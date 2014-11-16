@@ -1,0 +1,1 @@
+#define kStatusBarHeight    20
