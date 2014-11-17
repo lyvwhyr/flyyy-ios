@@ -13,5 +13,7 @@
 + (UIColor *)colorWithHexString:(NSString *)hexString;
 +(UIColor *)flyGreen;
 +(UIColor *)flyTabBarBackground;
++(UIColor *)flyTabBarSeparator;
++(UIColor *)flyTabBarGreyText;
 
 @end

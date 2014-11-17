@@ -11,6 +11,8 @@
 
 #define kColorFlyGreen                          @"#36b4a7"
 #define kColorFlyTabBarBackground               @"#f3f3f3"
+#define kColorFlyTabBarSeparator                @"#a3a3a5"
+#define kColorFlyTabBarGreyText                 @"#bcbcbc"
 
 @implementation UIColor (FLYAddition)
 
@@ -33,4 +35,13 @@
     return [self colorWithHexString:kColorFlyTabBarBackground];
 }
 
++(UIColor *)flyTabBarSeparator
+{
+    return [self colorWithHexString:kColorFlyTabBarSeparator];
+}
+
++(UIColor *)flyTabBarGreyText
+{
+    return [self colorWithHexString:kColorFlyTabBarGreyText];
+}
 @end

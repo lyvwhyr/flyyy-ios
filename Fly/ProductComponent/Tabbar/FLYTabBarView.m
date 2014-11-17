@@ -32,9 +32,11 @@
         self.userInteractionEnabled = YES;
         
         _separator = [UIView new];
-        _separator.backgroundColor = [UIColor flyTabBarBackground];
+        _separator.backgroundColor = [UIColor flyTabBarSeparator];
+        [self addSubview:_separator];
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
+        [self setNeedsUpdateConstraints];
     }
     return self;
 }
@@ -55,6 +57,48 @@
                 make.height.equalTo(@kTabHeight);
         }];
     }
+}
+
+
+-(void)updateConstraints
+{
+    CGFloat height = 1.0/FLY_SCREEN_SCALE;
+    [self.separator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@0.0);
+        make.left.equalTo(@0.0);
+        make.width.equalTo(@(CGRectGetWidth([UIScreen mainScreen].bounds)));
+        make.height.equalTo([NSNumber numberWithFloat:height]);
+    }];
+    [super updateConstraints];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if ([touches count] != 1) {
+        return;
+    }
+    UITouch *touch = [touches anyObject];
+    NSInteger tabIndex = [self _indexOfTabAtPoint:[touch locationInView:self]];
+    if (tabIndex != NSNotFound) {
+        [self.delegate tabItemClicked:tabIndex];
+    }
+}
+
+- (NSInteger)_indexOfTabAtPoint:(CGPoint)point
+{
+    if (!CGRectContainsPoint(self.bounds, point)) {
+        return NSNotFound;
+    }
+    [self layoutIfNeeded];
+    NSInteger tabIndex = NSNotFound;
+    for (int i = 0; i < self.tabViews.count; i++) {
+        FLYTabView *tabView = (FLYTabView *)[self.tabViews objectAtIndex:i];
+        if (CGRectContainsPoint(tabView.frame, point)) {
+            tabIndex = i;
+            break;
+        }
+    }
+    return tabIndex;
 }
 
 - (void)layoutSubviews

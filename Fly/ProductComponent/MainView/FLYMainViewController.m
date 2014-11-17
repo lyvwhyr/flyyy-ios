@@ -13,7 +13,7 @@
 #import "FLYTabBarView.h"
 #import "FLYTabView.h"
 
-@interface FLYMainViewController()
+@interface FLYMainViewController() <FLYTabBarViewDelegate>
 
 @property (nonatomic) FLYTabBarView *tabBarView;
 
@@ -49,11 +49,12 @@
     [self.view addSubview:self.tabBarView];
     [self _addConstraints];
     
-    FLYTabView *homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"tab_bar_home_normal" recordTab:NO];
-    FLYTabView *meTab = [[FLYTabView alloc] initWithTitle:@"Me" image:@"tab_bar_home_normal" recordTab:NO];
+    FLYTabView *homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_tabbar_home" recordTab:NO];
+    FLYTabView *meTab = [[FLYTabView alloc] initWithTitle:@"Me" image:@"icon_tabbar_me" recordTab:NO];
     FLYTabView *recordTab = [[FLYTabView alloc] initWithTitle:nil image:@"icon_tabbar_voice" recordTab:YES];
     NSArray *tabs = @[homeTab, recordTab, meTab];
     [self.tabBarView setTabViews:tabs];
+    self.tabBarView.delegate = self;
 }
 
 - (void)_addConstraints
@@ -74,13 +75,18 @@
     [self.view addConstraints:tabBarConstraintPosV];
     
     [super updateViewConstraints];
-    
-//    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(@0.0);
-//        make.left.equalTo(@0.0);
-//        make.width.equalTo(@(CGRectGetWidth([UIScreen mainScreen].bounds)));
-//        make.height.equalTo(@(CGRectGetHeight([UIScreen mainScreen].bounds) - kStatusBarHeight - kNavBarHeight - kTabBarViewHeight));
-//    }];
+}
+
+#pragma mark - FLYTabBarViewDelegate
+- (void)tabItemClicked:(NSInteger)index
+{
+    if (index == TABBAR_HOME) {
+        
+    } else if (index == TABBAR_RECORD) {
+        
+    } else {
+        
+    }
 }
 
 
