@@ -13,7 +13,7 @@
 - (void)setStatusBarColor:(UIColor *)color
 {
     UIView *statusBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), kStatusBarHeight)];
-    statusBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+//    statusBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     statusBar.backgroundColor = color;
     [self.view addSubview:statusBar];
     [self.view bringSubviewToFront:statusBar];

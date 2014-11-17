@@ -9,11 +9,12 @@
 #import "UIColor+FLYAddition.h"
 
 
-#define kColorFlyGreen   @"#36b4a7"
+#define kColorFlyGreen                          @"#36b4a7"
+#define kColorFlyTabBarBackground               @"#f3f3f3"
 
 @implementation UIColor (FLYAddition)
 
-+ (UIColor *)colorFromHexString:(NSString *)hexString
++ (UIColor *)colorWithHexString:(NSString *)hexString
 {
     unsigned rgbValue = 0;
     NSScanner *scanner = [NSScanner scannerWithString:hexString];
@@ -24,7 +25,12 @@
 
 +(UIColor *)flyGreen
 {
-    return [self colorFromHexString:kColorFlyGreen];
+    return [self colorWithHexString:kColorFlyGreen];
+}
+
++(UIColor *)flyTabBarBackground
+{
+    return [self colorWithHexString:kColorFlyTabBarBackground];
 }
 
 @end

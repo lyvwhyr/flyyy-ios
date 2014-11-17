@@ -18,8 +18,10 @@
 		A6263EC11A1888D800C4C3BA /* FLYNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263EC01A1888D800C4C3BA /* FLYNavigationController.m */; };
 		A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263EC31A18910B00C4C3BA /* UIViewController+StatusBar.m */; };
 		A6263ECB1A1897CE00C4C3BA /* UIColor+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263ECA1A1897CE00C4C3BA /* UIColor+FLYAddition.m */; };
-		A6263ECD1A18A06B00C4C3BA /* navigation_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = A6263ECC1A18A06B00C4C3BA /* navigation_bar.png */; };
 		A6263ED01A18A10E00C4C3BA /* UIImage+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */; };
+		A648C0BD1A1956AA00FF1744 /* FLYTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0BC1A1956AA00FF1744 /* FLYTabBarView.m */; };
+		A648C0C01A195EA200FF1744 /* FLYTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0BF1A195EA200FF1744 /* FLYTabBarViewController.m */; };
+		A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0C21A1962A200FF1744 /* FLYUtilities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,9 +58,14 @@
 		A6263EC71A1893C000C4C3BA /* fly-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "fly-Prefix.pch"; sourceTree = "<group>"; };
 		A6263EC91A1897CE00C4C3BA /* UIColor+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FLYAddition.h"; sourceTree = "<group>"; };
 		A6263ECA1A1897CE00C4C3BA /* UIColor+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FLYAddition.m"; sourceTree = "<group>"; };
-		A6263ECC1A18A06B00C4C3BA /* navigation_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigation_bar.png; sourceTree = "<group>"; };
 		A6263ECE1A18A10E00C4C3BA /* UIImage+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FLYAddition.h"; sourceTree = "<group>"; };
 		A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FLYAddition.m"; sourceTree = "<group>"; };
+		A648C0BB1A1956AA00FF1744 /* FLYTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTabBarView.h; sourceTree = "<group>"; };
+		A648C0BC1A1956AA00FF1744 /* FLYTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTabBarView.m; sourceTree = "<group>"; };
+		A648C0BE1A195EA200FF1744 /* FLYTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTabBarViewController.h; sourceTree = "<group>"; };
+		A648C0BF1A195EA200FF1744 /* FLYTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTabBarViewController.m; sourceTree = "<group>"; };
+		A648C0C11A1962A200FF1744 /* FLYUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUtilities.h; sourceTree = "<group>"; };
+		A648C0C21A1962A200FF1744 /* FLYUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUtilities.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +120,8 @@
 				A6263E901A187E1200C4C3BA /* Info.plist */,
 				A6263E911A187E1200C4C3BA /* main.m */,
 				A6263EC71A1893C000C4C3BA /* fly-Prefix.pch */,
+				A648C0C11A1962A200FF1744 /* FLYUtilities.h */,
+				A648C0C21A1962A200FF1744 /* FLYUtilities.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -137,7 +146,7 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
-				A6263ECC1A18A06B00C4C3BA /* navigation_bar.png */,
+				A648C0BA1A19567700FF1744 /* Tabbar */,
 				A6263EBE1A1887DB00C4C3BA /* Categories */,
 				A6263EB71A1880DE00C4C3BA /* MainView */,
 				A6263EB61A18807600C4C3BA /* Feed */,
@@ -166,6 +175,8 @@
 				A6263EBC1A18817A00C4C3BA /* FLYUniversalViewController.m */,
 				A6263EBF1A1888D800C4C3BA /* FLYNavigationController.h */,
 				A6263EC01A1888D800C4C3BA /* FLYNavigationController.m */,
+				A648C0BE1A195EA200FF1744 /* FLYTabBarViewController.h */,
+				A648C0BF1A195EA200FF1744 /* FLYTabBarViewController.m */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -181,6 +192,15 @@
 				A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		A648C0BA1A19567700FF1744 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				A648C0BB1A1956AA00FF1744 /* FLYTabBarView.h */,
+				A648C0BC1A1956AA00FF1744 /* FLYTabBarView.m */,
+			);
+			path = Tabbar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,7 +284,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6263E9B1A187E1200C4C3BA /* Main.storyboard in Resources */,
-				A6263ECD1A18A06B00C4C3BA /* navigation_bar.png in Resources */,
 				A6263EA01A187E1200C4C3BA /* LaunchScreen.xib in Resources */,
 				A6263E9D1A187E1200C4C3BA /* Images.xcassets in Resources */,
 			);
@@ -284,13 +303,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */,
 				A6263EC11A1888D800C4C3BA /* FLYNavigationController.m in Sources */,
 				A6263EBA1A18815000C4C3BA /* FLYMainViewController.m in Sources */,
+				A648C0C01A195EA200FF1744 /* FLYTabBarViewController.m in Sources */,
 				A6263EBD1A18817A00C4C3BA /* FLYUniversalViewController.m in Sources */,
 				A6263ED01A18A10E00C4C3BA /* UIImage+FLYAddition.m in Sources */,
 				A6263E951A187E1200C4C3BA /* AppDelegate.m in Sources */,
 				A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */,
 				A6263E921A187E1200C4C3BA /* main.m in Sources */,
+				A648C0BD1A1956AA00FF1744 /* FLYTabBarView.m in Sources */,
 				A6263ECB1A1897CE00C4C3BA /* UIColor+FLYAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,6 +514,7 @@
 				A6263EB11A187E1200C4C3BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A6263EB21A187E1200C4C3BA /* Build configuration list for PBXNativeTarget "FlyTests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +523,7 @@
 				A6263EB41A187E1200C4C3BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

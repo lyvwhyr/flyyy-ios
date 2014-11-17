@@ -10,6 +10,13 @@
 #import "FLYNavigationController.h"
 #import "UIViewController+StatusBar.h"
 #import "UIColor+FLYAddition.h"
+#import "FLYTabBarView.h"
+
+@interface FLYMainViewController()
+
+@property (nonatomic) FLYTabBarView *tabBarView;
+
+@end
 
 @implementation FLYMainViewController
 
@@ -26,11 +33,33 @@
 {
     [super viewDidLoad];
     self.title = @"FLY";
+    
+    self.tabBarView = [FLYTabBarView new];
+    [self.view addSubview:self.tabBarView];
+    [self _addViewConstraints];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidLayoutSubviews
 {
-    [super viewWillAppear:animated];
+    [super viewDidLayoutSubviews];
+}
+
+- (void)_addViewConstraints
+{
+    //tabBarView size constraints
+    CGFloat tabBarWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
+    CGFloat tabBarVerticalSpacing = CGRectGetHeight([UIScreen mainScreen].bounds) - kStatusBarHeight - kNavBarHeight - kTabBarViewHeight;
+    NSDictionary *metrics = @{@"tabBarViewWidth":@(tabBarWidth), @"tabBarViewHeight":@(kTabBarViewHeight), @"tabBarViewVerticalSpacing":@(tabBarVerticalSpacing)};
+    NSArray *tabBarConstraintH = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[_tabBarView(tabBarViewWidth)]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_tabBarView)];
+    NSArray *tabBarConstraintV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_tabBarView(tabBarViewHeight)]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_tabBarView)];
+    [self.tabBarView addConstraints:tabBarConstraintH];
+    [self.tabBarView addConstraints:tabBarConstraintV];
+    
+    //tabBarView position constraints
+    NSArray *tabBarConstraintPosH = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(0)-[_tabBarView]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_tabBarView)];
+    NSArray *tabBarConstraintPosV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-tabBarViewVerticalSpacing-[_tabBarView]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_tabBarView)];
+    [self.view addConstraints:tabBarConstraintPosH];
+    [self.view addConstraints:tabBarConstraintPosV];
 }
 
 
