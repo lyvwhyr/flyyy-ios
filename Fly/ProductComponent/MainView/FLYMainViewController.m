@@ -11,6 +11,7 @@
 #import "UIViewController+StatusBar.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYTabBarView.h"
+#import "FLYTabView.h"
 
 @interface FLYMainViewController()
 
@@ -34,16 +35,25 @@
     [super viewDidLoad];
     self.title = @"FLY";
     
-    self.tabBarView = [FLYTabBarView new];
-    [self.view addSubview:self.tabBarView];
-    [self _addConstraints];
-    
-    [self.tabBarView setTabViews:nil];
+    [self _addTabBar];
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+}
+
+- (void)_addTabBar
+{
+    self.tabBarView = [FLYTabBarView new];
+    [self.view addSubview:self.tabBarView];
+    [self _addConstraints];
+    
+    FLYTabView *homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"tab_bar_home_normal" recordTab:NO];
+    FLYTabView *meTab = [[FLYTabView alloc] initWithTitle:@"Me" image:@"tab_bar_home_normal" recordTab:NO];
+    FLYTabView *recordTab = [[FLYTabView alloc] initWithTitle:nil image:@"tab_bar_home_normal" recordTab:YES];
+    NSArray *tabs = @[homeTab, recordTab, meTab];
+    [self.tabBarView setTabViews:tabs];
 }
 
 - (void)_addConstraints

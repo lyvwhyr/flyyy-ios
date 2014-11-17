@@ -10,6 +10,11 @@
 #import "FLYTabView.h"
 #import "UIColor+FLYAddition.h"
 
+#define kTabLeadingMargin        20
+#define kTabTopMargin            5
+#define kTabWidth                80
+#define kTabHeight               44
+
 
 @interface FLYTabBarView()
 
@@ -36,15 +41,20 @@
 
 - (void)setTabViews:(NSArray *)tabViews
 {
-    FLYTabView *tabView = [[FLYTabView alloc] initWithTitle:@"Home" image:@"tabbar_home_active"];
-    [self addSubview:tabView];
-    
-    [tabView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@1);
-        make.left.equalTo(@1);
-        make.width.equalTo(@80);
-        make.height.equalTo(@44);
-    }];
+    _tabViews = tabViews;
+    NSInteger count = _tabViews.count;
+    for (int i = 0; i < count; i++) {
+        FLYTabView *tabView = (FLYTabView *)[_tabViews objectAtIndex:i];
+        [self addSubview:tabView];
+        float middleSpacing = ((CGRectGetWidth([UIScreen mainScreen].bounds) - count * kTabWidth - 2 * kTabLeadingMargin))/(count - 1);
+        NSInteger leftX = kTabLeadingMargin + i * kTabWidth + i * middleSpacing;
+        [tabView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(@kTabTopMargin);
+                make.left.equalTo(@(leftX));
+                make.width.equalTo(@kTabWidth);
+                make.height.equalTo(@kTabHeight);
+        }];
+    }
 }
 
 - (void)layoutSubviews

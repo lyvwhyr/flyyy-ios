@@ -10,6 +10,8 @@
 
 @interface FLYTabView : UIView
 
-- (instancetype)initWithTitle:(NSString *)title image:(NSString *)imageName;
+@property (nonatomic) BOOL isRecordTab;
+
+- (instancetype)initWithTitle:(NSString *)title image:(NSString *)imageName recordTab:(BOOL)isRecordTab;
 
 @end

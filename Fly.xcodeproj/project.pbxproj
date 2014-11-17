@@ -19,11 +19,9 @@
 		A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263EC31A18910B00C4C3BA /* UIViewController+StatusBar.m */; };
 		A6263ECB1A1897CE00C4C3BA /* UIColor+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263ECA1A1897CE00C4C3BA /* UIColor+FLYAddition.m */; };
 		A6263ED01A18A10E00C4C3BA /* UIImage+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */; };
-		A648C0BD1A1956AA00FF1744 /* FLYTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0BC1A1956AA00FF1744 /* FLYTabBarView.m */; };
-		A648C0C01A195EA200FF1744 /* FLYTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0BF1A195EA200FF1744 /* FLYTabBarViewController.m */; };
 		A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0C21A1962A200FF1744 /* FLYUtilities.m */; };
 		A648C0C61A1982D900FF1744 /* FLYTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0C51A1982D900FF1744 /* FLYTabView.m */; };
-		A648C0C91A199FA600FF1744 /* tabbar_home_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A648C0C81A199FA600FF1744 /* tabbar_home_active@2x.png */; };
+		A648C0C91A199FA600FF1744 /* tab_bar_home_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A648C0C81A199FA600FF1744 /* tab_bar_home_normal@2x.png */; };
 		A648C0E31A19AD4A00FF1744 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0CD1A19AD4A00FF1744 /* MASCompositeConstraint.m */; };
 		A648C0E41A19AD4A00FF1744 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0D01A19AD4A00FF1744 /* MASConstraint.m */; };
 		A648C0E51A19AD4A00FF1744 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0D21A19AD4A00FF1744 /* MASConstraintMaker.m */; };
@@ -33,6 +31,8 @@
 		A648C0E91A19AD4A00FF1744 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0DC1A19AD4A00FF1744 /* NSArray+MASAdditions.m */; };
 		A648C0EA1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0DF1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		A648C0EB1A19AD4A00FF1744 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0E11A19AD4A00FF1744 /* View+MASAdditions.m */; };
+		A648C0F11A19B18B00FF1744 /* UIFont+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0F01A19B18B00FF1744 /* UIFont+FLYAddition.m */; };
+		A648C0F21A19C65B00FF1744 /* FLYTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0BC1A1956AA00FF1744 /* FLYTabBarView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,13 +73,11 @@
 		A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FLYAddition.m"; sourceTree = "<group>"; };
 		A648C0BB1A1956AA00FF1744 /* FLYTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTabBarView.h; sourceTree = "<group>"; };
 		A648C0BC1A1956AA00FF1744 /* FLYTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTabBarView.m; sourceTree = "<group>"; };
-		A648C0BE1A195EA200FF1744 /* FLYTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTabBarViewController.h; sourceTree = "<group>"; };
-		A648C0BF1A195EA200FF1744 /* FLYTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTabBarViewController.m; sourceTree = "<group>"; };
 		A648C0C11A1962A200FF1744 /* FLYUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUtilities.h; sourceTree = "<group>"; };
 		A648C0C21A1962A200FF1744 /* FLYUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUtilities.m; sourceTree = "<group>"; };
 		A648C0C41A1982D900FF1744 /* FLYTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTabView.h; sourceTree = "<group>"; };
 		A648C0C51A1982D900FF1744 /* FLYTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTabView.m; sourceTree = "<group>"; };
-		A648C0C81A199FA600FF1744 /* tabbar_home_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_home_active@2x.png"; sourceTree = "<group>"; };
+		A648C0C81A199FA600FF1744 /* tab_bar_home_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_bar_home_normal@2x.png"; sourceTree = "<group>"; };
 		A648C0CC1A19AD4A00FF1744 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
 		A648C0CD1A19AD4A00FF1744 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
 		A648C0CE1A19AD4A00FF1744 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
@@ -103,6 +101,8 @@
 		A648C0E01A19AD4A00FF1744 /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
 		A648C0E11A19AD4A00FF1744 /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
 		A648C0E21A19AD4A00FF1744 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		A648C0EF1A19B18B00FF1744 /* UIFont+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FLYAddition.h"; sourceTree = "<group>"; };
+		A648C0F01A19B18B00FF1744 /* UIFont+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FLYAddition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,8 +214,6 @@
 				A6263EBC1A18817A00C4C3BA /* FLYUniversalViewController.m */,
 				A6263EBF1A1888D800C4C3BA /* FLYNavigationController.h */,
 				A6263EC01A1888D800C4C3BA /* FLYNavigationController.m */,
-				A648C0BE1A195EA200FF1744 /* FLYTabBarViewController.h */,
-				A648C0BF1A195EA200FF1744 /* FLYTabBarViewController.m */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -229,6 +227,8 @@
 				A6263ECA1A1897CE00C4C3BA /* UIColor+FLYAddition.m */,
 				A6263ECE1A18A10E00C4C3BA /* UIImage+FLYAddition.h */,
 				A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */,
+				A648C0EF1A19B18B00FF1744 /* UIFont+FLYAddition.h */,
+				A648C0F01A19B18B00FF1744 /* UIFont+FLYAddition.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -247,7 +247,7 @@
 		A648C0C71A199F8C00FF1744 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				A648C0C81A199FA600FF1744 /* tabbar_home_active@2x.png */,
+				A648C0C81A199FA600FF1744 /* tab_bar_home_normal@2x.png */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -371,7 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6263E9B1A187E1200C4C3BA /* Main.storyboard in Resources */,
-				A648C0C91A199FA600FF1744 /* tabbar_home_active@2x.png in Resources */,
+				A648C0C91A199FA600FF1744 /* tab_bar_home_normal@2x.png in Resources */,
 				A6263EA01A187E1200C4C3BA /* LaunchScreen.xib in Resources */,
 				A6263E9D1A187E1200C4C3BA /* Images.xcassets in Resources */,
 			);
@@ -391,16 +391,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A648C0F11A19B18B00FF1744 /* UIFont+FLYAddition.m in Sources */,
 				A648C0C61A1982D900FF1744 /* FLYTabView.m in Sources */,
 				A648C0E91A19AD4A00FF1744 /* NSArray+MASAdditions.m in Sources */,
 				A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */,
+				A648C0F21A19C65B00FF1744 /* FLYTabBarView.m in Sources */,
 				A648C0EA1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				A6263EC11A1888D800C4C3BA /* FLYNavigationController.m in Sources */,
 				A6263EBA1A18815000C4C3BA /* FLYMainViewController.m in Sources */,
 				A648C0E71A19AD4A00FF1744 /* MASViewAttribute.m in Sources */,
 				A648C0E61A19AD4A00FF1744 /* MASLayoutConstraint.m in Sources */,
 				A648C0E31A19AD4A00FF1744 /* MASCompositeConstraint.m in Sources */,
-				A648C0C01A195EA200FF1744 /* FLYTabBarViewController.m in Sources */,
 				A6263EBD1A18817A00C4C3BA /* FLYUniversalViewController.m in Sources */,
 				A648C0E81A19AD4A00FF1744 /* MASViewConstraint.m in Sources */,
 				A6263ED01A18A10E00C4C3BA /* UIImage+FLYAddition.m in Sources */,
@@ -408,7 +409,6 @@
 				A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */,
 				A6263E921A187E1200C4C3BA /* main.m in Sources */,
 				A648C0E51A19AD4A00FF1744 /* MASConstraintMaker.m in Sources */,
-				A648C0BD1A1956AA00FF1744 /* FLYTabBarView.m in Sources */,
 				A648C0E41A19AD4A00FF1744 /* MASConstraint.m in Sources */,
 				A6263ECB1A1897CE00C4C3BA /* UIColor+FLYAddition.m in Sources */,
 				A648C0EB1A19AD4A00FF1744 /* View+MASAdditions.m in Sources */,

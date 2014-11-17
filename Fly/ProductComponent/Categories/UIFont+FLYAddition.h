@@ -1,13 +1,15 @@
 //
-//  FLYTabBarView.h
+//  UIFont+FLYAddition.h
 //  Fly
 //
 //  Created by Xingxing Xu on 11/16/14.
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-@interface FLYTabBarView : UIView
+#import <UIKit/UIKit.h>
 
-@property (nonatomic) NSArray *tabViews;
+@interface UIFont (FLYAddition)
+
++(UIFont *)flyToolBarFont;
 
 @end
