@@ -22,6 +22,17 @@
 		A648C0BD1A1956AA00FF1744 /* FLYTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0BC1A1956AA00FF1744 /* FLYTabBarView.m */; };
 		A648C0C01A195EA200FF1744 /* FLYTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0BF1A195EA200FF1744 /* FLYTabBarViewController.m */; };
 		A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0C21A1962A200FF1744 /* FLYUtilities.m */; };
+		A648C0C61A1982D900FF1744 /* FLYTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0C51A1982D900FF1744 /* FLYTabView.m */; };
+		A648C0C91A199FA600FF1744 /* tabbar_home_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A648C0C81A199FA600FF1744 /* tabbar_home_active@2x.png */; };
+		A648C0E31A19AD4A00FF1744 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0CD1A19AD4A00FF1744 /* MASCompositeConstraint.m */; };
+		A648C0E41A19AD4A00FF1744 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0D01A19AD4A00FF1744 /* MASConstraint.m */; };
+		A648C0E51A19AD4A00FF1744 /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0D21A19AD4A00FF1744 /* MASConstraintMaker.m */; };
+		A648C0E61A19AD4A00FF1744 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0D41A19AD4A00FF1744 /* MASLayoutConstraint.m */; };
+		A648C0E71A19AD4A00FF1744 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0D81A19AD4A00FF1744 /* MASViewAttribute.m */; };
+		A648C0E81A19AD4A00FF1744 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0DA1A19AD4A00FF1744 /* MASViewConstraint.m */; };
+		A648C0E91A19AD4A00FF1744 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0DC1A19AD4A00FF1744 /* NSArray+MASAdditions.m */; };
+		A648C0EA1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0DF1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m */; };
+		A648C0EB1A19AD4A00FF1744 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0E11A19AD4A00FF1744 /* View+MASAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +77,32 @@
 		A648C0BF1A195EA200FF1744 /* FLYTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTabBarViewController.m; sourceTree = "<group>"; };
 		A648C0C11A1962A200FF1744 /* FLYUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUtilities.h; sourceTree = "<group>"; };
 		A648C0C21A1962A200FF1744 /* FLYUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUtilities.m; sourceTree = "<group>"; };
+		A648C0C41A1982D900FF1744 /* FLYTabView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTabView.h; sourceTree = "<group>"; };
+		A648C0C51A1982D900FF1744 /* FLYTabView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTabView.m; sourceTree = "<group>"; };
+		A648C0C81A199FA600FF1744 /* tabbar_home_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_home_active@2x.png"; sourceTree = "<group>"; };
+		A648C0CC1A19AD4A00FF1744 /* MASCompositeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASCompositeConstraint.h; sourceTree = "<group>"; };
+		A648C0CD1A19AD4A00FF1744 /* MASCompositeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASCompositeConstraint.m; sourceTree = "<group>"; };
+		A648C0CE1A19AD4A00FF1744 /* MASConstraint+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASConstraint+Private.h"; sourceTree = "<group>"; };
+		A648C0CF1A19AD4A00FF1744 /* MASConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraint.h; sourceTree = "<group>"; };
+		A648C0D01A19AD4A00FF1744 /* MASConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraint.m; sourceTree = "<group>"; };
+		A648C0D11A19AD4A00FF1744 /* MASConstraintMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASConstraintMaker.h; sourceTree = "<group>"; };
+		A648C0D21A19AD4A00FF1744 /* MASConstraintMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASConstraintMaker.m; sourceTree = "<group>"; };
+		A648C0D31A19AD4A00FF1744 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASLayoutConstraint.h; sourceTree = "<group>"; };
+		A648C0D41A19AD4A00FF1744 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASLayoutConstraint.m; sourceTree = "<group>"; };
+		A648C0D51A19AD4A00FF1744 /* Masonry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Masonry.h; sourceTree = "<group>"; };
+		A648C0D61A19AD4A00FF1744 /* MASUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASUtilities.h; sourceTree = "<group>"; };
+		A648C0D71A19AD4A00FF1744 /* MASViewAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewAttribute.h; sourceTree = "<group>"; };
+		A648C0D81A19AD4A00FF1744 /* MASViewAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewAttribute.m; sourceTree = "<group>"; };
+		A648C0D91A19AD4A00FF1744 /* MASViewConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASViewConstraint.h; sourceTree = "<group>"; };
+		A648C0DA1A19AD4A00FF1744 /* MASViewConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASViewConstraint.m; sourceTree = "<group>"; };
+		A648C0DB1A19AD4A00FF1744 /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASAdditions.h"; sourceTree = "<group>"; };
+		A648C0DC1A19AD4A00FF1744 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MASAdditions.m"; sourceTree = "<group>"; };
+		A648C0DD1A19AD4A00FF1744 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
+		A648C0DE1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
+		A648C0DF1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
+		A648C0E01A19AD4A00FF1744 /* View+MASAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASAdditions.h"; sourceTree = "<group>"; };
+		A648C0E11A19AD4A00FF1744 /* View+MASAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "View+MASAdditions.m"; sourceTree = "<group>"; };
+		A648C0E21A19AD4A00FF1744 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +146,8 @@
 			children = (
 				A6263EB51A18800A00C4C3BA /* ProductComponent */,
 				A6263E9C1A187E1200C4C3BA /* Images.xcassets */,
+				A648C0C71A199F8C00FF1744 /* Assets */,
+				A648C0CA1A19ACDB00FF1744 /* Libraries */,
 				A6263E8F1A187E1200C4C3BA /* Supporting Files */,
 			);
 			path = Fly;
@@ -199,8 +238,56 @@
 			children = (
 				A648C0BB1A1956AA00FF1744 /* FLYTabBarView.h */,
 				A648C0BC1A1956AA00FF1744 /* FLYTabBarView.m */,
+				A648C0C41A1982D900FF1744 /* FLYTabView.h */,
+				A648C0C51A1982D900FF1744 /* FLYTabView.m */,
 			);
 			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		A648C0C71A199F8C00FF1744 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				A648C0C81A199FA600FF1744 /* tabbar_home_active@2x.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				A648C0CB1A19AD4A00FF1744 /* Masonry */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		A648C0CB1A19AD4A00FF1744 /* Masonry */ = {
+			isa = PBXGroup;
+			children = (
+				A648C0CC1A19AD4A00FF1744 /* MASCompositeConstraint.h */,
+				A648C0CD1A19AD4A00FF1744 /* MASCompositeConstraint.m */,
+				A648C0CE1A19AD4A00FF1744 /* MASConstraint+Private.h */,
+				A648C0CF1A19AD4A00FF1744 /* MASConstraint.h */,
+				A648C0D01A19AD4A00FF1744 /* MASConstraint.m */,
+				A648C0D11A19AD4A00FF1744 /* MASConstraintMaker.h */,
+				A648C0D21A19AD4A00FF1744 /* MASConstraintMaker.m */,
+				A648C0D31A19AD4A00FF1744 /* MASLayoutConstraint.h */,
+				A648C0D41A19AD4A00FF1744 /* MASLayoutConstraint.m */,
+				A648C0D51A19AD4A00FF1744 /* Masonry.h */,
+				A648C0D61A19AD4A00FF1744 /* MASUtilities.h */,
+				A648C0D71A19AD4A00FF1744 /* MASViewAttribute.h */,
+				A648C0D81A19AD4A00FF1744 /* MASViewAttribute.m */,
+				A648C0D91A19AD4A00FF1744 /* MASViewConstraint.h */,
+				A648C0DA1A19AD4A00FF1744 /* MASViewConstraint.m */,
+				A648C0DB1A19AD4A00FF1744 /* NSArray+MASAdditions.h */,
+				A648C0DC1A19AD4A00FF1744 /* NSArray+MASAdditions.m */,
+				A648C0DD1A19AD4A00FF1744 /* NSArray+MASShorthandAdditions.h */,
+				A648C0DE1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.h */,
+				A648C0DF1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m */,
+				A648C0E01A19AD4A00FF1744 /* View+MASAdditions.h */,
+				A648C0E11A19AD4A00FF1744 /* View+MASAdditions.m */,
+				A648C0E21A19AD4A00FF1744 /* View+MASShorthandAdditions.h */,
+			);
+			path = Masonry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6263E9B1A187E1200C4C3BA /* Main.storyboard in Resources */,
+				A648C0C91A199FA600FF1744 /* tabbar_home_active@2x.png in Resources */,
 				A6263EA01A187E1200C4C3BA /* LaunchScreen.xib in Resources */,
 				A6263E9D1A187E1200C4C3BA /* Images.xcassets in Resources */,
 			);
@@ -303,17 +391,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A648C0C61A1982D900FF1744 /* FLYTabView.m in Sources */,
+				A648C0E91A19AD4A00FF1744 /* NSArray+MASAdditions.m in Sources */,
 				A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */,
+				A648C0EA1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				A6263EC11A1888D800C4C3BA /* FLYNavigationController.m in Sources */,
 				A6263EBA1A18815000C4C3BA /* FLYMainViewController.m in Sources */,
+				A648C0E71A19AD4A00FF1744 /* MASViewAttribute.m in Sources */,
+				A648C0E61A19AD4A00FF1744 /* MASLayoutConstraint.m in Sources */,
+				A648C0E31A19AD4A00FF1744 /* MASCompositeConstraint.m in Sources */,
 				A648C0C01A195EA200FF1744 /* FLYTabBarViewController.m in Sources */,
 				A6263EBD1A18817A00C4C3BA /* FLYUniversalViewController.m in Sources */,
+				A648C0E81A19AD4A00FF1744 /* MASViewConstraint.m in Sources */,
 				A6263ED01A18A10E00C4C3BA /* UIImage+FLYAddition.m in Sources */,
 				A6263E951A187E1200C4C3BA /* AppDelegate.m in Sources */,
 				A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */,
 				A6263E921A187E1200C4C3BA /* main.m in Sources */,
+				A648C0E51A19AD4A00FF1744 /* MASConstraintMaker.m in Sources */,
 				A648C0BD1A1956AA00FF1744 /* FLYTabBarView.m in Sources */,
+				A648C0E41A19AD4A00FF1744 /* MASConstraint.m in Sources */,
 				A6263ECB1A1897CE00C4C3BA /* UIColor+FLYAddition.m in Sources */,
+				A648C0EB1A19AD4A00FF1744 /* View+MASAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

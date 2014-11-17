@@ -36,7 +36,9 @@
     
     self.tabBarView = [FLYTabBarView new];
     [self.view addSubview:self.tabBarView];
-    [self _addViewConstraints];
+    [self _addConstraints];
+    
+    [self.tabBarView setTabViews:nil];
 }
 
 - (void)viewDidLayoutSubviews
@@ -44,7 +46,7 @@
     [super viewDidLayoutSubviews];
 }
 
-- (void)_addViewConstraints
+- (void)_addConstraints
 {
     //tabBarView size constraints
     CGFloat tabBarWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
@@ -60,6 +62,8 @@
     NSArray *tabBarConstraintPosV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-tabBarViewVerticalSpacing-[_tabBarView]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_tabBarView)];
     [self.view addConstraints:tabBarConstraintPosH];
     [self.view addConstraints:tabBarConstraintPosV];
+    
+    [super updateViewConstraints];
 }
 
 

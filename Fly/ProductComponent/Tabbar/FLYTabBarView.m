@@ -7,6 +7,7 @@
 //
 
 #import "FLYTabBarView.h"
+#import "FLYTabView.h"
 #import "UIColor+FLYAddition.h"
 
 
@@ -29,15 +30,27 @@
         _separator.backgroundColor = [UIColor flyTabBarBackground];
         
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        [self _addConstraints];
     }
     return self;
 }
 
-- (void)_addConstraints
+- (void)setTabViews:(NSArray *)tabViews
 {
+    FLYTabView *tabView = [[FLYTabView alloc] initWithTitle:@"Home" image:@"tabbar_home_active"];
+    [self addSubview:tabView];
     
+    [tabView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(@1);
+        make.left.equalTo(@1);
+        make.width.equalTo(@80);
+        make.height.equalTo(@44);
+    }];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    NSLog(@"tabBarFrame %@", NSStringFromCGRect(self.frame));
 }
 
 

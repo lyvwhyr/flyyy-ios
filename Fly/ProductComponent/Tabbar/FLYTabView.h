@@ -1,5 +1,5 @@
 //
-//  FLYTabBarView.h
+//  FLYTabView.h
 //  Fly
 //
 //  Created by Xingxing Xu on 11/16/14.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FLYTabBarView : UIView
+@interface FLYTabView : UIView
 
-- (void)setTabViews:(NSArray *)tabViews;
+- (instancetype)initWithTitle:(NSString *)title image:(NSString *)imageName;
 
 @end
