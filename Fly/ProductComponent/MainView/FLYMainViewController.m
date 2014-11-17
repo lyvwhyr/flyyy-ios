@@ -24,7 +24,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        
+        self.view.backgroundColor = [UIColor whiteColor];
     }
     
     return self;
@@ -51,7 +51,7 @@
     
     FLYTabView *homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"tab_bar_home_normal" recordTab:NO];
     FLYTabView *meTab = [[FLYTabView alloc] initWithTitle:@"Me" image:@"tab_bar_home_normal" recordTab:NO];
-    FLYTabView *recordTab = [[FLYTabView alloc] initWithTitle:nil image:@"tab_bar_home_normal" recordTab:YES];
+    FLYTabView *recordTab = [[FLYTabView alloc] initWithTitle:nil image:@"icon_tabbar_voice" recordTab:YES];
     NSArray *tabs = @[homeTab, recordTab, meTab];
     [self.tabBarView setTabViews:tabs];
 }
@@ -74,6 +74,13 @@
     [self.view addConstraints:tabBarConstraintPosV];
     
     [super updateViewConstraints];
+    
+//    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(@0.0);
+//        make.left.equalTo(@0.0);
+//        make.width.equalTo(@(CGRectGetWidth([UIScreen mainScreen].bounds)));
+//        make.height.equalTo(@(CGRectGetHeight([UIScreen mainScreen].bounds) - kStatusBarHeight - kNavBarHeight - kTabBarViewHeight));
+//    }];
 }
 
 

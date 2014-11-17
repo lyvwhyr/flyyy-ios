@@ -14,7 +14,7 @@
 
 +(UIFont *)flyToolBarFont
 {
-    UIFont *font = [UIFont systemFontOfSize:14.0];
+    UIFont *font = [UIFont systemFontOfSize:11.0];
     return font;
 }
 

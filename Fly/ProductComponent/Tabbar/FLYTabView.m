@@ -10,10 +10,8 @@
 #import "UIColor+FLYAddition.h"
 #import "UIFont+FLYAddition.h"
 
-#define kLabelPosH      1
 #define kLabelPosV      28
-#define kImagePostH     1
-#define kImagePosV      2
+#define kImagePosV      1
 
 @interface FLYTabView()
 
@@ -50,8 +48,6 @@
             [self addSubview:_imageView];
         }
         _isRecordTab = isRecordTab;
-        
-        self.backgroundColor = [UIColor blueColor];
         [self setNeedsUpdateConstraints];
     }
     return self;
@@ -59,19 +55,22 @@
 
 - (void)updateConstraints
 {
-    NSDictionary *metrics = @{@"imagePosH":@(kImagePostH), @"imagePosV":@(kImagePosV), @"labelPosH":@(kLabelPosH), @"labelPosV":@(kLabelPosV)};
+    NSDictionary *metrics = @{@"imagePosV":@(kImagePosV), @"labelPosV":@(kLabelPosV)};
     
-    NSArray *imagePosH = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-imagePosH-[_imageView]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_imageView)];
     NSArray *imagePosV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-imagePosV-[_imageView]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_imageView)];
-    [self addConstraints:imagePosH];
     [self addConstraints:imagePosV];
+    
+    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self);
+    }];
     
     //label constraints
     if (!self.isRecordTab) {
-        NSArray *labelPosH = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-labelPosH-[_label]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_label)];
         NSArray *labelPosV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-labelPosV-[_label]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_label)];
-        [self addConstraints:labelPosH];
         [self addConstraints:labelPosV];
+        [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self);
+        }];
     }
     [super updateConstraints];
 }

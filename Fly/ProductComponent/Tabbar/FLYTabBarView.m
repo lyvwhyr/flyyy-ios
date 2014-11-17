@@ -11,7 +11,7 @@
 #import "UIColor+FLYAddition.h"
 
 #define kTabLeadingMargin        20
-#define kTabTopMargin            5
+#define kTabTopMargin            1
 #define kTabWidth                80
 #define kTabHeight               44
 
