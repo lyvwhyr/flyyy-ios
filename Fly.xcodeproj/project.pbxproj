@@ -36,6 +36,7 @@
 		A648C0F61A19D1FF00FF1744 /* icon_tabbar_voice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A648C0F51A19D1FF00FF1744 /* icon_tabbar_voice@2x.png */; };
 		A6655B551A19DEF000440AAB /* icon_tabbar_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */; };
 		A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */; };
+		A6655B5A1A19ECED00440AAB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B591A19ECED00440AAB /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		A648C0F51A19D1FF00FF1744 /* icon_tabbar_voice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_voice@2x.png"; sourceTree = "<group>"; };
 		A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_home@3x.png"; sourceTree = "<group>"; };
 		A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_me@3x.png"; sourceTree = "<group>"; };
+		A6655B591A19ECED00440AAB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +255,7 @@
 		A648C0C71A199F8C00FF1744 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A6655B591A19ECED00440AAB /* Default-568h@2x.png */,
 				A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */,
 				A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */,
 				A648C0F51A19D1FF00FF1744 /* icon_tabbar_voice@2x.png */,
@@ -384,6 +387,7 @@
 				A6655B551A19DEF000440AAB /* icon_tabbar_home@3x.png in Resources */,
 				A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */,
 				A6263EA01A187E1200C4C3BA /* LaunchScreen.xib in Resources */,
+				A6655B5A1A19ECED00440AAB /* Default-568h@2x.png in Resources */,
 				A6263E9D1A187E1200C4C3BA /* Images.xcassets in Resources */,
 				A648C0F41A19C7A100FF1744 /* icon_tabbar_voice@3x.png in Resources */,
 			);
