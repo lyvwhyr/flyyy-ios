@@ -12,10 +12,18 @@
 #import "UIColor+FLYAddition.h"
 #import "FLYTabBarView.h"
 #import "FLYTabView.h"
+#import "FLYFeedViewController.h"
+#import "FLYRecordViewController.h"
+#import "FLYProfileViewController.h"
 
 @interface FLYMainViewController() <FLYTabBarViewDelegate>
 
 @property (nonatomic) FLYTabBarView *tabBarView;
+
+@property (nonatomic) FLYFeedViewController *feedViewController;
+@property (nonatomic) FLYRecordViewController *recordViewController;
+@property (nonatomic) FLYProfileViewController *profileViewController;
+@property (nonatomic) FLYUniversalViewController *currentViewController;
 
 @end
 
@@ -34,14 +42,11 @@
 {
     [super viewDidLoad];
     self.title = @"FLY";
-    
     [self _addTabBar];
+    [self _addChildControllers];
 }
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-}
+
 
 - (void)_addTabBar
 {
@@ -56,6 +61,23 @@
     [self.tabBarView setTabViews:tabs];
     self.tabBarView.delegate = self;
 }
+
+- (void)_addChildControllers
+{
+    _feedViewController = [FLYFeedViewController new];
+    [self addChildViewController:_feedViewController];
+    
+    _recordViewController = [FLYRecordViewController new];
+    [self addChildViewController:_recordViewController];
+    
+    _profileViewController = [FLYProfileViewController new];
+    [self addChildViewController:_profileViewController];
+    
+    _currentViewController = _feedViewController;
+    [self.view addSubview:_currentViewController.view];
+}
+
+
 
 - (void)_addConstraints
 {
@@ -83,7 +105,9 @@
     if (index == TABBAR_HOME) {
         
     } else if (index == TABBAR_RECORD) {
-        
+        [self transitionFromViewController:_currentViewController toViewController:_recordViewController duration:0 options:0 animations:nil completion:^(BOOL finished) {
+            _currentViewController = _recordViewController;
+        }];
     } else {
         
     }

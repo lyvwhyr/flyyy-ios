@@ -75,10 +75,4 @@
     [super updateConstraints];
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    NSLog(@"tabTabView %@", NSStringFromCGRect(self.frame));
-}
-
 @end
