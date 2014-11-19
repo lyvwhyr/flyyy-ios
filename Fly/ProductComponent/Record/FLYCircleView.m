@@ -21,10 +21,24 @@
         arcLayer.path = path.CGPath;
         arcLayer.strokeColor = [UIColor flyGreen].CGColor;
         arcLayer.fillColor = [UIColor flyGreen].CGColor;
-        arcLayer.lineWidth = 3;
+//        arcLayer.fillColor = [UIColor whiteColor].CGColor;
+        arcLayer.lineWidth = 5;
         [self.layer addSublayer:arcLayer];
+        
+//        [self drawLineAnimation:arcLayer];
     }
     return self;
+}
+
+
+-(void)drawLineAnimation:(CALayer*)layer
+{
+    CABasicAnimation *bas=[CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    bas.duration=10;
+    bas.delegate=self;
+    bas.fromValue=[NSNumber numberWithInteger:0];
+    bas.toValue=[NSNumber numberWithInteger:1];
+    [layer addAnimation:bas forKey:@"key"];
 }
 
 - (void)layoutSubviews

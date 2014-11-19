@@ -44,6 +44,9 @@
 		A6A30D711A1B1EEE001AE1FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A30D701A1B1EEE001AE1FE /* QuartzCore.framework */; };
 		A6A30D731A1B1EFA001AE1FE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A30D721A1B1EFA001AE1FE /* CoreGraphics.framework */; };
 		A6A30D761A1B2700001AE1FE /* icon_voice_record@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A30D751A1B2700001AE1FE /* icon_voice_record@3x.png */; };
+		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
+		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
+		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +132,12 @@
 		A6A30D701A1B1EEE001AE1FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A6A30D721A1B1EFA001AE1FE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A6A30D751A1B2700001AE1FE /* icon_voice_record@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_voice_record@3x.png"; sourceTree = "<group>"; };
+		A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
+		A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
+		A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
+		A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PulsingHaloLayer.m; sourceTree = "<group>"; };
+		A6E171FA1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplePulsingHaloLayer.h; sourceTree = "<group>"; };
+		A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplePulsingHaloLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +302,8 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A6E171F71A1C62DD00F2B4BF /* PulsingHalo */,
+				A6E171F31A1C5F1A00F2B4BF /* SVPulsingAnnotationView */,
 				A648C0CB1A19AD4A00FF1744 /* Masonry */,
 			);
 			path = Libraries;
@@ -355,6 +366,26 @@
 				A6A30D701A1B1EEE001AE1FE /* QuartzCore.framework */,
 			);
 			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		A6E171F31A1C5F1A00F2B4BF /* SVPulsingAnnotationView */ = {
+			isa = PBXGroup;
+			children = (
+				A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */,
+				A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */,
+			);
+			path = SVPulsingAnnotationView;
+			sourceTree = "<group>";
+		};
+		A6E171F71A1C62DD00F2B4BF /* PulsingHalo */ = {
+			isa = PBXGroup;
+			children = (
+				A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */,
+				A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */,
+				A6E171FA1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.h */,
+				A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */,
+			);
+			path = PulsingHalo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -467,6 +498,7 @@
 				A648C0C61A1982D900FF1744 /* FLYTabView.m in Sources */,
 				A648C0E91A19AD4A00FF1744 /* NSArray+MASAdditions.m in Sources */,
 				A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */,
+				A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */,
 				A6A30D661A1B0555001AE1FE /* FLYFeedViewController.m in Sources */,
 				A648C0F21A19C65B00FF1744 /* FLYTabBarView.m in Sources */,
 				A648C0EA1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
@@ -475,6 +507,7 @@
 				A6A30D6F1A1B1DF8001AE1FE /* FLYCircleView.m in Sources */,
 				A648C0E71A19AD4A00FF1744 /* MASViewAttribute.m in Sources */,
 				A648C0E61A19AD4A00FF1744 /* MASLayoutConstraint.m in Sources */,
+				A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */,
 				A648C0E31A19AD4A00FF1744 /* MASCompositeConstraint.m in Sources */,
 				A6263EBD1A18817A00C4C3BA /* FLYUniversalViewController.m in Sources */,
 				A6A30D6C1A1B0586001AE1FE /* FLYRecordViewController.m in Sources */,
@@ -482,6 +515,7 @@
 				A6263ED01A18A10E00C4C3BA /* UIImage+FLYAddition.m in Sources */,
 				A6263E951A187E1200C4C3BA /* AppDelegate.m in Sources */,
 				A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */,
+				A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */,
 				A6263E921A187E1200C4C3BA /* main.m in Sources */,
 				A648C0E51A19AD4A00FF1744 /* MASConstraintMaker.m in Sources */,
 				A6A30D691A1B0574001AE1FE /* FLYProfileViewController.m in Sources */,

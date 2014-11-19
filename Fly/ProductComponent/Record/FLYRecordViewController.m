@@ -9,6 +9,9 @@
 #import "FLYRecordViewController.h"
 #import "FLYCircleView.h"
 #import "UIColor+FLYAddition.h"
+#import "SVPulsingAnnotationView.h"
+#import "PulsingHaloLayer.h"
+#import "MultiplePulsingHaloLayer.h"
 
 #define kInnerCircleRadius 100
 
@@ -17,6 +20,8 @@
 @property (nonatomic) FLYCircleView *circleView;
 @property (nonatomic) UIImageView *centerImageView;
 @property (nonatomic) UILabel *recordedTimeLabel;
+@property (nonatomic) SVPulsingAnnotationView *pulsingView;
+@property (nonatomic, weak) PulsingHaloLayer *halo;
 
 @property (nonatomic) NSInteger recordedSeconds;
 
@@ -28,6 +33,8 @@
 {
     [super viewDidLoad];
     _recordedSeconds = 0;
+    
+    [self _addPulseView];
     
     _circleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kInnerCircleRadius, kInnerCircleRadius)];
     [self.view addSubview:_circleView];
@@ -45,6 +52,15 @@
     [self.view addSubview:_recordedTimeLabel];
     
     [self updateViewConstraints];
+}
+
+
+- (void)_addPulseView
+{
+    PulsingHaloLayer *layer = [PulsingHaloLayer layer];
+    self.halo = layer;
+    self.halo.radius = 150;
+    [self.view.layer insertSublayer:self.halo below:self.centerImageView.layer];
 }
 
 -(void)updateViewConstraints
@@ -78,6 +94,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+    self.halo.position = self.centerImageView.center;
 }
 
 @end
