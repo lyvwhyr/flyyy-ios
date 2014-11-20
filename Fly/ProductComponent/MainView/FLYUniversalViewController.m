@@ -8,6 +8,10 @@
 
 #import "FLYUniversalViewController.h"
 
+#if DEBUG
+#import "FLEXManager.h"
+#endif
+
 @interface FLYUniversalViewController ()
 
 @end
@@ -16,6 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    #if DEBUG
+    [[FLEXManager sharedManager] showExplorer];
+    #endif
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -22,14 +22,23 @@
 
 -(void)updateViewConstraints
 {
+    CGFloat height = kContainerViewHeight;
     [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(@0);
         make.top.equalTo(@(0));
+//        make.width.equalTo(@(kMainScreenWidth));
+//        make.height.equalTo(@(kContainerViewHeight));
+        
         make.width.equalTo(@(kMainScreenWidth));
-        make.height.equalTo(@(kContainerViewHeight));
+        make.height.equalTo(@(100));
     }];
     
     [super updateViewConstraints];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
 }
 
 @end

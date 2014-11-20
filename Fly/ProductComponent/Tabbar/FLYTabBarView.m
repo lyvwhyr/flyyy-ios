@@ -28,7 +28,8 @@
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor flyTabBarBackground];
+//        self.backgroundColor = [UIColor flyTabBarBackground];
+        self.backgroundColor = [UIColor blueColor];
         self.userInteractionEnabled = YES;
         
         _separator = [UIView new];

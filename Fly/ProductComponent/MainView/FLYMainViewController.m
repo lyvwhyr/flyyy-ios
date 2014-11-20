@@ -16,6 +16,10 @@
 #import "FLYRecordViewController.h"
 #import "FLYProfileViewController.h"
 
+#if DEBUG
+#import "FLEXManager.h"
+#endif
+
 @interface FLYMainViewController() <FLYTabBarViewDelegate>
 
 @property (nonatomic) FLYTabBarView *tabBarView;
@@ -42,6 +46,7 @@
 {
     [super viewDidLoad];
     self.title = @"FLY";
+    self.view.userInteractionEnabled = YES;
     [self _addTabBar];
     [self _addChildControllers];
 }
