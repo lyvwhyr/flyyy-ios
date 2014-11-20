@@ -8,6 +8,12 @@
 
 #import "FLYUniversalViewController.h"
 
+NS_ENUM(NSInteger, FLYRecordState)
+{
+    FLYRecordStatePause = 1
+    
+};
+
 @interface FLYRecordViewController : FLYUniversalViewController
 
 @end

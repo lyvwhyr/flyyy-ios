@@ -34,7 +34,19 @@
     [super viewDidLoad];
     _recordedSeconds = 0;
     
-    [self _addPulseView];
+    [self _addSubviews];
+    
+    [self updateViewConstraints];
+}
+
+
+#pragma mark - add subviews
+- (void)_addSubviews
+{
+    PulsingHaloLayer *layer = [PulsingHaloLayer layer];
+    self.halo = layer;
+    self.halo.radius = 150;
+    [self.view.layer insertSublayer:self.halo below:self.centerImageView.layer];
     
     _circleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kInnerCircleRadius, kInnerCircleRadius)];
     [self.view addSubview:_circleView];
@@ -48,19 +60,8 @@
     _recordedTimeLabel = [UILabel new];
     _recordedTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _recordedTimeLabel.textColor = [UIColor flyGreen];
-    _recordedTimeLabel.text = @"2'";
+    _recordedTimeLabel.text = @"0 s";
     [self.view addSubview:_recordedTimeLabel];
-    
-    [self updateViewConstraints];
-}
-
-
-- (void)_addPulseView
-{
-    PulsingHaloLayer *layer = [PulsingHaloLayer layer];
-    self.halo = layer;
-    self.halo.radius = 150;
-    [self.view.layer insertSublayer:self.halo below:self.centerImageView.layer];
 }
 
 -(void)updateViewConstraints
