@@ -10,6 +10,12 @@
 #import "FLYCircleView.h"
 #import "UIColor+FLYAddition.h"
 
+@interface FLYCircleView()
+
+@property (nonatomic) CAShapeLayer *arcLayer;
+
+@end
+
 @implementation FLYCircleView
 
 - (instancetype)initWithCenterPoint:(CGPoint)point radius:(CGFloat)radius color:(UIColor *)color
@@ -17,18 +23,26 @@
     if (self = [super init]) {
         UIBezierPath *path = [UIBezierPath bezierPath];
         [path addArcWithCenter:point radius:radius startAngle:0 endAngle:2 * M_PI clockwise:NO];
-        CAShapeLayer *arcLayer = [CAShapeLayer layer];
-        arcLayer.path = path.CGPath;
+        _arcLayer = [CAShapeLayer layer];
+        _arcLayer.path = path.CGPath;
 //        arcLayer.strokeColor = [UIColor flyGreen].CGColor;
-        arcLayer.fillColor = color.CGColor;
+        _arcLayer.fillColor = color.CGColor;
 //        arcLayer.fillColor = [UIColor whiteColor].CGColor;
-        arcLayer.lineWidth = 5;
-        [self.layer addSublayer:arcLayer];
+        _arcLayer.lineWidth = 5;
+        [self.layer addSublayer:_arcLayer];
         
 //        [self drawLineAnimation:arcLayer];
     }
     return self;
 }
+
+- (void)setupLayerFillColor:(UIColor *)fillColor strokeColor:(UIColor *)strokeColor
+{
+    _arcLayer.fillColor = fillColor.CGColor;
+    _arcLayer.strokeColor = strokeColor.CGColor;
+}
+
+
 
 
 -(void)drawLineAnimation:(CALayer*)layer

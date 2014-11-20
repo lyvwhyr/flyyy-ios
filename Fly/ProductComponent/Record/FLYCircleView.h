@@ -11,5 +11,6 @@
 @interface FLYCircleView : UIView
 
 - (instancetype)initWithCenterPoint:(CGPoint)point radius:(CGFloat)radius color:(UIColor *)color;
+- (void)setupLayerFillColor:(UIColor *)fillColor strokeColor:(UIColor *)strokeColor;
 
 @end

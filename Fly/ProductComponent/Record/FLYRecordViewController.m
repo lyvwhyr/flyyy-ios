@@ -24,10 +24,13 @@
 @property (nonatomic) UILabel *recordedTimeLabel;
 @property (nonatomic) SVPulsingAnnotationView *pulsingView;
 @property (nonatomic, weak) PulsingHaloLayer *halo;
+@property (nonatomic) UIButton *trashButton;
 @property (nonatomic) FLYRecordState currentState;
 @property (nonatomic) NSTimer *recordTimer;
+@property (nonatomic) PulsingHaloLayer *pulsingHaloLayer;
 
 @property (nonatomic, readonly) UITapGestureRecognizer *userActionTapGestureRecognizer;
+@property (nonatomic, readonly) UITapGestureRecognizer *deleteRecordingTapGestureRecognizer;
 
 @property (nonatomic) NSInteger recordedSeconds;
 
@@ -41,6 +44,7 @@
     if (self = [super init]) {
         self.view.frame = CGRectMake(0, 64, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - 64);
         self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        self.title = @"Record";
     }
     return self;
 }
@@ -58,7 +62,7 @@
 
 - (void)dealloc
 {
-    
+    NSLog(@"dealloc for record view controller");
 }
 
 - (void)_cleanupData
@@ -80,12 +84,14 @@
 
 - (void)_backButtonTapped
 {
+    [self _cleanupData];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)_setupInitialViewState
 {
     self.view.backgroundColor = [UIColor flyContentBackgroundGrey];
+    _currentState = FLYRecordInitialState;
     
     _outerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kOuterCircleRadius, kOuterCircleRadius) radius:kOuterCircleRadius color:[UIColor whiteColor]];
     [self.view addSubview:_outerCircleView];
@@ -100,6 +106,8 @@
     [_userActionImageView addGestureRecognizer:_userActionTapGestureRecognizer];
     _userActionImageView.userInteractionEnabled = YES;
     [self.view insertSubview:_userActionImageView aboveSubview:_innerCircleView];
+    
+    [self updateViewConstraints];
 }
 
 - (void)_setupRecordingViewState
@@ -115,6 +123,24 @@
     
     [self.view addSubview:_recordedTimeLabel];
     [self _addPulsingAnimation];
+    [self updateViewConstraints];
+}
+
+- (void)_setupCompleteViewState
+{
+    [self.recordedTimeLabel removeFromSuperview];
+    [_pulsingHaloLayer removeFromSuperlayer];
+    
+    _innerCircleView.hidden = YES;
+    
+    [_outerCircleView setupLayerFillColor:[UIColor whiteColor] strokeColor:[UIColor flyLightGreen]];
+    [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_play"]];
+    
+    _trashButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_trashButton setImage:[UIImage imageNamed:@"icon_record_trash_bin"] forState:UIControlStateNormal];
+    _trashButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [_trashButton addTarget:self action:@selector(_setupInitialViewState) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_trashButton];
     [self updateViewConstraints];
 }
 
@@ -135,8 +161,8 @@
 
 - (void)_addPulsingAnimation
 {
-    PulsingHaloLayer *layer = [PulsingHaloLayer layer];
-    self.halo = layer;
+    _pulsingHaloLayer = [PulsingHaloLayer layer];
+    self.halo = _pulsingHaloLayer;
     self.halo.radius = 150;
     [self.view.layer insertSublayer:self.halo below:self.userActionImageView.layer];
 }
@@ -167,9 +193,16 @@
         make.center.equalTo(self.innerCircleView);
     }];
     
-    [self.recordedTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.outerCircleView.mas_top).with.offset(-20);
-        make.centerX.equalTo(self.outerCircleView.mas_centerX);
+    if (_currentState == FLYRecordRecordingState) {
+        [self.recordedTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.outerCircleView.mas_top).with.offset(-20);
+            make.centerX.equalTo(self.outerCircleView.mas_centerX);
+        }];
+    }
+    
+    [self.trashButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.outerCircleView.mas_bottom).offset(30);
+        make.right.equalTo(self.view.mas_right).offset(-30);
     }];
     
     [super updateViewConstraints];
@@ -182,6 +215,17 @@
         {
             _currentState = FLYRecordRecordingState;
             [self _setupRecordingViewState];
+            break;
+        }
+        case FLYRecordRecordingState:
+        {
+            _currentState = FLYRecordCompleteState;
+            [self _setupCompleteViewState];
+            break;
+        }
+        case FLYRecordCompleteState:
+        {
+            _currentState = FLYRecordPauseState;
             break;
         }
         default:
