@@ -21,7 +21,7 @@
 @property (nonatomic) FLYTabBarView *tabBarView;
 
 @property (nonatomic) FLYFeedViewController *feedViewController;
-@property (nonatomic) FLYRecordViewController *recordViewController;
+//@property (nonatomic) FLYRecordViewController *recordViewController;
 @property (nonatomic) FLYProfileViewController *profileViewController;
 @property (nonatomic) FLYUniversalViewController *currentViewController;
 
@@ -67,8 +67,7 @@
     _feedViewController = [FLYFeedViewController new];
     [self addChildViewController:_feedViewController];
     
-    _recordViewController = [FLYRecordViewController new];
-    [self addChildViewController:_recordViewController];
+//    [self addChildViewController:_recordViewController];
     
     _profileViewController = [FLYProfileViewController new];
     [self addChildViewController:_profileViewController];
@@ -105,9 +104,12 @@
     if (index == TABBAR_HOME) {
         
     } else if (index == TABBAR_RECORD) {
-        [self transitionFromViewController:_currentViewController toViewController:_recordViewController duration:0 options:0 animations:nil completion:^(BOOL finished) {
-            _currentViewController = _recordViewController;
-        }];
+        FLYRecordViewController *recordViewController = [FLYRecordViewController new];
+//        [self transitionFromViewController:_currentViewController toViewController:_recordViewController duration:0 options:0 animations:nil completion:^(BOOL finished) {
+            _currentViewController = recordViewController;
+//        }];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:recordViewController];
+        [self presentViewController:navigationController animated:NO completion:nil];
     } else {
         
     }

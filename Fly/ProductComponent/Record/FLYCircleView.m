@@ -12,15 +12,15 @@
 
 @implementation FLYCircleView
 
-- (instancetype)initWithCenterPoint:(CGPoint)point
+- (instancetype)initWithCenterPoint:(CGPoint)point radius:(CGFloat)radius color:(UIColor *)color
 {
     if (self = [super init]) {
         UIBezierPath *path = [UIBezierPath bezierPath];
-        [path addArcWithCenter:point radius:100 startAngle:0 endAngle:2 * M_PI clockwise:NO];
+        [path addArcWithCenter:point radius:radius startAngle:0 endAngle:2 * M_PI clockwise:NO];
         CAShapeLayer *arcLayer = [CAShapeLayer layer];
         arcLayer.path = path.CGPath;
-        arcLayer.strokeColor = [UIColor flyGreen].CGColor;
-        arcLayer.fillColor = [UIColor flyGreen].CGColor;
+//        arcLayer.strokeColor = [UIColor flyGreen].CGColor;
+        arcLayer.fillColor = color.CGColor;
 //        arcLayer.fillColor = [UIColor whiteColor].CGColor;
         arcLayer.lineWidth = 5;
         [self.layer addSublayer:arcLayer];

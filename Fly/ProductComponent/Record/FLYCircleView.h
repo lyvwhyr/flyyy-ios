@@ -10,6 +10,6 @@
 
 @interface FLYCircleView : UIView
 
-- (instancetype)initWithCenterPoint:(CGPoint)point;
+- (instancetype)initWithCenterPoint:(CGPoint)point radius:(CGFloat)radius color:(UIColor *)color;
 
 @end
