@@ -63,10 +63,10 @@
 
 - (void)playWithCompletionBlock:(AudioPlayerCompleteblock)block
 {
-    if ( _player ) {
-        [_audioController removeChannels:@[_player]];
-        self.player = nil;
-    } else {
+//    if ( _player ) {
+//        [_audioController removeChannels:@[_player]];
+//        self.player = nil;
+//    } else {
         NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.aiff"];
         
@@ -87,7 +87,7 @@
         _player.removeUponFinish = YES;
         _player.completionBlock = [block copy];
         [_audioController addChannels:@[_player]];
-    }
+//    }
 }
 
 
