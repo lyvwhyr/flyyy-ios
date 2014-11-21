@@ -12,9 +12,13 @@
 #import "SVPulsingAnnotationView.h"
 #import "PulsingHaloLayer.h"
 #import "MultiplePulsingHaloLayer.h"
+#import "AERecorder.h"
+#import "AEAudioController.h"
+#import "FLYAudioStateManager.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
+
 
 @interface FLYRecordViewController ()
 
@@ -28,6 +32,10 @@
 @property (nonatomic) FLYRecordState currentState;
 @property (nonatomic) NSTimer *recordTimer;
 @property (nonatomic) PulsingHaloLayer *pulsingHaloLayer;
+
+@property (nonatomic) AEAudioController *audioController;
+@property (nonatomic) AEAudioFilePlayer *player;
+@property (nonatomic, copy) AudioPlayerCompleteblock completionBlock;
 
 @property (nonatomic, readonly) UITapGestureRecognizer *userActionTapGestureRecognizer;
 @property (nonatomic, readonly) UITapGestureRecognizer *deleteRecordingTapGestureRecognizer;
@@ -45,6 +53,7 @@
         self.view.frame = CGRectMake(0, 64, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - 64);
         self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         self.title = @"Record";
+        
     }
     return self;
 }
@@ -53,11 +62,22 @@
 {
     [super viewDidLoad];
     _recordedSeconds = 0;
+    [self _initVoiceRecording];
     
     [self _setupInitialViewState];
     [self _setupNavigationItem];
     
     [self updateViewConstraints];
+}
+
+- (void)_initVoiceRecording
+{
+    __weak typeof(self) weakSelf = self;
+    _completionBlock = ^{
+        __strong typeof(self) strongSelf = weakSelf;
+        strongSelf.currentState = FLYRecordCompleteState;
+        [strongSelf.userActionImageView setImage:[UIImage imageNamed:@"icon_record_play"]];
+    };
 }
 
 - (void)dealloc
@@ -127,6 +147,8 @@
     [self.view addSubview:_recordedTimeLabel];
     [self _addPulsingAnimation];
     [self updateViewConstraints];
+    
+    [[FLYAudioStateManager manager] startRecord];
 }
 
 - (void)_setupCompleteViewState
@@ -145,6 +167,11 @@
     [_trashButton addTarget:self action:@selector(_setupInitialViewState) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_trashButton];
     [self updateViewConstraints];
+}
+
+- (void)_setupPauseViewState
+{
+    [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_pause"]];
 }
 
 - (void)_setupRecordTimer
@@ -226,11 +253,22 @@
         {
             _currentState = FLYRecordCompleteState;
             [self _setupCompleteViewState];
+            [[FLYAudioStateManager manager] stopRecord];
             break;
         }
         case FLYRecordCompleteState:
         {
             _currentState = FLYRecordPauseState;
+            [self _setupPauseViewState];
+            [[FLYAudioStateManager manager] playWithCompletionBlock:_completionBlock];
+            break;
+        }
+        case FLYRecordPauseState:
+        {
+            _currentState = FLYRecordCompleteState;
+            [[FLYAudioStateManager manager] playWithCompletionBlock:_completionBlock];
+            [self _setupCompleteViewState];
+            
             break;
         }
         default:
