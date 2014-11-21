@@ -90,6 +90,9 @@
 
 - (void)_setupInitialViewState
 {
+    [_trashButton removeFromSuperview];
+    _trashButton = nil;
+    
     self.view.backgroundColor = [UIColor flyContentBackgroundGrey];
     _currentState = FLYRecordInitialState;
     
@@ -200,10 +203,12 @@
         }];
     }
     
-    [self.trashButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.outerCircleView.mas_bottom).offset(30);
-        make.right.equalTo(self.view.mas_right).offset(-30);
-    }];
+    if (self.trashButton) {
+        [self.trashButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.outerCircleView.mas_bottom).offset(30);
+            make.right.equalTo(self.view.mas_right).offset(-30);
+        }];
+    }
     
     [super updateViewConstraints];
 }

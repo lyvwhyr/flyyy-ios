@@ -1,4 +1,6 @@
-#define FLY_SCREEN_SCALE        FLYMainScreenScale()
+@interface FLYUtilities : NSObject
 
++ (CGFloat) FLYMainScreenScale;
++ (void)printAutolayoutTrace;
 
-extern CGFloat FLYMainScreenScale(void) __attribute__((const));
+@end

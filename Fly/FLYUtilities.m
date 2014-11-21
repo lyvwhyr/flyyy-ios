@@ -7,8 +7,11 @@
 //
 
 #import "FLYUtilities.h"
+#import "UIWindow+FLYAddition.h"
 
-CGFloat FLYMainScreenScale()
+@implementation FLYUtilities
+
++ (CGFloat) FLYMainScreenScale
 {
     static CGFloat kScale;
     static dispatch_once_t onceToken;
@@ -17,3 +20,17 @@ CGFloat FLYMainScreenScale()
     });
     return kScale;
 }
+
++ (void)printAutolayoutTrace
+{
+    
+    [FLYUtilities performSelector:@selector(_wrapperForLoggingConstraints) withObject:nil afterDelay:.3];
+}
+
++ (void)_wrapperForLoggingConstraints
+{
+    NSString *result = [[UIWindow keyWindow] _autolayoutTrace];
+    NSLog(@"%@", result);
+}
+
+@end

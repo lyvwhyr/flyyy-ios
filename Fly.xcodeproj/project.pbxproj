@@ -93,6 +93,8 @@
 		A6A0E4BE1A1E76110036116E /* FLEXHierarchyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E48A1A1E76110036116E /* FLEXHierarchyTableViewCell.m */; };
 		A6A0E4BF1A1E76110036116E /* FLEXHierarchyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E48C1A1E76110036116E /* FLEXHierarchyTableViewController.m */; };
 		A6A0E4C01A1E76110036116E /* FLEXImagePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E48E1A1E76110036116E /* FLEXImagePreviewViewController.m */; };
+		A6A0E4C31A1E7EFA0036116E /* UIWindow+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E4C21A1E7EFA0036116E /* UIWindow+FLYAddition.m */; };
+		A6A0E4C51A1EB5600036116E /* icon_voice_record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E4C41A1EB5600036116E /* icon_voice_record@2x.png */; };
 		A6A30D661A1B0555001AE1FE /* FLYFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A30D651A1B0555001AE1FE /* FLYFeedViewController.m */; };
 		A6A30D691A1B0574001AE1FE /* FLYProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A30D681A1B0574001AE1FE /* FLYProfileViewController.m */; };
 		A6A30D6C1A1B0586001AE1FE /* FLYRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A30D6B1A1B0586001AE1FE /* FLYRecordViewController.m */; };
@@ -284,6 +286,9 @@
 		A6A0E48C1A1E76110036116E /* FLEXHierarchyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLEXHierarchyTableViewController.m; sourceTree = "<group>"; };
 		A6A0E48D1A1E76110036116E /* FLEXImagePreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLEXImagePreviewViewController.h; sourceTree = "<group>"; };
 		A6A0E48E1A1E76110036116E /* FLEXImagePreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLEXImagePreviewViewController.m; sourceTree = "<group>"; };
+		A6A0E4C11A1E7EFA0036116E /* UIWindow+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+FLYAddition.h"; sourceTree = "<group>"; };
+		A6A0E4C21A1E7EFA0036116E /* UIWindow+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+FLYAddition.m"; sourceTree = "<group>"; };
+		A6A0E4C41A1EB5600036116E /* icon_voice_record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_voice_record@2x.png"; sourceTree = "<group>"; };
 		A6A30D641A1B0555001AE1FE /* FLYFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFeedViewController.h; sourceTree = "<group>"; };
 		A6A30D651A1B0555001AE1FE /* FLYFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFeedViewController.m; sourceTree = "<group>"; };
 		A6A30D671A1B0574001AE1FE /* FLYProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYProfileViewController.h; sourceTree = "<group>"; };
@@ -434,6 +439,8 @@
 				A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */,
 				A648C0EF1A19B18B00FF1744 /* UIFont+FLYAddition.h */,
 				A648C0F01A19B18B00FF1744 /* UIFont+FLYAddition.m */,
+				A6A0E4C11A1E7EFA0036116E /* UIWindow+FLYAddition.h */,
+				A6A0E4C21A1E7EFA0036116E /* UIWindow+FLYAddition.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -452,6 +459,7 @@
 		A648C0C71A199F8C00FF1744 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A6A0E4C41A1EB5600036116E /* icon_voice_record@2x.png */,
 				A6A0E41A1A1E6E970036116E /* icon_tabbar_home@2x.png */,
 				A6A0E41B1A1E6E970036116E /* icon_tabbar_me@2x.png */,
 				A6A0E4141A1DD5130036116E /* icon_record_pause@3x.png */,
@@ -811,6 +819,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6A0E4191A1DD5130036116E /* icon_record_trash_bin@3x.png in Resources */,
+				A6A0E4C51A1EB5600036116E /* icon_voice_record@2x.png in Resources */,
 				A6A30D761A1B2700001AE1FE /* icon_voice_record@3x.png in Resources */,
 				A6A0E4181A1DD5130036116E /* icon_record_play@3x.png in Resources */,
 				A648C0F61A19D1FF00FF1744 /* icon_tabbar_voice@2x.png in Resources */,
@@ -900,6 +909,7 @@
 				A6A0E4B31A1E76110036116E /* FLEXGlobalsTableViewControllerEntry.m in Sources */,
 				A6263E951A187E1200C4C3BA /* AppDelegate.m in Sources */,
 				A6A0E49D1A1E76110036116E /* FLEXFieldEditorViewController.m in Sources */,
+				A6A0E4C31A1E7EFA0036116E /* UIWindow+FLYAddition.m in Sources */,
 				A6A0E4BA1A1E76110036116E /* FLEXHeapEnumerator.m in Sources */,
 				A6A0E49A1A1E76110036116E /* FLEXArgumentInputViewFactory.m in Sources */,
 				A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */,

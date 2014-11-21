@@ -120,6 +120,11 @@
     }
 }
 
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+}
+
 
 - (FLYNavigationController *)flyNavigationController
 {

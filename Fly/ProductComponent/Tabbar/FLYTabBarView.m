@@ -28,8 +28,7 @@
 {
     self = [super init];
     if (self) {
-//        self.backgroundColor = [UIColor flyTabBarBackground];
-        self.backgroundColor = [UIColor blueColor];
+        self.backgroundColor = [UIColor flyTabBarBackground];
         self.userInteractionEnabled = YES;
         
         _separator = [UIView new];
@@ -63,7 +62,7 @@
 
 -(void)updateConstraints
 {
-    CGFloat height = 1.0/FLY_SCREEN_SCALE;
+    CGFloat height = 1.0/[FLYUtilities FLYMainScreenScale];
     [self.separator mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@0.0);
         make.left.equalTo(@0.0);
