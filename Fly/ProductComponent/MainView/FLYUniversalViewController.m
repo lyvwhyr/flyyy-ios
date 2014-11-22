@@ -20,9 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    #if DEBUG
-//    [[FLEXManager sharedManager] showExplorer];
-//    #endif
+    #if DEBUG
+    [[FLEXManager sharedManager] showExplorer];
+    #endif
 }
 
 - (void)viewWillAppear:(BOOL)animated

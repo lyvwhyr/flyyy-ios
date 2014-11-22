@@ -124,6 +124,7 @@
 		A6F27CA71A20735A000EC0B3 /* record_animate_12.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F27C991A20735A000EC0B3 /* record_animate_12.png */; };
 		A6F27CA81A20735A000EC0B3 /* record_animate_13.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F27C9A1A20735A000EC0B3 /* record_animate_13.png */; };
 		A6F27CA91A20735A000EC0B3 /* record_animate_14.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F27C9B1A20735A000EC0B3 /* record_animate_14.png */; };
+		A6F27CAB1A2085D6000EC0B3 /* icon_audio_wave@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -347,6 +348,7 @@
 		A6F27C991A20735A000EC0B3 /* record_animate_12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record_animate_12.png; sourceTree = "<group>"; };
 		A6F27C9A1A20735A000EC0B3 /* record_animate_13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record_animate_13.png; sourceTree = "<group>"; };
 		A6F27C9B1A20735A000EC0B3 /* record_animate_14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record_animate_14.png; sourceTree = "<group>"; };
+		A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_audio_wave@3x.png"; sourceTree = "<group>"; };
 		DEF027D145FDC2CC1553A7A5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F4DA38F875E9D2C76E94F1F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -525,6 +527,7 @@
 		A648C0C71A199F8C00FF1744 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */,
 				A6F27C8D1A20732A000EC0B3 /* recording */,
 				A61D186C1A1F1E7900D188B5 /* icon_record_pause1@3x.png */,
 				A61D186D1A1F1E7900D188B5 /* icon_record_play@3x.png */,
@@ -912,6 +915,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6F27CAB1A2085D6000EC0B3 /* icon_audio_wave@3x.png in Resources */,
 				A6A0E4191A1DD5130036116E /* icon_record_trash_bin@3x.png in Resources */,
 				A6F27CA41A20735A000EC0B3 /* record_animate_09.png in Resources */,
 				A6F27CA11A20735A000EC0B3 /* record_animate_06.png in Resources */,
