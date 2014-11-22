@@ -360,11 +360,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Record/FLYRecordViewController.m"
-            timestampString = "438334310.635143"
+            timestampString = "438335953.834243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "312"
-            endingLineNumber = "312"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
             landmarkName = "-_userActionTapped:"
             landmarkType = "5">
          </BreakpointContent>
@@ -376,11 +376,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Record/FLYRecordViewController.m"
-            timestampString = "438334310.635143"
+            timestampString = "438335953.834243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
             landmarkName = "-_setupRecordingViewState"
             landmarkType = "5">
          </BreakpointContent>
@@ -392,11 +392,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Record/FLYRecordViewController.m"
-            timestampString = "438334310.635143"
+            timestampString = "438335953.834243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "314"
+            endingLineNumber = "314"
             landmarkName = "-_userActionTapped:"
             landmarkType = "5">
          </BreakpointContent>
@@ -408,11 +408,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Record/FLYRecordViewController.m"
-            timestampString = "438334310.635143"
+            timestampString = "438335953.834243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
             landmarkName = "-updateViewConstraints"
             landmarkType = "5">
          </BreakpointContent>
@@ -456,11 +456,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Record/FLYRecordViewController.m"
-            timestampString = "438334310.635143"
+            timestampString = "438335953.834243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
+            startingLineNumber = "351"
+            endingLineNumber = "351"
             landmarkName = "-viewDidLayoutSubviews"
             landmarkType = "5">
          </BreakpointContent>
@@ -472,11 +472,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Record/FLYRecordViewController.m"
-            timestampString = "438334310.635143"
+            timestampString = "438335953.834243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "346"
-            endingLineNumber = "346"
+            startingLineNumber = "350"
+            endingLineNumber = "350"
             landmarkName = "-viewDidLayoutSubviews"
             landmarkType = "5">
          </BreakpointContent>
@@ -504,11 +504,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Record/FLYRecordViewController.m"
-            timestampString = "438334310.635143"
+            timestampString = "438335953.834243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "-dealloc"
             landmarkType = "5">
          </BreakpointContent>
@@ -520,11 +520,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Record/FLYRecordViewController.m"
-            timestampString = "438334310.635143"
+            timestampString = "438335953.834243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "-_cleanupData"
             landmarkType = "5">
          </BreakpointContent>
@@ -536,11 +536,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Record/FLYRecordViewController.m"
-            timestampString = "438334310.635143"
+            timestampString = "438335953.834243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "-_setupCompleteViewState"
             landmarkType = "5">
          </BreakpointContent>
@@ -552,11 +552,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Record/FLYRecordViewController.m"
-            timestampString = "438334310.635143"
+            timestampString = "438335953.834243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "-_setupInitialViewState"
             landmarkType = "5">
          </BreakpointContent>
@@ -774,11 +774,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Record/FLYRecordViewController.m"
-            timestampString = "438334310.635143"
+            timestampString = "438335953.834243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "-updateViewConstraints"
             landmarkType = "5">
          </BreakpointContent>

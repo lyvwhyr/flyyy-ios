@@ -84,6 +84,10 @@
 
 - (void)updateLevels:(NSTimer*)timer
 {
+    if (_currentState != FLYRecordRecordingState) {
+        return;
+    }
+    
     Float32 inputAvg, inputPeak, outputAvg, outputPeak;
     [_audioController inputAveragePowerLevel:&inputAvg peakHoldLevel:&inputPeak];
     [_audioController outputAveragePowerLevel:&outputAvg peakHoldLevel:&outputPeak];
