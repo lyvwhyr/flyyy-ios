@@ -222,6 +222,7 @@ static inline float translate(float val, float min, float max) {
 
 - (void)_setupCompleteViewState
 {
+    
     [self.recordedTimeLabel removeFromSuperview];
     [_pulsingHaloLayer removeFromSuperlayer];
     
@@ -321,15 +322,15 @@ static inline float translate(float val, float min, float max) {
         case FLYRecordRecordingState:
         {
             _currentState = FLYRecordCompleteState;
-            [self _setupCompleteViewState];
             [[FLYAudioStateManager manager] stopRecord];
+            [self _setupCompleteViewState];
             break;
         }
         case FLYRecordCompleteState:
         {
             _currentState = FLYRecordPauseState;
-            [self _setupPauseViewState];
             [[FLYAudioStateManager manager] playWithCompletionBlock:_completionBlock];
+            [self _setupPauseViewState];
             break;
         }
         case FLYRecordPauseState:

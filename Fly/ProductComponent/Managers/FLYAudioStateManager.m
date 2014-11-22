@@ -83,10 +83,13 @@
                               otherButtonTitles:@"OK", nil] show];
             return;
         }
+    
+        NSLog(@"audio duration before %f", _player.duration);
         
         _player.removeUponFinish = YES;
         _player.completionBlock = [block copy];
         [_audioController addChannels:@[_player]];
+        NSLog(@"audio duration after %f", _player.duration);
 //    }
 }
 
