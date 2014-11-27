@@ -33,6 +33,7 @@
 @property (nonatomic) FLYRecordState currentState;
 @property (nonatomic) NSTimer *recordTimer;
 @property (nonatomic) PulsingHaloLayer *pulsingHaloLayer;
+@property (nonatomic) UIButton *voiceFilterButton;
 
 @property (nonatomic) AEAudioController *audioController;
 @property (nonatomic) AEAudioFilePlayer *audioPlayer;
@@ -161,6 +162,9 @@ static inline float translate(float val, float min, float max) {
     
 }
 
+
+#pragma mark - navigation bar actions
+
 - (void)_backButtonTapped
 {
     [self _cleanupData];
@@ -172,6 +176,13 @@ static inline float translate(float val, float min, float max) {
     FLYPrePostViewController *prePostVC = [FLYPrePostViewController new];
     [self.navigationController pushViewController:prePostVC animated:YES];
 }
+
+#pragma mark - recording complete actions
+- (void)_voiceFilterButtonTapped
+{
+    
+}
+
 
 - (void)_setupInitialViewState
 {
@@ -236,6 +247,13 @@ static inline float translate(float val, float min, float max) {
     _trashButton.translatesAutoresizingMaskIntoConstraints = NO;
     [_trashButton addTarget:self action:@selector(_setupInitialViewState) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_trashButton];
+    
+    _voiceFilterButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_voiceFilterButton setImage:[UIImage imageNamed:@"icon_voice_filter"] forState:UIControlStateNormal];
+    _voiceFilterButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [_voiceFilterButton addTarget:self action:@selector(_voiceFilterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_voiceFilterButton];
+    
     [self updateViewConstraints];
 }
 
@@ -287,7 +305,7 @@ static inline float translate(float val, float min, float max) {
         make.width.equalTo(@(kInnerCircleRadius * 2));
         make.height.equalTo(@(kInnerCircleRadius * 2));
         make.center.equalTo(self.view);
-    }];
+    }]; 
     
     [self.userActionImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.innerCircleView);
@@ -304,6 +322,13 @@ static inline float translate(float val, float min, float max) {
         [self.trashButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.outerCircleView.mas_bottom).offset(30);
             make.right.equalTo(self.view.mas_right).offset(-30);
+        }];
+    }
+    
+    if (_voiceFilterButton) {
+        [_voiceFilterButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.outerCircleView.mas_bottom).offset(30);
+            make.left.equalTo(self.view.mas_leading).offset(20);
         }];
     }
     

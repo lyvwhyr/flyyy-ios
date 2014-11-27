@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
+#import <POP/POP.h>
+#import "PaperButton.h"
 #import "FLYMainViewController.h"
 #import "FLYNavigationController.h"
 #import "UIViewController+StatusBar.h"
@@ -47,8 +49,17 @@
     [super viewDidLoad];
     self.title = @"FLY";
     self.view.userInteractionEnabled = YES;
+    [self _addNavigationBar];
     [self _addTabBar];
     [self _addChildControllers];
+}
+
+- (void)_addNavigationBar
+{
+    PaperButton *button = [PaperButton button];
+    button.tintColor = [UIColor whiteColor];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.rightBarButtonItem = barButton;
 }
 
 
@@ -59,10 +70,10 @@
     [self.view addSubview:self.tabBarView];
     [self _addConstraints];
     
-    FLYTabView *homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_tabbar_home" recordTab:NO];
-    FLYTabView *meTab = [[FLYTabView alloc] initWithTitle:@"Me" image:@"icon_tabbar_me" recordTab:NO];
+    FLYTabView *hogroupsTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_tabbar_home" recordTab:NO];
+    FLYTabView *groupsTab = [[FLYTabView alloc] initWithTitle:@"Groups" image:@"icon_tabbar_group" recordTab:NO];
     FLYTabView *recordTab = [[FLYTabView alloc] initWithTitle:nil image:@"icon_tabbar_voice" recordTab:YES];
-    NSArray *tabs = @[homeTab, recordTab, meTab];
+    NSArray *tabs = @[hogroupsTab, recordTab, groupsTab];
     [self.tabBarView setTabViews:tabs];
     self.tabBarView.delegate = self;
 }
