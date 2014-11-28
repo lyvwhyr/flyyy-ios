@@ -18,4 +18,10 @@
 + (UIColor *)flyTabBarGreyText;
 + (UIColor *)flyContentBackgroundGrey;
 
++ (UIColor *)customGrayColor;
++ (UIColor *)customRedColor;
++ (UIColor *)customYellowColor;
++ (UIColor *)customGreenColor;
++ (UIColor *)customBlueColor;
+
 @end

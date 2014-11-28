@@ -36,7 +36,6 @@
 {
     [super viewWillLayoutSubviews];
     [self updateViewConstraints];
-    [FLYUtilities printAutolayoutTrace];
     
 }
 

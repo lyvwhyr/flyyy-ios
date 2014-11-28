@@ -17,12 +17,15 @@
 #import "FLYFeedViewController.h"
 #import "FLYRecordViewController.h"
 #import "FLYProfileViewController.h"
+#import "PresentingAnimator.h"
+#import "DismissingAnimator.h"
+#import "FLYFilterHomeFeedSelectorViewController.h"
 
 #if DEBUG
 #import "FLEXManager.h"
 #endif
 
-@interface FLYMainViewController() <FLYTabBarViewDelegate>
+@interface FLYMainViewController() <FLYTabBarViewDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic) FLYTabBarView *tabBarView;
 
@@ -60,6 +63,13 @@
     button.tintColor = [UIColor whiteColor];
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = barButton;
+    
+    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [leftButton setImage:[UIImage imageNamed:@"icon_nav_filter"] forState:UIControlStateNormal];
+    [leftButton addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [leftButton sizeToFit];
+    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+    self.navigationItem.leftBarButtonItem = leftBarItem;
 }
 
 
@@ -129,6 +139,28 @@
     } else {
         
     }
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source
+{
+    return [PresentingAnimator new];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return [DismissingAnimator new];
+}
+
+#pragma mark - private methods for navigation bar actions
+
+- (void)_filterButtonTapped
+{
+    FLYFilterHomeFeedSelectorViewController *vc = [FLYFilterHomeFeedSelectorViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewWillLayoutSubviews

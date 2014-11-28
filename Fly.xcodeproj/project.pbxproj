@@ -47,6 +47,15 @@
 		A6655B5A1A19ECED00440AAB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B591A19ECED00440AAB /* Default-568h@2x.png */; };
 		A69C4B941A27094B00CAD443 /* icon_tabbar_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */; };
 		A69C4B981A270E1400CAD443 /* PaperButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4B971A270E1400CAD443 /* PaperButton.m */; };
+		A69C4B9A1A27111700CAD443 /* icon_filter_feed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B991A27111700CAD443 /* icon_filter_feed@3x.png */; };
+		A69C4B9C1A27186300CAD443 /* icon_nav_filter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B9B1A27186300CAD443 /* icon_nav_filter@3x.png */; };
+		A69C4BA71A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BA51A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.m */; };
+		A69C4BA81A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A69C4BA61A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.xib */; };
+		A69C4BAE1A271B8600CAD443 /* PresentingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BAD1A271B8600CAD443 /* PresentingAnimator.m */; };
+		A69C4BB11A271B8E00CAD443 /* DismissingAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BB01A271B8E00CAD443 /* DismissingAnimator.m */; };
+		A69C4BB41A27D61000CAD443 /* FLYFilterSelectorGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BB31A27D61000CAD443 /* FLYFilterSelectorGroupTableViewCell.m */; };
+		A69C4BBE1A27E2A400CAD443 /* icon_unchecked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4BBD1A27E2A400CAD443 /* icon_unchecked@3x.png */; };
+		A69C4BC01A27E89A00CAD443 /* icon_checked@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4BBF1A27E89A00CAD443 /* icon_checked@3x.png */; };
 		A6A0E4131A1DB9480036116E /* icon_navigation_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E4121A1DB9480036116E /* icon_navigation_back@3x.png */; };
 		A6A0E4191A1DD5130036116E /* icon_record_trash_bin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E4161A1DD5130036116E /* icon_record_trash_bin@3x.png */; };
 		A6A0E41C1A1E6E970036116E /* icon_tabbar_home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E41A1A1E6E970036116E /* icon_tabbar_home@2x.png */; };
@@ -216,6 +225,19 @@
 		A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_group@3x.png"; sourceTree = "<group>"; };
 		A69C4B961A270E1400CAD443 /* PaperButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperButton.h; sourceTree = "<group>"; };
 		A69C4B971A270E1400CAD443 /* PaperButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperButton.m; sourceTree = "<group>"; };
+		A69C4B991A27111700CAD443 /* icon_filter_feed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_filter_feed@3x.png"; sourceTree = "<group>"; };
+		A69C4B9B1A27186300CAD443 /* icon_nav_filter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_nav_filter@3x.png"; sourceTree = "<group>"; };
+		A69C4BA41A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFilterHomeFeedSelectorViewController.h; sourceTree = "<group>"; };
+		A69C4BA51A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFilterHomeFeedSelectorViewController.m; sourceTree = "<group>"; };
+		A69C4BA61A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLYFilterHomeFeedSelectorViewController.xib; sourceTree = "<group>"; };
+		A69C4BAC1A271B8600CAD443 /* PresentingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentingAnimator.h; sourceTree = "<group>"; };
+		A69C4BAD1A271B8600CAD443 /* PresentingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentingAnimator.m; sourceTree = "<group>"; };
+		A69C4BAF1A271B8E00CAD443 /* DismissingAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissingAnimator.h; sourceTree = "<group>"; };
+		A69C4BB01A271B8E00CAD443 /* DismissingAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissingAnimator.m; sourceTree = "<group>"; };
+		A69C4BB21A27D61000CAD443 /* FLYFilterSelectorGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFilterSelectorGroupTableViewCell.h; sourceTree = "<group>"; };
+		A69C4BB31A27D61000CAD443 /* FLYFilterSelectorGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFilterSelectorGroupTableViewCell.m; sourceTree = "<group>"; };
+		A69C4BBD1A27E2A400CAD443 /* icon_unchecked@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_unchecked@3x.png"; sourceTree = "<group>"; };
+		A69C4BBF1A27E89A00CAD443 /* icon_checked@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_checked@3x.png"; sourceTree = "<group>"; };
 		A6A0E4121A1DB9480036116E /* icon_navigation_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_navigation_back@3x.png"; sourceTree = "<group>"; };
 		A6A0E4161A1DD5130036116E /* icon_record_trash_bin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_record_trash_bin@3x.png"; sourceTree = "<group>"; };
 		A6A0E41A1A1E6E970036116E /* icon_tabbar_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_home@2x.png"; sourceTree = "<group>"; };
@@ -465,6 +487,8 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A69C4BA91A271B5800CAD443 /* Animator */,
+				A69C4BA31A271AA100CAD443 /* FilterHomeFeed */,
 				A69C4B951A270E0200CAD443 /* UIControls */,
 				A61D18631A1EE6C500D188B5 /* Managers */,
 				A6263EB71A1880DE00C4C3BA /* MainView */,
@@ -535,6 +559,10 @@
 		A648C0C71A199F8C00FF1744 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A69C4BBF1A27E89A00CAD443 /* icon_checked@3x.png */,
+				A69C4BBD1A27E2A400CAD443 /* icon_unchecked@3x.png */,
+				A69C4B9B1A27186300CAD443 /* icon_nav_filter@3x.png */,
+				A69C4B991A27111700CAD443 /* icon_filter_feed@3x.png */,
 				A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */,
 				A62E53B41A227E0B00125DBC /* icon_voice_filter@3x.png */,
 				A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */,
@@ -604,6 +632,45 @@
 				A69C4B971A270E1400CAD443 /* PaperButton.m */,
 			);
 			path = UIControls;
+			sourceTree = "<group>";
+		};
+		A69C4BA31A271AA100CAD443 /* FilterHomeFeed */ = {
+			isa = PBXGroup;
+			children = (
+				A69C4BA41A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.h */,
+				A69C4BA51A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.m */,
+				A69C4BA61A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.xib */,
+				A69C4BB21A27D61000CAD443 /* FLYFilterSelectorGroupTableViewCell.h */,
+				A69C4BB31A27D61000CAD443 /* FLYFilterSelectorGroupTableViewCell.m */,
+			);
+			path = FilterHomeFeed;
+			sourceTree = "<group>";
+		};
+		A69C4BA91A271B5800CAD443 /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				A69C4BAB1A271B8000CAD443 /* PresentingAnimator */,
+				A69C4BAA1A271B6F00CAD443 /* DismissingAnimator */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
+		A69C4BAA1A271B6F00CAD443 /* DismissingAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				A69C4BAF1A271B8E00CAD443 /* DismissingAnimator.h */,
+				A69C4BB01A271B8E00CAD443 /* DismissingAnimator.m */,
+			);
+			path = DismissingAnimator;
+			sourceTree = "<group>";
+		};
+		A69C4BAB1A271B8000CAD443 /* PresentingAnimator */ = {
+			isa = PBXGroup;
+			children = (
+				A69C4BAC1A271B8600CAD443 /* PresentingAnimator.h */,
+				A69C4BAD1A271B8600CAD443 /* PresentingAnimator.m */,
+			);
+			path = PresentingAnimator;
 			sourceTree = "<group>";
 		};
 		A6A0E4211A1E760A0036116E /* FLEX */ = {
@@ -935,6 +1002,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6F27CAB1A2085D6000EC0B3 /* icon_audio_wave@3x.png in Resources */,
+				A69C4BBE1A27E2A400CAD443 /* icon_unchecked@3x.png in Resources */,
 				A6A0E4191A1DD5130036116E /* icon_record_trash_bin@3x.png in Resources */,
 				A6F27CA41A20735A000EC0B3 /* record_animate_09.png in Resources */,
 				A6F27CA11A20735A000EC0B3 /* record_animate_06.png in Resources */,
@@ -954,11 +1022,14 @@
 				A61D186E1A1F1E7900D188B5 /* icon_record_pause1@3x.png in Resources */,
 				A6F27CA71A20735A000EC0B3 /* record_animate_12.png in Resources */,
 				A6A0E41C1A1E6E970036116E /* icon_tabbar_home@2x.png in Resources */,
+				A69C4BA81A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.xib in Resources */,
 				A6F27C9F1A20735A000EC0B3 /* record_animate_04.png in Resources */,
 				A6A0E41D1A1E6E970036116E /* icon_tabbar_me@2x.png in Resources */,
+				A69C4B9A1A27111700CAD443 /* icon_filter_feed@3x.png in Resources */,
 				A6263EA01A187E1200C4C3BA /* LaunchScreen.xib in Resources */,
 				A6655B5A1A19ECED00440AAB /* Default-568h@2x.png in Resources */,
 				A6263E9D1A187E1200C4C3BA /* Images.xcassets in Resources */,
+				A69C4B9C1A27186300CAD443 /* icon_nav_filter@3x.png in Resources */,
 				A6F27CA31A20735A000EC0B3 /* record_animate_08.png in Resources */,
 				A6F27C9C1A20735A000EC0B3 /* record_animate_01.png in Resources */,
 				A6F27CA61A20735A000EC0B3 /* record_animate_11.png in Resources */,
@@ -968,6 +1039,7 @@
 				A6F27CA51A20735A000EC0B3 /* record_animate_10.png in Resources */,
 				A61D18771A1F27E900D188B5 /* FLYPrePostViewController.xib in Resources */,
 				A6F27C9E1A20735A000EC0B3 /* record_animate_03.png in Resources */,
+				A69C4BC01A27E89A00CAD443 /* icon_checked@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1020,6 +1092,7 @@
 			files = (
 				A6A0E4931A1E76110036116E /* FLEXArgumentInputNotSupportedView.m in Sources */,
 				A648C0F11A19B18B00FF1744 /* UIFont+FLYAddition.m in Sources */,
+				A69C4BA71A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.m in Sources */,
 				A6A0E4AB1A1E76110036116E /* FLEXLibrariesTableViewController.m in Sources */,
 				A6A0E4BD1A1E76110036116E /* FLEXUtility.m in Sources */,
 				A6A0E4B51A1E76110036116E /* FLEXObjectExplorerFactory.m in Sources */,
@@ -1027,6 +1100,7 @@
 				A648C0E91A19AD4A00FF1744 /* NSArray+MASAdditions.m in Sources */,
 				A6A0E4B11A1E76110036116E /* FLEXDescriptionTableViewCell.m in Sources */,
 				A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */,
+				A69C4BB41A27D61000CAD443 /* FLYFilterSelectorGroupTableViewCell.m in Sources */,
 				A6A0E4901A1E76110036116E /* FLEXArgumentInputFontsPickerView.m in Sources */,
 				A6A0E4A61A1E76110036116E /* FLEXClassesTableViewController.m in Sources */,
 				A6A0E4AA1A1E76110036116E /* FLEXInstancesTableViewController.m in Sources */,
@@ -1049,6 +1123,7 @@
 				A648C0E61A19AD4A00FF1744 /* MASLayoutConstraint.m in Sources */,
 				A6A0E4991A1E76110036116E /* FLEXArgumentInputView.m in Sources */,
 				A6A0E4AE1A1E76110036116E /* FLEXArrayExplorerViewController.m in Sources */,
+				A69C4BAE1A271B8600CAD443 /* PresentingAnimator.m in Sources */,
 				A6A0E4911A1E76110036116E /* FLEXArgumentInputFontView.m in Sources */,
 				A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */,
 				A6A0E4A21A1E76110036116E /* FLEXExplorerViewController.m in Sources */,
@@ -1088,6 +1163,7 @@
 				A6A0E49C1A1E76110036116E /* FLEXFieldEditorView.m in Sources */,
 				A6A0E4B71A1E76110036116E /* FLEXSetExplorerViewController.m in Sources */,
 				A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */,
+				A69C4BB11A271B8E00CAD443 /* DismissingAnimator.m in Sources */,
 				A6A0E4BC1A1E76110036116E /* FLEXRuntimeUtility.m in Sources */,
 				A6A0E4A81A1E76110036116E /* FLEXFileBrowserTableViewController.m in Sources */,
 				A6263E921A187E1200C4C3BA /* main.m in Sources */,
