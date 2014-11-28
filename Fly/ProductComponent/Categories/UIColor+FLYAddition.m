@@ -84,6 +84,11 @@
     return [self colorWithRed:52 green:152 blue:219];
 }
 
++ (UIColor *)gb_greenColor
+{
+    return [UIColor colorWithRed:158/255.0 green:211/255.0 blue:15/255.0 alpha:1];
+}
+
 #pragma mark - Private class methods
 
 + (UIColor *)colorWithRed:(NSUInteger)red

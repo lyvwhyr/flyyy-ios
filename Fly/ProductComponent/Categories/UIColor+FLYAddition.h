@@ -23,5 +23,6 @@
 + (UIColor *)customYellowColor;
 + (UIColor *)customGreenColor;
 + (UIColor *)customBlueColor;
++ (UIColor *)gb_greenColor;
 
 @end

@@ -9,7 +9,8 @@
 #import "GBFlatButton.h"
 #import <QuartzCore/QuartzCore.h>
 
-static CGFloat const kHorizontalPadding = 14.0f;
+static CGFloat const kHorizontalPadding = 8.0f;
+static CGFloat const kVerticalPadding = 1.0f;
 
 @implementation GBFlatButton
 {
@@ -49,11 +50,12 @@ static CGFloat const kHorizontalPadding = 14.0f;
 
 - (void)customizeAppearance
 {
+    
     BOOL containsEdgeInsets = ! UIEdgeInsetsEqualToEdgeInsets(self.contentEdgeInsets, UIEdgeInsetsZero);
-    self.contentEdgeInsets = containsEdgeInsets ? self.contentEdgeInsets : UIEdgeInsetsMake(0, kHorizontalPadding, 0, kHorizontalPadding);
+    self.contentEdgeInsets = containsEdgeInsets ? self.contentEdgeInsets : UIEdgeInsetsMake(kVerticalPadding, kHorizontalPadding, kVerticalPadding, kHorizontalPadding);
     self.layer.borderWidth = self.layer.borderWidth ?: 1.0f;
 //    self.layer.cornerRadius = self.layer.cornerRadius ?: CGRectGetHeight(self.frame) / 2.0f;
-    self.layer.cornerRadius = 10;
+    self.layer.cornerRadius = 5.0f;
     self.layer.masksToBounds = YES;
 }
 
@@ -70,8 +72,12 @@ static CGFloat const kHorizontalPadding = 14.0f;
 - (void)drawRect:(CGRect)rect
 {
     self.layer.borderColor = self.tintColor.CGColor;
-    [self setTitleColor:self.tintColor
+    [self setTitleColor:self.buttonTextColor
                forState:UIControlStateNormal];
+    
+    [self setTitleColor:self.buttonTextColor
+               forState:UIControlStateNormal];
+    
     [self setTitleColor:[UIColor whiteColor]
                forState:UIControlStateSelected];
 }

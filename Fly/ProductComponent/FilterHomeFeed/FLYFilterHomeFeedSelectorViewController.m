@@ -9,6 +9,7 @@
 #import "FLYFilterHomeFeedSelectorViewController.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYFilterSelectorGroupTableViewCell.h"
+#import "GBFlatButton.h"
 
 #define EXPLANATION_TEXT_LINE_SPACING          8.0f
 #define EXPLANATION_TEXT_TOP_PADDING           10.0f
@@ -105,7 +106,14 @@
     [backButton setImage:[UIImage imageNamed:@"icon_navigation_back"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(_backButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(_nextBarButtonTapped)];
+    
+    GBFlatButton *rightBarButton = [GBFlatButton new];
+    rightBarButton.tintColor = [UIColor whiteColor];
+    rightBarButton.buttonTextColor = [UIColor whiteColor];
+    [rightBarButton setTitle:@"Done" forState:UIControlStateNormal];
+    [rightBarButton addTarget:self action:@selector(_rightBarItemTapped) forControlEvents:UIControlEventTouchUpInside];
+    [rightBarButton sizeToFit];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
 }
 
 - (void)updateViewConstraints
@@ -122,7 +130,6 @@
     [_explanationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_explanationView).offset(15.0f);
         make.leading.mas_equalTo(_explanationView.mas_leading).offset(20.0f);
-        CGFloat maxWidth = CGRectGetWidth([self.view bounds]) - FILTER_VIEW_LEFT_PADDING;
         make.width.mas_equalTo(CGRectGetWidth([self.view bounds]) - 20 - 20);
     }];
     
@@ -179,6 +186,11 @@
 #pragma mark - navigation bar actions
 
 - (void)_backButtonTapped
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)_rightBarItemTapped
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
