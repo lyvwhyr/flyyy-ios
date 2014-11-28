@@ -61,6 +61,8 @@
 		A69C4BD11A281E1100CAD443 /* icon_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4BD01A281E1100CAD443 /* icon_back@3x.png */; };
 		A69C4BD51A283F6400CAD443 /* FLYPost.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BD41A283F6400CAD443 /* FLYPost.m */; };
 		A69C4BD81A2840E700CAD443 /* NSDictionary+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BD71A2840E700CAD443 /* NSDictionary+FLYAddition.m */; };
+		A69C4BE51A284B6F00CAD443 /* FLYFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BE31A284B6F00CAD443 /* FLYFeedViewController.m */; };
+		A69C4BE91A2851FD00CAD443 /* FLYFeedTopicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BE81A2851FD00CAD443 /* FLYFeedTopicTableViewCell.m */; };
 		A6A0E4131A1DB9480036116E /* icon_navigation_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E4121A1DB9480036116E /* icon_navigation_back@3x.png */; };
 		A6A0E4191A1DD5130036116E /* icon_record_trash_bin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E4161A1DD5130036116E /* icon_record_trash_bin@3x.png */; };
 		A6A0E41C1A1E6E970036116E /* icon_tabbar_home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E41A1A1E6E970036116E /* icon_tabbar_home@2x.png */; };
@@ -117,7 +119,6 @@
 		A6A0E4C01A1E76110036116E /* FLEXImagePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E48E1A1E76110036116E /* FLEXImagePreviewViewController.m */; };
 		A6A0E4C31A1E7EFA0036116E /* UIWindow+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A0E4C21A1E7EFA0036116E /* UIWindow+FLYAddition.m */; };
 		A6A0E4C51A1EB5600036116E /* icon_voice_record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A0E4C41A1EB5600036116E /* icon_voice_record@2x.png */; };
-		A6A30D661A1B0555001AE1FE /* FLYFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A30D651A1B0555001AE1FE /* FLYFeedViewController.m */; };
 		A6A30D691A1B0574001AE1FE /* FLYProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A30D681A1B0574001AE1FE /* FLYProfileViewController.m */; };
 		A6A30D6C1A1B0586001AE1FE /* FLYRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A30D6B1A1B0586001AE1FE /* FLYRecordViewController.m */; };
 		A6A30D6F1A1B1DF8001AE1FE /* FLYCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A30D6E1A1B1DF8001AE1FE /* FLYCircleView.m */; };
@@ -252,6 +253,10 @@
 		A69C4BD41A283F6400CAD443 /* FLYPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPost.m; sourceTree = "<group>"; };
 		A69C4BD61A2840E700CAD443 /* NSDictionary+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FLYAddition.h"; sourceTree = "<group>"; };
 		A69C4BD71A2840E700CAD443 /* NSDictionary+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FLYAddition.m"; sourceTree = "<group>"; };
+		A69C4BE21A284B6F00CAD443 /* FLYFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFeedViewController.h; sourceTree = "<group>"; };
+		A69C4BE31A284B6F00CAD443 /* FLYFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFeedViewController.m; sourceTree = "<group>"; };
+		A69C4BE71A2851FD00CAD443 /* FLYFeedTopicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFeedTopicTableViewCell.h; sourceTree = "<group>"; };
+		A69C4BE81A2851FD00CAD443 /* FLYFeedTopicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFeedTopicTableViewCell.m; sourceTree = "<group>"; };
 		A6A0E4121A1DB9480036116E /* icon_navigation_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_navigation_back@3x.png"; sourceTree = "<group>"; };
 		A6A0E4161A1DD5130036116E /* icon_record_trash_bin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_record_trash_bin@3x.png"; sourceTree = "<group>"; };
 		A6A0E41A1A1E6E970036116E /* icon_tabbar_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_home@2x.png"; sourceTree = "<group>"; };
@@ -360,8 +365,6 @@
 		A6A0E4C11A1E7EFA0036116E /* UIWindow+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+FLYAddition.h"; sourceTree = "<group>"; };
 		A6A0E4C21A1E7EFA0036116E /* UIWindow+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+FLYAddition.m"; sourceTree = "<group>"; };
 		A6A0E4C41A1EB5600036116E /* icon_voice_record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_voice_record@2x.png"; sourceTree = "<group>"; };
-		A6A30D641A1B0555001AE1FE /* FLYFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFeedViewController.h; sourceTree = "<group>"; };
-		A6A30D651A1B0555001AE1FE /* FLYFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFeedViewController.m; sourceTree = "<group>"; };
 		A6A30D671A1B0574001AE1FE /* FLYProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYProfileViewController.h; sourceTree = "<group>"; };
 		A6A30D681A1B0574001AE1FE /* FLYProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYProfileViewController.m; sourceTree = "<group>"; };
 		A6A30D6A1A1B0586001AE1FE /* FLYRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYRecordViewController.h; sourceTree = "<group>"; };
@@ -501,13 +504,13 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A69C4BE11A284B6100CAD443 /* Feed */,
 				A69C4BD21A283EFA00CAD443 /* Model */,
 				A69C4BA91A271B5800CAD443 /* Animator */,
 				A69C4BA31A271AA100CAD443 /* FilterHomeFeed */,
 				A69C4B951A270E0200CAD443 /* UIControls */,
 				A61D18631A1EE6C500D188B5 /* Managers */,
 				A6263EB71A1880DE00C4C3BA /* MainView */,
-				A6263EB61A18807600C4C3BA /* Feed */,
 				A6A30D631A1B0511001AE1FE /* Profile */,
 				A6A30D621A1B0506001AE1FE /* Record */,
 				A648C0BA1A19567700FF1744 /* Tabbar */,
@@ -519,15 +522,6 @@
 				A6263EC51A1891D100C4C3BA /* Constants.h */,
 			);
 			path = ProductComponent;
-			sourceTree = "<group>";
-		};
-		A6263EB61A18807600C4C3BA /* Feed */ = {
-			isa = PBXGroup;
-			children = (
-				A6A30D641A1B0555001AE1FE /* FLYFeedViewController.h */,
-				A6A30D651A1B0555001AE1FE /* FLYFeedViewController.m */,
-			);
-			path = Feed;
 			sourceTree = "<group>";
 		};
 		A6263EB71A1880DE00C4C3BA /* MainView */ = {
@@ -710,6 +704,17 @@
 				A69C4BD41A283F6400CAD443 /* FLYPost.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A69C4BE11A284B6100CAD443 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				A69C4BE21A284B6F00CAD443 /* FLYFeedViewController.h */,
+				A69C4BE31A284B6F00CAD443 /* FLYFeedViewController.m */,
+				A69C4BE71A2851FD00CAD443 /* FLYFeedTopicTableViewCell.h */,
+				A69C4BE81A2851FD00CAD443 /* FLYFeedTopicTableViewCell.m */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		A6A0E4211A1E760A0036116E /* FLEX */ = {
@@ -1145,12 +1150,12 @@
 				A6A0E4A61A1E76110036116E /* FLEXClassesTableViewController.m in Sources */,
 				A69C4BCC1A280C4F00CAD443 /* GBFlatButton.m in Sources */,
 				A6A0E4AA1A1E76110036116E /* FLEXInstancesTableViewController.m in Sources */,
+				A69C4BE91A2851FD00CAD443 /* FLYFeedTopicTableViewCell.m in Sources */,
 				A6A0E4A91A1E76110036116E /* FLEXGlobalsTableViewController.m in Sources */,
 				A69C4BD81A2840E700CAD443 /* NSDictionary+FLYAddition.m in Sources */,
 				A6A0E4961A1E76110036116E /* FLEXArgumentInputStructView.m in Sources */,
 				A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */,
 				A6A0E49B1A1E76110036116E /* FLEXDefaultEditorViewController.m in Sources */,
-				A6A30D661A1B0555001AE1FE /* FLYFeedViewController.m in Sources */,
 				A648C0F21A19C65B00FF1744 /* FLYTabBarView.m in Sources */,
 				A648C0EA1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				A6A0E49E1A1E76110036116E /* FLEXIvarEditorViewController.m in Sources */,
@@ -1180,6 +1185,7 @@
 				A6A0E4B91A1E76110036116E /* FLEXViewExplorerViewController.m in Sources */,
 				A6263EBD1A18817A00C4C3BA /* FLYUniversalViewController.m in Sources */,
 				A6A0E4981A1E76110036116E /* FLEXArgumentInputTextView.m in Sources */,
+				A69C4BE51A284B6F00CAD443 /* FLYFeedViewController.m in Sources */,
 				A69C4B981A270E1400CAD443 /* PaperButton.m in Sources */,
 				A6A0E4BB1A1E76110036116E /* FLEXResources.m in Sources */,
 				A69C4BCF1A280D8800CAD443 /* GBFlatSelectableButton.m in Sources */,

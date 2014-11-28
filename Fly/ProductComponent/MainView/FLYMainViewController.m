@@ -91,6 +91,7 @@
 - (void)_addChildControllers
 {
     _feedViewController = [FLYFeedViewController new];
+    _feedViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
     [self addChildViewController:_feedViewController];
     
 //    [self addChildViewController:_recordViewController];
@@ -120,6 +121,7 @@
     NSArray *tabBarConstraintPosV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-tabBarViewVerticalSpacing-[_tabBarView]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_tabBarView)];
     [self.view addConstraints:tabBarConstraintPosH];
     [self.view addConstraints:tabBarConstraintPosV];
+    
     
     [super updateViewConstraints];
 }
