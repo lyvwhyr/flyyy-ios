@@ -69,27 +69,11 @@
     [_groups addObject:@"LGBTQ"];
     [_groups addObject:@"Relationships"];
     
-//    [_groups addObject:@"Drugs and alcohol"];
-//    [_groups addObject:@"Rape"];
-//    [_groups addObject:@"Love confession"];
-//    [_groups addObject:@"LGBTQ"];
-//    [_groups addObject:@"Relationships"];
-//    
-//    [_groups addObject:@"Drugs and alcohol"];
-//    [_groups addObject:@"Rape"];
-//    [_groups addObject:@"Love confession"];
-//    [_groups addObject:@"LGBTQ"];
-//    [_groups addObject:@"Relationships"];
-//    [_groups addObject:@"Drugs and alcohol"];
-//    [_groups addObject:@"Rape"];
-//    [_groups addObject:@"Love confession"];
-//    [_groups addObject:@"LGBTQ"];
-//    [_groups addObject:@"Relationships"];
-//    [_groups addObject:@"Drugs and alcohol"];
-//    [_groups addObject:@"Rape"];
-//    [_groups addObject:@"Love confession"];
-//    [_groups addObject:@"LGBTQ"];
-//    [_groups addObject:@"Relationships"];
+    [_groups addObject:@"Tattoosand piercings"];
+    [_groups addObject:@"Travel"];
+    [_groups addObject:@"Money"];
+    [_groups addObject:@"Faith"];
+    [_groups addObject:@"Family"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -169,6 +153,12 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.groupName = [_groups objectAtIndex:indexPath.row];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    FLYFilterSelectorGroupTableViewCell *cell = (FLYFilterSelectorGroupTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    [cell selectCell];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

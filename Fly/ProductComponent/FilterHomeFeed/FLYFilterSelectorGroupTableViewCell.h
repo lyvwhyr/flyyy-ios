@@ -12,4 +12,6 @@
 
 @property (nonatomic, copy) NSString *groupName;
 
+- (void)selectCell;
+
 @end

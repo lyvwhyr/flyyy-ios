@@ -28,7 +28,8 @@
         
         _checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _checkButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_checkButton addTarget:self action:@selector(_checkButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        _checkButton.userInteractionEnabled = NO;
+//        [_checkButton addTarget:self action:@selector(_checkButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [_checkButton setImage:[UIImage imageNamed:@"icon_unchecked"] forState:UIControlStateNormal];
         [_checkButton setImage:[UIImage imageNamed:@"icon_checked"] forState:UIControlStateHighlighted];
         [_checkButton setImage:[UIImage imageNamed:@"icon_checked"] forState:UIControlStateSelected];
@@ -40,9 +41,14 @@
     return self;
 }
 
-- (void)_checkButtonTapped:(UIButton *)sender
+//- (void)_checkButtonTapped:(UIButton *)sender
+//{
+//    sender.selected = !sender.selected;
+//}
+
+- (void)selectCell
 {
-    sender.selected = !sender.selected;
+    _checkButton.selected = !_checkButton.selected;
 }
 
 - (void)setGroupName:(NSString *)groupName
