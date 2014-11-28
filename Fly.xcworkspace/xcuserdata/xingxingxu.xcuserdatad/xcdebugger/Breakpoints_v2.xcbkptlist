@@ -106,28 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/FilterHomeFeed/FLYFilterHomeFeedSelectorViewController.m"
-            timestampString = "438825901.052798"
+            timestampString = "438831049.22101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "-_backButtonTapped"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/FilterHomeFeed/FLYFilterHomeFeedSelectorViewController.m"
-            timestampString = "438825751.530743"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "-updateViewConstraints"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -144,6 +128,22 @@
             startingLineNumber = "45"
             endingLineNumber = "45"
             landmarkName = "-_checkButtonTapped:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/FilterHomeFeed/FLYFilterHomeFeedSelectorViewController.m"
+            timestampString = "438831049.22101"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "-viewWillLayoutSubviews"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

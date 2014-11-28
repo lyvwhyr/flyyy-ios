@@ -17,6 +17,7 @@
 
 @interface FLYFilterHomeFeedSelectorViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic) UIView *explanationView;
 @property (nonatomic) UILabel *explanationLabel;
 @property (nonatomic) UITableView *groupsTabelView;
 
@@ -32,7 +33,7 @@
     self.title = @"Filter";
     [self _setupNavigationBar];
     
-    self.view.backgroundColor = [UIColor flyContentBackgroundGrey];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     _explanationLabel = [UILabel new];
     _explanationLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -40,14 +41,19 @@
     _explanationLabel.textColor = [UIColor flyGreen];
     _explanationLabel.font = [UIFont systemFontOfSize:EXPLANATION_TEXT_FONT_SIZE];
     
-    NSString *explanationText = @"Personalize home feed";
+    NSString *explanationText = @"I want to follow:";
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:explanationText];
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineSpacing = EXPLANATION_TEXT_LINE_SPACING;
-    paragraphStyle.alignment = NSTextAlignmentCenter;
     [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, explanationText.length)];
     _explanationLabel.attributedText = attrStr;
-    [self.view addSubview:_explanationLabel];
+    [_explanationLabel sizeToFit];
+    
+    _explanationView = [UIView new];
+    _explanationView.translatesAutoresizingMaskIntoConstraints = NO;
+    _explanationView.backgroundColor = [UIColor whiteColor];
+    [_explanationView addSubview:_explanationLabel];
+    [self.view addSubview:_explanationView];
     
     _groupsTabelView = [UITableView new];
     _groupsTabelView.backgroundColor = [UIColor clearColor];
@@ -61,12 +67,35 @@
     [_groups addObject:@"Love confession"];
     [_groups addObject:@"LGBTQ"];
     [_groups addObject:@"Relationships"];
+    
+//    [_groups addObject:@"Drugs and alcohol"];
+//    [_groups addObject:@"Rape"];
+//    [_groups addObject:@"Love confession"];
+//    [_groups addObject:@"LGBTQ"];
+//    [_groups addObject:@"Relationships"];
+//    
+//    [_groups addObject:@"Drugs and alcohol"];
+//    [_groups addObject:@"Rape"];
+//    [_groups addObject:@"Love confession"];
+//    [_groups addObject:@"LGBTQ"];
+//    [_groups addObject:@"Relationships"];
+//    [_groups addObject:@"Drugs and alcohol"];
+//    [_groups addObject:@"Rape"];
+//    [_groups addObject:@"Love confession"];
+//    [_groups addObject:@"LGBTQ"];
+//    [_groups addObject:@"Relationships"];
+//    [_groups addObject:@"Drugs and alcohol"];
+//    [_groups addObject:@"Rape"];
+//    [_groups addObject:@"Love confession"];
+//    [_groups addObject:@"LGBTQ"];
+//    [_groups addObject:@"Relationships"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [_groupsTabelView reloadData];
+    [self updateViewConstraints];
 }
 
 - (void)_setupNavigationBar
@@ -81,25 +110,32 @@
 
 - (void)updateViewConstraints
 {
+//    [self.view removeConstraints:self.view.constraints];
+    
+    [_explanationView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view);
+        make.leading.mas_equalTo(self.view);
+        make.width.mas_equalTo(CGRectGetWidth([[UIScreen mainScreen] bounds]));
+        make.height.mas_equalTo(45);
+    }];
+    
     [_explanationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view).offset(EXPLANATION_TEXT_TOP_PADDING);
-        make.centerX.mas_equalTo(self.view);
-//        make.leading.mas_equalTo(self.view).offset(FILTER_VIEW_LEFT_PADDING);
+        make.top.mas_equalTo(_explanationView).offset(15.0f);
+        make.leading.mas_equalTo(_explanationView.mas_leading).offset(20.0f);
         CGFloat maxWidth = CGRectGetWidth([self.view bounds]) - FILTER_VIEW_LEFT_PADDING;
-        make.width.mas_lessThanOrEqualTo(@(maxWidth));
+        make.width.mas_equalTo(CGRectGetWidth([self.view bounds]) - 20 - 20);
     }];
     
     [_groupsTabelView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_explanationLabel.mas_bottom).offset(10);
+        make.top.mas_equalTo(_explanationView.mas_bottom).offset(0);
         make.leading.mas_equalTo(self.view).offset(0);
         make.width.mas_equalTo(CGRectGetWidth([self.view bounds]));
-        CGFloat maxHeight = CGRectGetHeight([self.view bounds]) -  CGRectGetMaxY(_explanationLabel.frame);
+        CGFloat maxHeight = CGRectGetHeight([self.view bounds]) -  CGRectGetMaxY(_explanationView.frame);
         CGFloat height = _groupsTabelView.contentSize.height;
         if (height >= maxHeight) {
             height = maxHeight;
         }
         make.height.mas_equalTo(height);
-//        make.bottom.mas_equalTo(self.view);
     }];
     
     [super updateViewConstraints];
@@ -136,7 +172,7 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    [self updateViewConstraints];
+//    [self updateViewConstraints];
     [FLYUtilities printAutolayoutTrace];
 }
 
