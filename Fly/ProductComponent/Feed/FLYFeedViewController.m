@@ -57,6 +57,8 @@
     if (cell == nil) {
         cell = [[FLYFeedTopicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
     return cell;
 }
 

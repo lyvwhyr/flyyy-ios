@@ -7,6 +7,7 @@
 //
 
 #import "FLYFeedTopicTableViewCell.h"
+#import "UIColor+FLYAddition.h"
 
 @interface FLYFeedTopicTableViewCell()
 
@@ -21,6 +22,70 @@
 @end
 
 @implementation FLYFeedTopicTableViewCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        //header view
+        _avatarImageView = [UIImageView new];
+        NSString *avatarName = [NSString stringWithFormat:@"p%d.jpg", (arc4random()%4 + 1)];
+        [_avatarImageView setImage:[UIImage imageNamed:avatarName]];
+        
+        _userNameLabel = [UILabel new];
+        _userNameLabel.text = @"pancake";
+        
+        _postAtLabel = [UILabel new];
+        _postAtLabel.text = @"19s";
+        
+        _categoryNameLabel = [UILabel new];
+        _categoryNameLabel.text = @"Confession";
+        
+        _postHeaderView = [UIView new];
+        _postHeaderView.translatesAutoresizingMaskIntoConstraints = NO;
+        [_postHeaderView addSubview:_avatarImageView];
+//        [_postHeaderView addSubview:_userNameLabel];
+//        [_postHeaderView addSubview:_postAtLabel];
+//        [_postHeaderView addSubview:_categoryNameLabel];
+        [self.contentView addSubview:_postHeaderView];
+        _postHeaderView.backgroundColor = [UIColor flyContentBackgroundGrey];
+        
+        [self setNeedsUpdateConstraints];
+    }
+    return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    // Make sure the contentView does a layout pass here so that its subviews have their frames set, which we
+    // need to use to set the preferredMaxLayoutWidth below.
+//    [self.contentView setNeedsLayout];
+//    [self.contentView layoutIfNeeded];
+}
+
+- (void)updateConstraints
+{
+    
+    [_postHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView).offset(0);
+        make.leading.equalTo(self.contentView).offset(0);
+        make.width.equalTo(@(CGRectGetWidth([[UIScreen mainScreen] bounds])));
+        make.height.equalTo(@(50));
+    }];
+    
+    [_avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_postHeaderView).offset(10);
+        make.leading.equalTo(_postHeaderView).offset(20);
+        make.width.equalTo(@(36));
+        make.height.equalTo(@(36));
+    }];
+    
+    [super updateConstraints];
+}
 
 
 @end
