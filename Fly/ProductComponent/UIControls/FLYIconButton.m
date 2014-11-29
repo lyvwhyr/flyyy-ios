@@ -20,25 +20,26 @@
 
 @implementation FLYIconButton
 
-- (instancetype)initWithText:(NSString *)text icon:(NSString *)iconName
+- (instancetype)initWithText:(NSString *)text textFont:(UIFont *)font textColor:(UIColor *)color icon:(NSString *)iconName
 {
     self = [super init];
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
         
         _localIconView = [UIImageView new];
+        _localIconView.translatesAutoresizingMaskIntoConstraints = NO;
         [_localIconView setImage:[UIImage imageNamed:iconName]];
         [_localIconView sizeToFit];
         [self addSubview:_localIconView];
         
         _localTitleLabel = [UILabel new];
+        _localTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _localTitleLabel.text = text;
-        _localTitleLabel.textColor = [UIColor flyInlineActionGrey];
-        _localTitleLabel.font = [UIFont systemFontOfSize:13.0f];
+        _localTitleLabel.textColor = color;
+        _localTitleLabel.font = font;
+        
         [_localTitleLabel sizeToFit];
         [self addSubview:_localTitleLabel];
-        
-//        [self setNeedsUpdateConstraints];
     }
     return self;
 }

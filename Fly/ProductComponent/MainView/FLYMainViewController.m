@@ -20,6 +20,8 @@
 #import "PresentingAnimator.h"
 #import "DismissingAnimator.h"
 #import "FLYFilterHomeFeedSelectorViewController.h"
+#import "FLYIconButton.h"
+#import "FLYNavigationBarMyGroupButton.h"
 
 #if DEBUG
 #import "FLEXManager.h"
@@ -50,10 +52,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"FLY";
+//    self.title = @"FLY";
     self.view.userInteractionEnabled = YES;
-    [self _addNavigationBar];
     [self _addTabBar];
+    [self _addNavigationBar];
     [self _addChildControllers];
 }
 
@@ -64,12 +66,11 @@
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = barButton;
     
-    UIButton *leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftButton setImage:[UIImage imageNamed:@"icon_nav_filter"] forState:UIControlStateNormal];
+    FLYNavigationBarMyGroupButton *leftButton = [[FLYNavigationBarMyGroupButton alloc] initWithFrame:CGRectMake(0, 0, 120, 32) Title:@"My Groups" icon:@"icon_down_arrow"];
+    
     [leftButton addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     [leftButton sizeToFit];
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-    self.navigationItem.leftBarButtonItem = leftBarItem;
+    self.navigationItem.titleView = leftButton;
 }
 
 

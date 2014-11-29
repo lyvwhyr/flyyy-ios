@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"Filter";
+    self.title = @"My Groups";
     [self _setupNavigationBar];
     
     self.view.backgroundColor = [UIColor whiteColor];

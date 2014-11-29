@@ -18,7 +18,7 @@
 @property (nonatomic) UIImageView *avatarImageView;
 @property (nonatomic) UILabel *userNameLabel;
 @property (nonatomic) UILabel *postAtLabel;
-@property (nonatomic) UILabel *categoryNameLabel;
+@property (nonatomic) FLYIconButton *categoryButton;
 
 @property (nonatomic) UIButton *playButton;
 @property (nonatomic) UILabel *postTitle;
@@ -47,15 +47,16 @@
         
         _userNameLabel = [UILabel new];
         _userNameLabel.text = @"pancake";
-        _userNameLabel.textColor = [UIColor flyGreen];
+        _userNameLabel.textColor = [UIColor blackColor];
         
         _postAtLabel = [UILabel new];
         _postAtLabel.text = @"19s";
         _postAtLabel.font = [UIFont systemFontOfSize:13];
         _postAtLabel.textColor = [UIColor flyFeedGrey];
         
-        _categoryNameLabel = [UILabel new];
-        _categoryNameLabel.text = @"Confession";
+
+        _categoryButton = [[FLYIconButton alloc] initWithText:@"Small business saturday" textFont:[UIFont systemFontOfSize:12] textColor:[UIColor flyInlineActionGrey] icon:@"icon_feed_group"];
+        [self addSubview:_categoryButton];
         
         _postHeaderView = [UIView new];
         _postHeaderView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -132,8 +133,13 @@
 //        make.height.equalTo(@(36));
     }];
     
+    [_categoryButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_userNameLabel.mas_bottom).offset(3);
+        make.leading.equalTo(_userNameLabel);
+    }];
+    
     [_postAtLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_postHeaderView).offset(10);
+        make.top.equalTo(_postHeaderView).offset(15);
         make.trailing.equalTo(_postHeaderView).offset(-20);
     }];
     

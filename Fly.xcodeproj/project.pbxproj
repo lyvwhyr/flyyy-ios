@@ -144,6 +144,9 @@
 		A6A30D711A1B1EEE001AE1FE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A30D701A1B1EEE001AE1FE /* QuartzCore.framework */; };
 		A6A30D731A1B1EFA001AE1FE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A30D721A1B1EFA001AE1FE /* CoreGraphics.framework */; };
 		A6A30D761A1B2700001AE1FE /* icon_voice_record@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A30D751A1B2700001AE1FE /* icon_voice_record@3x.png */; };
+		A6A4EFA31A2A76FC00FD4066 /* icon_feed_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A4EFA21A2A76FC00FD4066 /* icon_feed_group@3x.png */; };
+		A6A4EFA51A2A7CF600FD4066 /* icon_down_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A4EFA41A2A7CF600FD4066 /* icon_down_arrow@3x.png */; };
+		A6A4EFA81A2A85C400FD4066 /* FLYNavigationBarMyGroupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFA71A2A85C400FD4066 /* FLYNavigationBarMyGroupButton.m */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
@@ -414,6 +417,10 @@
 		A6A30D701A1B1EEE001AE1FE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A6A30D721A1B1EFA001AE1FE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A6A30D751A1B2700001AE1FE /* icon_voice_record@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_voice_record@3x.png"; sourceTree = "<group>"; };
+		A6A4EFA21A2A76FC00FD4066 /* icon_feed_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_feed_group@3x.png"; sourceTree = "<group>"; };
+		A6A4EFA41A2A7CF600FD4066 /* icon_down_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_down_arrow@3x.png"; sourceTree = "<group>"; };
+		A6A4EFA61A2A85C400FD4066 /* FLYNavigationBarMyGroupButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLYNavigationBarMyGroupButton.h; path = ../FLYNavigationBarMyGroupButton.h; sourceTree = "<group>"; };
+		A6A4EFA71A2A85C400FD4066 /* FLYNavigationBarMyGroupButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLYNavigationBarMyGroupButton.m; path = ../FLYNavigationBarMyGroupButton.m; sourceTree = "<group>"; };
 		A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
@@ -544,6 +551,7 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A6A4EFA91A2A85D700FD4066 /* NavigationBar */,
 				A69C4BE11A284B6100CAD443 /* Feed */,
 				A69C4BD21A283EFA00CAD443 /* Model */,
 				A69C4BA91A271B5800CAD443 /* Animator */,
@@ -610,6 +618,8 @@
 		A648C0C71A199F8C00FF1744 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A6A4EFA41A2A7CF600FD4066 /* icon_down_arrow@3x.png */,
+				A6A4EFA21A2A76FC00FD4066 /* icon_feed_group@3x.png */,
 				A64D159C1A29C0BB00369D62 /* icon_inline_comment@3x.png */,
 				A64D159D1A29C0BB00369D62 /* icon_inline_share@3x.png */,
 				A64D159E1A29C0BB00369D62 /* icon_inline_wing@3x.png */,
@@ -991,6 +1001,15 @@
 			path = Frameworks;
 			sourceTree = "<group>";
 		};
+		A6A4EFA91A2A85D700FD4066 /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				A6A4EFA61A2A85C400FD4066 /* FLYNavigationBarMyGroupButton.h */,
+				A6A4EFA71A2A85C400FD4066 /* FLYNavigationBarMyGroupButton.m */,
+			);
+			path = NavigationBar;
+			sourceTree = "<group>";
+		};
 		A6E171F31A1C5F1A00F2B4BF /* SVPulsingAnnotationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1118,6 +1137,7 @@
 				A64D159F1A29C0BB00369D62 /* icon_inline_comment@3x.png in Resources */,
 				A69C4BBE1A27E2A400CAD443 /* icon_unchecked@3x.png in Resources */,
 				A6A0E4191A1DD5130036116E /* icon_record_trash_bin@3x.png in Resources */,
+				A6A4EFA31A2A76FC00FD4066 /* icon_feed_group@3x.png in Resources */,
 				A6F27CA41A20735A000EC0B3 /* record_animate_09.png in Resources */,
 				A6F27CA11A20735A000EC0B3 /* record_animate_06.png in Resources */,
 				A69C4BFA1A28636F00CAD443 /* p4.jpg in Resources */,
@@ -1169,6 +1189,7 @@
 				A61D18771A1F27E900D188B5 /* FLYPrePostViewController.xib in Resources */,
 				A6F27C9E1A20735A000EC0B3 /* record_animate_03.png in Resources */,
 				A69C4C001A28636F00CAD443 /* p10.jpg in Resources */,
+				A6A4EFA51A2A7CF600FD4066 /* icon_down_arrow@3x.png in Resources */,
 				A69C4BC01A27E89A00CAD443 /* icon_checked@3x.png in Resources */,
 				A69C4BD11A281E1100CAD443 /* icon_back@3x.png in Resources */,
 			);
@@ -1309,6 +1330,7 @@
 				A648C0E51A19AD4A00FF1744 /* MASConstraintMaker.m in Sources */,
 				A6A30D691A1B0574001AE1FE /* FLYProfileViewController.m in Sources */,
 				A648C0E41A19AD4A00FF1744 /* MASConstraint.m in Sources */,
+				A6A4EFA81A2A85C400FD4066 /* FLYNavigationBarMyGroupButton.m in Sources */,
 				A61D18761A1F27E900D188B5 /* FLYPrePostViewController.m in Sources */,
 				A6A0E4A31A1E76110036116E /* FLEXManager.m in Sources */,
 				A6A0E49F1A1E76110036116E /* FLEXMethodCallingViewController.m in Sources */,

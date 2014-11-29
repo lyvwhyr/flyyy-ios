@@ -10,6 +10,6 @@
 
 @interface FLYIconButton : UIButton
 
-- (instancetype)initWithText:(NSString *)text icon:(NSString *)iconName;
+- (instancetype)initWithText:(NSString *)text textFont:(UIFont *)font textColor:(UIColor *)color icon:(NSString *)iconName;
 
 @end

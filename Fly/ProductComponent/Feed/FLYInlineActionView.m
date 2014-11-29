@@ -8,6 +8,7 @@
 
 #import "FLYInlineActionView.h"
 #import "FLYIconButton.h"
+#import "UIColor+FLYAddition.h"
 
 
 #define kInlineActionButtonTopPadding 10
@@ -26,13 +27,15 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        _flyButton = [[FLYIconButton alloc] initWithText:@"5" icon:@"icon_inline_wing"];
+        UIColor *color = [UIColor flyInlineActionGrey];
+        UIFont *font = [UIFont systemFontOfSize:13.0f];
+        _flyButton = [[FLYIconButton alloc] initWithText:@"5" textFont:font textColor:color icon:@"icon_inline_wing"];
         [self addSubview:_flyButton];
         
-        _commentButton = [[FLYIconButton alloc] initWithText:@"10" icon:@"icon_inline_comment"];
+        _commentButton = [[FLYIconButton alloc] initWithText:@"10" textFont:font textColor:color  icon:@"icon_inline_comment"];
         [self addSubview:_commentButton];
         
-        _shareButton = [[FLYIconButton alloc] initWithText:@"Share" icon:@"icon_inline_share"];
+        _shareButton = [[FLYIconButton alloc] initWithText:@"Share" textFont:font textColor:color icon:@"icon_inline_share"];
         [self addSubview:_shareButton];
         
         [self setNeedsUpdateConstraints];
