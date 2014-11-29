@@ -44,9 +44,11 @@
 		A648C0F61A19D1FF00FF1744 /* icon_tabbar_voice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A648C0F51A19D1FF00FF1744 /* icon_tabbar_voice@2x.png */; };
 		A64D157F1A29985600369D62 /* icon_feed_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D157E1A29985600369D62 /* icon_feed_play@3x.png */; };
 		A64D15811A299B8200369D62 /* icon_feed_play2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D15801A299B8200369D62 /* icon_feed_play2@3x.png */; };
-		A64D15831A29A61B00369D62 /* icon_inline_wing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D15821A29A61B00369D62 /* icon_inline_wing@3x.png */; };
-		A64D15891A29AAE300369D62 /* UIButton+PPiAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D15861A29AAE300369D62 /* UIButton+PPiAwesome.m */; };
-		A64D158A1A29AAE300369D62 /* UIAwesomeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D15881A29AAE300369D62 /* UIAwesomeButton.m */; };
+		A64D15981A29B47D00369D62 /* FLYIconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D15971A29B47D00369D62 /* FLYIconButton.m */; };
+		A64D159B1A29BC6E00369D62 /* FLYInlineActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D159A1A29BC6E00369D62 /* FLYInlineActionView.m */; };
+		A64D159F1A29C0BB00369D62 /* icon_inline_comment@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D159C1A29C0BB00369D62 /* icon_inline_comment@3x.png */; };
+		A64D15A01A29C0BB00369D62 /* icon_inline_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D159D1A29C0BB00369D62 /* icon_inline_share@3x.png */; };
+		A64D15A11A29C0BB00369D62 /* icon_inline_wing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D159E1A29C0BB00369D62 /* icon_inline_wing@3x.png */; };
 		A6655B551A19DEF000440AAB /* icon_tabbar_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */; };
 		A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */; };
 		A6655B5A1A19ECED00440AAB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B591A19ECED00440AAB /* Default-568h@2x.png */; };
@@ -244,11 +246,13 @@
 		A648C0F51A19D1FF00FF1744 /* icon_tabbar_voice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_voice@2x.png"; sourceTree = "<group>"; };
 		A64D157E1A29985600369D62 /* icon_feed_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_feed_play@3x.png"; sourceTree = "<group>"; };
 		A64D15801A299B8200369D62 /* icon_feed_play2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_feed_play2@3x.png"; sourceTree = "<group>"; };
-		A64D15821A29A61B00369D62 /* icon_inline_wing@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_wing@3x.png"; sourceTree = "<group>"; };
-		A64D15851A29AAE300369D62 /* UIButton+PPiAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+PPiAwesome.h"; sourceTree = "<group>"; };
-		A64D15861A29AAE300369D62 /* UIButton+PPiAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+PPiAwesome.m"; sourceTree = "<group>"; };
-		A64D15871A29AAE300369D62 /* UIAwesomeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAwesomeButton.h; sourceTree = "<group>"; };
-		A64D15881A29AAE300369D62 /* UIAwesomeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAwesomeButton.m; sourceTree = "<group>"; };
+		A64D15961A29B47D00369D62 /* FLYIconButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYIconButton.h; sourceTree = "<group>"; };
+		A64D15971A29B47D00369D62 /* FLYIconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYIconButton.m; sourceTree = "<group>"; };
+		A64D15991A29BC6E00369D62 /* FLYInlineActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYInlineActionView.h; sourceTree = "<group>"; };
+		A64D159A1A29BC6E00369D62 /* FLYInlineActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYInlineActionView.m; sourceTree = "<group>"; };
+		A64D159C1A29C0BB00369D62 /* icon_inline_comment@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_comment@3x.png"; sourceTree = "<group>"; };
+		A64D159D1A29C0BB00369D62 /* icon_inline_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_share@3x.png"; sourceTree = "<group>"; };
+		A64D159E1A29C0BB00369D62 /* icon_inline_wing@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_wing@3x.png"; sourceTree = "<group>"; };
 		A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_home@3x.png"; sourceTree = "<group>"; };
 		A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_me@3x.png"; sourceTree = "<group>"; };
 		A6655B591A19ECED00440AAB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -606,7 +610,9 @@
 		A648C0C71A199F8C00FF1744 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				A64D15821A29A61B00369D62 /* icon_inline_wing@3x.png */,
+				A64D159C1A29C0BB00369D62 /* icon_inline_comment@3x.png */,
+				A64D159D1A29C0BB00369D62 /* icon_inline_share@3x.png */,
+				A64D159E1A29C0BB00369D62 /* icon_inline_wing@3x.png */,
 				A64D15801A299B8200369D62 /* icon_feed_play2@3x.png */,
 				A64D157E1A29985600369D62 /* icon_feed_play@3x.png */,
 				A69C4BEA1A28632900CAD443 /* test */,
@@ -639,8 +645,6 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				A64D158B1A29AB1700369D62 /* FontAwesome */,
-				A64D15841A29AA5600369D62 /* PPiAwesomeButton */,
 				A6A0E4211A1E760A0036116E /* FLEX */,
 				A6E171F71A1C62DD00F2B4BF /* PulsingHalo */,
 				A6E171F31A1C5F1A00F2B4BF /* SVPulsingAnnotationView */,
@@ -679,30 +683,14 @@
 			path = Masonry;
 			sourceTree = "<group>";
 		};
-		A64D15841A29AA5600369D62 /* PPiAwesomeButton */ = {
-			isa = PBXGroup;
-			children = (
-				A64D15851A29AAE300369D62 /* UIButton+PPiAwesome.h */,
-				A64D15861A29AAE300369D62 /* UIButton+PPiAwesome.m */,
-				A64D15871A29AAE300369D62 /* UIAwesomeButton.h */,
-				A64D15881A29AAE300369D62 /* UIAwesomeButton.m */,
-			);
-			path = PPiAwesomeButton;
-			sourceTree = "<group>";
-		};
-		A64D158B1A29AB1700369D62 /* FontAwesome */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FontAwesome;
-			sourceTree = "<group>";
-		};
 		A69C4B951A270E0200CAD443 /* UIControls */ = {
 			isa = PBXGroup;
 			children = (
 				A69C4BC91A280C4300CAD443 /* GBFlatButton */,
 				A69C4B961A270E1400CAD443 /* PaperButton.h */,
 				A69C4B971A270E1400CAD443 /* PaperButton.m */,
+				A64D15961A29B47D00369D62 /* FLYIconButton.h */,
+				A64D15971A29B47D00369D62 /* FLYIconButton.m */,
 			);
 			path = UIControls;
 			sourceTree = "<group>";
@@ -773,6 +761,8 @@
 				A69C4BE31A284B6F00CAD443 /* FLYFeedViewController.m */,
 				A69C4BE71A2851FD00CAD443 /* FLYFeedTopicTableViewCell.h */,
 				A69C4BE81A2851FD00CAD443 /* FLYFeedTopicTableViewCell.m */,
+				A64D15991A29BC6E00369D62 /* FLYInlineActionView.h */,
+				A64D159A1A29BC6E00369D62 /* FLYInlineActionView.m */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1125,15 +1115,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6F27CAB1A2085D6000EC0B3 /* icon_audio_wave@3x.png in Resources */,
+				A64D159F1A29C0BB00369D62 /* icon_inline_comment@3x.png in Resources */,
 				A69C4BBE1A27E2A400CAD443 /* icon_unchecked@3x.png in Resources */,
-				A64D15831A29A61B00369D62 /* icon_inline_wing@3x.png in Resources */,
 				A6A0E4191A1DD5130036116E /* icon_record_trash_bin@3x.png in Resources */,
 				A6F27CA41A20735A000EC0B3 /* record_animate_09.png in Resources */,
 				A6F27CA11A20735A000EC0B3 /* record_animate_06.png in Resources */,
 				A69C4BFA1A28636F00CAD443 /* p4.jpg in Resources */,
+				A64D15A01A29C0BB00369D62 /* icon_inline_share@3x.png in Resources */,
 				A69C4C011A28636F00CAD443 /* p11.jpg in Resources */,
 				A69C4B941A27094B00CAD443 /* icon_tabbar_group@3x.png in Resources */,
 				A61D186F1A1F1E7900D188B5 /* icon_record_play@3x.png in Resources */,
+				A64D15A11A29C0BB00369D62 /* icon_inline_wing@3x.png in Resources */,
 				A6F27CA21A20735A000EC0B3 /* record_animate_07.png in Resources */,
 				A69C4BF71A28636F00CAD443 /* p1.jpg in Resources */,
 				A6A0E4C51A1EB5600036116E /* icon_voice_record@2x.png in Resources */,
@@ -1242,7 +1234,6 @@
 				A69C4BB41A27D61000CAD443 /* FLYFilterSelectorGroupTableViewCell.m in Sources */,
 				A6A0E4901A1E76110036116E /* FLEXArgumentInputFontsPickerView.m in Sources */,
 				A6A0E4A61A1E76110036116E /* FLEXClassesTableViewController.m in Sources */,
-				A64D158A1A29AAE300369D62 /* UIAwesomeButton.m in Sources */,
 				A69C4BCC1A280C4F00CAD443 /* GBFlatButton.m in Sources */,
 				A6A0E4AA1A1E76110036116E /* FLEXInstancesTableViewController.m in Sources */,
 				A69C4BE91A2851FD00CAD443 /* FLYFeedTopicTableViewCell.m in Sources */,
@@ -1261,7 +1252,6 @@
 				A6A0E4B21A1E76110036116E /* FLEXDictionaryExplorerViewController.m in Sources */,
 				A6A0E4A01A1E76110036116E /* FLEXPropertyEditorViewController.m in Sources */,
 				A6A30D6F1A1B1DF8001AE1FE /* FLYCircleView.m in Sources */,
-				A64D15891A29AAE300369D62 /* UIButton+PPiAwesome.m in Sources */,
 				A648C0E71A19AD4A00FF1744 /* MASViewAttribute.m in Sources */,
 				A648C0E61A19AD4A00FF1744 /* MASLayoutConstraint.m in Sources */,
 				A6A0E4991A1E76110036116E /* FLEXArgumentInputView.m in Sources */,
@@ -1288,9 +1278,11 @@
 				A6A0E4951A1E76110036116E /* FLEXArgumentInputStringView.m in Sources */,
 				A6A30D6C1A1B0586001AE1FE /* FLYRecordViewController.m in Sources */,
 				A648C0E81A19AD4A00FF1744 /* MASViewConstraint.m in Sources */,
+				A64D159B1A29BC6E00369D62 /* FLYInlineActionView.m in Sources */,
 				A6A0E4A51A1E76110036116E /* FLEXWindow.m in Sources */,
 				A6A0E4AF1A1E76110036116E /* FLEXClassExplorerViewController.m in Sources */,
 				A6A0E4B41A1E76110036116E /* FLEXImageExplorerViewController.m in Sources */,
+				A64D15981A29B47D00369D62 /* FLYIconButton.m in Sources */,
 				A6A0E4B01A1E76110036116E /* FLEXDefaultsExplorerViewController.m in Sources */,
 				A6A0E4B61A1E76110036116E /* FLEXObjectExplorerViewController.m in Sources */,
 				A6A0E4941A1E76110036116E /* FLEXArgumentInputNumberView.m in Sources */,

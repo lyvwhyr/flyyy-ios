@@ -8,6 +8,9 @@
 
 #import "FLYFeedTopicTableViewCell.h"
 #import "UIColor+FLYAddition.h"
+#import "FLYIconButton.h"
+#import "FLYInlineActionView.h"
+#import "UIImage+FLYAddition.h"
 
 @interface FLYFeedTopicTableViewCell()
 
@@ -18,7 +21,9 @@
 @property (nonatomic) UILabel *categoryNameLabel;
 
 @property (nonatomic) UIButton *playButton;
+@property (nonatomic) UILabel *postTitle;
 
+@property (nonatomic) FLYInlineActionView *inlineActionView;
 
 @end
 
@@ -33,8 +38,12 @@
         
         //header view
         _avatarImageView = [UIImageView new];
-        NSString *avatarName = [NSString stringWithFormat:@"p%d.jpg", (arc4random()%4 + 1)];
-        [_avatarImageView setImage:[UIImage imageNamed:avatarName]];
+        NSString *avatarName = [NSString stringWithFormat:@"p%d.jpg", (arc4random()%10 + 1)];
+        UIImage *avatarImage = [UIImage imageNamed:avatarName];
+        [_avatarImageView setImage:avatarImage];
+        [_avatarImageView sizeToFit];
+        _avatarImageView.layer.cornerRadius = 18;
+        _avatarImageView.clipsToBounds = YES;
         
         _userNameLabel = [UILabel new];
         _userNameLabel.text = @"pancake";
@@ -42,6 +51,7 @@
         
         _postAtLabel = [UILabel new];
         _postAtLabel.text = @"19s";
+        _postAtLabel.font = [UIFont systemFontOfSize:13];
         _postAtLabel.textColor = [UIColor flyFeedGrey];
         
         _categoryNameLabel = [UILabel new];
@@ -51,15 +61,33 @@
         _postHeaderView.translatesAutoresizingMaskIntoConstraints = NO;
         [_postHeaderView addSubview:_avatarImageView];
         [_postHeaderView addSubview:_userNameLabel];
-//        [_postHeaderView addSubview:_postAtLabel];
+        [_postHeaderView addSubview:_postAtLabel];
 //        [_postHeaderView addSubview:_categoryNameLabel];
         [self.contentView addSubview:_postHeaderView];
-//        _postHeaderView.backgroundColor = [UIColor flyContentBackgroundGrey];
-        
         
         _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_playButton setImage:[UIImage imageNamed:@"icon_feed_play2"] forState:UIControlStateNormal];
+        [_playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
         [self addSubview:_playButton];
+        
+        _postTitle = [UILabel new];
+//        _postTitle.text = @"That feel when break is halfway done.";
+        
+        _postTitle.numberOfLines = 0;
+        _postTitle.textColor = [UIColor blackColor];
+        _postTitle.font = [UIFont systemFontOfSize:15];
+        
+        NSString *postTitle = @"There's a fine line between numerator and denominator.";
+        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:postTitle];
+        NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+        paragraphStyle.lineSpacing = 6;
+        [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, postTitle.length)];
+        _postTitle.attributedText = attrStr;
+        [_postTitle sizeToFit];
+        [self addSubview:_postTitle];
+        
+        _inlineActionView = [FLYInlineActionView new];
+//        _inlineActionView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+        [self addSubview:_inlineActionView];
         
         [self setNeedsUpdateConstraints];
     }
@@ -98,15 +126,36 @@
     }];
     
     [_userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_postHeaderView).offset(8);
+        make.top.equalTo(_avatarImageView);
         make.leading.equalTo(_avatarImageView.mas_right).offset(10);
 //        make.width.equalTo(@(36));
 //        make.height.equalTo(@(36));
     }];
     
+    [_postAtLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_postHeaderView).offset(10);
+        make.trailing.equalTo(_postHeaderView).offset(-20);
+    }];
+    
+    
+    //center part
     [_playButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_postHeaderView.mas_bottom).offset(30);
-        make.leading.equalTo(self).offset(20);
+        make.top.equalTo(_postHeaderView.mas_bottom).offset(20);
+        make.leading.equalTo(self).offset(25);
+    }];
+    
+    [_postTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_postHeaderView.mas_bottom).offset(5);
+        make.leading.equalTo(_playButton.mas_trailing).offset(20);
+        make.width.lessThanOrEqualTo(self).offset(-40 - 36);
+    }];
+    
+    [_inlineActionView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(_playButton.mas_bottom);
+        make.bottom.equalTo(self);
+        make.leading.equalTo(self);
+        make.width.equalTo(self);
+        make.height.equalTo(@(40));
     }];
     
     [super updateConstraints];

@@ -18,6 +18,7 @@
 + (UIColor *)flyTabBarGreyText;
 + (UIColor *)flyContentBackgroundGrey;
 + (UIColor *)flyFeedGrey;
++ (UIColor *)flyInlineActionGrey;
 
 
 

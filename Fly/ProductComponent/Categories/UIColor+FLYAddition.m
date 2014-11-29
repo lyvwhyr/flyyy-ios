@@ -16,6 +16,7 @@
 #define kColorFlyLightGreen                     @"#8fbfba"
 #define kColorFlyContentBackgroundGrey          @"#eaeaea"
 #define kColorFlyFeedGrey                       @"#a6a6a6"
+#define kColorFlyInlineActionGrey               @"#ababab"
 
 @implementation UIColor (FLYAddition)
 
@@ -61,6 +62,11 @@
 + (UIColor *)flyFeedGrey
 {
     return [self colorWithHexString:kColorFlyFeedGrey];
+}
+
++ (UIColor *)flyInlineActionGrey
+{
+    return [self colorWithHexString:kColorFlyInlineActionGrey];
 }
 
 

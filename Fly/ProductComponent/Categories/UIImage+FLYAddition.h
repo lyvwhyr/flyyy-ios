@@ -28,4 +28,8 @@
  */
 + (UIImage *)resizableImageWithColor:(UIColor *)color cornerRadius:(CGFloat)cornerRadius;
 
+
++ (UIImage *)roundedImageWithImage:(UIImage *)image;
+
+
 @end

@@ -101,11 +101,11 @@
     return tabIndex;
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    NSLog(@"tabBarFrame %@", NSStringFromCGRect(self.frame));
-}
+//- (void)layoutSubviews
+//{
+//    [super layoutSubviews];
+//    NSLog(@"tabBarFrame %@", NSStringFromCGRect(self.frame));
+//}
 
 
 
