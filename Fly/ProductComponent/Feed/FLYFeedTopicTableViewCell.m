@@ -17,6 +17,7 @@
 @property (nonatomic) UILabel *postAtLabel;
 @property (nonatomic) UILabel *categoryNameLabel;
 
+@property (nonatomic) UIButton *playButton;
 
 
 @end
@@ -27,7 +28,8 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.translatesAutoresizingMaskIntoConstraints = NO;
+//        self.translatesAutoresizingMaskIntoConstraints = NO;
+//        self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
         
         //header view
         _avatarImageView = [UIImageView new];
@@ -36,9 +38,11 @@
         
         _userNameLabel = [UILabel new];
         _userNameLabel.text = @"pancake";
+        _userNameLabel.textColor = [UIColor flyGreen];
         
         _postAtLabel = [UILabel new];
         _postAtLabel.text = @"19s";
+        _postAtLabel.textColor = [UIColor flyFeedGrey];
         
         _categoryNameLabel = [UILabel new];
         _categoryNameLabel.text = @"Confession";
@@ -46,11 +50,16 @@
         _postHeaderView = [UIView new];
         _postHeaderView.translatesAutoresizingMaskIntoConstraints = NO;
         [_postHeaderView addSubview:_avatarImageView];
-//        [_postHeaderView addSubview:_userNameLabel];
+        [_postHeaderView addSubview:_userNameLabel];
 //        [_postHeaderView addSubview:_postAtLabel];
 //        [_postHeaderView addSubview:_categoryNameLabel];
         [self.contentView addSubview:_postHeaderView];
-        _postHeaderView.backgroundColor = [UIColor flyContentBackgroundGrey];
+//        _postHeaderView.backgroundColor = [UIColor flyContentBackgroundGrey];
+        
+        
+        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_playButton setImage:[UIImage imageNamed:@"icon_feed_play2"] forState:UIControlStateNormal];
+        [self addSubview:_playButton];
         
         [self setNeedsUpdateConstraints];
     }
@@ -60,7 +69,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
+//            [self setNeedsUpdateConstraints];
     // Make sure the contentView does a layout pass here so that its subviews have their frames set, which we
     // need to use to set the preferredMaxLayoutWidth below.
 //    [self.contentView setNeedsLayout];
@@ -69,6 +78,10 @@
 
 - (void)updateConstraints
 {
+//    [self mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.equalTo(@(CGRectGetWidth([[UIScreen mainScreen] bounds])));
+//        make.height.equalTo(@(50));
+//    }];
     
     [_postHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(0);
@@ -82,6 +95,18 @@
         make.leading.equalTo(_postHeaderView).offset(20);
         make.width.equalTo(@(36));
         make.height.equalTo(@(36));
+    }];
+    
+    [_userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_postHeaderView).offset(8);
+        make.leading.equalTo(_avatarImageView.mas_right).offset(10);
+//        make.width.equalTo(@(36));
+//        make.height.equalTo(@(36));
+    }];
+    
+    [_playButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_postHeaderView.mas_bottom).offset(30);
+        make.leading.equalTo(self).offset(20);
     }];
     
     [super updateConstraints];

@@ -15,6 +15,7 @@
 #define kColorFlyTabBarGreyText                 @"#bcbcbc"
 #define kColorFlyLightGreen                     @"#8fbfba"
 #define kColorFlyContentBackgroundGrey          @"#eaeaea"
+#define kColorFlyFeedGrey                       @"#a6a6a6"
 
 @implementation UIColor (FLYAddition)
 
@@ -55,6 +56,11 @@
 +(UIColor *)flyTabBarGreyText
 {
     return [self colorWithHexString:kColorFlyTabBarGreyText];
+}
+
++ (UIColor *)flyFeedGrey
+{
+    return [self colorWithHexString:kColorFlyFeedGrey];
 }
 
 

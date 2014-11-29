@@ -74,6 +74,22 @@
     [_groups addObject:@"Money"];
     [_groups addObject:@"Faith"];
     [_groups addObject:@"Family"];
+    
+    [_groups addObject:@"Tattoosand piercings"];
+    [_groups addObject:@"Travel"];
+    [_groups addObject:@"Money"];
+    [_groups addObject:@"Faith"];
+    [_groups addObject:@"Family"];
+    [_groups addObject:@"Tattoosand piercings"];
+    [_groups addObject:@"Travel"];
+    [_groups addObject:@"Money"];
+    [_groups addObject:@"Faith"];
+    [_groups addObject:@"Family"];
+    [_groups addObject:@"Tattoosand piercings"];
+    [_groups addObject:@"Travel"];
+    [_groups addObject:@"Money"];
+    [_groups addObject:@"Faith"];
+    [_groups addObject:@"Family"];
 }
 
 - (void)viewWillAppear:(BOOL)animated

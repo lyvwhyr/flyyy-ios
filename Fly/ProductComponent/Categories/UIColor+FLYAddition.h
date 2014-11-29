@@ -17,6 +17,9 @@
 + (UIColor *)flyTabBarSeparator;
 + (UIColor *)flyTabBarGreyText;
 + (UIColor *)flyContentBackgroundGrey;
++ (UIColor *)flyFeedGrey;
+
+
 
 + (UIColor *)customGrayColor;
 + (UIColor *)customRedColor;
