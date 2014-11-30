@@ -17,7 +17,7 @@
 #import "FLYFeedViewController.h"
 #import "FLYRecordViewController.h"
 #import "FLYProfileViewController.h"
-#import "FLYGroupsViewController.h"
+#import "FLYGroupListViewController.h"
 #import "PresentingAnimator.h"
 #import "DismissingAnimator.h"
 #import "FLYFilterHomeFeedSelectorViewController.h"
@@ -34,7 +34,7 @@
 
 @property (nonatomic) FLYFeedViewController *feedViewController;
 //@property (nonatomic) FLYRecordViewController *recordViewController;
-@property (nonatomic) FLYGroupsViewController *groupsViewController;
+@property (nonatomic) FLYGroupListViewController *groupsViewController;
 @property (nonatomic) FLYUniversalViewController *currentViewController;
 
 
@@ -99,7 +99,7 @@
     
 //    [self addChildViewController:_recordViewController];
     
-    _groupsViewController = [FLYGroupsViewController new];
+    _groupsViewController = [FLYGroupListViewController new];
     _groupsViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
 //    [self addChildViewController:_groupsViewController];
     
@@ -144,7 +144,6 @@
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:recordViewController];
         [self presentViewController:navigationController animated:NO completion:nil];
     } else {
-        
         self.navigationItem.title = @"Groups";
         if (_currentViewController == _groupsViewController) {
             return;
@@ -170,7 +169,7 @@
     if (animated && oldC != nil) {
         oldC.view.alpha = 1.0f;
         newC.view.alpha = 0.0f;
-        [self transitionFromViewController:oldC toViewController:newC duration:0.25f options:0 animations:^{
+        [self transitionFromViewController:oldC toViewController:newC duration:0.0f options:0 animations:^{
             
             oldC.view.alpha = 0.0f;
             newC.view.alpha = 1.0f;
@@ -183,8 +182,15 @@
         [contentView addSubview:newC.view];
         oldC.view.alpha = 0.0f;
         newC.view.alpha = 1.0f;
-        [oldC removeFromParentViewController];
-        [newC didMoveToParentViewController:self];
+        [self transitionFromViewController:oldC toViewController:newC duration:0.25f options:0 animations:^{
+            
+            oldC.view.alpha = 0.0f;
+            newC.view.alpha = 1.0f;
+            
+        } completion:^(BOOL finished) {
+            [oldC removeFromParentViewController];
+            [newC didMoveToParentViewController:self];
+        }];
     }
 }
 
@@ -207,7 +213,13 @@
 - (void)_filterButtonTapped
 {
     FLYFilterHomeFeedSelectorViewController *vc = [FLYFilterHomeFeedSelectorViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
+//    [self.navigationController pushViewController:vc animated:YES];    
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [self.navigationController pushViewController:vc animated:NO];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.navigationController.view cache:NO];
+                     }];
 }
 
 - (void)viewWillLayoutSubviews

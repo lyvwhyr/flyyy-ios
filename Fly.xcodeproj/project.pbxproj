@@ -147,7 +147,8 @@
 		A6A4EFA31A2A76FC00FD4066 /* icon_feed_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A4EFA21A2A76FC00FD4066 /* icon_feed_group@3x.png */; };
 		A6A4EFA51A2A7CF600FD4066 /* icon_down_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A4EFA41A2A7CF600FD4066 /* icon_down_arrow@3x.png */; };
 		A6A4EFA81A2A85C400FD4066 /* FLYNavigationBarMyGroupButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFA71A2A85C400FD4066 /* FLYNavigationBarMyGroupButton.m */; };
-		A6A4EFAD1A2B05C700FD4066 /* FLYGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFAC1A2B05C700FD4066 /* FLYGroupsViewController.m */; };
+		A6A4EFAD1A2B05C700FD4066 /* FLYGroupListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFAC1A2B05C700FD4066 /* FLYGroupListViewController.m */; };
+		A6A4EFB01A2BD4D500FD4066 /* FLYGroupListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFAF1A2BD4D500FD4066 /* FLYGroupListTableViewCell.m */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
@@ -422,8 +423,10 @@
 		A6A4EFA41A2A7CF600FD4066 /* icon_down_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_down_arrow@3x.png"; sourceTree = "<group>"; };
 		A6A4EFA61A2A85C400FD4066 /* FLYNavigationBarMyGroupButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLYNavigationBarMyGroupButton.h; path = ../FLYNavigationBarMyGroupButton.h; sourceTree = "<group>"; };
 		A6A4EFA71A2A85C400FD4066 /* FLYNavigationBarMyGroupButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLYNavigationBarMyGroupButton.m; path = ../FLYNavigationBarMyGroupButton.m; sourceTree = "<group>"; };
-		A6A4EFAB1A2B05C700FD4066 /* FLYGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupsViewController.h; sourceTree = "<group>"; };
-		A6A4EFAC1A2B05C700FD4066 /* FLYGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupsViewController.m; sourceTree = "<group>"; };
+		A6A4EFAB1A2B05C700FD4066 /* FLYGroupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupListViewController.h; sourceTree = "<group>"; };
+		A6A4EFAC1A2B05C700FD4066 /* FLYGroupListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupListViewController.m; sourceTree = "<group>"; };
+		A6A4EFAE1A2BD4D500FD4066 /* FLYGroupListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupListTableViewCell.h; sourceTree = "<group>"; };
+		A6A4EFAF1A2BD4D500FD4066 /* FLYGroupListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupListTableViewCell.m; sourceTree = "<group>"; };
 		A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
@@ -554,7 +557,7 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
-				A6A4EFAA1A2B056C00FD4066 /* Groups */,
+				A6A4EFAA1A2B056C00FD4066 /* GroupList */,
 				A6A4EFA91A2A85D700FD4066 /* NavigationBar */,
 				A69C4BE11A284B6100CAD443 /* Feed */,
 				A69C4BD21A283EFA00CAD443 /* Model */,
@@ -1014,12 +1017,15 @@
 			path = NavigationBar;
 			sourceTree = "<group>";
 		};
-		A6A4EFAA1A2B056C00FD4066 /* Groups */ = {
+		A6A4EFAA1A2B056C00FD4066 /* GroupList */ = {
 			isa = PBXGroup;
 			children = (
-				A6A4EFAB1A2B05C700FD4066 /* FLYGroupsViewController.h */,
-				A6A4EFAC1A2B05C700FD4066 /* FLYGroupsViewController.m */,
+				A6A4EFAB1A2B05C700FD4066 /* FLYGroupListViewController.h */,
+				A6A4EFAC1A2B05C700FD4066 /* FLYGroupListViewController.m */,
+				A6A4EFAE1A2BD4D500FD4066 /* FLYGroupListTableViewCell.h */,
+				A6A4EFAF1A2BD4D500FD4066 /* FLYGroupListTableViewCell.m */,
 			);
+			name = GroupList;
 			path = Groups;
 			sourceTree = "<group>";
 		};
@@ -1285,7 +1291,7 @@
 				A6263EBA1A18815000C4C3BA /* FLYMainViewController.m in Sources */,
 				A6A0E4B21A1E76110036116E /* FLEXDictionaryExplorerViewController.m in Sources */,
 				A6A0E4A01A1E76110036116E /* FLEXPropertyEditorViewController.m in Sources */,
-				A6A4EFAD1A2B05C700FD4066 /* FLYGroupsViewController.m in Sources */,
+				A6A4EFAD1A2B05C700FD4066 /* FLYGroupListViewController.m in Sources */,
 				A6A30D6F1A1B1DF8001AE1FE /* FLYCircleView.m in Sources */,
 				A648C0E71A19AD4A00FF1744 /* MASViewAttribute.m in Sources */,
 				A648C0E61A19AD4A00FF1744 /* MASLayoutConstraint.m in Sources */,
@@ -1332,6 +1338,7 @@
 				A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */,
 				A6A0E4B81A1E76110036116E /* FLEXViewControllerExplorerViewController.m in Sources */,
 				A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */,
+				A6A4EFB01A2BD4D500FD4066 /* FLYGroupListTableViewCell.m in Sources */,
 				A6A0E4BE1A1E76110036116E /* FLEXHierarchyTableViewCell.m in Sources */,
 				A6A0E49C1A1E76110036116E /* FLEXFieldEditorView.m in Sources */,
 				A6A0E4B71A1E76110036116E /* FLEXSetExplorerViewController.m in Sources */,
