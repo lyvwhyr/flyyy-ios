@@ -17,6 +17,7 @@
 #import "FLYFeedViewController.h"
 #import "FLYRecordViewController.h"
 #import "FLYProfileViewController.h"
+#import "FLYGroupsViewController.h"
 #import "PresentingAnimator.h"
 #import "DismissingAnimator.h"
 #import "FLYFilterHomeFeedSelectorViewController.h"
@@ -33,8 +34,9 @@
 
 @property (nonatomic) FLYFeedViewController *feedViewController;
 //@property (nonatomic) FLYRecordViewController *recordViewController;
-@property (nonatomic) FLYProfileViewController *profileViewController;
+@property (nonatomic) FLYGroupsViewController *groupsViewController;
 @property (nonatomic) FLYUniversalViewController *currentViewController;
+
 
 @end
 
@@ -97,11 +99,13 @@
     
 //    [self addChildViewController:_recordViewController];
     
-    _profileViewController = [FLYProfileViewController new];
-    [self addChildViewController:_profileViewController];
+    _groupsViewController = [FLYGroupsViewController new];
+    _groupsViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+//    [self addChildViewController:_groupsViewController];
     
     _currentViewController = _feedViewController;
-    [self.view addSubview:_currentViewController.view];
+    [self.view addSubview:_feedViewController.view];
+//    [self.view addSubview:_groupsViewController.view];
 }
 
 
@@ -131,16 +135,56 @@
 - (void)tabItemClicked:(NSInteger)index
 {
     if (index == TABBAR_HOME) {
-        
+        if (_currentViewController == _feedViewController) {
+            return;
+        }
+        [self showController:_feedViewController withView:_feedViewController.view animated:YES];
     } else if (index == TABBAR_RECORD) {
         FLYRecordViewController *recordViewController = [FLYRecordViewController new];
-//        [self transitionFromViewController:_currentViewController toViewController:_recordViewController duration:0 options:0 animations:nil completion:^(BOOL finished) {
-            _currentViewController = recordViewController;
-//        }];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:recordViewController];
         [self presentViewController:navigationController animated:NO completion:nil];
     } else {
         
+        self.navigationItem.title = @"Groups";
+        if (_currentViewController == _groupsViewController) {
+            return;
+        }
+        [self showController:_groupsViewController withView:_groupsViewController.view animated:YES];
+        
+    }
+}
+
+- (void) showController:(UIViewController*)newC withView:(UIView*)contentView animated:(BOOL)animated
+{
+    UIViewController *oldC = self.childViewControllers.firstObject;
+    if (oldC == newC) {
+        return;
+    }
+    _currentViewController = (FLYUniversalViewController *)newC;
+    
+    [oldC willMoveToParentViewController:nil];
+    
+    [self addChildViewController:newC];
+    newC.view.frame = (CGRect){ 0, 0, contentView.frame.size };
+    
+    if (animated && oldC != nil) {
+        oldC.view.alpha = 1.0f;
+        newC.view.alpha = 0.0f;
+        [self transitionFromViewController:oldC toViewController:newC duration:0.25f options:0 animations:^{
+            
+            oldC.view.alpha = 0.0f;
+            newC.view.alpha = 1.0f;
+            
+        } completion:^(BOOL finished) {
+            [oldC removeFromParentViewController];
+            [newC didMoveToParentViewController:self];
+        }];
+    } else {
+        [contentView addSubview:newC.view];
+        oldC.view.alpha = 0.0f;
+        newC.view.alpha = 1.0f;
+        [oldC removeFromParentViewController];
+        [newC didMoveToParentViewController:self];
     }
 }
 
