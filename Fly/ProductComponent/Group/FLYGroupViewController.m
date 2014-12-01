@@ -11,7 +11,7 @@
 
 @interface FLYGroupViewController ()
 
-@property (nonatomic) UIView *feedView;
+@property (nonatomic) FLYFeedViewController *feedViewController;
 
 @end
 
@@ -20,29 +20,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    _feedView= [FLYFeedViewController new].view;
-    [self.view addSubview:_feedView];
+    _feedViewController = [FLYFeedViewController new];
+    [self.view addSubview:_feedViewController.view];
+    _feedViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    self.view.backgroundColor = [UIColor blueColor];
     
 }
 
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    [self updateViewConstraints];
+    [self.view layoutIfNeeded];
+    [FLYUtilities printAutolayoutTrace];
 }
 
 - (void)updateViewConstraints
 {
-    [self.view removeConstraints:self.view.constraints];
-//    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(@(64));
-//        make.leading.equalTo(@(0));
-//        make.width.equalTo(@(414));
-//        make.height.equalTo(@(672));
-//    }];
     
+    [self.view removeConstraints:self.view.constraints];
+//    [_feedViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.view);
+//        make.leading.equalTo(self.view);
+//        make.width.equalTo(self.view);
+//        make.height.equalTo(self.view);
+//    }];
     [super updateViewConstraints];
 }
 

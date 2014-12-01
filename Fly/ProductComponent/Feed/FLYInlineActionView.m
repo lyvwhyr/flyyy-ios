@@ -30,12 +30,15 @@
         UIColor *color = [UIColor flyInlineActionGrey];
         UIFont *font = [UIFont systemFontOfSize:13.0f];
         _flyButton = [[FLYIconButton alloc] initWithText:@"5" textFont:font textColor:color icon:@"icon_inline_wing"];
+        _flyButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_flyButton];
         
         _commentButton = [[FLYIconButton alloc] initWithText:@"10" textFont:font textColor:color  icon:@"icon_inline_comment"];
+        _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_commentButton];
         
         _shareButton = [[FLYIconButton alloc] initWithText:@"Share" textFont:font textColor:color icon:@"icon_inline_share"];
+        _shareButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_shareButton];
         
         [self setNeedsUpdateConstraints];

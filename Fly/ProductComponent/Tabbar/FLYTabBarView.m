@@ -32,6 +32,7 @@
         self.userInteractionEnabled = YES;
         
         _separator = [UIView new];
+        _separator.translatesAutoresizingMaskIntoConstraints = NO;
         _separator.backgroundColor = [UIColor flyTabBarSeparator];
         [self addSubview:_separator];
         
@@ -47,6 +48,7 @@
     NSInteger count = _tabViews.count;
     for (int i = 0; i < count; i++) {
         FLYTabView *tabView = (FLYTabView *)[_tabViews objectAtIndex:i];
+        tabView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:tabView];
         float middleSpacing = ((CGRectGetWidth([UIScreen mainScreen].bounds) - count * kTabWidth - 2 * kTabLeadingMargin))/(count - 1);
         NSInteger leftX = kTabLeadingMargin + i * kTabWidth + i * middleSpacing;
@@ -100,13 +102,5 @@
     }
     return tabIndex;
 }
-
-//- (void)layoutSubviews
-//{
-//    [super layoutSubviews];
-//    NSLog(@"tabBarFrame %@", NSStringFromCGRect(self.frame));
-//}
-
-
 
 @end

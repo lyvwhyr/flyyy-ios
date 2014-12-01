@@ -44,6 +44,7 @@
         [_avatarImageView sizeToFit];
         _avatarImageView.layer.cornerRadius = 18;
         _avatarImageView.clipsToBounds = YES;
+        _avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
         
         _userNameLabel = [UILabel new];
         _userNameLabel.text = @"pancake";
@@ -70,6 +71,7 @@
         [self.contentView addSubview:_postHeaderView];
         
         _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _playButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
         [self addSubview:_playButton];
         
@@ -79,6 +81,7 @@
         _postTitle.numberOfLines = 0;
         _postTitle.textColor = [UIColor blackColor];
         _postTitle.font = [UIFont systemFontOfSize:15];
+        _postAtLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
         NSString *postTitle = @"There's a fine line between numerator and denominator.";
         NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:postTitle];
@@ -90,6 +93,7 @@
         [self addSubview:_postTitle];
         
         _inlineActionView = [FLYInlineActionView new];
+        _inlineActionView.translatesAutoresizingMaskIntoConstraints = NO;
 //        _inlineActionView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
         [self addSubview:_inlineActionView];
         

@@ -141,13 +141,13 @@
 - (void)_filterButtonTapped
 {
     FLYFilterHomeFeedSelectorViewController *vc = [FLYFilterHomeFeedSelectorViewController new];
-    //    [self.navigationController pushViewController:vc animated:YES];
-    [UIView animateWithDuration:0.3
-                     animations:^{
-                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                         [self.navigationController pushViewController:vc animated:NO];
-                         [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.navigationController.view cache:NO];
-                     }];
+    [self.navigationController pushViewController:vc animated:YES];
+//    [UIView animateWithDuration:0.3
+//                     animations:^{
+//                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//                         [self.navigationController pushViewController:vc animated:NO];
+//                         [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.navigationController.view cache:NO];
+//                     }];
 }
 
 @end

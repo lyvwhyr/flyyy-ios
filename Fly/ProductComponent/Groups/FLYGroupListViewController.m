@@ -13,7 +13,7 @@
 #import "UIColor+FLYAddition.h"
 #import "JGProgressHUD.h"
 #import "JGProgressHUDSuccessIndicatorView.h"
-#import "FLYGroupViewController.h"
+#import "FLYSingleGroupViewController.h"
 #import "FLYMainViewController.h"
 
 #define kSuggestGroupRow 0
@@ -160,7 +160,8 @@
         
         [alert showCustom:self image:[UIImage imageNamed:@"icon_feed_play"] color:[UIColor flyGreen] title:@"Suggest" subTitle:@"Do you want to suggest a new group? We are open to new ideas." closeButtonTitle:@"Cancel" duration:0.0f];
     } else {
-        FLYMainViewController *vc = [FLYMainViewController new];
+        FLYSingleGroupViewController *vc = [FLYSingleGroupViewController new];
+        vc.view.translatesAutoresizingMaskIntoConstraints = NO;
 //        [feedViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
 //            make.top.equalTo(self.view);
 //            make.leading.equalTo(self.view);

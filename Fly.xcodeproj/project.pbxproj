@@ -152,6 +152,8 @@
 		A6A4EFB31A2BE71000FD4066 /* FLYGroupListSuggestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFB21A2BE71000FD4066 /* FLYGroupListSuggestTableViewCell.m */; };
 		A6A4EFB51A2BE99300FD4066 /* icon_suggest_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A4EFB41A2BE99300FD4066 /* icon_suggest_group@3x.png */; };
 		A6A4EFBE1A2C22EF00FD4066 /* FLYGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFBD1A2C22EF00FD4066 /* FLYGroupViewController.m */; };
+		A6A4EFC21A2C634900FD4066 /* FLYSingleGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFC01A2C634900FD4066 /* FLYSingleGroupViewController.m */; };
+		A6A4EFC31A2C634900FD4066 /* FLYSingleGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6A4EFC11A2C634900FD4066 /* FLYSingleGroupViewController.xib */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
@@ -435,6 +437,9 @@
 		A6A4EFB41A2BE99300FD4066 /* icon_suggest_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_suggest_group@3x.png"; sourceTree = "<group>"; };
 		A6A4EFBC1A2C22EF00FD4066 /* FLYGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupViewController.h; sourceTree = "<group>"; };
 		A6A4EFBD1A2C22EF00FD4066 /* FLYGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupViewController.m; sourceTree = "<group>"; };
+		A6A4EFBF1A2C634900FD4066 /* FLYSingleGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSingleGroupViewController.h; sourceTree = "<group>"; };
+		A6A4EFC01A2C634900FD4066 /* FLYSingleGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSingleGroupViewController.m; sourceTree = "<group>"; };
+		A6A4EFC11A2C634900FD4066 /* FLYSingleGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLYSingleGroupViewController.xib; sourceTree = "<group>"; };
 		A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
@@ -1046,6 +1051,9 @@
 			children = (
 				A6A4EFBC1A2C22EF00FD4066 /* FLYGroupViewController.h */,
 				A6A4EFBD1A2C22EF00FD4066 /* FLYGroupViewController.m */,
+				A6A4EFBF1A2C634900FD4066 /* FLYSingleGroupViewController.h */,
+				A6A4EFC01A2C634900FD4066 /* FLYSingleGroupViewController.m */,
+				A6A4EFC11A2C634900FD4066 /* FLYSingleGroupViewController.xib */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -1195,6 +1203,7 @@
 				A69C4BFC1A28636F00CAD443 /* p6.jpg in Resources */,
 				A64D15811A299B8200369D62 /* icon_feed_play2@3x.png in Resources */,
 				A62E53B51A227E0B00125DBC /* icon_voice_filter@3x.png in Resources */,
+				A6A4EFC31A2C634900FD4066 /* FLYSingleGroupViewController.xib in Resources */,
 				A64D157F1A29985600369D62 /* icon_feed_play@3x.png in Resources */,
 				A648C0F61A19D1FF00FF1744 /* icon_tabbar_voice@2x.png in Resources */,
 				A6263E9B1A187E1200C4C3BA /* Main.storyboard in Resources */,
@@ -1329,6 +1338,7 @@
 				A6A0E48F1A1E76110036116E /* FLEXArgumentInputColorView.m in Sources */,
 				A6A0E4BF1A1E76110036116E /* FLEXHierarchyTableViewController.m in Sources */,
 				A6A0E4AC1A1E76110036116E /* FLEXLiveObjectsTableViewController.m in Sources */,
+				A6A4EFC21A2C634900FD4066 /* FLYSingleGroupViewController.m in Sources */,
 				A648C0E31A19AD4A00FF1744 /* MASCompositeConstraint.m in Sources */,
 				A6A0E4A71A1E76110036116E /* FLEXFileBrowserSearchOperation.m in Sources */,
 				A6A0E4971A1E76110036116E /* FLEXArgumentInputSwitchView.m in Sources */,
