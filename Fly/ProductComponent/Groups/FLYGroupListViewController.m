@@ -13,6 +13,7 @@
 #import "UIColor+FLYAddition.h"
 #import "JGProgressHUD.h"
 #import "JGProgressHUDSuccessIndicatorView.h"
+#import "FLYGroupViewController.h"
 
 #define kSuggestGroupRow 0
 
@@ -84,18 +85,18 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [self updateViewConstraints];
+    [self.view layoutIfNeeded];
 }
 
 -(void)updateViewConstraints
 {
     [self.view removeConstraints:[self.view constraints]];
-    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.parentViewController.view);
-        make.leading.equalTo(self.parentViewController.view);
-        make.width.equalTo(@(CGRectGetWidth(self.parentViewController.view.bounds)));
-        make.height.equalTo(@(CGRectGetHeight(self.parentViewController.view.bounds) - kTabBarViewHeight));
-    }];
+//    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.parentViewController.view);
+//        make.leading.equalTo(self.parentViewController.view);
+//        make.width.equalTo(@(CGRectGetWidth(self.parentViewController.view.bounds)));
+//        make.height.equalTo(@(CGRectGetHeight(self.parentViewController.view.bounds) - kTabBarViewHeight));
+//    }];
     
     [_groupsTabelView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view);
@@ -157,6 +158,9 @@
         }];
         
         [alert showCustom:self image:[UIImage imageNamed:@"icon_feed_play"] color:[UIColor flyGreen] title:@"Suggest" subTitle:@"Do you want to suggest a new group? We are open to new ideas." closeButtonTitle:@"Cancel" duration:0.0f];
+    } else {
+        FLYGroupViewController *groupViewController = [FLYGroupViewController new];
+        [self.navigationController pushViewController:groupViewController animated:YES];
     }
     
 //    FLYGroupListTableViewCell *cell = (FLYGroupListTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];

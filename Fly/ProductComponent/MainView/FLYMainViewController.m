@@ -81,7 +81,6 @@
 {
     self.tabBarView = [FLYTabBarView new];
     [self.view addSubview:self.tabBarView];
-    [self _addConstraints];
     
     FLYTabView *hogroupsTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_tabbar_home" recordTab:NO];
     FLYTabView *groupsTab = [[FLYTabView alloc] initWithTitle:@"Groups" image:@"icon_tabbar_group" recordTab:NO];
@@ -104,11 +103,10 @@
     [self.view addSubview:_feedViewController.view];
 }
 
-
-
-- (void)_addConstraints
+- (void)updateViewConstraints
 {
-    //tabBarView size constraints
+    [self.view removeConstraints:[self.view constraints]];
+    
     CGFloat tabBarWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
     CGFloat tabBarVerticalSpacing = CGRectGetHeight([UIScreen mainScreen].bounds) - kStatusBarHeight - kNavBarHeight - kTabBarViewHeight;
     NSDictionary *metrics = @{@"tabBarViewWidth":@(tabBarWidth), @"tabBarViewHeight":@(kTabBarViewHeight), @"tabBarViewVerticalSpacing":@(tabBarVerticalSpacing)};
@@ -123,9 +121,38 @@
     [self.view addConstraints:tabBarConstraintPosH];
     [self.view addConstraints:tabBarConstraintPosV];
     
+    if (_feedViewController.view.superview) {
+        [_feedViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view);
+            make.leading.equalTo(self.view);
+            make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
+            make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight));
+        }];
+    }
+    
+    if (_groupsViewController.view.superview) {
+        [_groupsViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view);
+            make.leading.equalTo(self.view);
+            make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
+            make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight));
+        }];
+    }
     
     [super updateViewConstraints];
 }
+
+//- (void)_addGroupListConstranits
+//{
+//    [_groupsViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.view);
+//        make.leading.equalTo(self.view);
+//        make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
+//        make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight));
+//    }];
+//}
+
+
 
 #pragma mark - FLYTabBarViewDelegate
 - (void)tabItemClicked:(NSInteger)index
@@ -144,7 +171,6 @@
             return;
         }
         [self showController:_groupsViewController withView:_groupsViewController.view animated:YES];
-        
     }
 }
 
@@ -178,7 +204,6 @@
         oldC.view.alpha = 0.0f;
         newC.view.alpha = 1.0f;
         [self transitionFromViewController:oldC toViewController:newC duration:0.25f options:0 animations:^{
-            
             oldC.view.alpha = 0.0f;
             newC.view.alpha = 1.0f;
             
@@ -205,9 +230,10 @@
 
 #pragma mark - private methods for navigation bar actions
 
-- (void)viewWillLayoutSubviews
+- (void)viewDidLayoutSubviews
 {
-    [super viewWillLayoutSubviews];
+    [super viewDidLayoutSubviews];
+    [self updateViewConstraints];
 }
 
 

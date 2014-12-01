@@ -89,12 +89,12 @@
 - (void)updateViewConstraints
 {
     [self.view removeConstraints:[self.view constraints]];
-    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.parentViewController.view);
-        make.leading.equalTo(self.parentViewController.view);
-        make.width.equalTo(@(CGRectGetWidth(self.parentViewController.view.bounds)));
-        make.height.equalTo(@(CGRectGetHeight(self.parentViewController.view.bounds) - kTabBarViewHeight));
-    }];
+//    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.view.superview);
+//        make.leading.equalTo(self.parentViewController.view);
+//        make.width.equalTo(@(CGRectGetWidth(self.parentViewController.view.bounds)));
+//        make.height.equalTo(@(CGRectGetHeight(self.parentViewController.view.bounds) - kTabBarViewHeight));
+//    }];
 
     [_feedTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
@@ -104,6 +104,12 @@
     }];
     
     [super updateViewConstraints];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [self.view layoutIfNeeded];
 }
 
 - (void)_addDatasource
@@ -128,12 +134,6 @@
     [_posts addObject:p4];
     [_posts addObject:p5];
     [_posts addObject:p6];
-}
-
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    [self updateViewConstraints];
 }
 
 - (void)_filterButtonTapped
