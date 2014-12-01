@@ -8,6 +8,8 @@
 
 #import "FLYFeedViewController.h"
 #import "FLYFeedTopicTableViewCell.h"
+#import "FLYNavigationBarMyGroupButton.h"
+#import "FLYFilterHomeFeedSelectorViewController.h"
 
 @interface FLYFeedViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -22,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _posts = [NSMutableArray new];
+    
     [self _addDatasource];
     
     _feedTableView = [UITableView new];
@@ -32,9 +35,19 @@
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
 }
 
+- (void)_initNavigationBar
+{
+    FLYNavigationBarMyGroupButton *leftButton = [[FLYNavigationBarMyGroupButton alloc] initWithFrame:CGRectMake(0, 0, 120, 32) Title:@"My Groups" icon:@"icon_down_arrow"];
+    
+    [leftButton addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [leftButton sizeToFit];
+    [self.parentViewController.navigationItem setTitleView:leftButton];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self _initNavigationBar];
 }
 
 #pragma mark - UITableViewDelegate, datasource
@@ -121,6 +134,18 @@
 {
     [super viewWillLayoutSubviews];
     [self updateViewConstraints];
+}
+
+- (void)_filterButtonTapped
+{
+    FLYFilterHomeFeedSelectorViewController *vc = [FLYFilterHomeFeedSelectorViewController new];
+    //    [self.navigationController pushViewController:vc animated:YES];
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [self.navigationController pushViewController:vc animated:NO];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.navigationController.view cache:NO];
+                     }];
 }
 
 @end

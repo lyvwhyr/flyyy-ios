@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439081462.991694"
+            timestampString = "439084122.507587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
             landmarkName = "-flyNavigationController"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439081462.991694"
+            timestampString = "439084122.507587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
             landmarkName = "-flyNavigationController"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439077842.723802"
+            timestampString = "439083401.15324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "-_addConstraints"
             landmarkType = "5">
          </BreakpointContent>
@@ -184,11 +184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439077842.723802"
+            timestampString = "439083401.15324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "-tabItemClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -248,11 +248,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439077842.723802"
+            timestampString = "439083401.15324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "-tabItemClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -296,11 +296,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "438851041.751717"
+            timestampString = "439084020.106008"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -408,7 +408,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439077842.723802"
+            timestampString = "439083401.15324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "96"
@@ -424,11 +424,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439077842.723802"
+            timestampString = "439083401.15324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "-tabItemClicked:"
             landmarkType = "5">
          </BreakpointContent>
@@ -600,11 +600,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "439032285.669492"
+            timestampString = "439084020.106008"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "@implementation FLYFeedViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -648,11 +648,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439077842.723802"
+            timestampString = "439083401.15324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "-tabItemClicked:"
             landmarkType = "5">
          </BreakpointContent>

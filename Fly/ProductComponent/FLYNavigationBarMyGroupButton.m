@@ -30,7 +30,7 @@
         _localTitleLabel = [UILabel new];
         _localTitleLabel.text = title;
         _localTitleLabel.textColor = [UIColor whiteColor];
-        _localTitleLabel.font = [UIFont systemFontOfSize:16];
+        _localTitleLabel.font = [UIFont fontWithName:@"HelveticaNeueInterface-MediumP4" size:17];
         [_localTitleLabel sizeToFit];
         [self addSubview:_localTitleLabel];
     }

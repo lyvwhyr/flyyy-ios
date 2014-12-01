@@ -68,11 +68,11 @@
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = barButton;
     
-    FLYNavigationBarMyGroupButton *leftButton = [[FLYNavigationBarMyGroupButton alloc] initWithFrame:CGRectMake(0, 0, 120, 32) Title:@"My Groups" icon:@"icon_down_arrow"];
-    
-    [leftButton addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [leftButton sizeToFit];
-    self.navigationItem.titleView = leftButton;
+//    FLYNavigationBarMyGroupButton *leftButton = [[FLYNavigationBarMyGroupButton alloc] initWithFrame:CGRectMake(0, 0, 120, 32) Title:@"My Groups" icon:@"icon_down_arrow"];
+//    
+//    [leftButton addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+//    [leftButton sizeToFit];
+//    self.navigationItem.titleView = leftButton;
 }
 
 
@@ -97,15 +97,11 @@
     _feedViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
     [self addChildViewController:_feedViewController];
     
-//    [self addChildViewController:_recordViewController];
-    
     _groupsViewController = [FLYGroupListViewController new];
     _groupsViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-//    [self addChildViewController:_groupsViewController];
     
     _currentViewController = _feedViewController;
     [self.view addSubview:_feedViewController.view];
-//    [self.view addSubview:_groupsViewController.view];
 }
 
 
@@ -144,7 +140,6 @@
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:recordViewController];
         [self presentViewController:navigationController animated:NO completion:nil];
     } else {
-        self.navigationItem.title = @"Groups";
         if (_currentViewController == _groupsViewController) {
             return;
         }
@@ -209,18 +204,6 @@
 }
 
 #pragma mark - private methods for navigation bar actions
-
-- (void)_filterButtonTapped
-{
-    FLYFilterHomeFeedSelectorViewController *vc = [FLYFilterHomeFeedSelectorViewController new];
-//    [self.navigationController pushViewController:vc animated:YES];    
-    [UIView animateWithDuration:0.3
-                     animations:^{
-                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                         [self.navigationController pushViewController:vc animated:NO];
-                         [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.navigationController.view cache:NO];
-                     }];
-}
 
 - (void)viewWillLayoutSubviews
 {

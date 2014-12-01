@@ -9,6 +9,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-JGProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-SCLAlertView-Objective-C.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-TheAmazingAudioEngine.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>22DCFC0D1462CFAC77C38A92</key>
+		<key>39DAAF6494AA7D8C784710DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DF99610952D868A12F68FF91</key>
+		<key>52BAB832D2E7F3A907EF5E53</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E2BA682FAD377B3A2BDD595C</key>
+		<key>52C25B7AB148F51C67A351B4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FCB2C37509FD531EFD74EEC2</key>
+		<key>55D3EEEA5B74CE3C2C3153C0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7E32336AD49FAD98BE300C46</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D71197871FF50DC4BAA8FA6D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

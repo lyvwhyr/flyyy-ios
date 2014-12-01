@@ -48,6 +48,18 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 5
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 0
 
+// JGProgressHUD
+#define COCOAPODS_POD_AVAILABLE_JGProgressHUD
+#define COCOAPODS_VERSION_MAJOR_JGProgressHUD 1
+#define COCOAPODS_VERSION_MINOR_JGProgressHUD 2
+#define COCOAPODS_VERSION_PATCH_JGProgressHUD 2
+
+// SCLAlertView-Objective-C
+#define COCOAPODS_POD_AVAILABLE_SCLAlertView_Objective_C
+#define COCOAPODS_VERSION_MAJOR_SCLAlertView_Objective_C 0
+#define COCOAPODS_VERSION_MINOR_SCLAlertView_Objective_C 3
+#define COCOAPODS_VERSION_PATCH_SCLAlertView_Objective_C 5
+
 // TheAmazingAudioEngine
 #define COCOAPODS_POD_AVAILABLE_TheAmazingAudioEngine
 #define COCOAPODS_VERSION_MAJOR_TheAmazingAudioEngine 1
