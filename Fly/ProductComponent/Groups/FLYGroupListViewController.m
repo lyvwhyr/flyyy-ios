@@ -14,6 +14,7 @@
 #import "JGProgressHUD.h"
 #import "JGProgressHUDSuccessIndicatorView.h"
 #import "FLYGroupViewController.h"
+#import "FLYMainViewController.h"
 
 #define kSuggestGroupRow 0
 
@@ -159,8 +160,14 @@
         
         [alert showCustom:self image:[UIImage imageNamed:@"icon_feed_play"] color:[UIColor flyGreen] title:@"Suggest" subTitle:@"Do you want to suggest a new group? We are open to new ideas." closeButtonTitle:@"Cancel" duration:0.0f];
     } else {
-        FLYGroupViewController *groupViewController = [FLYGroupViewController new];
-        [self.navigationController pushViewController:groupViewController animated:YES];
+        FLYMainViewController *vc = [FLYMainViewController new];
+//        [feedViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.view);
+//            make.leading.equalTo(self.view);
+//            make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
+//            make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight));
+//        }];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
 //    FLYGroupListTableViewCell *cell = (FLYGroupListTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];

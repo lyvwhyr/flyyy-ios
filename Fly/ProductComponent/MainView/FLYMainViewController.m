@@ -54,7 +54,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.title = @"FLY";
     self.view.userInteractionEnabled = YES;
     [self _addTabBar];
     [self _addNavigationBar];
@@ -67,12 +66,6 @@
     button.tintColor = [UIColor whiteColor];
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = barButton;
-    
-//    FLYNavigationBarMyGroupButton *leftButton = [[FLYNavigationBarMyGroupButton alloc] initWithFrame:CGRectMake(0, 0, 120, 32) Title:@"My Groups" icon:@"icon_down_arrow"];
-//    
-//    [leftButton addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-//    [leftButton sizeToFit];
-//    self.navigationItem.titleView = leftButton;
 }
 
 
@@ -141,18 +134,6 @@
     
     [super updateViewConstraints];
 }
-
-//- (void)_addGroupListConstranits
-//{
-//    [_groupsViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.view);
-//        make.leading.equalTo(self.view);
-//        make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
-//        make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight));
-//    }];
-//}
-
-
 
 #pragma mark - FLYTabBarViewDelegate
 - (void)tabItemClicked:(NSInteger)index

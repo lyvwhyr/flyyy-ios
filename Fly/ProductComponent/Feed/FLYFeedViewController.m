@@ -21,6 +21,15 @@
 
 @implementation FLYFeedViewController
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super init];
+    if (self) {
+        self.view.frame = frame;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _posts = [NSMutableArray new];
@@ -32,7 +41,7 @@
     _feedTableView.dataSource = self;
     [self.view addSubview:_feedTableView];
     
-    self.view.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.view.translatesAutoresizingMaskIntoConstraints = NO;
 }
 
 - (void)_initNavigationBar
@@ -89,13 +98,6 @@
 - (void)updateViewConstraints
 {
     [self.view removeConstraints:[self.view constraints]];
-//    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.view.superview);
-//        make.leading.equalTo(self.parentViewController.view);
-//        make.width.equalTo(@(CGRectGetWidth(self.parentViewController.view.bounds)));
-//        make.height.equalTo(@(CGRectGetHeight(self.parentViewController.view.bounds) - kTabBarViewHeight));
-//    }];
-
     [_feedTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
         make.leading.equalTo(self.view);

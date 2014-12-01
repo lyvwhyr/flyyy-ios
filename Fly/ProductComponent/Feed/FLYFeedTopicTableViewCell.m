@@ -48,14 +48,17 @@
         _userNameLabel = [UILabel new];
         _userNameLabel.text = @"pancake";
         _userNameLabel.textColor = [UIColor blackColor];
+        _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
         _postAtLabel = [UILabel new];
         _postAtLabel.text = @"19s";
         _postAtLabel.font = [UIFont systemFontOfSize:13];
         _postAtLabel.textColor = [UIColor flyFeedGrey];
+        _postAtLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
 
         _categoryButton = [[FLYIconButton alloc] initWithText:@"Small business saturday" textFont:[UIFont systemFontOfSize:12] textColor:[UIColor flyInlineActionGrey] icon:@"icon_feed_group"];
+        _categoryButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_categoryButton];
         
         _postHeaderView = [UIView new];
@@ -90,7 +93,6 @@
 //        _inlineActionView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
         [self addSubview:_inlineActionView];
         
-        [self setNeedsUpdateConstraints];
     }
     return self;
 }
@@ -98,6 +100,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    [self setNeedsUpdateConstraints];
 //            [self setNeedsUpdateConstraints];
     // Make sure the contentView does a layout pass here so that its subviews have their frames set, which we
     // need to use to set the preferredMaxLayoutWidth below.
@@ -111,6 +114,7 @@
 //        make.width.equalTo(@(CGRectGetWidth([[UIScreen mainScreen] bounds])));
 //        make.height.equalTo(@(50));
 //    }];
+//    [self removeConstraints:[self constraints]];
     
     [_postHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(0);
