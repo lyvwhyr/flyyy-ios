@@ -34,7 +34,7 @@
 
 @property (nonatomic) FLYFeedViewController *feedViewController;
 //@property (nonatomic) FLYRecordViewController *recordViewController;
-@property (nonatomic) FLYGroupListViewController *groupsViewController;
+@property (nonatomic) FLYGroupListViewController *groupsListViewController;
 @property (nonatomic) FLYUniversalViewController *currentViewController;
 
 @property (nonatomic) BOOL didSetConstraints;
@@ -90,8 +90,8 @@
     _feedViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
     [self addChildViewController:_feedViewController];
     
-    _groupsViewController = [FLYGroupListViewController new];
-    _groupsViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    _groupsListViewController = [FLYGroupListViewController new];
+    _groupsListViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
     
     _currentViewController = _feedViewController;
     [self.view addSubview:_feedViewController.view];
@@ -118,8 +118,8 @@
         }];
     }
     
-    if (_groupsViewController.view.superview) {
-        [_groupsViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
+    if (_groupsListViewController.view.superview) {
+        [_groupsListViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view);
             make.leading.equalTo(self.view);
             make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
@@ -141,10 +141,10 @@
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:recordViewController];
         [self presentViewController:navigationController animated:NO completion:nil];
     } else {
-        if (_currentViewController == _groupsViewController) {
+        if (_currentViewController == _groupsListViewController) {
             return;
         }
-        [self showController:_groupsViewController withView:_groupsViewController.view animated:YES];
+        [self showController:_groupsListViewController withView:_groupsListViewController.view animated:YES];
     }
 }
 

@@ -109,51 +109,51 @@
 
 - (void)updateConstraints
 {
-    [_postHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_postHeaderView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(0);
         make.leading.equalTo(self.contentView).offset(0);
         make.width.equalTo(@(CGRectGetWidth([[UIScreen mainScreen] bounds])));
         make.height.equalTo(@(50));
     }];
     
-    [_avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_avatarImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_postHeaderView).offset(10);
         make.leading.equalTo(_postHeaderView).offset(20);
         make.width.equalTo(@(36));
         make.height.equalTo(@(36));
     }];
     
-    [_userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_avatarImageView);
         make.leading.equalTo(_avatarImageView.mas_right).offset(10);
 //        make.width.equalTo(@(36));
 //        make.height.equalTo(@(36));
     }];
     
-    [_categoryButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_categoryButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_userNameLabel.mas_bottom).offset(3);
         make.leading.equalTo(_userNameLabel);
     }];
     
-    [_postAtLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_postAtLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_postHeaderView).offset(15);
         make.trailing.equalTo(_postHeaderView).offset(-20);
     }];
     
     
     //center part
-    [_playButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_postHeaderView.mas_bottom).offset(20);
         make.leading.equalTo(self).offset(25);
     }];
     
-    [_postTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_postTitle mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_postHeaderView.mas_bottom).offset(5);
         make.leading.equalTo(_playButton.mas_trailing).offset(20);
         make.width.lessThanOrEqualTo(self).offset(-40 - 36);
     }];
     
-    [_inlineActionView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_inlineActionView mas_remakeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(_playButton.mas_bottom);
         make.bottom.equalTo(self);
         make.leading.equalTo(self);

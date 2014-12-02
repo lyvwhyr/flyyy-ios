@@ -15,6 +15,7 @@
 #import "JGProgressHUDSuccessIndicatorView.h"
 #import "FLYSingleGroupViewController.h"
 #import "FLYMainViewController.h"
+#import "FLYFeedViewController.h"
 
 #define kSuggestGroupRow 0
 
@@ -160,14 +161,12 @@
         
         [alert showCustom:self image:[UIImage imageNamed:@"icon_feed_play"] color:[UIColor flyGreen] title:@"Suggest" subTitle:@"Do you want to suggest a new group? We are open to new ideas." closeButtonTitle:@"Cancel" duration:0.0f];
     } else {
-        FLYSingleGroupViewController *vc = [FLYSingleGroupViewController new];
-        vc.view.translatesAutoresizingMaskIntoConstraints = NO;
-//        [feedViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.view);
-//            make.leading.equalTo(self.view);
-//            make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
-//            make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight));
-//        }];
+//        FLYSingleGroupViewController *vc = [FLYSingleGroupViewController new];
+//        vc.view.translatesAutoresizingMaskIntoConstraints = NO;
+//        [self.navigationController pushViewController:vc animated:YES];
+        
+        FLYFeedViewController *vc = [FLYFeedViewController new];
+        self.view.backgroundColor = [UIColor blueColor];
         [self.navigationController pushViewController:vc animated:YES];
     }
     
