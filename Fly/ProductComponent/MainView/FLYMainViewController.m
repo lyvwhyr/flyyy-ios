@@ -88,13 +88,15 @@
 {
     _feedViewController = [FLYFeedViewController new];
     _feedViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addChildViewController:_feedViewController];
+//    [self addChildViewController:_feedViewController];
     
     _groupsListViewController = [FLYGroupListViewController new];
     _groupsListViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
     
     _currentViewController = _feedViewController;
-    [self.view addSubview:_feedViewController.view];
+//    [self.view addSubview:_feedViewController.view];
+    
+    [self addViewController:_feedViewController];
 }
 
 - (void)_addViewConstraints
@@ -131,11 +133,13 @@
 #pragma mark - FLYTabBarViewDelegate
 - (void)tabItemClicked:(NSInteger)index
 {
+    [self removeViewController:_currentViewController];
     if (index == TABBAR_HOME) {
         if (_currentViewController == _feedViewController) {
             return;
         }
-        [self showController:_feedViewController withView:_feedViewController.view animated:YES];
+        [self addViewController:_feedViewController];
+        _currentViewController = _feedViewController;
     } else if (index == TABBAR_RECORD) {
         FLYRecordViewController *recordViewController = [FLYRecordViewController new];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:recordViewController];
@@ -144,8 +148,27 @@
         if (_currentViewController == _groupsListViewController) {
             return;
         }
-        [self showController:_groupsListViewController withView:_groupsListViewController.view animated:YES];
+//        [self showController:_groupsListViewController withView:_groupsListViewController.view animated:YES];
+        [self addViewController:_groupsListViewController];
+        _currentViewController = _groupsListViewController;
     }
+}
+
+- (void)removeViewController:(UIViewController *)viewController
+{
+    [viewController willMoveToParentViewController:nil];
+    [viewController.view removeFromSuperview];
+    [viewController removeFromParentViewController];
+    [viewController didMoveToParentViewController:nil];
+}
+
+- (void)addViewController:(UIViewController *)viewController
+{
+    [viewController willMoveToParentViewController:self];
+    [self addChildViewController:viewController];
+    [self.view addSubview:viewController.view];
+    [viewController didMoveToParentViewController:self];
+//    viewController
 }
 
 - (void) showController:(UIViewController*)newC withView:(UIView*)contentView animated:(BOOL)animated
