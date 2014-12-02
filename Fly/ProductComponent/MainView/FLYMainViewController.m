@@ -37,6 +37,7 @@
 @property (nonatomic) FLYGroupListViewController *groupsViewController;
 @property (nonatomic) FLYUniversalViewController *currentViewController;
 
+@property (nonatomic) BOOL didSetConstraints;
 
 @end
 
@@ -96,14 +97,12 @@
     [self.view addSubview:_feedViewController.view];
 }
 
-- (void)updateViewConstraints
+- (void)_addViewConstraints
 {
-    [self.view removeConstraints:[self.view constraints]];
-    
     CGFloat tabBarWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
     CGFloat tabBarVerticalSpacing = CGRectGetHeight([UIScreen mainScreen].bounds) - kStatusBarHeight - kNavBarHeight - kTabBarViewHeight;
     
-    [_tabBarView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_tabBarView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.view);
         make.width.equalTo(@(tabBarWidth));
         make.height.equalTo(@(kTabBarViewHeight));
@@ -111,7 +110,7 @@
     }];
     
     if (_feedViewController.view.superview) {
-        [_feedViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_feedViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view);
             make.leading.equalTo(self.view);
             make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
@@ -120,15 +119,13 @@
     }
     
     if (_groupsViewController.view.superview) {
-        [_groupsViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_groupsViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view);
             make.leading.equalTo(self.view);
             make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
             make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight));
         }];
     }
-    
-    [super updateViewConstraints];
 }
 
 #pragma mark - FLYTabBarViewDelegate
@@ -205,13 +202,11 @@
     return [DismissingAnimator new];
 }
 
-
-- (void)viewWillLayoutSubviews
+- (void)viewDidLayoutSubviews
 {
-    [super viewWillLayoutSubviews];
-    [self updateViewConstraints];
+    [super viewDidLayoutSubviews];
+    [self _addViewConstraints];
 }
-
 
 - (FLYNavigationController *)flyNavigationController
 {

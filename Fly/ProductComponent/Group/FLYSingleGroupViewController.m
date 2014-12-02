@@ -13,6 +13,9 @@
 
 @property (nonatomic) FLYFeedViewController *feedViewController;
 
+@property (nonatomic) BOOL didSetConstraints;
+
+
 @end
 
 @implementation FLYSingleGroupViewController
@@ -20,9 +23,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    _feedViewController = [FLYFeedViewController new];
-//    [self.view addSubview:_feedViewController.view];
-//    _feedViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    _feedViewController = [FLYFeedViewController new];
+    [self.view addSubview:_feedViewController.view];
+    _feedViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    [_feedViewController.view setNeedsUpdateConstraints];
     self.view.backgroundColor = [UIColor blueColor];
     
 }
@@ -30,21 +34,22 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    [self.view layoutIfNeeded];
+    if (!_didSetConstraints) {
+        [self _addViewConstraints];
+        _didSetConstraints = YES;
+    }
     [FLYUtilities printAutolayoutTrace];
 }
 
-//- (void)updateViewConstraints
-//{
-//    [self.view removeConstraints:self.view.constraints];
-//    [_feedViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.view);
-//            make.leading.equalTo(self.view);
-//            make.width.equalTo(self.view);
-//            make.height.equalTo(self.view);
-//        }];
-//    [super updateViewConstraints];
-//}
+- (void)_addViewConstraints
+{
+    [_feedViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view);
+            make.leading.equalTo(self.view);
+            make.width.equalTo(self.view);
+            make.height.equalTo(self.view);
+    }];
+}
 
 
 @end

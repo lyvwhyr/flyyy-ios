@@ -16,6 +16,7 @@
 @property (nonatomic) UITableView *feedTableView;
 
 @property (nonatomic) NSMutableArray *posts;
+@property (nonatomic) BOOL didSetConstraints;
 
 @end
 
@@ -97,8 +98,8 @@
 
 - (void)updateViewConstraints
 {
-    [self.view removeConstraints:[self.view constraints]];
-    [_feedTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//    [self.view removeConstraints:[self.view constraints]];
+    [_feedTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
         make.leading.equalTo(self.view);
         make.right.equalTo(self.view);
@@ -111,7 +112,11 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [self.view layoutIfNeeded];
+//    if (!_didSetConstraints) {
+//        _didSetConstraints = YES;
+//        [self _addConstraints];
+//    }
+    [self updateViewConstraints];
 }
 
 - (void)_addDatasource
@@ -142,12 +147,6 @@
 {
     FLYFilterHomeFeedSelectorViewController *vc = [FLYFilterHomeFeedSelectorViewController new];
     [self.navigationController pushViewController:vc animated:YES];
-//    [UIView animateWithDuration:0.3
-//                     animations:^{
-//                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//                         [self.navigationController pushViewController:vc animated:NO];
-//                         [UIView setAnimationTransition:UIViewAnimationTransitionCurlDown forView:self.navigationController.view cache:NO];
-//                     }];
 }
 
 @end

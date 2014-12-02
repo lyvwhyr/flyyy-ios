@@ -22,6 +22,9 @@
 @property (nonatomic) UILabel *explanationLabel;
 @property (nonatomic) UITableView *groupsTabelView;
 
+@property (nonatomic) BOOL didSetConstraints;
+
+
 @property (nonatomic) NSMutableArray *groups;
 
 @end
@@ -96,7 +99,6 @@
 {
     [super viewWillAppear:animated];
     [_groupsTabelView reloadData];
-    [self updateViewConstraints];
 }
 
 - (void)_setupNavigationBar
@@ -116,10 +118,8 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBarButton];
 }
 
-- (void)updateViewConstraints
-{
-//    [self.view removeConstraints:self.view.constraints];
-    
+- (void)_addViewConstraints
+{    
     [_explanationView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view);
         make.leading.mas_equalTo(self.view);
@@ -185,7 +185,10 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-//    [self updateViewConstraints];
+    if (!_didSetConstraints) {
+        [self _addViewConstraints];
+        _didSetConstraints = YES;
+    }
     [FLYUtilities printAutolayoutTrace];
 }
 

@@ -105,21 +105,10 @@
 {
     [super layoutSubviews];
     [self setNeedsUpdateConstraints];
-//            [self setNeedsUpdateConstraints];
-    // Make sure the contentView does a layout pass here so that its subviews have their frames set, which we
-    // need to use to set the preferredMaxLayoutWidth below.
-//    [self.contentView setNeedsLayout];
-//    [self.contentView layoutIfNeeded];
 }
 
 - (void)updateConstraints
 {
-//    [self mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(@(CGRectGetWidth([[UIScreen mainScreen] bounds])));
-//        make.height.equalTo(@(50));
-//    }];
-//    [self removeConstraints:[self constraints]];
-    
     [_postHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(0);
         make.leading.equalTo(self.contentView).offset(0);
