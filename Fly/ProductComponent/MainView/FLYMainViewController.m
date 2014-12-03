@@ -133,11 +133,11 @@
 #pragma mark - FLYTabBarViewDelegate
 - (void)tabItemClicked:(NSInteger)index
 {
-    [self removeViewController:_currentViewController];
     if (index == TABBAR_HOME) {
         if (_currentViewController == _feedViewController) {
             return;
         }
+        [self removeViewController:_currentViewController];
         [self addViewController:_feedViewController];
         _currentViewController = _feedViewController;
     } else if (index == TABBAR_RECORD) {
@@ -148,7 +148,7 @@
         if (_currentViewController == _groupsListViewController) {
             return;
         }
-//        [self showController:_groupsListViewController withView:_groupsListViewController.view animated:YES];
+        [self removeViewController:_currentViewController];
         [self addViewController:_groupsListViewController];
         _currentViewController = _groupsListViewController;
     }
@@ -168,7 +168,6 @@
     [self addChildViewController:viewController];
     [self.view addSubview:viewController.view];
     [viewController didMoveToParentViewController:self];
-//    viewController
 }
 
 - (void) showController:(UIViewController*)newC withView:(UIView*)contentView animated:(BOOL)animated
