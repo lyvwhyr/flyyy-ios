@@ -10,7 +10,7 @@
 		9FAF85492A0B03E6240416FA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4DA38F875E9D2C76E94F1F6 /* libPods.a */; };
 		A61D18661A1EE6ED00D188B5 /* FLYAudioStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */; };
 		A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */; };
-		A61D186E1A1F1E7900D188B5 /* icon_record_pause1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A61D186C1A1F1E7900D188B5 /* icon_record_pause1@3x.png */; };
+		A61D186E1A1F1E7900D188B5 /* icon_record_pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A61D186C1A1F1E7900D188B5 /* icon_record_pause@3x.png */; };
 		A61D186F1A1F1E7900D188B5 /* icon_record_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A61D186D1A1F1E7900D188B5 /* icon_record_play@3x.png */; };
 		A61D18761A1F27E900D188B5 /* FLYPrePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */; };
 		A61D18771A1F27E900D188B5 /* FLYPrePostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61D18751A1F27E900D188B5 /* FLYPrePostViewController.xib */; };
@@ -194,7 +194,7 @@
 		A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYAudioStateManager.m; sourceTree = "<group>"; };
 		A61D18671A1EE70900D188B5 /* FLYAppStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYAppStateManager.h; sourceTree = "<group>"; };
 		A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYAppStateManager.m; sourceTree = "<group>"; };
-		A61D186C1A1F1E7900D188B5 /* icon_record_pause1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_record_pause1@3x.png"; sourceTree = "<group>"; };
+		A61D186C1A1F1E7900D188B5 /* icon_record_pause@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_record_pause@3x.png"; sourceTree = "<group>"; };
 		A61D186D1A1F1E7900D188B5 /* icon_record_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_record_play@3x.png"; sourceTree = "<group>"; };
 		A61D18731A1F27E900D188B5 /* FLYPrePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostViewController.h; sourceTree = "<group>"; };
 		A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostViewController.m; sourceTree = "<group>"; };
@@ -671,7 +671,7 @@
 				A62E53B41A227E0B00125DBC /* icon_voice_filter@3x.png */,
 				A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */,
 				A6F27C8D1A20732A000EC0B3 /* recording */,
-				A61D186C1A1F1E7900D188B5 /* icon_record_pause1@3x.png */,
+				A61D186C1A1F1E7900D188B5 /* icon_record_pause@3x.png */,
 				A61D186D1A1F1E7900D188B5 /* icon_record_play@3x.png */,
 				A6A0E4C41A1EB5600036116E /* icon_voice_record@2x.png */,
 				A6A0E41A1A1E6E970036116E /* icon_tabbar_home@2x.png */,
@@ -1241,7 +1241,7 @@
 				A6F27CA91A20735A000EC0B3 /* record_animate_14.png in Resources */,
 				A69C4C021A28636F00CAD443 /* p12.jpg in Resources */,
 				A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */,
-				A61D186E1A1F1E7900D188B5 /* icon_record_pause1@3x.png in Resources */,
+				A61D186E1A1F1E7900D188B5 /* icon_record_pause@3x.png in Resources */,
 				A6F27CA71A20735A000EC0B3 /* record_animate_12.png in Resources */,
 				A69C4BFF1A28636F00CAD443 /* p9.jpg in Resources */,
 				A69C4BFD1A28636F00CAD443 /* p7.jpg in Resources */,
