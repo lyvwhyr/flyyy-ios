@@ -10,10 +10,14 @@
 #import "FLYFeedTopicTableViewCell.h"
 #import "FLYNavigationBarMyGroupButton.h"
 #import "FLYFilterHomeFeedSelectorViewController.h"
+#import "FLYFeedDataSource.h"
+#import "FLYFeedDelegate.h"
 
-@interface FLYFeedViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface FLYFeedViewController ()
 
 @property (nonatomic) UITableView *feedTableView;
+@property (nonatomic) FLYFeedDataSource *feedDataSource;
+@property (nonatomic) FLYFeedDelegate *feedDelegate;
 
 @property (nonatomic) NSMutableArray *posts;
 @property (nonatomic) BOOL didSetConstraints;
@@ -38,8 +42,12 @@
     [self _addDatasource];
     
     _feedTableView = [UITableView new];
-    _feedTableView.delegate = self;
-    _feedTableView.dataSource = self;
+    _feedDataSource = [[FLYFeedDataSource alloc] initWithPosts:_posts];
+    _feedTableView.dataSource = _feedDataSource;
+    _feedDelegate = [FLYFeedDelegate new];
+    _feedTableView.delegate = _feedDelegate;
+    [_feedTableView registerClass:[FLYFeedTopicTableViewCell class] forCellReuseIdentifier:@"feedPostCellIdentifier"];
+    
     [self.view addSubview:_feedTableView];
     
 //    self.view.translatesAutoresizingMaskIntoConstraints = NO;
@@ -59,41 +67,6 @@
     [super viewWillAppear:animated];
     [self _initNavigationBar];
 }
-
-#pragma mark - UITableViewDelegate, datasource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return _posts.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *cellIdentifier = @"feedPostCellIdentifier";
-    FLYFeedTopicTableViewCell *cell = (FLYFeedTopicTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[FLYFeedTopicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    if (NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)
-    {
-        cell.contentView.frame = cell.bounds;
-        cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
-    }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 150.0f;
-}
-
 
 - (void)updateViewConstraints
 {

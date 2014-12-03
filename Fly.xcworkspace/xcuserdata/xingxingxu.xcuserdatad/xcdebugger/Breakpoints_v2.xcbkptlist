@@ -4,44 +4,18 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            scope = "0"
-            stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/Groups/FLYGroupListViewController.m"
-            timestampString = "439193470.048052"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
+            timestampString = "439282208.196148"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/Groups/FLYGroupListViewController.m"
-            timestampString = "439193470.048052"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "-updateViewConstraints"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "-viewDidLayoutSubviews"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -52,81 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "439191124.07724"
+            timestampString = "439282076.475439"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "-updateViewConstraints"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "439191124.07724"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "-updateViewConstraints"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            symbolName = "UIViewAlertForUnsatisfiableConstraints"
-            moduleName = "">
-            <Actions>
-               <BreakpointActionProxy
-                  ActionExtensionID = "Xcode.BreakpointAction.Log">
-                  <ActionContent
-                     message = ""
-                     conveyanceType = "0">
-                  </ActionContent>
-               </BreakpointActionProxy>
-            </Actions>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.AddressBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            symbolName = "*0x18cb5daac">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "UIViewAlertForUnsatisfiableConstraints"
-                  moduleName = "UIKit"
-                  offsetFromSymbolStart = "88">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/Group/FLYGroupViewController.m"
-            timestampString = "439116930.530957"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -137,28 +41,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439195554.922603"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
+            timestampString = "439282076.475439"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "-_addViewConstraints"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439188010.111042"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
@@ -169,59 +57,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439195554.922603"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedDataSource.m"
+            timestampString = "439281751.664834"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "-_addViewConstraints"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[FLYMainViewController updateViewConstraints]"
-                  moduleName = "Fly"
-                  urlString = "file:///Users/xingxingxu/workspace/fly/Fly/ProductComponent/MainView/FLYMainViewController.m"
-                  timestampString = "439113850.024538"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "428">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__46-[FLYMainViewController updateViewConstraints]_block_invoke"
-                  moduleName = "Fly"
-                  urlString = "file:///Users/xingxingxu/workspace/fly/Fly/ProductComponent/MainView/FLYMainViewController.m"
-                  timestampString = "439113850.024871"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439195554.922603"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "-_addViewConstraints"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -231,59 +73,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "439191124.07724"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedDataSource.m"
+            timestampString = "439281751.664834"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "-updateViewConstraints"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[FLYFeedViewController updateViewConstraints]"
-                  moduleName = "Fly"
-                  urlString = "file:///Users/xingxingxu/workspace/fly/Fly/ProductComponent/Feed/FLYFeedViewController.m"
-                  timestampString = "439190732.747093"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "41">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__46-[FLYFeedViewController updateViewConstraints]_block_invoke"
-                  moduleName = "Fly"
-                  urlString = "file:///Users/xingxingxu/workspace/fly/Fly/ProductComponent/Feed/FLYFeedViewController.m"
-                  timestampString = "439190732.747763"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "102"
-                  endingLineNumber = "102"
-                  offsetFromSymbolStart = "39">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439195767.918912"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "-tabItemClicked:"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -293,45 +89,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439195807.5628"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedDataSource.m"
+            timestampString = "439281751.664834"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "-tabItemClicked:"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "-initWithPosts:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439195838.14934"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedDelegate.m"
+            timestampString = "439282104.373438"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "-tabItemClicked:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Fly/ProductComponent/MainView/FLYMainViewController.m"
-            timestampString = "439195897.995904"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "-tabItemClicked:"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

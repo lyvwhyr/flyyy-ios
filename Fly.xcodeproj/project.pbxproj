@@ -52,6 +52,11 @@
 		A6655B551A19DEF000440AAB /* icon_tabbar_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */; };
 		A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */; };
 		A6655B5A1A19ECED00440AAB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B591A19ECED00440AAB /* Default-568h@2x.png */; };
+		A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E20481A2EBDAE004235F5 /* RDVTabBarItem.m */; };
+		A66E204E1A2EBDAE004235F5 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E204A1A2EBDAE004235F5 /* RDVTabBar.m */; };
+		A66E204F1A2EBDAE004235F5 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E204C1A2EBDAE004235F5 /* RDVTabBarController.m */; };
+		A66E20521A2EDA7A004235F5 /* FLYFeedDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E20511A2EDA7A004235F5 /* FLYFeedDataSource.m */; };
+		A66E20551A2EE90F004235F5 /* FLYFeedDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E20541A2EE90F004235F5 /* FLYFeedDelegate.m */; };
 		A69C4B941A27094B00CAD443 /* icon_tabbar_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */; };
 		A69C4B981A270E1400CAD443 /* PaperButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4B971A270E1400CAD443 /* PaperButton.m */; };
 		A69C4B9A1A27111700CAD443 /* icon_filter_feed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B991A27111700CAD443 /* icon_filter_feed@3x.png */; };
@@ -265,6 +270,16 @@
 		A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_home@3x.png"; sourceTree = "<group>"; };
 		A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_me@3x.png"; sourceTree = "<group>"; };
 		A6655B591A19ECED00440AAB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		A66E20471A2EBDAE004235F5 /* RDVTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarItem.h; sourceTree = "<group>"; };
+		A66E20481A2EBDAE004235F5 /* RDVTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarItem.m; sourceTree = "<group>"; };
+		A66E20491A2EBDAE004235F5 /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
+		A66E204A1A2EBDAE004235F5 /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
+		A66E204B1A2EBDAE004235F5 /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarController.h; sourceTree = "<group>"; };
+		A66E204C1A2EBDAE004235F5 /* RDVTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarController.m; sourceTree = "<group>"; };
+		A66E20501A2EDA7A004235F5 /* FLYFeedDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFeedDataSource.h; sourceTree = "<group>"; };
+		A66E20511A2EDA7A004235F5 /* FLYFeedDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFeedDataSource.m; sourceTree = "<group>"; };
+		A66E20531A2EE90F004235F5 /* FLYFeedDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFeedDelegate.h; sourceTree = "<group>"; };
+		A66E20541A2EE90F004235F5 /* FLYFeedDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFeedDelegate.m; sourceTree = "<group>"; };
 		A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_group@3x.png"; sourceTree = "<group>"; };
 		A69C4B961A270E1400CAD443 /* PaperButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperButton.h; sourceTree = "<group>"; };
 		A69C4B971A270E1400CAD443 /* PaperButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperButton.m; sourceTree = "<group>"; };
@@ -626,6 +641,7 @@
 		A648C0BA1A19567700FF1744 /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
+				A66E20461A2EBDA5004235F5 /* RDVTabBarController */,
 				A648C0BB1A1956AA00FF1744 /* FLYTabBarView.h */,
 				A648C0BC1A1956AA00FF1744 /* FLYTabBarView.m */,
 				A648C0C41A1982D900FF1744 /* FLYTabView.h */,
@@ -713,6 +729,19 @@
 			path = Masonry;
 			sourceTree = "<group>";
 		};
+		A66E20461A2EBDA5004235F5 /* RDVTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				A66E20471A2EBDAE004235F5 /* RDVTabBarItem.h */,
+				A66E20481A2EBDAE004235F5 /* RDVTabBarItem.m */,
+				A66E20491A2EBDAE004235F5 /* RDVTabBar.h */,
+				A66E204A1A2EBDAE004235F5 /* RDVTabBar.m */,
+				A66E204B1A2EBDAE004235F5 /* RDVTabBarController.h */,
+				A66E204C1A2EBDAE004235F5 /* RDVTabBarController.m */,
+			);
+			path = RDVTabBarController;
+			sourceTree = "<group>";
+		};
 		A69C4B951A270E0200CAD443 /* UIControls */ = {
 			isa = PBXGroup;
 			children = (
@@ -793,6 +822,10 @@
 				A69C4BE81A2851FD00CAD443 /* FLYFeedTopicTableViewCell.m */,
 				A64D15991A29BC6E00369D62 /* FLYInlineActionView.h */,
 				A64D159A1A29BC6E00369D62 /* FLYInlineActionView.m */,
+				A66E20501A2EDA7A004235F5 /* FLYFeedDataSource.h */,
+				A66E20511A2EDA7A004235F5 /* FLYFeedDataSource.m */,
+				A66E20531A2EE90F004235F5 /* FLYFeedDelegate.h */,
+				A66E20541A2EE90F004235F5 /* FLYFeedDelegate.m */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1307,6 +1340,8 @@
 				A6A4EFB31A2BE71000FD4066 /* FLYGroupListSuggestTableViewCell.m in Sources */,
 				A6A0E4A91A1E76110036116E /* FLEXGlobalsTableViewController.m in Sources */,
 				A69C4BD81A2840E700CAD443 /* NSDictionary+FLYAddition.m in Sources */,
+				A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */,
+				A66E204E1A2EBDAE004235F5 /* RDVTabBar.m in Sources */,
 				A6A0E4961A1E76110036116E /* FLEXArgumentInputStructView.m in Sources */,
 				A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */,
 				A6A0E49B1A1E76110036116E /* FLEXDefaultEditorViewController.m in Sources */,
@@ -1358,6 +1393,7 @@
 				A6A0E4B61A1E76110036116E /* FLEXObjectExplorerViewController.m in Sources */,
 				A6A0E4941A1E76110036116E /* FLEXArgumentInputNumberView.m in Sources */,
 				A6263ED01A18A10E00C4C3BA /* UIImage+FLYAddition.m in Sources */,
+				A66E20521A2EDA7A004235F5 /* FLYFeedDataSource.m in Sources */,
 				A6A0E4B31A1E76110036116E /* FLEXGlobalsTableViewControllerEntry.m in Sources */,
 				A6263E951A187E1200C4C3BA /* AppDelegate.m in Sources */,
 				A6A0E49D1A1E76110036116E /* FLEXFieldEditorViewController.m in Sources */,
@@ -1365,6 +1401,7 @@
 				A6A0E4C31A1E7EFA0036116E /* UIWindow+FLYAddition.m in Sources */,
 				A6A0E4BA1A1E76110036116E /* FLEXHeapEnumerator.m in Sources */,
 				A6A0E49A1A1E76110036116E /* FLEXArgumentInputViewFactory.m in Sources */,
+				A66E20551A2EE90F004235F5 /* FLYFeedDelegate.m in Sources */,
 				A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */,
 				A6A0E4B81A1E76110036116E /* FLEXViewControllerExplorerViewController.m in Sources */,
 				A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */,
@@ -1374,6 +1411,7 @@
 				A6A0E4B71A1E76110036116E /* FLEXSetExplorerViewController.m in Sources */,
 				A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */,
 				A69C4BB11A271B8E00CAD443 /* DismissingAnimator.m in Sources */,
+				A66E204F1A2EBDAE004235F5 /* RDVTabBarController.m in Sources */,
 				A6A0E4BC1A1E76110036116E /* FLEXRuntimeUtility.m in Sources */,
 				A6A0E4A81A1E76110036116E /* FLEXFileBrowserTableViewController.m in Sources */,
 				A6263E921A187E1200C4C3BA /* main.m in Sources */,
