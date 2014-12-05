@@ -46,7 +46,6 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.view.backgroundColor = [UIColor whiteColor];
     }
     
     return self;
@@ -55,9 +54,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.view.userInteractionEnabled = YES;
     [self _addTabBar];
-    [self _addNavigationBar];
+//    [self _addNavigationBar];
     [self _addChildControllers];
 
 }
@@ -88,36 +88,37 @@
 - (void)_addChildControllers
 {
     _feedViewController = [FLYFeedViewController new];
+    FLYNavigationController *feedNav = [[FLYNavigationController alloc] initWithRootViewController:_feedViewController];
     _feedViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    _feedViewController.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 //    [self addChildViewController:_feedViewController];
     
     _groupsListViewController = [FLYGroupListViewController new];
-    _groupsListViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    FLYNavigationController *groupListNav = [[FLYNavigationController alloc] initWithRootViewController:_groupsListViewController];
+//    _groupsListViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
     
     _currentViewController = _feedViewController;
 //    [self.view addSubview:_feedViewController.view];
     
-    [self addViewController:_feedViewController];
+    [self addViewController:feedNav];
 }
 
 - (void)_addViewConstraints
 {
     CGFloat tabBarWidth = CGRectGetWidth([UIScreen mainScreen].bounds);
-    CGFloat tabBarVerticalSpacing = CGRectGetHeight([UIScreen mainScreen].bounds) - kStatusBarHeight - kNavBarHeight - kTabBarViewHeight;
-    
     [_tabBarView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.view);
+        make.bottom.equalTo(self.view);
         make.width.equalTo(@(tabBarWidth));
         make.height.equalTo(@(kTabBarViewHeight));
-        make.top.equalTo(self.view).offset(tabBarVerticalSpacing);
     }];
     
     if (_feedViewController.view.superview) {
         [_feedViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view);
+            make.top.equalTo(self.view).offset(kNavBarHeight + kStatusBarHeight);
             make.leading.equalTo(self.view);
             make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
-            make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight));
+            make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight - kNavBarHeight - kStatusBarHeight));
         }];
     }
     
@@ -166,6 +167,9 @@
 - (void)addViewController:(UIViewController *)viewController
 {
     [viewController willMoveToParentViewController:self];
+    CGRect frame = self.view.bounds;
+    frame.size.height = self.view.bounds.size.height - kTabBarViewHeight;
+    viewController.view.frame = frame;
     [self addChildViewController:viewController];
     [self.view addSubview:viewController.view];
     [viewController didMoveToParentViewController:self];
@@ -229,6 +233,7 @@
 {
     [super viewDidLayoutSubviews];
     [self _addViewConstraints];
+    [FLYUtilities printAutolayoutTrace];
 }
 
 - (FLYNavigationController *)flyNavigationController

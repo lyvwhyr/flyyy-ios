@@ -7,12 +7,18 @@
 //
 
 #import "FLYFeedDelegate.h"
+#import "FLYSingleGroupViewController.h"
 
 @implementation FLYFeedDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 150.0f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.delegate cellClicked];
 }
 
 @end

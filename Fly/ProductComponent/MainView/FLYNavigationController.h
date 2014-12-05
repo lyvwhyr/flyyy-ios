@@ -6,8 +6,13 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@class FLYNavigationBar;
 
 @interface FLYNavigationController : UINavigationController
+
+
+- (FLYNavigationBar *)flyNavigationBar;
+- (void)pushViewController:(UIViewController *)viewController
+                  animated:(BOOL)animated __attribute__((objc_requires_super));
 
 @end

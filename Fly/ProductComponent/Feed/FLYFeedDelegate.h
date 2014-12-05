@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol FLYFeedViewControllerDelegate <NSObject>
+
+- (void)cellClicked;
+
+@end
+
 @interface FLYFeedDelegate : NSObject <UITableViewDelegate>
+
+@property (nonatomic, weak) id<FLYFeedViewControllerDelegate> delegate;
 
 @end

@@ -6,8 +6,11 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@class FLYNavigationController;
 
 @interface FLYUniversalViewController : UIViewController
+
+- (FLYNavigationController *)flyNavigationController;
+- (UIColor *)preferredNavigationBarColor;
 
 @end

@@ -7,6 +7,9 @@
 //
 
 #import "FLYUniversalViewController.h"
+#import "FLYNavigationController.h"
+#import "FLYNavigationBar.h"
+#import "UIColor+FLYAddition.h"
 
 #if DEBUG
 #import "FLEXManager.h"
@@ -28,7 +31,24 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
+    [self.flyNavigationController.flyNavigationBar setColor:[self preferredNavigationBarColor] animated:YES];
+}
+
+- (FLYNavigationController *)flyNavigationController
+{
+    if ([self.navigationController isKindOfClass:[FLYNavigationController class]]) {
+        return  (FLYNavigationController *)(self.navigationController);
+    }
+    return nil;
+}
+
+
+- (UIColor *)preferredNavigationBarColor
+{
+    if ([self.parentViewController respondsToSelector:@selector(preferredNavigationBarColor)]) {
+        return [self.parentViewController performSelector:@selector(preferredNavigationBarColor)];
+    }
+    return [UIColor flyGreen];
 }
 
 @end

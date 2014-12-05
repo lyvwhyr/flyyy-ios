@@ -27,7 +27,7 @@
     
     FLYFeedViewController *vc = [FLYFeedViewController new];
     self.view.backgroundColor = [UIColor blueColor];
-    [self.navigationController pushViewController:vc animated:YES];
+//    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

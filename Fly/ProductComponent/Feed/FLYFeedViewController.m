@@ -12,8 +12,9 @@
 #import "FLYFilterHomeFeedSelectorViewController.h"
 #import "FLYFeedDataSource.h"
 #import "FLYFeedDelegate.h"
+#import "FLYSingleGroupViewController.h"
 
-@interface FLYFeedViewController ()
+@interface FLYFeedViewController () <UITableViewDelegate>
 
 @property (nonatomic) UITableView *feedTableView;
 @property (nonatomic) FLYFeedDataSource *feedDataSource;
@@ -42,11 +43,12 @@
     [self _addDatasource];
     
     _feedTableView = [UITableView new];
+    _feedTableView.translatesAutoresizingMaskIntoConstraints = NO;
     _feedDataSource = [[FLYFeedDataSource alloc] initWithPosts:_posts];
     _feedTableView.dataSource = _feedDataSource;
-    _feedDelegate = [FLYFeedDelegate new];
-    _feedTableView.delegate = _feedDelegate;
+    _feedTableView.delegate = self;
     [_feedTableView registerClass:[FLYFeedTopicTableViewCell class] forCellReuseIdentifier:@"feedPostCellIdentifier"];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self.view addSubview:_feedTableView];
     
@@ -70,8 +72,8 @@
 
 - (void)updateViewConstraints
 {
-//    [self.view removeConstraints:[self.view constraints]];
-    [_feedTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//    [self.feedTableView removeConstraints:[self.feedTableView constraints]];
+    [_feedTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
         make.leading.equalTo(self.view);
         make.right.equalTo(self.view);
@@ -86,9 +88,8 @@
     [super viewDidLayoutSubviews];
 //    if (!_didSetConstraints) {
 //        _didSetConstraints = YES;
-//        [self _addConstraints];
+        [self updateViewConstraints];
 //    }
-    [self updateViewConstraints];
 }
 
 - (void)_addDatasource
@@ -119,6 +120,17 @@
 {
     FLYFilterHomeFeedSelectorViewController *vc = [FLYFilterHomeFeedSelectorViewController new];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 150.0f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    FLYSingleGroupViewController *viewController = [FLYSingleGroupViewController new];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 @end

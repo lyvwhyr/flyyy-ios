@@ -26,13 +26,7 @@
     
     FLYMainViewController *mainVC = [FLYMainViewController new];
     FLYNavigationController *navigationVC = [[FLYNavigationController alloc] initWithRootViewController:mainVC];
-    
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor flyGreen]] forBarMetrics:UIBarMetricsDefault];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    
-    self.window.rootViewController = navigationVC;
+     self.window.rootViewController = navigationVC;
     
     return YES;
 }
