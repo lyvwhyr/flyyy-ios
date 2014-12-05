@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9FAF85492A0B03E6240416FA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4DA38F875E9D2C76E94F1F6 /* libPods.a */; };
+		A612753F1A2EFB72004D25D3 /* DKCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A612753E1A2EFB72004D25D3 /* DKCircleButton.m */; };
 		A61D18661A1EE6ED00D188B5 /* FLYAudioStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */; };
 		A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */; };
 		A61D186E1A1F1E7900D188B5 /* icon_record_pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A61D186C1A1F1E7900D188B5 /* icon_record_pause@3x.png */; };
@@ -190,6 +191,8 @@
 
 /* Begin PBXFileReference section */
 		0F37115B05133DC886737552 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A612753D1A2EFB72004D25D3 /* DKCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKCircleButton.h; sourceTree = "<group>"; };
+		A612753E1A2EFB72004D25D3 /* DKCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKCircleButton.m; sourceTree = "<group>"; };
 		A61D18641A1EE6ED00D188B5 /* FLYAudioStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYAudioStateManager.h; sourceTree = "<group>"; };
 		A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYAudioStateManager.m; sourceTree = "<group>"; };
 		A61D18671A1EE70900D188B5 /* FLYAppStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYAppStateManager.h; sourceTree = "<group>"; };
@@ -745,6 +748,8 @@
 		A69C4B951A270E0200CAD443 /* UIControls */ = {
 			isa = PBXGroup;
 			children = (
+				A612753D1A2EFB72004D25D3 /* DKCircleButton.h */,
+				A612753E1A2EFB72004D25D3 /* DKCircleButton.m */,
 				A69C4BC91A280C4300CAD443 /* GBFlatButton */,
 				A69C4B961A270E1400CAD443 /* PaperButton.h */,
 				A69C4B971A270E1400CAD443 /* PaperButton.m */,
@@ -1349,6 +1354,7 @@
 				A648C0EA1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				A6A0E49E1A1E76110036116E /* FLEXIvarEditorViewController.m in Sources */,
 				A6A0E4A41A1E76110036116E /* FLEXToolbarItem.m in Sources */,
+				A612753F1A2EFB72004D25D3 /* DKCircleButton.m in Sources */,
 				A6A0E4AD1A1E76110036116E /* FLEXWebViewController.m in Sources */,
 				A6263EC11A1888D800C4C3BA /* FLYNavigationController.m in Sources */,
 				A6263EBA1A18815000C4C3BA /* FLYMainViewController.m in Sources */,

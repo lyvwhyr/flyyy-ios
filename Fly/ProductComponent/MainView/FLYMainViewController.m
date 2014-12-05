@@ -59,6 +59,7 @@
     [self _addTabBar];
     [self _addNavigationBar];
     [self _addChildControllers];
+
 }
 
 - (void)_addNavigationBar

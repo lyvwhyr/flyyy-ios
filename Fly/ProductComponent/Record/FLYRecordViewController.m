@@ -16,9 +16,12 @@
 #import "AEAudioController.h"
 #import "FLYAudioStateManager.h"
 #import "FLYPrePostViewController.h"
+#import "GBFlatButton.h"
+#import "DKCircleButton.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
+#define kOutCircleTopPadding 80
 
 
 @interface FLYRecordViewController ()
@@ -33,7 +36,7 @@
 @property (nonatomic) FLYRecordState currentState;
 @property (nonatomic) NSTimer *recordTimer;
 @property (nonatomic) PulsingHaloLayer *pulsingHaloLayer;
-@property (nonatomic) UIButton *voiceFilterButton;
+@property (nonatomic) DKCircleButton *voiceFilterButton;
 
 @property (nonatomic) AEAudioController *audioController;
 @property (nonatomic) AEAudioFilePlayer *audioPlayer;
@@ -246,9 +249,16 @@ static inline float translate(float val, float min, float max) {
     [_trashButton addTarget:self action:@selector(_setupInitialViewState) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_trashButton];
     
-    _voiceFilterButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_voiceFilterButton setImage:[UIImage imageNamed:@"icon_voice_filter"] forState:UIControlStateNormal];
-    _voiceFilterButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+
+    _voiceFilterButton = [[DKCircleButton alloc] initWithFrame:CGRectMake(0, 0, 90, 90)];
+    
+    _voiceFilterButton.center = CGPointMake(60, 420);
+    _voiceFilterButton.titleLabel.font = [UIFont systemFontOfSize:22];
+    
+    [_voiceFilterButton setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
+    _voiceFilterButton.animateTap = NO;
+    [_voiceFilterButton setTitle:NSLocalizedString(@"Adjust Voice", nil) forState:UIControlStateNormal];
     [_voiceFilterButton addTarget:self action:@selector(_voiceFilterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_voiceFilterButton];
     
@@ -295,14 +305,15 @@ static inline float translate(float val, float min, float max) {
     [self.outerCircleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(kOuterCircleRadius * 2));
         make.height.equalTo(@(kOuterCircleRadius * 2));
-        make.center.equalTo(self.view);
+        make.centerX.equalTo(self.view);
+        make.top.equalTo(@(kOutCircleTopPadding));
     }];
     
     
     [self.innerCircleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(kInnerCircleRadius * 2));
         make.height.equalTo(@(kInnerCircleRadius * 2));
-        make.center.equalTo(self.view);
+        make.center.equalTo(self.outerCircleView);
     }]; 
     
     [self.userActionImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -323,12 +334,12 @@ static inline float translate(float val, float min, float max) {
         }];
     }
     
-    if (_voiceFilterButton) {
-        [_voiceFilterButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.outerCircleView.mas_bottom).offset(30);
-            make.left.equalTo(self.view.mas_leading).offset(20);
-        }];
-    }
+//    if (_voiceFilterButton) {
+//        [_voiceFilterButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.outerCircleView.mas_bottom).offset(30);
+//            make.left.equalTo(self.view.mas_leading).offset(20);
+//        }];
+//    }
     
     [super updateViewConstraints];
 }

@@ -9,8 +9,8 @@
 #import "GBFlatButton.h"
 #import <QuartzCore/QuartzCore.h>
 
-static CGFloat const kHorizontalPadding = 8.0f;
-static CGFloat const kVerticalPadding = 1.0f;
+static CGFloat const kHorizontalPadding = 10.0f;
+static CGFloat const kVerticalPadding = 2.0f;
 
 @implementation GBFlatButton
 {
