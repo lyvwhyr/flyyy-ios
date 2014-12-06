@@ -18,5 +18,16 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "-[FLYGroupListViewController updateViewConstraints]:FLYGroupListViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FLYGroupListViewController viewDidLayoutSubviews]:FLYGroupListViewController.m">
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

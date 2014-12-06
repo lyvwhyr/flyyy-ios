@@ -35,7 +35,10 @@
 @property (nonatomic) FLYFeedViewController *feedViewController;
 //@property (nonatomic) FLYRecordViewController *recordViewController;
 @property (nonatomic) FLYGroupListViewController *groupsListViewController;
-@property (nonatomic) FLYUniversalViewController *currentViewController;
+@property (nonatomic) UIViewController *currentViewController;
+
+@property (nonatomic) FLYNavigationController *feedViewNavigationController;
+@property (nonatomic) FLYNavigationController *groupsListViewNavigationController;
 
 @property (nonatomic) BOOL didSetConstraints;
 
@@ -88,19 +91,15 @@
 - (void)_addChildControllers
 {
     _feedViewController = [FLYFeedViewController new];
-    FLYNavigationController *feedNav = [[FLYNavigationController alloc] initWithRootViewController:_feedViewController];
-    _feedViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-    _feedViewController.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-//    [self addChildViewController:_feedViewController];
+     _feedViewNavigationController= [[FLYNavigationController alloc] initWithRootViewController:_feedViewController];
+//    _feedViewController.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     
     _groupsListViewController = [FLYGroupListViewController new];
-    FLYNavigationController *groupListNav = [[FLYNavigationController alloc] initWithRootViewController:_groupsListViewController];
-//    _groupsListViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
+    _groupsListViewNavigationController = [[FLYNavigationController alloc] initWithRootViewController:_groupsListViewController];
+//    _groupsListViewController.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     
-    _currentViewController = _feedViewController;
-//    [self.view addSubview:_feedViewController.view];
-    
-    [self addViewController:feedNav];
+    _currentViewController = _feedViewNavigationController;
+    [self addViewController:_currentViewController];
 }
 
 - (void)_addViewConstraints
@@ -113,46 +112,46 @@
         make.height.equalTo(@(kTabBarViewHeight));
     }];
     
-    if (_feedViewController.view.superview) {
-        [_feedViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view).offset(kNavBarHeight + kStatusBarHeight);
-            make.leading.equalTo(self.view);
-            make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
-            make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight - kNavBarHeight - kStatusBarHeight));
-        }];
-    }
-    
-    if (_groupsListViewController.view.superview) {
-        [_groupsListViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view);
-            make.leading.equalTo(self.view);
-            make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
-            make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight));
-        }];
-    }
+//    if (_feedViewNavigationController.view.superview) {
+//        [_feedViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.view).offset(kNavBarHeight + kStatusBarHeight);
+//            make.leading.equalTo(self.view);
+//            make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
+//            make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight - kNavBarHeight - kStatusBarHeight));
+//        }];
+//    }
+//    
+//    if (_groupsListViewNavigationController.view.superview) {
+//        [_groupsListViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.view);
+//            make.leading.equalTo(self.view);
+//            make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
+//            make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight));
+//        }];
+//    }
 }
 
 #pragma mark - FLYTabBarViewDelegate
 - (void)tabItemClicked:(NSInteger)index
 {
     if (index == TABBAR_HOME) {
-        if (_currentViewController == _feedViewController) {
+        if (_currentViewController == _feedViewNavigationController) {
             return;
         }
         [self removeViewController:_currentViewController];
-        [self addViewController:_feedViewController];
-        _currentViewController = _feedViewController;
+        [self addViewController:_feedViewNavigationController];
+        _currentViewController = _feedViewNavigationController;
     } else if (index == TABBAR_RECORD) {
         FLYRecordViewController *recordViewController = [FLYRecordViewController new];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:recordViewController];
         [self presentViewController:navigationController animated:NO completion:nil];
     } else {
-        if (_currentViewController == _groupsListViewController) {
+        if (_currentViewController == _groupsListViewNavigationController) {
             return;
         }
         [self removeViewController:_currentViewController];
-        [self addViewController:_groupsListViewController];
-        _currentViewController = _groupsListViewController;
+        [self addViewController:_groupsListViewNavigationController];
+        _currentViewController = _groupsListViewNavigationController;
     }
 }
 
@@ -167,12 +166,13 @@
 - (void)addViewController:(UIViewController *)viewController
 {
     [viewController willMoveToParentViewController:self];
-    CGRect frame = self.view.bounds;
-    frame.size.height = self.view.bounds.size.height - kTabBarViewHeight;
-    viewController.view.frame = frame;
     [self addChildViewController:viewController];
     [self.view addSubview:viewController.view];
     [viewController didMoveToParentViewController:self];
+    
+    CGRect frame = self.view.bounds;
+    frame.size.height = self.view.bounds.size.height - kTabBarViewHeight;
+    viewController.view.frame = frame;
 }
 
 - (void) showController:(UIViewController*)newC withView:(UIView*)contentView animated:(BOOL)animated

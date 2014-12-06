@@ -34,7 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.view.translatesAutoresizingMaskIntoConstraints = NO;
     
     _groupsTabelView = [UITableView new];
     _groupsTabelView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -71,6 +71,8 @@
     [_groups addObject:@"Money"];
     [_groups addObject:@"Faith"];
     [_groups addObject:@"Family"];
+    
+    [self _addViewConstraints];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -81,16 +83,16 @@
     titleLabel.text = @"Groups";
     [titleLabel sizeToFit];
     self.parentViewController.navigationItem.titleView = titleLabel;
-    [_groupsTabelView reloadData];
+//    [_groupsTabelView r`1eloadData];
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [self.view layoutIfNeeded];
+//    [self updateViewConstraints];
 }
 
--(void)updateViewConstraints
+-(void)_addViewConstraints
 {
     [self.view removeConstraints:[self.view constraints]];
 //    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -106,7 +108,7 @@
         make.width.mas_equalTo(self.view);
         make.height.mas_equalTo(self.view);
     }];
-    [super updateViewConstraints];
+//    [super updateViewConstraints];
 }
 
 #pragma mark - tableView datasource
