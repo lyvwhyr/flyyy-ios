@@ -10,6 +10,10 @@
 
 @interface FLYUniversalViewController : UIViewController
 
+@property (nonatomic) UIButton *leftNavBarButton;
+@property (nonatomic) UIButton *rightBarButton;
+@property (nonatomic) UIView *titleNavBarView;
+
 - (FLYNavigationController *)flyNavigationController;
 - (UIColor *)preferredNavigationBarColor;
 

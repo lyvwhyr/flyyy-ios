@@ -61,7 +61,13 @@
     [self _addTabBar];
 //    [self _addNavigationBar];
     [self _addChildControllers];
+    [self _addViewConstraints];
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)_addNavigationBar
@@ -169,7 +175,6 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [self _addViewConstraints];
     [FLYUtilities printAutolayoutTrace];
 }
 

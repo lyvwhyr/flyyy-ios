@@ -17,6 +17,8 @@
 @interface FLYFeedViewController () <UITableViewDelegate>
 
 @property (nonatomic) UITableView *feedTableView;
+@property (nonatomic) FLYNavigationBarMyGroupButton *customizedTitleView;
+
 @property (nonatomic) FLYFeedDataSource *feedDataSource;
 @property (nonatomic) FLYFeedDelegate *feedDelegate;
 
@@ -64,29 +66,35 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self _initNavigationBar];
+//    [self _initNavigationBar];
+    [self _addViewConstraints];
 }
 
-- (void)updateViewConstraints
+- (void)_addViewConstraints
 {
-//    [self.feedTableView removeConstraints:[self.feedTableView constraints]];
     [_feedTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
         make.leading.equalTo(self.view);
         make.right.equalTo(self.view);
         make.bottom.equalTo(self.view);
     }];
-    
-    [super updateViewConstraints];
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-//    if (!_didSetConstraints) {
-//        _didSetConstraints = YES;
-        [self updateViewConstraints];
-//    }
+}
+
+- (UINavigationItem *)navigationItem
+{
+    if (!_customizedTitleView) {
+        _customizedTitleView = [[FLYNavigationBarMyGroupButton alloc] initWithFrame:CGRectMake(0, 0, 120, 32) Title:@"My Groups" icon:@"icon_down_arrow"];
+        
+        [_customizedTitleView addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        [_customizedTitleView sizeToFit];
+        [self.navigationItem setTitleView:_customizedTitleView];
+    }
+    return [super navigationItem];
 }
 
 - (void)_addDatasource

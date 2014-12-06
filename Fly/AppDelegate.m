@@ -26,7 +26,7 @@
     
     FLYMainViewController *mainVC = [FLYMainViewController new];
     FLYNavigationController *navigationVC = [[FLYNavigationController alloc] initWithRootViewController:mainVC];
-     self.window.rootViewController = navigationVC;
+    self.window.rootViewController = navigationVC;
     
     return YES;
 }
