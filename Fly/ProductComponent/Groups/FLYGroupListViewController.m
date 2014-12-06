@@ -34,6 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"Groups";
     
     _groupsTabelView = [UITableView new];
     _groupsTabelView.translatesAutoresizingMaskIntoConstraints = NO;

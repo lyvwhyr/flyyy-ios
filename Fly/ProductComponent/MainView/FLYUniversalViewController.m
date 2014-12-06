@@ -11,6 +11,7 @@
 #import "FLYNavigationBar.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYBarButtonItem.h"
+#import "UIViewController+StatusBar.h"
 
 #if DEBUG
 #import "FLEXManager.h"
@@ -35,6 +36,7 @@
 {
     [super viewWillAppear:animated];
     [self.flyNavigationController.flyNavigationBar setColor:[self preferredNavigationBarColor] animated:YES];
+    [self.flyNavigationController setStatusBarColor:[self preferredStatusBarColor]];
 }
 
 - (FLYNavigationController *)flyNavigationController
@@ -74,6 +76,19 @@
         return [self.parentViewController performSelector:@selector(preferredNavigationBarColor)];
     }
     return [UIColor flyGreen];
+}
+
+- (UIStatusBarStyle) preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+- (UIColor*)preferredStatusBarColor
+{
+    if ([self.parentViewController respondsToSelector:@selector(preferredStatusBarColor)]) {
+        return [self.parentViewController performSelector:@selector(preferredStatusBarColor)];
+    }
+    return [UIColor clearColor];
 }
 
 - (void)_backButtonTapped

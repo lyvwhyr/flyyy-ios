@@ -16,5 +16,6 @@
 
 - (FLYNavigationController *)flyNavigationController;
 - (UIColor *)preferredNavigationBarColor;
+- (UIColor*)preferredStatusBarColor;
 
 @end
