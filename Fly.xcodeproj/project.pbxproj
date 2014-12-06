@@ -161,6 +161,9 @@
 		A6A4EFB51A2BE99300FD4066 /* icon_suggest_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A4EFB41A2BE99300FD4066 /* icon_suggest_group@3x.png */; };
 		A6A4EFBE1A2C22EF00FD4066 /* FLYGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFBD1A2C22EF00FD4066 /* FLYGroupViewController.m */; };
 		A6A4EFC21A2C634900FD4066 /* FLYSingleGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFC01A2C634900FD4066 /* FLYSingleGroupViewController.m */; };
+		A6A57A901A33B91700610785 /* UIView+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57A8F1A33B91700610785 /* UIView+FLYAddition.m */; };
+		A6A57A921A33C1E100610785 /* icon_join_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A57A911A33C1E100610785 /* icon_join_group@3x.png */; };
+		A6A57A941A33C6DE00610785 /* icon_group_checkmark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A57A931A33C6DE00610785 /* icon_group_checkmark@3x.png */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
@@ -462,6 +465,10 @@
 		A6A4EFBD1A2C22EF00FD4066 /* FLYGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupViewController.m; sourceTree = "<group>"; };
 		A6A4EFBF1A2C634900FD4066 /* FLYSingleGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSingleGroupViewController.h; sourceTree = "<group>"; };
 		A6A4EFC01A2C634900FD4066 /* FLYSingleGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSingleGroupViewController.m; sourceTree = "<group>"; };
+		A6A57A8E1A33B91700610785 /* UIView+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FLYAddition.h"; sourceTree = "<group>"; };
+		A6A57A8F1A33B91700610785 /* UIView+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FLYAddition.m"; sourceTree = "<group>"; };
+		A6A57A911A33C1E100610785 /* icon_join_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_join_group@3x.png"; sourceTree = "<group>"; };
+		A6A57A931A33C6DE00610785 /* icon_group_checkmark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_group_checkmark@3x.png"; sourceTree = "<group>"; };
 		A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
@@ -647,6 +654,8 @@
 				A6A0E4C21A1E7EFA0036116E /* UIWindow+FLYAddition.m */,
 				A69C4BD61A2840E700CAD443 /* NSDictionary+FLYAddition.h */,
 				A69C4BD71A2840E700CAD443 /* NSDictionary+FLYAddition.m */,
+				A6A57A8E1A33B91700610785 /* UIView+FLYAddition.h */,
+				A6A57A8F1A33B91700610785 /* UIView+FLYAddition.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -666,6 +675,8 @@
 		A648C0C71A199F8C00FF1744 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A6A57A911A33C1E100610785 /* icon_join_group@3x.png */,
+				A6A57A931A33C6DE00610785 /* icon_group_checkmark@3x.png */,
 				A6A4EFB41A2BE99300FD4066 /* icon_suggest_group@3x.png */,
 				A6A4EFA41A2A7CF600FD4066 /* icon_down_arrow@3x.png */,
 				A6A4EFA21A2A76FC00FD4066 /* icon_feed_group@3x.png */,
@@ -1238,9 +1249,11 @@
 				A64D15A01A29C0BB00369D62 /* icon_inline_share@3x.png in Resources */,
 				A69C4C011A28636F00CAD443 /* p11.jpg in Resources */,
 				A69C4B941A27094B00CAD443 /* icon_tabbar_group@3x.png in Resources */,
+				A6A57A941A33C6DE00610785 /* icon_group_checkmark@3x.png in Resources */,
 				A61D186F1A1F1E7900D188B5 /* icon_record_play@3x.png in Resources */,
 				A64D15A11A29C0BB00369D62 /* icon_inline_wing@3x.png in Resources */,
 				A6F27CA21A20735A000EC0B3 /* record_animate_07.png in Resources */,
+				A6A57A921A33C1E100610785 /* icon_join_group@3x.png in Resources */,
 				A69C4BF71A28636F00CAD443 /* p1.jpg in Resources */,
 				A6A0E4C51A1EB5600036116E /* icon_voice_record@2x.png in Resources */,
 				A6A30D761A1B2700001AE1FE /* icon_voice_record@3x.png in Resources */,
@@ -1428,6 +1441,7 @@
 				A6A0E49C1A1E76110036116E /* FLEXFieldEditorView.m in Sources */,
 				A6A0E4B71A1E76110036116E /* FLEXSetExplorerViewController.m in Sources */,
 				A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */,
+				A6A57A901A33B91700610785 /* UIView+FLYAddition.m in Sources */,
 				A69C4BB11A271B8E00CAD443 /* DismissingAnimator.m in Sources */,
 				A66E204F1A2EBDAE004235F5 /* RDVTabBarController.m in Sources */,
 				A6A0E4BC1A1E76110036116E /* FLEXRuntimeUtility.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "FLYBarButtonItem.h"
+#import "UIView+FLYAddition.h"
 
 
 @implementation FLYBarButtonItem
@@ -28,7 +29,9 @@
 - (instancetype)initWithButton:(UIButton *)button actionBlock:(FLYBarButtonItemActionBlock)actionBlock;
 {
     _button = button;
-    if (self = [super initWithCustomView:button]) {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, button.width, button.height)];
+    [view addSubview:button];
+    if (self = [super initWithCustomView:view]) {
         _actionBlock = [actionBlock copy];
         [_button addTarget:self action:@selector(barButtonItemTapped:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -50,10 +53,47 @@
 {
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //12 * 21
-    [backButton setFrame:CGRectMake(0, 0, 52, 44)];
-    [backButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
+    UIImage *image = [UIImage imageNamed:@"icon_back"];
+    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 0);
+    CGFloat x = (left ? -1 : 1) * 16;
+    backButton.frame = CGRectMake(x, 0, 52, 44);
+    [backButton setImage:image forState:UIControlStateNormal];
     self = [super initWithButton:backButton actionBlock:nil];
     return self;
 }
 
 @end
+
+
+@implementation FLYAddGroupBarButtonItem
+
+- (instancetype)initWithSide:(BOOL)left
+{
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //12 * 21
+    UIImage *image = [UIImage imageNamed:@"icon_join_group"];
+    CGFloat x = (left ? -1 : 1) * 16;
+    backButton.frame = CGRectMake(x, 0, 52, 44);
+    [backButton setImage:image forState:UIControlStateNormal];
+    self = [super initWithButton:backButton actionBlock:nil];
+    return self;
+}
+
+@end
+
+@implementation FLYJoinedGroupBarButtonItem
+
+- (instancetype)initWithSide:(BOOL)left
+{
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //12 * 21
+    UIImage *image = [UIImage imageNamed:@"icon_group_checkmark"];
+    CGFloat x = (left ? -1 : 1) * 16;
+    backButton.frame = CGRectMake(x, 0, 52, 44);
+    [backButton setImage:image forState:UIControlStateNormal];
+    self = [super initWithButton:backButton actionBlock:nil];
+    return self;
+}
+
+@end
+

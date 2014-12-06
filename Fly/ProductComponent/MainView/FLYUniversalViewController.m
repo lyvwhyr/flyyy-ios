@@ -52,6 +52,7 @@
     if (!_hasSetNavigationItem) {
         _hasSetNavigationItem = YES;
         [self loadLeftBarButton];
+        [self loadRightBarButton];
     }
     return [super navigationItem];
 }
@@ -67,6 +68,10 @@
         };
         self.navigationItem.leftBarButtonItem = barItem;
     }
+}
+
+- (void)loadRightBarButton
+{
 }
 
 

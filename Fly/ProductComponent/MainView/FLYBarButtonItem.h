@@ -24,3 +24,12 @@ typedef void(^FLYBarButtonItemActionBlock)(FLYBarButtonItem *barButtonItem);
 @interface FLYBackBarButtonItem : FLYBarButtonItem
 
 @end
+
+
+@interface FLYAddGroupBarButtonItem : FLYBarButtonItem
+
+@end
+
+@interface FLYJoinedGroupBarButtonItem : FLYBarButtonItem
+
+@end

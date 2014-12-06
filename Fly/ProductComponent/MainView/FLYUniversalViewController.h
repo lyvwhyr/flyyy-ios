@@ -18,4 +18,7 @@
 - (UIColor *)preferredNavigationBarColor;
 - (UIColor*)preferredStatusBarColor;
 
+- (void)loadLeftBarButton;
+- (void)loadRightBarButton;
+
 @end

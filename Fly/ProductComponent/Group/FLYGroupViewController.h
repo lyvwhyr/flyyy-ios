@@ -8,6 +8,6 @@
 
 #import "FLYFeedViewController.h"
 
-@interface FLYGroupViewController:UIViewController
+@interface FLYGroupViewController:FLYFeedViewController
 
 @end

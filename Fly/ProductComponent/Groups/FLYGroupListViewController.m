@@ -16,6 +16,7 @@
 #import "FLYSingleGroupViewController.h"
 #import "FLYMainViewController.h"
 #import "FLYFeedViewController.h"
+#import "FLYGroupViewController.h"
 
 #define kSuggestGroupRow 0
 
@@ -165,7 +166,7 @@
 //        vc.view.translatesAutoresizingMaskIntoConstraints = NO;
 //        [self.navigationController pushViewController:vc animated:YES];
         
-        FLYFeedViewController *vc = [FLYFeedViewController new];
+        FLYGroupViewController *vc = [FLYGroupViewController new];
         self.view.backgroundColor = [UIColor blueColor];
         [self.navigationController pushViewController:vc animated:YES];
     }
