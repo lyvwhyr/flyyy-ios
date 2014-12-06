@@ -34,7 +34,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.view.translatesAutoresizingMaskIntoConstraints = NO;
     
     _groupsTabelView = [UITableView new];
     _groupsTabelView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -83,18 +82,16 @@
     titleLabel.text = @"Groups";
     [titleLabel sizeToFit];
     self.parentViewController.navigationItem.titleView = titleLabel;
-//    [_groupsTabelView r`1eloadData];
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-//    [self updateViewConstraints];
 }
 
 -(void)_addViewConstraints
 {
-    [self.view removeConstraints:[self.view constraints]];
+//    [self.view removeConstraints:[self.view constraints]];
 //    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(self.parentViewController.view);
 //        make.leading.equalTo(self.parentViewController.view);

@@ -48,11 +48,8 @@
     _feedTableView.dataSource = _feedDataSource;
     _feedTableView.delegate = self;
     [_feedTableView registerClass:[FLYFeedTopicTableViewCell class] forCellReuseIdentifier:@"feedPostCellIdentifier"];
-    self.automaticallyAdjustsScrollViewInsets = NO;
     
     [self.view addSubview:_feedTableView];
-    
-//    self.view.translatesAutoresizingMaskIntoConstraints = NO;
 }
 
 - (void)_initNavigationBar

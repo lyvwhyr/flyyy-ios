@@ -58,7 +58,6 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.view.userInteractionEnabled = YES;
     [self _addTabBar];
 //    [self _addNavigationBar];
     [self _addChildControllers];
@@ -72,8 +71,6 @@
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = barButton;
 }
-
-
 
 - (void)_addTabBar
 {
@@ -91,12 +88,10 @@
 - (void)_addChildControllers
 {
     _feedViewController = [FLYFeedViewController new];
-     _feedViewNavigationController= [[FLYNavigationController alloc] initWithRootViewController:_feedViewController];
-//    _feedViewController.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    _feedViewNavigationController= [[FLYNavigationController alloc] initWithRootViewController:_feedViewController];
     
     _groupsListViewController = [FLYGroupListViewController new];
     _groupsListViewNavigationController = [[FLYNavigationController alloc] initWithRootViewController:_groupsListViewController];
-//    _groupsListViewController.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     
     _currentViewController = _feedViewNavigationController;
     [self addViewController:_currentViewController];
@@ -111,24 +106,6 @@
         make.width.equalTo(@(tabBarWidth));
         make.height.equalTo(@(kTabBarViewHeight));
     }];
-    
-//    if (_feedViewNavigationController.view.superview) {
-//        [_feedViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.view).offset(kNavBarHeight + kStatusBarHeight);
-//            make.leading.equalTo(self.view);
-//            make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
-//            make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight - kNavBarHeight - kStatusBarHeight));
-//        }];
-//    }
-//    
-//    if (_groupsListViewNavigationController.view.superview) {
-//        [_groupsListViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.view);
-//            make.leading.equalTo(self.view);
-//            make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
-//            make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kTabBarViewHeight));
-//        }];
-//    }
 }
 
 #pragma mark - FLYTabBarViewDelegate
@@ -173,46 +150,6 @@
     CGRect frame = self.view.bounds;
     frame.size.height = self.view.bounds.size.height - kTabBarViewHeight;
     viewController.view.frame = frame;
-}
-
-- (void) showController:(UIViewController*)newC withView:(UIView*)contentView animated:(BOOL)animated
-{
-    UIViewController *oldC = self.childViewControllers.firstObject;
-    if (oldC == newC) {
-        return;
-    }
-    _currentViewController = (FLYUniversalViewController *)newC;
-    
-    [oldC willMoveToParentViewController:nil];
-    
-    [self addChildViewController:newC];
-    newC.view.frame = (CGRect){ 0, 0, contentView.frame.size };
-    
-    if (animated && oldC != nil) {
-        oldC.view.alpha = 1.0f;
-        newC.view.alpha = 0.0f;
-        [self transitionFromViewController:oldC toViewController:newC duration:0.0f options:0 animations:^{
-            
-            oldC.view.alpha = 0.0f;
-            newC.view.alpha = 1.0f;
-            
-        } completion:^(BOOL finished) {
-            [oldC removeFromParentViewController];
-            [newC didMoveToParentViewController:self];
-        }];
-    } else {
-        [contentView addSubview:newC.view];
-        oldC.view.alpha = 0.0f;
-        newC.view.alpha = 1.0f;
-        [self transitionFromViewController:oldC toViewController:newC duration:0.25f options:0 animations:^{
-            oldC.view.alpha = 0.0f;
-            newC.view.alpha = 1.0f;
-            
-        } completion:^(BOOL finished) {
-            [oldC removeFromParentViewController];
-            [newC didMoveToParentViewController:self];
-        }];
-    }
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
