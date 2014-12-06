@@ -167,7 +167,6 @@
 //        [self.navigationController pushViewController:vc animated:YES];
         
         FLYGroupViewController *vc = [FLYGroupViewController new];
-        self.view.backgroundColor = [UIColor blueColor];
         [self.navigationController pushViewController:vc animated:YES];
     }
     

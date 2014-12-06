@@ -54,8 +54,8 @@
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //12 * 21
     UIImage *image = [UIImage imageNamed:@"icon_back"];
-    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -15, 0, 0);
-    CGFloat x = (left ? -1 : 1) * 16;
+    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    CGFloat x = (left ? -1 : 1) * 10;
     backButton.frame = CGRectMake(x, 0, 52, 44);
     [backButton setImage:image forState:UIControlStateNormal];
     self = [super initWithButton:backButton actionBlock:nil];
@@ -88,7 +88,7 @@
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //12 * 21
     UIImage *image = [UIImage imageNamed:@"icon_group_checkmark"];
-    CGFloat x = (left ? -1 : 1) * 16;
+    CGFloat x = (left ? -1 : 1) * 10;
     backButton.frame = CGRectMake(x, 0, 52, 44);
     [backButton setImage:image forState:UIControlStateNormal];
     self = [super initWithButton:backButton actionBlock:nil];
