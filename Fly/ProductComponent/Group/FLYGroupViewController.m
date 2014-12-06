@@ -23,7 +23,6 @@
     _feedViewController = [FLYFeedViewController new];
     [self.view addSubview:_feedViewController.view];
     _feedViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-    self.view.backgroundColor = [UIColor blueColor];
     
 }
 
