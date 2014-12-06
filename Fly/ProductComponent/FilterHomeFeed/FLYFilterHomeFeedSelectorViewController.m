@@ -121,7 +121,7 @@
 - (void)_addViewConstraints
 {    
     [_explanationView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view).offset(kNavBarHeight + kStatusBarHeight);
         make.leading.mas_equalTo(self.view);
         make.width.mas_equalTo(CGRectGetWidth([[UIScreen mainScreen] bounds]));
         make.height.mas_equalTo(45);
