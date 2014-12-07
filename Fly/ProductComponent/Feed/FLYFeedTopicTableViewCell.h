@@ -6,8 +6,16 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@class FLYFeedTopicTableViewCell;
+
+@protocol FLYFeedTopicTableViewCellDelegate <NSObject>
+
+- (void)commentButtonTapped:(FLYFeedTopicTableViewCell *)cell;
+
+@end
 
 @interface FLYFeedTopicTableViewCell : UITableViewCell
+
+@property id<FLYFeedTopicTableViewCellDelegate>delegate;
 
 @end

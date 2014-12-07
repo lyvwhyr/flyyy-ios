@@ -49,6 +49,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
+        
     }
     
     return self;
@@ -58,6 +59,7 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
     [self _addTabBar];
 //    [self _addNavigationBar];
     [self _addChildControllers];

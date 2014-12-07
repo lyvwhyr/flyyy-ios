@@ -94,6 +94,11 @@
         
         _inlineActionView = [FLYInlineActionView new];
         _inlineActionView.translatesAutoresizingMaskIntoConstraints = NO;
+        __weak typeof(self)weakSelf = self;
+        _inlineActionView.commentButtonTappedBlock = ^ {
+            __strong typeof(self)strongSelf = weakSelf;
+            [strongSelf.delegate commentButtonTapped:strongSelf];
+        };
 //        _inlineActionView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
         [self addSubview:_inlineActionView];
         

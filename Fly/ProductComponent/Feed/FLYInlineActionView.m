@@ -34,6 +34,7 @@
         [self addSubview:_flyButton];
         
         _commentButton = [[FLYIconButton alloc] initWithText:@"10" textFont:font textColor:color  icon:@"icon_inline_comment"];
+        [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_commentButton];
         
@@ -68,6 +69,10 @@
     [super updateConstraints];
 }
 
+- (void)_commentButtonTapped
+{
+    _commentButtonTappedBlock();
+}
 
 
 @end

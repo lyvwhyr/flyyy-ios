@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^FLYCommentButtonTappedBlock)();
+
 @interface FLYInlineActionView : UIView
+
+@property (nonatomic, copy) FLYCommentButtonTappedBlock commentButtonTappedBlock;
 
 @end

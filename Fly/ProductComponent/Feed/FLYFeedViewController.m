@@ -13,9 +13,12 @@
 #import "FLYFeedDataSource.h"
 #import "FLYFeedDelegate.h"
 #import "FLYSingleGroupViewController.h"
+#import "FLYInlineReplyView.h"
 
-@interface FLYFeedViewController () <UITableViewDelegate>
+@interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
+@property (nonatomic) UIView *backgroundView;
+@property (nonatomic) FLYInlineReplyView *inlineReplyView;
 @property (nonatomic) UITableView *feedTableView;
 @property (nonatomic) FLYNavigationBarMyGroupButton *customizedTitleView;
 
@@ -42,16 +45,35 @@
     [super viewDidLoad];
     _posts = [NSMutableArray new];
     
+    [self _addInlineReplyBar];
     [self _addDatasource];
     
     _feedTableView = [UITableView new];
     _feedTableView.translatesAutoresizingMaskIntoConstraints = NO;
     _feedDataSource = [[FLYFeedDataSource alloc] initWithPosts:_posts];
-    _feedTableView.dataSource = _feedDataSource;
+    _feedTableView.dataSource = self;
     _feedTableView.delegate = self;
     [_feedTableView registerClass:[FLYFeedTopicTableViewCell class] forCellReuseIdentifier:@"feedPostCellIdentifier"];
-    
     [self.view addSubview:_feedTableView];
+    
+    _feedTableView.scrollsToTop = YES;
+    
+    _backgroundView = [UIView new];
+    _backgroundView.userInteractionEnabled = NO;
+    _backgroundView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_backgroundView];
+}
+
+- (void)_addInlineReplyBar
+{
+    _inlineReplyView = [FLYInlineReplyView new];
+    _inlineReplyView.translatesAutoresizingMaskIntoConstraints = NO;
+    __weak typeof(self) weakSelf = self;
+    _inlineReplyView.backgroudTappedBlock = ^(FLYInlineReplyView *view){
+        __strong typeof(self) strongSelf = weakSelf;
+        [strongSelf _moveInlineReplyViewOffScreen];
+    };
+    [self.view addSubview:_inlineReplyView];
 }
 
 - (void)_initNavigationBar
@@ -66,18 +88,32 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [self _initNavigationBar];
-    [self _addViewConstraints];
+    [self updateViewConstraints];
 }
 
-- (void)_addViewConstraints
+- (void)updateViewConstraints
 {
-    [_feedTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_backgroundView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
         make.leading.equalTo(self.view);
         make.right.equalTo(self.view);
         make.bottom.equalTo(self.view);
     }];
+    
+    [_feedTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
+        make.leading.equalTo(self.view);
+        make.right.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+    }];
+    
+    [_inlineReplyView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(CGRectGetHeight(self.view.bounds));
+        make.leading.equalTo(self.view);
+        make.width.equalTo(self.view);
+        make.height.equalTo(self.view);
+    }];
+    [super updateViewConstraints];
 }
 
 - (void)viewDidLayoutSubviews
@@ -127,6 +163,29 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _posts.count;
+}
+
+- (FLYFeedTopicTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"feedPostCellIdentifier";
+    FLYFeedTopicTableViewCell *cell = (FLYFeedTopicTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[FLYFeedTopicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    if (NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)
+    {
+        cell.contentView.frame = cell.bounds;
+        cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.delegate = self;
+    return cell;
+}
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 150.0f;
@@ -136,6 +195,54 @@
 {
     FLYSingleGroupViewController *viewController = [FLYSingleGroupViewController new];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)commentButtonTapped:(FLYFeedTopicTableViewCell *)cell
+{
+     self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+    [self.view layoutIfNeeded];
+    [self.view bringSubviewToFront:_inlineReplyView];
+    [self _moveInlineReplyViewOnScreen];
+    [self.view needsUpdateConstraints];
+    [self.view layoutIfNeeded];
+}
+
+- (void)_moveInlineReplyViewOnScreen
+{
+    [_inlineReplyView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view);
+        make.leading.equalTo(self.view);
+        make.width.equalTo(self.view);
+        make.height.equalTo(self.view);
+    }];
+    [UIView animateWithDuration:0.3f animations:^{
+        _backgroundView.backgroundColor = [UIColor grayColor];
+        _backgroundView.alpha = 0.4;
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+
+    }];
+     
+}
+
+- (void)_moveInlineReplyViewOffScreen
+{
+    self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
+    
+    _backgroundView.backgroundColor = [UIColor clearColor];
+    _backgroundView.alpha = 0;
+    [self.view bringSubviewToFront:_backgroundView];
+    [_inlineReplyView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(CGRectGetHeight(self.view.bounds));
+        make.leading.equalTo(self.view);
+        make.width.equalTo(self.view);
+        make.height.equalTo(self.view);
+    }];
+    [UIView animateWithDuration:0.3f animations:^{
+        [self.view layoutIfNeeded];
+    }];
+    [self.view needsUpdateConstraints];
+    [self.view layoutIfNeeded];
 }
 
 @end

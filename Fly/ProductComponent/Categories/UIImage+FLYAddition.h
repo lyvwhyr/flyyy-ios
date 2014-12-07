@@ -31,5 +31,4 @@
 
 + (UIImage *)roundedImageWithImage:(UIImage *)image;
 
-
 @end
