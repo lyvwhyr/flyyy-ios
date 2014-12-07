@@ -18,6 +18,7 @@
 #import "FLYPrePostViewController.h"
 #import "GBFlatButton.h"
 #import "DKCircleButton.h"
+#import "FLYBarButtonItem.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -160,9 +161,28 @@ static inline float translate(float val, float min, float max) {
     [backButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(_backButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(_nextBarButtonTapped)];
+    
+    
+    UILabel *rightBarLabel = [UILabel new];
+    rightBarLabel.text = @"Next";
+    rightBarLabel.font = [UIFont systemFontOfSize:22];
+    rightBarLabel.textColor = [UIColor whiteColor];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:<#(UIView *)#>
+    
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(_nextBarButtonTapped)];
 }
 
+-(void)loadRightBarButton
+{
+    FLYPostRecordingNextBarButtonItem *barButtonItem = [FLYPostRecordingNextBarButtonItem barButtonItem:NO];
+    __weak typeof(self) weakSelf = self;
+    barButtonItem.actionBlock = ^(FLYBarButtonItem *item) {
+        __strong typeof(self) strongSelf = weakSelf;
+        [strongSelf _nextBarButtonTapped];
+    };
+    self.navigationItem.rightBarButtonItem = barButtonItem;
+}
+                                              
 
 #pragma mark - navigation bar actions
 

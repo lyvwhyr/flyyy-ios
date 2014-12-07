@@ -126,7 +126,7 @@
         _currentViewController = _feedViewNavigationController;
     } else if (index == TABBAR_RECORD) {
         FLYRecordViewController *recordViewController = [FLYRecordViewController new];
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:recordViewController];
+        UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
         [self presentViewController:navigationController animated:NO completion:nil];
     } else {
         if (_currentViewController == _groupsListViewNavigationController) {
