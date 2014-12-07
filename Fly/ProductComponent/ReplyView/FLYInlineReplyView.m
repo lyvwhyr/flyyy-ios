@@ -35,7 +35,7 @@
         _backgroundView = [UIView new];
         _backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
         _backgroundView.backgroundColor = [UIColor clearColor];
-        UITapGestureRecognizer *backgroundTapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_backgroundTapped)];
+        UITapGestureRecognizer *backgroundTapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_cancelTapped)];
         [_backgroundView addGestureRecognizer:backgroundTapGR];
         [self addSubview:_backgroundView];
         
@@ -48,6 +48,7 @@
         _cancelButton.buttonTextColor = [UIColor flyInlineActionGrey];
         [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
         _cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_cancelButton addTarget:self action:@selector(_cancelTapped) forControlEvents:UIControlEventTouchUpInside];
         [_mainView addSubview:_cancelButton];
         
         _postButton = [GBFlatButton new];
@@ -142,7 +143,7 @@
     [self setNeedsUpdateConstraints];
 }
 
-- (void)_backgroundTapped
+- (void)_cancelTapped
 {
     _backgroudTappedBlock(self);
 }

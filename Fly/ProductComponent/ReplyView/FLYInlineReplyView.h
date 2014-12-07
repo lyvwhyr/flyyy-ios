@@ -8,11 +8,11 @@
 
 @class FLYInlineReplyView;
 
-typedef void(^FLYBackgroupTappedBlock)(FLYInlineReplyView *view);
+typedef void(^FLYMoveOffscreenBlock)(FLYInlineReplyView *view);
 
 @interface FLYInlineReplyView : UIView
 
 @property (nonatomic) UIView *backgroundView;
-@property (nonatomic, copy)FLYBackgroupTappedBlock backgroudTappedBlock;
+@property (nonatomic, copy)FLYMoveOffscreenBlock backgroudTappedBlock;
 
 @end

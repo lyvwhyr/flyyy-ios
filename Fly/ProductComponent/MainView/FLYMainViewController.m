@@ -156,6 +156,7 @@
     [viewController didMoveToParentViewController:self];
     
     CGRect frame = self.view.bounds;
+//    frame.size.height = self.view.bounds.size.height - kTabBarViewHeight;
     frame.size.height = self.view.bounds.size.height - kTabBarViewHeight;
     viewController.view.frame = frame;
 }

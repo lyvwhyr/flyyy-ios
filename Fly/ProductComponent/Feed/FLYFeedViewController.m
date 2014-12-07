@@ -209,6 +209,7 @@
 
 - (void)_moveInlineReplyViewOnScreen
 {
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [_inlineReplyView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
         make.leading.equalTo(self.view);
