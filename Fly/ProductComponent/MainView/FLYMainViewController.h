@@ -9,6 +9,7 @@
 #import "FLYUniversalViewController.h"
 
 @class FLYNavigationController;
+@class FLYTabBarView;
 
 NS_ENUM(NSInteger, TabBarItemIndex) {
     TABBAR_HOME = 0,

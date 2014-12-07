@@ -130,7 +130,7 @@
     }];
     
     [_trashImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(_micImageView).offset(kInnerCircleRadius * 2 + 30);
+        make.trailing.equalTo(_mainView).offset(-20);
         make.centerY.equalTo(_micImageView);
     }];
     

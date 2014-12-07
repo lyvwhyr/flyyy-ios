@@ -28,6 +28,8 @@
 #import "FLEXManager.h"
 #endif
 
+@class FLYTabBarView;
+
 @interface FLYMainViewController() <FLYTabBarViewDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic) FLYTabBarView *tabBarView;
