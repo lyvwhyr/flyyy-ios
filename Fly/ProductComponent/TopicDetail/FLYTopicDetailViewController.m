@@ -119,7 +119,7 @@
     if (indexPath.section == FlyTopicCellSectionIndex) {
         return 150;
     }
-    return 60;
+    return 90;
 }
 
 

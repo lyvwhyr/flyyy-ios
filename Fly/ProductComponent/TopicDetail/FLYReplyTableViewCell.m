@@ -9,6 +9,7 @@
 #import "FLYReplyTableViewCell.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYReplyPlayView.h"
+#import "FLYIconButton.h"
 
 @interface FLYReplyTableViewCell()
 
@@ -16,6 +17,9 @@
 @property (nonatomic) UILabel *userNameLabel;
 @property (nonatomic) FLYReplyPlayView *replyPlayView;
 @property (nonatomic) UILabel *postAtLabel;
+
+@property (nonatomic) FLYIconButton *flyButton;
+@property (nonatomic) FLYIconButton *commentButton;
 
 @end
 
@@ -52,6 +56,17 @@
         _postAtLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_postAtLabel];
         
+        UIColor *color = [UIColor flyInlineActionGrey];
+        UIFont *font = [UIFont systemFontOfSize:13.0f];
+        _flyButton = [[FLYIconButton alloc] initWithText:@"Fly" textFont:font textColor:color icon:@"icon_inline_wing"];
+        _flyButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_flyButton];
+        
+        _commentButton = [[FLYIconButton alloc] initWithText:@"Comment" textFont:font textColor:color  icon:@"icon_inline_comment"];
+//        [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_commentButton];
+        
         [self needsUpdateConstraints];
     }
     
@@ -61,26 +76,25 @@
 - (void)updateConstraints
 {
     [_avatarImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
+        make.top.equalTo(self).offset(10);
         make.leading.equalTo(self).offset(20);
         make.width.equalTo(@(36));
         make.height.equalTo(@(36));
     }];
     
     [_userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
+        make.top.equalTo(self).offset(10);
         make.leading.equalTo(_avatarImageView.mas_right).offset(10);
     }];
     
     [_replyPlayView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
-//        make.leading.equalTo(_userNameLabel.mas_trailing).offset(15);
+        make.top.equalTo(self).offset(5);
         make.width.equalTo(@(75));
         make.height.equalTo((@30));
     }];
     
     [_postAtLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self);
+        make.top.equalTo(self).offset(10);
         make.trailing.equalTo(self).offset(-20);
     }];
     
@@ -97,6 +111,18 @@
     [_replyPlayView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(helperView);
     }];
+    
+
+    [_commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self).offset(-10);
+        make.trailing.equalTo(self).offset(-10);
+    }];
+    
+    [_flyButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self).offset(-10);
+        make.trailing.equalTo(_commentButton.mas_leading).offset(-40);
+    }];
+
     
     [super updateConstraints];
 }
