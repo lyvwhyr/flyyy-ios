@@ -189,7 +189,6 @@
         [self _addViewConstraints];
         _didSetConstraints = YES;
     }
-    [FLYUtilities printAutolayoutTrace];
 }
 
 #pragma mark - navigation bar actions

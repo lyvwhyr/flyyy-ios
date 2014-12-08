@@ -14,6 +14,7 @@
 #import "FLYFeedDelegate.h"
 #import "FLYSingleGroupViewController.h"
 #import "FLYInlineReplyView.h"
+#import "FLYTopicDetailViewController.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -193,7 +194,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FLYSingleGroupViewController *viewController = [FLYSingleGroupViewController new];
+    self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+    [self.view layoutIfNeeded];
+    FLYTopicDetailViewController *viewController = [FLYTopicDetailViewController new];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

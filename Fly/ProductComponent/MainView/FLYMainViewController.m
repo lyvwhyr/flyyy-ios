@@ -180,7 +180,6 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [FLYUtilities printAutolayoutTrace];
 }
 
 - (FLYNavigationController *)flyNavigationController
