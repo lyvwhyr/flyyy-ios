@@ -15,6 +15,7 @@
 
 @property (nonatomic) UIImageView *avatarImageView;
 @property (nonatomic) UILabel *userNameLabel;
+@property (nonatomic) UILabel *inReplyToUserNameLabel;
 @property (nonatomic) FLYReplyPlayView *replyPlayView;
 @property (nonatomic) UILabel *postAtLabel;
 
@@ -44,6 +45,13 @@
         _userNameLabel.textColor = [UIColor blackColor];
         _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_userNameLabel];
+        
+        _inReplyToUserNameLabel = [UILabel new];
+        _inReplyToUserNameLabel.text = @"@natasha";
+        _inReplyToUserNameLabel.font = [UIFont systemFontOfSize:12];
+        _inReplyToUserNameLabel.textColor = [UIColor flyFeedGrey];
+        _inReplyToUserNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_inReplyToUserNameLabel];
         
         _replyPlayView = [FLYReplyPlayView new];
         _replyPlayView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -84,6 +92,11 @@
     
     [_userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(10);
+        make.leading.equalTo(_avatarImageView.mas_right).offset(10);
+    }];
+    
+    [_inReplyToUserNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_userNameLabel.mas_bottom).offset(3);
         make.leading.equalTo(_avatarImageView.mas_right).offset(10);
     }];
     
