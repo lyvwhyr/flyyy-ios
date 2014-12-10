@@ -10,12 +10,15 @@
 #import "FLYBarButtonItem.h"
 #import "FLYFeedTopicTableViewCell.h"
 #import "FLYReplyTableViewCell.h"
+#import "FLYBarButtonItem.h"
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) UITableView *topicTableView;
 
 @property (nonatomic) NSMutableArray *replies;
+
+@property (nonatomic) BOOL setLayoutConstraints;
 
 @end
 
@@ -43,7 +46,7 @@
     _topicTableView.dataSource = self;
     [self.view addSubview:_topicTableView];
     
-    [self updateViewConstraints];
+//    [self updateViewConstraints];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -60,14 +63,24 @@
 
 - (void)updateViewConstraints
 {
-    [_topicTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
-        make.leading.equalTo(self.view);
-        make.width.equalTo(self.view);
-        make.height.equalTo(@(CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight - kTabBarViewHeight));
-    }];
+    if (!_setLayoutConstraints) {
+        _setLayoutConstraints = YES;
+        CGFloat tableViewHeight = MIN((CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight - kTabBarViewHeight), _topicTableView.contentSize.height);
+        [_topicTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
+            make.leading.equalTo(self.view);
+            make.width.equalTo(self.view);
+            make.height.equalTo(@(tableViewHeight));
+        }];
+    }
     
     [super updateViewConstraints];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    [self updateViewConstraints];
 }
 
 #pragma mark - UITableViewDelegate
@@ -135,6 +148,16 @@
         };
         self.navigationItem.leftBarButtonItem = barItem;
     }
+}
+
+- (void)loadRightBarButton
+{
+    FLYFlagTopicBarButtonItem *barItem = [FLYFlagTopicBarButtonItem barButtonItem:NO];
+    __weak typeof(self)weakSelf = self;
+    barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+        
+    };
+    self.navigationItem.rightBarButtonItem = barItem;
 }
 
 - (void)_backButtonTapped

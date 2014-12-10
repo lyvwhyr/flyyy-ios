@@ -18,7 +18,7 @@
 @interface FLYInlineReplyView()
 
 @property (nonatomic) UIView *mainView;
-@property (nonatomic) GBFlatButton *cancelButton;
+@property (nonatomic) UILabel *cancelButton;
 @property (nonatomic) GBFlatButton *postButton;
 @property (nonatomic) UIView *separatorView;
 @property (nonatomic) FLYCircleView *innerCircleView;
@@ -43,13 +43,13 @@
         _mainView.backgroundColor = [UIColor whiteColor];
         _mainView.translatesAutoresizingMaskIntoConstraints = NO;
         
-        _cancelButton = [GBFlatButton new];
-        _cancelButton.tintColor = [UIColor flyInlineActionGrey];
-        _cancelButton.buttonTextColor = [UIColor flyInlineActionGrey];
-        [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
-        _cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_cancelButton addTarget:self action:@selector(_cancelTapped) forControlEvents:UIControlEventTouchUpInside];
-        [_mainView addSubview:_cancelButton];
+//        _cancelButton = [GBFlatButton new];
+//        _cancelButton.tintColor = [UIColor flyInlineActionGrey];
+//        _cancelButton.buttonTextColor = [UIColor flyInlineActionGrey];
+//        [_cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+//        _cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
+//        [_cancelButton addTarget:self action:@selector(_cancelTapped) forControlEvents:UIControlEventTouchUpInside];
+//        [_mainView addSubview:_cancelButton];
         
         _postButton = [GBFlatButton new];
         _postButton.tintColor = [UIColor flyInlineActionGrey];
@@ -100,10 +100,10 @@
         make.bottom.equalTo(self);
     }];
     
-    [_cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@(10));
-        make.leading.equalTo(@(10));
-    }];
+//    [_cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(@(10));
+//        make.leading.equalTo(@(10));
+//    }];
     
     [_postButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@(10));

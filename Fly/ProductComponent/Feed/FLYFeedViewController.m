@@ -15,6 +15,8 @@
 #import "FLYSingleGroupViewController.h"
 #import "FLYInlineReplyView.h"
 #import "FLYTopicDetailViewController.h"
+#import "FLYBarButtonItem.h"
+#import "FLYGroupViewController.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -46,6 +48,9 @@
     [super viewDidLoad];
     _posts = [NSMutableArray new];
     
+    if (![self isKindOfClass:[FLYGroupViewController class]]) {
+        [self _loadLeftBarItem];
+    }
     [self _addInlineReplyBar];
     [self _addDatasource];
     
@@ -77,13 +82,23 @@
     [self.view addSubview:_inlineReplyView];
 }
 
-- (void)_initNavigationBar
+- (void)_loadLeftBarItem
 {
-    FLYNavigationBarMyGroupButton *leftButton = [[FLYNavigationBarMyGroupButton alloc] initWithFrame:CGRectMake(0, 0, 120, 32) Title:@"My Groups" icon:@"icon_down_arrow"];
+    FLYNavigationBarMyGroupButton *leftButton = [[FLYNavigationBarMyGroupButton alloc] initWithFrame:CGRectMake(0, 0, 120, 32) Title:@"My Feed" icon:@"icon_down_arrow"];
     
     [leftButton addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     [leftButton sizeToFit];
-    [self.parentViewController.navigationItem setTitleView:leftButton];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+}
+
+- (void)loadRightBarButton
+{
+    FLYCatalogBarButtonItem *barItem = [FLYCatalogBarButtonItem barButtonItem:NO];
+    __weak typeof(self)weakSelf = self;
+    barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+        __strong typeof(self) strongSelf = weakSelf;
+    };
+    self.navigationItem.rightBarButtonItem = barItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -122,17 +137,17 @@
     [super viewDidLayoutSubviews];
 }
 
-- (UINavigationItem *)navigationItem
-{
-    if (!_customizedTitleView) {
-        _customizedTitleView = [[FLYNavigationBarMyGroupButton alloc] initWithFrame:CGRectMake(0, 0, 120, 32) Title:@"My Groups" icon:@"icon_down_arrow"];
-        
-        [_customizedTitleView addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-        [_customizedTitleView sizeToFit];
-        [self.navigationItem setTitleView:_customizedTitleView];
-    }
-    return [super navigationItem];
-}
+//- (UINavigationItem *)navigationItem
+//{
+//    if (!_customizedTitleView) {
+//        _customizedTitleView = [[FLYNavigationBarMyGroupButton alloc] initWithFrame:CGRectMake(0, 0, 120, 32) Title:@"My Groups" icon:@"icon_down_arrow"];
+//        
+//        [_customizedTitleView addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+//        [_customizedTitleView sizeToFit];
+//        [self.navigationItem setTitleView:_customizedTitleView];
+//    }
+//    return [super navigationItem];
+//}
 
 - (void)_addDatasource
 {
