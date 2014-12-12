@@ -54,6 +54,9 @@
 		A64D159F1A29C0BB00369D62 /* icon_inline_comment@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D159C1A29C0BB00369D62 /* icon_inline_comment@3x.png */; };
 		A64D15A01A29C0BB00369D62 /* icon_inline_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D159D1A29C0BB00369D62 /* icon_inline_share@3x.png */; };
 		A64D15A11A29C0BB00369D62 /* icon_inline_wing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D159E1A29C0BB00369D62 /* icon_inline_wing@3x.png */; };
+		A655783E1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A655783D1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m */; };
+		A65578411A3ADCC3003102CD /* FLYPostButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A65578401A3ADCC3003102CD /* FLYPostButtonView.m */; };
+		A65578431A3ADE4E003102CD /* icon_share_post@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A65578421A3ADE4E003102CD /* icon_share_post@3x.png */; };
 		A6655B551A19DEF000440AAB /* icon_tabbar_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */; };
 		A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */; };
 		A6655B5A1A19ECED00440AAB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B591A19ECED00440AAB /* Default-568h@2x.png */; };
@@ -174,6 +177,7 @@
 		A6A57A9D1A34134200610785 /* icon_reply_record@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A57A9C1A34134200610785 /* icon_reply_record@3x.png */; };
 		A6A57AA91A34345600610785 /* FLYTopicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57AA81A34345600610785 /* FLYTopicDetailViewController.m */; };
 		A6A57AAD1A34555400610785 /* FLYReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57AAB1A34555400610785 /* FLYReplyTableViewCell.m */; };
+		A6C67A3A1A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C67A391A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
@@ -291,6 +295,11 @@
 		A64D159C1A29C0BB00369D62 /* icon_inline_comment@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_comment@3x.png"; sourceTree = "<group>"; };
 		A64D159D1A29C0BB00369D62 /* icon_inline_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_share@3x.png"; sourceTree = "<group>"; };
 		A64D159E1A29C0BB00369D62 /* icon_inline_wing@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_wing@3x.png"; sourceTree = "<group>"; };
+		A655783C1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostChooseGroupTableViewCell.h; sourceTree = "<group>"; };
+		A655783D1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostChooseGroupTableViewCell.m; sourceTree = "<group>"; };
+		A655783F1A3ADCC3003102CD /* FLYPostButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPostButtonView.h; sourceTree = "<group>"; };
+		A65578401A3ADCC3003102CD /* FLYPostButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPostButtonView.m; sourceTree = "<group>"; };
+		A65578421A3ADE4E003102CD /* icon_share_post@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_share_post@3x.png"; sourceTree = "<group>"; };
 		A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_home@3x.png"; sourceTree = "<group>"; };
 		A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_me@3x.png"; sourceTree = "<group>"; };
 		A6655B591A19ECED00440AAB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -494,6 +503,8 @@
 		A6A57AA81A34345600610785 /* FLYTopicDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTopicDetailViewController.m; sourceTree = "<group>"; };
 		A6A57AAA1A34555400610785 /* FLYReplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYReplyTableViewCell.h; sourceTree = "<group>"; };
 		A6A57AAB1A34555400610785 /* FLYReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYReplyTableViewCell.m; sourceTree = "<group>"; };
+		A6C67A381A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostTitleTableViewCell.h; sourceTree = "<group>"; };
+		A6C67A391A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostTitleTableViewCell.m; sourceTree = "<group>"; };
 		A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
@@ -704,6 +715,7 @@
 		A648C0C71A199F8C00FF1744 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A65578421A3ADE4E003102CD /* icon_share_post@3x.png */,
 				A640BC3C1A381AE900DC59A7 /* icon_navigation_catalog@3x.png */,
 				A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */,
 				A67208241A356CAE00B2C5B5 /* icon_play_reply@3x.png */,
@@ -1091,6 +1103,12 @@
 				A61D18731A1F27E900D188B5 /* FLYPrePostViewController.h */,
 				A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */,
 				A61D18751A1F27E900D188B5 /* FLYPrePostViewController.xib */,
+				A6C67A381A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.h */,
+				A6C67A391A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m */,
+				A655783C1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.h */,
+				A655783D1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m */,
+				A655783F1A3ADCC3003102CD /* FLYPostButtonView.h */,
+				A65578401A3ADCC3003102CD /* FLYPostButtonView.m */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -1354,6 +1372,7 @@
 				A69C4BF91A28636F00CAD443 /* p3.jpg in Resources */,
 				A6F27CA01A20735A000EC0B3 /* record_animate_05.png in Resources */,
 				A6F27CA51A20735A000EC0B3 /* record_animate_10.png in Resources */,
+				A65578431A3ADE4E003102CD /* icon_share_post@3x.png in Resources */,
 				A67208251A356CAE00B2C5B5 /* icon_play_reply@3x.png in Resources */,
 				A61D18771A1F27E900D188B5 /* FLYPrePostViewController.xib in Resources */,
 				A6F27C9E1A20735A000EC0B3 /* record_animate_03.png in Resources */,
@@ -1442,6 +1461,7 @@
 				A6A0E49E1A1E76110036116E /* FLEXIvarEditorViewController.m in Sources */,
 				A67208231A3569C600B2C5B5 /* FLYReplyPlayView.m in Sources */,
 				A6A0E4A41A1E76110036116E /* FLEXToolbarItem.m in Sources */,
+				A65578411A3ADCC3003102CD /* FLYPostButtonView.m in Sources */,
 				A612753F1A2EFB72004D25D3 /* DKCircleButton.m in Sources */,
 				A6A0E4AD1A1E76110036116E /* FLEXWebViewController.m in Sources */,
 				A6263EC11A1888D800C4C3BA /* FLYNavigationController.m in Sources */,
@@ -1495,6 +1515,7 @@
 				A6A0E49D1A1E76110036116E /* FLEXFieldEditorViewController.m in Sources */,
 				A6A57A9B1A34103D00610785 /* UIImage+ResizeMagick.m in Sources */,
 				A61D18661A1EE6ED00D188B5 /* FLYAudioStateManager.m in Sources */,
+				A655783E1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m in Sources */,
 				A6A0E4C31A1E7EFA0036116E /* UIWindow+FLYAddition.m in Sources */,
 				A6A0E4BA1A1E76110036116E /* FLEXHeapEnumerator.m in Sources */,
 				A6A0E49A1A1E76110036116E /* FLEXArgumentInputViewFactory.m in Sources */,
@@ -1503,6 +1524,7 @@
 				A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */,
 				A6A0E4B81A1E76110036116E /* FLEXViewControllerExplorerViewController.m in Sources */,
 				A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */,
+				A6C67A3A1A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m in Sources */,
 				A6A4EFB01A2BD4D500FD4066 /* FLYGroupListTableViewCell.m in Sources */,
 				A6A0E4BE1A1E76110036116E /* FLEXHierarchyTableViewCell.m in Sources */,
 				A6A0E49C1A1E76110036116E /* FLEXFieldEditorView.m in Sources */,

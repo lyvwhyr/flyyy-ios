@@ -19,7 +19,8 @@
 + (UIColor *)flyContentBackgroundGrey;
 + (UIColor *)flyFeedGrey;
 + (UIColor *)flyInlineActionGrey;
-
++ (UIColor *)tableHeaderGrey;
++ (UIColor *) tableHeaderTextGrey;
 
 
 + (UIColor *)customGrayColor;
