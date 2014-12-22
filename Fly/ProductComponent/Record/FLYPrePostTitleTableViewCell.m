@@ -30,7 +30,7 @@
         _descriptionTextView = [[UITextView alloc] init];
         [_descriptionTextView setDelegate:self];
         [_descriptionTextView setReturnKeyType:UIReturnKeyDone];
-        [_descriptionTextView setText:@"Add description"];
+        [_descriptionTextView setText:LOC(@"FLYPrePostDefaultText")];
         [_descriptionTextView setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];
         [_descriptionTextView setTextColor:[UIColor lightGrayColor]];
         [self addSubview:_descriptionTextView];
@@ -76,6 +76,11 @@
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView
 {
+    if(textView.text.length == 0){
+        textView.textColor = [UIColor lightGrayColor];
+        textView.text = LOC(@"FLYPrePostDefaultText");
+    }
+    
     [_delegate titleTextViewShouldEndEditing:textView];
     return YES;
 }
@@ -84,7 +89,7 @@
 {
     if(textView.text.length == 0){
         textView.textColor = [UIColor lightGrayColor];
-        textView.text = @"List words or terms separated by commas";
+        textView.text = LOC(@"FLYPrePostDefaultText");
         [textView resignFirstResponder];
     }
 }
@@ -95,7 +100,7 @@
         [textView resignFirstResponder];
         if(textView.text.length == 0){
             textView.textColor = [UIColor lightGrayColor];
-            textView.text = @"List words or terms separated by commas";
+            textView.text = LOC(@"FLYPrePostDefaultText");
             [textView resignFirstResponder];
         }
         return NO;

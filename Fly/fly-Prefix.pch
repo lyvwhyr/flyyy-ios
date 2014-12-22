@@ -19,5 +19,6 @@
 #import "Constants.h"
 #import "FLYUtilities.h"
 #import "Masonry.h"
+#import "NSBundle+FLYAddition.h"
 
 #endif

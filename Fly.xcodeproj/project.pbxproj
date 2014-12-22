@@ -178,6 +178,8 @@
 		A6A57AA91A34345600610785 /* FLYTopicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57AA81A34345600610785 /* FLYTopicDetailViewController.m */; };
 		A6A57AAD1A34555400610785 /* FLYReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57AAB1A34555400610785 /* FLYReplyTableViewCell.m */; };
 		A6C67A3A1A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C67A391A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m */; };
+		A6CD56E41A47D891003486DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6CD56E31A47D891003486DD /* Localizable.strings */; };
+		A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
@@ -505,6 +507,9 @@
 		A6A57AAB1A34555400610785 /* FLYReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYReplyTableViewCell.m; sourceTree = "<group>"; };
 		A6C67A381A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostTitleTableViewCell.h; sourceTree = "<group>"; };
 		A6C67A391A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostTitleTableViewCell.m; sourceTree = "<group>"; };
+		A6CD56E31A47D891003486DD /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		A6CD56E51A47DAFB003486DD /* NSBundle+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+FLYAddition.h"; sourceTree = "<group>"; };
+		A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+FLYAddition.m"; sourceTree = "<group>"; };
 		A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
@@ -611,6 +616,7 @@
 				A6263EC71A1893C000C4C3BA /* fly-Prefix.pch */,
 				A648C0C11A1962A200FF1744 /* FLYUtilities.h */,
 				A648C0C21A1962A200FF1744 /* FLYUtilities.m */,
+				A6CD56E31A47D891003486DD /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -696,6 +702,8 @@
 				A69C4BD71A2840E700CAD443 /* NSDictionary+FLYAddition.m */,
 				A6A57A8E1A33B91700610785 /* UIView+FLYAddition.h */,
 				A6A57A8F1A33B91700610785 /* UIView+FLYAddition.m */,
+				A6CD56E51A47DAFB003486DD /* NSBundle+FLYAddition.h */,
+				A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1353,6 +1361,7 @@
 				A6A0E41C1A1E6E970036116E /* icon_tabbar_home@2x.png in Resources */,
 				A69C4BA81A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.xib in Resources */,
 				A69C4BF81A28636F00CAD443 /* p2.jpg in Resources */,
+				A6CD56E41A47D891003486DD /* Localizable.strings in Resources */,
 				A6F27C9F1A20735A000EC0B3 /* record_animate_04.png in Resources */,
 				A67208201A35689600B2C5B5 /* icon_seconds@3x.png in Resources */,
 				A6A0E41D1A1E6E970036116E /* icon_tabbar_me@2x.png in Resources */,
@@ -1526,6 +1535,7 @@
 				A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */,
 				A6C67A3A1A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m in Sources */,
 				A6A4EFB01A2BD4D500FD4066 /* FLYGroupListTableViewCell.m in Sources */,
+				A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */,
 				A6A0E4BE1A1E76110036116E /* FLEXHierarchyTableViewCell.m in Sources */,
 				A6A0E49C1A1E76110036116E /* FLEXFieldEditorView.m in Sources */,
 				A6A0E4B71A1E76110036116E /* FLEXSetExplorerViewController.m in Sources */,
