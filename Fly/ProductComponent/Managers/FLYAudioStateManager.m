@@ -10,6 +10,7 @@
 #import "AEAudioController.h"
 #import "AERecorder.h"
 #import "AEAudioFilePlayer.h"
+#import "FLYFileManager.h"
 
 @implementation FLYAudioStateManager
 
@@ -68,9 +69,14 @@
 //        self.player = nil;
 //    } else {
         NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.aiff"];
-        
-        if ( ![[NSFileManager defaultManager] fileExistsAtPath:path] ) return;
+//        NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.aiff"];
+
+    NSURL *url = [NSURL URLWithString:@"http://freedownloads.last.fm/download/569264057/Get+Got.mp3"];
+    NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:[url.pathComponents componentsJoinedByString:@"_"]];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        return;
+    }
         
         NSError *error = nil;
         self.player = [AEAudioFilePlayer audioFilePlayerWithURL:[NSURL fileURLWithPath:path] audioController:_audioController error:&error];

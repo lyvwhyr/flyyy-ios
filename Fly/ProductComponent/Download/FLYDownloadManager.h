@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define kDownloadCompleteNotification @"kDownloadCompleteNotification"
+
 @interface FLYDownloadManager : NSObject {
     dispatch_queue_t _startDownloadQueue;
 }

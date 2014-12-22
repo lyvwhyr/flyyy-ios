@@ -41,6 +41,8 @@
     self = [super init];
     if (self) {
         self.view.frame = frame;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadComplete:) name:kDownloadCompleteNotification object:nil];
     }
     return self;
 }
@@ -216,6 +218,12 @@
     [self.view layoutIfNeeded];
     FLYTopicDetailViewController *viewController = [FLYTopicDetailViewController new];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)downloadComplete:(NSNotification *)notificaiton
+{
+    NSString *localPath = [notificaiton.userInfo objectForKey:@"localPath"];
+    
 }
 
 - (void)commentButtonTapped:(FLYFeedTopicTableViewCell *)cell

@@ -10,7 +10,6 @@
 #import "FLYFileManager.h"
 #import "AFHTTPRequestOperation.h"
 
-#define kDownloadCompleteNotification @"kDownloadCompleteNotification"
 #define kTimeoutInterval 20
 
 @interface FLYDownloadManager()
@@ -64,13 +63,16 @@
                 //retry
                 return;
             }
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDownloadCompleteNotification object:nil userInfo:@{@"localPath":localPath}];
+            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //retry
             NSLog(@"failed to load");
         }];
         
         [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-            NSLog(@"downloading");
+//            NSLog(@"downloading");
         }];
         
         NSOperationQueue *operationQueue = [NSOperationQueue new];
