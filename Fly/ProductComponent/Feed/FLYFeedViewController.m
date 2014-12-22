@@ -17,6 +17,7 @@
 #import "FLYTopicDetailViewController.h"
 #import "FLYBarButtonItem.h"
 #import "FLYGroupViewController.h"
+#import "FLYDownloadManager.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -68,6 +69,8 @@
     _backgroundView.userInteractionEnabled = NO;
     _backgroundView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_backgroundView];
+    
+    [[FLYDownloadManager sharedInstance] loadAudioByURLString:@"http://freedownloads.last.fm/download/569264057/Get+Got.mp3"];
 }
 
 - (void)_addInlineReplyBar

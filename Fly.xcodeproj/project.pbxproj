@@ -180,6 +180,8 @@
 		A6C67A3A1A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C67A391A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m */; };
 		A6CD56E41A47D891003486DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6CD56E31A47D891003486DD /* Localizable.strings */; };
 		A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */; };
+		A6CD56EB1A4802C3003486DD /* FLYDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56EA1A4802C3003486DD /* FLYDownloadManager.m */; };
+		A6CD56EE1A48079D003486DD /* FLYFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56ED1A48079D003486DD /* FLYFileManager.m */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
@@ -510,6 +512,10 @@
 		A6CD56E31A47D891003486DD /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		A6CD56E51A47DAFB003486DD /* NSBundle+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+FLYAddition.h"; sourceTree = "<group>"; };
 		A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+FLYAddition.m"; sourceTree = "<group>"; };
+		A6CD56E91A4802C3003486DD /* FLYDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYDownloadManager.h; sourceTree = "<group>"; };
+		A6CD56EA1A4802C3003486DD /* FLYDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDownloadManager.m; sourceTree = "<group>"; };
+		A6CD56EC1A48079D003486DD /* FLYFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFileManager.h; sourceTree = "<group>"; };
+		A6CD56ED1A48079D003486DD /* FLYFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFileManager.m; sourceTree = "<group>"; };
 		A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
@@ -641,6 +647,7 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A6CD56E81A480298003486DD /* Download */,
 				A6A57AA61A34344900610785 /* TopicDetail */,
 				A6A57A951A33D8DE00610785 /* ReplyView */,
 				A6A4EFBB1A2C22E300FD4066 /* Group */,
@@ -1196,6 +1203,17 @@
 			path = TopicDetail;
 			sourceTree = "<group>";
 		};
+		A6CD56E81A480298003486DD /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				A6CD56E91A4802C3003486DD /* FLYDownloadManager.h */,
+				A6CD56EA1A4802C3003486DD /* FLYDownloadManager.m */,
+				A6CD56EC1A48079D003486DD /* FLYFileManager.h */,
+				A6CD56ED1A48079D003486DD /* FLYFileManager.m */,
+			);
+			path = Download;
+			sourceTree = "<group>";
+		};
 		A6E171F31A1C5F1A00F2B4BF /* SVPulsingAnnotationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1499,6 +1517,7 @@
 				A6A0E4C01A1E76110036116E /* FLEXImagePreviewViewController.m in Sources */,
 				A6A57A981A33D92700610785 /* FLYInlineReplyView.m in Sources */,
 				A6A0E4B91A1E76110036116E /* FLEXViewExplorerViewController.m in Sources */,
+				A6CD56EB1A4802C3003486DD /* FLYDownloadManager.m in Sources */,
 				A6263EBD1A18817A00C4C3BA /* FLYUniversalViewController.m in Sources */,
 				A6A0E4981A1E76110036116E /* FLEXArgumentInputTextView.m in Sources */,
 				A69C4BE51A284B6F00CAD443 /* FLYFeedViewController.m in Sources */,
@@ -1543,6 +1562,7 @@
 				A6A57A901A33B91700610785 /* UIView+FLYAddition.m in Sources */,
 				A69C4BB11A271B8E00CAD443 /* DismissingAnimator.m in Sources */,
 				A66E204F1A2EBDAE004235F5 /* RDVTabBarController.m in Sources */,
+				A6CD56EE1A48079D003486DD /* FLYFileManager.m in Sources */,
 				A6A0E4BC1A1E76110036116E /* FLEXRuntimeUtility.m in Sources */,
 				A6A0E4A81A1E76110036116E /* FLEXFileBrowserTableViewController.m in Sources */,
 				A6263E921A187E1200C4C3BA /* main.m in Sources */,
