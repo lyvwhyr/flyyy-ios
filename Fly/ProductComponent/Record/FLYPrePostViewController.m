@@ -15,11 +15,13 @@
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
 #define kFlyPostButtonHeight 44
+#define kTitleTextCellHeight 70
 
-@interface FLYPrePostViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface FLYPrePostViewController () <UITableViewDataSource, UITableViewDelegate, FLYPrePostTitleTableViewCellDelegate>
 
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) FLYPostButtonView *postButton;
+@property (nonatomic) UIView *overlayView;
 
 @property (nonatomic) NSMutableArray *groups;
 
@@ -72,6 +74,16 @@
         make.trailing.equalTo(self.view);
         make.bottom.equalTo(self.view).offset(-kFlyPostButtonHeight);
     }];
+    
+    if (_overlayView) {
+        [_overlayView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(kNavBarHeight + kStatusBarHeight + kTitleTextCellHeight);
+            make.leading.equalTo(self.view);
+            make.trailing.equalTo(self.view);
+            make.bottom.equalTo(self.view);
+        }];
+    }
+    
     [super updateViewConstraints];
     
 }
@@ -99,6 +111,7 @@
         if (!cell) {
             cell = [[FLYPrePostTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
+        ((FLYPrePostTitleTableViewCell *)cell).delegate = self;
     } else {
         static NSString *cellIdentifier = kFlyPrePostChooseGroupCellIdentifier;
         FLYPrePostChooseGroupTableViewCell *chooseGroupCell;
@@ -114,7 +127,7 @@
 - (CGFloat) tableView: (UITableView*) tableView heightForRowAtIndexPath: (NSIndexPath*) indexPath
 {
     if (indexPath.row == 0 && indexPath.section == 0) {
-        return 70;
+        return kTitleTextCellHeight;
     } else {
         return 44;
     }
@@ -150,6 +163,43 @@
     } else {
         return 40;
     }
+}
+
+#pragma mark - FLYPrePostTitleTableViewCellDelegate
+- (BOOL)titleTextViewShouldBeginEditing:(UITextView *)textView
+{
+    [self.view addSubview:self.overlayView];
+    [self updateViewConstraints];
+    return YES;
+}
+
+- (BOOL)titleTextViewShouldEndEditing:(UIView *)textView
+{
+    [self _exitEditTitleMode];
+    return YES;
+}
+
+- (UIView *)overlayView
+{
+    if (!_overlayView) {
+        _overlayView = [UIView new];
+        [_overlayView setBackgroundColor:[UIColor blackColor]];
+        _overlayView.alpha = 0.65;
+        
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_exitEditTitleMode)];
+        [_overlayView addGestureRecognizer:tapGestureRecognizer];
+    }
+    return _overlayView;
+}
+
+- (void)_exitEditTitleMode
+{
+    _overlayView.alpha = 0;
+    [_overlayView removeFromSuperview];
+    _overlayView = nil;
+    
+    FLYPrePostTitleTableViewCell *titleTableCell = (FLYPrePostTitleTableViewCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    [titleTableCell resignFirstResponder];
 }
 
 - (void)_addTestData

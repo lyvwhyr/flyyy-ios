@@ -241,7 +241,6 @@
     } completion:^(BOOL finished) {
 
     }];
-     
 }
 
 - (void)_moveInlineReplyViewOffScreen

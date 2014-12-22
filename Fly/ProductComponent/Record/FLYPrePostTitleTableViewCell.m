@@ -57,14 +57,62 @@
     [super updateConstraints];
 }
 
+#pragma mark - UITextViewDelegate
 
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView
 {
-    if (_descriptionTextView.textColor == [UIColor lightGrayColor]) {
-        _descriptionTextView.text = @"";
-        _descriptionTextView.textColor = [UIColor blackColor];
+    if (textView.textColor == [UIColor lightGrayColor]) {
+        textView.text = @"";
+        textView.textColor = [UIColor blackColor];
     }
+    [_delegate titleTextViewShouldBeginEditing:textView];
     return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+}
+
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+    [_delegate titleTextViewShouldEndEditing:textView];
+    return YES;
+}
+
+-(void) textViewDidChange:(UITextView *)textView
+{
+    if(textView.text.length == 0){
+        textView.textColor = [UIColor lightGrayColor];
+        textView.text = @"List words or terms separated by commas";
+        [textView resignFirstResponder];
+    }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        if(textView.text.length == 0){
+            textView.textColor = [UIColor lightGrayColor];
+            textView.text = @"List words or terms separated by commas";
+            [textView resignFirstResponder];
+        }
+        return NO;
+    }
+    
+    return YES;
+}
+
+#pragma mark - UIResponder
+- (void)becomeFirstResponder
+{
+    [_descriptionTextView becomeFirstResponder];
+}
+
+- (void)resignFirstResponder
+{
+    [_descriptionTextView resignFirstResponder];
 }
 
 
