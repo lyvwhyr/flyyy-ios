@@ -71,25 +71,25 @@
 
 - (void)playAudioURLStr:(NSString *)str WithCompletionBlock:(AudioPlayerCompleteblock)block
 {
-//    if ( _player ) {
-//        [_audioController removeChannels:@[_player]];
-//        self.player = nil;
-//    } else {
-        NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//        NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.aiff"];
-
+    if (_player) {
+        [_audioController removeChannels:@[_player]];
+        self.player = nil;
+    }
+    NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //        NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.aiff"];
+    
     if (str.length == 0) {
         //default
         str = @"http://freedownloads.last.fm/download/569264057/Get+Got.mp3";
     }
     
     NSURL *url = [NSURL URLWithString:str];
-//    NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:[url.pathComponents componentsJoinedByString:@"_"]];
+    //    NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:[url.pathComponents componentsJoinedByString:@"_"]];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:str]) {
         return;
     }
-        
+    
     NSError *error = nil;
     self.player = [AEAudioFilePlayer audioFilePlayerWithURL:[NSURL fileURLWithPath:str] audioController:_audioController error:&error];
     
@@ -108,7 +108,6 @@
     _player.completionBlock = [block copy];
     [_audioController addChannels:@[_player]];
     NSLog(@"audio duration after %f", _player.duration);
-//    }
 }
 
 
