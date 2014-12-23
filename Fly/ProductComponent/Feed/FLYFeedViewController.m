@@ -227,6 +227,7 @@ static NSInteger globalPageNum = 1;
         cell.contentView.frame = cell.bounds;
         cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
     }
+    cell.post = _posts[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
     return cell;
@@ -252,6 +253,7 @@ static NSInteger globalPageNum = 1;
     
 }
 
+#pragma mark - FLYFeedTopicTableViewCellDelegate
 - (void)commentButtonTapped:(FLYFeedTopicTableViewCell *)cell
 {
      self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
@@ -262,6 +264,13 @@ static NSInteger globalPageNum = 1;
     [self.view layoutIfNeeded];
 }
 
+- (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYPost *)post
+{
+    NSString *audioURL = post.audioURL;
+    
+}
+
+#pragma mark - reply view move in and off screen
 - (void)_moveInlineReplyViewOnScreen
 {
     self.automaticallyAdjustsScrollViewInsets = NO;

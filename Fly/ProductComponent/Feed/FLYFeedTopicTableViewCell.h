@@ -7,14 +7,18 @@
 //
 
 @class FLYFeedTopicTableViewCell;
+@class FLYPost;
 
 @protocol FLYFeedTopicTableViewCellDelegate <NSObject>
 
 - (void)commentButtonTapped:(FLYFeedTopicTableViewCell *)cell;
+- (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYPost *)post;
 
 @end
 
 @interface FLYFeedTopicTableViewCell : UITableViewCell
+
+@property (nonatomic) FLYPost *post;
 
 @property id<FLYFeedTopicTableViewCellDelegate>delegate;
 

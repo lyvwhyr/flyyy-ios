@@ -11,8 +11,11 @@
 #import "FLYIconButton.h"
 #import "FLYInlineActionView.h"
 #import "UIImage+FLYAddition.h"
+#import "FLYPost.h"
 
 @interface FLYFeedTopicTableViewCell()
+
+
 
 @property (nonatomic) UIView *postHeaderView;
 @property (nonatomic) UIImageView *avatarImageView;
@@ -72,6 +75,7 @@
         
         _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _playButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [_playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
         [self addSubview:_playButton];
         
@@ -167,6 +171,11 @@
     }];
     
     [super updateConstraints];
+}
+
+- (void)_playButtonTapped
+{
+    [self.delegate playButtonTapped:self withPost:self.post];
 }
 
 
