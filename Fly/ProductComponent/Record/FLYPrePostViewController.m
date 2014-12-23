@@ -11,6 +11,9 @@
 #import "FLYPrePostTitleTableViewCell.h"
 #import "FLYPrePostChooseGroupTableViewCell.h"
 #import "FLYPostButtonView.h"
+#import "JGProgressHUD.h"
+#import "JGProgressHUDSuccessIndicatorView.h"
+#import "Dialog.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -49,6 +52,9 @@
     [_tableView registerClass:[FLYPrePostChooseGroupTableViewCell class] forCellReuseIdentifier:kFlyPrePostChooseGroupCellIdentifier];
     
     _postButton = [FLYPostButtonView new];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_postButtonTapped)];
+    [_postButton addGestureRecognizer:tap];
+    
     [self.view addSubview:_postButton];
     
     [self updateViewConstraints];
@@ -233,5 +239,10 @@
     [_groups addObject:@"Family"];
 }
 
+- (void)_postButtonTapped
+{
+    [Dialog simpleToast:@"Posted"];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

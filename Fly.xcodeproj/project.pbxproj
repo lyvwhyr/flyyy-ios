@@ -54,6 +54,15 @@
 		A64D159F1A29C0BB00369D62 /* icon_inline_comment@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D159C1A29C0BB00369D62 /* icon_inline_comment@3x.png */; };
 		A64D15A01A29C0BB00369D62 /* icon_inline_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D159D1A29C0BB00369D62 /* icon_inline_share@3x.png */; };
 		A64D15A11A29C0BB00369D62 /* icon_inline_wing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D159E1A29C0BB00369D62 /* icon_inline_wing@3x.png */; };
+		A651BD871A4985D40081A1E0 /* Dialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A651BD861A4985D40081A1E0 /* Dialog.m */; };
+		A651BD901A4985F20081A1E0 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A651BD891A4985F20081A1E0 /* SVProgressHUD.bundle */; };
+		A651BD911A4985F20081A1E0 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = A651BD8A1A4985F20081A1E0 /* error.png */; };
+		A651BD921A4985F20081A1E0 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A651BD8B1A4985F20081A1E0 /* error@2x.png */; };
+		A651BD931A4985F20081A1E0 /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = A651BD8C1A4985F20081A1E0 /* success.png */; };
+		A651BD941A4985F20081A1E0 /* success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A651BD8D1A4985F20081A1E0 /* success@2x.png */; };
+		A651BD951A4985F20081A1E0 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A651BD8F1A4985F20081A1E0 /* SVProgressHUD.m */; };
+		A651BD981A4986400081A1E0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A651BD971A4986400081A1E0 /* MBProgressHUD.m */; };
+		A651BD9C1A4986730081A1E0 /* UALogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A651BD9B1A4986730081A1E0 /* UALogger.m */; };
 		A655783E1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A655783D1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m */; };
 		A65578411A3ADCC3003102CD /* FLYPostButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A65578401A3ADCC3003102CD /* FLYPostButtonView.m */; };
 		A65578431A3ADE4E003102CD /* icon_share_post@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A65578421A3ADE4E003102CD /* icon_share_post@3x.png */; };
@@ -300,6 +309,19 @@
 		A64D159D1A29C0BB00369D62 /* icon_inline_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_share@3x.png"; sourceTree = "<group>"; };
 		A64D159E1A29C0BB00369D62 /* icon_inline_wing@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_wing@3x.png"; sourceTree = "<group>"; };
 		A651BD831A4972470081A1E0 /* FLYDownloadableAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYDownloadableAudio.h; sourceTree = "<group>"; };
+		A651BD851A4985D40081A1E0 /* Dialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dialog.h; sourceTree = "<group>"; };
+		A651BD861A4985D40081A1E0 /* Dialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dialog.m; sourceTree = "<group>"; };
+		A651BD891A4985F20081A1E0 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		A651BD8A1A4985F20081A1E0 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
+		A651BD8B1A4985F20081A1E0 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error@2x.png"; sourceTree = "<group>"; };
+		A651BD8C1A4985F20081A1E0 /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success.png; sourceTree = "<group>"; };
+		A651BD8D1A4985F20081A1E0 /* success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "success@2x.png"; sourceTree = "<group>"; };
+		A651BD8E1A4985F20081A1E0 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		A651BD8F1A4985F20081A1E0 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		A651BD961A4986400081A1E0 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		A651BD971A4986400081A1E0 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		A651BD9A1A4986730081A1E0 /* UALogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UALogger.h; sourceTree = "<group>"; };
+		A651BD9B1A4986730081A1E0 /* UALogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UALogger.m; sourceTree = "<group>"; };
 		A655783C1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostChooseGroupTableViewCell.h; sourceTree = "<group>"; };
 		A655783D1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostChooseGroupTableViewCell.m; sourceTree = "<group>"; };
 		A655783F1A3ADCC3003102CD /* FLYPostButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPostButtonView.h; sourceTree = "<group>"; };
@@ -777,6 +799,8 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A651BD991A49866C0081A1E0 /* UALogger */,
+				A651BD841A4985CB0081A1E0 /* HUD */,
 				A6A0E4211A1E760A0036116E /* FLEX */,
 				A6E171F71A1C62DD00F2B4BF /* PulsingHalo */,
 				A6E171F31A1C5F1A00F2B4BF /* SVPulsingAnnotationView */,
@@ -813,6 +837,41 @@
 				A648C0E21A19AD4A00FF1744 /* View+MASShorthandAdditions.h */,
 			);
 			path = Masonry;
+			sourceTree = "<group>";
+		};
+		A651BD841A4985CB0081A1E0 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				A651BD961A4986400081A1E0 /* MBProgressHUD.h */,
+				A651BD971A4986400081A1E0 /* MBProgressHUD.m */,
+				A651BD881A4985E90081A1E0 /* SVProgressHUD */,
+				A651BD851A4985D40081A1E0 /* Dialog.h */,
+				A651BD861A4985D40081A1E0 /* Dialog.m */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
+		A651BD881A4985E90081A1E0 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				A651BD891A4985F20081A1E0 /* SVProgressHUD.bundle */,
+				A651BD8A1A4985F20081A1E0 /* error.png */,
+				A651BD8B1A4985F20081A1E0 /* error@2x.png */,
+				A651BD8C1A4985F20081A1E0 /* success.png */,
+				A651BD8D1A4985F20081A1E0 /* success@2x.png */,
+				A651BD8E1A4985F20081A1E0 /* SVProgressHUD.h */,
+				A651BD8F1A4985F20081A1E0 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		A651BD991A49866C0081A1E0 /* UALogger */ = {
+			isa = PBXGroup;
+			children = (
+				A651BD9A1A4986730081A1E0 /* UALogger.h */,
+				A651BD9B1A4986730081A1E0 /* UALogger.m */,
+			);
+			path = UALogger;
 			sourceTree = "<group>";
 		};
 		A66E20461A2EBDA5004235F5 /* RDVTabBarController */ = {
@@ -1342,7 +1401,9 @@
 			files = (
 				A6F27CAB1A2085D6000EC0B3 /* icon_audio_wave@3x.png in Resources */,
 				A64D159F1A29C0BB00369D62 /* icon_inline_comment@3x.png in Resources */,
+				A651BD941A4985F20081A1E0 /* success@2x.png in Resources */,
 				A69C4BBE1A27E2A400CAD443 /* icon_unchecked@3x.png in Resources */,
+				A651BD921A4985F20081A1E0 /* error@2x.png in Resources */,
 				A6A0E4191A1DD5130036116E /* icon_record_trash_bin@3x.png in Resources */,
 				A6A4EFA31A2A76FC00FD4066 /* icon_feed_group@3x.png in Resources */,
 				A6A4EFB51A2BE99300FD4066 /* icon_suggest_group@3x.png in Resources */,
@@ -1375,6 +1436,7 @@
 				A69C4C021A28636F00CAD443 /* p12.jpg in Resources */,
 				A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */,
 				A61D186E1A1F1E7900D188B5 /* icon_record_pause@3x.png in Resources */,
+				A651BD901A4985F20081A1E0 /* SVProgressHUD.bundle in Resources */,
 				A6F27CA71A20735A000EC0B3 /* record_animate_12.png in Resources */,
 				A69C4BFF1A28636F00CAD443 /* p9.jpg in Resources */,
 				A69C4BFD1A28636F00CAD443 /* p7.jpg in Resources */,
@@ -1401,6 +1463,7 @@
 				A69C4BF91A28636F00CAD443 /* p3.jpg in Resources */,
 				A6F27CA01A20735A000EC0B3 /* record_animate_05.png in Resources */,
 				A6F27CA51A20735A000EC0B3 /* record_animate_10.png in Resources */,
+				A651BD931A4985F20081A1E0 /* success.png in Resources */,
 				A65578431A3ADE4E003102CD /* icon_share_post@3x.png in Resources */,
 				A67208251A356CAE00B2C5B5 /* icon_play_reply@3x.png in Resources */,
 				A61D18771A1F27E900D188B5 /* FLYPrePostViewController.xib in Resources */,
@@ -1408,6 +1471,7 @@
 				A69C4C001A28636F00CAD443 /* p10.jpg in Resources */,
 				A6A4EFA51A2A7CF600FD4066 /* icon_down_arrow@3x.png in Resources */,
 				A69C4BC01A27E89A00CAD443 /* icon_checked@3x.png in Resources */,
+				A651BD911A4985F20081A1E0 /* error.png in Resources */,
 				A69C4BD11A281E1100CAD443 /* icon_back@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1500,6 +1564,7 @@
 				A6A4EFAD1A2B05C700FD4066 /* FLYGroupListViewController.m in Sources */,
 				A6A30D6F1A1B1DF8001AE1FE /* FLYCircleView.m in Sources */,
 				A648C0E71A19AD4A00FF1744 /* MASViewAttribute.m in Sources */,
+				A651BD951A4985F20081A1E0 /* SVProgressHUD.m in Sources */,
 				A648C0E61A19AD4A00FF1744 /* MASLayoutConstraint.m in Sources */,
 				A6A0E4991A1E76110036116E /* FLEXArgumentInputView.m in Sources */,
 				A6A0E4AE1A1E76110036116E /* FLEXArrayExplorerViewController.m in Sources */,
@@ -1511,6 +1576,7 @@
 				A6A0E4A21A1E76110036116E /* FLEXExplorerViewController.m in Sources */,
 				A6A0E48F1A1E76110036116E /* FLEXArgumentInputColorView.m in Sources */,
 				A6A0E4BF1A1E76110036116E /* FLEXHierarchyTableViewController.m in Sources */,
+				A651BD871A4985D40081A1E0 /* Dialog.m in Sources */,
 				A6A0E4AC1A1E76110036116E /* FLEXLiveObjectsTableViewController.m in Sources */,
 				A6A4EFC21A2C634900FD4066 /* FLYSingleGroupViewController.m in Sources */,
 				A648C0E31A19AD4A00FF1744 /* MASCompositeConstraint.m in Sources */,
@@ -1528,6 +1594,7 @@
 				A6A0E4BB1A1E76110036116E /* FLEXResources.m in Sources */,
 				A69C4BCF1A280D8800CAD443 /* GBFlatSelectableButton.m in Sources */,
 				A6A0E4951A1E76110036116E /* FLEXArgumentInputStringView.m in Sources */,
+				A651BD9C1A4986730081A1E0 /* UALogger.m in Sources */,
 				A6A30D6C1A1B0586001AE1FE /* FLYRecordViewController.m in Sources */,
 				A648C0E81A19AD4A00FF1744 /* MASViewConstraint.m in Sources */,
 				A64D159B1A29BC6E00369D62 /* FLYInlineActionView.m in Sources */,
@@ -1575,6 +1642,7 @@
 				A6A4EFA81A2A85C400FD4066 /* FLYNavigationBarMyGroupButton.m in Sources */,
 				A61D18761A1F27E900D188B5 /* FLYPrePostViewController.m in Sources */,
 				A6A0E4A31A1E76110036116E /* FLEXManager.m in Sources */,
+				A651BD981A4986400081A1E0 /* MBProgressHUD.m in Sources */,
 				A6A0E49F1A1E76110036116E /* FLEXMethodCallingViewController.m in Sources */,
 				A6263ECB1A1897CE00C4C3BA /* UIColor+FLYAddition.m in Sources */,
 				A6A0E4921A1E76110036116E /* FLEXArgumentInputJSONObjectView.m in Sources */,
