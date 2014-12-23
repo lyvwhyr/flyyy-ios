@@ -19,6 +19,9 @@
 #import "FLYGroupViewController.h"
 #import "FLYDownloadManager.h"
 #import "FLYPost.h"
+#import "SVPullToRefresh.h"
+
+static NSInteger globalPageNum = 1;
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -32,6 +35,7 @@
 
 @property (nonatomic) NSMutableArray *posts;
 @property (nonatomic) BOOL didSetConstraints;
+@property (nonatomic) enum RequestType requestType;
 
 @end
 
@@ -56,7 +60,6 @@
         [self _loadLeftBarItem];
     }
     [self _addInlineReplyBar];
-    [self _addDatasource];
     
     _feedTableView = [UITableView new];
     _feedTableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -73,6 +76,27 @@
     _backgroundView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_backgroundView];
     
+    __weak typeof(self) weakSelf = self;
+//    [NSTimer timerWithTimeInterval:1.0f target:self selector:@selector(_addDataSource) userInfo:nil repeats:NO];
+    
+//    [self performSelector:@selector(_addDataSource) withObject:nil afterDelay:1.0];
+    
+    [_feedTableView addPullToRefreshWithActionHandler:^{
+        __strong typeof(self) strongSelf = weakSelf;
+        strongSelf.requestType = RequestTypeNormal;
+        [strongSelf performSelector:@selector(_addDataSource:) withObject:@(1) afterDelay:1.0];
+    }];
+    
+    // setup infinite scrolling
+    __weak typeof(self) weakSelfLoadMore = self;
+    [_feedTableView addInfiniteScrollingWithActionHandler:^{
+        __strong typeof(self) strongSelf = weakSelfLoadMore;
+        strongSelf.requestType = RequestTypeLoadMore;
+        [strongSelf performSelector:@selector(_addDataSource:) withObject:@(globalPageNum) afterDelay:1.0];
+    }];
+
+    [_feedTableView triggerPullToRefresh];
+
     [[FLYDownloadManager sharedInstance] loadAudioByURLString:@"http://freedownloads.last.fm/download/569264057/Get+Got.mp3"];
 }
 
@@ -155,28 +179,29 @@
 //    return [super navigationItem];
 //}
 
-- (void)_addDatasource
+- (void)_addDataSource:(id)argument
 {
-    /*
-     @property (nonatomic, copy) NSString *postAt;
-     @property (nonatomic, copy) NSString *audioURL;
-     @property (nonatomic) NSInteger likeCount;
-     @property (nonatomic) NSInteger replyCount;
-     @property (nonatomic) NSInteger audioLength;
-     */
+    globalPageNum = [argument integerValue];
+    if (globalPageNum == 1) {
+        [_posts removeAllObjects];
+    }
+    [self _addDatasource:globalPageNum];
+    [_feedTableView.pullToRefreshView stopAnimating];
+    [_feedTableView.infiniteScrollingView stopAnimating];
+}
+
+- (void)_addDatasource:(NSInteger)pageNum
+{
+    globalPageNum++;
     
-    NSDictionary *p1 = @{@"title":@"Just broke up with my gf", @"user_name":@"pancake", @"postAt":@"1m", @"audio_url":@"http://freedownloads.last.fm/download/569264057/Get+Got.mp3", @"like_count":@(10), @"reply_count":@(25), @"audio_length":@(48), @"group_name":@"Confession"};
-    NSDictionary *p2 = @{@"title":@"Just broke up with my gf", @"user_name":@"pancake", @"postAt":@"1m", @"audio_url":@"http://freedownloads.last.fm/download/569264057/Get+Got.mp3", @"like_count":@(10), @"reply_count":@(25), @"audio_length":@(48), @"group_name":@"Confession"};
-    NSDictionary *p3 = @{@"title":@"Just broke up with my gf", @"user_name":@"pancake", @"postAt":@"1m", @"audio_url":@"http://freedownloads.last.fm/download/569264057/Get+Got.mp3", @"like_count":@(10), @"reply_count":@(25), @"audio_length":@(48), @"group_name":@"Confession"};
-    NSDictionary *p4 = @{@"title":@"Just broke up with my gf", @"user_name":@"pancake", @"postAt":@"1m", @"audio_url":@"http://freedownloads.last.fm/download/569264057/Get+Got.mp3", @"like_count":@(10), @"reply_count":@(25), @"audio_length":@(48), @"group_name":@"Confession"};
-    NSDictionary *p5 = @{@"title":@"Just broke up with my gf", @"user_name":@"pancake", @"postAt":@"1m", @"audio_url":@"http://freedownloads.last.fm/download/569264057/Get+Got.mp3", @"like_count":@(10), @"reply_count":@(25), @"audio_length":@(48), @"group_name":@"Confession"};
-    NSDictionary *p6 = @{@"title":@"Just broke up with my gf", @"user_name":@"pancake", @"postAt":@"1m", @"audio_url":@"http://freedownloads.last.fm/download/569264057/Get+Got.mp3", @"like_count":@(10), @"reply_count":@(25), @"audio_length":@(48), @"group_name":@"Confession"};
-    [_posts addObject:p1];
-    [_posts addObject:p2];
-    [_posts addObject:p3];
-    [_posts addObject:p4];
-    [_posts addObject:p5];
-    [_posts addObject:p6];
+    NSInteger postsPerPage = 10;
+    NSInteger start = (pageNum - 1) * postsPerPage + 1;
+    NSInteger end = start + postsPerPage;
+    for (NSInteger i = start; i <= end; i++) {
+        FLYPost *post = [[FLYPost alloc] initWithDictory:@{@"count":@(i), @"title":@"Tellm me something I need to know."}];
+        [_posts addObject:post];
+    }
+    [self.feedTableView reloadData];
 }
 
 - (void)_filterButtonTapped

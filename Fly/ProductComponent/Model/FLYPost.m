@@ -11,14 +11,12 @@
 
 @implementation FLYPost
 
-static int count = 1;
-
 - (instancetype)initWithDictory:(NSDictionary *)dict
 {
     if (self = [super init]) {
         _title = [dict fly_stringForKey:@"title"];
-        _audioURL = [NSString stringWithFormat:@"https://ia601409.us.archive.org/6/items/new_concept_uk_level3/lesson_%.2d.mp3", count];
-        count++;
+        NSInteger count = [dict fly_integerForKey:@"count"];
+        _audioURL = [NSString stringWithFormat:@"https://ia601409.us.archive.org/6/items/new_concept_uk_level3/lesson_%.2d.mp3", (int)count];
     }
     return self;
 }

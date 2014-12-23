@@ -60,6 +60,12 @@
 #define COCOAPODS_VERSION_MINOR_SCLAlertView_Objective_C 3
 #define COCOAPODS_VERSION_PATCH_SCLAlertView_Objective_C 5
 
+// SVPullToRefresh
+#define COCOAPODS_POD_AVAILABLE_SVPullToRefresh
+#define COCOAPODS_VERSION_MAJOR_SVPullToRefresh 0
+#define COCOAPODS_VERSION_MINOR_SVPullToRefresh 4
+#define COCOAPODS_VERSION_PATCH_SVPullToRefresh 1
+
 // TheAmazingAudioEngine
 #define COCOAPODS_POD_AVAILABLE_TheAmazingAudioEngine
 #define COCOAPODS_VERSION_MAJOR_TheAmazingAudioEngine 1
