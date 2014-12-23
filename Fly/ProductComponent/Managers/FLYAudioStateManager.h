@@ -20,7 +20,7 @@ typedef void (^AudioPlayerCompleteblock)();
 
 - (void)startRecord;
 - (void)stopRecord;
-- (void)playWithCompletionBlock:(AudioPlayerCompleteblock)block;
+- (void)playAudioURLStr:(NSString *)str WithCompletionBlock:(AudioPlayerCompleteblock)block;
 
 + (instancetype)manager;
 

@@ -13,7 +13,7 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *userName;
 @property (nonatomic, copy) NSString *postAt;
-@property (nonatomic, copy) NSString *audioURL;
+@property (nonatomic, copy) NSString *audioURLStr;
 @property (nonatomic) NSInteger likeCount;
 @property (nonatomic) NSInteger replyCount;
 @property (nonatomic) NSInteger audioLength;

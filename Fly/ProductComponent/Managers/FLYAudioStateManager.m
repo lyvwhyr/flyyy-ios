@@ -24,9 +24,16 @@
     return manager;
 }
 
+- (id)init
+{
+    if (self = [super init]) {
+        [self _initAudioController];
+    }
+    return self;
+}
+
 - (void)startRecord
 {
-    [self _initAudioController];
     if (_recorder) {
         [_recorder finishRecording];
         [_audioController removeOutputReceiver:_recorder];
@@ -62,7 +69,7 @@
     
 }
 
-- (void)playWithCompletionBlock:(AudioPlayerCompleteblock)block
+- (void)playAudioURLStr:(NSString *)str WithCompletionBlock:(AudioPlayerCompleteblock)block
 {
 //    if ( _player ) {
 //        [_audioController removeChannels:@[_player]];
@@ -71,31 +78,36 @@
         NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 //        NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.aiff"];
 
-    NSURL *url = [NSURL URLWithString:@"http://freedownloads.last.fm/download/569264057/Get+Got.mp3"];
-    NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:[url.pathComponents componentsJoinedByString:@"_"]];
+    if (str.length == 0) {
+        //default
+        str = @"http://freedownloads.last.fm/download/569264057/Get+Got.mp3";
+    }
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+    NSURL *url = [NSURL URLWithString:str];
+//    NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:[url.pathComponents componentsJoinedByString:@"_"]];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:str]) {
         return;
     }
         
-        NSError *error = nil;
-        self.player = [AEAudioFilePlayer audioFilePlayerWithURL:[NSURL fileURLWithPath:path] audioController:_audioController error:&error];
-        
-        if ( !_player ) {
-            [[[UIAlertView alloc] initWithTitle:@"Error"
-                                        message:[NSString stringWithFormat:@"Couldn't start playback: %@", [error localizedDescription]]
-                                       delegate:nil
-                              cancelButtonTitle:nil
-                              otherButtonTitles:@"OK", nil] show];
-            return;
-        }
+    NSError *error = nil;
+    self.player = [AEAudioFilePlayer audioFilePlayerWithURL:[NSURL fileURLWithPath:str] audioController:_audioController error:&error];
     
-        NSLog(@"audio duration before %f", _player.duration);
-        
-        _player.removeUponFinish = YES;
-        _player.completionBlock = [block copy];
-        [_audioController addChannels:@[_player]];
-        NSLog(@"audio duration after %f", _player.duration);
+    if ( !_player ) {
+        [[[UIAlertView alloc] initWithTitle:@"Error"
+                                    message:[NSString stringWithFormat:@"Couldn't start playback: %@", [error localizedDescription]]
+                                   delegate:nil
+                          cancelButtonTitle:nil
+                          otherButtonTitles:@"OK", nil] show];
+        return;
+    }
+    
+    NSLog(@"audio duration before %f", _player.duration);
+    
+    _player.removeUponFinish = YES;
+    _player.completionBlock = [block copy];
+    [_audioController addChannels:@[_player]];
+    NSLog(@"audio duration after %f", _player.duration);
 //    }
 }
 
@@ -106,6 +118,10 @@
     _audioController.preferredBufferDuration = 0.005;
     _audioController.useMeasurementMode = YES;
     [_audioController start:NULL];
+    
+    _recorder = [[AERecorder alloc] initWithAudioController:_audioController];
+    [_audioController addOutputReceiver:_recorder];
+    [_audioController addInputReceiver:_recorder];
 }
 
 @end

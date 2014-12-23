@@ -43,6 +43,7 @@
         NSString *localPath = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:[url.pathComponents componentsJoinedByString:@"_"]];
         NSString *downloadingPath = [localPath stringByAppendingString:@".part"];
         if ([[NSFileManager defaultManager] fileExistsAtPath:localPath]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDownloadCompleteNotification object:nil userInfo:@{@"localPath":localPath}];
             return;
         }
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];

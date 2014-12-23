@@ -20,6 +20,7 @@
 #import "FLYDownloadManager.h"
 #import "FLYPost.h"
 #import "SVPullToRefresh.h"
+#import "FLYAudioStateManager.h"
 
 static NSInteger globalPageNum = 1;
 
@@ -41,12 +42,10 @@ static NSInteger globalPageNum = 1;
 
 @implementation FLYFeedViewController
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)init
 {
     self = [super init];
     if (self) {
-        self.view.frame = frame;
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadComplete:) name:kDownloadCompleteNotification object:nil];
     }
     return self;
@@ -96,8 +95,6 @@ static NSInteger globalPageNum = 1;
     }];
 
     [_feedTableView triggerPullToRefresh];
-
-    [[FLYDownloadManager sharedInstance] loadAudioByURLString:@"http://freedownloads.last.fm/download/569264057/Get+Got.mp3"];
 }
 
 - (void)_addInlineReplyBar
@@ -249,8 +246,10 @@ static NSInteger globalPageNum = 1;
 
 - (void)downloadComplete:(NSNotification *)notificaiton
 {
-    NSString *localPath = [notificaiton.userInfo objectForKey:@"localPath"];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString *localPath = [notificaiton.userInfo objectForKey:@"localPath"];
+        [[FLYAudioStateManager manager] playAudioURLStr:localPath WithCompletionBlock:nil];
+    });
 }
 
 #pragma mark - FLYFeedTopicTableViewCellDelegate
@@ -266,8 +265,8 @@ static NSInteger globalPageNum = 1;
 
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYPost *)post
 {
-    NSString *audioURL = post.audioURL;
-    
+    NSString *audioURLStr = post.audioURLStr;
+    [[FLYDownloadManager sharedInstance] loadAudioByURLString:audioURLStr];
 }
 
 #pragma mark - reply view move in and off screen

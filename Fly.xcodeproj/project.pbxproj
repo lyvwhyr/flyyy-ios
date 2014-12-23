@@ -299,6 +299,7 @@
 		A64D159C1A29C0BB00369D62 /* icon_inline_comment@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_comment@3x.png"; sourceTree = "<group>"; };
 		A64D159D1A29C0BB00369D62 /* icon_inline_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_share@3x.png"; sourceTree = "<group>"; };
 		A64D159E1A29C0BB00369D62 /* icon_inline_wing@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_wing@3x.png"; sourceTree = "<group>"; };
+		A651BD831A4972470081A1E0 /* FLYDownloadableAudio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYDownloadableAudio.h; sourceTree = "<group>"; };
 		A655783C1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostChooseGroupTableViewCell.h; sourceTree = "<group>"; };
 		A655783D1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostChooseGroupTableViewCell.m; sourceTree = "<group>"; };
 		A655783F1A3ADCC3003102CD /* FLYPostButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPostButtonView.h; sourceTree = "<group>"; };
@@ -1210,6 +1211,7 @@
 				A6CD56EA1A4802C3003486DD /* FLYDownloadManager.m */,
 				A6CD56EC1A48079D003486DD /* FLYFileManager.h */,
 				A6CD56ED1A48079D003486DD /* FLYFileManager.m */,
+				A651BD831A4972470081A1E0 /* FLYDownloadableAudio.h */,
 			);
 			path = Download;
 			sourceTree = "<group>";
