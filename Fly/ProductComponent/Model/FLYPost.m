@@ -7,19 +7,20 @@
 //
 
 #import "FLYPost.h"
-
-@interface FLYPost()
-
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *userName;
-@property (nonatomic, copy) NSString *postAt;
-@property (nonatomic, copy) NSString *audioURL;
-@property (nonatomic) NSInteger likeCount;
-@property (nonatomic) NSInteger replyCount;
-@property (nonatomic) NSInteger audioLength;
-
-@end
+#import "NSDictionary+FLYAddition.h"
 
 @implementation FLYPost
+
+static int count = 1;
+
+- (instancetype)initWithDictory:(NSDictionary *)dict
+{
+    if (self = [super init]) {
+        _title = [dict fly_stringForKey:@"title"];
+        _audioURL = [NSString stringWithFormat:@"https://ia601409.us.archive.org/6/items/new_concept_uk_level3/lesson_%.2d.mp3", count];
+        count++;
+    }
+    return self;
+}
 
 @end

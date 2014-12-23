@@ -10,4 +10,14 @@
 
 @interface FLYPost : NSObject
 
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *userName;
+@property (nonatomic, copy) NSString *postAt;
+@property (nonatomic, copy) NSString *audioURL;
+@property (nonatomic) NSInteger likeCount;
+@property (nonatomic) NSInteger replyCount;
+@property (nonatomic) NSInteger audioLength;
+
+- (instancetype)initWithDictory:(NSDictionary *)dict;
+
 @end

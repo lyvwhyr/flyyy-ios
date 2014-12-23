@@ -18,6 +18,7 @@
 #import "FLYBarButtonItem.h"
 #import "FLYGroupViewController.h"
 #import "FLYDownloadManager.h"
+#import "FLYPost.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
