@@ -10,6 +10,8 @@
 
 @interface FLYFileManager : NSObject
 
+- (NSInteger)currentAudioCacheSize;
+
 + (instancetype)sharedInstance;
 + (NSString *)audioCacheDirectory;
 

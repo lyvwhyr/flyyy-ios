@@ -269,6 +269,12 @@ static NSInteger globalPageNum = 1;
     [[FLYDownloadManager sharedInstance] loadAudioByURLString:audioURLStr];
 }
 
+#pragma mark - download audios
+- (void)_autoDownloadAudios
+{
+    
+}
+
 #pragma mark - reply view move in and off screen
 - (void)_moveInlineReplyViewOnScreen
 {

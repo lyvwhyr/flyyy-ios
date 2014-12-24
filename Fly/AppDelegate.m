@@ -11,6 +11,7 @@
 #import "FLYMainViewController.h"
 #import "UIColor+FLYAddition.h"
 #import "UIImage+FLYAddition.h"
+#import "FLYFileManager.h"
 
 @interface AppDelegate ()
 
@@ -27,6 +28,10 @@
     FLYMainViewController *mainVC = [FLYMainViewController new];
     FLYNavigationController *navigationVC = [[FLYNavigationController alloc] initWithRootViewController:mainVC];
     self.window.rootViewController = navigationVC;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [FLYFileManager sharedInstance];
+    });
     
     return YES;
 }
