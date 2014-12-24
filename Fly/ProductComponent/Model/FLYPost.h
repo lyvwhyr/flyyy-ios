@@ -17,6 +17,7 @@
 @property (nonatomic) NSInteger likeCount;
 @property (nonatomic) NSInteger replyCount;
 @property (nonatomic) NSInteger audioLength;
+@property (nonatomic) BOOL isAudioDownloaded;
 
 - (instancetype)initWithDictory:(NSDictionary *)dict;
 

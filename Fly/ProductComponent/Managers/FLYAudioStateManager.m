@@ -11,6 +11,7 @@
 #import "AERecorder.h"
 #import "AEAudioFilePlayer.h"
 #import "FLYFileManager.h"
+#import "FLYPlayableItem.h"
 
 @implementation FLYAudioStateManager
 

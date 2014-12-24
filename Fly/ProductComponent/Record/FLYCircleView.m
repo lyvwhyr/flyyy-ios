@@ -31,7 +31,7 @@
         _arcLayer.lineWidth = 5;
         [self.layer addSublayer:_arcLayer];
         
-//        [self drawLineAnimation:arcLayer];
+        [self drawLineAnimation:_arcLayer];
     }
     return self;
 }

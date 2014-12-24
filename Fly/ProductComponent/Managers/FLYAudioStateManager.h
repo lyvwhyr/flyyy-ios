@@ -9,6 +9,7 @@
 @class AEAudioController;
 @class AERecorder;
 @class AEAudioFilePlayer;
+@class FLYPlayableItem;
 
 typedef void (^AudioPlayerCompleteblock)();
 
@@ -17,6 +18,9 @@ typedef void (^AudioPlayerCompleteblock)();
 @property (nonatomic) AEAudioController *audioController;
 @property (nonatomic) AERecorder *recorder;
 @property (nonatomic) AEAudioFilePlayer *player;
+
+@property (nonatomic) FLYPlayableItem *previousPlayItem;
+@property (nonatomic) FLYPlayableItem *currentPlayItem;
 
 - (void)startRecord;
 - (void)stopRecord;
