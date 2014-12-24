@@ -12,7 +12,6 @@
 
 static const CGFloat kCacheCleanInterval = 300;  //5 mins
 static const NSInteger kCachMaxSize = 256 * 1024 * 1024;  //256M
-//static const NSInteger kCachMaxSize = 1 * 1024 * 1024;  //256M
 
 @interface FLYFileManager()
 
@@ -38,12 +37,21 @@ static const NSInteger kCachMaxSize = 256 * 1024 * 1024;  //256M
 {
     if (self = [super init]) {
         _cacheCleanupQueue = dispatch_queue_create("com.flyy.cacheCleanupQueue", DISPATCH_QUEUE_SERIAL);
-        _cacheCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:kCacheCleanInterval target:self selector:@selector(_cleanCache) userInfo:nil repeats:YES];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _cacheCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:kCacheCleanInterval target:self selector:@selector(_cleanCache) userInfo:nil repeats:YES];
+        });
+
         _cleanupFileManager = [[NSFileManager alloc] init];
         
         [self _cleanCache];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    UALog(@"dealloced");
 }
 
 - (void)_cleanCache
