@@ -70,6 +70,19 @@
     
 }
 
+- (void)pausePlayer
+{
+    self.currentPlayItem.playState = FLYPlayStatePaused;
+    _player.channelIsPlaying = NO;
+
+}
+
+- (void)resumePlayer
+{
+    self.currentPlayItem.playState = FLYPlayStatePlaying;
+    _player.channelIsPlaying = YES;
+}
+
 - (void)playAudioURLStr:(NSString *)str WithCompletionBlock:(AudioPlayerCompleteblock)block
 {
     if (_player) {
@@ -93,6 +106,7 @@
     
     NSError *error = nil;
     self.player = [AEAudioFilePlayer audioFilePlayerWithURL:[NSURL fileURLWithPath:str] audioController:_audioController error:&error];
+    self.player.loop = NO;
     
     if ( !_player ) {
         [[[UIAlertView alloc] initWithTitle:@"Error"

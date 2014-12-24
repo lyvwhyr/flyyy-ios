@@ -21,6 +21,7 @@
 #import "FLYPost.h"
 #import "SVPullToRefresh.h"
 #import "FLYAudioStateManager.h"
+#import "FLYPlayableItem.h"
 
 static NSInteger globalPageNum = 1;
 
@@ -265,9 +266,31 @@ static NSInteger globalPageNum = 1;
 
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYPost *)post
 {
+    if (![FLYAudioStateManager manager].currentPlayItem) {
+        [FLYAudioStateManager manager].currentPlayItem = [[FLYPlayableItem alloc] initWithItem:cell playableItemType:FLYPlayableFeed playState:FLYPlayStateNotSet];
+    }
     
-    NSString *audioURLStr = post.audioURLStr;
-    [[FLYDownloadManager sharedInstance] loadAudioByURLString:audioURLStr];
+    [FLYAudioStateManager manager].currentPlayItem.item = cell;
+    FLYPlayableItem *currentItem = [FLYAudioStateManager manager].currentPlayItem;
+    if (currentItem.item == cell) {
+        if (currentItem.playState == FLYPlayStateNotSet) {
+            NSString *audioURLStr = post.audioURLStr;
+            [FLYAudioStateManager manager].currentPlayItem.playState = FLYPlayStatePlaying;
+            [[FLYDownloadManager sharedInstance] loadAudioByURLString:audioURLStr];
+        } else if (currentItem.playState == FLYPlayStatePlaying){
+            [[FLYAudioStateManager manager] pausePlayer];
+        } else {
+            [[FLYAudioStateManager manager] resumePlayer];
+        }
+    }
+ 
+    //change previous state, remove animation, change current to previous
+    [FLYAudioStateManager manager].previousPlayItem = [FLYAudioStateManager manager].currentPlayItem;
+    
+    
+    
+//    NSString *audioURLStr = post.audioURLStr;
+//    [[FLYDownloadManager sharedInstance] loadAudioByURLString:audioURLStr];
 }
 
 #pragma mark - download audios

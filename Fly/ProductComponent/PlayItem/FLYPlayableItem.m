@@ -10,4 +10,14 @@
 
 @implementation FLYPlayableItem
 
+- (instancetype)initWithItem:(id)item playableItemType:(FLYPlayableItemType)playableItemType playState:(FLYPlayState)playState
+{
+    if (self = [super init]) {
+        _item = item;
+        _playableItemType = playableItemType;
+        _playState = playState;
+    }
+    return self;
+}
+
 @end
