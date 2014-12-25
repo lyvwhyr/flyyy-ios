@@ -16,7 +16,7 @@
 
 @implementation FLYAudioStateManager
 
-+ (instancetype)manager
++ (instancetype)sharedInstance
 {
     static FLYAudioStateManager *manager;
     static dispatch_once_t once;
@@ -185,6 +185,12 @@
     _player.completionBlock = [block copy];
     [_audioController addChannels:@[_player]];
     NSLog(@"audio duration after %f", _player.duration);
+}
+
+- (void)removePlayer
+{
+    [_audioController removeChannels:@[_player]];
+    self.player = nil;
 }
 
 

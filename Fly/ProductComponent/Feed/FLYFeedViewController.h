@@ -10,6 +10,4 @@
 
 @interface FLYFeedViewController : FLYUniversalViewController
 
-- (instancetype)initWithFrame:(CGRect)frame;
-
 @end

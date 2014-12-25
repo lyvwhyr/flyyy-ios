@@ -245,9 +245,9 @@ static inline float translate(float val, float min, float max) {
     [self _addPulsingAnimation];
     [self updateViewConstraints];
     
-    [[FLYAudioStateManager manager] startRecord];
-    _audioPlayer = [FLYAudioStateManager manager].player;
-    _audioController = [FLYAudioStateManager manager].audioController;
+    [[FLYAudioStateManager sharedInstance] startRecord];
+    _audioPlayer = [FLYAudioStateManager sharedInstance].player;
+    _audioController = [FLYAudioStateManager sharedInstance].audioController;
     
     self.levelsTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(updateLevels:) userInfo:nil repeats:YES];
 }
@@ -376,22 +376,22 @@ static inline float translate(float val, float min, float max) {
         case FLYRecordRecordingState:
         {
             _currentState = FLYRecordCompleteState;
-            [[FLYAudioStateManager manager] stopRecord];
+            [[FLYAudioStateManager sharedInstance] stopRecord];
             [self _setupCompleteViewState];
             break;
         }
         case FLYRecordCompleteState:
         {
             _currentState = FLYRecordPauseState;
-            [[FLYAudioStateManager manager] playAudioURLStr:nil WithCompletionBlock:_completionBlock];
-            [[FLYAudioStateManager manager] playAudioWithCompletionBlock:_completionBlock];
+            [[FLYAudioStateManager sharedInstance] playAudioURLStr:nil WithCompletionBlock:_completionBlock];
+            [[FLYAudioStateManager sharedInstance] playAudioWithCompletionBlock:_completionBlock];
             [self _setupPauseViewState];
             break;
         }
         case FLYRecordPauseState:
         {
             _currentState = FLYRecordCompleteState;
-            [[FLYAudioStateManager manager] playAudioWithCompletionBlock:_completionBlock];
+            [[FLYAudioStateManager sharedInstance] playAudioWithCompletionBlock:_completionBlock];
             [self _setupCompleteViewState];
             
             break;

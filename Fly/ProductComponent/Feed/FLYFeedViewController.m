@@ -249,7 +249,7 @@ static NSInteger globalPageNum = 1;
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *localPath = [notificaiton.userInfo objectForKey:@"localPath"];
-        [[FLYAudioStateManager manager] playAudioURLStr:localPath WithCompletionBlock:nil];
+        [[FLYAudioStateManager sharedInstance] playAudioURLStr:localPath WithCompletionBlock:nil];
     });
 }
 
@@ -264,33 +264,32 @@ static NSInteger globalPageNum = 1;
     [self.view layoutIfNeeded];
 }
 
-- (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYPost *)post
+- (void)playButtonTapped:(FLYFeedTopicTableViewCell *)tappedCell withPost:(FLYPost *)post
 {
-    if (![FLYAudioStateManager manager].currentPlayItem) {
-        [FLYAudioStateManager manager].currentPlayItem = [[FLYPlayableItem alloc] initWithItem:cell playableItemType:FLYPlayableFeed playState:FLYPlayStateNotSet];
+    //If currentPlayItem is empty, set the tappedCell as currentPlayItem
+    if (![FLYAudioStateManager sharedInstance].currentPlayItem) {
+        [FLYAudioStateManager sharedInstance].currentPlayItem = [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableFeed playState:FLYPlayStateNotSet];
     }
     
-    [FLYAudioStateManager manager].currentPlayItem.item = cell;
-    FLYPlayableItem *currentItem = [FLYAudioStateManager manager].currentPlayItem;
-    if (currentItem.item == cell) {
-        if (currentItem.playState == FLYPlayStateNotSet) {
-            NSString *audioURLStr = post.audioURLStr;
-            [FLYAudioStateManager manager].currentPlayItem.playState = FLYPlayStatePlaying;
-            [[FLYDownloadManager sharedInstance] loadAudioByURLString:audioURLStr];
-        } else if (currentItem.playState == FLYPlayStatePlaying){
-            [[FLYAudioStateManager manager] pausePlayer];
+    //tap on the same cell
+    if ([FLYAudioStateManager sharedInstance].currentPlayItem.item == tappedCell) {
+        if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateNotSet) {
+            [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
+            [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.audioURLStr];
+        } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStatePlaying) {
+             [[FLYAudioStateManager sharedInstance] pausePlayer];
         } else {
-            [[FLYAudioStateManager manager] resumePlayer];
+            [[FLYAudioStateManager sharedInstance] resumePlayer];
         }
+    } else {
+        //tap on a different cell
+        [[FLYAudioStateManager sharedInstance] removePlayer];
+        [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.audioURLStr];
     }
+    [FLYAudioStateManager sharedInstance].currentPlayItem.item = tappedCell;
  
     //change previous state, remove animation, change current to previous
-    [FLYAudioStateManager manager].previousPlayItem = [FLYAudioStateManager manager].currentPlayItem;
-    
-    
-    
-//    NSString *audioURLStr = post.audioURLStr;
-//    [[FLYDownloadManager sharedInstance] loadAudioByURLString:audioURLStr];
+    [FLYAudioStateManager sharedInstance].previousPlayItem = [FLYAudioStateManager sharedInstance].currentPlayItem;
 }
 
 #pragma mark - download audios
