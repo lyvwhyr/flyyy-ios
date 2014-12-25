@@ -12,6 +12,7 @@
 #import "AEAudioFilePlayer.h"
 #import "FLYFileManager.h"
 #import "FLYPlayableItem.h"
+#import "AEAudioFileWriter.h"
 
 @implementation FLYAudioStateManager
 
@@ -35,12 +36,13 @@
 
 - (void)startRecord
 {
-    if (_recorder) {
-        [_recorder finishRecording];
-        [_audioController removeOutputReceiver:_recorder];
-        [_audioController removeInputReceiver:_recorder];
-        self.recorder = nil;
-    } else {
+    [self _initAudioController];
+//    if (_recorder) {
+//        [_recorder finishRecording];
+//        [_audioController removeOutputReceiver:_recorder];
+//        [_audioController removeInputReceiver:_recorder];
+//        self.recorder = nil;
+//    } else {
         self.recorder = [[AERecorder alloc] initWithAudioController:_audioController];
         NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.aiff"];
@@ -56,7 +58,7 @@
         }
         [_audioController addOutputReceiver:_recorder];
         [_audioController addInputReceiver:_recorder];
-    }
+//    }
 }
 
 - (void)stopRecord
@@ -83,28 +85,88 @@
     _player.channelIsPlaying = YES;
 }
 
+- (void)playAudioWithCompletionBlock:(AudioPlayerCompleteblock)block
+{
+    
+    if (_player) {
+        [_audioController removeChannels:@[_player]];
+        self.player = nil;
+    }
+    
+    NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *str = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.aiff"];
+    
+    
+    NSError *error = NULL;
+    AEAudioUnitFilter *pitch = [[AEAudioUnitFilter alloc]
+                                initWithComponentDescription:AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
+                                                                                             kAudioUnitType_FormatConverter,
+                                                                                             kAudioUnitSubType_Varispeed)
+                                audioController:_audioController
+                                error:&error];
+    
+    AudioUnitSetParameter(pitch.audioUnit, kAudioUnitScope_Global, 0, kVarispeedParam_PlaybackRate, 1.15, 0);
+    [_audioController addFilter:pitch];
+    
+    
+    
+    AEAudioFileWriter *audioFileWriter = [[AEAudioFileWriter alloc] init];
+    //    [audioFileWriter beginWritingToFileAtPath:str fileType:kAudioFileAIFFType error:nil];
+    UInt32 numberOfSamples = 4096;
+    
+    AudioBufferList *list = AEAllocateAndInitAudioBufferList(_audioController.audioDescription, numberOfSamples);
+    
+    AudioTimeStamp timeStamp;
+    memset (&timeStamp, 0, sizeof(timeStamp));
+    timeStamp.mFlags = kAudioTimeStampSampleTimeValid;
+    
+    AEAudioControllerRenderMainOutput(_audioController, timeStamp, numberOfSamples, list);
+    OSStatus status = AEAudioFileWriterAddAudioSynchronously(audioFileWriter, list, numberOfSamples);
+    if (status != 0) {
+        NSLog(@"ERROR: %d", (int)status);
+    }
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:str]) {
+        return;
+    }
+    
+    self.player = [AEAudioFilePlayer audioFilePlayerWithURL:[NSURL fileURLWithPath:str] audioController:_audioController error:&error];
+    self.player.loop = NO;
+    
+    if ( !_player ) {
+        [[[UIAlertView alloc] initWithTitle:@"Error"
+                                    message:[NSString stringWithFormat:@"Couldn't start playback: %@", [error localizedDescription]]
+                                   delegate:nil
+                          cancelButtonTitle:nil
+                          otherButtonTitles:@"OK", nil] show];
+        return;
+    }
+    
+    NSLog(@"audio duration before %f", _player.duration);
+    
+    _player.removeUponFinish = YES;
+    _player.completionBlock = [block copy];
+    [_audioController addChannels:@[_player]];
+    NSLog(@"audio duration after %f", _player.duration);
+}
+
+
 - (void)playAudioURLStr:(NSString *)str WithCompletionBlock:(AudioPlayerCompleteblock)block
 {
     if (_player) {
         [_audioController removeChannels:@[_player]];
         self.player = nil;
     }
-    NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    //        NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.aiff"];
     
-    if (str.length == 0) {
-        //default
-        str = @"http://freedownloads.last.fm/download/569264057/Get+Got.mp3";
+    if (!str) {
+        UALog(@"Audio file string is empty");
     }
     
-    NSURL *url = [NSURL URLWithString:str];
-    //    NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:[url.pathComponents componentsJoinedByString:@"_"]];
-    
+    NSError *error = NULL;
     if (![[NSFileManager defaultManager] fileExistsAtPath:str]) {
         return;
     }
     
-    NSError *error = nil;
     self.player = [AEAudioFilePlayer audioFilePlayerWithURL:[NSURL fileURLWithPath:str] audioController:_audioController error:&error];
     self.player.loop = NO;
     
