@@ -225,6 +225,14 @@ static NSInteger globalPageNum = 1;
         cell.contentView.frame = cell.bounds;
         cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
     }
+    
+    //set cell state
+    [cell updatePlayState:FLYPlayStateNotSet];
+    if ([[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
+        FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)[FLYAudioStateManager sharedInstance].currentPlayItem.item;
+        [cell updatePlayState:[FLYAudioStateManager sharedInstance].currentPlayItem.playState];
+    }
+    
     cell.post = _posts[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
@@ -249,7 +257,11 @@ static NSInteger globalPageNum = 1;
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *localPath = [notificaiton.userInfo objectForKey:@"localPath"];
-        [[FLYAudioStateManager sharedInstance] playAudioURLStr:localPath WithCompletionBlock:nil];
+        [[FLYAudioStateManager sharedInstance] playAudioURLStr:localPath WithCompletionBlock:^{
+            [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
+            FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)[FLYAudioStateManager sharedInstance].currentPlayItem.item;
+            [currentCell updatePlayState:FLYPlayStatePlaying];
+        }];
     });
 }
 
@@ -267,29 +279,46 @@ static NSInteger globalPageNum = 1;
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)tappedCell withPost:(FLYPost *)post
 {
     //If currentPlayItem is empty, set the tappedCell as currentPlayItem
+    NSIndexPath *indexPath = [self.feedTableView indexPathForCell:tappedCell];
     if (![FLYAudioStateManager sharedInstance].currentPlayItem) {
-        [FLYAudioStateManager sharedInstance].currentPlayItem = [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableFeed playState:FLYPlayStateNotSet];
+        [FLYAudioStateManager sharedInstance].currentPlayItem = [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableFeed playState:FLYPlayStateNotSet indexPath:indexPath];
     }
     
     //tap on the same cell
-    if ([FLYAudioStateManager sharedInstance].currentPlayItem.item == tappedCell) {
+    if ([FLYAudioStateManager sharedInstance].currentPlayItem.indexPath == indexPath) {
         if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateNotSet) {
-            [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
+            [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStateLoading;
+            [tappedCell updatePlayState:FLYPlayStateLoading];
             [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.audioURLStr];
+        } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateLoading) {
+            return;
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStatePlaying) {
-             [[FLYAudioStateManager sharedInstance] pausePlayer];
-        } else {
+            [tappedCell updatePlayState:FLYPlayStatePaused];
+            [[FLYAudioStateManager sharedInstance] pausePlayer];
+        } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStatePaused) {
             [[FLYAudioStateManager sharedInstance] resumePlayer];
+            [tappedCell updatePlayState:FLYPlayStatePlaying];
+        }  else {
+            [[FLYAudioStateManager sharedInstance] removePlayer];
+            [tappedCell updatePlayState:FLYPlayStateFinished];
         }
+        
+        [FLYAudioStateManager sharedInstance].currentPlayItem.item = tappedCell;
     } else {
         //tap on a different cell
         [[FLYAudioStateManager sharedInstance] removePlayer];
         [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.audioURLStr];
+        
+        //change previous state, remove animation, change current to previous
+        [FLYAudioStateManager sharedInstance].previousPlayItem = [FLYAudioStateManager sharedInstance].currentPlayItem;
+        [FLYAudioStateManager sharedInstance].previousPlayItem.playState = FLYPlayStateNotSet;
+        FLYFeedTopicTableViewCell *previousCell = (FLYFeedTopicTableViewCell *)[FLYAudioStateManager sharedInstance].previousPlayItem.item;
+        [previousCell updatePlayState:FLYPlayStateNotSet];
+        
+    
+        [FLYAudioStateManager sharedInstance].currentPlayItem =  [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableFeed playState:FLYPlayStateLoading indexPath:indexPath];
+        [tappedCell updatePlayState:FLYPlayStateLoading];
     }
-    [FLYAudioStateManager sharedInstance].currentPlayItem.item = tappedCell;
- 
-    //change previous state, remove animation, change current to previous
-    [FLYAudioStateManager sharedInstance].previousPlayItem = [FLYAudioStateManager sharedInstance].currentPlayItem;
 }
 
 #pragma mark - download audios

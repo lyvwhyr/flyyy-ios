@@ -638,11 +638,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedTopicTableViewCell.m"
-            timestampString = "441018642.895941"
+            timestampString = "441672534.537584"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "-initWithStyle:reuseIdentifier:"
             landmarkType = "5">
          </BreakpointContent>
@@ -654,11 +654,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "441186107.347274"
+            timestampString = "441676218.27559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
+            startingLineNumber = "330"
+            endingLineNumber = "330"
             landmarkName = "-_moveInlineReplyViewOnScreen"
             landmarkType = "5">
          </BreakpointContent>
@@ -686,11 +686,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "441104851.570662"
+            timestampString = "441672852.697758"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "-commentButtonTapped:"
             landmarkType = "5">
          </BreakpointContent>
@@ -748,11 +748,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "441186107.347274"
+            timestampString = "441676218.27559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
             landmarkName = "-_moveInlineReplyViewOnScreen"
             landmarkType = "5">
          </BreakpointContent>
@@ -764,11 +764,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "441186107.347274"
+            timestampString = "441676218.27559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "304"
-            endingLineNumber = "304"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
             landmarkName = "-_moveInlineReplyViewOnScreen"
             landmarkType = "5">
          </BreakpointContent>
@@ -842,11 +842,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "441186107.347274"
+            timestampString = "441676218.27559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
+            startingLineNumber = "369"
+            endingLineNumber = "369"
             landmarkName = "@implementation FLYFeedViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -874,11 +874,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "441104851.570662"
+            timestampString = "441672852.697758"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
             landmarkName = "-commentButtonTapped:"
             landmarkType = "5">
          </BreakpointContent>
@@ -890,11 +890,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "441186107.347274"
+            timestampString = "441676218.27559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
+            startingLineNumber = "331"
+            endingLineNumber = "331"
             landmarkName = "-_moveInlineReplyViewOnScreen"
             landmarkType = "5">
          </BreakpointContent>
@@ -906,11 +906,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "441186107.347274"
+            timestampString = "441676218.27559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
             landmarkName = "-_moveInlineReplyViewOnScreen"
             landmarkType = "5">
             <Locations>
@@ -1474,7 +1474,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Download/FLYDownloadManager.m"
@@ -1654,11 +1654,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedTopicTableViewCell.m"
-            timestampString = "441022810.463558"
+            timestampString = "441672534.537584"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
             landmarkName = "-_playButtonTapped"
             landmarkType = "5">
          </BreakpointContent>
@@ -1828,11 +1828,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
-            timestampString = "441185472.693798"
+            timestampString = "441673523.031856"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "-playButtonTapped:withPost:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1960,6 +1960,244 @@
             startingLineNumber = "43"
             endingLineNumber = "43"
             landmarkName = "-loadAudioByURLString:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
+            timestampString = "441672852.697758"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
+            landmarkName = "-downloadComplete:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
+            timestampString = "441672852.697758"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "-downloadComplete:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
+            timestampString = "441672852.697758"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
+            landmarkName = "-downloadComplete:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[FLYFeedViewController downloadComplete:]"
+                  moduleName = "Fly"
+                  urlString = "file:///Users/xingxingxu/workspace/fly/Fly/ProductComponent/Feed/FLYFeedViewController.m"
+                  timestampString = "441672852.769607"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "258"
+                  endingLineNumber = "258"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__42-[FLYFeedViewController downloadComplete:]_block_invoke"
+                  moduleName = "Fly"
+                  urlString = "file:///Users/xingxingxu/workspace/fly/Fly/ProductComponent/Feed/FLYFeedViewController.m"
+                  timestampString = "441672852.769991"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "258"
+                  endingLineNumber = "258"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
+            timestampString = "441672587.05636"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
+            timestampString = "441672601.322555"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
+            timestampString = "441673944.586162"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
+            landmarkName = "-playButtonTapped:withPost:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedTopicTableViewCell.m"
+            timestampString = "441674266.423667"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "-updatePlayState:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
+            timestampString = "441674900.806065"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "232"
+            endingLineNumber = "232"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedTopicTableViewCell.m"
+            timestampString = "441675006.601685"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "-updatePlayState:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedTopicTableViewCell.m"
+            timestampString = "441675007.903813"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "-updatePlayState:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
+            timestampString = "441675363.312565"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
+            timestampString = "441675563.325972"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
+            landmarkName = "-playButtonTapped:withPost:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Fly/ProductComponent/Feed/FLYFeedViewController.m"
+            timestampString = "441676332.269381"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
+            landmarkName = "-playButtonTapped:withPost:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -9,6 +9,8 @@
 @class FLYFeedTopicTableViewCell;
 @class FLYPost;
 
+#import "FLYPlayableItem.h"
+
 @protocol FLYFeedTopicTableViewCellDelegate <NSObject>
 
 - (void)commentButtonTapped:(FLYFeedTopicTableViewCell *)cell;
@@ -21,5 +23,8 @@
 @property (nonatomic) FLYPost *post;
 
 @property id<FLYFeedTopicTableViewCellDelegate>delegate;
+
+
+- (void)updatePlayState:(FLYPlayState)state;
 
 @end

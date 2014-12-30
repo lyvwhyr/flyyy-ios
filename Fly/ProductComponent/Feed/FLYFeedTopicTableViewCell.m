@@ -70,7 +70,6 @@
         [_postHeaderView addSubview:_avatarImageView];
         [_postHeaderView addSubview:_userNameLabel];
         [_postHeaderView addSubview:_postAtLabel];
-//        [_postHeaderView addSubview:_categoryNameLabel];
         [self.contentView addSubview:_postHeaderView];
         
         _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -80,8 +79,6 @@
         [self addSubview:_playButton];
         
         _postTitle = [UILabel new];
-//        _postTitle.text = @"That feel when break is halfway done.";
-        
         _postTitle.numberOfLines = 0;
         _postTitle.textColor = [UIColor blackColor];
         _postTitle.font = [UIFont systemFontOfSize:15];
@@ -103,11 +100,40 @@
             __strong typeof(self)strongSelf = weakSelf;
             [strongSelf.delegate commentButtonTapped:strongSelf];
         };
-//        _inlineActionView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
         [self addSubview:_inlineActionView];
         
     }
     return self;
+}
+
+- (void)updatePlayState:(FLYPlayState)state
+{
+    switch (state) {
+        case FLYPlayStateNotSet: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
+            break;
+        }
+        case FLYPlayStateLoading: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_play_loading"] forState:UIControlStateNormal];
+            break;
+        }
+        case FLYPlayStatePlaying: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_play_pause"] forState:UIControlStateNormal];
+            break;
+        }
+        case FLYPlayStatePaused: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
+            break;
+        }
+        case FLYPlayStateFinished: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
+            break;
+        }
+        default: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
+            break;
+        }
+    }
 }
 
 - (void)layoutSubviews
