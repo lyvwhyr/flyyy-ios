@@ -13,6 +13,7 @@
 #import "FLYFileManager.h"
 #import "FLYPlayableItem.h"
 #import "AEAudioFileWriter.h"
+#import <AVFoundation/AVAudioSession.h>
 
 @implementation FLYAudioStateManager
 
@@ -200,6 +201,8 @@
     _audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleaved16BitStereoAudioDescription] inputEnabled:YES];
     _audioController.preferredBufferDuration = 0.005;
     _audioController.useMeasurementMode = YES;
+    _audioController.allowMixingWithOtherApps = NO;
+    _audioController.audioSessionCategory = AVAudioSessionCategoryPlayback;
     [_audioController start:NULL];
     
     _recorder = [[AERecorder alloc] initWithAudioController:_audioController];
