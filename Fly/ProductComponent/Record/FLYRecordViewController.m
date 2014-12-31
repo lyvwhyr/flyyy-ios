@@ -383,7 +383,7 @@ static inline float translate(float val, float min, float max) {
         case FLYRecordCompleteState:
         {
             _currentState = FLYRecordPauseState;
-            [[FLYAudioStateManager sharedInstance] playAudioURLStr:nil WithCompletionBlock:_completionBlock];
+            [[FLYAudioStateManager sharedInstance] playAudioURLStr:nil withCompletionBlock:_completionBlock];
             [[FLYAudioStateManager sharedInstance] playAudioWithCompletionBlock:_completionBlock];
             [self _setupPauseViewState];
             break;

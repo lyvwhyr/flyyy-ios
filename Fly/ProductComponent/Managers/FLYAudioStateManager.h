@@ -16,6 +16,7 @@ typedef void (^AudioPlayerCompleteblock)();
 @interface FLYAudioStateManager : NSObject
 
 @property (nonatomic) AEAudioController *audioController;
+
 @property (nonatomic) AERecorder *recorder;
 @property (nonatomic) AEAudioFilePlayer *player;
 
@@ -27,7 +28,7 @@ typedef void (^AudioPlayerCompleteblock)();
 - (void)pausePlayer;
 - (void)resumePlayer;
 - (void)removePlayer;
-- (void)playAudioURLStr:(NSString *)str WithCompletionBlock:(AudioPlayerCompleteblock)block;
+- (void)playAudioURLStr:(NSString *)str withCompletionBlock:(AudioPlayerCompleteblock)block;
 - (void)playAudioWithCompletionBlock:(AudioPlayerCompleteblock)block;
 
 + (instancetype)sharedInstance;

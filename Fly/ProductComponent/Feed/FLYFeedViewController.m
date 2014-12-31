@@ -257,7 +257,7 @@ static NSInteger globalPageNum = 1;
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *localPath = [notificaiton.userInfo objectForKey:@"localPath"];
-        [[FLYAudioStateManager sharedInstance] playAudioURLStr:localPath WithCompletionBlock:^{
+        [[FLYAudioStateManager sharedInstance] playAudioURLStr:localPath withCompletionBlock:^{
             [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
             FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)[FLYAudioStateManager sharedInstance].currentPlayItem.item;
             [currentCell updatePlayState:FLYPlayStatePlaying];

@@ -31,35 +31,30 @@
 {
     if (self = [super init]) {
         [self _initAudioController];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_appDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     }
     return self;
 }
 
 - (void)startRecord
 {
-    [self _initAudioController];
-//    if (_recorder) {
-//        [_recorder finishRecording];
-//        [_audioController removeOutputReceiver:_recorder];
-//        [_audioController removeInputReceiver:_recorder];
-//        self.recorder = nil;
-//    } else {
-        self.recorder = [[AERecorder alloc] initWithAudioController:_audioController];
-        NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.aiff"];
-        NSError *error = nil;
-        if ( ![_recorder beginRecordingToFileAtPath:path fileType:kAudioFileAIFFType error:&error] ) {
-            [[[UIAlertView alloc] initWithTitle:@"Error"
-                                        message:[NSString stringWithFormat:@"Couldn't start recording: %@", [error localizedDescription]]
-                                       delegate:nil
-                              cancelButtonTitle:nil
-                              otherButtonTitles:@"OK", nil] show];
-            self.recorder = nil;
-            return;
-        }
-        [_audioController addOutputReceiver:_recorder];
-        [_audioController addInputReceiver:_recorder];
-//    }
+    [self _initRecordAudioController];
+    
+    NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.m4a"];
+    NSError *error = nil;
+    if ( ![_recorder beginRecordingToFileAtPath:path fileType:kAudioFileM4AType error:&error] ) {
+        [[[UIAlertView alloc] initWithTitle:@"Error"
+                                    message:[NSString stringWithFormat:@"Couldn't start recording: %@", [error localizedDescription]]
+                                   delegate:nil
+                          cancelButtonTitle:nil
+                          otherButtonTitles:@"OK", nil] show];
+        self.recorder = nil;
+        return;
+    }
+    [_audioController addOutputReceiver:_recorder];
+    [_audioController addInputReceiver:_recorder];
 }
 
 - (void)stopRecord
@@ -95,7 +90,7 @@
     }
     
     NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *str = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.aiff"];
+    NSString *str = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.m4a"];
     
     
     NSError *error = NULL;
@@ -152,7 +147,7 @@
 }
 
 
-- (void)playAudioURLStr:(NSString *)str WithCompletionBlock:(AudioPlayerCompleteblock)block
+- (void)playAudioURLStr:(NSString *)str withCompletionBlock:(AudioPlayerCompleteblock)block
 {
     if (_player) {
         [_audioController removeChannels:@[_player]];
@@ -185,6 +180,7 @@
     
     _player.removeUponFinish = YES;
     block();
+    _player.completionBlock = [block copy];
     [_audioController addChannels:@[_player]];
     NSLog(@"audio duration after %f", _player.duration);
 }
@@ -198,16 +194,51 @@
 
 - (void)_initAudioController
 {
-    _audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleaved16BitStereoAudioDescription] inputEnabled:YES];
+    _audioController = nil;
+    
+    _audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleaved16BitStereoAudioDescription] inputEnabled:NO];
     _audioController.preferredBufferDuration = 0.005;
     _audioController.useMeasurementMode = YES;
     _audioController.allowMixingWithOtherApps = NO;
     _audioController.audioSessionCategory = AVAudioSessionCategoryPlayback;
     [_audioController start:NULL];
+}
+
+- (void)_initRecordAudioController
+{
+    if (_audioController) {
+        [_audioController stop];
+        _audioController = nil;
+    }
+    _audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleaved16BitStereoAudioDescription] inputEnabled:YES];
+    _audioController.preferredBufferDuration = 0.005;
+    _audioController.useMeasurementMode = YES;
+    _audioController.allowMixingWithOtherApps = NO;
+//    _audioController.audioSessionCategory = AVAudioSessionCategoryPlayback;
+    [_audioController start:NULL];
     
     _recorder = [[AERecorder alloc] initWithAudioController:_audioController];
-    [_audioController addOutputReceiver:_recorder];
-    [_audioController addInputReceiver:_recorder];
+}
+
+
+
+- (void)_appWillEnterForeground:(NSNotification *)notification
+{
+    if (!_audioController) {
+        [self _initAudioController];
+        [_audioController start:nil];
+    }
+}
+
+- (void)_appDidEnterBackground:(NSNotification *)notification
+{
+    if (_audioController.audioInputAvailable) {
+        [_audioController removeInputReceiver:_recorder];
+        [_audioController removeOutputReceiver:_recorder];
+        
+        [_audioController stop];
+         _audioController = nil;
+    }
 }
 
 @end
