@@ -32,6 +32,7 @@
 		A62E53B51A227E0B00125DBC /* icon_voice_filter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A62E53B41A227E0B00125DBC /* icon_voice_filter@3x.png */; };
 		A640BC3B1A3815B700DC59A7 /* icon_flag_post@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */; };
 		A640BC3D1A381AE900DC59A7 /* icon_navigation_catalog@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3C1A381AE900DC59A7 /* icon_navigation_catalog@3x.png */; };
+		A642FE2E1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A642FE2D1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.m */; };
 		A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0C21A1962A200FF1744 /* FLYUtilities.m */; };
 		A648C0C61A1982D900FF1744 /* FLYTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0C51A1982D900FF1744 /* FLYTabView.m */; };
 		A648C0E31A19AD4A00FF1744 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0CD1A19AD4A00FF1744 /* MASCompositeConstraint.m */; };
@@ -268,6 +269,8 @@
 		A62E53B41A227E0B00125DBC /* icon_voice_filter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_voice_filter@3x.png"; sourceTree = "<group>"; };
 		A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_flag_post@3x.png"; sourceTree = "<group>"; };
 		A640BC3C1A381AE900DC59A7 /* icon_navigation_catalog@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_navigation_catalog@3x.png"; sourceTree = "<group>"; };
+		A642FE2C1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYRecordVoiceFilterViewController.h; sourceTree = "<group>"; };
+		A642FE2D1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYRecordVoiceFilterViewController.m; sourceTree = "<group>"; };
 		A648C0BB1A1956AA00FF1744 /* FLYTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTabBarView.h; sourceTree = "<group>"; };
 		A648C0BC1A1956AA00FF1744 /* FLYTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTabBarView.m; sourceTree = "<group>"; };
 		A648C0C11A1962A200FF1744 /* FLYUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUtilities.h; sourceTree = "<group>"; };
@@ -1191,6 +1194,8 @@
 				A655783D1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m */,
 				A655783F1A3ADCC3003102CD /* FLYPostButtonView.h */,
 				A65578401A3ADCC3003102CD /* FLYPostButtonView.m */,
+				A642FE2C1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.h */,
+				A642FE2D1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.m */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -1631,6 +1636,7 @@
 				A6A57A9B1A34103D00610785 /* UIImage+ResizeMagick.m in Sources */,
 				A61D18661A1EE6ED00D188B5 /* FLYAudioStateManager.m in Sources */,
 				A655783E1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m in Sources */,
+				A642FE2E1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.m in Sources */,
 				A6A0E4C31A1E7EFA0036116E /* UIWindow+FLYAddition.m in Sources */,
 				A6A0E4BA1A1E76110036116E /* FLEXHeapEnumerator.m in Sources */,
 				A6A0E49A1A1E76110036116E /* FLEXArgumentInputViewFactory.m in Sources */,

@@ -19,6 +19,7 @@
 #import "GBFlatButton.h"
 #import "DKCircleButton.h"
 #import "FLYBarButtonItem.h"
+#import "FLYRecordVoiceFilterViewController.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -38,6 +39,7 @@
 @property (nonatomic) NSTimer *recordTimer;
 @property (nonatomic) PulsingHaloLayer *pulsingHaloLayer;
 @property (nonatomic) DKCircleButton *voiceFilterButton;
+@property (nonatomic) UIViewController *filterModalViewController;
 
 @property (nonatomic) AEAudioController *audioController;
 @property (nonatomic) AEAudioFilePlayer *audioPlayer;
@@ -201,7 +203,26 @@ static inline float translate(float val, float min, float max) {
 #pragma mark - recording complete actions
 - (void)_voiceFilterButtonTapped
 {
-    
+    if (self.childViewControllers.count == 0) {
+        self.filterModalViewController = [FLYRecordVoiceFilterViewController new];
+        [self addChildViewController:self.filterModalViewController];
+        self.filterModalViewController.view.frame = CGRectMake(0, 568, 320, 50);
+        self.filterModalViewController.view.backgroundColor = [UIColor whiteColor];
+        [self.view addSubview:self.filterModalViewController.view];
+        [UIView animateWithDuration:0.2 animations:^{
+            self.filterModalViewController.view.frame = CGRectMake(0, 568 - 50, 320, 50);;
+        } completion:^(BOOL finished) {
+            [self.filterModalViewController didMoveToParentViewController:self];
+        }];
+    }else{
+        [UIView animateWithDuration:0.2 animations:^{
+            self.filterModalViewController.view.frame = CGRectMake(0, 568, 320, 284);
+        } completion:^(BOOL finished) {
+            [self.filterModalViewController.view removeFromSuperview];
+            [self.filterModalViewController removeFromParentViewController];
+            self.filterModalViewController = nil;
+        }];
+    }
 }
 
 
