@@ -15,6 +15,13 @@
 #import "AEAudioFileWriter.h"
 #import <AVFoundation/AVAudioSession.h>
 
+@interface FLYAudioStateManager()
+
+@property (nonatomic) BOOL isRecordAudioMode;
+
+@end
+
+
 @implementation FLYAudioStateManager
 
 + (instancetype)sharedInstance
@@ -83,7 +90,7 @@
 
 - (void)playAudioWithCompletionBlock:(AudioPlayerCompleteblock)block
 {
-    
+    NSError *error = nil;
     if (_player) {
         [_audioController removeChannels:@[_player]];
         self.player = nil;
@@ -91,36 +98,6 @@
     
     NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *str = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.m4a"];
-    
-    
-    NSError *error = NULL;
-    AEAudioUnitFilter *pitch = [[AEAudioUnitFilter alloc]
-                                initWithComponentDescription:AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
-                                                                                             kAudioUnitType_FormatConverter,
-                                                                                             kAudioUnitSubType_Varispeed)
-                                audioController:_audioController
-                                error:&error];
-    
-    AudioUnitSetParameter(pitch.audioUnit, kAudioUnitScope_Global, 0, kVarispeedParam_PlaybackRate, 1.15, 0);
-    [_audioController addFilter:pitch];
-    
-    
-    
-    AEAudioFileWriter *audioFileWriter = [[AEAudioFileWriter alloc] init];
-    //    [audioFileWriter beginWritingToFileAtPath:str fileType:kAudioFileAIFFType error:nil];
-    UInt32 numberOfSamples = 4096;
-    
-    AudioBufferList *list = AEAllocateAndInitAudioBufferList(_audioController.audioDescription, numberOfSamples);
-    
-    AudioTimeStamp timeStamp;
-    memset (&timeStamp, 0, sizeof(timeStamp));
-    timeStamp.mFlags = kAudioTimeStampSampleTimeValid;
-    
-    AEAudioControllerRenderMainOutput(_audioController, timeStamp, numberOfSamples, list);
-    OSStatus status = AEAudioFileWriterAddAudioSynchronously(audioFileWriter, list, numberOfSamples);
-    if (status != 0) {
-        NSLog(@"ERROR: %d", (int)status);
-    }
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:str]) {
         return;
@@ -144,6 +121,37 @@
     _player.completionBlock = [block copy];
     [_audioController addChannels:@[_player]];
     NSLog(@"audio duration after %f", _player.duration);
+}
+
+- (void)applyFilter
+{
+    NSError *error = NULL;
+    AEAudioUnitFilter *pitch = [[AEAudioUnitFilter alloc]
+                                initWithComponentDescription:AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
+                                                                                             kAudioUnitType_FormatConverter,
+                                                                                             kAudioUnitSubType_Varispeed)
+                                audioController:_audioController
+                                error:&error];
+    
+    AudioUnitSetParameter(pitch.audioUnit, kAudioUnitScope_Global, 0, kVarispeedParam_PlaybackRate, 1.15, 0);
+    [_audioController addFilter:pitch];
+    
+    
+    
+    AEAudioFileWriter *audioFileWriter = [[AEAudioFileWriter alloc] init];
+    UInt32 numberOfSamples = 4096;
+    
+    AudioBufferList *list = AEAllocateAndInitAudioBufferList(_audioController.audioDescription, numberOfSamples);
+    
+    AudioTimeStamp timeStamp;
+    memset (&timeStamp, 0, sizeof(timeStamp));
+    timeStamp.mFlags = kAudioTimeStampSampleTimeValid;
+    
+    AEAudioControllerRenderMainOutput(_audioController, timeStamp, numberOfSamples, list);
+    OSStatus status = AEAudioFileWriterAddAudioSynchronously(audioFileWriter, list, numberOfSamples);
+    if (status != 0) {
+        NSLog(@"ERROR: %d", (int)status);
+    }
 }
 
 
@@ -194,7 +202,12 @@
 
 - (void)_initAudioController
 {
-    _audioController = nil;
+    if (_audioController) {
+        [_audioController stop];
+        _audioController = nil;
+    }
+    
+    self.isRecordAudioMode = NO;
     
     _audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleaved16BitStereoAudioDescription] inputEnabled:NO];
     _audioController.preferredBufferDuration = 0.005;
@@ -206,15 +219,22 @@
 
 - (void)_initRecordAudioController
 {
+    if (self.isRecordAudioMode && _audioController) {
+        _recorder = [[AERecorder alloc] initWithAudioController:_audioController];
+        return;
+    }
+    
     if (_audioController) {
         [_audioController stop];
         _audioController = nil;
     }
+    self.isRecordAudioMode = YES;
+    
     _audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleaved16BitStereoAudioDescription] inputEnabled:YES];
     _audioController.preferredBufferDuration = 0.005;
     _audioController.useMeasurementMode = YES;
     _audioController.allowMixingWithOtherApps = NO;
-//    _audioController.audioSessionCategory = AVAudioSessionCategoryPlayback;
+    _audioController.audioSessionCategory = AVAudioSessionCategoryPlayAndRecord;
     [_audioController start:NULL];
     
     _recorder = [[AERecorder alloc] initWithAudioController:_audioController];

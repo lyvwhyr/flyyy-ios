@@ -7,31 +7,54 @@
 //
 
 #import "FLYRecordVoiceFilterViewController.h"
+#import "DKCircleButton.h"
+#import "UIColor+FLYAddition.h"
+
+#define kRadius 60
 
 @interface FLYRecordVoiceFilterViewController ()
+
+@property (nonatomic) DKCircleButton *normalButton;
+@property (nonatomic) DKCircleButton *adjustPitchButton;
 
 @end
 
 @implementation FLYRecordVoiceFilterViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    _normalButton = [[DKCircleButton alloc] initWithFrame:CGRectMake(0, 0, kRadius, kRadius)];
+    _normalButton.center = CGPointMake(40, 40);
+    _normalButton.titleLabel.font = [UIFont systemFontOfSize:12];
+    _normalButton.borderColor = [UIColor purpleColor];
+    [_normalButton setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
+    _normalButton.animateTap = NO;
+    [_normalButton setTitle:NSLocalizedString(@"Normal", nil) forState:UIControlStateNormal];
+    [_normalButton addTarget:self action:@selector(_normalButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_normalButton];
+    
+    _adjustPitchButton = [[DKCircleButton alloc] initWithFrame:CGRectMake(0, 0, kRadius, kRadius)];
+    _adjustPitchButton.borderColor = [UIColor flyGreen];
+    _adjustPitchButton.center = CGPointMake(150, 40);
+    _adjustPitchButton.titleLabel.font = [UIFont systemFontOfSize:12];
+    [_adjustPitchButton setTitleColor:[UIColor flyGreen] forState:UIControlStateNormal];
+    _adjustPitchButton.animateTap = NO;
+    [_adjustPitchButton setTitle:NSLocalizedString(@"Adjust Pitch", nil) forState:UIControlStateNormal];
+    [_adjustPitchButton addTarget:self action:@selector(_adjustPitchButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_adjustPitchButton];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)_normalButtonTapped:(id)sender
+{
+    [self.delegate normalFilterButtonTapped:sender];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)_adjustPitchButtonTapped:(id)sender
+{
+    [self.delegate adjustPitchFilterButtonTapped:sender];
 }
-*/
 
 @end

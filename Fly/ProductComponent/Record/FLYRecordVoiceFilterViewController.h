@@ -8,6 +8,17 @@
 
 #import "FLYUniversalViewController.h"
 
+@class DKCircleButton;
+
+@protocol FLYUniversalViewControllerDelegate <NSObject>
+
+- (void)normalFilterButtonTapped:(id)button;
+- (void)adjustPitchFilterButtonTapped:(id)button;
+
+@end
+
 @interface FLYRecordVoiceFilterViewController : FLYUniversalViewController
+
+@property (nonatomic, weak)id<FLYUniversalViewControllerDelegate> delegate;
 
 @end

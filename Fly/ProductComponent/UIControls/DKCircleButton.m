@@ -39,7 +39,7 @@
         _highLightView.alpha = 0;
         _highLightView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
         
-        _borderColor = [UIColor purpleColor];
+//        _borderColor = [UIColor purpleColor];
         _animateTap = YES;
         _borderSize = DKCircleButtonBorderWidth;
         

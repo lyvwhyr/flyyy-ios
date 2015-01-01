@@ -24,9 +24,10 @@
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
 #define kOutCircleTopPadding 80
+#define kFilterModalHeight 80
 
 
-@interface FLYRecordViewController ()
+@interface FLYRecordViewController ()<FLYUniversalViewControllerDelegate>
 
 @property (nonatomic) FLYCircleView *innerCircleView;
 @property (nonatomic) FLYCircleView *outerCircleView;
@@ -39,7 +40,7 @@
 @property (nonatomic) NSTimer *recordTimer;
 @property (nonatomic) PulsingHaloLayer *pulsingHaloLayer;
 @property (nonatomic) DKCircleButton *voiceFilterButton;
-@property (nonatomic) UIViewController *filterModalViewController;
+@property (nonatomic) FLYRecordVoiceFilterViewController *filterModalViewController;
 
 @property (nonatomic) AEAudioController *audioController;
 @property (nonatomic) AEAudioFilePlayer *audioPlayer;
@@ -203,20 +204,24 @@ static inline float translate(float val, float min, float max) {
 #pragma mark - recording complete actions
 - (void)_voiceFilterButtonTapped
 {
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = CGRectGetWidth(screenBounds);
+    CGFloat screenHeight = CGRectGetHeight(screenBounds);
     if (self.childViewControllers.count == 0) {
         self.filterModalViewController = [FLYRecordVoiceFilterViewController new];
+        self.filterModalViewController.delegate = self;
         [self addChildViewController:self.filterModalViewController];
-        self.filterModalViewController.view.frame = CGRectMake(0, 568, 320, 50);
+        self.filterModalViewController.view.frame = CGRectMake(0, screenHeight, screenWidth, kFilterModalHeight);
         self.filterModalViewController.view.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:self.filterModalViewController.view];
         [UIView animateWithDuration:0.2 animations:^{
-            self.filterModalViewController.view.frame = CGRectMake(0, 568 - 50, 320, 50);;
+            self.filterModalViewController.view.frame = CGRectMake(0, screenHeight - kFilterModalHeight, screenWidth, kFilterModalHeight);;
         } completion:^(BOOL finished) {
             [self.filterModalViewController didMoveToParentViewController:self];
         }];
     }else{
         [UIView animateWithDuration:0.2 animations:^{
-            self.filterModalViewController.view.frame = CGRectMake(0, 568, 320, 284);
+            self.filterModalViewController.view.frame = CGRectMake(0, screenHeight, screenWidth, kFilterModalHeight);
         } completion:^(BOOL finished) {
             [self.filterModalViewController.view removeFromSuperview];
             [self.filterModalViewController removeFromParentViewController];
@@ -225,9 +230,24 @@ static inline float translate(float val, float min, float max) {
     }
 }
 
+#pragma mark - FLYRecordVoiceFilterViewController
+- (void)normalFilterButtonTapped:(id)button
+{
+    UALog(@"normal");
+    
+}
+
+- (void)adjustPitchFilterButtonTapped:(id)button
+{
+    UALog(@"adjust pitch");
+}
+
 
 - (void)_setupInitialViewState
 {
+    [self.levelsTimer invalidate];
+    self.levelsTimer = nil;
+    
     [_trashButton removeFromSuperview];
     _trashButton = nil;
     
@@ -404,7 +424,7 @@ static inline float translate(float val, float min, float max) {
         case FLYRecordCompleteState:
         {
             _currentState = FLYRecordPauseState;
-            [[FLYAudioStateManager sharedInstance] playAudioURLStr:nil withCompletionBlock:_completionBlock];
+//            [[FLYAudioStateManager sharedInstance] playAudioURLStr:nil withCompletionBlock:_completionBlock];
             [[FLYAudioStateManager sharedInstance] playAudioWithCompletionBlock:_completionBlock];
             [self _setupPauseViewState];
             break;
