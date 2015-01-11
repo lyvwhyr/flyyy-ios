@@ -18,6 +18,8 @@
 @interface FLYAudioStateManager()
 
 @property (nonatomic) BOOL isRecordAudioMode;
+@property (nonatomic) BOOL isApplyingFilter;
+@property (nonatomic) AEAudioUnitFilter *pitch;
 
 @end
 
@@ -125,20 +127,45 @@
 
 - (void)applyFilter
 {
+    if (self.isApplyingFilter) {
+        return;
+    }
+    self.isApplyingFilter = YES;
     NSError *error = NULL;
-    AEAudioUnitFilter *pitch = [[AEAudioUnitFilter alloc]
+    _pitch = [[AEAudioUnitFilter alloc]
                                 initWithComponentDescription:AEAudioComponentDescriptionMake(kAudioUnitManufacturer_Apple,
                                                                                              kAudioUnitType_FormatConverter,
                                                                                              kAudioUnitSubType_Varispeed)
                                 audioController:_audioController
                                 error:&error];
+    AudioUnitSetParameter(_pitch.audioUnit, kAudioUnitScope_Global, 0, kVarispeedParam_PlaybackRate, 1.15, 0);
+    [_audioController addFilter:_pitch];
+    [self _writeAudioToFile];
+}
+
+- (void)removeFilter
+{
+    if (self.isApplyingFilter) {
+        self.isApplyingFilter = NO;
+        [_audioController removeFilter:_pitch];
+        _pitch = nil;
+        [self _writeAudioToFile];
+    }
+}
+
+- (void)_writeAudioToFile
+{
     
-    AudioUnitSetParameter(pitch.audioUnit, kAudioUnitScope_Global, 0, kVarispeedParam_PlaybackRate, 1.15, 0);
-    [_audioController addFilter:pitch];
+    AEAudioFileWriter *audioFileWriter =[[AEAudioFileWriter alloc] initWithAudioDescription:_audioController.audioDescription];
+    
+    
+    NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.m4a"];
+    NSError *error = nil;
+//    [audioFileWriter beginWritingToFileAtPath:path fileType:kAudioFileM4AType error:nil];
     
     
     
-    AEAudioFileWriter *audioFileWriter = [[AEAudioFileWriter alloc] init];
     UInt32 numberOfSamples = 4096;
     
     AudioBufferList *list = AEAllocateAndInitAudioBufferList(_audioController.audioDescription, numberOfSamples);

@@ -234,12 +234,13 @@ static inline float translate(float val, float min, float max) {
 - (void)normalFilterButtonTapped:(id)button
 {
     UALog(@"normal");
-    
+    [[FLYAudioStateManager sharedInstance] removeFilter];
 }
 
 - (void)adjustPitchFilterButtonTapped:(id)button
 {
     UALog(@"adjust pitch");
+    [[FLYAudioStateManager sharedInstance] applyFilter];
 }
 
 
