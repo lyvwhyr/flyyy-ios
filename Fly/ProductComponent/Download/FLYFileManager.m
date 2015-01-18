@@ -37,13 +37,9 @@ static const NSInteger kCachMaxSize = 256 * 1024 * 1024;  //256M
 {
     if (self = [super init]) {
         _cacheCleanupQueue = dispatch_queue_create("com.flyy.cacheCleanupQueue", DISPATCH_QUEUE_SERIAL);
+        _cacheCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:kCacheCleanInterval target:self selector:@selector(_cleanCache) userInfo:nil repeats:YES];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            _cacheCleanupTimer = [NSTimer scheduledTimerWithTimeInterval:kCacheCleanInterval target:self selector:@selector(_cleanCache) userInfo:nil repeats:YES];
-        });
-
         _cleanupFileManager = [[NSFileManager alloc] init];
-        
         [self _cleanCache];
     }
     return self;
@@ -61,6 +57,18 @@ static const NSInteger kCachMaxSize = 256 * 1024 * 1024;  //256M
     dispatch_async(_cacheCleanupQueue, ^{
         [self _cleanupCacheHelper];
     });
+}
+
+- (void)debugPrintFilesAndSizeForDirectory:(NSString *)directory
+{
+    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:directory error:nil];
+    for (int i = 0; files && (i < files.count); i++) {
+        NSString *filePath = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:files[i]];
+        NSDictionary *attributes = [_cleanupFileManager attributesOfItemAtPath:filePath error:nil];
+        NSInteger fileSize = [attributes[NSFileSize] integerValue];
+        NSString *fileName = [[filePath componentsSeparatedByString:@"/"] lastObject];
+        UALog(@"File name: %@, size %.2fk", fileName, fileSize/1024.0);
+    }
 }
 
 - (void)_cleanupCacheHelper
@@ -146,7 +154,7 @@ static const NSInteger kCachMaxSize = 256 * 1024 * 1024;  //256M
 - (BOOL)_isAudioWithAttributes:(NSDictionary *)attributes fileName:(NSString *)fileName
 {
     if ([attributes[NSFileType] isEqualToString:NSFileTypeRegular] &&
-        ([[fileName pathExtension] isEqualToString:@"mp3"] || [[fileName pathExtension] isEqualToString:@"part"])) {
+        ([[fileName pathExtension] isEqualToString:@"m4a"] || [[fileName pathExtension] isEqualToString:@"part"])) {
         return YES;
     }
     return NO;

@@ -15,4 +15,6 @@
 + (instancetype)sharedInstance;
 + (NSString *)audioCacheDirectory;
 
+- (void)debugPrintFilesAndSizeForDirectory:(NSString *)directory;
+
 @end

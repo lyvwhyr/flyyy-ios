@@ -5,7 +5,7 @@
 //  Created by Xingxing Xu on 11/20/14.
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
-
+#import <AVFoundation/AVAudioSession.h>
 #import "FLYAudioStateManager.h"
 #import "AEAudioController.h"
 #import "AERecorder.h"
@@ -13,7 +13,8 @@
 #import "FLYFileManager.h"
 #import "FLYPlayableItem.h"
 #import "AEAudioFileWriter.h"
-#import <AVFoundation/AVAudioSession.h>
+#import "FLYFileManager.h"
+
 
 @interface FLYAudioStateManager()
 
@@ -50,8 +51,10 @@
 {
     [self _initRecordAudioController];
     
-    NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.m4a"];
+//    NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.m4a"];
+    
+    NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:@"Recording.m4a"];
     NSError *error = nil;
     if ( ![_recorder beginRecordingToFileAtPath:path fileType:kAudioFileM4AType error:&error] ) {
         [[[UIAlertView alloc] initWithTitle:@"Error"
@@ -99,6 +102,7 @@
     }
     
     NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
     NSString *str = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.m4a"];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:str]) {

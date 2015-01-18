@@ -23,6 +23,7 @@
 #import "FLYFilterHomeFeedSelectorViewController.h"
 #import "FLYIconButton.h"
 #import "FLYNavigationBarMyGroupButton.h"
+#import "FLYFileManager.h"
 
 #if DEBUG
 #import "FLEXManager.h"
@@ -51,7 +52,8 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        
+        NSString *audioDir = [FLYFileManager audioCacheDirectory];
+        [[FLYFileManager sharedInstance] debugPrintFilesAndSizeForDirectory:audioDir];
     }
     
     return self;

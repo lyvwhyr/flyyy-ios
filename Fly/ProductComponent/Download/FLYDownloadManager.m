@@ -32,6 +32,8 @@
 {
     if (self = [super init]) {
         _startDownloadQueue = dispatch_queue_create("com.flyyapp.startDownloadQueue", DISPATCH_QUEUE_SERIAL);
+        
+        //TODO:clear cache on logout
     }
     return self;
 }

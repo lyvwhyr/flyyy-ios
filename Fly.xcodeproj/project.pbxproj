@@ -616,6 +616,7 @@
 		A6263E831A187E1200C4C3BA = {
 			isa = PBXGroup;
 			children = (
+				A64596431A6B450B00E8D26D /* RawAssets */,
 				A6263E8E1A187E1200C4C3BA /* Fly */,
 				A6263EA81A187E1200C4C3BA /* FlyTests */,
 				A6263E8D1A187E1200C4C3BA /* Products */,
@@ -745,6 +746,13 @@
 				A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		A64596431A6B450B00E8D26D /* RawAssets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RawAssets;
 			sourceTree = "<group>";
 		};
 		A648C0BA1A19567700FF1744 /* Tabbar */ = {
