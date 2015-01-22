@@ -77,6 +77,7 @@
 		A67208201A35689600B2C5B5 /* icon_seconds@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A672081F1A35689600B2C5B5 /* icon_seconds@3x.png */; };
 		A67208231A3569C600B2C5B5 /* FLYReplyPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = A67208221A3569C600B2C5B5 /* FLYReplyPlayView.m */; };
 		A67208251A356CAE00B2C5B5 /* icon_play_reply@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67208241A356CAE00B2C5B5 /* icon_play_reply@3x.png */; };
+		A67A5E851A70CBA60098DA23 /* ServerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A67A5E841A70CBA60098DA23 /* ServerConfig.m */; };
 		A69C4B941A27094B00CAD443 /* icon_tabbar_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */; };
 		A69C4B981A270E1400CAD443 /* PaperButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4B971A270E1400CAD443 /* PaperButton.m */; };
 		A69C4B9A1A27111700CAD443 /* icon_filter_feed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B991A27111700CAD443 /* icon_filter_feed@3x.png */; };
@@ -348,6 +349,9 @@
 		A67208211A3569C600B2C5B5 /* FLYReplyPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYReplyPlayView.h; sourceTree = "<group>"; };
 		A67208221A3569C600B2C5B5 /* FLYReplyPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYReplyPlayView.m; sourceTree = "<group>"; };
 		A67208241A356CAE00B2C5B5 /* icon_play_reply@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_play_reply@3x.png"; sourceTree = "<group>"; };
+		A67A5E831A70CBA60098DA23 /* ServerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConfig.h; sourceTree = "<group>"; };
+		A67A5E841A70CBA60098DA23 /* ServerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConfig.m; sourceTree = "<group>"; };
+		A67A5E881A70CC450098DA23 /* EndPointConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EndPointConstant.h; sourceTree = "<group>"; };
 		A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_group@3x.png"; sourceTree = "<group>"; };
 		A69C4B961A270E1400CAD443 /* PaperButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperButton.h; sourceTree = "<group>"; };
 		A69C4B971A270E1400CAD443 /* PaperButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperButton.m; sourceTree = "<group>"; };
@@ -637,10 +641,12 @@
 		A6263E8E1A187E1200C4C3BA /* Fly */ = {
 			isa = PBXGroup;
 			children = (
+				A67A5E871A70CC290098DA23 /* Services */,
 				A6263EB51A18800A00C4C3BA /* ProductComponent */,
 				A6263E9C1A187E1200C4C3BA /* Images.xcassets */,
 				A648C0C71A199F8C00FF1744 /* Assets */,
 				A648C0CA1A19ACDB00FF1744 /* Libraries */,
+				A67A5E821A70CB810098DA23 /* Config */,
 				A6263E8F1A187E1200C4C3BA /* Supporting Files */,
 			);
 			path = Fly;
@@ -903,6 +909,24 @@
 				A66E204C1A2EBDAE004235F5 /* RDVTabBarController.m */,
 			);
 			path = RDVTabBarController;
+			sourceTree = "<group>";
+		};
+		A67A5E821A70CB810098DA23 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				A67A5E831A70CBA60098DA23 /* ServerConfig.h */,
+				A67A5E841A70CBA60098DA23 /* ServerConfig.m */,
+			);
+			name = Config;
+			path = ../Config;
+			sourceTree = "<group>";
+		};
+		A67A5E871A70CC290098DA23 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A67A5E881A70CC450098DA23 /* EndPointConstant.h */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		A69C4B951A270E0200CAD443 /* UIControls */ = {
@@ -1560,6 +1584,7 @@
 				A6162C721A318F1100A3B277 /* FLYNavigationBar.m in Sources */,
 				A6A0E4AB1A1E76110036116E /* FLEXLibrariesTableViewController.m in Sources */,
 				A6A0E4BD1A1E76110036116E /* FLEXUtility.m in Sources */,
+				A67A5E851A70CBA60098DA23 /* ServerConfig.m in Sources */,
 				A6A0E4B51A1E76110036116E /* FLEXObjectExplorerFactory.m in Sources */,
 				A648C0C61A1982D900FF1744 /* FLYTabView.m in Sources */,
 				A648C0E91A19AD4A00FF1744 /* NSArray+MASAdditions.m in Sources */,
