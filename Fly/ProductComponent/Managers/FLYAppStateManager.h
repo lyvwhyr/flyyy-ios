@@ -10,4 +10,9 @@
 
 @interface FLYAppStateManager : NSObject
 
+@property (nonatomic) BOOL isAutoPlayEnabled;
+
+
++ (instancetype)sharedInstance;
+
 @end

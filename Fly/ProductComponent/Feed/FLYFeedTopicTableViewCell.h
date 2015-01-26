@@ -14,7 +14,7 @@
 @protocol FLYFeedTopicTableViewCellDelegate <NSObject>
 
 - (void)commentButtonTapped:(FLYFeedTopicTableViewCell *)cell;
-- (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYPost *)post;
+- (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYPost *)post withIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

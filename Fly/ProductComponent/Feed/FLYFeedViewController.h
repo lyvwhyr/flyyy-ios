@@ -10,4 +10,6 @@
 
 @interface FLYFeedViewController : FLYUniversalViewController
 
+- (void)clearCurrentPlayingItem;
+
 @end

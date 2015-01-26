@@ -201,7 +201,7 @@
 
 - (void)_playButtonTapped
 {
-    [self.delegate playButtonTapped:self withPost:self.post];
+    [self.delegate playButtonTapped:self withPost:self.post withIndexPath:nil];
 }
 
 
