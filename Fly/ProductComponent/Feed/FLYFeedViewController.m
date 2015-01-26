@@ -273,7 +273,7 @@ static NSInteger globalPageNum = 1;
                 }
                 FLYPost *postToPlay = self.posts[toPlayRow];
                 NSIndexPath *indexPathToPlay = [NSIndexPath indexPathForRow:toPlayRow inSection:preIndexPath.section];
-                FLYFeedTopicTableViewCell *toPlayCell = (FLYFeedTopicTableViewCell *)[self tableView:self.feedTableView cellForRowAtIndexPath:indexPathToPlay];
+                FLYFeedTopicTableViewCell *toPlayCell = (FLYFeedTopicTableViewCell *)[self.feedTableView cellForRowAtIndexPath:indexPathToPlay];
                 [self playButtonTapped:toPlayCell withPost:postToPlay withIndexPath:indexPathToPlay];
             }
         }];
@@ -299,7 +299,6 @@ static NSInteger globalPageNum = 1;
         tappedCellIndexPath = [self.feedTableView indexPathForCell:tappedCell];
     } else {
         tappedCellIndexPath = indexPath;
-        tappedCell = (FLYFeedTopicTableViewCell *)[self.feedTableView cellForRowAtIndexPath:tappedCellIndexPath];
     }
     if (![FLYAudioStateManager sharedInstance].currentPlayItem) {
         [FLYAudioStateManager sharedInstance].currentPlayItem = [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableFeed playState:FLYPlayStateNotSet indexPath:tappedCellIndexPath];
