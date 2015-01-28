@@ -15,6 +15,8 @@
 #import "AEAudioFileWriter.h"
 #import "FLYFileManager.h"
 
+#define kRecordingAudioFileName  "kRecordingAudioFileName.m4a"
+
 
 @interface FLYAudioStateManager()
 
@@ -51,10 +53,7 @@
 {
     [self _initRecordAudioController];
     
-//    NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.m4a"];
-    
-    NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:@"Recording.m4a"];
+    NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:@"kRecordingAudioFileName.m4a"];
     NSError *error = nil;
     if ( ![_recorder beginRecordingToFileAtPath:path fileType:kAudioFileM4AType error:&error] ) {
         [[[UIAlertView alloc] initWithTitle:@"Error"
@@ -101,9 +100,7 @@
         self.player = nil;
     }
     
-    NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    NSString *str = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.m4a"];
+    NSString *str = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:@"kRecordingAudioFileName.m4a"];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:str]) {
         return;
@@ -164,7 +161,7 @@
     
     
     NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.m4a"];
+    NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"kRecordingAudioFileName.m4a"];
     NSError *error = nil;
 //    [audioFileWriter beginWritingToFileAtPath:path fileType:kAudioFileM4AType error:nil];
     
