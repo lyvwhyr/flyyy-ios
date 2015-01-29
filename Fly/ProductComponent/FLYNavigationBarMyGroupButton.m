@@ -7,6 +7,7 @@
 //
 
 #import "FLYNavigationBarMyGroupButton.h"
+#import "UIColor+FLYAddition.h"
 
 #define kMyGroupButtonHorizontalPadding 1
 
@@ -29,7 +30,7 @@
         
         _localTitleLabel = [UILabel new];
         _localTitleLabel.text = title;
-        _localTitleLabel.textColor = [UIColor whiteColor];
+        _localTitleLabel.textColor = [UIColor flyBlue];
         _localTitleLabel.font = [UIFont fontWithName:@"HelveticaNeueInterface-MediumP4" size:17];
         [_localTitleLabel sizeToFit];
         [self addSubview:_localTitleLabel];

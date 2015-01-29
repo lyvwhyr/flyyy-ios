@@ -35,7 +35,7 @@
         self.pulseInterval = 0;
         self.repeatCount = repeatCount;
 //        self.backgroundColor = [[UIColor colorWithRed:0.000 green:0.478 blue:1.000 alpha:1] CGColor];
-        self.backgroundColor = [[UIColor flyGreen] CGColor];
+        self.backgroundColor = [[UIColor flyBlue] CGColor];
         self.useTimingFunction = YES;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {

@@ -20,7 +20,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:[UIFont systemFontOfSize:18]};
+        self.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor flyBlue], NSFontAttributeName:[UIFont systemFontOfSize:18]};
         self.backgroundColor = [UIColor clearColor];
         self.translucent = YES;
         [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
@@ -33,7 +33,7 @@
     [super layoutSubviews];
     if (!self.colorView) {
         self.colorView = [[UIView alloc] initWithFrame:self.frame];
-        self.colorView.backgroundColor = [UIColor flyGreen];
+        self.colorView.backgroundColor = [UIColor flyBlue];
         [self addSubview:self.colorView];
     }
     
@@ -49,7 +49,7 @@
 
 - (void)setColor:(UIColor *)color animated:(BOOL)animated
 {
-    _color = color ? color : [UIColor flyGreen];
+    _color = color ? color : [UIColor flyBlue];
     [UIView animateWithDuration:0 animations:^{
         _colorView.backgroundColor = color;
     }];

@@ -11,7 +11,7 @@
 @interface UIColor (FLYAddition)
 
 + (UIColor *)colorWithHexString:(NSString *)hexString;
-+ (UIColor *)flyGreen;
++ (UIColor *)flyBlue;
 + (UIColor *)flyLightGreen;
 + (UIColor *)flyTabBarBackground;
 + (UIColor *)flyTabBarSeparator;
@@ -19,6 +19,7 @@
 + (UIColor *)flyContentBackgroundGrey;
 + (UIColor *)flyFeedGrey;
 + (UIColor *)flyInlineActionGrey;
++ (UIColor *)flyBackgroundColorBlue;
 + (UIColor *)tableHeaderGrey;
 + (UIColor *) tableHeaderTextGrey;
 

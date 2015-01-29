@@ -79,7 +79,7 @@
 - (void)_addNavigationBar
 {
     PaperButton *button = [PaperButton button];
-    button.tintColor = [UIColor whiteColor];
+    button.tintColor = [UIColor flyBlue];
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = barButton;
 }

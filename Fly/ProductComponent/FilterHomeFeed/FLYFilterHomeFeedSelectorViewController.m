@@ -42,7 +42,7 @@
     _explanationLabel = [UILabel new];
     _explanationLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _explanationLabel.numberOfLines = 0;
-    _explanationLabel.textColor = [UIColor flyGreen];
+    _explanationLabel.textColor = [UIColor flyBlue];
     _explanationLabel.font = [UIFont systemFontOfSize:EXPLANATION_TEXT_FONT_SIZE];
     
     NSString *explanationText = @"I want to follow:";

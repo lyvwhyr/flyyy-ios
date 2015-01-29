@@ -9,7 +9,7 @@
 #import "UIColor+FLYAddition.h"
 
 
-#define kColorFlyGreen                          @"#36b4a7"
+#define kColorFlyBlue                           @"#4CA8D3"
 #define kColorFlyTabBarBackground               @"#f3f3f3"
 #define kColorFlyTabBarSeparator                @"#a3a3a5"
 #define kColorFlyTabBarGreyText                 @"#bcbcbc"
@@ -19,6 +19,8 @@
 #define kColorFlyInlineActionGrey               @"#ababab"
 #define kColorFlyTableHeaderGrey                @"#f2f2f2"
 #define kColorFlyTableHeaderTextGrey            @"#9e9e9e"
+
+#define kColorFlyBackgroundColorBlue            @"#4CA8D3"
 
 @implementation UIColor (FLYAddition)
 
@@ -31,9 +33,9 @@
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
-+(UIColor *)flyGreen
++(UIColor *)flyBlue
 {
-    return [self colorWithHexString:kColorFlyGreen];
+    return [self colorWithHexString:kColorFlyBlue];
 }
 
 + (UIColor *)flyLightGreen
@@ -69,6 +71,11 @@
 + (UIColor *)flyInlineActionGrey
 {
     return [self colorWithHexString:kColorFlyInlineActionGrey];
+}
+
++ (UIColor *)flyBackgroundColorBlue
+{
+    return [self colorWithHexString:kColorFlyBackgroundColorBlue];
 }
 
 + (UIColor *)tableHeaderGrey

@@ -22,6 +22,7 @@
 #import "SVPullToRefresh.h"
 #import "FLYAudioStateManager.h"
 #import "FLYPlayableItem.h"
+#import "UIColor+FLYAddition.h"
 
 static NSInteger globalPageNum = 1;
 
@@ -56,12 +57,14 @@ static NSInteger globalPageNum = 1;
     [super viewDidLoad];
     _posts = [NSMutableArray new];
     
+    self.view.backgroundColor = [UIColor flyBackgroundColorBlue];
     if (![self isKindOfClass:[FLYGroupViewController class]]) {
         [self _loadLeftBarItem];
     }
     [self _addInlineReplyBar];
     
     _feedTableView = [UITableView new];
+    _feedTableView.backgroundColor = [UIColor clearColor];
     _feedTableView.translatesAutoresizingMaskIntoConstraints = NO;
     _feedDataSource = [[FLYFeedDataSource alloc] initWithPosts:_posts];
     _feedTableView.dataSource = self;
@@ -69,6 +72,7 @@ static NSInteger globalPageNum = 1;
     [_feedTableView registerClass:[FLYFeedTopicTableViewCell class] forCellReuseIdentifier:@"feedPostCellIdentifier"];
     [self.view addSubview:_feedTableView];
     
+    _feedTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _feedTableView.scrollsToTop = YES;
     
     _backgroundView = [UIView new];
@@ -225,6 +229,7 @@ static NSInteger globalPageNum = 1;
         cell.contentView.frame = cell.bounds;
         cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
     }
+    cell.backgroundColor = [UIColor clearColor];
     
     //set cell state
     [cell updatePlayState:FLYPlayStateNotSet];

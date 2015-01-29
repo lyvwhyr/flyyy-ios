@@ -276,7 +276,7 @@ static inline float translate(float val, float min, float max) {
     _outerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kOuterCircleRadius, kOuterCircleRadius) radius:kOuterCircleRadius color:[UIColor whiteColor]];
     [self.view addSubview:_outerCircleView];
     
-    _innerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kInnerCircleRadius, kInnerCircleRadius) radius:kInnerCircleRadius color:[UIColor flyGreen]];
+    _innerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kInnerCircleRadius, kInnerCircleRadius) radius:kInnerCircleRadius color:[UIColor flyBlue]];
     [self.view insertSubview:_innerCircleView aboveSubview:_outerCircleView];
     
     _userActionImageView = [UIImageView new];
@@ -299,7 +299,7 @@ static inline float translate(float val, float min, float max) {
     _recordedTimeLabel = [UILabel new];
     _recordedTimeLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:28.0f];
     _recordedTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    _recordedTimeLabel.textColor = [UIColor flyGreen];
+    _recordedTimeLabel.textColor = [UIColor flyBlue];
     
     [self.view addSubview:_recordedTimeLabel];
     [self _addPulsingAnimation];

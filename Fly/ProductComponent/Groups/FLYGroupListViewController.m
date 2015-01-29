@@ -160,7 +160,7 @@
             [HUD dismissAfterDelay:2.0];
         }];
         
-        [alert showCustom:self image:[UIImage imageNamed:@"icon_feed_play"] color:[UIColor flyGreen] title:@"Suggest" subTitle:@"Do you want to suggest a new group? We are open to new ideas." closeButtonTitle:@"Cancel" duration:0.0f];
+        [alert showCustom:self image:[UIImage imageNamed:@"icon_feed_play"] color:[UIColor flyBlue] title:@"Suggest" subTitle:@"Do you want to suggest a new group? We are open to new ideas." closeButtonTitle:@"Cancel" duration:0.0f];
     } else {
 //        FLYSingleGroupViewController *vc = [FLYSingleGroupViewController new];
 //        vc.view.translatesAutoresizingMaskIntoConstraints = NO;

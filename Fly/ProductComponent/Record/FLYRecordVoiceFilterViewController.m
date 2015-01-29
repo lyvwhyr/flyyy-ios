@@ -36,10 +36,10 @@
     [self.view addSubview:_normalButton];
     
     _adjustPitchButton = [[DKCircleButton alloc] initWithFrame:CGRectMake(0, 0, kRadius, kRadius)];
-    _adjustPitchButton.borderColor = [UIColor flyGreen];
+    _adjustPitchButton.borderColor = [UIColor flyBlue];
     _adjustPitchButton.center = CGPointMake(150, 40);
     _adjustPitchButton.titleLabel.font = [UIFont systemFontOfSize:12];
-    [_adjustPitchButton setTitleColor:[UIColor flyGreen] forState:UIControlStateNormal];
+    [_adjustPitchButton setTitleColor:[UIColor flyBlue] forState:UIControlStateNormal];
     _adjustPitchButton.animateTap = NO;
     [_adjustPitchButton setTitle:NSLocalizedString(@"Adjust Pitch", nil) forState:UIControlStateNormal];
     [_adjustPitchButton addTarget:self action:@selector(_adjustPitchButtonTapped:) forControlEvents:UIControlEventTouchUpInside];

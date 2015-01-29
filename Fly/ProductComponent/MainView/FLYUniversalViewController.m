@@ -27,9 +27,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    #if DEBUG
-//    [[FLEXManager sharedManager] showExplorer];
-//    #endif
+    #if DEBUG
+    [[FLEXManager sharedManager] showExplorer];
+    #endif
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -80,7 +80,7 @@
     if ([self.parentViewController respondsToSelector:@selector(preferredNavigationBarColor)]) {
         return [self.parentViewController performSelector:@selector(preferredNavigationBarColor)];
     }
-    return [UIColor flyGreen];
+    return [UIColor whiteColor];
 }
 
 - (UIStatusBarStyle) preferredStatusBarStyle

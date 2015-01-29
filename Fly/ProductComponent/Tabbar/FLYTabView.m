@@ -37,7 +37,7 @@
             _label = [UILabel new];
             _label.translatesAutoresizingMaskIntoConstraints = NO;
             _label.font = [UIFont flyToolBarFont];
-            _label.textColor = [UIColor flyGreen];
+            _label.textColor = [UIColor flyBlue];
             _label.text = title;
             [self addSubview:_label];
         } else {

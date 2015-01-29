@@ -63,7 +63,7 @@
         _separatorView.translatesAutoresizingMaskIntoConstraints = NO;
         [_mainView addSubview:_separatorView];
         
-        _innerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kInnerCircleRadius, kInnerCircleRadius) radius:kInnerCircleRadius color:[UIColor flyGreen]];
+        _innerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kInnerCircleRadius, kInnerCircleRadius) radius:kInnerCircleRadius color:[UIColor flyBlue]];
         _innerCircleView.translatesAutoresizingMaskIntoConstraints = NO;
         [_mainView addSubview:_innerCircleView];
         

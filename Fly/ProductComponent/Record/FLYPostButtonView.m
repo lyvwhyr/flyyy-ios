@@ -21,7 +21,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.backgroundColor = [UIColor flyGreen];
+        self.backgroundColor = [UIColor flyBlue];
         
         _textLabel = [UILabel new];
         _textLabel.text = @"Post";
