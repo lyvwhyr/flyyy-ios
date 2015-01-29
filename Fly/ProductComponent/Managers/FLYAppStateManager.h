@@ -6,11 +6,10 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface FLYAppStateManager : NSObject
 
 @property (nonatomic) BOOL isAutoPlayEnabled;
+@property (nonatomic) NSString *recordingFilePath;
 
 
 + (instancetype)sharedInstance;

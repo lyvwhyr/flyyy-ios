@@ -20,6 +20,7 @@
 #import "DKCircleButton.h"
 #import "FLYBarButtonItem.h"
 #import "FLYRecordVoiceFilterViewController.h"
+#import "AFHTTPRequestOperationManager.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -197,9 +198,26 @@ static inline float translate(float val, float min, float max) {
 
 - (void)_nextBarButtonTapped
 {
+    [self _uploadAudioFile];
+    
     FLYPrePostViewController *prePostVC = [FLYPrePostViewController new];
     [self.navigationController pushViewController:prePostVC animated:YES];
 }
+
+- (void)_uploadAudioFile
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:@"http://localhost:3000/v1/media/upload?token=secret123" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        NSData *audioData=[NSData dataWithContentsOfFile:[FLYAppStateManager sharedInstance].recordingFilePath];
+        [formData appendPartWithFileData:audioData name: @"media" fileName:@"dummyName.m4a" mimeType:@"audio/mp4a-latm"];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        UALog(@"Post audio file response: %@", responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+}
+
 
 #pragma mark - recording complete actions
 - (void)_voiceFilterButtonTapped
