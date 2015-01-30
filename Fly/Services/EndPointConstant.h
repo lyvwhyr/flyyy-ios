@@ -45,6 +45,8 @@
 
 
 //Confess.ly URLs
+#define kE
+
 #define EP_URL_CONFESSLY_RULES                  @"https://www.confess.ly/footer/rules"
 #define EP_URL_CONFESSLY_PRIVACY_POLICY         @"https://www.confess.ly/footer/privacy"
 #define EP_URL_CONFESSLY_TERMS_SERVICE          @"https://www.confess.ly/footer/terms"

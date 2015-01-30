@@ -10,6 +10,19 @@
 
 @implementation NSDictionary (FLYAddition)
 
+- (id)fly_objectOrNilForKey:(id)key
+{
+    if (key == nil) {
+        return nil;
+    }
+    id object = [self objectForKey:key];
+    if (object == [NSNull null]) {
+        return nil;
+    } else {
+        return object;
+    }
+}
+
 - (NSString *)fly_stringForKey:(id)key
 {
     return [self fly_stringForKey:key defaultValue:nil];
@@ -18,7 +31,7 @@
 - (NSString *)fly_stringForKey:(id)key defaultValue:(NSString *)defaultVal
 {
     id obj = [self objectForKey:key];
-    if ([obj isKindOfClass:[obj class]]) {
+    if ([obj isKindOfClass:[NSString class]]) {
         return obj;
     }
     return defaultVal;
@@ -27,7 +40,7 @@
 - (NSArray *)fly_arrayForKey:(id)key
 {
     id obj = [self objectForKey:key];
-    if ([obj isKindOfClass:[obj class]]) {
+    if ([obj isKindOfClass:[NSArray class]]) {
         return obj;
     }
     return nil;
@@ -36,7 +49,7 @@
 - (NSDictionary *)fly_dictionaryForKey:(id)key
 {
     id obj = [self objectForKey:key];
-    if ([obj isKindOfClass:[obj class]]) {
+    if ([obj isKindOfClass:[NSDictionary class]]) {
         return obj;
     }
     return nil;

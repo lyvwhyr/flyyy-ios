@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSDictionary (FLYAddition)
-
+- (id)fly_objectOrNilForKey:(id)key;
 - (NSString *)fly_stringForKey:(id)key;
 - (NSString *)fly_stringForKey:(id)key defaultValue:(NSString *)defaultVal;
 - (NSArray *)fly_arrayForKey:(id)key;

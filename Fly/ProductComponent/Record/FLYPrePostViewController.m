@@ -14,6 +14,9 @@
 #import "JGProgressHUD.h"
 #import "JGProgressHUDSuccessIndicatorView.h"
 #import "Dialog.h"
+#import "FLYRecordViewController.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "FLYPost.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -26,6 +29,7 @@
 @property (nonatomic) FLYPostButtonView *postButton;
 @property (nonatomic) UIView *overlayView;
 
+@property (nonatomic, copy) NSString *topicTitle;
 @property (nonatomic) NSMutableArray *groups;
 
 @end
@@ -179,8 +183,10 @@
     return YES;
 }
 
-- (BOOL)titleTextViewShouldEndEditing:(UIView *)textView
+- (BOOL)titleTextViewShouldEndEditing:(UITextView *)textView
 {
+    self.topicTitle = textView.text;
+    
     [self _exitEditTitleMode];
     return YES;
 }
@@ -241,8 +247,27 @@
 
 - (void)_postButtonTapped
 {
-    [Dialog simpleToast:@"Posted"];
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    NSString *mediaId = [FLYAppStateManager sharedInstance].mediaId;
+    if (mediaId) {
+        [self _serviceCreateTopic];
+    }
+}
+
+#pragma mark - Service
+- (void)_serviceCreateTopic
+{
+    //TODO:use real data
+    NSNumber *mediaIdNum = [NSNumber numberWithLongLong:[[FLYAppStateManager sharedInstance].mediaId longLongValue]];
+    NSDictionary *params = @{@"topic_title":self.topicTitle, @"media_id":mediaIdNum};
+    NSString *baseURL = @"http://localhost:3000/v1/topics?token=secret123&&media_id=not_valid&group_id=12345&audio_duration=10&extension=m4a";
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:baseURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        FLYPost *post = [[FLYPost alloc] initWithDictory:responseObject];
+        [Dialog simpleToast:@"Posted"];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        UALog(@"Post error %@", error);
+    }];
 }
 
 @end

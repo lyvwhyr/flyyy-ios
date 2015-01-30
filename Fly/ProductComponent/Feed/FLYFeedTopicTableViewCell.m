@@ -207,8 +207,8 @@
         make.top.equalTo(self.topicContentView).offset(10);
         make.leading.equalTo(self.topicContentView).offset(30);
         make.trailing.equalTo(self.topicContentView).offset(-10);
-//        make.width.lessThanOrEqualTo(self).offset(-40 - 36);
     }];
+    
 
     
     

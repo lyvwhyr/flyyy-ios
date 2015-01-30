@@ -21,11 +21,15 @@
 #import "FLYBarButtonItem.h"
 #import "FLYRecordVoiceFilterViewController.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "NSDictionary+FLYAddition.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
 #define kOutCircleTopPadding 80
 #define kFilterModalHeight 80
+#define kMultiPartName              @"media"
+#define kMultiPartFileName          @"dummyName.m4a"
+#define kMimeType                   @"audio/mp4a-latm"
 
 
 @interface FLYRecordViewController ()<FLYUniversalViewControllerDelegate>
@@ -52,6 +56,8 @@
 
 @property (nonatomic) NSInteger recordedSeconds;
 @property (nonatomic) NSTimer *levelsTimer;
+
+@property (nonatomic) NSString *mediaId;
 
 @end
 
@@ -206,13 +212,15 @@ static inline float translate(float val, float min, float max) {
 
 - (void)_uploadAudioFile
 {
+    [FLYAppStateManager sharedInstance].mediaId = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:@"http://localhost:3000/v1/media/upload?token=secret123" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSData *audioData=[NSData dataWithContentsOfFile:[FLYAppStateManager sharedInstance].recordingFilePath];
-        [formData appendPartWithFileData:audioData name: @"media" fileName:@"dummyName.m4a" mimeType:@"audio/mp4a-latm"];
+        [formData appendPartWithFileData:audioData name: kMultiPartName fileName: kMultiPartFileName mimeType:kMimeType];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [FLYAppStateManager sharedInstance].mediaId = [[responseObject fly_objectOrNilForKey:@"media_id"] stringValue];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kMediaIdGeneratedNotification object:nil];
         UALog(@"Post audio file response: %@", responseObject);
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];

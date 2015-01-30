@@ -10,6 +10,7 @@
 
 @property (nonatomic) BOOL isAutoPlayEnabled;
 @property (nonatomic) NSString *recordingFilePath;
+@property (nonatomic) NSString *mediaId;
 
 
 + (instancetype)sharedInstance;

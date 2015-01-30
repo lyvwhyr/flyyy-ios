@@ -10,4 +10,9 @@
 
 @interface FLYGroup : NSObject
 
+@property (nonatomic, copy) NSString *groupId;
+@property (nonatomic, copy) NSString *groupName;
+
+- (instancetype)initWithDictory:(NSDictionary *)dict;
+
 @end

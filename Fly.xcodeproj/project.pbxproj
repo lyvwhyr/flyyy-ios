@@ -52,6 +52,7 @@
 		A648C0F61A19D1FF00FF1744 /* icon_tabbar_voice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A648C0F51A19D1FF00FF1744 /* icon_tabbar_voice@2x.png */; };
 		A64BDAC61A7B518400B46F18 /* FLYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A64BDAC51A7B518400B46F18 /* FLYUser.m */; };
 		A64BDAC91A7B519400B46F18 /* FLYGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A64BDAC81A7B519400B46F18 /* FLYGroup.m */; };
+		A64BDACB1A7B647600B46F18 /* FLYURLConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = A64BDACA1A7B647600B46F18 /* FLYURLConstants.h */; };
 		A64D157F1A29985600369D62 /* icon_feed_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D157E1A29985600369D62 /* icon_feed_play@3x.png */; };
 		A64D15981A29B47D00369D62 /* FLYIconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D15971A29B47D00369D62 /* FLYIconButton.m */; };
 		A64D159B1A29BC6E00369D62 /* FLYInlineActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D159A1A29BC6E00369D62 /* FLYInlineActionView.m */; };
@@ -315,6 +316,7 @@
 		A64BDAC51A7B518400B46F18 /* FLYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUser.m; sourceTree = "<group>"; };
 		A64BDAC71A7B519400B46F18 /* FLYGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroup.h; sourceTree = "<group>"; };
 		A64BDAC81A7B519400B46F18 /* FLYGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroup.m; sourceTree = "<group>"; };
+		A64BDACA1A7B647600B46F18 /* FLYURLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYURLConstants.h; sourceTree = "<group>"; };
 		A64D157E1A29985600369D62 /* icon_feed_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_feed_play@3x.png"; sourceTree = "<group>"; };
 		A64D15961A29B47D00369D62 /* FLYIconButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYIconButton.h; sourceTree = "<group>"; };
 		A64D15971A29B47D00369D62 /* FLYIconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYIconButton.m; sourceTree = "<group>"; };
@@ -937,6 +939,7 @@
 			isa = PBXGroup;
 			children = (
 				A67A5E881A70CC450098DA23 /* EndPointConstant.h */,
+				A64BDACA1A7B647600B46F18 /* FLYURLConstants.h */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1601,6 +1604,7 @@
 				A69C4BA71A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.m in Sources */,
 				A6162C721A318F1100A3B277 /* FLYNavigationBar.m in Sources */,
 				A6A0E4AB1A1E76110036116E /* FLEXLibrariesTableViewController.m in Sources */,
+				A64BDACB1A7B647600B46F18 /* FLYURLConstants.h in Sources */,
 				A6A0E4BD1A1E76110036116E /* FLEXUtility.m in Sources */,
 				A67A5E851A70CBA60098DA23 /* ServerConfig.m in Sources */,
 				A6A0E4B51A1E76110036116E /* FLEXObjectExplorerFactory.m in Sources */,

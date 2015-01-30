@@ -10,4 +10,9 @@
 
 @interface FLYUser : NSObject
 
+@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *userName;
+
+- (instancetype)initWithDictory:(NSDictionary *)dict;
+
 @end
