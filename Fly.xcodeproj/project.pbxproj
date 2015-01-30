@@ -28,6 +28,8 @@
 		A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263EC31A18910B00C4C3BA /* UIViewController+StatusBar.m */; };
 		A6263ECB1A1897CE00C4C3BA /* UIColor+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263ECA1A1897CE00C4C3BA /* UIColor+FLYAddition.m */; };
 		A6263ED01A18A10E00C4C3BA /* UIImage+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */; };
+		A628FA6D1A7A1AA300BD9B7A /* icon_timeline.png in Resources */ = {isa = PBXBuildFile; fileRef = A628FA6C1A7A1AA300BD9B7A /* icon_timeline.png */; };
+		A628FA6F1A7A20D800BD9B7A /* icon_home_timeline_speechbubble.png in Resources */ = {isa = PBXBuildFile; fileRef = A628FA6E1A7A20D800BD9B7A /* icon_home_timeline_speechbubble.png */; };
 		A62CBE7C1A32E695007F459C /* FLYBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A62CBE7B1A32E695007F459C /* FLYBarButtonItem.m */; };
 		A62E53B51A227E0B00125DBC /* icon_voice_filter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A62E53B41A227E0B00125DBC /* icon_voice_filter@3x.png */; };
 		A640BC3B1A3815B700DC59A7 /* icon_flag_post@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */; };
@@ -48,6 +50,8 @@
 		A648C0F21A19C65B00FF1744 /* FLYTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0BC1A1956AA00FF1744 /* FLYTabBarView.m */; };
 		A648C0F41A19C7A100FF1744 /* icon_tabbar_voice@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A648C0F31A19C7A100FF1744 /* icon_tabbar_voice@3x.png */; };
 		A648C0F61A19D1FF00FF1744 /* icon_tabbar_voice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A648C0F51A19D1FF00FF1744 /* icon_tabbar_voice@2x.png */; };
+		A64BDAC61A7B518400B46F18 /* FLYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A64BDAC51A7B518400B46F18 /* FLYUser.m */; };
+		A64BDAC91A7B519400B46F18 /* FLYGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A64BDAC81A7B519400B46F18 /* FLYGroup.m */; };
 		A64D157F1A29985600369D62 /* icon_feed_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D157E1A29985600369D62 /* icon_feed_play@3x.png */; };
 		A64D15981A29B47D00369D62 /* FLYIconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D15971A29B47D00369D62 /* FLYIconButton.m */; };
 		A64D159B1A29BC6E00369D62 /* FLYInlineActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D159A1A29BC6E00369D62 /* FLYInlineActionView.m */; };
@@ -265,6 +269,8 @@
 		A6263ECA1A1897CE00C4C3BA /* UIColor+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FLYAddition.m"; sourceTree = "<group>"; };
 		A6263ECE1A18A10E00C4C3BA /* UIImage+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FLYAddition.h"; sourceTree = "<group>"; };
 		A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FLYAddition.m"; sourceTree = "<group>"; };
+		A628FA6C1A7A1AA300BD9B7A /* icon_timeline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_timeline.png; sourceTree = "<group>"; };
+		A628FA6E1A7A20D800BD9B7A /* icon_home_timeline_speechbubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_home_timeline_speechbubble.png; sourceTree = "<group>"; };
 		A62CBE7A1A32E695007F459C /* FLYBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYBarButtonItem.h; sourceTree = "<group>"; };
 		A62CBE7B1A32E695007F459C /* FLYBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYBarButtonItem.m; sourceTree = "<group>"; };
 		A62E53B41A227E0B00125DBC /* icon_voice_filter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_voice_filter@3x.png"; sourceTree = "<group>"; };
@@ -305,6 +311,10 @@
 		A648C0F01A19B18B00FF1744 /* UIFont+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FLYAddition.m"; sourceTree = "<group>"; };
 		A648C0F31A19C7A100FF1744 /* icon_tabbar_voice@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_voice@3x.png"; sourceTree = "<group>"; };
 		A648C0F51A19D1FF00FF1744 /* icon_tabbar_voice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_voice@2x.png"; sourceTree = "<group>"; };
+		A64BDAC41A7B518400B46F18 /* FLYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUser.h; sourceTree = "<group>"; };
+		A64BDAC51A7B518400B46F18 /* FLYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUser.m; sourceTree = "<group>"; };
+		A64BDAC71A7B519400B46F18 /* FLYGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroup.h; sourceTree = "<group>"; };
+		A64BDAC81A7B519400B46F18 /* FLYGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroup.m; sourceTree = "<group>"; };
 		A64D157E1A29985600369D62 /* icon_feed_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_feed_play@3x.png"; sourceTree = "<group>"; };
 		A64D15961A29B47D00369D62 /* FLYIconButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYIconButton.h; sourceTree = "<group>"; };
 		A64D15971A29B47D00369D62 /* FLYIconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYIconButton.m; sourceTree = "<group>"; };
@@ -776,6 +786,8 @@
 		A648C0C71A199F8C00FF1744 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A628FA6E1A7A20D800BD9B7A /* icon_home_timeline_speechbubble.png */,
+				A628FA6C1A7A1AA300BD9B7A /* icon_timeline.png */,
 				A6E5060F1A4AA0CB009C5FAB /* icon_play_loading@3x.png */,
 				A6E506101A4AA0CB009C5FAB /* icon_play_pause@3x.png */,
 				A65578421A3ADE4E003102CD /* icon_share_post@3x.png */,
@@ -998,6 +1010,10 @@
 			children = (
 				A69C4BD31A283F6400CAD443 /* FLYPost.h */,
 				A69C4BD41A283F6400CAD443 /* FLYPost.m */,
+				A64BDAC41A7B518400B46F18 /* FLYUser.h */,
+				A64BDAC51A7B518400B46F18 /* FLYUser.m */,
+				A64BDAC71A7B519400B46F18 /* FLYGroup.h */,
+				A64BDAC81A7B519400B46F18 /* FLYGroup.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1465,6 +1481,7 @@
 				A6F27CA41A20735A000EC0B3 /* record_animate_09.png in Resources */,
 				A6F27CA11A20735A000EC0B3 /* record_animate_06.png in Resources */,
 				A69C4BFA1A28636F00CAD443 /* p4.jpg in Resources */,
+				A628FA6F1A7A20D800BD9B7A /* icon_home_timeline_speechbubble.png in Resources */,
 				A64D15A01A29C0BB00369D62 /* icon_inline_share@3x.png in Resources */,
 				A69C4C011A28636F00CAD443 /* p11.jpg in Resources */,
 				A69C4B941A27094B00CAD443 /* icon_tabbar_group@3x.png in Resources */,
@@ -1520,6 +1537,7 @@
 				A6F27CA51A20735A000EC0B3 /* record_animate_10.png in Resources */,
 				A651BD931A4985F20081A1E0 /* success.png in Resources */,
 				A65578431A3ADE4E003102CD /* icon_share_post@3x.png in Resources */,
+				A628FA6D1A7A1AA300BD9B7A /* icon_timeline.png in Resources */,
 				A67208251A356CAE00B2C5B5 /* icon_play_reply@3x.png in Resources */,
 				A61D18771A1F27E900D188B5 /* FLYPrePostViewController.xib in Resources */,
 				A6F27C9E1A20735A000EC0B3 /* record_animate_03.png in Resources */,
@@ -1592,6 +1610,7 @@
 				A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */,
 				A69C4BB41A27D61000CAD443 /* FLYFilterSelectorGroupTableViewCell.m in Sources */,
 				A6A0E4901A1E76110036116E /* FLEXArgumentInputFontsPickerView.m in Sources */,
+				A64BDAC91A7B519400B46F18 /* FLYGroup.m in Sources */,
 				A62CBE7C1A32E695007F459C /* FLYBarButtonItem.m in Sources */,
 				A6A0E4A61A1E76110036116E /* FLEXClassesTableViewController.m in Sources */,
 				A69C4BCC1A280C4F00CAD443 /* GBFlatButton.m in Sources */,
@@ -1624,6 +1643,7 @@
 				A648C0E61A19AD4A00FF1744 /* MASLayoutConstraint.m in Sources */,
 				A6A0E4991A1E76110036116E /* FLEXArgumentInputView.m in Sources */,
 				A6A0E4AE1A1E76110036116E /* FLEXArrayExplorerViewController.m in Sources */,
+				A64BDAC61A7B518400B46F18 /* FLYUser.m in Sources */,
 				A69C4BAE1A271B8600CAD443 /* PresentingAnimator.m in Sources */,
 				A69C4BD51A283F6400CAD443 /* FLYPost.m in Sources */,
 				A6A4EFBE1A2C22EF00FD4066 /* FLYGroupViewController.m in Sources */,

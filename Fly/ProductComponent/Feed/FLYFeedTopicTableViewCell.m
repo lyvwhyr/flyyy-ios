@@ -26,6 +26,11 @@
 @property (nonatomic) UIButton *playButton;
 @property (nonatomic) UILabel *postTitle;
 
+@property (nonatomic) UIImageView *timelineImageView;
+
+@property (nonatomic) UIView *topicContentView;
+@property (nonatomic) UIImageView *speechBubbleView;
+
 @property (nonatomic) FLYInlineActionView *inlineActionView;
 
 @end
@@ -36,9 +41,6 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-//        self.translatesAutoresizingMaskIntoConstraints = NO;
-//        self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
-        
         //header view
         _avatarImageView = [UIImageView new];
         NSString *avatarName = [NSString stringWithFormat:@"p%d.jpg", (arc4random()%10 + 1)];
@@ -49,40 +51,30 @@
         _avatarImageView.clipsToBounds = YES;
         _avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
         
-        _userNameLabel = [UILabel new];
-        _userNameLabel.text = @"pancake";
-        _userNameLabel.textColor = [UIColor blackColor];
-        _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
         
-        _postAtLabel = [UILabel new];
-        _postAtLabel.text = @"19s";
-        _postAtLabel.font = [UIFont systemFontOfSize:13];
-        _postAtLabel.textColor = [UIColor flyFeedGrey];
-        _postAtLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _timelineImageView = [UIImageView new];
+        UIImage *timelineImage = [UIImage imageNamed:@"icon_timeline"];
+        [_timelineImageView setImage:timelineImage];
+        _timelineImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.contentView addSubview:_timelineImageView];
         
-
-        _categoryButton = [[FLYIconButton alloc] initWithText:@"Small business saturday" textFont:[UIFont systemFontOfSize:12] textColor:[UIColor flyInlineActionGrey] icon:@"icon_feed_group"];
-        _categoryButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_categoryButton];
+        _topicContentView = [UIView new];
+        [self.contentView addSubview:_topicContentView];
         
-        _postHeaderView = [UIView new];
-        _postHeaderView.translatesAutoresizingMaskIntoConstraints = NO;
-        [_postHeaderView addSubview:_avatarImageView];
-        [_postHeaderView addSubview:_userNameLabel];
-        [_postHeaderView addSubview:_postAtLabel];
-        [self.contentView addSubview:_postHeaderView];
+        _speechBubbleView = [UIImageView new];
+        UIImage* image = [UIImage imageNamed:@"icon_home_timeline_speechbubble"];
+//        UIEdgeInsets insets = UIEdgeInsetsMake(20, 20, 70, 20);
+//        image = [image resizableImageWithCapInsets:insets];
+        self.speechBubbleView.image = image;
+        [self.speechBubbleView sizeToFit];
+        [self.topicContentView addSubview:self.speechBubbleView];
         
-        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _playButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-        [_playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
-        [self addSubview:_playButton];
         
         _postTitle = [UILabel new];
-        _postTitle.numberOfLines = 0;
+        _postTitle.numberOfLines = 2;
         _postTitle.textColor = [UIColor blackColor];
         _postTitle.font = [UIFont systemFontOfSize:15];
-        _postAtLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _postTitle.translatesAutoresizingMaskIntoConstraints = NO;
         
         NSString *postTitle = @"There's a fine line between numerator and denominator.";
         NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:postTitle];
@@ -91,16 +83,48 @@
         [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, postTitle.length)];
         _postTitle.attributedText = attrStr;
         [_postTitle sizeToFit];
-        [self addSubview:_postTitle];
+        [self.topicContentView insertSubview:self.postTitle aboveSubview:self.speechBubbleView];
         
-        _inlineActionView = [FLYInlineActionView new];
-        _inlineActionView.translatesAutoresizingMaskIntoConstraints = NO;
-        __weak typeof(self)weakSelf = self;
-        _inlineActionView.commentButtonTappedBlock = ^ {
-            __strong typeof(self)strongSelf = weakSelf;
-            [strongSelf.delegate commentButtonTapped:strongSelf];
-        };
-        [self addSubview:_inlineActionView];
+        
+        
+        
+//        _userNameLabel = [UILabel new];
+//        _userNameLabel.text = @"pancake";
+//        _userNameLabel.textColor = [UIColor blackColor];
+//        _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//        
+//        _postAtLabel = [UILabel new];
+//        _postAtLabel.text = @"19s";
+//        _postAtLabel.font = [UIFont systemFontOfSize:13];
+//        _postAtLabel.textColor = [UIColor flyFeedGrey];
+//        _postAtLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//        
+//
+//        _categoryButton = [[FLYIconButton alloc] initWithText:@"Small business saturday" textFont:[UIFont systemFontOfSize:12] textColor:[UIColor flyInlineActionGrey] icon:@"icon_feed_group"];
+//        _categoryButton.translatesAutoresizingMaskIntoConstraints = NO;
+//        [self addSubview:_categoryButton];
+        
+//        _postHeaderView = [UIView new];
+//        _postHeaderView.translatesAutoresizingMaskIntoConstraints = NO;
+//        [_postHeaderView addSubview:_avatarImageView];
+//        [_postHeaderView addSubview:_userNameLabel];
+//        [_postHeaderView addSubview:_postAtLabel];
+//        [self.contentView addSubview:_postHeaderView];
+        
+//        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        _playButton.translatesAutoresizingMaskIntoConstraints = NO;
+//        [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+//        [_playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
+//        [self addSubview:_playButton];
+//        
+//        _inlineActionView = [FLYInlineActionView new];
+//        _inlineActionView.translatesAutoresizingMaskIntoConstraints = NO;
+//        __weak typeof(self)weakSelf = self;
+//        _inlineActionView.commentButtonTappedBlock = ^ {
+//            __strong typeof(self)strongSelf = weakSelf;
+//            [strongSelf.delegate commentButtonTapped:strongSelf];
+//        };
+//        [self addSubview:_inlineActionView];
         
     }
     return self;
@@ -144,57 +168,82 @@
 
 - (void)updateConstraints
 {
-    [_postHeaderView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).offset(0);
-        make.leading.equalTo(self.contentView).offset(0);
-        make.width.equalTo(@(CGRectGetWidth([[UIScreen mainScreen] bounds])));
-        make.height.equalTo(@(50));
-    }];
-    
-    [_avatarImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_postHeaderView).offset(10);
-        make.leading.equalTo(_postHeaderView).offset(20);
-        make.width.equalTo(@(36));
-        make.height.equalTo(@(36));
-    }];
-    
-    [_userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_avatarImageView);
-        make.leading.equalTo(_avatarImageView.mas_right).offset(10);
+//    [_postHeaderView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.contentView).offset(0);
+//        make.leading.equalTo(self.contentView).offset(0);
+//        make.width.equalTo(@(CGRectGetWidth([[UIScreen mainScreen] bounds])));
+//        make.height.equalTo(@(50));
+//    }];
+//    
+//    [_avatarImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(_postHeaderView).offset(10);
+//        make.leading.equalTo(_postHeaderView).offset(20);
 //        make.width.equalTo(@(36));
 //        make.height.equalTo(@(36));
+//    }];
+    
+    [_timelineImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(0);
+        make.leading.equalTo(self).offset(20);
+        make.width.equalTo(@(4));
+        make.height.equalTo(@(150));
     }];
     
-    [_categoryButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_userNameLabel.mas_bottom).offset(3);
-        make.leading.equalTo(_userNameLabel);
+    [self.topicContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView).offset(5);
+        make.leading.equalTo(self.contentView).offset(30);
+        make.trailing.equalTo(self.contentView).offset(-5);
+        make.bottom.equalTo(self.contentView).offset(-5);
     }];
     
-    [_postAtLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_postHeaderView).offset(15);
-        make.trailing.equalTo(_postHeaderView).offset(-20);
+    [self.speechBubbleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topicContentView).offset(0);
+        make.leading.equalTo(self.topicContentView).offset(0);
+        make.trailing.equalTo(self.topicContentView).offset(0);
+        make.bottom.equalTo(self.topicContentView).offset(0);
     }];
+    
+    [self.postTitle mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topicContentView).offset(10);
+        make.leading.equalTo(self.topicContentView).offset(30);
+        make.trailing.equalTo(self.topicContentView).offset(-10);
+//        make.width.lessThanOrEqualTo(self).offset(-40 - 36);
+    }];
+
+    
+    
+//    [_userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(_avatarImageView);
+//        make.leading.equalTo(_avatarImageView.mas_right).offset(10);
+////        make.width.equalTo(@(36));
+////        make.height.equalTo(@(36));
+//    }];
+    
+//    [_categoryButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(_userNameLabel.mas_bottom).offset(3);
+//        make.leading.equalTo(_userNameLabel);
+//    }];
+//    
+//    [_postAtLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(_postHeaderView).offset(15);
+//        make.trailing.equalTo(_postHeaderView).offset(-20);
+//    }];
     
     
     //center part
-    [_playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_postHeaderView.mas_bottom).offset(20);
-        make.leading.equalTo(self).offset(25);
-    }];
+//    [_playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(_postHeaderView.mas_bottom).offset(20);
+//        make.leading.equalTo(self).offset(25);
+//    }];
+//    
     
-    [_postTitle mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_postHeaderView.mas_bottom).offset(5);
-        make.leading.equalTo(_playButton.mas_trailing).offset(20);
-        make.width.lessThanOrEqualTo(self).offset(-40 - 36);
-    }];
-    
-    [_inlineActionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(_playButton.mas_bottom);
-        make.bottom.equalTo(self);
-        make.leading.equalTo(self);
-        make.width.equalTo(self);
-        make.height.equalTo(@(40));
-    }];
+//    [_inlineActionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+////        make.top.equalTo(_playButton.mas_bottom);
+//        make.bottom.equalTo(self);
+//        make.leading.equalTo(self);
+//        make.width.equalTo(self);
+//        make.height.equalTo(@(150));
+//    }];
     
     [super updateConstraints];
 }
