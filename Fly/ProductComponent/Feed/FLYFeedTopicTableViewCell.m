@@ -78,14 +78,15 @@
         
         _postTitle = [UILabel new];
         _postTitle.numberOfLines = 2;
-        _postTitle.textColor = [UIColor blackColor];
-        _postTitle.font = [UIFont systemFontOfSize:15];
+        _postTitle.adjustsFontSizeToFitWidth = NO;
+        _postTitle.lineBreakMode = NSLineBreakByTruncatingTail;
+        _postTitle.font = [UIFont fontWithName:@"Avenir-Book" size:18];
         _postTitle.translatesAutoresizingMaskIntoConstraints = NO;
         
-        _topicTitleString = @"There's a fine line between numerator and denominator. There's a fine line between numerator and denominator. There's a fine line between numerator and denominator.";
+        _topicTitleString = @"There's a fine line between numerator and here's a fine line between numerator and denominator. There's a fine line between numerator and denominator.";
         NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:_topicTitleString];
         NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-        paragraphStyle.lineSpacing = 6;
+        paragraphStyle.lineSpacing = 2;
         [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _topicTitleString.length)];
         _postTitle.attributedText = attrStr;
         [_postTitle sizeToFit];
