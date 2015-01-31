@@ -33,6 +33,9 @@
 
 @property (nonatomic) FLYInlineActionView *inlineActionView;
 
+
+@property (nonatomic, copy) NSString *topicTitleString;
+
 @end
 
 @implementation FLYFeedTopicTableViewCell
@@ -62,9 +65,9 @@
         [self.contentView addSubview:_topicContentView];
         
         _speechBubbleView = [UIImageView new];
-        UIImage* image = [UIImage imageNamed:@"icon_home_timeline_speechbubble"];
-//        UIEdgeInsets insets = UIEdgeInsetsMake(20, 20, 70, 20);
-//        image = [image resizableImageWithCapInsets:insets];
+        UIImage* image = [UIImage imageNamed:@"icon_homefeed_speech_bubble"];
+        UIEdgeInsets insets = UIEdgeInsetsMake(40, 40, 70, 50);
+        image = [image resizableImageWithCapInsets:insets];
         self.speechBubbleView.image = image;
         [self.speechBubbleView sizeToFit];
         [self.topicContentView addSubview:self.speechBubbleView];
@@ -76,16 +79,14 @@
         _postTitle.font = [UIFont systemFontOfSize:15];
         _postTitle.translatesAutoresizingMaskIntoConstraints = NO;
         
-        NSString *postTitle = @"There's a fine line between numerator and denominator.";
-        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:postTitle];
+        _topicTitleString = @"There's a fine line between numerator and denominator. There's a fine line between numerator and denominator. There's a fine line between numerator and denominator.";
+        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:_topicTitleString];
         NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
         paragraphStyle.lineSpacing = 6;
-        [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, postTitle.length)];
+        [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _topicTitleString.length)];
         _postTitle.attributedText = attrStr;
         [_postTitle sizeToFit];
         [self.topicContentView insertSubview:self.postTitle aboveSubview:self.speechBubbleView];
-        
-        
         
         
 //        _userNameLabel = [UILabel new];

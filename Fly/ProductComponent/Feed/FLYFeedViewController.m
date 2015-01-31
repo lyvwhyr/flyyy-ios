@@ -116,11 +116,12 @@ static NSInteger globalPageNum = 1;
 
 - (void)_loadLeftBarItem
 {
-    FLYNavigationBarMyGroupButton *leftButton = [[FLYNavigationBarMyGroupButton alloc] initWithFrame:CGRectMake(0, 0, 120, 32) Title:@"My Feed" icon:@"icon_down_arrow"];
+    FLYGroupsButtonItem *leftBarItem = [FLYGroupsButtonItem barButtonItem:YES];
+    self.navigationItem.leftBarButtonItem = leftBarItem;
     
-    [leftButton addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [leftButton sizeToFit];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+//    [leftButton addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+//    [leftButton sizeToFit];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
 }
 
 - (void)loadRightBarButton

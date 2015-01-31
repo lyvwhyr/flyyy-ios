@@ -34,6 +34,8 @@
 		A62E53B51A227E0B00125DBC /* icon_voice_filter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A62E53B41A227E0B00125DBC /* icon_voice_filter@3x.png */; };
 		A640BC3B1A3815B700DC59A7 /* icon_flag_post@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */; };
 		A640BC3D1A381AE900DC59A7 /* icon_navigation_catalog@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3C1A381AE900DC59A7 /* icon_navigation_catalog@3x.png */; };
+		A6419B691A7C92D00075B543 /* icon_homefeed_speech_bubble@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6419B681A7C92D00075B543 /* icon_homefeed_speech_bubble@3x.png */; };
+		A6419B6B1A7C943B0075B543 /* icon_homefeed_groups_blue@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6419B6A1A7C943B0075B543 /* icon_homefeed_groups_blue@3x.png */; };
 		A642FE2E1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A642FE2D1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.m */; };
 		A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0C21A1962A200FF1744 /* FLYUtilities.m */; };
 		A648C0C61A1982D900FF1744 /* FLYTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0C51A1982D900FF1744 /* FLYTabView.m */; };
@@ -277,6 +279,8 @@
 		A62E53B41A227E0B00125DBC /* icon_voice_filter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_voice_filter@3x.png"; sourceTree = "<group>"; };
 		A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_flag_post@3x.png"; sourceTree = "<group>"; };
 		A640BC3C1A381AE900DC59A7 /* icon_navigation_catalog@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_navigation_catalog@3x.png"; sourceTree = "<group>"; };
+		A6419B681A7C92D00075B543 /* icon_homefeed_speech_bubble@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_homefeed_speech_bubble@3x.png"; sourceTree = "<group>"; };
+		A6419B6A1A7C943B0075B543 /* icon_homefeed_groups_blue@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_homefeed_groups_blue@3x.png"; sourceTree = "<group>"; };
 		A642FE2C1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYRecordVoiceFilterViewController.h; sourceTree = "<group>"; };
 		A642FE2D1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYRecordVoiceFilterViewController.m; sourceTree = "<group>"; };
 		A648C0BB1A1956AA00FF1744 /* FLYTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTabBarView.h; sourceTree = "<group>"; };
@@ -788,6 +792,8 @@
 		A648C0C71A199F8C00FF1744 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A6419B6A1A7C943B0075B543 /* icon_homefeed_groups_blue@3x.png */,
+				A6419B681A7C92D00075B543 /* icon_homefeed_speech_bubble@3x.png */,
 				A628FA6E1A7A20D800BD9B7A /* icon_home_timeline_speechbubble.png */,
 				A628FA6C1A7A1AA300BD9B7A /* icon_timeline.png */,
 				A6E5060F1A4AA0CB009C5FAB /* icon_play_loading@3x.png */,
@@ -1507,6 +1513,7 @@
 				A6A0E4131A1DB9480036116E /* icon_navigation_back@3x.png in Resources */,
 				A6F27CA91A20735A000EC0B3 /* record_animate_14.png in Resources */,
 				A69C4C021A28636F00CAD443 /* p12.jpg in Resources */,
+				A6419B691A7C92D00075B543 /* icon_homefeed_speech_bubble@3x.png in Resources */,
 				A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */,
 				A61D186E1A1F1E7900D188B5 /* icon_record_pause@3x.png in Resources */,
 				A651BD901A4985F20081A1E0 /* SVProgressHUD.bundle in Resources */,
@@ -1524,6 +1531,7 @@
 				A69C4B9A1A27111700CAD443 /* icon_filter_feed@3x.png in Resources */,
 				A6A57A9D1A34134200610785 /* icon_reply_record@3x.png in Resources */,
 				A6263EA01A187E1200C4C3BA /* LaunchScreen.xib in Resources */,
+				A6419B6B1A7C943B0075B543 /* icon_homefeed_groups_blue@3x.png in Resources */,
 				A6655B5A1A19ECED00440AAB /* Default-568h@2x.png in Resources */,
 				A6263E9D1A187E1200C4C3BA /* Images.xcassets in Resources */,
 				A69C4B9C1A27186300CAD443 /* icon_nav_filter@3x.png in Resources */,

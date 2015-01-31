@@ -64,6 +64,23 @@
 
 @end
 
+@implementation FLYGroupsButtonItem
+
+- (instancetype)initWithSide:(BOOL)left
+{
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //12 * 21
+    UIImage *image = [UIImage imageNamed:@"icon_homefeed_groups_blue"];
+    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    CGFloat x = (left ? -1 : 1) * 10;
+    backButton.frame = CGRectMake(x, 0, 52, 44);
+    [backButton setImage:image forState:UIControlStateNormal];
+    self = [super initWithButton:backButton actionBlock:nil];
+    return self;
+}
+
+@end
+
 
 @implementation FLYAddGroupBarButtonItem
 
