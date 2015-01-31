@@ -40,6 +40,9 @@
 
 @implementation FLYFeedTopicTableViewCell
 
+#define kTopicContentLeftPadding    71
+#define kHomeTimeLineLeftPadding    33
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -56,7 +59,7 @@
         
         
         _timelineImageView = [UIImageView new];
-        UIImage *timelineImage = [UIImage imageNamed:@"icon_timeline"];
+        UIImage *timelineImage = [UIImage imageNamed:@"icon_homefeed_timeline"];
         [_timelineImageView setImage:timelineImage];
         _timelineImageView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_timelineImageView];
@@ -88,6 +91,13 @@
         [_postTitle sizeToFit];
         [self.topicContentView insertSubview:self.postTitle aboveSubview:self.speechBubbleView];
         
+        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _playButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        [_playButton setImage:[UIImage imageNamed:@"icon_homefeed_backplay"] forState:UIControlStateNormal];
+        [self.topicContentView insertSubview:self.playButton aboveSubview:self.timelineImageView];
+
+        
         
 //        _userNameLabel = [UILabel new];
 //        _userNameLabel.text = @"pancake";
@@ -112,12 +122,7 @@
 //        [_postHeaderView addSubview:_postAtLabel];
 //        [self.contentView addSubview:_postHeaderView];
         
-//        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        _playButton.translatesAutoresizingMaskIntoConstraints = NO;
-//        [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-//        [_playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
-//        [self addSubview:_playButton];
-//        
+//
 //        _inlineActionView = [FLYInlineActionView new];
 //        _inlineActionView.translatesAutoresizingMaskIntoConstraints = NO;
 //        __weak typeof(self)weakSelf = self;
@@ -135,7 +140,7 @@
 {
     switch (state) {
         case FLYPlayStateNotSet: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backplay"] forState:UIControlStateNormal];
             break;
         }
         case FLYPlayStateLoading: {
@@ -185,15 +190,14 @@
     
     [_timelineImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(0);
-        make.leading.equalTo(self).offset(20);
-        make.width.equalTo(@(4));
+        make.leading.equalTo(self).offset(kHomeTimeLineLeftPadding);
         make.height.equalTo(@(150));
     }];
     
     [self.topicContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(5);
-        make.leading.equalTo(self.contentView).offset(30);
-        make.trailing.equalTo(self.contentView).offset(-5);
+        make.leading.equalTo(self.contentView).offset(kTopicContentLeftPadding);
+        make.trailing.equalTo(self.contentView).offset(-10);
         make.bottom.equalTo(self.contentView).offset(-5);
     }];
     
@@ -201,13 +205,18 @@
         make.top.equalTo(self.topicContentView).offset(0);
         make.leading.equalTo(self.topicContentView).offset(0);
         make.trailing.equalTo(self.topicContentView).offset(0);
-        make.bottom.equalTo(self.topicContentView).offset(0);
+        make.bottom.equalTo(self.topicContentView).offset(-20);
     }];
     
     [self.postTitle mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topicContentView).offset(10);
         make.leading.equalTo(self.topicContentView).offset(30);
         make.trailing.equalTo(self.topicContentView).offset(-10);
+    }];
+    
+    [_playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.timelineImageView);
+        make.top.equalTo(self.topicContentView).offset(90);
     }];
     
 
@@ -231,13 +240,6 @@
 //    }];
     
     
-    //center part
-//    [_playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(_postHeaderView.mas_bottom).offset(20);
-//        make.leading.equalTo(self).offset(25);
-//    }];
-//    
-    
 //    [_inlineActionView mas_remakeConstraints:^(MASConstraintMaker *make) {
 ////        make.top.equalTo(_playButton.mas_bottom);
 //        make.bottom.equalTo(self);
@@ -252,6 +254,15 @@
 - (void)_playButtonTapped
 {
     [self.delegate playButtonTapped:self withPost:self.post withIndexPath:nil];
+}
+
+- (CGFloat)heightForTopic:(FLYPost *)post
+{
+    CGFloat height = 0;
+    NSString *title = post.topicTitle;
+    
+    
+    return height;
 }
 
 
