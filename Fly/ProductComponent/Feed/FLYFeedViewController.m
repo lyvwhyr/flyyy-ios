@@ -10,8 +10,6 @@
 #import "FLYFeedTopicTableViewCell.h"
 #import "FLYNavigationBarMyGroupButton.h"
 #import "FLYFilterHomeFeedSelectorViewController.h"
-#import "FLYFeedDataSource.h"
-#import "FLYFeedDelegate.h"
 #import "FLYSingleGroupViewController.h"
 #import "FLYInlineReplyView.h"
 #import "FLYTopicDetailViewController.h"
@@ -33,8 +31,6 @@ static NSInteger globalPageNum = 1;
 @property (nonatomic) UITableView *feedTableView;
 @property (nonatomic) FLYNavigationBarMyGroupButton *customizedTitleView;
 
-@property (nonatomic) FLYFeedDataSource *feedDataSource;
-@property (nonatomic) FLYFeedDelegate *feedDelegate;
 
 @property (nonatomic) NSMutableArray *posts;
 @property (nonatomic) BOOL didSetConstraints;
@@ -66,7 +62,6 @@ static NSInteger globalPageNum = 1;
     _feedTableView = [UITableView new];
     _feedTableView.backgroundColor = [UIColor clearColor];
     _feedTableView.translatesAutoresizingMaskIntoConstraints = NO;
-    _feedDataSource = [[FLYFeedDataSource alloc] initWithPosts:_posts];
     _feedTableView.dataSource = self;
     _feedTableView.delegate = self;
     [_feedTableView registerClass:[FLYFeedTopicTableViewCell class] forCellReuseIdentifier:@"feedPostCellIdentifier"];

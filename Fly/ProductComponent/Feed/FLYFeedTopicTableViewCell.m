@@ -15,22 +15,24 @@
 
 @interface FLYFeedTopicTableViewCell()
 
-
-
-@property (nonatomic) UIView *postHeaderView;
-@property (nonatomic) UIImageView *avatarImageView;
-@property (nonatomic) UILabel *userNameLabel;
-@property (nonatomic) UILabel *postAtLabel;
-@property (nonatomic) FLYIconButton *categoryButton;
-
-@property (nonatomic) UIButton *playButton;
-@property (nonatomic) UILabel *postTitle;
-
+//timeline and play button
 @property (nonatomic) UIImageView *timelineImageView;
+@property (nonatomic) UIButton *playButton;
 
+//topic content view
 @property (nonatomic) UIView *topicContentView;
 @property (nonatomic) UIImageView *speechBubbleView;
+@property (nonatomic) UILabel *userNameLabel;
+@property (nonatomic) UIButton *shareButton;
+@property (nonatomic) UILabel *postTitle;
+@property (nonatomic) UIButton *likeButton;
+@property (nonatomic) UIButton *categoryNameButton;
+@property (nonatomic) UIButton *commentButton;
 
+
+//TODO:remove unused
+@property (nonatomic) UILabel *postAtLabel;
+@property (nonatomic) FLYIconButton *categoryButton;
 @property (nonatomic) FLYInlineActionView *inlineActionView;
 
 
@@ -42,28 +44,29 @@
 
 #define kTopicContentLeftPadding    71
 #define kHomeTimeLineLeftPadding    33
+//padding for user name, topic title to it's parent view
+#define kElementLeftPadding         30
+#define kElementRightPadding        10
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        //header view
-        _avatarImageView = [UIImageView new];
-        NSString *avatarName = [NSString stringWithFormat:@"p%d.jpg", (arc4random()%10 + 1)];
-        UIImage *avatarImage = [UIImage imageNamed:avatarName];
-        [_avatarImageView setImage:avatarImage];
-        [_avatarImageView sizeToFit];
-        _avatarImageView.layer.cornerRadius = 18;
-        _avatarImageView.clipsToBounds = YES;
-        _avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
         
-        
+        //left timeline
         _timelineImageView = [UIImageView new];
         UIImage *timelineImage = [UIImage imageNamed:@"icon_homefeed_timeline"];
         [_timelineImageView setImage:timelineImage];
         _timelineImageView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_timelineImageView];
         
+        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _playButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        [_playButton setImage:[UIImage imageNamed:@"icon_homefeed_backplay"] forState:UIControlStateNormal];
+        [self.contentView insertSubview:self.playButton aboveSubview:self.timelineImageView];
+        
+        //topic content view
         _topicContentView = [UIView new];
         [self.contentView addSubview:_topicContentView];
         
@@ -75,14 +78,26 @@
         [self.speechBubbleView sizeToFit];
         [self.topicContentView addSubview:self.speechBubbleView];
         
+        _userNameLabel = [UILabel new];
+        _userNameLabel.text = @"pancake";
+        _userNameLabel.textColor = [UIColor flyBlue];
+        _userNameLabel.font = [UIFont fontWithName:@"Avenir-Roman" size:18];
+        _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.topicContentView addSubview:_userNameLabel];
+        
+        _shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _shareButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_shareButton addTarget:self action:@selector(_shareButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        [_shareButton setImage:[UIImage imageNamed:@"icon_homefeed_share"] forState:UIControlStateNormal];
+        [_shareButton sizeToFit];
+        [self.topicContentView addSubview:_shareButton];
         
         _postTitle = [UILabel new];
         _postTitle.numberOfLines = 2;
         _postTitle.adjustsFontSizeToFitWidth = NO;
         _postTitle.lineBreakMode = NSLineBreakByTruncatingTail;
-        _postTitle.font = [UIFont fontWithName:@"Avenir-Book" size:18];
+        _postTitle.font = [UIFont fontWithName:@"Avenir-Book" size:17];
         _postTitle.translatesAutoresizingMaskIntoConstraints = NO;
-        
         _topicTitleString = @"There's a fine line between numerator and here's a fine line between numerator and denominator. There's a fine line between numerator and denominator.";
         NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:_topicTitleString];
         NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
@@ -91,20 +106,9 @@
         _postTitle.attributedText = attrStr;
         [_postTitle sizeToFit];
         [self.topicContentView insertSubview:self.postTitle aboveSubview:self.speechBubbleView];
-        
-        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _playButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-        [_playButton setImage:[UIImage imageNamed:@"icon_homefeed_backplay"] forState:UIControlStateNormal];
-        [self.topicContentView insertSubview:self.playButton aboveSubview:self.timelineImageView];
 
         
-        
-//        _userNameLabel = [UILabel new];
-//        _userNameLabel.text = @"pancake";
-//        _userNameLabel.textColor = [UIColor blackColor];
-//        _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-//        
+//
 //        _postAtLabel = [UILabel new];
 //        _postAtLabel.text = @"19s";
 //        _postAtLabel.font = [UIFont systemFontOfSize:13];
@@ -175,24 +179,15 @@
 
 - (void)updateConstraints
 {
-//    [_postHeaderView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.contentView).offset(0);
-//        make.leading.equalTo(self.contentView).offset(0);
-//        make.width.equalTo(@(CGRectGetWidth([[UIScreen mainScreen] bounds])));
-//        make.height.equalTo(@(50));
-//    }];
-//    
-//    [_avatarImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(_postHeaderView).offset(10);
-//        make.leading.equalTo(_postHeaderView).offset(20);
-//        make.width.equalTo(@(36));
-//        make.height.equalTo(@(36));
-//    }];
-    
     [_timelineImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(0);
         make.leading.equalTo(self).offset(kHomeTimeLineLeftPadding);
         make.height.equalTo(@(150));
+    }];
+    
+    [_playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.timelineImageView);
+        make.top.equalTo(self.contentView).offset(90);
     }];
     
     [self.topicContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -209,15 +204,20 @@
         make.bottom.equalTo(self.topicContentView).offset(-20);
     }];
     
-    [self.postTitle mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topicContentView).offset(10);
-        make.leading.equalTo(self.topicContentView).offset(30);
-        make.trailing.equalTo(self.topicContentView).offset(-10);
+    [self.userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topicContentView).offset(5);
+        make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
     }];
     
-    [_playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.timelineImageView);
-        make.top.equalTo(self.topicContentView).offset(90);
+    [self.shareButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topicContentView).offset(5);
+        make.trailing.equalTo(self.speechBubbleView.mas_trailing).offset(-kElementRightPadding);
+    }];
+    
+    [self.postTitle mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.userNameLabel.mas_bottom).offset(5);
+        make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
+        make.trailing.equalTo(self.topicContentView).offset(-10);
     }];
     
 
