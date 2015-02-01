@@ -106,7 +106,7 @@
         //shared font
         UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
         
-        _likeButton = [[FLYIconButton alloc] initWithText:nil textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_wings"];
+        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_comment"];
         [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self.topicContentView addSubview:_likeButton];
@@ -118,7 +118,7 @@
         [_groupNameButton sizeToFit];
         [self.topicContentView addSubview:_groupNameButton];
         
-        _commentButton = [[FLYIconButton alloc] initWithText:nil textFont:inlineActionFont textColor:[UIColor flyBlue] icon:@"icon_homefeed_comment"];
+        _commentButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue] icon:@"icon_homefeed_comment"];
         [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_commentButton sizeToFit];
@@ -198,7 +198,7 @@
     }];
     
     [self.commentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topicTitle.mas_bottom).offset(5);
+        make.centerY.equalTo(self.likeButton);
         make.trailing.equalTo(self.speechBubbleView.mas_trailing).offset(-kElementRightPadding);
     }];
     

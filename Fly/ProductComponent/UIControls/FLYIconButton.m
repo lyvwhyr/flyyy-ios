@@ -8,6 +8,7 @@
 
 #import "FLYIconButton.h"
 #import "UIColor+FLYAddition.h"
+#import "CoreGraphics+FLYAddition.h"
 
 #define kIconRightPadding 5
 
@@ -24,7 +25,7 @@
 {
     self = [super init];
     if (self) {
-        self.translatesAutoresizingMaskIntoConstraints = NO;
+//        self.translatesAutoresizingMaskIntoConstraints = NO;
         
         _localIconView = [UIImageView new];
         _localIconView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -38,7 +39,6 @@
         _localTitleLabel.text = text;
         _localTitleLabel.textColor = color;
         _localTitleLabel.font = font;
-        
         [_localTitleLabel sizeToFit];
         [self addSubview:_localTitleLabel];
     }
@@ -48,14 +48,14 @@
 - (void)setLabelText:(NSString *)text
 {
     _localTitleLabel.text = text;
-    [self setNeedsUpdateConstraints];
+    [self updateConstraints];
 }
 
 - (void)updateConstraints
 {
     CGFloat intrinsicHeight = MAX(CGRectGetHeight(_localIconView.bounds), CGRectGetHeight(_localTitleLabel.bounds));
-    CGFloat iconExtraOffset = (intrinsicHeight - CGRectGetHeight(_localIconView.bounds))/2;
-    CGFloat labelExtraOffset = (intrinsicHeight - CGRectGetHeight(_localTitleLabel.bounds))/2;
+    CGFloat iconExtraOffset = FLYFloorToPixel((intrinsicHeight - CGRectGetHeight(_localIconView.bounds))/2);
+    CGFloat labelExtraOffset = FLYFloorToPixel((intrinsicHeight - CGRectGetHeight(_localTitleLabel.bounds))/2);
     [_localIconView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(iconExtraOffset);
         make.leading.equalTo(self);
@@ -65,13 +65,13 @@
         make.top.equalTo(self).offset(labelExtraOffset);
         make.leading.equalTo(_localIconView.mas_right).offset(kIconRightPadding);
     }];
-    
     [super updateConstraints];
     
 }
 
 - (CGSize)intrinsicContentSize
 {
+    [_localTitleLabel sizeToFit];
     CGFloat intrinsicHeight = MAX(CGRectGetHeight(_localIconView.bounds), CGRectGetHeight(_localTitleLabel.bounds));
     CGFloat intrinsicWidth = CGRectGetWidth(_localIconView.bounds) + CGRectGetWidth(_localTitleLabel.bounds) + kIconRightPadding;
     return CGSizeMake(intrinsicWidth, intrinsicHeight);

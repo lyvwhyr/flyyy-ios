@@ -216,17 +216,15 @@ static NSInteger globalPageNum = 1;
 {
     static NSString *cellIdentifier = @"feedPostCellIdentifier";
     FLYFeedTopicTableViewCell *cell = (FLYFeedTopicTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
+//    if (cell == nil) {
         cell = [[FLYFeedTopicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
+//    }
     if (NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)
     {
         cell.contentView.frame = cell.bounds;
         cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
     }
     cell.backgroundColor = [UIColor clearColor];
-    [cell setupTopic:_posts[indexPath.row]];
-    
     //set cell state
     [cell updatePlayState:FLYPlayStateNotSet];
     if ([[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
@@ -235,6 +233,7 @@ static NSInteger globalPageNum = 1;
     }
     
     cell.topic = _posts[indexPath.row];
+    [cell setupTopic:_posts[indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
     return cell;
