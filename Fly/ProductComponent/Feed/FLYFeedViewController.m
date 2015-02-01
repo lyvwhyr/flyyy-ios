@@ -242,7 +242,8 @@ static NSInteger globalPageNum = 1;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 150.0f;
+//    return 150;
+    return [FLYFeedTopicTableViewCell heightForTopic:_posts[indexPath.row]];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

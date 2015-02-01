@@ -27,4 +27,6 @@
 - (void)setupTopic:(FLYTopic *)topic;
 - (void)updatePlayState:(FLYPlayState)state;
 
+
++ (CGFloat)heightForTopic:(FLYTopic *)topic;
 @end

@@ -45,12 +45,15 @@
 
 @implementation FLYFeedTopicTableViewCell
 
-#define kTopicContentLeftPadding    5
-#define kHomeTimeLineLeftPadding    25
+#define kTopicContentBottomPadding      5
+#define kTopicContentLeftPadding        5
+#define kHomeTimeLineLeftPadding        25
+#define kTopicContentRightPadding       10
+#define kInlineActionTopPadding         10
 //padding for user name, topic title to it's parent view
-#define kElementLeftPadding         30
-#define kElementRightPadding        10
-#define kUsernameOffset             -100
+#define kElementLeftPadding             30
+#define kElementRightPadding            10
+#define kUsernameOffset                 -100
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -106,7 +109,7 @@
         //shared font
         UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
         
-        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_comment"];
+        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_wings"];
         [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self.topicContentView addSubview:_likeButton];
@@ -147,20 +150,17 @@
     [_timelineImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(0);
         make.leading.equalTo(self).offset(kHomeTimeLineLeftPadding);
-        make.height.equalTo(@(150));
-    }];
-    
-    [_playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.timelineImageView);
-        make.top.equalTo(self.contentView).offset(90);
+        make.height.equalTo(self);
+//        make.bottom.equalTo(self);
+//        make.trailing.equalTo(self);
     }];
     
     CGFloat topicContentLeftPadding = CGRectGetMaxX(_playButton.frame) + kTopicContentLeftPadding;
     [self.topicContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).offset(5);
+        make.top.equalTo(self.contentView).offset(2);
         make.leading.equalTo(self.contentView).offset(topicContentLeftPadding);
-        make.trailing.equalTo(self.contentView).offset(-10);
-        make.bottom.equalTo(self.contentView).offset(-5);
+        make.trailing.equalTo(self.contentView).offset(-kTopicContentRightPadding);
+        make.bottom.equalTo(self.contentView).offset(-kTopicContentBottomPadding);
     }];
     
     [self.speechBubbleView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -168,6 +168,11 @@
         make.leading.equalTo(self.topicContentView).offset(0);
         make.trailing.equalTo(self.topicContentView).offset(0);
         make.bottom.equalTo(self.topicContentView).offset(0);
+    }];
+    
+    [_playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.timelineImageView);
+        make.bottom.equalTo(self.mas_bottom);
     }];
     
     [self.userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -188,7 +193,7 @@
     }];
     
     [self.likeButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topicTitle.mas_bottom).offset(5);
+        make.top.equalTo(self.topicTitle.mas_bottom).offset(kInlineActionTopPadding);
         make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
     }];
     
@@ -277,11 +282,44 @@
 }
 
 #pragma mark - Height of the cell
-- (CGFloat)heightForTopic:(FLYTopic *)post
++ (CGFloat)heightForTopic:(FLYTopic *)topic
 {
     CGFloat height = 0;
-    NSString *title = post.topicTitle;
     
+    UILabel *dummyLabel = [UILabel new];
+    dummyLabel.font = [UIFont fontWithName:@"Avenir-Book" size:17];
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:topic.topicTitle];
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+//    paragraphStyle.lineBreakMode= NSLineBreakByTruncatingTail;
+    paragraphStyle.lineSpacing = 2;
+    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, topic.topicTitle.length)];
+    [attrStr addAttribute:NSFontAttributeName value:dummyLabel.font range:NSMakeRange(0, topic.topicTitle.length)];
+    dummyLabel.attributedText = attrStr;
+    
+    CGFloat rightPadding = kTopicContentRightPadding + kElementRightPadding;
+    //half 5/2 timeline width, 19.5 = 117/3/ radius for play button
+    CGFloat leftPadding = kElementLeftPadding + 5/2 + 19.5 + kTopicContentLeftPadding + kElementLeftPadding;
+    CGFloat maxWidth = CGRectGetWidth([[UIScreen mainScreen] bounds]) - rightPadding - leftPadding;
+    
+    CGRect rect = [attrStr boundingRectWithSize:CGSizeMake(maxWidth, 10000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    
+    
+    //
+    NSString *dummyString = @"dummyText";
+    NSMutableAttributedString *attrStrSingleLine = [[NSMutableAttributedString alloc] initWithString:dummyString];
+    paragraphStyle.lineSpacing = 2;
+    [attrStrSingleLine addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, dummyString.length)];
+    [attrStrSingleLine addAttribute:NSFontAttributeName value:dummyLabel.font range:NSMakeRange(0, dummyString.length)];
+    CGRect rectSingleLine = [attrStrSingleLine boundingRectWithSize:CGSizeMake(maxWidth, 10000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+
+    CGFloat labelHeight = 0.0;
+    int numberOfLines = ceil(rect.size.height / rectSingleLine.size.height);
+    if (numberOfLines >= 2) {
+        labelHeight = rectSingleLine.size.height * 2 + paragraphStyle.lineSpacing;
+    } else {
+        labelHeight = rect.size.height;
+    }
+    height += labelHeight + 44 + 70 + 5;
     
     return height;
 }
