@@ -229,7 +229,7 @@
 {
     switch (state) {
         case FLYPlayStateNotSet: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backplay"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
             break;
         }
         case FLYPlayStateLoading: {
