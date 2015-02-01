@@ -33,6 +33,7 @@
         [self addSubview:_localIconView];
         
         _localTitleLabel = [UILabel new];
+        _localTitleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _localTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _localTitleLabel.text = text;
         _localTitleLabel.textColor = color;
@@ -42,6 +43,12 @@
         [self addSubview:_localTitleLabel];
     }
     return self;
+}
+
+- (void)setLabelText:(NSString *)text
+{
+    _localTitleLabel.text = text;
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)updateConstraints
@@ -68,11 +75,6 @@
     CGFloat intrinsicHeight = MAX(CGRectGetHeight(_localIconView.bounds), CGRectGetHeight(_localTitleLabel.bounds));
     CGFloat intrinsicWidth = CGRectGetWidth(_localIconView.bounds) + CGRectGetWidth(_localTitleLabel.bounds) + kIconRightPadding;
     return CGSizeMake(intrinsicWidth, intrinsicHeight);
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
 }
 
 @end

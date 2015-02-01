@@ -7,24 +7,24 @@
 //
 
 @class FLYFeedTopicTableViewCell;
-@class FLYPost;
+@class FLYTopic;
 
 #import "FLYPlayableItem.h"
+#import "FLYTopic.h"
 
 @protocol FLYFeedTopicTableViewCellDelegate <NSObject>
 
 - (void)commentButtonTapped:(FLYFeedTopicTableViewCell *)cell;
-- (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYPost *)post withIndexPath:(NSIndexPath *)indexPath;
+- (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
 @interface FLYFeedTopicTableViewCell : UITableViewCell
 
-@property (nonatomic) FLYPost *post;
-
+@property (nonatomic) FLYTopic *topic;
 @property id<FLYFeedTopicTableViewCellDelegate>delegate;
 
-
+- (void)setupTopic:(FLYTopic *)topic;
 - (void)updatePlayState:(FLYPlayState)state;
 
 @end

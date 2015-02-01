@@ -11,8 +11,10 @@
 #import "FLYIconButton.h"
 #import "FLYInlineActionView.h"
 #import "UIImage+FLYAddition.h"
-#import "FLYPost.h"
+#import "FLYTopic.h"
 #import "FLYIconButton.h"
+#import "FLYUser.h"
+#import "FLYGroup.h"
 
 @interface FLYFeedTopicTableViewCell()
 
@@ -25,7 +27,7 @@
 @property (nonatomic) UIImageView *speechBubbleView;
 @property (nonatomic) UILabel *userNameLabel;
 @property (nonatomic) UIButton *shareButton;
-@property (nonatomic) UILabel *postTitle;
+@property (nonatomic) UILabel *topicTitle;
 @property (nonatomic) FLYIconButton *likeButton;
 @property (nonatomic) UIButton *groupNameButton;
 @property (nonatomic) FLYIconButton *commentButton;
@@ -48,6 +50,7 @@
 //padding for user name, topic title to it's parent view
 #define kElementLeftPadding         30
 #define kElementRightPadding        10
+#define kUsernameOffset             -100
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -80,7 +83,6 @@
         [self.topicContentView addSubview:self.speechBubbleView];
         
         _userNameLabel = [UILabel new];
-        _userNameLabel.text = @"pancake";
         _userNameLabel.textColor = [UIColor flyBlue];
         _userNameLabel.font = [UIFont fontWithName:@"Avenir-Roman" size:18];
         _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -93,25 +95,18 @@
         [_shareButton sizeToFit];
         [self.topicContentView addSubview:_shareButton];
         
-        _postTitle = [UILabel new];
-        _postTitle.numberOfLines = 2;
-        _postTitle.adjustsFontSizeToFitWidth = NO;
-        _postTitle.lineBreakMode = NSLineBreakByTruncatingTail;
-        _postTitle.font = [UIFont fontWithName:@"Avenir-Book" size:17];
-        _postTitle.translatesAutoresizingMaskIntoConstraints = NO;
-        _topicTitleString = @"There's a fine line between numerator and here's a fine line between numerator and denominator. There's a fine line between numerator and denominator.";
-        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:_topicTitleString];
-        NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-        paragraphStyle.lineSpacing = 2;
-        [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _topicTitleString.length)];
-        _postTitle.attributedText = attrStr;
-        [_postTitle sizeToFit];
-        [self.topicContentView insertSubview:self.postTitle aboveSubview:self.speechBubbleView];
+        _topicTitle = [UILabel new];
+        _topicTitle.numberOfLines = 2;
+        _topicTitle.adjustsFontSizeToFitWidth = NO;
+        _topicTitle.lineBreakMode = NSLineBreakByTruncatingTail;
+        _topicTitle.font = [UIFont fontWithName:@"Avenir-Book" size:17];
+        _topicTitle.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.topicContentView insertSubview:self.topicTitle aboveSubview:self.speechBubbleView];
         
         //shared font
         UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
         
-        _likeButton = [[FLYIconButton alloc] initWithText:@"10" textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_wings"];
+        _likeButton = [[FLYIconButton alloc] initWithText:nil textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_wings"];
         [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self.topicContentView addSubview:_likeButton];
@@ -119,12 +114,11 @@
         _groupNameButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _groupNameButton.titleLabel.font = inlineActionFont;
         [_groupNameButton setTitleColor:[UIColor flyBlue] forState:UIControlStateNormal];
-        [_groupNameButton setTitle:@"@confession" forState:UIControlStateNormal];
         _groupNameButton.titleEdgeInsets = UIEdgeInsetsZero;
         [_groupNameButton sizeToFit];
         [self.topicContentView addSubview:_groupNameButton];
         
-        _commentButton = [[FLYIconButton alloc] initWithText:@"10" textFont:inlineActionFont textColor:[UIColor flyBlue] icon:@"icon_homefeed_comment"];
+        _commentButton = [[FLYIconButton alloc] initWithText:nil textFont:inlineActionFont textColor:[UIColor flyBlue] icon:@"icon_homefeed_comment"];
         [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_commentButton sizeToFit];
@@ -137,29 +131,7 @@
 //        _postAtLabel.font = [UIFont systemFontOfSize:13];
 //        _postAtLabel.textColor = [UIColor flyFeedGrey];
 //        _postAtLabel.translatesAutoresizingMaskIntoConstraints = NO;
-//        
 //
-//        _categoryButton = [[FLYIconButton alloc] initWithText:@"Small business saturday" textFont:[UIFont systemFontOfSize:12] textColor:[UIColor flyInlineActionGrey] icon:@"icon_feed_group"];
-//        _categoryButton.translatesAutoresizingMaskIntoConstraints = NO;
-//        [self addSubview:_categoryButton];
-        
-//        _postHeaderView = [UIView new];
-//        _postHeaderView.translatesAutoresizingMaskIntoConstraints = NO;
-//        [_postHeaderView addSubview:_avatarImageView];
-//        [_postHeaderView addSubview:_userNameLabel];
-//        [_postHeaderView addSubview:_postAtLabel];
-//        [self.contentView addSubview:_postHeaderView];
-        
-//
-//        _inlineActionView = [FLYInlineActionView new];
-//        _inlineActionView.translatesAutoresizingMaskIntoConstraints = NO;
-//        __weak typeof(self)weakSelf = self;
-//        _inlineActionView.commentButtonTappedBlock = ^ {
-//            __strong typeof(self)strongSelf = weakSelf;
-//            [strongSelf.delegate commentButtonTapped:strongSelf];
-//        };
-//        [self addSubview:_inlineActionView];
-        
     }
     return self;
 }
@@ -201,6 +173,7 @@
     [self.userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topicContentView).offset(5);
         make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
+        make.width.lessThanOrEqualTo(self.topicContentView).offset(kUsernameOffset);
     }];
     
     [self.shareButton mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -208,14 +181,14 @@
         make.trailing.equalTo(self.speechBubbleView.mas_trailing).offset(-kElementRightPadding);
     }];
     
-    [self.postTitle mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.topicTitle mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.userNameLabel.mas_bottom).offset(5);
         make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
         make.trailing.equalTo(self.topicContentView).offset(-10);
     }];
     
     [self.likeButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.postTitle.mas_bottom).offset(5);
+        make.top.equalTo(self.topicTitle.mas_bottom).offset(5);
         make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
     }];
     
@@ -225,11 +198,30 @@
     }];
     
     [self.commentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.postTitle.mas_bottom).offset(5);
+        make.top.equalTo(self.topicTitle.mas_bottom).offset(5);
         make.trailing.equalTo(self.speechBubbleView.mas_trailing).offset(-kElementRightPadding);
     }];
     
     [super updateConstraints];
+}
+
+#pragma mark - assign values to cell
+- (void)setupTopic:(FLYTopic *)topic
+{
+    self.topic = topic;
+    self.userNameLabel.text = topic.user.userName;
+    
+    self.topicTitle.text = topic.topicTitle;
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:topic.topicTitle];
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.lineSpacing = 2;
+    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _topicTitleString.length)];
+    self.topicTitle.attributedText = attrStr;
+    [self.topicTitle sizeToFit];
+    
+    [self.likeButton setLabelText:[NSString stringWithFormat:@"%ld", topic.likeCount]];
+    [self.groupNameButton setTitle:topic.group.groupName forState:UIControlStateNormal];
+    [self.commentButton setLabelText:[NSString stringWithFormat:@"%ld", topic.replyCount]];
 }
 
 #pragma mark - update play state
@@ -266,7 +258,7 @@
 #pragma mark - inline actions
 - (void)_playButtonTapped
 {
-    [self.delegate playButtonTapped:self withPost:self.post withIndexPath:nil];
+    [self.delegate playButtonTapped:self withPost:self.topic withIndexPath:nil];
 }
 
 - (void)_likeButtonTapped
@@ -285,7 +277,7 @@
 }
 
 #pragma mark - Height of the cell
-- (CGFloat)heightForTopic:(FLYPost *)post
+- (CGFloat)heightForTopic:(FLYTopic *)post
 {
     CGFloat height = 0;
     NSString *title = post.topicTitle;

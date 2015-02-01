@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-#import "FLYPost.h"
+#import "FLYTopic.h"
 #import "FLYUser.h"
 #import "FLYGroup.h"
 #import "NSDictionary+FLYAddition.h"
 #import "FLYDownloadableAudio.h"
 #import "FLYURLConstants.h"
 
-@interface FLYPost() <FLYDownloadableAudio>
+@interface FLYTopic() <FLYDownloadableAudio>
 
 @end
 
@@ -29,7 +29,7 @@
 //@property (nonatomic) FLYGroup *group;
 
 
-@implementation FLYPost
+@implementation FLYTopic
 
 - (instancetype)initWithDictory:(NSDictionary *)dict
 {

@@ -30,7 +30,7 @@
 @class FLYUser;
 @class FLYGroup;
 
-@interface FLYPost : NSObject
+@interface FLYTopic : NSObject
 
 @property (nonatomic, copy) NSString *topicId;
 @property (nonatomic, copy) NSString *topicTitle;

@@ -89,6 +89,7 @@
 		A67CC6151A7D802F0092E500 /* icon_homefeed_wings@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67CC6141A7D802F0092E500 /* icon_homefeed_wings@3x.png */; };
 		A67CC6171A7D8EA30092E500 /* icon_homefeed_comment@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67CC6161A7D8EA30092E500 /* icon_homefeed_comment@3x.png */; };
 		A67CC6191A7D8EA90092E500 /* icon_homefeed_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67CC6181A7D8EA90092E500 /* icon_homefeed_share@3x.png */; };
+		A67CC61C1A7DDE360092E500 /* topics.json in Resources */ = {isa = PBXBuildFile; fileRef = A67CC61B1A7DDE360092E500 /* topics.json */; };
 		A69C4B941A27094B00CAD443 /* icon_tabbar_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */; };
 		A69C4B981A270E1400CAD443 /* PaperButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4B971A270E1400CAD443 /* PaperButton.m */; };
 		A69C4B9A1A27111700CAD443 /* icon_filter_feed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B991A27111700CAD443 /* icon_filter_feed@3x.png */; };
@@ -103,7 +104,7 @@
 		A69C4BCC1A280C4F00CAD443 /* GBFlatButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BCB1A280C4F00CAD443 /* GBFlatButton.m */; };
 		A69C4BCF1A280D8800CAD443 /* GBFlatSelectableButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BCE1A280D8800CAD443 /* GBFlatSelectableButton.m */; };
 		A69C4BD11A281E1100CAD443 /* icon_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4BD01A281E1100CAD443 /* icon_back@3x.png */; };
-		A69C4BD51A283F6400CAD443 /* FLYPost.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BD41A283F6400CAD443 /* FLYPost.m */; };
+		A69C4BD51A283F6400CAD443 /* FLYTopic.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BD41A283F6400CAD443 /* FLYTopic.m */; };
 		A69C4BD81A2840E700CAD443 /* NSDictionary+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BD71A2840E700CAD443 /* NSDictionary+FLYAddition.m */; };
 		A69C4BE51A284B6F00CAD443 /* FLYFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BE31A284B6F00CAD443 /* FLYFeedViewController.m */; };
 		A69C4BE91A2851FD00CAD443 /* FLYFeedTopicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4BE81A2851FD00CAD443 /* FLYFeedTopicTableViewCell.m */; };
@@ -375,6 +376,7 @@
 		A67CC6141A7D802F0092E500 /* icon_homefeed_wings@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_homefeed_wings@3x.png"; sourceTree = "<group>"; };
 		A67CC6161A7D8EA30092E500 /* icon_homefeed_comment@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_homefeed_comment@3x.png"; sourceTree = "<group>"; };
 		A67CC6181A7D8EA90092E500 /* icon_homefeed_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_homefeed_share@3x.png"; sourceTree = "<group>"; };
+		A67CC61B1A7DDE360092E500 /* topics.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = topics.json; sourceTree = "<group>"; };
 		A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_group@3x.png"; sourceTree = "<group>"; };
 		A69C4B961A270E1400CAD443 /* PaperButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperButton.h; sourceTree = "<group>"; };
 		A69C4B971A270E1400CAD443 /* PaperButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperButton.m; sourceTree = "<group>"; };
@@ -396,8 +398,8 @@
 		A69C4BCD1A280D8800CAD443 /* GBFlatSelectableButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBFlatSelectableButton.h; sourceTree = "<group>"; };
 		A69C4BCE1A280D8800CAD443 /* GBFlatSelectableButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBFlatSelectableButton.m; sourceTree = "<group>"; };
 		A69C4BD01A281E1100CAD443 /* icon_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_back@3x.png"; sourceTree = "<group>"; };
-		A69C4BD31A283F6400CAD443 /* FLYPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPost.h; sourceTree = "<group>"; };
-		A69C4BD41A283F6400CAD443 /* FLYPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPost.m; sourceTree = "<group>"; };
+		A69C4BD31A283F6400CAD443 /* FLYTopic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTopic.h; sourceTree = "<group>"; };
+		A69C4BD41A283F6400CAD443 /* FLYTopic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTopic.m; sourceTree = "<group>"; };
 		A69C4BD61A2840E700CAD443 /* NSDictionary+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+FLYAddition.h"; sourceTree = "<group>"; };
 		A69C4BD71A2840E700CAD443 /* NSDictionary+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+FLYAddition.m"; sourceTree = "<group>"; };
 		A69C4BE21A284B6F00CAD443 /* FLYFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFeedViewController.h; sourceTree = "<group>"; };
@@ -962,6 +964,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		A67CC61A1A7DDE100092E500 /* fixture */ = {
+			isa = PBXGroup;
+			children = (
+				A67CC61B1A7DDE360092E500 /* topics.json */,
+			);
+			path = fixture;
+			sourceTree = "<group>";
+		};
 		A69C4B951A270E0200CAD443 /* UIControls */ = {
 			isa = PBXGroup;
 			children = (
@@ -1029,8 +1039,8 @@
 		A69C4BD21A283EFA00CAD443 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A69C4BD31A283F6400CAD443 /* FLYPost.h */,
-				A69C4BD41A283F6400CAD443 /* FLYPost.m */,
+				A69C4BD31A283F6400CAD443 /* FLYTopic.h */,
+				A69C4BD41A283F6400CAD443 /* FLYTopic.m */,
 				A64BDAC41A7B518400B46F18 /* FLYUser.h */,
 				A64BDAC51A7B518400B46F18 /* FLYUser.m */,
 				A64BDAC71A7B519400B46F18 /* FLYGroup.h */,
@@ -1050,6 +1060,7 @@
 				A64D159A1A29BC6E00369D62 /* FLYInlineActionView.m */,
 				A66E20531A2EE90F004235F5 /* FLYFeedDelegate.h */,
 				A66E20541A2EE90F004235F5 /* FLYFeedDelegate.m */,
+				A67CC61A1A7DDE100092E500 /* fixture */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -1526,6 +1537,7 @@
 				A6A0E4131A1DB9480036116E /* icon_navigation_back@3x.png in Resources */,
 				A6F27CA91A20735A000EC0B3 /* record_animate_14.png in Resources */,
 				A69C4C021A28636F00CAD443 /* p12.jpg in Resources */,
+				A67CC61C1A7DDE360092E500 /* topics.json in Resources */,
 				A6419B691A7C92D00075B543 /* icon_homefeed_speech_bubble@3x.png in Resources */,
 				A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */,
 				A67CC6131A7D69F30092E500 /* icon_homefeed_backplay@3x.png in Resources */,
@@ -1672,7 +1684,7 @@
 				A6A0E4AE1A1E76110036116E /* FLEXArrayExplorerViewController.m in Sources */,
 				A64BDAC61A7B518400B46F18 /* FLYUser.m in Sources */,
 				A69C4BAE1A271B8600CAD443 /* PresentingAnimator.m in Sources */,
-				A69C4BD51A283F6400CAD443 /* FLYPost.m in Sources */,
+				A69C4BD51A283F6400CAD443 /* FLYTopic.m in Sources */,
 				A6A4EFBE1A2C22EF00FD4066 /* FLYGroupViewController.m in Sources */,
 				A6A0E4911A1E76110036116E /* FLEXArgumentInputFontView.m in Sources */,
 				A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */,

@@ -16,7 +16,7 @@
 #import "Dialog.h"
 #import "FLYRecordViewController.h"
 #import "AFHTTPRequestOperationManager.h"
-#import "FLYPost.h"
+#import "FLYTopic.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -262,7 +262,7 @@
     NSString *baseURL = @"http://localhost:3000/v1/topics?token=secret123&&media_id=not_valid&group_id=12345&audio_duration=10&extension=m4a";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:baseURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        FLYPost *post = [[FLYPost alloc] initWithDictory:responseObject];
+        FLYTopic *post = [[FLYTopic alloc] initWithDictory:responseObject];
         [Dialog simpleToast:@"Posted"];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

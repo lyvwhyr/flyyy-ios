@@ -16,7 +16,7 @@
 #import "FLYBarButtonItem.h"
 #import "FLYGroupViewController.h"
 #import "FLYDownloadManager.h"
-#import "FLYPost.h"
+#import "FLYTopic.h"
 #import "SVPullToRefresh.h"
 #import "FLYAudioStateManager.h"
 #import "FLYPlayableItem.h"
@@ -190,15 +190,23 @@ static NSInteger globalPageNum = 1;
 
 - (void)_addDatasource:(NSInteger)pageNum
 {
-    globalPageNum++;
-    
-    NSInteger postsPerPage = 10;
-    NSInteger start = (pageNum - 1) * postsPerPage + 1;
-    NSInteger end = start + postsPerPage;
-    for (NSInteger i = start; i <= end; i++) {
-        FLYPost *post = [[FLYPost alloc] initWithDictory:@{@"count":@(i), @"title":@"Tellm me something I need to know."}];
-        [_posts addObject:post];
+//    globalPageNum++;
+//    
+//    NSInteger postsPerPage = 10;
+//    NSInteger start = (pageNum - 1) * postsPerPage + 1;
+//    NSInteger end = start + postsPerPage;
+//    for (NSInteger i = start; i <= end; i++) {
+//        FLYTopic *post = [[FLYTopic alloc] initWithDictory:@{@"count":@(i), @"title":@"Tellm me something I need to know."}];
+//        [_posts addObject:post];
+//    }
+    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"topics" withExtension:@"json"];
+    NSData *fileData = [NSData dataWithContentsOfURL:fileURL];
+    NSArray *arr = [NSJSONSerialization JSONObjectWithData:fileData options:0 error:nil];
+    for (int i= 0; i < arr.count; i++) {
+        FLYTopic *topic = [[FLYTopic alloc] initWithDictory:arr[i]];
+        [_posts addObject:topic];
     }
+    
     [self.feedTableView reloadData];
 }
 
@@ -226,6 +234,7 @@ static NSInteger globalPageNum = 1;
         cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
     }
     cell.backgroundColor = [UIColor clearColor];
+    [cell setupTopic:_posts[indexPath.row]];
     
     //set cell state
     [cell updatePlayState:FLYPlayStateNotSet];
@@ -234,7 +243,7 @@ static NSInteger globalPageNum = 1;
         [cell updatePlayState:[FLYAudioStateManager sharedInstance].currentPlayItem.playState];
     }
     
-    cell.post = _posts[indexPath.row];
+    cell.topic = _posts[indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.delegate = self;
     return cell;
@@ -272,7 +281,7 @@ static NSInteger globalPageNum = 1;
                 if (toPlayRow >= [self.posts count]) {
                     return;
                 }
-                FLYPost *postToPlay = self.posts[toPlayRow];
+                FLYTopic *postToPlay = self.posts[toPlayRow];
                 NSIndexPath *indexPathToPlay = [NSIndexPath indexPathForRow:toPlayRow inSection:preIndexPath.section];
                 FLYFeedTopicTableViewCell *toPlayCell = (FLYFeedTopicTableViewCell *)[self.feedTableView cellForRowAtIndexPath:indexPathToPlay];
                 [self playButtonTapped:toPlayCell withPost:postToPlay withIndexPath:indexPathToPlay];
@@ -292,7 +301,7 @@ static NSInteger globalPageNum = 1;
     [self.view layoutIfNeeded];
 }
 
-- (void)playButtonTapped:(FLYFeedTopicTableViewCell *)tappedCell withPost:(FLYPost *)post withIndexPath:(NSIndexPath *)indexPath
+- (void)playButtonTapped:(FLYFeedTopicTableViewCell *)tappedCell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath
 {
     //If currentPlayItem is empty, set the tappedCell as currentPlayItem
     NSIndexPath *tappedCellIndexPath;
