@@ -108,6 +108,7 @@
         [_postTitle sizeToFit];
         [self.topicContentView insertSubview:self.postTitle aboveSubview:self.speechBubbleView];
         
+        //shared font
         UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
         
         _likeButton = [[FLYIconButton alloc] initWithText:@"10" textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_wings"];
@@ -161,36 +162,6 @@
         
     }
     return self;
-}
-
-- (void)updatePlayState:(FLYPlayState)state
-{
-    switch (state) {
-        case FLYPlayStateNotSet: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backplay"] forState:UIControlStateNormal];
-            break;
-        }
-        case FLYPlayStateLoading: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_play_loading"] forState:UIControlStateNormal];
-            break;
-        }
-        case FLYPlayStatePlaying: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_play_pause"] forState:UIControlStateNormal];
-            break;
-        }
-        case FLYPlayStatePaused: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
-            break;
-        }
-        case FLYPlayStateFinished: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
-            break;
-        }
-        default: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
-            break;
-        }
-    }
 }
 
 - (void)layoutSubviews
@@ -258,36 +229,38 @@
         make.trailing.equalTo(self.speechBubbleView.mas_trailing).offset(-kElementRightPadding);
     }];
     
-
-    
-    
-//    [_userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(_avatarImageView);
-//        make.leading.equalTo(_avatarImageView.mas_right).offset(10);
-////        make.width.equalTo(@(36));
-////        make.height.equalTo(@(36));
-//    }];
-    
-//    [_categoryButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(_userNameLabel.mas_bottom).offset(3);
-//        make.leading.equalTo(_userNameLabel);
-//    }];
-//    
-//    [_postAtLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(_postHeaderView).offset(15);
-//        make.trailing.equalTo(_postHeaderView).offset(-20);
-//    }];
-    
-    
-//    [_inlineActionView mas_remakeConstraints:^(MASConstraintMaker *make) {
-////        make.top.equalTo(_playButton.mas_bottom);
-//        make.bottom.equalTo(self);
-//        make.leading.equalTo(self);
-//        make.width.equalTo(self);
-//        make.height.equalTo(@(150));
-//    }];
-    
     [super updateConstraints];
+}
+
+#pragma mark - update play state
+- (void)updatePlayState:(FLYPlayState)state
+{
+    switch (state) {
+        case FLYPlayStateNotSet: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backplay"] forState:UIControlStateNormal];
+            break;
+        }
+        case FLYPlayStateLoading: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_play_loading"] forState:UIControlStateNormal];
+            break;
+        }
+        case FLYPlayStatePlaying: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_play_pause"] forState:UIControlStateNormal];
+            break;
+        }
+        case FLYPlayStatePaused: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
+            break;
+        }
+        case FLYPlayStateFinished: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
+            break;
+        }
+        default: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
+            break;
+        }
+    }
 }
 
 #pragma mark - inline actions
@@ -320,6 +293,5 @@
     
     return height;
 }
-
 
 @end
