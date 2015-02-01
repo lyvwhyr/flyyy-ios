@@ -1,4 +1,4 @@
-//
+
 //  FLYIconButton.m
 //  Fly
 //
@@ -46,13 +46,16 @@
 
 - (void)updateConstraints
 {
-    [_localIconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self);
+    CGFloat intrinsicHeight = MAX(CGRectGetHeight(_localIconView.bounds), CGRectGetHeight(_localTitleLabel.bounds));
+    CGFloat iconExtraOffset = (intrinsicHeight - CGRectGetHeight(_localIconView.bounds))/2;
+    CGFloat labelExtraOffset = (intrinsicHeight - CGRectGetHeight(_localTitleLabel.bounds))/2;
+    [_localIconView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(iconExtraOffset);
         make.leading.equalTo(self);
     }];
     
-    [_localTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self);
+    [_localTitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self).offset(labelExtraOffset);
         make.leading.equalTo(_localIconView.mas_right).offset(kIconRightPadding);
     }];
     
@@ -70,7 +73,6 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self setNeedsUpdateConstraints];
 }
 
 @end

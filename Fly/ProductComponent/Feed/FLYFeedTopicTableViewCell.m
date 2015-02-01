@@ -12,6 +12,7 @@
 #import "FLYInlineActionView.h"
 #import "UIImage+FLYAddition.h"
 #import "FLYPost.h"
+#import "FLYIconButton.h"
 
 @interface FLYFeedTopicTableViewCell()
 
@@ -25,9 +26,9 @@
 @property (nonatomic) UILabel *userNameLabel;
 @property (nonatomic) UIButton *shareButton;
 @property (nonatomic) UILabel *postTitle;
-@property (nonatomic) UIButton *likeButton;
-@property (nonatomic) UIButton *categoryNameButton;
-@property (nonatomic) UIButton *commentButton;
+@property (nonatomic) FLYIconButton *likeButton;
+@property (nonatomic) UIButton *groupNameButton;
+@property (nonatomic) FLYIconButton *commentButton;
 
 
 //TODO:remove unused
@@ -42,8 +43,8 @@
 
 @implementation FLYFeedTopicTableViewCell
 
-#define kTopicContentLeftPadding    71
-#define kHomeTimeLineLeftPadding    33
+#define kTopicContentLeftPadding    5
+#define kHomeTimeLineLeftPadding    25
 //padding for user name, topic title to it's parent view
 #define kElementLeftPadding         30
 #define kElementRightPadding        10
@@ -106,6 +107,27 @@
         _postTitle.attributedText = attrStr;
         [_postTitle sizeToFit];
         [self.topicContentView insertSubview:self.postTitle aboveSubview:self.speechBubbleView];
+        
+        UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
+        
+        _likeButton = [[FLYIconButton alloc] initWithText:@"10" textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_wings"];
+        [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.topicContentView addSubview:_likeButton];
+        
+        _groupNameButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _groupNameButton.titleLabel.font = inlineActionFont;
+        [_groupNameButton setTitleColor:[UIColor flyBlue] forState:UIControlStateNormal];
+        [_groupNameButton setTitle:@"@confession" forState:UIControlStateNormal];
+        _groupNameButton.titleEdgeInsets = UIEdgeInsetsZero;
+        [_groupNameButton sizeToFit];
+        [self.topicContentView addSubview:_groupNameButton];
+        
+        _commentButton = [[FLYIconButton alloc] initWithText:@"10" textFont:inlineActionFont textColor:[UIColor flyBlue] icon:@"icon_homefeed_comment"];
+        [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_commentButton sizeToFit];
+        [self.topicContentView addSubview:_commentButton];
 
         
 //
@@ -190,9 +212,10 @@
         make.top.equalTo(self.contentView).offset(90);
     }];
     
+    CGFloat topicContentLeftPadding = CGRectGetMaxX(_playButton.frame) + kTopicContentLeftPadding;
     [self.topicContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(5);
-        make.leading.equalTo(self.contentView).offset(kTopicContentLeftPadding);
+        make.leading.equalTo(self.contentView).offset(topicContentLeftPadding);
         make.trailing.equalTo(self.contentView).offset(-10);
         make.bottom.equalTo(self.contentView).offset(-5);
     }];
@@ -201,7 +224,7 @@
         make.top.equalTo(self.topicContentView).offset(0);
         make.leading.equalTo(self.topicContentView).offset(0);
         make.trailing.equalTo(self.topicContentView).offset(0);
-        make.bottom.equalTo(self.topicContentView).offset(-20);
+        make.bottom.equalTo(self.topicContentView).offset(0);
     }];
     
     [self.userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -218,6 +241,21 @@
         make.top.equalTo(self.userNameLabel.mas_bottom).offset(5);
         make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
         make.trailing.equalTo(self.topicContentView).offset(-10);
+    }];
+    
+    [self.likeButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.postTitle.mas_bottom).offset(5);
+        make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
+    }];
+    
+    [self.groupNameButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.likeButton);
+        make.centerX.equalTo(self.speechBubbleView);
+    }];
+    
+    [self.commentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.postTitle.mas_bottom).offset(5);
+        make.trailing.equalTo(self.speechBubbleView.mas_trailing).offset(-kElementRightPadding);
     }];
     
 
@@ -252,11 +290,28 @@
     [super updateConstraints];
 }
 
+#pragma mark - inline actions
 - (void)_playButtonTapped
 {
     [self.delegate playButtonTapped:self withPost:self.post withIndexPath:nil];
 }
 
+- (void)_likeButtonTapped
+{
+    
+}
+
+- (void)_shareButtonTapped
+{
+    
+}
+
+- (void)_commentButtonTapped
+{
+    
+}
+
+#pragma mark - Height of the cell
 - (CGFloat)heightForTopic:(FLYPost *)post
 {
     CGFloat height = 0;
