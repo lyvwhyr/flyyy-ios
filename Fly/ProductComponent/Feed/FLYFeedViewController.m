@@ -190,15 +190,7 @@ static NSInteger globalPageNum = 1;
 
 - (void)_addDatasource:(NSInteger)pageNum
 {
-//    globalPageNum++;
-//    
-//    NSInteger postsPerPage = 10;
-//    NSInteger start = (pageNum - 1) * postsPerPage + 1;
-//    NSInteger end = start + postsPerPage;
-//    for (NSInteger i = start; i <= end; i++) {
-//        FLYTopic *post = [[FLYTopic alloc] initWithDictory:@{@"count":@(i), @"title":@"Tellm me something I need to know."}];
-//        [_posts addObject:post];
-//    }
+    globalPageNum++;
     NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"topics" withExtension:@"json"];
     NSData *fileData = [NSData dataWithContentsOfURL:fileURL];
     NSArray *arr = [NSJSONSerialization JSONObjectWithData:fileData options:0 error:nil];
@@ -206,7 +198,6 @@ static NSInteger globalPageNum = 1;
         FLYTopic *topic = [[FLYTopic alloc] initWithDictory:arr[i]];
         [_posts addObject:topic];
     }
-    
     [self.feedTableView reloadData];
 }
 
