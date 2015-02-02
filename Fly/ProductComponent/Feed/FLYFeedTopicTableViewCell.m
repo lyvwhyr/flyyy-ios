@@ -238,23 +238,23 @@
             break;
         }
         case FLYPlayStateLoading: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_play_loading"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
             break;
         }
         case FLYPlayStatePlaying: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_play_pause"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_pausebackground"] forState:UIControlStateNormal];
             break;
         }
         case FLYPlayStatePaused: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
             break;
         }
         case FLYPlayStateFinished: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
             break;
         }
         default: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_feed_play"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
             break;
         }
     }

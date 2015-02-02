@@ -48,7 +48,6 @@
         
         //TODO:remove
         NSInteger count = [dict fly_integerForKey:@"count"];
-        _audioURLStr = [NSString stringWithFormat:@"https://ia601409.us.archive.org/6/items/new_concept_uk_level3/lesson_%.2d.mp3", (int)count];
     }
     return self;
 }

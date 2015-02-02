@@ -46,7 +46,6 @@
 @property (nonatomic) BOOL isAudioDownloaded;
 
 //TODO:remove this
-@property (nonatomic, copy) NSString *audioURLStr;
 
 - (instancetype)initWithDictory:(NSDictionary *)dict;
 

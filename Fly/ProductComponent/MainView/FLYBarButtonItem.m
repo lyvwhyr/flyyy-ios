@@ -70,7 +70,7 @@
 {
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //12 * 21
-    UIImage *image = [UIImage imageNamed:@"icon_homefeed_groups_blue"];
+    UIImage *image = [UIImage imageNamed:@"icon_homefeed_groups"];
     backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
     CGFloat x = (left ? -1 : 1) * 10;
     backButton.frame = CGRectMake(x, 0, 52, 44);

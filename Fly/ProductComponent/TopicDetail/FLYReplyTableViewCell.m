@@ -66,11 +66,11 @@
         
         UIColor *color = [UIColor flyInlineActionGrey];
         UIFont *font = [UIFont systemFontOfSize:13.0f];
-        _flyButton = [[FLYIconButton alloc] initWithText:@"Fly" textFont:font textColor:color icon:@"icon_inline_wing"];
+        _flyButton = [[FLYIconButton alloc] initWithText:@"Fly" textFont:font textColor:color icon:@"icon_inline_wing" isIconLeft:YES];
         _flyButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_flyButton];
         
-        _commentButton = [[FLYIconButton alloc] initWithText:@"Comment" textFont:font textColor:color  icon:@"icon_inline_comment"];
+        _commentButton = [[FLYIconButton alloc] initWithText:@"Comment" textFont:font textColor:color  icon:@"icon_inline_comment" isIconLeft:NO];
 //        [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_commentButton];

@@ -113,20 +113,24 @@ static NSInteger globalPageNum = 1;
 {
     FLYGroupsButtonItem *leftBarItem = [FLYGroupsButtonItem barButtonItem:YES];
     self.navigationItem.leftBarButtonItem = leftBarItem;
-    
-//    [leftButton addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-//    [leftButton sizeToFit];
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
 }
 
 - (void)loadRightBarButton
 {
-    FLYCatalogBarButtonItem *barItem = [FLYCatalogBarButtonItem barButtonItem:NO];
-    __weak typeof(self)weakSelf = self;
-    barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
-        __strong typeof(self) strongSelf = weakSelf;
-    };
-    self.navigationItem.rightBarButtonItem = barItem;
+    UIImage *autoPlayImage = [UIImage imageNamed:@"icon_homefeed_playall"];
+    UIButton *autoPlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [autoPlayButton setImage:autoPlayImage forState:UIControlStateNormal];
+    [autoPlayButton addTarget:self action:@selector(_autoPlayButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [autoPlayButton setFrame:CGRectMake(0, 0, 20, 20)];
+    UIBarButtonItem *autoPlayItem = [[UIBarButtonItem alloc] initWithCustomView:autoPlayButton];
+    
+    UIImage *profileButtonImage = [UIImage imageNamed:@"icon_homefeed_profile"];
+    UIButton *profileButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [profileButton setImage:profileButtonImage forState:UIControlStateNormal];
+    [profileButton addTarget:self action:@selector(_profileButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [profileButton setFrame:CGRectMake(0, 0, 30, 30)];
+    UIBarButtonItem *profileItem = [[UIBarButtonItem alloc] initWithCustomView:profileButton];
+    self.navigationItem.rightBarButtonItems = @[profileItem, autoPlayItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -216,9 +220,9 @@ static NSInteger globalPageNum = 1;
 {
     static NSString *cellIdentifier = @"feedPostCellIdentifier";
     FLYFeedTopicTableViewCell *cell = (FLYFeedTopicTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-//    if (cell == nil) {
+    if (cell == nil) {
         cell = [[FLYFeedTopicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-//    }
+    }
     if (NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)
     {
         cell.contentView.frame = cell.bounds;
@@ -310,7 +314,7 @@ static NSInteger globalPageNum = 1;
         if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateNotSet) {
             [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStateLoading;
             [tappedCell updatePlayState:FLYPlayStateLoading];
-            [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.audioURLStr];
+            [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL];
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateLoading) {
             return;
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStatePlaying) {
@@ -328,7 +332,7 @@ static NSInteger globalPageNum = 1;
     } else {
         //tap on a different cell
         [[FLYAudioStateManager sharedInstance] removePlayer];
-        [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.audioURLStr];
+        [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL];
         
         //change previous state, remove animation, change current to previous
         [FLYAudioStateManager sharedInstance].previousPlayItem = [FLYAudioStateManager sharedInstance].currentPlayItem;
@@ -399,5 +403,17 @@ static NSInteger globalPageNum = 1;
     [self.view needsUpdateConstraints];
     [self.view layoutIfNeeded];
 }
+
+#pragma mark - navigation bar item tapped 
+- (void)_autoPlayButtonTapped
+{
+    
+}
+
+- (void)_profileButtonTapped
+{
+    
+}
+
 
 @end
