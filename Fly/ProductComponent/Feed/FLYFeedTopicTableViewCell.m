@@ -45,7 +45,7 @@
 
 @implementation FLYFeedTopicTableViewCell
 
-#define kTopicContentBottomPadding      5
+#define kTopicContentBottomPadding      0
 #define kTopicContentLeftPadding        5
 #define kHomeTimeLineLeftPadding        25
 #define kTopicContentRightPadding       10
@@ -167,7 +167,7 @@
         make.top.equalTo(self.topicContentView).offset(0);
         make.leading.equalTo(self.topicContentView).offset(0);
         make.trailing.equalTo(self.topicContentView).offset(0);
-        make.bottom.equalTo(self.topicContentView).offset(0);
+        make.bottom.equalTo(self.topicContentView).offset(-10);
     }];
     
     [_playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -225,7 +225,7 @@
     [self.topicTitle sizeToFit];
     
     [self.likeButton setLabelText:[NSString stringWithFormat:@"%ld", topic.likeCount]];
-    [self.groupNameButton setTitle:topic.group.groupName forState:UIControlStateNormal];
+    [self.groupNameButton setTitle:[NSString stringWithFormat:@"@%@", topic.group.groupName] forState:UIControlStateNormal];
     [self.commentButton setLabelText:[NSString stringWithFormat:@"%ld", topic.replyCount]];
 }
 
@@ -319,7 +319,8 @@
     } else {
         labelHeight = rect.size.height;
     }
-    height += labelHeight + 44 + 70 + 5;
+    //top, bottom, padding
+    height += labelHeight + 44 + 70;
     
     return height;
 }
