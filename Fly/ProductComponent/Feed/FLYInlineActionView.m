@@ -27,22 +27,22 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        UIColor *color = [UIColor flyInlineActionGrey];
-        UIFont *font = [UIFont systemFontOfSize:13.0f];
-        _flyButton = [[FLYIconButton alloc] initWithText:@"5" textFont:font textColor:color icon:@"icon_inline_wing"];
-        _flyButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_flyButton];
-        
-        _commentButton = [[FLYIconButton alloc] initWithText:@"10" textFont:font textColor:color  icon:@"icon_inline_comment"];
-        [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-        _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_commentButton];
-        
-        _shareButton = [[FLYIconButton alloc] initWithText:@"Share" textFont:font textColor:color icon:@"icon_inline_share"];
-        _shareButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_shareButton];
-        
-        [self setNeedsUpdateConstraints];
+//        UIColor *color = [UIColor flyInlineActionGrey];
+//        UIFont *font = [UIFont systemFontOfSize:13.0f];
+//        _flyButton = [[FLYIconButton alloc] initWithText:@"5" textFont:font textColor:color icon:@"icon_inline_wing"];
+//        _flyButton.translatesAutoresizingMaskIntoConstraints = NO;
+//        [self addSubview:_flyButton];
+//        
+//        _commentButton = [[FLYIconButton alloc] initWithText:@"10" textFont:font textColor:color  icon:@"icon_inline_comment"];
+//        [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+//        _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
+//        [self addSubview:_commentButton];
+//        
+//        _shareButton = [[FLYIconButton alloc] initWithText:@"Share" textFont:font textColor:color icon:@"icon_inline_share"];
+//        _shareButton.translatesAutoresizingMaskIntoConstraints = NO;
+//        [self addSubview:_shareButton];
+//        
+//        [self setNeedsUpdateConstraints];
     }
     return self;
 }

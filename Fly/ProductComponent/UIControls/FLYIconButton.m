@@ -17,15 +17,17 @@
 @property (nonatomic) UILabel *localTitleLabel;
 @property (nonatomic) UIImageView *localIconView;
 
+@property (nonatomic) BOOL isIconLeft;
+
 @end
 
 @implementation FLYIconButton
 
-- (instancetype)initWithText:(NSString *)text textFont:(UIFont *)font textColor:(UIColor *)color icon:(NSString *)iconName
+- (instancetype)initWithText:(NSString *)text textFont:(UIFont *)font textColor:(UIColor *)color icon:(NSString *)iconName isIconLeft:(BOOL)isIconLeft
 {
     self = [super init];
     if (self) {
-//        self.translatesAutoresizingMaskIntoConstraints = NO;
+        _isIconLeft = isIconLeft;
         
         _localIconView = [UIImageView new];
         _localIconView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -56,15 +58,28 @@
     CGFloat intrinsicHeight = MAX(CGRectGetHeight(_localIconView.bounds), CGRectGetHeight(_localTitleLabel.bounds));
     CGFloat iconExtraOffset = FLYFloorToPixel((intrinsicHeight - CGRectGetHeight(_localIconView.bounds))/2);
     CGFloat labelExtraOffset = FLYFloorToPixel((intrinsicHeight - CGRectGetHeight(_localTitleLabel.bounds))/2);
-    [_localIconView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(iconExtraOffset);
-        make.leading.equalTo(self);
-    }];
-    
-    [_localTitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(labelExtraOffset);
-        make.leading.equalTo(_localIconView.mas_right).offset(kIconRightPadding);
-    }];
+    if (self.isIconLeft) {
+        [_localIconView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self).offset(iconExtraOffset);
+            make.leading.equalTo(self);
+        }];
+        
+        [_localTitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self).offset(labelExtraOffset);
+            make.leading.equalTo(_localIconView.mas_right).offset(kIconRightPadding);
+        }];
+    } else {
+        [_localIconView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self).offset(iconExtraOffset);
+            make.trailing.equalTo(self);
+        }];
+        
+        [_localTitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self).offset(labelExtraOffset);
+            make.trailing.equalTo(self.localIconView.mas_leading).offset(-kIconRightPadding);
+        }];
+
+    }
     [super updateConstraints];
     
 }
