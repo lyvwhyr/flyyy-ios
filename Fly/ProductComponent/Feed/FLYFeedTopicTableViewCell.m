@@ -21,6 +21,7 @@
 //timeline and play button
 @property (nonatomic) UIImageView *timelineImageView;
 @property (nonatomic) UIButton *playButton;
+@property (nonatomic) UIActivityIndicatorView *loadingIndicatorView;
 
 //topic content view
 @property (nonatomic) UIView *topicContentView;
@@ -151,8 +152,6 @@
         make.top.equalTo(self).offset(0);
         make.leading.equalTo(self).offset(kHomeTimeLineLeftPadding);
         make.height.equalTo(self);
-//        make.bottom.equalTo(self);
-//        make.trailing.equalTo(self);
     }];
     
     CGFloat topicContentLeftPadding = CGRectGetMaxX(_playButton.frame) + kTopicContentLeftPadding;
@@ -170,10 +169,17 @@
         make.bottom.equalTo(self.topicContentView).offset(-10);
     }];
     
-    [_playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.timelineImageView);
         make.bottom.equalTo(self.mas_bottom);
     }];
+    
+    if (_loadingIndicatorView) {
+        [_loadingIndicatorView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.playButton);
+            make.centerY.equalTo(self.playButton);
+        }];
+    }
     
     [self.userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topicContentView).offset(5);
@@ -210,6 +216,17 @@
     [super updateConstraints];
 }
 
+- (UIActivityIndicatorView *)loadingIndicatorView
+{
+    if (_loadingIndicatorView == nil) {
+        _loadingIndicatorView = [UIActivityIndicatorView new];
+        _loadingIndicatorView.hidesWhenStopped = YES;
+        [self.contentView insertSubview:_loadingIndicatorView aboveSubview:self.playButton];
+    }
+    [_loadingIndicatorView startAnimating];
+    return _loadingIndicatorView;
+}
+
 #pragma mark - assign values to cell
 - (void)setupTopic:(FLYTopic *)topic
 {
@@ -232,13 +249,16 @@
 #pragma mark - update play state
 - (void)updatePlayState:(FLYPlayState)state
 {
+    [_loadingIndicatorView stopAnimating];
+    
     switch (state) {
         case FLYPlayStateNotSet: {
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
             break;
         }
         case FLYPlayStateLoading: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backplay_bg"] forState:UIControlStateNormal];
+            [self loadingIndicatorView];
             break;
         }
         case FLYPlayStatePlaying: {
