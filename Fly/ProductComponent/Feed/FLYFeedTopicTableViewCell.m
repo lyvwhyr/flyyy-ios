@@ -66,12 +66,14 @@
         UIImage *timelineImage = [UIImage imageNamed:@"icon_homefeed_timeline"];
         [_timelineImageView setImage:timelineImage];
         _timelineImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        [_timelineImageView sizeToFit];
         [self.contentView addSubview:_timelineImageView];
         
         _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _playButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [_playButton setImage:[UIImage imageNamed:@"icon_homefeed_backplay"] forState:UIControlStateNormal];
+        [_playButton sizeToFit];
         [self.contentView insertSubview:self.playButton aboveSubview:self.timelineImageView];
         
         //topic content view
@@ -83,7 +85,7 @@
         UIEdgeInsets insets = UIEdgeInsetsMake(40, 40, 70, 50);
         image = [image resizableImageWithCapInsets:insets];
         self.speechBubbleView.image = image;
-        [self.speechBubbleView sizeToFit];
+//        [self.speechBubbleView sizeToFit];
         [self.topicContentView addSubview:self.speechBubbleView];
         
         _userNameLabel = [UILabel new];
@@ -128,7 +130,6 @@
         [_commentButton sizeToFit];
         [self.topicContentView addSubview:_commentButton];
 
-        
 //
 //        _postAtLabel = [UILabel new];
 //        _postAtLabel.text = @"19s";
@@ -143,7 +144,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self setNeedsUpdateConstraints];
+    [self updateConstraints];
 }
 
 - (void)updateConstraints
@@ -154,7 +155,7 @@
         make.height.equalTo(self);
     }];
     
-    CGFloat topicContentLeftPadding = CGRectGetMaxX(_playButton.frame) + kTopicContentLeftPadding;
+    CGFloat topicContentLeftPadding = kHomeTimeLineLeftPadding + CGRectGetWidth(_timelineImageView.bounds)/2 + CGRectGetWidth(_playButton.bounds)/2 + kTopicContentLeftPadding;
     [self.topicContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(2);
         make.leading.equalTo(self.contentView).offset(topicContentLeftPadding);
@@ -241,9 +242,9 @@
     self.topicTitle.attributedText = attrStr;
     [self.topicTitle sizeToFit];
     
-    [self.likeButton setLabelText:[NSString stringWithFormat:@"%ld", topic.likeCount]];
+    [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.likeCount]];
     [self.groupNameButton setTitle:[NSString stringWithFormat:@"@%@", topic.group.groupName] forState:UIControlStateNormal];
-    [self.commentButton setLabelText:[NSString stringWithFormat:@"%ld", topic.replyCount]];
+    [self.commentButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.replyCount]];
 }
 
 #pragma mark - update play state
