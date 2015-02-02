@@ -22,6 +22,7 @@
 + (UIColor *)flyBackgroundColorBlue;
 + (UIColor *)tableHeaderGrey;
 + (UIColor *) tableHeaderTextGrey;
++ (UIColor *) flyColorPlayAnimation;
 
 
 + (UIColor *)customGrayColor;

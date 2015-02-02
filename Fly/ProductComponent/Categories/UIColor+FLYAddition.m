@@ -19,6 +19,7 @@
 #define kColorFlyInlineActionGrey               @"#ababab"
 #define kColorFlyTableHeaderGrey                @"#f2f2f2"
 #define kColorFlyTableHeaderTextGrey            @"#9e9e9e"
+#define kColorFlyPlayAnimation                  @"#60BD88"
 
 #define kColorFlyBackgroundColorBlue            @"#4CA8D3"
 
@@ -86,6 +87,11 @@
 + (UIColor *) tableHeaderTextGrey
 {
     return [self colorWithHexString:kColorFlyTableHeaderTextGrey];
+}
+
++ (UIColor *) flyColorPlayAnimation
+{
+    return [self colorWithHexString:kColorFlyPlayAnimation];
 }
 
 

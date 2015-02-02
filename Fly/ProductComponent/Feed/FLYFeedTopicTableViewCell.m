@@ -21,6 +21,7 @@
 //timeline and play button
 @property (nonatomic) UIImageView *timelineImageView;
 @property (nonatomic) UIButton *playButton;
+@property (nonatomic) CAShapeLayer *arcLayer;
 @property (nonatomic) UIActivityIndicatorView *loadingIndicatorView;
 
 //topic content view
@@ -141,6 +142,33 @@
     return self;
 }
 
+-(void)drawLineAnimation
+{
+    CGPoint center = CGPointMake(CGRectGetMidX(self.playButton.bounds),  CGRectGetMidY(self.playButton.bounds));
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path addArcWithCenter:center radius:20 startAngle: -(float)M_PI_2 endAngle:2 * M_PI clockwise:YES];
+    _arcLayer = [CAShapeLayer layer];
+    _arcLayer.path = path.CGPath;
+    _arcLayer.strokeColor = [UIColor flyColorPlayAnimation].CGColor;
+    _arcLayer.fillColor = [UIColor clearColor].CGColor;
+    _arcLayer.lineWidth = 5;
+    [_playButton.layer addSublayer:_arcLayer];
+    
+    CABasicAnimation *bas=[CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    bas.removedOnCompletion = YES;
+    bas.duration=5;
+    bas.delegate=self;
+    bas.fromValue=[NSNumber numberWithInteger:0];
+    bas.toValue=[NSNumber numberWithInteger:1];
+    [_arcLayer addAnimation:bas forKey:@"key"];
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    [self.arcLayer removeFromSuperlayer];
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -251,7 +279,7 @@
 - (void)updatePlayState:(FLYPlayState)state
 {
     [_loadingIndicatorView stopAnimating];
-    
+    [self.arcLayer removeFromSuperlayer];
     switch (state) {
         case FLYPlayStateNotSet: {
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
@@ -264,6 +292,7 @@
         }
         case FLYPlayStatePlaying: {
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_pausebackground"] forState:UIControlStateNormal];
+            [self drawLineAnimation];
             break;
         }
         case FLYPlayStatePaused: {
