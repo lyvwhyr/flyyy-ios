@@ -23,5 +23,6 @@
 #import "NSBundle+FLYAddition.h"
 #import "UALogger.h"
 #import "FLYAppStateManager.h"
+#import "Mixpanel.h"
 
 #endif

@@ -4,3 +4,4 @@ pod "AFNetworking", "~> 2.0"
 pod 'SCLAlertView-Objective-C'
 pod 'JGProgressHUD'
 pod 'SVPullToRefresh'
+pod 'Mixpanel'

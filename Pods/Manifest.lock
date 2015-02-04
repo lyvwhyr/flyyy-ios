@@ -21,6 +21,9 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - JGProgressHUD (1.2.2)
+  - Mixpanel (2.7.1):
+    - Mixpanel/MPCategoryHelpers (= 2.7.1)
+  - Mixpanel/MPCategoryHelpers (2.7.1)
   - pop (1.0.7)
   - SCLAlertView-Objective-C (0.3.5)
   - SVPullToRefresh (0.4.1)
@@ -29,6 +32,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - JGProgressHUD
+  - Mixpanel
   - pop (~> 1.0)
   - SCLAlertView-Objective-C
   - SVPullToRefresh
@@ -37,6 +41,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
   JGProgressHUD: a7c58f711eec0b67f257a0821c0bac9194c72398
+  Mixpanel: 57314e0e7c0a63a6471618a41002da3e1408532c
   pop: 2f14a1ea61339767af9e66741b418c831b3844df
   SCLAlertView-Objective-C: ba283f4d609d9929d4d2bf66f713db19ae0fe066
   SVPullToRefresh: d5161ebc833a38b465364412e5e307ca80bbb190

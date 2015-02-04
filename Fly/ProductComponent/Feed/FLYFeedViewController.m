@@ -95,6 +95,9 @@ static NSInteger globalPageNum = 1;
     }];
 
     [_feedTableView triggerPullToRefresh];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"timeline_view"];
 }
 
 - (void)_addInlineReplyBar

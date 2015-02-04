@@ -253,6 +253,8 @@
     }
 }
 
+//curl -X POST -i -d "topic_title=abc" -d "media_id=418819451816822124" "localhost:3000/v1/topics?token=secret123&media_id=not_valid&group_id=12345&audio_duration=10&extension=m4a"
+
 #pragma mark - Service
 - (void)_serviceCreateTopic
 {

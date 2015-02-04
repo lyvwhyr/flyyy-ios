@@ -13,6 +13,8 @@
 #import "UIImage+FLYAddition.h"
 #import "FLYFileManager.h"
 
+#define MIXPANEL_TOKEN @"4ce141a1dcd56132894230aff97b282b"
+
 @interface AppDelegate ()
 
 @end
@@ -28,6 +30,8 @@
     FLYMainViewController *mainVC = [FLYMainViewController new];
     FLYNavigationController *navigationVC = [[FLYNavigationController alloc] initWithRootViewController:mainVC];
     self.window.rootViewController = navigationVC;
+    
+    [self _setupThirdLibraries];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [FLYAppStateManager sharedInstance];
@@ -57,6 +61,12 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - setup third party libraries
+- (void)_setupThirdLibraries
+{
+    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
 }
 
 @end
