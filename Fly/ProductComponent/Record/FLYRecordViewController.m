@@ -30,6 +30,7 @@
 #define kMultiPartName              @"media"
 #define kMultiPartFileName          @"dummyName.m4a"
 #define kMimeType                   @"audio/mp4a-latm"
+#define kMaxRetry           3
 
 
 @interface FLYRecordViewController ()<FLYUniversalViewControllerDelegate>
@@ -58,6 +59,7 @@
 @property (nonatomic) NSTimer *levelsTimer;
 
 @property (nonatomic) NSString *mediaId;
+@property (nonatomic) NSInteger retryCount;
 
 @end
 
@@ -223,6 +225,11 @@ static inline float translate(float val, float min, float max) {
         UALog(@"Post audio file response: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
+        if (self.retryCount > kMaxRetry) {
+            return;
+        }
+        self.retryCount++;
+        [self _uploadAudioFile];
     }];
 }
 
