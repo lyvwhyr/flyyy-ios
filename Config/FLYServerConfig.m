@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Confess.ly. All rights reserved.
 //
 
-#import "ServerConfig.h"
+#import "FLYServerConfig.h"
 
-@implementation ServerConfig
+@implementation FLYServerConfig
 
-+(NSString *)getServerURL
++ (NSString *)getServerURL
 {
 //    ENV_TYPE type = ENV_STAGING;
 //    ENV_TYPE type = ENV_DEV;

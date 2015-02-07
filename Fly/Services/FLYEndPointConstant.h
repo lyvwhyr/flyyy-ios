@@ -6,12 +6,10 @@
 //  Copyright (c) 2014 Confess.ly. All rights reserved.
 //
 
-@interface EndPointConstant : NSObject
-
 //Base URL
-#define DEV_BASE_URL                            @"https://campusab.localhost.com/confessly/"
-#define STAGING_BASE_URL                        @"https://staging.confess.ly/"
-#define PROD_BASE_URL                           @"https://www.confess.ly/"
+#define DEV_BASE_URL                            @"http://localhost:3000/v1"
+#define STAGING_BASE_URL                        @"http://localhost:3000/v1"
+#define PROD_BASE_URL                           @"http://localhost:3000/v1"
 
 //Endpoint
 #define GET_ALL_POSTS                           @"topic/all_confessions/recent/%@"
@@ -52,6 +50,3 @@
 #define EP_URL_CONFESSLY_TERMS_SERVICE          @"https://www.confess.ly/footer/terms"
 #define EP_URL_FORGET_PASSWORD                  @"https://www.confess.ly/login/forgetPwd"
 #define EP_URL_SHARE                            @"https://www.confess.ly/topic/view_casual/tid=%lld"
-
-
-@end

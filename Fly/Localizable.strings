@@ -1,1 +1,3 @@
 "FLYPrePostDefaultText" = "Add description";
+"FLYPrePostTitleEmpty" = "Please enter the topic description.";
+"FLYPrePostGroupEmpty" = "Please choose a group.";

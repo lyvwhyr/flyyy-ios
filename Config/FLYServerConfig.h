@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, ENV_TYPE) {
     ENV_PROD
 };
 
-@interface ServerConfig : NSObject
+@interface FLYServerConfig : NSObject
 
 
 +(NSString *)getServerURL;

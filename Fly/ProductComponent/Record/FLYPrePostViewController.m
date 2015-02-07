@@ -31,8 +31,9 @@
 @property (nonatomic) FLYPostButtonView *postButton;
 @property (nonatomic) UIView *overlayView;
 
-@property (nonatomic, copy) NSString *topicTitle;
 @property (nonatomic) NSArray *groups;
+@property (nonatomic, copy) NSString *topicTitle;
+@property (nonatomic) FLYGroup *selectedGroup;
 
 @end
 
@@ -149,6 +150,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell isKindOfClass:[FLYPrePostChooseGroupTableViewCell class]]) {
         [((FLYPrePostChooseGroupTableViewCell *)cell) selectCell];
+        self.selectedGroup = [self.groups objectAtIndex:indexPath.row];
     }
 }
 
@@ -217,6 +219,16 @@
 
 - (void)_postButtonTapped
 {
+    if (!self.topicTitle) {
+        [Dialog simpleToast:LOC(@"FLYPrePostDefaultText")];
+        return;
+    }
+    
+    if (!self.selectedGroup) {
+        [Dialog simpleToast:LOC(@"FLYPrePostGroupEmpty")];
+        return;
+    }
+    
     NSString *mediaId = [FLYAppStateManager sharedInstance].mediaId;
     if (mediaId) {
         [self _serviceCreateTopic];
@@ -227,12 +239,10 @@
 #pragma mark - Service
 - (void)_serviceCreateTopic
 {
-    //TODO:use real data
-    NSNumber *mediaIdNum = [NSNumber numberWithLongLong:[[FLYAppStateManager sharedInstance].mediaId longLongValue]];
     NSDictionary *params = @{@"topic_title":self.topicTitle,
-                             @"media_id":mediaIdNum,
+                             @"media_id":[FLYAppStateManager sharedInstance].mediaId,
                              @"extension":@"m4a",
-                             @"group_id":@"11245832070063228345",
+                             @"group_id":self.selectedGroup.groupId,
                              @"audio_duration":@10
                              };
     NSString *baseURL = @"http://localhost:3000/v1/topics?token=secret123&&media_id=not_valid&user_id=1349703104000715808";

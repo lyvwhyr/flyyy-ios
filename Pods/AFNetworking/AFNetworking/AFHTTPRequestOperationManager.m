@@ -32,14 +32,19 @@
 #import <UIKit/UIKit.h>
 #endif
 
+
 @interface AFHTTPRequestOperationManager ()
+
 @property (readwrite, nonatomic, strong) NSURL *baseURL;
+
 @end
 
 @implementation AFHTTPRequestOperationManager
 
 + (instancetype)manager {
-    return [[self alloc] initWithBaseURL:nil];
+    NSString *baseURLStr = [[NSUserDefaults standardUserDefaults] objectForKey:kBaseURLInPreference];
+    NSURL *baseURL = [NSURL URLWithString:baseURLStr];
+    return [[self alloc] initWithBaseURL:baseURL];
 }
 
 - (instancetype)init {

@@ -7,6 +7,8 @@
 //
 
 #import "FLYAppStateManager.h"
+#import "FLYServerConfig.h"
+#import "AFHTTPRequestOperationManager.h"
 
 @implementation FLYAppStateManager
 
@@ -24,6 +26,10 @@
 {
     if (self = [super init]) {
         _isAutoPlayEnabled = YES;
+        
+        //set up http request base url
+        [[NSUserDefaults standardUserDefaults] setObject:[FLYServerConfig getServerURL] forKey:kBaseURLInPreference];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     return self;
 }
