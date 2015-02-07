@@ -260,11 +260,17 @@
 {
     //TODO:use real data
     NSNumber *mediaIdNum = [NSNumber numberWithLongLong:[[FLYAppStateManager sharedInstance].mediaId longLongValue]];
-    NSDictionary *params = @{@"topic_title":self.topicTitle, @"media_id":mediaIdNum};
-    NSString *baseURL = @"http://localhost:3000/v1/topics?token=secret123&&media_id=not_valid&group_id=12345&audio_duration=10&extension=m4a";
+    NSDictionary *params = @{@"topic_title":self.topicTitle,
+                             @"media_id":mediaIdNum,
+                             @"extension":@"m4a",
+                             @"group_id":@"11245832070063228345",
+                             @"audio_duration":@10
+                             };
+    NSString *baseURL = @"http://localhost:3000/v1/topics?token=secret123&&media_id=not_valid&user_id=1349703104000715808";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:baseURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         FLYTopic *post = [[FLYTopic alloc] initWithDictory:responseObject];
+        UALog(@"%@", post);
         [Dialog simpleToast:@"Posted"];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
