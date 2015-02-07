@@ -9,6 +9,7 @@
 #import "EXTScope.h"
 #import "FLYGroupManager.h"
 #import "FLYEndpointRequest.h"
+#import "FLYGroup.h"
 
 @interface FLYGroupManager()
 
@@ -31,7 +32,8 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        
+        _groupList = [NSArray new];
+        [self _initGroupList];
     }
     return self;
 }
@@ -40,7 +42,17 @@
 {
     @weakify(self)
     self.groupListServiceResponseBlock = ^(id response) {
-        
+        @strongify(self)
+        if (!response && ![response isKindOfClass:[NSArray class]]) {
+            return;
+        }
+        response = (NSArray *)response;
+        NSMutableArray *tempGroups = [NSMutableArray new];
+        for(int i = 0; i < [response count]; i++) {
+            FLYGroup *group = [[FLYGroup alloc] initWithDictory:response[i]];
+            [tempGroups addObject:group];
+        }
+        self.groupList = tempGroups;
     };
     [FLYEndpointRequest getGroupListService:self.groupListServiceResponseBlock];
 }

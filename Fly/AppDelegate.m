@@ -12,6 +12,7 @@
 #import "UIColor+FLYAddition.h"
 #import "UIImage+FLYAddition.h"
 #import "FLYFileManager.h"
+#import "FLYGroupManager.h"
 
 #define MIXPANEL_TOKEN @"4ce141a1dcd56132894230aff97b282b"
 
@@ -36,6 +37,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [FLYAppStateManager sharedInstance];
         [FLYFileManager sharedInstance];
+        [FLYGroupManager sharedInstance];
     });
     
     return YES;

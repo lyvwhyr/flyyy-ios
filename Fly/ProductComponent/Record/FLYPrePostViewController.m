@@ -17,6 +17,8 @@
 #import "FLYRecordViewController.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "FLYTopic.h"
+#import "FLYGroup.h"
+#import "FLYGroupManager.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -30,7 +32,7 @@
 @property (nonatomic) UIView *overlayView;
 
 @property (nonatomic, copy) NSString *topicTitle;
-@property (nonatomic) NSMutableArray *groups;
+@property (nonatomic) NSArray *groups;
 
 @end
 
@@ -39,9 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _groups = [NSMutableArray new];
-    
-    [self _addTestData];
+    _groups = [NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList];
     
     self.view.backgroundColor = [UIColor flyFeedGrey];
     
@@ -126,7 +126,8 @@
         static NSString *cellIdentifier = kFlyPrePostChooseGroupCellIdentifier;
         FLYPrePostChooseGroupTableViewCell *chooseGroupCell;
         chooseGroupCell = [[FLYPrePostChooseGroupTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        chooseGroupCell.groupName = [_groups objectAtIndex:indexPath.row];
+        FLYGroup *group = [_groups objectAtIndex:indexPath.row];
+        chooseGroupCell.groupName = group.groupName;
         cell = chooseGroupCell;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -212,37 +213,6 @@
     
     FLYPrePostTitleTableViewCell *titleTableCell = (FLYPrePostTitleTableViewCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
     [titleTableCell resignFirstResponder];
-}
-
-- (void)_addTestData
-{
-    [_groups addObject:@"Drugs and alcohol"];
-    [_groups addObject:@"Rape"];
-    [_groups addObject:@"Love confession"];
-    [_groups addObject:@"LGBTQ"];
-    [_groups addObject:@"Relationships"];
-    
-    [_groups addObject:@"Tattoosand piercings"];
-    [_groups addObject:@"Travel"];
-    [_groups addObject:@"Money"];
-    [_groups addObject:@"Faith"];
-    [_groups addObject:@"Family"];
-    
-    [_groups addObject:@"Tattoosand piercings"];
-    [_groups addObject:@"Travel"];
-    [_groups addObject:@"Money"];
-    [_groups addObject:@"Faith"];
-    [_groups addObject:@"Family"];
-    [_groups addObject:@"Tattoosand piercings"];
-    [_groups addObject:@"Travel"];
-    [_groups addObject:@"Money"];
-    [_groups addObject:@"Faith"];
-    [_groups addObject:@"Family"];
-    [_groups addObject:@"Tattoosand piercings"];
-    [_groups addObject:@"Travel"];
-    [_groups addObject:@"Money"];
-    [_groups addObject:@"Faith"];
-    [_groups addObject:@"Family"];
 }
 
 - (void)_postButtonTapped

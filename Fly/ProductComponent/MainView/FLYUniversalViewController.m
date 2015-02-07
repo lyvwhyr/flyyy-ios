@@ -12,7 +12,6 @@
 #import "UIColor+FLYAddition.h"
 #import "FLYBarButtonItem.h"
 #import "UIViewController+StatusBar.h"
-#import "FLYEndpointRequest.h"
 
 #if DEBUG
 #import "FLEXManager.h"
@@ -38,8 +37,6 @@
     [super viewWillAppear:animated];
     [self.flyNavigationController.flyNavigationBar setColor:[self preferredNavigationBarColor] animated:YES];
     [self.flyNavigationController setStatusBarColor:[self preferredStatusBarColor]];
-    
-    [FLYEndpointRequest getGroupList];
 }
 
 - (FLYNavigationController *)flyNavigationController
