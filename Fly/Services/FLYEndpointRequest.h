@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^GroupListServiceResponseBlock)(id responseObject);
+
 @interface FLYEndpointRequest : NSObject
 
-+ (void)getGroupList;
++ (void)getGroupListService:(GroupListServiceResponseBlock)responseBlock;
 
 @end

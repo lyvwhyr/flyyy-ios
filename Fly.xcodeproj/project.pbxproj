@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9FAF85492A0B03E6240416FA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4DA38F875E9D2C76E94F1F6 /* libPods.a */; };
+		A60489961A85DAFD00C67480 /* FLYGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A60489951A85DAFD00C67480 /* FLYGroupManager.m */; };
 		A612753F1A2EFB72004D25D3 /* DKCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A612753E1A2EFB72004D25D3 /* DKCircleButton.m */; };
 		A6162C721A318F1100A3B277 /* FLYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6162C711A318F1100A3B277 /* FLYNavigationBar.m */; };
 		A61D18661A1EE6ED00D188B5 /* FLYAudioStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */; };
@@ -306,6 +307,8 @@
 
 /* Begin PBXFileReference section */
 		0F37115B05133DC886737552 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A60489941A85DAFD00C67480 /* FLYGroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupManager.h; sourceTree = "<group>"; };
+		A60489951A85DAFD00C67480 /* FLYGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupManager.m; sourceTree = "<group>"; };
 		A612753D1A2EFB72004D25D3 /* DKCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKCircleButton.h; sourceTree = "<group>"; };
 		A612753E1A2EFB72004D25D3 /* DKCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKCircleButton.m; sourceTree = "<group>"; };
 		A6162C701A318F1100A3B277 /* FLYNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYNavigationBar.h; sourceTree = "<group>"; };
@@ -774,6 +777,8 @@
 				A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */,
 				A61D18671A1EE70900D188B5 /* FLYAppStateManager.h */,
 				A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */,
+				A60489941A85DAFD00C67480 /* FLYGroupManager.h */,
+				A60489951A85DAFD00C67480 /* FLYGroupManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -781,12 +786,12 @@
 		A6263E831A187E1200C4C3BA = {
 			isa = PBXGroup;
 			children = (
-				A64596431A6B450B00E8D26D /* RawAssets */,
 				A6263E8E1A187E1200C4C3BA /* Fly */,
 				A6263EA81A187E1200C4C3BA /* FlyTests */,
 				A6263E8D1A187E1200C4C3BA /* Products */,
 				A6A30D741A1B1F33001AE1FE /* Frameworks */,
 				3DD9A234A282FD97B33F4A8E /* Pods */,
+				A64596431A6B450B00E8D26D /* RawAssets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1991,6 +1996,7 @@
 				A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */,
 				A6A0E4B81A1E76110036116E /* FLEXViewControllerExplorerViewController.m in Sources */,
 				A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */,
+				A60489961A85DAFD00C67480 /* FLYGroupManager.m in Sources */,
 				A6C67A3A1A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m in Sources */,
 				A6A4EFB01A2BD4D500FD4066 /* FLYGroupListTableViewCell.m in Sources */,
 				A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */,

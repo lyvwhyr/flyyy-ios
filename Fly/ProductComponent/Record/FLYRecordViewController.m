@@ -206,14 +206,14 @@ static inline float translate(float val, float min, float max) {
 
 - (void)_nextBarButtonTapped
 {
-    [self _uploadAudioFile];
+    [self _uploadAudioFileService];
     
     FLYPrePostViewController *prePostVC = [FLYPrePostViewController new];
     [self.navigationController pushViewController:prePostVC animated:YES];
 }
 
 //curl -X POST -F "media=@/Users/xingxingxu/Desktop/11223632430542967739.m4a" -i "http://localhost:3000/v1/media/upload?token=secret123&user_id=1349703091376390371"
-- (void)_uploadAudioFile
+- (void)_uploadAudioFileService
 {
     [FLYAppStateManager sharedInstance].mediaId = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -230,7 +230,7 @@ static inline float translate(float val, float min, float max) {
             return;
         }
         self.retryCount++;
-        [self _uploadAudioFile];
+        [self _uploadAudioFileService];
     }];
 }
 
