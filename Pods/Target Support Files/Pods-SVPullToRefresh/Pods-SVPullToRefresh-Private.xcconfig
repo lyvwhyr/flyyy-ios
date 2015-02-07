@@ -1,5 +1,5 @@
 #include "Pods-SVPullToRefresh.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/SVPullToRefresh" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/JGProgressHUD" "${PODS_ROOT}/Headers/Public/Mixpanel" "${PODS_ROOT}/Headers/Public/SCLAlertView-Objective-C" "${PODS_ROOT}/Headers/Public/SVPullToRefresh" "${PODS_ROOT}/Headers/Public/TheAmazingAudioEngine" "${PODS_ROOT}/Headers/Public/pop"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/SVPullToRefresh" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/JGProgressHUD" "${PODS_ROOT}/Headers/Public/Mixpanel" "${PODS_ROOT}/Headers/Public/SCLAlertView-Objective-C" "${PODS_ROOT}/Headers/Public/SVPullToRefresh" "${PODS_ROOT}/Headers/Public/TheAmazingAudioEngine" "${PODS_ROOT}/Headers/Public/pop"
 OTHER_LDFLAGS = ${PODS_SVPULLTOREFRESH_OTHER_LDFLAGS} -ObjC
 PODS_ROOT = ${SRCROOT}
