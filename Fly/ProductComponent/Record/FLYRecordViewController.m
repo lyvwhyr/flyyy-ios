@@ -24,6 +24,7 @@
 #import "NSDictionary+FLYAddition.h"
 #import "FLYNavigationBar.h"
 #import "FLYNavigationController.h"
+#import "FLYRecordBottomBar.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -44,6 +45,8 @@
 @property (nonatomic) SVPulsingAnnotationView *pulsingView;
 @property (nonatomic, weak) PulsingHaloLayer *halo;
 @property (nonatomic) UIButton *trashButton;
+@property (nonatomic) FLYRecordBottomBar *recordBottomBar;
+
 @property (nonatomic) FLYRecordState currentState;
 @property (nonatomic) NSTimer *recordTimer;
 @property (nonatomic) PulsingHaloLayer *pulsingHaloLayer;
@@ -294,6 +297,9 @@ static inline float translate(float val, float min, float max) {
     [_trashButton removeFromSuperview];
     _trashButton = nil;
     
+    [self.recordBottomBar removeFromSuperview];
+    self.recordBottomBar = nil;
+    
     self.view.backgroundColor = [UIColor whiteColor];
     _currentState = FLYRecordInitialState;
     
@@ -354,6 +360,8 @@ static inline float translate(float val, float min, float max) {
     [_trashButton addTarget:self action:@selector(_setupInitialViewState) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_trashButton];
     
+    self.recordBottomBar = [FLYRecordBottomBar new];
+    [self.view addSubview:self.recordBottomBar];
     
 
     _voiceFilterButton = [[DKCircleButton alloc] initWithFrame:CGRectMake(0, 0, 90, 90)];
@@ -439,6 +447,14 @@ static inline float translate(float val, float min, float max) {
         [self.recordedTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(self.userActionImageView).with.offset(30);
             make.centerX.equalTo(self.userActionImageView);
+        }];
+    }
+    
+    if (self.recordBottomBar) {
+        [self.recordBottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.view);
+            make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
+            make.height.equalTo(@44);
         }];
     }
     

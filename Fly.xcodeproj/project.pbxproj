@@ -210,6 +210,7 @@
 		A67A5E851A70CBA60098DA23 /* FLYServerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A67A5E841A70CBA60098DA23 /* FLYServerConfig.m */; };
 		A67CC61C1A7DDE360092E500 /* topics.json in Resources */ = {isa = PBXBuildFile; fileRef = A67CC61B1A7DDE360092E500 /* topics.json */; };
 		A67CC61F1A7DF1730092E500 /* CoreGraphics+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A67CC61E1A7DF1730092E500 /* CoreGraphics+FLYAddition.m */; };
+		A6852B821A875EE70093C75C /* FLYRecordBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6852B811A875EE70093C75C /* FLYRecordBottomBar.m */; };
 		A69C4B941A27094B00CAD443 /* icon_tabbar_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */; };
 		A69C4B981A270E1400CAD443 /* PaperButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4B971A270E1400CAD443 /* PaperButton.m */; };
 		A69C4B9A1A27111700CAD443 /* icon_filter_feed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B991A27111700CAD443 /* icon_filter_feed@3x.png */; };
@@ -626,6 +627,8 @@
 		A67CC61B1A7DDE360092E500 /* topics.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = topics.json; sourceTree = "<group>"; };
 		A67CC61D1A7DF1730092E500 /* CoreGraphics+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreGraphics+FLYAddition.h"; sourceTree = "<group>"; };
 		A67CC61E1A7DF1730092E500 /* CoreGraphics+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CoreGraphics+FLYAddition.m"; sourceTree = "<group>"; };
+		A6852B801A875EE70093C75C /* FLYRecordBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYRecordBottomBar.h; sourceTree = "<group>"; };
+		A6852B811A875EE70093C75C /* FLYRecordBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYRecordBottomBar.m; sourceTree = "<group>"; };
 		A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_group@3x.png"; sourceTree = "<group>"; };
 		A69C4B961A270E1400CAD443 /* PaperButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperButton.h; sourceTree = "<group>"; };
 		A69C4B971A270E1400CAD443 /* PaperButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperButton.m; sourceTree = "<group>"; };
@@ -1673,6 +1676,8 @@
 				A65578401A3ADCC3003102CD /* FLYPostButtonView.m */,
 				A642FE2C1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.h */,
 				A642FE2D1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.m */,
+				A6852B801A875EE70093C75C /* FLYRecordBottomBar.h */,
+				A6852B811A875EE70093C75C /* FLYRecordBottomBar.m */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -2142,6 +2147,7 @@
 				A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */,
 				A6A0E4A21A1E76110036116E /* FLEXExplorerViewController.m in Sources */,
 				A6A0E48F1A1E76110036116E /* FLEXArgumentInputColorView.m in Sources */,
+				A6852B821A875EE70093C75C /* FLYRecordBottomBar.m in Sources */,
 				A6A0E4BF1A1E76110036116E /* FLEXHierarchyTableViewController.m in Sources */,
 				A651BD871A4985D40081A1E0 /* Dialog.m in Sources */,
 				A6A0E4AC1A1E76110036116E /* FLEXLiveObjectsTableViewController.m in Sources */,
