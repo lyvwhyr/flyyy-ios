@@ -81,7 +81,7 @@
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
     //Set up title
-    self.title = @"Recording";
+    self.title = @"Record";
     UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
     
@@ -182,15 +182,6 @@ static inline float translate(float val, float min, float max) {
     [backButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(_backButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    
-    
-    UILabel *rightBarLabel = [UILabel new];
-    rightBarLabel.text = @"Next";
-    rightBarLabel.font = [UIFont systemFontOfSize:22];
-    rightBarLabel.textColor = [UIColor whiteColor];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:<#(UIView *)#>
-    
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(_nextBarButtonTapped)];
 }
 
 -(void)loadRightBarButton
@@ -202,6 +193,7 @@ static inline float translate(float val, float min, float max) {
         [strongSelf _nextBarButtonTapped];
     };
     self.navigationItem.rightBarButtonItem = barButtonItem;
+    
 }
                                               
 
