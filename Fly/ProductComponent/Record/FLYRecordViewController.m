@@ -22,6 +22,8 @@
 #import "FLYRecordVoiceFilterViewController.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "NSDictionary+FLYAddition.h"
+#import "FLYNavigationBar.h"
+#import "FLYNavigationController.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -72,7 +74,11 @@
     
     self.view.frame = CGRectMake(0, 64, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - 64);
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.title = @"Record";
+    
+    //Set up title
+    self.title = @"Recording";
+    UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
+    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
     
     _recordedSeconds = 0;
     [self _initVoiceRecording];

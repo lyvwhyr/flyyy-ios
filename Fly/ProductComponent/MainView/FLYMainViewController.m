@@ -86,12 +86,12 @@
 
 - (void)_addNavigationBar
 {
-    PaperButton *button = [PaperButton button];
-    button.tintColor = [UIColor flyBlue];
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.rightBarButtonItem = barButton;
+//    PaperButton *button = [PaperButton button];
+//    button.tintColor = [UIColor flyBlue];
+//    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+//    self.navigationItem.rightBarButtonItem = barButton;
     
-    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
+//    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
 }
 
 - (void)_addTabBar

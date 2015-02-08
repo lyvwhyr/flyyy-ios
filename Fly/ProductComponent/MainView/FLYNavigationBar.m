@@ -20,7 +20,7 @@
 - (id)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor flyBlue], NSFontAttributeName:[UIFont systemFontOfSize:18]};
+//        self.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor flyBlue], NSFontAttributeName:[UIFont systemFontOfSize:18]};
         self.backgroundColor = [UIColor clearColor];
         self.translucent = YES;
         [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
