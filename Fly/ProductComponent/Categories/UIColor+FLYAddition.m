@@ -20,6 +20,7 @@
 #define kColorFlyTableHeaderGrey                @"#f2f2f2"
 #define kColorFlyTableHeaderTextGrey            @"#9e9e9e"
 #define kColorFlyPlayAnimation                  @"#60BD88"
+#define kColorRecordingTimer                 @"#C2C2C2"
 
 #define kColorFlyBackgroundColorBlue            @"#4CA8D3"
 
@@ -92,6 +93,11 @@
 + (UIColor *) flyColorPlayAnimation
 {
     return [self colorWithHexString:kColorFlyPlayAnimation];
+}
+
++ (UIColor *)flyColorRecordingTimer
+{
+    return [self colorWithHexString:kColorRecordingTimer];
 }
 
 

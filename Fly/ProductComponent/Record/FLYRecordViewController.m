@@ -67,6 +67,8 @@
 
 @implementation FLYRecordViewController
 
+#define kMaxRecordTime          60
+
 
 - (void)viewDidLoad
 {
@@ -319,26 +321,27 @@ static inline float translate(float val, float min, float max) {
     
     [_recordedTimeLabel removeFromSuperview];
     _recordedTimeLabel = [UILabel new];
-    _recordedTimeLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:28.0f];
+    _recordedTimeLabel.font = [UIFont fontWithName:@"Avenir-Book" size:21];
     _recordedTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    _recordedTimeLabel.textColor = [UIColor flyBlue];
+    _recordedTimeLabel.textColor = [UIColor flyColorRecordingTimer];
+    _recordedTimeLabel.text = [NSString stringWithFormat:@":%d", kMaxRecordTime];
     
     [self.view addSubview:_recordedTimeLabel];
-    [self _addPulsingAnimation];
+//    [self _addPulsingAnimation];
     [self updateViewConstraints];
     
     [[FLYAudioStateManager sharedInstance] startRecord];
     _audioPlayer = [FLYAudioStateManager sharedInstance].player;
     _audioController = [FLYAudioStateManager sharedInstance].audioController;
     
-    self.levelsTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(updateLevels:) userInfo:nil repeats:YES];
+//    self.levelsTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(updateLevels:) userInfo:nil repeats:YES];
 }
 
 - (void)_setupCompleteViewState
 {
     
     [self.recordedTimeLabel removeFromSuperview];
-    [_pulsingHaloLayer removeFromSuperlayer];
+//    [_pulsingHaloLayer removeFromSuperlayer];
     
     _innerCircleView.hidden = YES;
     
@@ -376,13 +379,22 @@ static inline float translate(float val, float min, float max) {
 {
     [self.recordTimer invalidate];
     self.recordTimer = nil;
+    if (self.recordedSeconds >= kMaxRecordTime) {
+        return;
+    }
     self.recordTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(_updateTimerLabel) userInfo:nil repeats:YES];
 }
 
 - (void)_updateTimerLabel
 {
+    if (self.recordedSeconds >= kMaxRecordTime) {
+        [self.recordTimer invalidate];
+        self.recordTimer = nil;
+        return;
+    }
+    
     self.recordedSeconds++;
-    _recordedTimeLabel.text = [NSString stringWithFormat:@"%ld s", self.recordedSeconds];
+    _recordedTimeLabel.text = [NSString stringWithFormat:@":%ld", kMaxRecordTime - self.recordedSeconds];
     [self.view setNeedsLayout];
 }
 
@@ -418,24 +430,24 @@ static inline float translate(float val, float min, float max) {
 //        make.center.equalTo(self.outerCircleView);
 //    }]; 
     
-    [self.userActionImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.userActionImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
         make.centerY.equalTo(self.view).offset(-50);
     }];
     
     if (_currentState == FLYRecordRecordingState) {
         [self.recordedTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.outerCircleView.mas_top).with.offset(-20);
-            make.centerX.equalTo(self.outerCircleView.mas_centerX);
+            make.bottom.equalTo(self.userActionImageView).with.offset(30);
+            make.centerX.equalTo(self.userActionImageView);
         }];
     }
     
-    if (self.trashButton) {
-        [self.trashButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.outerCircleView.mas_bottom).offset(30);
-            make.right.equalTo(self.view.mas_right).offset(-30);
-        }];
-    }
+   // if (self.trashButton) {
+   //     [self.trashButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(self.outerCircleView.mas_bottom).offset(30);
+//            make.right.equalTo(self.view.mas_right).offset(-30);
+//        }];
+//    }
     
 //    if (_voiceFilterButton) {
 //        [_voiceFilterButton mas_makeConstraints:^(MASConstraintMaker *make) {
