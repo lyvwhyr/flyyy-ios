@@ -66,20 +66,14 @@
 @implementation FLYRecordViewController
 
 
-- (instancetype)init
-{
-    if (self = [super init]) {
-        self.view.frame = CGRectMake(0, 64, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - 64);
-        self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        self.title = @"Record";
-        
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.view.frame = CGRectMake(0, 64, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - 64);
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    self.title = @"Record";
+    
     _recordedSeconds = 0;
     [self _initVoiceRecording];
     
@@ -87,6 +81,12 @@
     [self _setupNavigationItem];
     
     [self updateViewConstraints];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)_initVoiceRecording
@@ -166,8 +166,6 @@ static inline float translate(float val, float min, float max) {
 
 - (void)_setupNavigationItem
 {
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_navigation_back"] style:UIBarButtonItemStylePlain target:self action:@selector(_backButtonTapped)];
-    
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(0, 0, 32, 32)];
     [backButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
@@ -481,6 +479,16 @@ static inline float translate(float val, float min, float max) {
 {
     [super viewDidLayoutSubviews];
     self.halo.position = self.userActionImageView.center;
+}
+
+- (UIColor *)preferredNavigationBarColor
+{
+    return [UIColor flyBlue];
+}
+
+- (UIColor*)preferredStatusBarColor
+{
+    return [UIColor flyBlue];
 }
 
 @end

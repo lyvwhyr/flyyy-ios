@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "icon_homefeed_groups.png"
+      "filename" : "icon_homefeed_pause.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "icon_homefeed_groups@2x.png"
+      "filename" : "icon_homefeed_pause@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "icon_homefeed_groups@3x.png"
+      "filename" : "icon_homefeed_pause@3x.png"
     }
   ],
   "info" : {

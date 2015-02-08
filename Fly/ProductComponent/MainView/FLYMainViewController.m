@@ -34,6 +34,7 @@
 @interface FLYMainViewController() <FLYTabBarViewDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic) FLYTabBarView *tabBarView;
+@property (nonatomic) UIButton *recordButton;
 
 @property (nonatomic) FLYFeedViewController *feedViewController;
 //@property (nonatomic) FLYRecordViewController *recordViewController;
@@ -65,8 +66,13 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self _addTabBar];
-//    [self _addNavigationBar];
     [self _addChildControllers];
+    
+    self.recordButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.recordButton setImage:[UIImage imageNamed:@"icon_home_record"] forState:UIControlStateNormal];
+    [self.recordButton addTarget:self action:@selector(_recordButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view insertSubview:self.recordButton aboveSubview:self.currentViewController.view];
+    
     [self _addViewConstraints];
 }
 
@@ -74,6 +80,8 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)_addNavigationBar
@@ -82,6 +90,8 @@
     button.tintColor = [UIColor flyBlue];
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.rightBarButtonItem = barButton;
+    
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
 }
 
 - (void)_addTabBar
@@ -91,8 +101,8 @@
     
     FLYTabView *hogroupsTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_tabbar_home" recordTab:NO];
     FLYTabView *groupsTab = [[FLYTabView alloc] initWithTitle:@"Groups" image:@"icon_tabbar_group" recordTab:NO];
-    FLYTabView *recordTab = [[FLYTabView alloc] initWithTitle:nil image:@"icon_tabbar_voice" recordTab:YES];
-    NSArray *tabs = @[hogroupsTab, recordTab, groupsTab];
+    
+    NSArray *tabs = @[hogroupsTab, groupsTab];
     [self.tabBarView setTabViews:tabs];
     self.tabBarView.delegate = self;
 }
@@ -118,6 +128,11 @@
         make.width.equalTo(@(tabBarWidth));
         make.height.equalTo(@(kTabBarViewHeight));
     }];
+    
+    [self.recordButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.tabBarView);
+        make.bottom.equalTo(self.tabBarView);
+    }];
 }
 
 #pragma mark - FLYTabBarViewDelegate
@@ -130,10 +145,6 @@
         [self removeViewController:_currentViewController];
         [self addViewController:_feedViewNavigationController];
         _currentViewController = _feedViewNavigationController;
-    } else if (index == TABBAR_RECORD) {
-        FLYRecordViewController *recordViewController = [FLYRecordViewController new];
-        UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
-        [self presentViewController:navigationController animated:NO completion:nil];
     } else {
         if (_currentViewController == _groupsListViewNavigationController) {
             return;
@@ -190,6 +201,13 @@
         return (FLYNavigationController *)(self.navigationController);
     }
     return nil;
+}
+
+- (void)_recordButtonTapped
+{
+    FLYRecordViewController *recordViewController = [FLYRecordViewController new];
+    UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
+    [self presentViewController:navigationController animated:NO completion:nil];
 }
 
 @end

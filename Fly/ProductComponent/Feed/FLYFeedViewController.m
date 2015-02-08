@@ -124,14 +124,14 @@ static NSInteger globalPageNum = 1;
     UIButton *autoPlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [autoPlayButton setImage:autoPlayImage forState:UIControlStateNormal];
     [autoPlayButton addTarget:self action:@selector(_autoPlayButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [autoPlayButton setFrame:CGRectMake(0, 0, 20, 20)];
+    [autoPlayButton setFrame:CGRectMake(0, 0, 39, 39)];
     UIBarButtonItem *autoPlayItem = [[UIBarButtonItem alloc] initWithCustomView:autoPlayButton];
     
     UIImage *profileButtonImage = [UIImage imageNamed:@"icon_homefeed_profile"];
     UIButton *profileButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [profileButton setImage:profileButtonImage forState:UIControlStateNormal];
     [profileButton addTarget:self action:@selector(_profileButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [profileButton setFrame:CGRectMake(0, 0, 30, 30)];
+    [profileButton setFrame:CGRectMake(0, 0, 39, 39)];
     UIBarButtonItem *profileItem = [[UIBarButtonItem alloc] initWithCustomView:profileButton];
     self.navigationItem.rightBarButtonItems = @[profileItem, autoPlayItem];
 }

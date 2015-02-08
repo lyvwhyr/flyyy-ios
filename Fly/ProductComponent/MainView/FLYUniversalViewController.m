@@ -27,9 +27,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    #if DEBUG
-    [[FLEXManager sharedManager] showExplorer];
-    #endif
+//    #if DEBUG
+//    [[FLEXManager sharedManager] showExplorer];
+//    #endif
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -83,10 +83,14 @@
     return [UIColor whiteColor];
 }
 
-- (UIStatusBarStyle) preferredStatusBarStyle
-{
-    return UIStatusBarStyleDefault;
-}
+//- (UIStatusBarStyle) preferredStatusBarStyle
+//{
+//    if ([self.parentViewController respondsToSelector:@selector(preferredStatusBarStyle)]) {
+////        return [[self.parentViewController performSelector:@selector(preferredStatusBarStyle)] integerValue];
+//        return [self.parentViewController preferredStatusBarStyle];
+//    }
+//    return UIStatusBarStyleDefault;
+//}
 
 - (UIColor*)preferredStatusBarColor
 {

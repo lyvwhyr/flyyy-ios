@@ -10,7 +10,7 @@
 
 
 #define kColorFlyBlue                           @"#4CA8D3"
-#define kColorFlyTabBarBackground               @"#f3f3f3"
+#define kColorFlyTabBarBackground               @"#FBFBFB"
 #define kColorFlyTabBarSeparator                @"#a3a3a5"
 #define kColorFlyTabBarGreyText                 @"#bcbcbc"
 #define kColorFlyLightGreen                     @"#8fbfba"

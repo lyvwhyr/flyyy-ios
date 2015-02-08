@@ -13,7 +13,6 @@
 
 NS_ENUM(NSInteger, TabBarItemIndex) {
     TABBAR_HOME = 0,
-    TABBAR_RECORD,
     TABBAR_ME
 };
 

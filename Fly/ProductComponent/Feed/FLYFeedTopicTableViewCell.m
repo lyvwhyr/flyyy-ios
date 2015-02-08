@@ -291,7 +291,7 @@
             break;
         }
         case FLYPlayStatePlaying: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_pausebackground"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_pause"] forState:UIControlStateNormal];
             [self drawLineAnimation];
             break;
         }
