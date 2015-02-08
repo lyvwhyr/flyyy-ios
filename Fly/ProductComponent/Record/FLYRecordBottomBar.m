@@ -29,11 +29,13 @@
         _trashButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_trashButton setImage:[UIImage imageNamed:@"icon_record_trash"] forState:UIControlStateNormal];
         [_trashButton addTarget:self action:@selector(_trashButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        _trashButton.contentEdgeInsets = UIEdgeInsetsMake(1, 10, 1, 20);
         [self addSubview:_trashButton];
         
         _nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_nextButton setImage:[UIImage imageNamed:@"icon_record_next"] forState:UIControlStateNormal];
         [_nextButton addTarget:self action:@selector(_nextButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+        _nextButton.contentEdgeInsets = UIEdgeInsetsMake(1, 20, 1, 10);
         [self addSubview:_nextButton];
     }
     return self;

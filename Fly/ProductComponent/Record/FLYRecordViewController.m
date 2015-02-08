@@ -309,6 +309,9 @@ static inline float translate(float val, float min, float max) {
 //    _innerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kInnerCircleRadius, kInnerCircleRadius) radius:kInnerCircleRadius color:[UIColor flyBlue]];
 //    [self.view insertSubview:_innerCircleView aboveSubview:_outerCircleView];
     
+    [_userActionImageView removeFromSuperview];
+    _userActionImageView = nil;
+    
     _userActionImageView = [UIImageView new];
     _userActionImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_record"]];
@@ -365,16 +368,16 @@ static inline float translate(float val, float min, float max) {
     self.recordBottomBar.delegate = self;
     
 
-    _voiceFilterButton = [[DKCircleButton alloc] initWithFrame:CGRectMake(0, 0, 90, 90)];
+//    _voiceFilterButton = [[DKCircleButton alloc] initWithFrame:CGRectMake(0, 0, 90, 90)];
+//    
+//    _voiceFilterButton.center = CGPointMake(60, 420);
+//    _voiceFilterButton.titleLabel.font = [UIFont systemFontOfSize:22];
     
-    _voiceFilterButton.center = CGPointMake(60, 420);
-    _voiceFilterButton.titleLabel.font = [UIFont systemFontOfSize:22];
-    
-    [_voiceFilterButton setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
-    _voiceFilterButton.animateTap = NO;
-    [_voiceFilterButton setTitle:NSLocalizedString(@"Adjust Voice", nil) forState:UIControlStateNormal];
-    [_voiceFilterButton addTarget:self action:@selector(_voiceFilterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_voiceFilterButton];
+//    [_voiceFilterButton setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
+//    _voiceFilterButton.animateTap = NO;
+//    [_voiceFilterButton setTitle:NSLocalizedString(@"Adjust Voice", nil) forState:UIControlStateNormal];
+//    [_voiceFilterButton addTarget:self action:@selector(_voiceFilterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:_voiceFilterButton];
     
     [self updateViewConstraints];
 }
