@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol FLYRecordBottomBarDelegate <NSObject>
+
+- (void)trashButtonTapped:(UIButton *)button;
+- (void)nextButtonTapped:(UIButton *)button;
+
+@end
+
 @interface FLYRecordBottomBar : UIView
+
+@property id<FLYRecordBottomBarDelegate> delegate;
 
 @end

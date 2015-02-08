@@ -36,7 +36,7 @@
 #define kMaxRetry           3
 
 
-@interface FLYRecordViewController ()<FLYUniversalViewControllerDelegate>
+@interface FLYRecordViewController ()<FLYUniversalViewControllerDelegate, FLYRecordBottomBarDelegate>
 
 @property (nonatomic) FLYCircleView *innerCircleView;
 @property (nonatomic) FLYCircleView *outerCircleView;
@@ -362,6 +362,7 @@ static inline float translate(float val, float min, float max) {
     
     self.recordBottomBar = [FLYRecordBottomBar new];
     [self.view addSubview:self.recordBottomBar];
+    self.recordBottomBar.delegate = self;
     
 
     _voiceFilterButton = [[DKCircleButton alloc] initWithFrame:CGRectMake(0, 0, 90, 90)];
@@ -512,12 +513,24 @@ static inline float translate(float val, float min, float max) {
     }
 }
 
-- (void)viewDidLayoutSubviews
+//- (void)viewDidLayoutSubviews
+//{
+//    [super viewDidLayoutSubviews];
+//    self.halo.position = self.userActionImageView.center;
+//}
+
+#pragma mark - FLYRecordBottomBarDelegate
+- (void)trashButtonTapped:(UIButton *)button
 {
-    [super viewDidLayoutSubviews];
-    self.halo.position = self.userActionImageView.center;
+    [self _setupInitialViewState];
 }
 
+- (void)nextButtonTapped:(UIButton *)button
+{
+    [self _nextBarButtonTapped];
+}
+
+#pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor
 {
     return [UIColor flyBlue];
