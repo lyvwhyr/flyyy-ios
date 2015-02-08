@@ -6,12 +6,10 @@
 //  Copyright (c) 2014 Confess.ly. All rights reserved.
 //
 
-//Base URL
-#define DEV_BASE_URL                            @"http://localhost:3000/v1"
-#define STAGING_BASE_URL                        @"http://localhost:3000/v1"
-#define PROD_BASE_URL                           @"http://localhost:3000/v1"
-
 //Endpoint
+
+
+
 #define GET_ALL_POSTS                           @"topic/all_confessions/recent/%@"
 #define GET_TOPIC_DETAIL                        @"topic/view_casual/tid=%@"
 #define LOGIN_URL                               @"login/login/"

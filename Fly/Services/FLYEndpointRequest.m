@@ -13,7 +13,8 @@
 
 + (void)getGroupListService:(GroupListServiceResponseBlock)responseBlock
 {
-    NSString *baseURL = @"http://localhost:3000/v1/groups?token=secret123";
+    NSString *baseURL = @"groups?token=secret123";
+//        NSString *baseURL = @"http://localhost:3001/v1/groups?token=secret123";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:baseURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         responseBlock(responseObject);

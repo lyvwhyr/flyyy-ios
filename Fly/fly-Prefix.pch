@@ -18,6 +18,7 @@
 
 #import "Constants.h"
 #import "FLYEndPointConstant.h"
+#import "FLYURLConstants.h"
 #import "FLYUtilities.h"
 #import "Masonry.h"
 #import "NSBundle+FLYAddition.h"

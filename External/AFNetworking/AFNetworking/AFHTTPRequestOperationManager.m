@@ -27,6 +27,7 @@
 
 #import <Availability.h>
 #import <Security/Security.h>
+#import "FLYServerConfig.h"
 
 #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
 #import <UIKit/UIKit.h>
@@ -42,8 +43,7 @@
 @implementation AFHTTPRequestOperationManager
 
 + (instancetype)manager {
-    NSString *baseURLStr = [[NSUserDefaults standardUserDefaults] objectForKey:kBaseURLInPreference];
-    NSURL *baseURL = [NSURL URLWithString:baseURLStr];
+    NSURL *baseURL = [NSURL URLWithString:[FLYServerConfig getServerURL]];
     return [[self alloc] initWithBaseURL:baseURL];
 }
 

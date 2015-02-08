@@ -245,7 +245,7 @@
                              @"group_id":self.selectedGroup.groupId,
                              @"audio_duration":@10
                              };
-    NSString *baseURL = @"http://localhost:3000/v1/topics?token=secret123&&media_id=not_valid&user_id=1349703104000715808";
+    NSString *baseURL = @"topics?token=secret123&&media_id=not_valid&user_id=1349703104000715808";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:baseURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         FLYTopic *post = [[FLYTopic alloc] initWithDictory:responseObject];

@@ -217,7 +217,7 @@ static inline float translate(float val, float min, float max) {
 {
     [FLYAppStateManager sharedInstance].mediaId = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://localhost:3000/v1/media/upload?token=secret123&user_id=1349703091376390371" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [manager POST:@"media/upload?token=secret123&user_id=1349703091376390371" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSData *audioData=[NSData dataWithContentsOfFile:[FLYAppStateManager sharedInstance].recordingFilePath];
         [formData appendPartWithFileData:audioData name: kMultiPartName fileName: kMultiPartFileName mimeType:kMimeType];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {

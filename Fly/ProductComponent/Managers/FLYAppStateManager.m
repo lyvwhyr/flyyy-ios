@@ -26,10 +26,6 @@
 {
     if (self = [super init]) {
         _isAutoPlayEnabled = YES;
-        
-        //set up http request base url
-        [[NSUserDefaults standardUserDefaults] setObject:[FLYServerConfig getServerURL] forKey:kBaseURLInPreference];
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     return self;
 }

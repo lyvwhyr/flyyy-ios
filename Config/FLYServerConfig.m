@@ -12,9 +12,9 @@
 
 + (NSString *)getServerURL
 {
-//    ENV_TYPE type = ENV_STAGING;
+    ENV_TYPE type = ENV_STAGING;
 //    ENV_TYPE type = ENV_DEV;
-    ENV_TYPE type = ENV_PROD;
+//    ENV_TYPE type = ENV_PROD;
     
     NSString *serverURL;
     if (type == ENV_DEV) {
