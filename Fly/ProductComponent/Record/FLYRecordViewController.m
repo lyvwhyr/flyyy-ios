@@ -216,6 +216,8 @@ static inline float translate(float val, float min, float max) {
     [self.navigationController pushViewController:prePostVC animated:YES];
 }
 
+
+#pragma mark - upload audio API
 //curl -X POST -F "media=@/Users/xingxingxu/Desktop/11223632430542967739.m4a" -i "http://localhost:3000/v1/media/upload?token=secret123&user_id=1349703091376390371"
 - (void)_uploadAudioFileService
 {
@@ -290,22 +292,22 @@ static inline float translate(float val, float min, float max) {
     [_trashButton removeFromSuperview];
     _trashButton = nil;
     
-    self.view.backgroundColor = [UIColor flyContentBackgroundGrey];
+    self.view.backgroundColor = [UIColor whiteColor];
     _currentState = FLYRecordInitialState;
     
-    _outerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kOuterCircleRadius, kOuterCircleRadius) radius:kOuterCircleRadius color:[UIColor whiteColor]];
-    [self.view addSubview:_outerCircleView];
-    
-    _innerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kInnerCircleRadius, kInnerCircleRadius) radius:kInnerCircleRadius color:[UIColor flyBlue]];
-    [self.view insertSubview:_innerCircleView aboveSubview:_outerCircleView];
+//    _outerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kOuterCircleRadius, kOuterCircleRadius) radius:kOuterCircleRadius color:[UIColor whiteColor]];
+//    [self.view addSubview:_outerCircleView];
+//    
+//    _innerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kInnerCircleRadius, kInnerCircleRadius) radius:kInnerCircleRadius color:[UIColor flyBlue]];
+//    [self.view insertSubview:_innerCircleView aboveSubview:_outerCircleView];
     
     _userActionImageView = [UIImageView new];
     _userActionImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    [_userActionImageView setImage:[UIImage imageNamed:@"icon_voice_record"]];
+    [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_record"]];
     _userActionTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_userActionTapped:)];
     [_userActionImageView addGestureRecognizer:_userActionTapGestureRecognizer];
     _userActionImageView.userInteractionEnabled = YES;
-    [self.view insertSubview:_userActionImageView aboveSubview:_innerCircleView];
+    [self.view addSubview:_userActionImageView];
     
     [self updateViewConstraints];
 }
@@ -402,22 +404,23 @@ static inline float translate(float val, float min, float max) {
 //        make.height.equalTo(@(200));
 //    }];
     
-    [self.outerCircleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@(kOuterCircleRadius * 2));
-        make.height.equalTo(@(kOuterCircleRadius * 2));
-        make.centerX.equalTo(self.view);
-        make.top.equalTo(@(kOutCircleTopPadding));
-    }];
-    
-    
-    [self.innerCircleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@(kInnerCircleRadius * 2));
-        make.height.equalTo(@(kInnerCircleRadius * 2));
-        make.center.equalTo(self.outerCircleView);
-    }]; 
+//    [self.outerCircleView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.equalTo(@(kOuterCircleRadius * 2));
+//        make.height.equalTo(@(kOuterCircleRadius * 2));
+//        make.centerX.equalTo(self.view);
+//        make.top.equalTo(@(kOutCircleTopPadding));
+//    }];
+//    
+//    
+//    [self.innerCircleView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.equalTo(@(kInnerCircleRadius * 2));
+//        make.height.equalTo(@(kInnerCircleRadius * 2));
+//        make.center.equalTo(self.outerCircleView);
+//    }]; 
     
     [self.userActionImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self.innerCircleView);
+        make.centerX.equalTo(self.view);
+        make.centerY.equalTo(self.view).offset(-50);
     }];
     
     if (_currentState == FLYRecordRecordingState) {
