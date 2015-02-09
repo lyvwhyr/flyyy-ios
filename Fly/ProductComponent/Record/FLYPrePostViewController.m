@@ -19,14 +19,19 @@
 #import "FLYTopic.h"
 #import "FLYGroup.h"
 #import "FLYGroupManager.h"
+#import "FLYNavigationController.h"
+#import "FLYNavigationBar.h"
+#import "FLYPrePostHeaderView.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
 #define kFlyPostButtonHeight 44
-#define kTitleTextCellHeight 70
+#define kTitleTextCellHeight 105
+#define kLeftPadding    15
 
-@interface FLYPrePostViewController () <UITableViewDataSource, UITableViewDelegate, FLYPrePostTitleTableViewCellDelegate>
+@interface FLYPrePostViewController () <UITableViewDataSource, UITableViewDelegate, FLYPrePostHeaderViewDelegate>
 
+@property (nonatomic) FLYPrePostHeaderView *headerView;
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) FLYPostButtonView *postButton;
 @property (nonatomic) UIView *overlayView;
@@ -42,11 +47,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    
     _groups = [NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList];
     
-    self.view.backgroundColor = [UIColor flyFeedGrey];
+    self.view.backgroundColor = [UIColor flyBlue];
     
     self.title = @"Post";
+    UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
+    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
+    
+    self.headerView = [FLYPrePostHeaderView new];
+    self.headerView.delegate = self;
+    [self.view addSubview:self.headerView];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     _tableView = [UITableView new];
     _tableView.delegate = self;
@@ -56,10 +71,14 @@
     [_tableView registerClass:[FLYPrePostTitleTableViewCell class] forCellReuseIdentifier:kFlyPrePostTitleCellIdentifier];
     [_tableView registerClass:[FLYPrePostChooseGroupTableViewCell class] forCellReuseIdentifier:kFlyPrePostChooseGroupCellIdentifier];
     
+    //Add table background image
+     UIImageView *backgroundImageView = [UIImageView new];
+     backgroundImageView.image = [UIImage imageNamed:@"icon_record_groups"];
+    _tableView.backgroundView = backgroundImageView;
+    
     _postButton = [FLYPostButtonView new];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_postButtonTapped)];
     [_postButton addGestureRecognizer:tap];
-    
     [self.view addSubview:_postButton];
     
     [self updateViewConstraints];
@@ -73,16 +92,24 @@
 
 - (void)updateViewConstraints
 {
+    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight + 15);
+        make.leading.equalTo(self.view).offset(kLeftPadding);
+        make.trailing.equalTo(self.view).offset(-kLeftPadding);
+        make.height.equalTo(@150);
+    }];
+    
     [_postButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(self.view);
         make.bottom.equalTo(self.view);
         make.width.equalTo(self.view);
         make.height.equalTo(@(kFlyPostButtonHeight));
     }];
     
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
-        make.leading.equalTo(self.view);
-        make.trailing.equalTo(self.view);
+        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight + 150);
+        make.leading.equalTo(self.view).offset(kLeftPadding);
+        make.trailing.equalTo(self.view).offset(-kLeftPadding);
         make.bottom.equalTo(self.view).offset(-kFlyPostButtonHeight);
     }];
     
@@ -101,48 +128,36 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return 1;
-    } else {
-        return _groups.count;
-    }
+    return _groups.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    if (indexPath.row == 0 && indexPath.section == 0) {
-        static NSString *cellIdentifier = kFlyPrePostTitleCellIdentifier;
-        cell = (UITableViewCell *)[_tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (!cell) {
-            cell = [[FLYPrePostTitleTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        }
-        ((FLYPrePostTitleTableViewCell *)cell).delegate = self;
-    } else {
-        static NSString *cellIdentifier = kFlyPrePostChooseGroupCellIdentifier;
-        FLYPrePostChooseGroupTableViewCell *chooseGroupCell;
-        chooseGroupCell = [[FLYPrePostChooseGroupTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        FLYGroup *group = [_groups objectAtIndex:indexPath.row];
-        chooseGroupCell.groupName = group.groupName;
-        cell = chooseGroupCell;
+    static NSString *cellIdentifier = kFlyPrePostChooseGroupCellIdentifier;
+    cell = [_tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[FLYPrePostChooseGroupTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
+    
+    FLYPrePostChooseGroupTableViewCell *chooseGroupCell = (FLYPrePostChooseGroupTableViewCell *)cell;
+    FLYGroup *group = [_groups objectAtIndex:indexPath.row];
+    chooseGroupCell.groupName = group.groupName;
+    cell = chooseGroupCell;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 
 
 - (CGFloat) tableView: (UITableView*) tableView heightForRowAtIndexPath: (NSIndexPath*) indexPath
 {
-    if (indexPath.row == 0 && indexPath.section == 0) {
-        return kTitleTextCellHeight;
-    } else {
-        return 44;
-    }
+    return 44;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -151,30 +166,6 @@
     if ([cell isKindOfClass:[FLYPrePostChooseGroupTableViewCell class]]) {
         [((FLYPrePostChooseGroupTableViewCell *)cell) selectCell];
         self.selectedGroup = [self.groups objectAtIndex:indexPath.row];
-    }
-}
-
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UILabel * sectionHeader = [[UILabel alloc] initWithFrame:CGRectZero];
-    sectionHeader.backgroundColor = [UIColor tableHeaderGrey];
-    sectionHeader.textAlignment = NSTextAlignmentLeft;
-    sectionHeader.font = [UIFont fontWithName:@"Helvetica Neue" size:16.0f];
-    sectionHeader.textColor = [UIColor tableHeaderTextGrey];
-    sectionHeader.text = @"     Add a Group";
-    if (section == 1) {
-        return sectionHeader;
-    }
-    return nil;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return 0;
-    } else {
-        return 40;
     }
 }
 
@@ -255,6 +246,23 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         UALog(@"Post error %@", error);
     }];
+}
+
+#pragma mark - Navigation bar and status bar
+- (UIColor *)preferredNavigationBarColor
+{
+    return [UIColor flyBlue];
+}
+
+- (UIColor*)preferredStatusBarColor
+{
+    return [UIColor flyBlue];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    [FLYUtilities printAutolayoutTrace];
 }
 
 @end

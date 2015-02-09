@@ -179,7 +179,7 @@ static inline float translate(float val, float min, float max) {
 {
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton setFrame:CGRectMake(0, 0, 32, 32)];
-    [backButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"icon_back_record"] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(_backButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
 }
@@ -349,11 +349,11 @@ static inline float translate(float val, float min, float max) {
     [_outerCircleView setupLayerFillColor:[UIColor whiteColor] strokeColor:[UIColor flyLightGreen]];
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_play"]];
     
-    _trashButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_trashButton setImage:[UIImage imageNamed:@"icon_record_trash_bin"] forState:UIControlStateNormal];
-    _trashButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [_trashButton addTarget:self action:@selector(_setupInitialViewState) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_trashButton];
+//    _trashButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [_trashButton setImage:[UIImage imageNamed:@"icon_record_trash_bin"] forState:UIControlStateNormal];
+//    _trashButton.translatesAutoresizingMaskIntoConstraints = NO;
+//    [_trashButton addTarget:self action:@selector(_setupInitialViewState) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:_trashButton];
     
     self.recordBottomBar = [FLYRecordBottomBar new];
     [self.view addSubview:self.recordBottomBar];
@@ -448,6 +448,7 @@ static inline float translate(float val, float min, float max) {
     
     if (self.recordBottomBar) {
         [self.recordBottomBar mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.view);
             make.bottom.equalTo(self.view);
             make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
             make.height.equalTo(@44);
@@ -508,11 +509,12 @@ static inline float translate(float val, float min, float max) {
     }
 }
 
-//- (void)viewDidLayoutSubviews
-//{
-//    [super viewDidLayoutSubviews];
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
 //    self.halo.position = self.userActionImageView.center;
-//}
+    [FLYUtilities printAutolayoutTrace];
+}
 
 #pragma mark - FLYRecordBottomBarDelegate
 - (void)trashButtonTapped:(UIButton *)button

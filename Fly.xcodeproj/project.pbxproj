@@ -42,7 +42,6 @@
 		A61D18661A1EE6ED00D188B5 /* FLYAudioStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */; };
 		A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */; };
 		A61D18761A1F27E900D188B5 /* FLYPrePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */; };
-		A61D18771A1F27E900D188B5 /* FLYPrePostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61D18751A1F27E900D188B5 /* FLYPrePostViewController.xib */; };
 		A6263E921A187E1200C4C3BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263E911A187E1200C4C3BA /* main.m */; };
 		A6263E951A187E1200C4C3BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263E941A187E1200C4C3BA /* AppDelegate.m */; };
 		A6263E9B1A187E1200C4C3BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6263E991A187E1200C4C3BA /* Main.storyboard */; };
@@ -197,6 +196,7 @@
 		A6655B551A19DEF000440AAB /* icon_tabbar_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */; };
 		A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */; };
 		A6655B5A1A19ECED00440AAB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B591A19ECED00440AAB /* Default-568h@2x.png */; };
+		A66D98561A883B5A00C3D75A /* FLYPrePostHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A66D98551A883B5A00C3D75A /* FLYPrePostHeaderView.m */; };
 		A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E20481A2EBDAE004235F5 /* RDVTabBarItem.m */; };
 		A66E204E1A2EBDAE004235F5 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E204A1A2EBDAE004235F5 /* RDVTabBar.m */; };
 		A66E204F1A2EBDAE004235F5 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E204C1A2EBDAE004235F5 /* RDVTabBarController.m */; };
@@ -404,7 +404,6 @@
 		A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYAppStateManager.m; sourceTree = "<group>"; };
 		A61D18731A1F27E900D188B5 /* FLYPrePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostViewController.h; sourceTree = "<group>"; };
 		A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostViewController.m; sourceTree = "<group>"; };
-		A61D18751A1F27E900D188B5 /* FLYPrePostViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLYPrePostViewController.xib; sourceTree = "<group>"; };
 		A6263E8C1A187E1200C4C3BA /* Fly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6263E901A187E1200C4C3BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6263E911A187E1200C4C3BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -603,6 +602,8 @@
 		A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_home@3x.png"; sourceTree = "<group>"; };
 		A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_me@3x.png"; sourceTree = "<group>"; };
 		A6655B591A19ECED00440AAB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		A66D98541A883B5A00C3D75A /* FLYPrePostHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostHeaderView.h; sourceTree = "<group>"; };
+		A66D98551A883B5A00C3D75A /* FLYPrePostHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostHeaderView.m; sourceTree = "<group>"; };
 		A66E20471A2EBDAE004235F5 /* RDVTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarItem.h; sourceTree = "<group>"; };
 		A66E20481A2EBDAE004235F5 /* RDVTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarItem.m; sourceTree = "<group>"; };
 		A66E20491A2EBDAE004235F5 /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
@@ -1658,7 +1659,6 @@
 				A6A30D6E1A1B1DF8001AE1FE /* FLYCircleView.m */,
 				A61D18731A1F27E900D188B5 /* FLYPrePostViewController.h */,
 				A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */,
-				A61D18751A1F27E900D188B5 /* FLYPrePostViewController.xib */,
 				A6C67A381A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.h */,
 				A6C67A391A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m */,
 				A655783C1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.h */,
@@ -1669,6 +1669,8 @@
 				A642FE2D1A53FE64000652F4 /* FLYRecordVoiceFilterViewController.m */,
 				A6852B801A875EE70093C75C /* FLYRecordBottomBar.h */,
 				A6852B811A875EE70093C75C /* FLYRecordBottomBar.m */,
+				A66D98541A883B5A00C3D75A /* FLYPrePostHeaderView.h */,
+				A66D98551A883B5A00C3D75A /* FLYPrePostHeaderView.m */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -2003,7 +2005,6 @@
 				A652D23D1A7F3ADD00765D45 /* icon_inline_wing@2x.png in Resources */,
 				A67208251A356CAE00B2C5B5 /* icon_play_reply@3x.png in Resources */,
 				A652D2641A7F3ADD00765D45 /* record_animate_02@2x.png in Resources */,
-				A61D18771A1F27E900D188B5 /* FLYPrePostViewController.xib in Resources */,
 				A652D2701A7F3ADD00765D45 /* record_animate_06@2x.png in Resources */,
 				A652D20C1A7F3ADD00765D45 /* Default-568h.png in Resources */,
 				A652D2891A7F3ADD00765D45 /* record_animate_14@3x.png in Resources */,
@@ -2113,6 +2114,7 @@
 				A6A0E4AD1A1E76110036116E /* FLEXWebViewController.m in Sources */,
 				A6048AD01A8603EF00C67480 /* AFHTTPSessionManager.m in Sources */,
 				A6263EC11A1888D800C4C3BA /* FLYNavigationController.m in Sources */,
+				A66D98561A883B5A00C3D75A /* FLYPrePostHeaderView.m in Sources */,
 				A6263EBA1A18815000C4C3BA /* FLYMainViewController.m in Sources */,
 				A6A0E4B21A1E76110036116E /* FLEXDictionaryExplorerViewController.m in Sources */,
 				A6048A401A85E63100C67480 /* EXTSafeCategory.m in Sources */,

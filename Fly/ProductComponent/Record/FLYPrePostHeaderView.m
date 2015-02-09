@@ -1,31 +1,32 @@
 //
-//  FLYPrePostTitleTableViewCell.m
+//  FLYPrePostHeaderView.m
 //  Fly
 //
-//  Created by Xingxing Xu on 12/11/14.
-//  Copyright (c) 2014 Fly. All rights reserved.
+//  Created by Xingxing Xu on 2/8/15.
+//  Copyright (c) 2015 Fly. All rights reserved.
 //
 
-#import "FLYPrePostTitleTableViewCell.h"
+#import "FLYPrePostHeaderView.h"
 
 #define kTopPadding 10
-#define kLeftPadding 15
-#define kRightPadding 15
+#define kDescriptionTextTopPadding  3
+#define kDescpritonHeight   60
 
-@interface FLYPrePostTitleTableViewCell()<UITextViewDelegate>
+@interface FLYPrePostHeaderView()<UITextViewDelegate>
 
 @property (nonatomic) UILabel *captionLabel;
 @property (nonatomic) UITextView *descriptionTextView;
 @property (nonatomic) UILabel *charLimitLabel;
+@property (nonatomic) UILabel *selectGroupLabel;
 
 @end
 
-@implementation FLYPrePostTitleTableViewCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+@implementation FLYPrePostHeaderView
+
+- (instancetype)init
 {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
+    if (self = [super init]) {
         _captionLabel = [UILabel new];
         [_captionLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:16]];
         _captionLabel.text = @"Caption:";
@@ -42,6 +43,20 @@
         [_descriptionTextView setTextColor:[UIColor lightGrayColor]];
         [self addSubview:_descriptionTextView];
         
+        _charLimitLabel = [UILabel new];
+        [_charLimitLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:8]];
+        _charLimitLabel.text = @"char limit: 124";
+        _charLimitLabel.textColor = [UIColor whiteColor];
+        _charLimitLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_charLimitLabel];
+        
+        _selectGroupLabel = [UILabel new];
+        [_selectGroupLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:16]];
+        _selectGroupLabel.text = @"Select a Group:";
+        _selectGroupLabel.textColor = [UIColor whiteColor];
+        _selectGroupLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_selectGroupLabel];
+        
         [self updateConstraintsIfNeeded];
     }
     
@@ -51,16 +66,30 @@
 - (void)updateConstraints
 {
     [self.captionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(kTopPadding);
-        make.leading.equalTo(self).offset(kLeftPadding);
+        make.top.equalTo(self);
+        make.leading.equalTo(self);
     }];
     
     [self.descriptionTextView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.captionLabel.mas_bottom).offset(kTopPadding);
-        make.leading.equalTo(self).offset(kLeftPadding);
-        make.right.equalTo(self.mas_right).offset(kRightPadding);
-        make.height.equalTo(@60);
+        make.top.equalTo(self.captionLabel.mas_bottom).offset(kDescriptionTextTopPadding);
+        make.leading.equalTo(self);
+        make.right.equalTo(self);
+        make.height.equalTo(@kDescpritonHeight);
     }];
+    
+    [self.charLimitLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.descriptionTextView.mas_bottom).offset(kDescriptionTextTopPadding);
+        make.leading.equalTo(self);
+        make.right.equalTo(self);
+    }];
+    
+    
+    [self.selectGroupLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.charLimitLabel.mas_bottom).offset(kDescriptionTextTopPadding);
+        make.leading.equalTo(self);
+        make.right.equalTo(self);
+    }];
+    
     [super updateConstraints];
 }
 
@@ -126,7 +155,5 @@
 {
     [_descriptionTextView resignFirstResponder];
 }
-
-
 
 @end
