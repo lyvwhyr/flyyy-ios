@@ -18,11 +18,9 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:baseURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         responseBlock(responseObject);
-        UALog(@"%@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         UALog(@"Post error %@", error);
     }];
-    
 }
 
 @end

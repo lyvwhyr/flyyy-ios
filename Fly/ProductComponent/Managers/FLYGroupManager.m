@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Fly. All rights reserved.
 //
 
-#import "EXTScope.h"
 #import "FLYGroupManager.h"
 #import "FLYEndpointRequest.h"
 #import "FLYGroup.h"

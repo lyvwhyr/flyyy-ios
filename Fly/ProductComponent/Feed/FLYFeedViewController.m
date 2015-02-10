@@ -21,8 +21,7 @@
 #import "FLYAudioStateManager.h"
 #import "FLYPlayableItem.h"
 #import "UIColor+FLYAddition.h"
-
-static NSInteger globalPageNum = 1;
+#import "AFHTTPRequestOperationManager.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -31,6 +30,8 @@ static NSInteger globalPageNum = 1;
 @property (nonatomic) UITableView *feedTableView;
 @property (nonatomic) FLYNavigationBarMyGroupButton *customizedTitleView;
 
+//used for pagination load more
+@property (nonatomic) NSString *beforeTimestamp;
 
 @property (nonatomic) NSMutableArray *posts;
 @property (nonatomic) BOOL didSetConstraints;
@@ -75,23 +76,19 @@ static NSInteger globalPageNum = 1;
     _backgroundView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_backgroundView];
     
-    __weak typeof(self) weakSelf = self;
-//    [NSTimer timerWithTimeInterval:1.0f target:self selector:@selector(_addDataSource) userInfo:nil repeats:NO];
-    
-//    [self performSelector:@selector(_addDataSource) withObject:nil afterDelay:1.0];
-    
+
+    @weakify(self)
     [_feedTableView addPullToRefreshWithActionHandler:^{
-        __strong typeof(self) strongSelf = weakSelf;
-        strongSelf.requestType = RequestTypeNormal;
-        [strongSelf performSelector:@selector(_addDataSource:) withObject:@(1) afterDelay:1.0];
+        @strongify(self)
+        self.requestType = RequestTypeNormal;
+        [self _fetchHomeTimelineService:nil requestType:RequestTypeNormal];
     }];
     
     // setup infinite scrolling
-    __weak typeof(self) weakSelfLoadMore = self;
     [_feedTableView addInfiniteScrollingWithActionHandler:^{
-        __strong typeof(self) strongSelf = weakSelfLoadMore;
-        strongSelf.requestType = RequestTypeLoadMore;
-        [strongSelf performSelector:@selector(_addDataSource:) withObject:@(globalPageNum) afterDelay:1.0];
+        @strongify(self)
+        self.requestType = RequestTypeLoadMore;
+        [self _fetchHomeTimelineService:self.beforeTimestamp requestType:RequestTypeLoadMore];
     }];
 
     [_feedTableView triggerPullToRefresh];
@@ -184,28 +181,43 @@ static NSInteger globalPageNum = 1;
 //    return [super navigationItem];
 //}
 
-- (void)_addDataSource:(id)argument
+- (void)_fetchHomeTimelineService:(NSString *)before requestType:(enum RequestType)requestType
 {
-    globalPageNum = [argument integerValue];
-    if (globalPageNum == 1) {
-        [_posts removeAllObjects];
+    NSString *partialUrl;
+    if (requestType == RequestTypeNormal) {
+        partialUrl = [NSString stringWithFormat:@"topics?limit=%d", kTopicPaginationCount];
+    } else {
+        partialUrl = [NSString stringWithFormat:@"topics?limit=%d&before=%@", kTopicPaginationCount, self.beforeTimestamp];
     }
-    [self _addDatasource:globalPageNum];
-    [_feedTableView.pullToRefreshView stopAnimating];
-    [_feedTableView.infiniteScrollingView stopAnimating];
-}
-
-- (void)_addDatasource:(NSInteger)pageNum
-{
-    globalPageNum++;
-    NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"topics" withExtension:@"json"];
-    NSData *fileData = [NSData dataWithContentsOfURL:fileURL];
-    NSArray *arr = [NSJSONSerialization JSONObjectWithData:fileData options:0 error:nil];
-    for (int i= 0; i < arr.count; i++) {
-        FLYTopic *topic = [[FLYTopic alloc] initWithDictory:arr[i]];
-        [_posts addObject:topic];
-    }
-    [self.feedTableView reloadData];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    @weakify(self)
+    [manager GET:partialUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        @strongify(self)
+        [_feedTableView.pullToRefreshView stopAnimating];
+        [_feedTableView.infiniteScrollingView stopAnimating];
+        NSArray *results = responseObject;
+        if (results == nil ||  results.count == 0) {
+            return;
+        }
+        if (requestType == RequestTypeNormal) {
+            [self.posts removeAllObjects];
+        }
+        for(int i = 0; i < results.count; i++) {
+            FLYTopic *post = [[FLYTopic alloc] initWithDictory:results[i]];
+            [self.posts addObject:post];
+        }
+        //Set up before id for load more
+        FLYTopic *lastTopic = [self.posts lastObject];
+        self.beforeTimestamp = lastTopic.createdAt;
+        
+        [self.feedTableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [_feedTableView.pullToRefreshView stopAnimating];
+        [_feedTableView.infiniteScrollingView stopAnimating];
+        UALog(@"Post error %@", error);
+    }];
+    
 }
 
 - (void)_filterButtonTapped

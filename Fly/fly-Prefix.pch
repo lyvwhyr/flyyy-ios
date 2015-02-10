@@ -25,5 +25,6 @@
 #import "UALogger.h"
 #import "FLYAppStateManager.h"
 #import "Mixpanel.h"
+#import "EXTScope.h"
 
 #endif
