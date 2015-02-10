@@ -22,8 +22,9 @@
 #define kColorFlyPlayAnimation                  @"#60BD88"
 #define kColorRecordingTimer                    @"#C2C2C2"
 #define kColorPostButtonGreen                   @"#45BB77"
-
 #define kColorFlyBackgroundColorBlue            @"#4CA8D3"
+#define kColorFlyGroupNameGrey                  @"#565252"
+#define kColorFlySelectGroupGrey                @"#979797"
 
 @implementation UIColor (FLYAddition)
 
@@ -104,6 +105,16 @@
 + (UIColor *)flyColorPostButtonGreen
 {
     return [self colorWithHexString:kColorPostButtonGreen];
+}
+
++ (UIColor *)flyColorFlyGroupNameGrey
+{
+    return [self colorWithHexString:kColorFlyGroupNameGrey];
+}
+
++ (UIColor *)flyColorFlySelectGroupGrey
+{
+    return [self colorWithHexString:kColorFlySelectGroupGrey];
 }
 
 

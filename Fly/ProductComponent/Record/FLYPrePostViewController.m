@@ -38,6 +38,8 @@
 
 @property (nonatomic) NSArray *groups;
 @property (nonatomic, copy) NSString *topicTitle;
+
+@property (nonatomic) NSIndexPath *selectedIndex;
 @property (nonatomic) FLYGroup *selectedGroup;
 
 @end
@@ -66,6 +68,7 @@
     _tableView = [UITableView new];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.backgroundColor = [UIColor clearColor];
     _tableView.separatorColor = [UIColor clearColor];
     [self.view addSubview:_tableView];
     [_tableView registerClass:[FLYPrePostTitleTableViewCell class] forCellReuseIdentifier:kFlyPrePostTitleCellIdentifier];
@@ -139,11 +142,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;
-    static NSString *cellIdentifier = kFlyPrePostChooseGroupCellIdentifier;
-    cell = [_tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell) {
-        cell = [[FLYPrePostChooseGroupTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
+    NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d%d", kFlyPrePostChooseGroupCellIdentifier, (int)indexPath.section, (int)indexPath.row];
+    cell = [[FLYPrePostChooseGroupTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     
     FLYPrePostChooseGroupTableViewCell *chooseGroupCell = (FLYPrePostChooseGroupTableViewCell *)cell;
     FLYGroup *group = [_groups objectAtIndex:indexPath.row];
@@ -151,6 +151,12 @@
     cell = chooseGroupCell;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
+    
+    //Set the button state
+    if (self.selectedIndex == indexPath) {
+        [chooseGroupCell selectCell];
+    }
+    
     return cell;
 }
 
@@ -162,9 +168,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if ([cell isKindOfClass:[FLYPrePostChooseGroupTableViewCell class]]) {
-        [((FLYPrePostChooseGroupTableViewCell *)cell) selectCell];
+    FLYPrePostChooseGroupTableViewCell *cell = (FLYPrePostChooseGroupTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    if (self.selectedIndex.row == indexPath.row && self.selectedIndex.section == indexPath.section) {
+        //unselect
+        self.selectedIndex = nil;
+        self.selectedGroup = nil;
+        [cell selectCell];
+    } else {
+        // deselect previous selected cell
+        FLYPrePostChooseGroupTableViewCell *previousSelectedCell = (FLYPrePostChooseGroupTableViewCell *)[tableView cellForRowAtIndexPath:self.selectedIndex];
+        [previousSelectedCell selectCell];
+        
+        // select the cell
+        [cell selectCell];
+        self.selectedIndex = indexPath;
         self.selectedGroup = [self.groups objectAtIndex:indexPath.row];
     }
 }

@@ -12,6 +12,10 @@
 
 @property (nonatomic, copy) NSString *groupName;
 
+@property (nonatomic) UILabel *groupNameLabel;
+@property (nonatomic) UIButton *checkButton;
+@property (nonatomic) UIView *separator;
+
 - (void)selectCell;
 
 @end

@@ -7,11 +7,11 @@
 //
 
 #import "FLYPrePostChooseGroupTableViewCell.h"
+#import "UIColor+FLYAddition.h"
 
 @interface FLYPrePostChooseGroupTableViewCell()
 
-@property (nonatomic) UILabel *groupNameLabel;
-@property (nonatomic) UIButton *checkButton;
+
 
 @end
 
@@ -23,18 +23,24 @@
     if (self) {
         _groupNameLabel = [UILabel new];
         _groupNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _groupNameLabel.font = [UIFont systemFontOfSize:18.0f];
+        _groupNameLabel.textColor = [UIColor flyColorFlyGroupNameGrey];
+        [_groupNameLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:16]];
         [self addSubview:_groupNameLabel];
         
         _checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _checkButton.translatesAutoresizingMaskIntoConstraints = NO;
         _checkButton.userInteractionEnabled = NO;
         //        [_checkButton addTarget:self action:@selector(_checkButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-        [_checkButton setImage:[UIImage imageNamed:@"icon_unchecked"] forState:UIControlStateNormal];
-        [_checkButton setImage:[UIImage imageNamed:@"icon_checked"] forState:UIControlStateHighlighted];
-        [_checkButton setImage:[UIImage imageNamed:@"icon_checked"] forState:UIControlStateSelected];
+        [_checkButton setImage:[UIImage imageNamed:@"icon_record_empty"] forState:UIControlStateNormal];
+        [_checkButton setImage:[UIImage imageNamed:@"icon_record_checked"] forState:UIControlStateHighlighted];
+        [_checkButton setImage:[UIImage imageNamed:@"icon_record_checked"] forState:UIControlStateSelected];
         [_checkButton sizeToFit];
         [self addSubview:_checkButton];
+        
+        _separator = [UIView new];
+        _separator.backgroundColor = [UIColor flyColorFlySelectGroupGrey];
+        _separator.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_separator];
         
         [self setNeedsUpdateConstraints];
     }
@@ -53,17 +59,24 @@
 
 - (void)updateConstraints
 {
-    [_groupNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        //        make.top.equalTo(self).offset(10);
+    [self.groupNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
         make.left.equalTo(self).offset(20);
     }];
     
-    [_checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        //        make.top.equalTo(self).offset(10);
+    [self.checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
         make.right.equalTo(self).offset(-20);
     }];
+    
+    CGFloat height = 1.0/[FLYUtilities FLYMainScreenScale];
+    [self.separator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_bottom);
+        make.left.equalTo(self).offset(20);
+        make.trailing.equalTo(self);
+        make.height.equalTo(@(height));
+    }];
+    
     [super updateConstraints];
 }
 
