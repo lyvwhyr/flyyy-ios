@@ -221,8 +221,7 @@
     [_overlayView removeFromSuperview];
     _overlayView = nil;
     
-    FLYPrePostTitleTableViewCell *titleTableCell = (FLYPrePostTitleTableViewCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
-    [titleTableCell resignFirstResponder];
+    [self.headerView resignFirstResponder];
 }
 
 - (void)_postButtonTapped
