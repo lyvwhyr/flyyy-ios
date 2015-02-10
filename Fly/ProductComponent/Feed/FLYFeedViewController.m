@@ -231,31 +231,33 @@
     return _posts.count;
 }
 
-- (FLYFeedTopicTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"feedPostCellIdentifier";
-    FLYFeedTopicTableViewCell *cell = (FLYFeedTopicTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[FLYFeedTopicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
+    
+    FLYFeedTopicTableViewCell *topicCell = (FLYFeedTopicTableViewCell *)cell;
     if (NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)
     {
-        cell.contentView.frame = cell.bounds;
-        cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+        topicCell.contentView.frame = cell.bounds;
+        topicCell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
     }
-    cell.backgroundColor = [UIColor clearColor];
+    topicCell.backgroundColor = [UIColor clearColor];
     //set cell state
-    [cell updatePlayState:FLYPlayStateNotSet];
+    [topicCell updatePlayState:FLYPlayStateNotSet];
     if ([[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
         FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)[FLYAudioStateManager sharedInstance].currentPlayItem.item;
-        [cell updatePlayState:[FLYAudioStateManager sharedInstance].currentPlayItem.playState];
+        [topicCell updatePlayState:[FLYAudioStateManager sharedInstance].currentPlayItem.playState];
     }
     
-    cell.topic = _posts[indexPath.row];
-    [cell setupTopic:_posts[indexPath.row]];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.delegate = self;
-    return cell;
+    topicCell.topic = _posts[indexPath.row];
+    [topicCell setupTopic:_posts[indexPath.row]];
+    topicCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    topicCell.delegate = self;
+    return topicCell;
 }
 
 
