@@ -22,9 +22,11 @@
 #import "FLYNavigationController.h"
 #import "FLYNavigationBar.h"
 #import "FLYPrePostHeaderView.h"
+#import "FLYFeedViewController.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
+
 #define kFlyPostButtonHeight 44
 #define kTitleTextCellHeight 105
 #define kLeftPadding    15
@@ -169,7 +171,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FLYPrePostChooseGroupTableViewCell *cell = (FLYPrePostChooseGroupTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    if (self.selectedIndex.row == indexPath.row && self.selectedIndex.section == indexPath.section) {
+    if (self.selectedIndex == indexPath) {
         //unselect
         self.selectedIndex = nil;
         self.selectedGroup = nil;
@@ -256,8 +258,10 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:baseURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         FLYTopic *post = [[FLYTopic alloc] initWithDictory:responseObject];
+        NSDictionary *dict = @{kNewPostKey:post};
         UALog(@"%@", post);
         [Dialog simpleToast:@"Posted"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNewPostReceivedNotification object:self userInfo:dict];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         UALog(@"Post error %@", error);

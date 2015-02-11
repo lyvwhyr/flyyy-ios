@@ -7,4 +7,6 @@
 #define kMainScreenHeight     CGRectGetHeight([UIScreen mainScreen].bounds)
 #define kContainerViewHeight  kMainScreenHeight - kStatusBarHeight - kNavBarHeight - kTabBarViewHeight
 
+#define kNewPostKey @"kNewPostKey"
+
 #define kAudioCacheFolder   @"flyyapp.com.audios"

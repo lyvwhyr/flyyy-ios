@@ -8,6 +8,9 @@
 
 #import "FLYUniversalViewController.h"
 
+#define kNewPostReceivedNotification @"kNewPostReceivedNotification"
+
+
 @interface FLYFeedViewController : FLYUniversalViewController
 
 - (void)clearCurrentPlayingItem;

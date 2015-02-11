@@ -45,7 +45,14 @@
 {
     self = [super init];
     if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadComplete:) name:kDownloadCompleteNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(downloadComplete:)
+                                                     name:kDownloadCompleteNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_newPostReceived:)
+                                                     name:kNewPostReceivedNotification object:nil];
+    
     }
     return self;
 }
@@ -300,6 +307,14 @@
             }
         }];
     });
+}
+
+- (void)_newPostReceived:(NSNotification *)notif
+{
+    [self.feedTableView scrollsToTop];
+    FLYTopic *topic = [notif.userInfo objectForKey:kNewPostKey];
+    [self.posts insertObject:topic atIndex:0];
+    [self.feedTableView reloadData];
 }
 
 #pragma mark - FLYFeedTopicTableViewCellDelegate
