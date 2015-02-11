@@ -38,6 +38,8 @@
 
 @interface FLYRecordViewController ()<FLYUniversalViewControllerDelegate, FLYRecordBottomBarDelegate>
 
+@property (nonatomic) UIBarButtonItem *rightNavigationButton;
+
 @property (nonatomic) FLYCircleView *innerCircleView;
 @property (nonatomic) FLYCircleView *outerCircleView;
 @property (nonatomic) UIImageView *userActionImageView;
@@ -186,16 +188,19 @@ static inline float translate(float val, float min, float max) {
 
 -(void)loadRightBarButton
 {
-    FLYPostRecordingNextBarButtonItem *barButtonItem = [FLYPostRecordingNextBarButtonItem barButtonItem:NO];
-    __weak typeof(self) weakSelf = self;
-    barButtonItem.actionBlock = ^(FLYBarButtonItem *item) {
-        __strong typeof(self) strongSelf = weakSelf;
-        [strongSelf _nextBarButtonTapped];
-    };
-    self.navigationItem.rightBarButtonItem = barButtonItem;
-    
+    if (self.currentState == FLYRecordCompleteState) {
+        FLYPostRecordingNextBarButtonItem *barButtonItem = [FLYPostRecordingNextBarButtonItem barButtonItem:NO];
+        @weakify(self)
+        barButtonItem.actionBlock = ^(FLYBarButtonItem *item) {
+            @strongify(self)
+            [self _nextBarButtonTapped];
+        };
+        self.navigationItem.rightBarButtonItem = barButtonItem;
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
-                                              
+
 
 #pragma mark - navigation bar actions
 
@@ -207,6 +212,7 @@ static inline float translate(float val, float min, float max) {
 
 - (void)_nextBarButtonTapped
 {
+    [self _setupCompleteViewState];
     [self _uploadAudioFileService];
     
     FLYPrePostViewController *prePostVC = [FLYPrePostViewController new];
@@ -286,6 +292,8 @@ static inline float translate(float val, float min, float max) {
     [self.levelsTimer invalidate];
     self.levelsTimer = nil;
     
+    [[FLYAudioStateManager sharedInstance] removePlayer];
+    
     [_trashButton removeFromSuperview];
     _trashButton = nil;
     
@@ -312,6 +320,8 @@ static inline float translate(float val, float min, float max) {
     _userActionImageView.userInteractionEnabled = YES;
     [self.view addSubview:_userActionImageView];
     
+    //reload right item
+    [self loadRightBarButton];
     [self updateViewConstraints];
 }
 
@@ -335,6 +345,8 @@ static inline float translate(float val, float min, float max) {
     _audioPlayer = [FLYAudioStateManager sharedInstance].player;
     _audioController = [FLYAudioStateManager sharedInstance].audioController;
     
+    [self loadRightBarButton];
+    
 //    self.levelsTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(updateLevels:) userInfo:nil repeats:YES];
 }
 
@@ -345,37 +357,30 @@ static inline float translate(float val, float min, float max) {
 //    [_pulsingHaloLayer removeFromSuperlayer];
     
     _innerCircleView.hidden = YES;
-    
     [_outerCircleView setupLayerFillColor:[UIColor whiteColor] strokeColor:[UIColor flyLightGreen]];
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_play"]];
-    
-//    _trashButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [_trashButton setImage:[UIImage imageNamed:@"icon_record_trash_bin"] forState:UIControlStateNormal];
-//    _trashButton.translatesAutoresizingMaskIntoConstraints = NO;
-//    [_trashButton addTarget:self action:@selector(_setupInitialViewState) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:_trashButton];
-    
     self.recordBottomBar = [FLYRecordBottomBar new];
     [self.view addSubview:self.recordBottomBar];
+    
     self.recordBottomBar.delegate = self;
-    
-
-//    _voiceFilterButton = [[DKCircleButton alloc] initWithFrame:CGRectMake(0, 0, 90, 90)];
-//    
-//    _voiceFilterButton.center = CGPointMake(60, 420);
-//    _voiceFilterButton.titleLabel.font = [UIFont systemFontOfSize:22];
-    
-//    [_voiceFilterButton setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
-//    _voiceFilterButton.animateTap = NO;
-//    [_voiceFilterButton setTitle:NSLocalizedString(@"Adjust Voice", nil) forState:UIControlStateNormal];
-//    [_voiceFilterButton addTarget:self action:@selector(_voiceFilterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:_voiceFilterButton];
-    
+    [self loadRightBarButton];
     [self updateViewConstraints];
+}
+
+- (void)_setupPlayingViewState
+{
+    [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_pause"]];
 }
 
 - (void)_setupPauseViewState
 {
+    [[FLYAudioStateManager sharedInstance] pausePlayer];
+    [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_play"]];
+}
+
+- (void)_setupResumeViewState
+{
+    [[FLYAudioStateManager sharedInstance] resumePlayer];
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_pause"]];
 }
 
@@ -455,20 +460,6 @@ static inline float translate(float val, float min, float max) {
         }];
     }
     
-   // if (self.trashButton) {
-   //     [self.trashButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.outerCircleView.mas_bottom).offset(30);
-//            make.right.equalTo(self.view.mas_right).offset(-30);
-//        }];
-//    }
-    
-//    if (_voiceFilterButton) {
-//        [_voiceFilterButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(self.outerCircleView.mas_bottom).offset(30);
-//            make.left.equalTo(self.view.mas_leading).offset(20);
-//        }];
-//    }
-    
     [super updateViewConstraints];
 }
 
@@ -490,23 +481,27 @@ static inline float translate(float val, float min, float max) {
         }
         case FLYRecordCompleteState:
         {
-            _currentState = FLYRecordPauseState;
-//            [[FLYAudioStateManager sharedInstance] playAudioURLStr:nil withCompletionBlock:_completionBlock];
+            _currentState = FLYRecordPlayingState;
             [[FLYAudioStateManager sharedInstance] playAudioWithCompletionBlock:_completionBlock];
+            [self _setupPlayingViewState];
+            break;
+        }
+        case FLYRecordPlayingState:
+        {
+            _currentState = FLYRecordPauseState;
             [self _setupPauseViewState];
             break;
         }
         case FLYRecordPauseState:
         {
-            _currentState = FLYRecordCompleteState;
-            [[FLYAudioStateManager sharedInstance] playAudioWithCompletionBlock:_completionBlock];
-            [self _setupCompleteViewState];
-            
+            _currentState = FLYRecordPlayingState;
+            [self _setupResumeViewState];
             break;
         }
         default:
             break;
     }
+
 }
 
 - (void)viewDidLayoutSubviews

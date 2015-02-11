@@ -226,8 +226,10 @@
 
 - (void)removePlayer
 {
-    [_audioController removeChannels:@[_player]];
-    self.player = nil;
+    if (_audioController && _player) {
+        [_audioController removeChannels:@[_player]];
+        self.player = nil;
+    }
 }
 
 
