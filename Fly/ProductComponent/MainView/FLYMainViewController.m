@@ -174,6 +174,9 @@
 //    frame.size.height = self.view.bounds.size.height - kTabBarViewHeight;
     frame.size.height = self.view.bounds.size.height - kTabBarViewHeight;
     viewController.view.frame = frame;
+    
+    //Make sure the record button is on top of current view
+    [self.view insertSubview:self.recordButton aboveSubview:self.currentViewController.view];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
