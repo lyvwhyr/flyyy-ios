@@ -175,6 +175,17 @@
 //    [self updateConstraints];
 }
 
+- (void)updateConstraints
+{
+    if (_loadingIndicatorView) {
+        [_loadingIndicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.playButton);
+            make.centerY.equalTo(self.playButton);
+        }];
+    }
+    [super updateConstraints];
+}
+
 - (void)_addconstraints
 {
     [_timelineImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -202,13 +213,6 @@
         make.centerX.equalTo(self.timelineImageView);
         make.bottom.equalTo(self.mas_bottom);
     }];
-    
-    if (_loadingIndicatorView) {
-        [_loadingIndicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.playButton);
-            make.centerY.equalTo(self.playButton);
-        }];
-    }
     
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topicContentView).offset(5);
@@ -252,6 +256,7 @@
         _loadingIndicatorView.hidesWhenStopped = YES;
         [self.contentView insertSubview:_loadingIndicatorView aboveSubview:self.playButton];
     }
+    [self updateConstraints];
     [_loadingIndicatorView startAnimating];
     return _loadingIndicatorView;
 }
