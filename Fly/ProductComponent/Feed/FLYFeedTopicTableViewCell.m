@@ -172,77 +172,77 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self updateConstraints];
+//    [self updateConstraints];
 }
 
-- (void)updateConstraints
+- (void)_addconstraints
 {
-    [_timelineImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [_timelineImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(0);
         make.leading.equalTo(self).offset(kHomeTimeLineLeftPadding);
         make.height.equalTo(self);
     }];
     
     CGFloat topicContentLeftPadding = kHomeTimeLineLeftPadding + CGRectGetWidth(_timelineImageView.bounds)/2 + CGRectGetWidth(_playButton.bounds)/2 + kTopicContentLeftPadding;
-    [self.topicContentView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.topicContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(2);
         make.leading.equalTo(self.contentView).offset(topicContentLeftPadding);
         make.trailing.equalTo(self.contentView).offset(-kTopicContentRightPadding);
         make.bottom.equalTo(self.contentView).offset(-kTopicContentBottomPadding);
     }];
     
-    [self.speechBubbleView mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.speechBubbleView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topicContentView).offset(0);
         make.leading.equalTo(self.topicContentView).offset(0);
         make.trailing.equalTo(self.topicContentView).offset(0);
         make.bottom.equalTo(self.topicContentView).offset(-10);
     }];
     
-    [self.playButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.timelineImageView);
         make.bottom.equalTo(self.mas_bottom);
     }];
     
     if (_loadingIndicatorView) {
-        [_loadingIndicatorView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [_loadingIndicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.playButton);
             make.centerY.equalTo(self.playButton);
         }];
     }
     
-    [self.userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topicContentView).offset(5);
         make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
         make.width.lessThanOrEqualTo(self.topicContentView).offset(kUsernameOffset);
     }];
     
-    [self.shareButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topicContentView).offset(5);
         make.trailing.equalTo(self.speechBubbleView.mas_trailing).offset(-kElementRightPadding);
     }];
     
-    [self.topicTitle mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.topicTitle mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.userNameLabel.mas_bottom).offset(5);
         make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
         make.trailing.equalTo(self.topicContentView).offset(-10);
     }];
     
-    [self.likeButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topicTitle.mas_bottom).offset(kInlineActionTopPadding);
         make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
     }];
     
-    [self.groupNameButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.groupNameButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.likeButton);
         make.centerX.equalTo(self.speechBubbleView);
     }];
     
-    [self.commentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.likeButton);
         make.trailing.equalTo(self.speechBubbleView.mas_trailing).offset(-kElementRightPadding);
     }];
     
-    [super updateConstraints];
+//    [super updateConstraints];
 }
 
 - (UIActivityIndicatorView *)loadingIndicatorView
@@ -273,6 +273,7 @@
     [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.likeCount]];
     [self.groupNameButton setTitle:[NSString stringWithFormat:@"@%@", topic.group.groupName] forState:UIControlStateNormal];
     [self.commentButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.replyCount]];
+    [self _addconstraints];
 }
 
 #pragma mark - update play state

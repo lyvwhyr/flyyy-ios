@@ -72,7 +72,7 @@
     _feedTableView.translatesAutoresizingMaskIntoConstraints = NO;
     _feedTableView.dataSource = self;
     _feedTableView.delegate = self;
-    [_feedTableView registerClass:[FLYFeedTopicTableViewCell class] forCellReuseIdentifier:@"feedPostCellIdentifier"];
+//    [_feedTableView registerClass:[FLYFeedTopicTableViewCell class] forCellReuseIdentifier:@"feedPostCellIdentifier"];
     [self.view addSubview:_feedTableView];
     
     _feedTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
