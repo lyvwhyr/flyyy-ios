@@ -86,12 +86,12 @@
         UIEdgeInsets insets = UIEdgeInsetsMake(40, 40, 70, 50);
         image = [image resizableImageWithCapInsets:insets];
         self.speechBubbleView.image = image;
-//        [self.speechBubbleView sizeToFit];
         [self.topicContentView addSubview:self.speechBubbleView];
         
         _userNameLabel = [UILabel new];
         _userNameLabel.textColor = [UIColor flyBlue];
-        _userNameLabel.font = [UIFont fontWithName:@"Avenir-Roman" size:18];
+        //Avenir-Roman
+        _userNameLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14];
         _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self.topicContentView addSubview:_userNameLabel];
         
@@ -111,7 +111,7 @@
         [self.topicContentView insertSubview:self.topicTitle aboveSubview:self.speechBubbleView];
         
         //shared font
-        UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
+        UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:14];
         
         _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_wings" isIconLeft:YES]  ;
         [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
