@@ -311,10 +311,16 @@
 
 - (void)_newPostReceived:(NSNotification *)notif
 {
-    [self.feedTableView scrollsToTop];
     FLYTopic *topic = [notif.userInfo objectForKey:kNewPostKey];
     [self.posts insertObject:topic atIndex:0];
     [self.feedTableView reloadData];
+    [self _scrollToTop];
+}
+
+- (void)_scrollToTop
+{
+    NSIndexPath* top = [NSIndexPath indexPathForRow:NSNotFound inSection:0];
+    [self.feedTableView scrollToRowAtIndexPath:top atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 #pragma mark - FLYFeedTopicTableViewCellDelegate
