@@ -37,6 +37,8 @@
 		A6048ADE1A8603EF00C67480 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = A6048AC91A8603EF00C67480 /* UIProgressView+AFNetworking.m */; };
 		A6048ADF1A8603EF00C67480 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = A6048ACB1A8603EF00C67480 /* UIRefreshControl+AFNetworking.m */; };
 		A6048AE01A8603EF00C67480 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = A6048ACD1A8603EF00C67480 /* UIWebView+AFNetworking.m */; };
+		A60A44F21A8DD41200BED63A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60A44F11A8DD41200BED63A /* UIKit.framework */; };
+		A60A44F41A8DD42B00BED63A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60A44F31A8DD42B00BED63A /* Foundation.framework */; };
 		A612753F1A2EFB72004D25D3 /* DKCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A612753E1A2EFB72004D25D3 /* DKCircleButton.m */; };
 		A6162C721A318F1100A3B277 /* FLYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6162C711A318F1100A3B277 /* FLYNavigationBar.m */; };
 		A61D18661A1EE6ED00D188B5 /* FLYAudioStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */; };
@@ -394,6 +396,8 @@
 		A6048ACB1A8603EF00C67480 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		A6048ACC1A8603EF00C67480 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		A6048ACD1A8603EF00C67480 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		A60A44F11A8DD41200BED63A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A60A44F31A8DD42B00BED63A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A612753D1A2EFB72004D25D3 /* DKCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKCircleButton.h; sourceTree = "<group>"; };
 		A612753E1A2EFB72004D25D3 /* DKCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKCircleButton.m; sourceTree = "<group>"; };
 		A6162C701A318F1100A3B277 /* FLYNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYNavigationBar.h; sourceTree = "<group>"; };
@@ -827,8 +831,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6A30D731A1B1EFA001AE1FE /* CoreGraphics.framework in Frameworks */,
+				A60A44F41A8DD42B00BED63A /* Foundation.framework in Frameworks */,
 				A6A30D711A1B1EEE001AE1FE /* QuartzCore.framework in Frameworks */,
+				A60A44F21A8DD41200BED63A /* UIKit.framework in Frameworks */,
+				A6A30D731A1B1EFA001AE1FE /* CoreGraphics.framework in Frameworks */,
 				7D4B72EB34192CBBF4792073 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1687,6 +1693,8 @@
 		A6A30D741A1B1F33001AE1FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A60A44F31A8DD42B00BED63A /* Foundation.framework */,
+				A60A44F11A8DD41200BED63A /* UIKit.framework */,
 				A6A30D721A1B1EFA001AE1FE /* CoreGraphics.framework */,
 				A6A30D701A1B1EEE001AE1FE /* QuartzCore.framework */,
 				F4DA38F875E9D2C76E94F1F6 /* libPods.a */,

@@ -7,6 +7,7 @@ PODS:
   - SCLAlertView-Objective-C (0.3.5)
   - SVPullToRefresh (0.4.1)
   - TheAmazingAudioEngine (1.4.5)
+  - Waver (0.2.0)
 
 DEPENDENCIES:
   - JGProgressHUD
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - SCLAlertView-Objective-C
   - SVPullToRefresh
   - TheAmazingAudioEngine
+  - Waver (~> 0.2.0)
 
 SPEC CHECKSUMS:
   JGProgressHUD: a7c58f711eec0b67f257a0821c0bac9194c72398
@@ -23,5 +25,6 @@ SPEC CHECKSUMS:
   SCLAlertView-Objective-C: ba283f4d609d9929d4d2bf66f713db19ae0fe066
   SVPullToRefresh: d5161ebc833a38b465364412e5e307ca80bbb190
   TheAmazingAudioEngine: 34279bc2841262eae7a24c3c7944a43fab72918e
+  Waver: 113097c3a025542cd4857d087a9098bc45a51e9e
 
 COCOAPODS: 0.35.0

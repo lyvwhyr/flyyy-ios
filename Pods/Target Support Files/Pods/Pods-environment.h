@@ -42,6 +42,12 @@
 #define COCOAPODS_VERSION_MINOR_TheAmazingAudioEngine 4
 #define COCOAPODS_VERSION_PATCH_TheAmazingAudioEngine 5
 
+// Waver
+#define COCOAPODS_POD_AVAILABLE_Waver
+#define COCOAPODS_VERSION_MAJOR_Waver 0
+#define COCOAPODS_VERSION_MINOR_Waver 2
+#define COCOAPODS_VERSION_PATCH_Waver 0
+
 // pop
 #define COCOAPODS_POD_AVAILABLE_pop
 #define COCOAPODS_VERSION_MAJOR_pop 1

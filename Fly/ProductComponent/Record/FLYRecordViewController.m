@@ -25,6 +25,7 @@
 #import "FLYNavigationBar.h"
 #import "FLYNavigationController.h"
 #import "FLYRecordBottomBar.h"
+#import "Waver.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -48,6 +49,7 @@
 @property (nonatomic, weak) PulsingHaloLayer *halo;
 @property (nonatomic) UIButton *trashButton;
 @property (nonatomic) FLYRecordBottomBar *recordBottomBar;
+@property (nonatomic) Waver *waver;
 
 @property (nonatomic) FLYRecordState currentState;
 @property (nonatomic) NSTimer *recordTimer;
@@ -86,6 +88,7 @@
     self.title = @"Record";
     UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
+    self.view.backgroundColor = [UIColor whiteColor];
     
     _recordedSeconds = 0;
     [self _initVoiceRecording];
@@ -300,7 +303,7 @@ static inline float translate(float val, float min, float max) {
     [self.recordBottomBar removeFromSuperview];
     self.recordBottomBar = nil;
     
-    self.view.backgroundColor = [UIColor whiteColor];
+//    self.view.backgroundColor = [UIColor whiteColor];
     _currentState = FLYRecordInitialState;
     
 //    _outerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kOuterCircleRadius, kOuterCircleRadius) radius:kOuterCircleRadius color:[UIColor whiteColor]];
@@ -345,9 +348,29 @@ static inline float translate(float val, float min, float max) {
     _audioPlayer = [FLYAudioStateManager sharedInstance].player;
     _audioController = [FLYAudioStateManager sharedInstance].audioController;
     
+    [self _loadWaver];
     [self loadRightBarButton];
     
 //    self.levelsTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(updateLevels:) userInfo:nil repeats:YES];
+}
+
+- (void)_loadWaver
+{
+    if(!self.waver) {
+        self.waver = [[Waver alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 230, CGRectGetWidth(self.view.bounds), 100.0)];
+        __weak Waver * weakWaver = self.waver;
+        self.waver.waveColor = [UIColor flyColorFlyRecordingWave];
+        @weakify(self);
+        self.waver.waverLevelCallback = ^() {
+            @strongify(self)
+            Float32 inputAvg, inputPeak, outputAvg, outputPeak;
+            [self.audioController inputAveragePowerLevel:&inputAvg peakHoldLevel:&inputPeak];
+            [self.audioController outputAveragePowerLevel:&outputAvg peakHoldLevel:&outputPeak];
+            CGFloat normalizedValue = pow (10,  (inputAvg - 20) / 40);
+            weakWaver.level = normalizedValue;
+        };
+        [self.view addSubview:self.waver];
+    }
 }
 
 - (void)_setupCompleteViewState
@@ -460,11 +483,23 @@ static inline float translate(float val, float min, float max) {
         }];
     }
     
+    if (self.waver) {
+        [self.waver mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.view);
+            make.bottom.equalTo(self.view).offset(-50);
+            make.trailing.equalTo(self.view);
+            make.height.equalTo(@120);
+        }];
+    }
+    
     [super updateViewConstraints];
 }
 
 - (void)_userActionTapped:(UIGestureRecognizer *)gestureRecognizer
 {
+    [self.waver removeFromSuperview];
+    self.waver = nil;
+    
     switch (_currentState) {
         case FLYRecordInitialState:
         {

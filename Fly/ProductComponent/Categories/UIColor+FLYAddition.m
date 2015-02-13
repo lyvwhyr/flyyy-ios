@@ -25,6 +25,7 @@
 #define kColorFlyBackgroundColorBlue            @"#4CA8D3"
 #define kColorFlyGroupNameGrey                  @"#565252"
 #define kColorFlySelectGroupGrey                @"#979797"
+#define kColorFlyRecordingWave                  @"#f58686"
 
 @implementation UIColor (FLYAddition)
 
@@ -115,6 +116,11 @@
 + (UIColor *)flyColorFlySelectGroupGrey
 {
     return [self colorWithHexString:kColorFlySelectGroupGrey];
+}
+
++ (UIColor *)flyColorFlyRecordingWave
+{
+    return [self colorWithHexString:kColorFlyRecordingWave];
 }
 
 

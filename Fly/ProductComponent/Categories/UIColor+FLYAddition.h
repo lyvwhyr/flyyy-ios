@@ -27,6 +27,7 @@
 + (UIColor *)flyColorPostButtonGreen;
 + (UIColor *)flyColorFlyGroupNameGrey;
 + (UIColor *)flyColorFlySelectGroupGrey;
++ (UIColor *)flyColorFlyRecordingWave;
 
 
 + (UIColor *)customGrayColor;

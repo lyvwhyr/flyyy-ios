@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Waver.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,37 +47,42 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>184AB17E9894B056C0765C44</key>
+		<key>0CE38DA9F971930D02F7053E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>576676CE2B9D2AEEB6F1B52D</key>
+		<key>340E87EE5DCC42B706D3366B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>67FC6C205F71927D9236D2FA</key>
+		<key>7F54F6F0027A219F2D238DB7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7C4DC2BEE148FE3316F0283C</key>
+		<key>8183B2084E5817E57E1B881D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>82F5653E0D4902C25D3D2733</key>
+		<key>9C576F4788462B81AC62DE53</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9D472D524C2B9D663070A33A</key>
+		<key>DFC49E126943C2A2C4A56291</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EE41005993A764E963063FC7</key>
+		<key>EA601B13D637F1306312F530</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F94FC983DE6BA22BBC3CDC0F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
