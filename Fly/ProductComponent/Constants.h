@@ -10,3 +10,14 @@
 #define kNewPostKey @"kNewPostKey"
 
 #define kAudioCacheFolder   @"flyyapp.com.audios"
+
+
+
+//Mixpanel event
+#define kTrackingEventClientError                               @"client_error"
+
+
+//Mixpanel properties
+#define kTrackingPropertyStatusCode                             @"status_code"
+#define kTrackingPropertyErrorMessage                           @"error_message"
+#define kTrackingPropertyServerResponseBody                     @"server_response_body"

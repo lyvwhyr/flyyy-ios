@@ -113,6 +113,10 @@ static id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingO
 
     if (response && [response isKindOfClass:[NSHTTPURLResponse class]]) {
         if (self.acceptableContentTypes && ![self.acceptableContentTypes containsObject:[response MIMEType]]) {
+            NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            NSDictionary *properties = @{kTrackingPropertyStatusCode:@(response.statusCode),  kTrackingPropertyErrorMessage:[NSString stringWithFormat:@"unacceptable content-type %@", [response MIMEType]], kTrackingPropertyServerResponseBody:dataStr};
+            [[Mixpanel sharedInstance]  track:kTrackingEventClientError properties:properties];
+            
             if ([data length] > 0 && [response URL]) {
                 NSMutableDictionary *mutableUserInfo = [@{
                                                           NSLocalizedDescriptionKey: [NSString stringWithFormat:NSLocalizedStringFromTable(@"Request failed: unacceptable content-type: %@", @"AFNetworking", nil), [response MIMEType]],
@@ -220,7 +224,7 @@ static id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingO
         return nil;
     }
 
-    self.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", nil];
+    self.acceptableContentTypes = [NSSet setWithObjects:@"application/json", nil];
 
     return self;
 }
