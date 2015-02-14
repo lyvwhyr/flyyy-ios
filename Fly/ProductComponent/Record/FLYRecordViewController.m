@@ -320,7 +320,7 @@ static inline float translate(float val, float min, float max) {
     _userActionImageView = [UIImageView new];
     _userActionImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_record"]];
-    _userActionTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_userActionTapped:)];
+    _userActionTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_updateUserState)];
     [_userActionImageView addGestureRecognizer:_userActionTapGestureRecognizer];
     _userActionImageView.userInteractionEnabled = YES;
     [self.view addSubview:_userActionImageView];
@@ -413,17 +413,15 @@ static inline float translate(float val, float min, float max) {
 {
     [self.recordTimer invalidate];
     self.recordTimer = nil;
-    if (self.recordedSeconds >= kMaxRecordTime) {
-        return;
-    }
-    self.recordTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(_updateTimerLabel) userInfo:nil repeats:YES];
+    self.recordTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(_updateRecordingState) userInfo:nil repeats:YES];
 }
 
-- (void)_updateTimerLabel
+- (void)_updateRecordingState
 {
     if (self.recordedSeconds >= kMaxRecordTime) {
         [self.recordTimer invalidate];
         self.recordTimer = nil;
+        [self _updateUserState];
         return;
     }
     
@@ -497,7 +495,7 @@ static inline float translate(float val, float min, float max) {
     [super updateViewConstraints];
 }
 
-- (void)_userActionTapped:(UIGestureRecognizer *)gestureRecognizer
+- (void)_updateUserState
 {
     [self.waver removeFromSuperview];
     self.waver = nil;
