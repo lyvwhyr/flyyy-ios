@@ -26,6 +26,7 @@
 #import "FLYRecordBottomBar.h"
 #import "Waver.h"
 #import "FLYEndpointRequest.h"
+#import "UIView+Glow.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -41,6 +42,7 @@
 @property (nonatomic) FLYCircleView *innerCircleView;
 @property (nonatomic) FLYCircleView *outerCircleView;
 @property (nonatomic) UIImageView *userActionImageView;
+@property (nonatomic) UIImageView *glowView;
 @property (nonatomic) UILabel *recordedTimeLabel;
 @property (nonatomic) UILabel *remainingTimeLabel;
 @property (nonatomic) SVPulsingAnnotationView *pulsingView;
@@ -266,11 +268,20 @@ static inline float translate(float val, float min, float max) {
     
     _userActionImageView = [UIImageView new];
     _userActionImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_record"]];
+    [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_bg"]];
     _userActionTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_updateUserState)];
     [_userActionImageView addGestureRecognizer:_userActionTapGestureRecognizer];
     _userActionImageView.userInteractionEnabled = YES;
     [self.view addSubview:_userActionImageView];
+    
+    
+    [self.glowView removeFromSuperview];
+    self.glowView  = nil;
+    
+    self.glowView  = [UIImageView new];
+    self.glowView .translatesAutoresizingMaskIntoConstraints = NO;
+    [self.glowView  setImage:[UIImage imageNamed:@"icon_microphone"]];
+    [self.view addSubview:self.glowView ];
     
     //reload right item
     [self loadRightBarButton];
@@ -292,6 +303,7 @@ static inline float translate(float val, float min, float max) {
     
     [self.view addSubview:_recordedTimeLabel];
 //    [self _addPulsingAnimation];
+    
     [self updateViewConstraints];
     
     [[FLYAudioStateManager sharedInstance] startRecord];
@@ -300,8 +312,7 @@ static inline float translate(float val, float min, float max) {
     
     [self _loadWaver];
     [self loadRightBarButton];
-    
-//    self.levelsTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(updateLevels:) userInfo:nil repeats:YES];
+    [self.glowView startGlowingWithColor:[UIColor whiteColor] intensity:1];
 }
 
 - (void)_loadWaver
@@ -325,7 +336,9 @@ static inline float translate(float val, float min, float max) {
 
 - (void)_setupCompleteViewState
 {
-    
+    [self.glowView stopGlowing];
+    [self.glowView removeFromSuperview];
+    self.glowView = nil;
     [self.recordedTimeLabel removeFromSuperview];
     [self.remainingTimeLabel removeFromSuperview];
     self.recordedTimeLabel = nil;
@@ -451,6 +464,12 @@ static inline float translate(float val, float min, float max) {
         make.centerY.equalTo(self.view).offset(-50);
     }];
     
+    if (self.glowView) {
+        [self.glowView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.userActionImageView);
+        }];
+    }
+    
     if (_currentState == FLYRecordRecordingState) {
         if (self.recordedTimeLabel) {
             [self.recordedTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -513,6 +532,8 @@ static inline float translate(float val, float min, float max) {
         }
         case FLYRecordCompleteState:
         {
+            //TODO:add a minimal length
+            
             _currentState = FLYRecordPlayingState;
             [[FLYAudioStateManager sharedInstance] playAudioWithCompletionBlock:_completionBlock];
             [self _setupPlayingViewState];

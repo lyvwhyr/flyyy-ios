@@ -58,6 +58,7 @@
 		A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263EC31A18910B00C4C3BA /* UIViewController+StatusBar.m */; };
 		A6263ECB1A1897CE00C4C3BA /* UIColor+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263ECA1A1897CE00C4C3BA /* UIColor+FLYAddition.m */; };
 		A6263ED01A18A10E00C4C3BA /* UIImage+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */; };
+		A62B25571A8FECFF007E11C3 /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = A62B25561A8FECFF007E11C3 /* UIView+Glow.m */; };
 		A62CBE7C1A32E695007F459C /* FLYBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A62CBE7B1A32E695007F459C /* FLYBarButtonItem.m */; };
 		A62E53B51A227E0B00125DBC /* icon_voice_filter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A62E53B41A227E0B00125DBC /* icon_voice_filter@3x.png */; };
 		A640BC3B1A3815B700DC59A7 /* icon_flag_post@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */; };
@@ -435,6 +436,8 @@
 		A6263ECA1A1897CE00C4C3BA /* UIColor+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FLYAddition.m"; sourceTree = "<group>"; };
 		A6263ECE1A18A10E00C4C3BA /* UIImage+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FLYAddition.h"; sourceTree = "<group>"; };
 		A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FLYAddition.m"; sourceTree = "<group>"; };
+		A62B25551A8FECFF007E11C3 /* UIView+Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Glow.h"; sourceTree = "<group>"; };
+		A62B25561A8FECFF007E11C3 /* UIView+Glow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Glow.m"; sourceTree = "<group>"; };
 		A62CBE7A1A32E695007F459C /* FLYBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYBarButtonItem.h; sourceTree = "<group>"; };
 		A62CBE7B1A32E695007F459C /* FLYBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYBarButtonItem.m; sourceTree = "<group>"; };
 		A62E53B41A227E0B00125DBC /* icon_voice_filter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_voice_filter@3x.png"; sourceTree = "<group>"; };
@@ -1090,6 +1093,8 @@
 		A6263EBE1A1887DB00C4C3BA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				A62B25551A8FECFF007E11C3 /* UIView+Glow.h */,
+				A62B25561A8FECFF007E11C3 /* UIView+Glow.m */,
 				A6A57A991A34103D00610785 /* UIImage+ResizeMagick.h */,
 				A6A57A9A1A34103D00610785 /* UIImage+ResizeMagick.m */,
 				A6263EC21A18910B00C4C3BA /* UIViewController+StatusBar.h */,
@@ -2126,6 +2131,7 @@
 				A6A0E49B1A1E76110036116E /* FLEXDefaultEditorViewController.m in Sources */,
 				A648C0F21A19C65B00FF1744 /* FLYTabBarView.m in Sources */,
 				A648C0EA1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				A62B25571A8FECFF007E11C3 /* UIView+Glow.m in Sources */,
 				A6A0E49E1A1E76110036116E /* FLEXIvarEditorViewController.m in Sources */,
 				A67208231A3569C600B2C5B5 /* FLYReplyPlayView.m in Sources */,
 				A6A0E4A41A1E76110036116E /* FLEXToolbarItem.m in Sources */,
