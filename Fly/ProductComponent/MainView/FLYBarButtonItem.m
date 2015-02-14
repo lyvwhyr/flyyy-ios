@@ -55,9 +55,8 @@
     //12 * 21
     //Make it (8, 6), (31,30)
     UIImage *image = [UIImage imageNamed:@"icon_back_record"];
-    backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -25, 0, 0);
-    CGFloat x = (left ? -1 : 1) * 17;
-    backButton.frame = CGRectMake(x, 0, 62, 44);
+    CGFloat x = (left ? -1 : 1) * 15;
+    backButton.frame = CGRectMake(x, 0, 50, 40);
     [backButton setImage:image forState:UIControlStateNormal];
     self = [super initWithButton:backButton actionBlock:nil];
     return self;

@@ -94,7 +94,6 @@
     [self _initVoiceRecording];
     
     [self _setupInitialViewState];
-//    [self _setupNavigationItem];
     
     [self updateViewConstraints];
 }
