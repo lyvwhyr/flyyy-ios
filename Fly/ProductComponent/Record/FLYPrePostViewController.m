@@ -76,15 +76,15 @@
     _tableView = [UITableView new];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.backgroundColor = [UIColor whiteColor];
     _tableView.separatorColor = [UIColor clearColor];
     [self.view addSubview:_tableView];
     [_tableView registerClass:[FLYPrePostChooseGroupTableViewCell class] forCellReuseIdentifier:kFlyPrePostChooseGroupCellIdentifier];
     
     //Add table background image
-     UIImageView *backgroundImageView = [UIImageView new];
-     backgroundImageView.image = [UIImage imageNamed:@"icon_record_groups"];
-    _tableView.backgroundView = backgroundImageView;
+//     UIImageView *backgroundImageView = [UIImageView new];
+//     backgroundImageView.image = [UIImage imageNamed:@"icon_record_groups"];
+//    _tableView.backgroundView = backgroundImageView;
     
     _postButton = [FLYPostButtonView new];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_postButtonTapped)];
