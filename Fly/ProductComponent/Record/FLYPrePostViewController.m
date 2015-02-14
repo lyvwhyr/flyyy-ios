@@ -100,6 +100,11 @@
     [_tableView reloadData];
 }
 
+- (void)dealloc
+{
+    UALog(@"dealloc called");
+}
+
 - (void)updateViewConstraints
 {
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {

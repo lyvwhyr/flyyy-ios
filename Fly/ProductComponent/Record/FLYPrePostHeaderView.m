@@ -47,7 +47,7 @@
         
         _charLimitLabel = [UILabel new];
         [_charLimitLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:8]];
-        _charLimitLabel.text = @"char limit: 124";
+        _charLimitLabel.text = @"char limit: 120";
         _charLimitLabel.textColor = [UIColor whiteColor];
         _charLimitLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_charLimitLabel];

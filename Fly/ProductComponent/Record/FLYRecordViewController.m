@@ -55,8 +55,8 @@
 @property (nonatomic) PulsingHaloLayer *pulsingHaloLayer;
 @property (nonatomic) DKCircleButton *voiceFilterButton;
 
-@property (nonatomic) AEAudioController *audioController;
-@property (nonatomic) AEAudioFilePlayer *audioPlayer;
+@property (nonatomic, weak) AEAudioController *audioController;
+@property (nonatomic, weak) AEAudioFilePlayer *audioPlayer;
 @property (nonatomic, copy) AudioPlayerCompleteblock completionBlock;
 
 @property (nonatomic, readonly) UITapGestureRecognizer *userActionTapGestureRecognizer;
@@ -105,6 +105,7 @@
 
 - (void)dealloc
 {
+    UALog(@"dealloc called");
     [self _cleanupData];
 }
 
@@ -114,8 +115,10 @@
     _completionBlock = ^{
         @strongify(self)
         //Set currentState to FLYRecordRecordingState, so next state will be complete state
-        self.currentState = FLYRecordRecordingState;
-        [self _updateUserState];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.currentState = FLYRecordRecordingState;
+            [self _updateUserState];
+        });
     };
 }
 
@@ -237,8 +240,6 @@ static inline float translate(float val, float min, float max) {
 }
 
 
-
-
 - (void)_setupInitialViewState
 {
     [self.levelsTimer invalidate];
@@ -273,6 +274,7 @@ static inline float translate(float val, float min, float max) {
     //reload right item
     [self loadRightBarButton];
     [self updateViewConstraints];
+    [self.view layoutIfNeeded];
 }
 
 - (void)_setupRecordingViewState
@@ -325,11 +327,16 @@ static inline float translate(float val, float min, float max) {
     
     [self.recordedTimeLabel removeFromSuperview];
     [self.remainingTimeLabel removeFromSuperview];
+    self.recordedTimeLabel = nil;
+    self.remainingTimeLabel = nil;
 //    [_pulsingHaloLayer removeFromSuperlayer];
     
     _innerCircleView.hidden = YES;
     [_outerCircleView setupLayerFillColor:[UIColor whiteColor] strokeColor:[UIColor flyLightGreen]];
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_play"]];
+    
+    [self.recordBottomBar removeFromSuperview];
+    self.recordBottomBar = nil;
     self.recordBottomBar = [FLYRecordBottomBar new];
     [self.view addSubview:self.recordBottomBar];
     
@@ -444,17 +451,21 @@ static inline float translate(float val, float min, float max) {
     }];
     
     if (_currentState == FLYRecordRecordingState) {
-        [self.recordedTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.userActionImageView).with.offset(kTimeLabelTopPadding);
-            make.centerX.equalTo(self.userActionImageView);
-        }];
+        if (self.remainingTimeLabel) {
+            [self.recordedTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.equalTo(self.userActionImageView).with.offset(kTimeLabelTopPadding);
+                make.centerX.equalTo(self.userActionImageView);
+            }];
+        }
     }
     
     if (_currentState == FLYRecordPlayingState) {
-        [self.remainingTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.userActionImageView).with.offset(kTimeLabelTopPadding);
-            make.centerX.equalTo(self.userActionImageView);
-        }];
+        if (self.remainingTimeLabel) {
+            [self.remainingTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.equalTo(self.userActionImageView).with.offset(kTimeLabelTopPadding);
+                make.centerX.equalTo(self.userActionImageView);
+            }];
+        }
     }
     
     if (self.recordBottomBar) {

@@ -17,6 +17,6 @@
 
 @interface FLYRecordBottomBar : UIView
 
-@property id<FLYRecordBottomBarDelegate> delegate;
+@property (nonatomic, weak) id<FLYRecordBottomBarDelegate> delegate;
 
 @end
