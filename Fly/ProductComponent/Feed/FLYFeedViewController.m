@@ -143,6 +143,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self updateViewConstraints];
 }
 
@@ -451,6 +452,17 @@
 - (void)_profileButtonTapped
 {
     
+}
+
+#pragma mark - Navigation bar and status bar
+- (UIColor *)preferredNavigationBarColor
+{
+    return [UIColor whiteColor];
+}
+
+- (UIColor*)preferredStatusBarColor
+{
+    return [UIColor whiteColor];
 }
 
 

@@ -31,11 +31,11 @@
 #define kOuterCircleRadius 150
 #define kOutCircleTopPadding 80
 #define kFilterModalHeight 80
+#define kMaxRetry 3
+#define kTimeLabelTopPadding 30
 #define kMultiPartName              @"media"
 #define kMultiPartFileName          @"dummyName.m4a"
 #define kMimeType                   @"audio/mp4a-latm"
-#define kMaxRetry           3
-
 
 @interface FLYRecordViewController ()<FLYUniversalViewControllerDelegate, FLYRecordBottomBarDelegate>
 
@@ -45,6 +45,7 @@
 @property (nonatomic) FLYCircleView *outerCircleView;
 @property (nonatomic) UIImageView *userActionImageView;
 @property (nonatomic) UILabel *recordedTimeLabel;
+@property (nonatomic) UILabel *remainingTimeLabel;
 @property (nonatomic) SVPulsingAnnotationView *pulsingView;
 @property (nonatomic, weak) PulsingHaloLayer *halo;
 @property (nonatomic) UIButton *trashButton;
@@ -53,6 +54,7 @@
 
 @property (nonatomic) FLYRecordState currentState;
 @property (nonatomic) NSTimer *recordTimer;
+@property (nonatomic) NSTimer *playbackTimer;
 @property (nonatomic) PulsingHaloLayer *pulsingHaloLayer;
 @property (nonatomic) DKCircleButton *voiceFilterButton;
 @property (nonatomic) FLYRecordVoiceFilterViewController *filterModalViewController;
@@ -64,7 +66,8 @@
 @property (nonatomic, readonly) UITapGestureRecognizer *userActionTapGestureRecognizer;
 @property (nonatomic, readonly) UITapGestureRecognizer *deleteRecordingTapGestureRecognizer;
 
-@property (nonatomic) NSInteger recordedSeconds;
+@property (nonatomic) NSInteger audioLength;
+@property (nonatomic) NSInteger remainingAudioLength;
 @property (nonatomic) NSTimer *levelsTimer;
 
 @property (nonatomic) NSString *mediaId;
@@ -90,7 +93,7 @@
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
     self.view.backgroundColor = [UIColor whiteColor];
     
-    _recordedSeconds = 0;
+    _audioLength = 0;
     [self _initVoiceRecording];
     
     [self _setupInitialViewState];
@@ -104,13 +107,19 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
+- (void)dealloc
+{
+    [self _cleanupData];
+}
+
 - (void)_initVoiceRecording
 {
-    __weak typeof(self) weakSelf = self;
+    @weakify(self)
     _completionBlock = ^{
-        __strong typeof(self) strongSelf = weakSelf;
-        strongSelf.currentState = FLYRecordCompleteState;
-        [strongSelf.userActionImageView setImage:[UIImage imageNamed:@"icon_record_play"]];
+        @strongify(self)
+        //Set currentState to FLYRecordRecordingState, so next state will be complete state
+        self.currentState = FLYRecordRecordingState;
+        [self _updateUserState];
     };
 }
 
@@ -168,16 +177,25 @@ static inline float translate(float val, float min, float max) {
     return (val - min) / (max - min);
 }
 
-- (void)dealloc
-{
-    NSLog(@"dealloc for record view controller");
-}
+
+#pragma mark - clean up 
 
 - (void)_cleanupData
 {
-    [_recordTimer invalidate];
-    _recordTimer = nil;
+    [self _cleanupTimer];
+    self.waver = nil;
 }
+
+- (void) _cleanupTimer
+{
+    [self.recordTimer invalidate];
+    self.recordTimer = nil;
+    
+    [self.playbackTimer invalidate];
+    self.playbackTimer = nil;
+}
+
+#pragma mark - Navigation bar 
 
 - (void)loadLeftBarButton
 {
@@ -331,7 +349,7 @@ static inline float translate(float val, float min, float max) {
 
 - (void)_setupRecordingViewState
 {
-    self.recordedSeconds = 0;
+    self.audioLength = 0;
     [self _setupRecordTimer];
     
     [_recordedTimeLabel removeFromSuperview];
@@ -378,6 +396,7 @@ static inline float translate(float val, float min, float max) {
 {
     
     [self.recordedTimeLabel removeFromSuperview];
+    [self.remainingTimeLabel removeFromSuperview];
 //    [_pulsingHaloLayer removeFromSuperlayer];
     
     _innerCircleView.hidden = YES;
@@ -393,7 +412,18 @@ static inline float translate(float val, float min, float max) {
 
 - (void)_setupPlayingViewState
 {
+    [self.remainingTimeLabel removeFromSuperview];
+    self.remainingTimeLabel = [UILabel new];
+    self.remainingTimeLabel.font = [UIFont fontWithName:@"Avenir-Book" size:21];
+    self.remainingTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.remainingTimeLabel.textColor = [UIColor flyColorRecordingTimer];
+    self.remainingTimeLabel.text = [NSString stringWithFormat:@":%d", (int)self.audioLength];
+    [self.view addSubview:self.remainingTimeLabel];
+    
+    [self _setupPlaybackTimer];
+    
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_pause"]];
+    [self updateViewConstraints];
 }
 
 - (void)_setupPauseViewState
@@ -408,6 +438,8 @@ static inline float translate(float val, float min, float max) {
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_pause"]];
 }
 
+
+#pragma mark - Recording state methods
 - (void)_setupRecordTimer
 {
     [self.recordTimer invalidate];
@@ -417,15 +449,38 @@ static inline float translate(float val, float min, float max) {
 
 - (void)_updateRecordingState
 {
-    if (self.recordedSeconds >= kMaxRecordTime) {
+    if (self.audioLength >= kMaxRecordTime) {
         [self.recordTimer invalidate];
         self.recordTimer = nil;
         [self _updateUserState];
         return;
     }
     
-    self.recordedSeconds++;
-    _recordedTimeLabel.text = [NSString stringWithFormat:@":%ld", kMaxRecordTime - self.recordedSeconds];
+    self.audioLength++;
+    _recordedTimeLabel.text = [NSString stringWithFormat:@":%ld", kMaxRecordTime - self.audioLength];
+    [self.view setNeedsLayout];
+}
+
+#pragma mark - Playing state methods
+- (void)_setupPlaybackTimer
+{
+    [self.playbackTimer invalidate];
+    self.playbackTimer = nil;
+    self.remainingAudioLength = self.audioLength;
+    self.playbackTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(_updatePlayingState) userInfo:nil repeats:YES];
+}
+
+- (void)_updatePlayingState
+{
+    if (self.remainingAudioLength <= 0) {
+        [self.playbackTimer invalidate];
+        self.playbackTimer = nil;
+        //state will be updated in audio completion block
+        return;
+    }
+    
+    self.remainingAudioLength--;
+    self.remainingTimeLabel.text = [NSString stringWithFormat:@":%ld", self.remainingAudioLength];
     [self.view setNeedsLayout];
 }
 
@@ -468,7 +523,14 @@ static inline float translate(float val, float min, float max) {
     
     if (_currentState == FLYRecordRecordingState) {
         [self.recordedTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.userActionImageView).with.offset(30);
+            make.bottom.equalTo(self.userActionImageView).with.offset(kTimeLabelTopPadding);
+            make.centerX.equalTo(self.userActionImageView);
+        }];
+    }
+    
+    if (_currentState == FLYRecordPlayingState) {
+        [self.remainingTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.userActionImageView).with.offset(kTimeLabelTopPadding);
             make.centerX.equalTo(self.userActionImageView);
         }];
     }
@@ -498,6 +560,8 @@ static inline float translate(float val, float min, float max) {
 {
     [self.waver removeFromSuperview];
     self.waver = nil;
+    
+    [self _cleanupTimer];
     
     switch (_currentState) {
         case FLYRecordInitialState:

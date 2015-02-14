@@ -11,6 +11,7 @@
 #import "FLYFeedTopicTableViewCell.h"
 #import "FLYReplyTableViewCell.h"
 #import "FLYBarButtonItem.h"
+#import "UIColor+FLYAddition.h"
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -45,14 +46,14 @@
     _topicTableView.delegate = self;
     _topicTableView.dataSource = self;
     [self.view addSubview:_topicTableView];
-    
-//    [self updateViewConstraints];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [_topicTableView reloadData];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)viewDidLayoutSubviews
@@ -165,6 +166,17 @@
     self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
     [self.view layoutIfNeeded];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - Navigation bar and status bar
+- (UIColor *)preferredNavigationBarColor
+{
+    return [UIColor flyBlue];
+}
+
+- (UIColor*)preferredStatusBarColor
+{
+    return [UIColor flyBlue];
 }
 
 @end
