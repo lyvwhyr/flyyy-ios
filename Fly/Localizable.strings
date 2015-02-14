@@ -5,3 +5,4 @@
 "FLYTapWhenDoneLabelText" = "Tap when you are done";
 
 "FLYGenericError" = "Something went wrong. Please try again later";
+"FLYMaxCaptionLengthExceeded" = "Maximal caption length exceeded";

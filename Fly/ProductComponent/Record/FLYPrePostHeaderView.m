@@ -7,10 +7,12 @@
 //
 
 #import "FLYPrePostHeaderView.h"
+#import "Dialog.h"
 
 #define kTopPadding 10
 #define kDescriptionTextTopPadding  3
 #define kDescpritonHeight   60
+#define kMaxCharLengh 120
 
 @interface FLYPrePostHeaderView()<UITextViewDelegate>
 
@@ -142,7 +144,12 @@
         return NO;
     }
     
-    return YES;
+    NSUInteger newLength = [textView.text length] + [text length] - range.length;
+    BOOL result = (newLength > kMaxCharLengh) ? NO : YES;
+    if (result == NO) {
+        [Dialog simpleToast:LOC(@"FLYMaxCaptionLengthExceeded")];
+    }
+    return result;
 }
 
 #pragma mark - UIResponder

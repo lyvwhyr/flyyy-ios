@@ -309,7 +309,6 @@
 		A6A57AA91A34345600610785 /* FLYTopicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57AA81A34345600610785 /* FLYTopicDetailViewController.m */; };
 		A6A57AAD1A34555400610785 /* FLYReplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57AAB1A34555400610785 /* FLYReplyTableViewCell.m */; };
 		A6BCBBFD1A848D16001F8AB0 /* FLYEndpointRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BCBBFC1A848D16001F8AB0 /* FLYEndpointRequest.m */; };
-		A6C67A3A1A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C67A391A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m */; };
 		A6CD56E41A47D891003486DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6CD56E31A47D891003486DD /* Localizable.strings */; };
 		A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */; };
 		A6CD56EB1A4802C3003486DD /* FLYDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56EA1A4802C3003486DD /* FLYDownloadManager.m */; };
@@ -805,8 +804,6 @@
 		A6A57AAB1A34555400610785 /* FLYReplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYReplyTableViewCell.m; sourceTree = "<group>"; };
 		A6BCBBFB1A848D16001F8AB0 /* FLYEndpointRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYEndpointRequest.h; sourceTree = "<group>"; };
 		A6BCBBFC1A848D16001F8AB0 /* FLYEndpointRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYEndpointRequest.m; sourceTree = "<group>"; };
-		A6C67A381A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostTitleTableViewCell.h; sourceTree = "<group>"; };
-		A6C67A391A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostTitleTableViewCell.m; sourceTree = "<group>"; };
 		A6CD56E31A47D891003486DD /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		A6CD56E51A47DAFB003486DD /* NSBundle+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+FLYAddition.h"; sourceTree = "<group>"; };
 		A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+FLYAddition.m"; sourceTree = "<group>"; };
@@ -1670,8 +1667,6 @@
 				A6A30D6E1A1B1DF8001AE1FE /* FLYCircleView.m */,
 				A61D18731A1F27E900D188B5 /* FLYPrePostViewController.h */,
 				A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */,
-				A6C67A381A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.h */,
-				A6C67A391A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m */,
 				A655783C1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.h */,
 				A655783D1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m */,
 				A655783F1A3ADCC3003102CD /* FLYPostButtonView.h */,
@@ -2224,7 +2219,6 @@
 				A6A0E4B81A1E76110036116E /* FLEXViewControllerExplorerViewController.m in Sources */,
 				A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */,
 				A60489961A85DAFD00C67480 /* FLYGroupManager.m in Sources */,
-				A6C67A3A1A398EEB00C0AE28 /* FLYPrePostTitleTableViewCell.m in Sources */,
 				A6A4EFB01A2BD4D500FD4066 /* FLYGroupListTableViewCell.m in Sources */,
 				A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */,
 				A6A0E4BE1A1E76110036116E /* FLEXHierarchyTableViewCell.m in Sources */,

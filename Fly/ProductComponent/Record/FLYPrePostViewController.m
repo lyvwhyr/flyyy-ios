@@ -8,7 +8,6 @@
 
 #import "FLYPrePostViewController.h"
 #import "UIColor+FLYAddition.h"
-#import "FLYPrePostTitleTableViewCell.h"
 #import "FLYPrePostChooseGroupTableViewCell.h"
 #import "FLYPostButtonView.h"
 #import "JGProgressHUD.h"
@@ -80,7 +79,6 @@
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.separatorColor = [UIColor clearColor];
     [self.view addSubview:_tableView];
-    [_tableView registerClass:[FLYPrePostTitleTableViewCell class] forCellReuseIdentifier:kFlyPrePostTitleCellIdentifier];
     [_tableView registerClass:[FLYPrePostChooseGroupTableViewCell class] forCellReuseIdentifier:kFlyPrePostChooseGroupCellIdentifier];
     
     //Add table background image
