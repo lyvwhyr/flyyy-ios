@@ -452,7 +452,7 @@ static inline float translate(float val, float min, float max) {
     }];
     
     if (_currentState == FLYRecordRecordingState) {
-        if (self.remainingTimeLabel) {
+        if (self.recordedTimeLabel) {
             [self.recordedTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.bottom.equalTo(self.userActionImageView).with.offset(kTimeLabelTopPadding);
                 make.centerX.equalTo(self.userActionImageView);
