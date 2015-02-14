@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 #import "AppDelegate.h"
 #import "FLYNavigationController.h"
 #import "FLYMainViewController.h"
@@ -69,6 +72,7 @@
 - (void)_setupThirdLibraries
 {
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    [Fabric with:@[CrashlyticsKit]];
 }
 
 @end

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A6263E8B1A187E1200C4C3BA"
-               BuildableName = "Fly.app"
+               BuildableName = "flyyapp.app"
                BlueprintName = "Fly"
                ReferencedContainer = "container:Fly.xcodeproj">
             </BuildableReference>
@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A6263EA41A187E1200C4C3BA"
-               BuildableName = "FlyTests.xctest"
+               BuildableName = "flyyappTests.xctest"
                BlueprintName = "FlyTests"
                ReferencedContainer = "container:Fly.xcodeproj">
             </BuildableReference>
@@ -47,7 +47,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A6263EA41A187E1200C4C3BA"
-               BuildableName = "FlyTests.xctest"
+               BuildableName = "flyyappTests.xctest"
                BlueprintName = "FlyTests"
                ReferencedContainer = "container:Fly.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A6263E8B1A187E1200C4C3BA"
-            BuildableName = "Fly.app"
+            BuildableName = "flyyapp.app"
             BlueprintName = "Fly"
             ReferencedContainer = "container:Fly.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A6263E8B1A187E1200C4C3BA"
-            BuildableName = "Fly.app"
+            BuildableName = "flyyapp.app"
             BlueprintName = "Fly"
             ReferencedContainer = "container:Fly.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A6263E8B1A187E1200C4C3BA"
-            BuildableName = "Fly.app"
+            BuildableName = "flyyapp.app"
             BlueprintName = "Fly"
             ReferencedContainer = "container:Fly.xcodeproj">
          </BuildableReference>
