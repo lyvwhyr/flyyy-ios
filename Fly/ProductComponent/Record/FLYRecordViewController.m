@@ -279,7 +279,7 @@ static inline float translate(float val, float min, float max) {
     self.glowView  = nil;
     
     self.glowView  = [UIImageView new];
-    self.glowView .translatesAutoresizingMaskIntoConstraints = NO;
+    self.glowView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.glowView  setImage:[UIImage imageNamed:@"icon_microphone"]];
     [self.view addSubview:self.glowView ];
     
