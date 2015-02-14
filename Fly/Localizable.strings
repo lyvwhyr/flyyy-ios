@@ -1,3 +1,5 @@
 "FLYPrePostDefaultText" = "Add a caption";
 "FLYPrePostTitleEmpty" = "Please enter the topic description.";
 "FLYPrePostGroupEmpty" = "Please choose a group.";
+"FLYTapToStartRecordingLabelText" = "Tap to start recording";
+"FLYTapWhenDoneLabelText" = "Tap when you are done";

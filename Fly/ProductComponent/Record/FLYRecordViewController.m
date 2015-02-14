@@ -94,7 +94,7 @@
     [self _initVoiceRecording];
     
     [self _setupInitialViewState];
-    [self _setupNavigationItem];
+//    [self _setupNavigationItem];
     
     [self updateViewConstraints];
 }
@@ -180,13 +180,15 @@ static inline float translate(float val, float min, float max) {
     _recordTimer = nil;
 }
 
-- (void)_setupNavigationItem
+- (void)loadLeftBarButton
 {
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setFrame:CGRectMake(0, 0, 32, 32)];
-    [backButton setImage:[UIImage imageNamed:@"icon_back_record"] forState:UIControlStateNormal];
-    [backButton addTarget:self action:@selector(_backButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    FLYBackBarButtonItem *barItem = [FLYBackBarButtonItem barButtonItem:YES];
+    @weakify(self)
+    barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+        @strongify(self)
+        [self _backButtonTapped];
+    };
+    self.navigationItem.leftBarButtonItem = barItem;
 }
 
 -(void)loadRightBarButton
@@ -464,7 +466,7 @@ static inline float translate(float val, float min, float max) {
     
     [self.userActionImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.centerY.equalTo(self.view).offset(-50);
+        make.centerY.equalTo(self.view).offset(-30);
     }];
     
     if (_currentState == FLYRecordRecordingState) {
