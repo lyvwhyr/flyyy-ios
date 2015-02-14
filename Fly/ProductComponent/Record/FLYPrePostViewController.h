@@ -10,4 +10,6 @@
 
 @interface FLYPrePostViewController : FLYUniversalViewController
 
+@property (nonatomic) NSInteger audioDuration;
+
 @end

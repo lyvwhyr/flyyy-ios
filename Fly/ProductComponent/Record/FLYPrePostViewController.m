@@ -277,7 +277,7 @@
                              @"media_id":[FLYAppStateManager sharedInstance].mediaId,
                              @"extension":@"m4a",
                              @"group_id":self.selectedGroup.groupId,
-                             @"audio_duration":@10
+                             @"audio_duration":@(self.audioDuration)
                              };
     NSString *baseURL = @"topics?token=secret123&&media_id=not_valid&user_id=1349703104000715808";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

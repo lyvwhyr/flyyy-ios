@@ -236,6 +236,7 @@ static inline float translate(float val, float min, float max) {
     [self _setupCompleteViewState];
     [FLYEndpointRequest uploadAudioFileServiceWithSuccessBlock:nil failureBlock:nil];
     FLYPrePostViewController *prePostVC = [FLYPrePostViewController new];
+    prePostVC.audioDuration = self.audioLength;
     [self.navigationController pushViewController:prePostVC animated:YES];
 }
 
