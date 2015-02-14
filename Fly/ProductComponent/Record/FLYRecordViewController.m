@@ -19,7 +19,6 @@
 #import "GBFlatButton.h"
 #import "DKCircleButton.h"
 #import "FLYBarButtonItem.h"
-#import "FLYRecordVoiceFilterViewController.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "NSDictionary+FLYAddition.h"
 #import "FLYNavigationBar.h"
@@ -37,7 +36,7 @@
 #define kMultiPartFileName          @"dummyName.m4a"
 #define kMimeType                   @"audio/mp4a-latm"
 
-@interface FLYRecordViewController ()<FLYUniversalViewControllerDelegate, FLYRecordBottomBarDelegate>
+@interface FLYRecordViewController ()<FLYRecordBottomBarDelegate>
 
 @property (nonatomic) UIBarButtonItem *rightNavigationButton;
 
@@ -295,20 +294,6 @@ static inline float translate(float val, float min, float max) {
     }
 }
 
-#pragma mark - FLYRecordVoiceFilterViewController
-- (void)normalFilterButtonTapped:(id)button
-{
-    UALog(@"normal");
-    [[FLYAudioStateManager sharedInstance] removeFilter];
-}
-
-- (void)adjustPitchFilterButtonTapped:(id)button
-{
-    UALog(@"adjust pitch");
-    [[FLYAudioStateManager sharedInstance] applyFilter];
-}
-
-
 - (void)_setupInitialViewState
 {
     [self.levelsTimer invalidate];
@@ -321,8 +306,6 @@ static inline float translate(float val, float min, float max) {
     
     [self.recordBottomBar removeFromSuperview];
     self.recordBottomBar = nil;
-    
-//    self.view.backgroundColor = [UIColor whiteColor];
     _currentState = FLYRecordInitialState;
     
 //    _outerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kOuterCircleRadius, kOuterCircleRadius) radius:kOuterCircleRadius color:[UIColor whiteColor]];
@@ -495,12 +478,6 @@ static inline float translate(float val, float min, float max) {
 
 -(void)updateViewConstraints
 {
-//    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.leading.equalTo(@0);
-//        make.top.equalTo(@(0));
-//        make.width.equalTo(@(100));
-//        make.height.equalTo(@(200));
-//    }];
     
 //    [self.outerCircleView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.width.equalTo(@(kOuterCircleRadius * 2));
@@ -518,7 +495,7 @@ static inline float translate(float val, float min, float max) {
     
     [self.userActionImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.centerY.equalTo(self.view).offset(-30);
+        make.centerY.equalTo(self.view).offset(-50);
     }];
     
     if (_currentState == FLYRecordRecordingState) {
