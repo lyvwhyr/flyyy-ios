@@ -17,6 +17,14 @@ typedef NS_ENUM(NSInteger, FLYRecordState)
     FLYRecordPauseState
 };
 
+typedef NS_ENUM(NSInteger, FLYRecordingType)
+{
+    RecordingForTopic = 0,
+    RecordingForReply
+};
+
 @interface FLYRecordViewController : FLYUniversalViewController
+
+@property (nonatomic) FLYRecordingType recordingType;
 
 @end

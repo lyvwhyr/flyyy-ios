@@ -6,3 +6,4 @@
 
 "FLYGenericError" = "Something went wrong. Please try again later";
 "FLYMaxCaptionLengthExceeded" = "Maximal caption length exceeded";
+"FLYLessThanMinimalRecordingLength" = "Recording must be not less than %ld seconds";

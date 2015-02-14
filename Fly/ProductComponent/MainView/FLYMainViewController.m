@@ -209,6 +209,7 @@
 - (void)_recordButtonTapped
 {
     FLYRecordViewController *recordViewController = [FLYRecordViewController new];
+    recordViewController.recordingType = RecordingForTopic;
     UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
     [self presentViewController:navigationController animated:NO completion:nil];
 }

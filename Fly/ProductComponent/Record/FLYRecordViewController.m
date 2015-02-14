@@ -27,6 +27,7 @@
 #import "Waver.h"
 #import "FLYEndpointRequest.h"
 #import "UIView+Glow.h"
+#import "Dialog.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -34,6 +35,7 @@
 #define kFilterModalHeight 80
 #define kMaxRetry 3
 #define kTimeLabelTopPadding 30
+#define kMinimalRecordingLength 3
 
 @interface FLYRecordViewController ()<FLYRecordBottomBarDelegate>
 
@@ -525,6 +527,12 @@ static inline float translate(float val, float min, float max) {
         }
         case FLYRecordRecordingState:
         {
+            if (self.recordingType == RecordingForTopic && self.audioLength <= kMinimalRecordingLength) {
+                [Dialog simpleToast:[NSString stringWithFormat:LOC(@"FLYLessThanMinimalRecordingLength"), kMinimalRecordingLength]];
+                [self _setupInitialViewState];
+                return;
+            }
+            
             _currentState = FLYRecordCompleteState;
             [[FLYAudioStateManager sharedInstance] stopRecord];
             [self _setupCompleteViewState];
@@ -532,8 +540,6 @@ static inline float translate(float val, float min, float max) {
         }
         case FLYRecordCompleteState:
         {
-            //TODO:add a minimal length
-            
             _currentState = FLYRecordPlayingState;
             [[FLYAudioStateManager sharedInstance] playAudioWithCompletionBlock:_completionBlock];
             [self _setupPlayingViewState];
