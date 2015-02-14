@@ -327,7 +327,7 @@ static inline float translate(float val, float min, float max) {
             Float32 inputAvg, inputPeak, outputAvg, outputPeak;
             [self.audioController inputAveragePowerLevel:&inputAvg peakHoldLevel:&inputPeak];
             [self.audioController outputAveragePowerLevel:&outputAvg peakHoldLevel:&outputPeak];
-            CGFloat normalizedValue = pow (10,  1.4* (inputAvg - 20) / 40);
+            CGFloat normalizedValue = pow (10,  1.4* (inputAvg - 10) / 40);
             weakWaver.level = normalizedValue;
         };
         [self.view addSubview:self.waver];
