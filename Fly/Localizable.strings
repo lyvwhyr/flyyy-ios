@@ -3,3 +3,5 @@
 "FLYPrePostGroupEmpty" = "Please choose a group.";
 "FLYTapToStartRecordingLabelText" = "Tap to start recording";
 "FLYTapWhenDoneLabelText" = "Tap when you are done";
+
+"FLYGenericError" = "Something went wrong. Please try again later";

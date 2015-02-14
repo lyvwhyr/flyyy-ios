@@ -8,8 +8,6 @@
 
 #import "FLYUniversalViewController.h"
 
-#define kMediaIdGeneratedNotification @"kMediaIdGeneratedNotification"
-
 typedef NS_ENUM(NSInteger, FLYRecordState)
 {
     FLYRecordInitialState = 0,

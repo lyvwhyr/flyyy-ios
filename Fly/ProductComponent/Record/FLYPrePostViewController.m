@@ -13,6 +13,8 @@
 #import "FLYPostButtonView.h"
 #import "JGProgressHUD.h"
 #import "JGProgressHUDSuccessIndicatorView.h"
+#import "JGProgressHUDIndicatorView.h"
+#import "JGProgressHUDRingIndicatorView.h"
 #import "Dialog.h"
 #import "FLYRecordViewController.h"
 #import "AFHTTPRequestOperationManager.h"
@@ -23,6 +25,7 @@
 #import "FLYNavigationBar.h"
 #import "FLYPrePostHeaderView.h"
 #import "FLYFeedViewController.h"
+#import "FLYEndpointRequest.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -31,7 +34,7 @@
 #define kTitleTextCellHeight 105
 #define kLeftPadding    15
 
-@interface FLYPrePostViewController () <UITableViewDataSource, UITableViewDelegate, FLYPrePostHeaderViewDelegate>
+@interface FLYPrePostViewController () <UITableViewDataSource, UITableViewDelegate, FLYPrePostHeaderViewDelegate, JGProgressHUDDelegate>
 
 @property (nonatomic) FLYPrePostHeaderView *headerView;
 @property (nonatomic) UITableView *tableView;
@@ -43,6 +46,10 @@
 
 @property (nonatomic) NSIndexPath *selectedIndex;
 @property (nonatomic) FLYGroup *selectedGroup;
+
+@property (nonatomic, copy) mediaUploadSuccessBlock successBlock;
+@property (nonatomic, copy) mediaUploadFailureBlock failureBlock;
+
 
 @end
 
@@ -241,6 +248,21 @@
     NSString *mediaId = [FLYAppStateManager sharedInstance].mediaId;
     if (mediaId) {
         [self _serviceCreateTopic];
+    } else {
+        //If media id is still empty at this point, try to upload the media again.
+        JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        HUD.delegate = self;
+        HUD.textLabel.text = @"Posting...";
+        [HUD showInView:self.view];
+        @weakify(self)
+        [FLYEndpointRequest uploadAudioFileServiceWithSuccessBlock:^(NSString *mediaId) {
+            @strongify(self);
+            [HUD dismiss];
+            [self _serviceCreateTopic];
+        } failureBlock:^{
+            [HUD dismiss];
+            [Dialog simpleToast:LOC(@"FLYGenericError")];
+        }];
     }
 }
 

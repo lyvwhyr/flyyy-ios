@@ -8,8 +8,14 @@
 
 #import "AFHTTPRequestOperationManager.h"
 #import "FLYEndpointRequest.h"
+#import "NSDictionary+FLYAddition.h"
 
 @implementation FLYEndpointRequest
+
+#define kMultiPartName @"media"
+#define kMultiPartFileName @"dummyName.m4a"
+#define kMimeType @"audio/mp4a-latm"
+#define kMediaIdGeneratedNotification @"kMediaIdGeneratedNotification"
 
 + (void)getGroupListService:(GroupListServiceResponseBlock)responseBlock
 {
@@ -20,6 +26,28 @@
         responseBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         UALog(@"Post error %@", error);
+    }];
+}
+
+//curl -X POST -F "media=@/Users/xingxingxu/Desktop/11223632430542967739.m4a" -i "http://localhost:3000/v1/media/upload?token=secret123&user_id=1349703091376390371"
++ (void)uploadAudioFileServiceWithSuccessBlock:(mediaUploadSuccessBlock)successBlock failureBlock:(mediaUploadFailureBlock)fail
+{
+    [FLYAppStateManager sharedInstance].mediaId = nil;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:@"media/upload?token=secret123&user_id=1349703091376390371" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        NSData *audioData=[NSData dataWithContentsOfFile:[FLYAppStateManager sharedInstance].recordingFilePath];
+        [formData appendPartWithFileData:audioData name: kMultiPartName fileName: kMultiPartFileName mimeType:kMimeType];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [FLYAppStateManager sharedInstance].mediaId = [[responseObject fly_objectOrNilForKey:@"media_id"] stringValue];
+        if (successBlock) {
+            successBlock([FLYAppStateManager sharedInstance].mediaId);
+        }
+        UALog(@"Post audio file response: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (fail) {
+            fail();
+        }
+        NSLog(@"Error: %@", error);
     }];
 }
 

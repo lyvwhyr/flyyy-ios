@@ -25,6 +25,7 @@
 #import "FLYNavigationController.h"
 #import "FLYRecordBottomBar.h"
 #import "Waver.h"
+#import "FLYEndpointRequest.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -32,9 +33,6 @@
 #define kFilterModalHeight 80
 #define kMaxRetry 3
 #define kTimeLabelTopPadding 30
-#define kMultiPartName              @"media"
-#define kMultiPartFileName          @"dummyName.m4a"
-#define kMimeType                   @"audio/mp4a-latm"
 
 @interface FLYRecordViewController ()<FLYRecordBottomBarDelegate>
 
@@ -56,7 +54,6 @@
 @property (nonatomic) NSTimer *playbackTimer;
 @property (nonatomic) PulsingHaloLayer *pulsingHaloLayer;
 @property (nonatomic) DKCircleButton *voiceFilterButton;
-@property (nonatomic) FLYRecordVoiceFilterViewController *filterModalViewController;
 
 @property (nonatomic) AEAudioController *audioController;
 @property (nonatomic) AEAudioFilePlayer *audioPlayer;
@@ -234,65 +231,13 @@ static inline float translate(float val, float min, float max) {
 - (void)_nextBarButtonTapped
 {
     [self _setupCompleteViewState];
-    [self _uploadAudioFileService];
-    
+    [FLYEndpointRequest uploadAudioFileServiceWithSuccessBlock:nil failureBlock:nil];
     FLYPrePostViewController *prePostVC = [FLYPrePostViewController new];
     [self.navigationController pushViewController:prePostVC animated:YES];
 }
 
 
-#pragma mark - upload audio API
-//curl -X POST -F "media=@/Users/xingxingxu/Desktop/11223632430542967739.m4a" -i "http://localhost:3000/v1/media/upload?token=secret123&user_id=1349703091376390371"
-- (void)_uploadAudioFileService
-{
-    [FLYAppStateManager sharedInstance].mediaId = nil;
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"media/upload?token=secret123&user_id=1349703091376390371" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        NSData *audioData=[NSData dataWithContentsOfFile:[FLYAppStateManager sharedInstance].recordingFilePath];
-        [formData appendPartWithFileData:audioData name: kMultiPartName fileName: kMultiPartFileName mimeType:kMimeType];
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [FLYAppStateManager sharedInstance].mediaId = [[responseObject fly_objectOrNilForKey:@"media_id"] stringValue];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kMediaIdGeneratedNotification object:nil];
-        UALog(@"Post audio file response: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        if (self.retryCount > kMaxRetry) {
-            return;
-        }
-        self.retryCount++;
-        [self _uploadAudioFileService];
-    }];
-}
 
-
-#pragma mark - recording complete actions
-- (void)_voiceFilterButtonTapped
-{
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = CGRectGetWidth(screenBounds);
-    CGFloat screenHeight = CGRectGetHeight(screenBounds);
-    if (self.childViewControllers.count == 0) {
-        self.filterModalViewController = [FLYRecordVoiceFilterViewController new];
-        self.filterModalViewController.delegate = self;
-        [self addChildViewController:self.filterModalViewController];
-        self.filterModalViewController.view.frame = CGRectMake(0, screenHeight, screenWidth, kFilterModalHeight);
-        self.filterModalViewController.view.backgroundColor = [UIColor whiteColor];
-        [self.view addSubview:self.filterModalViewController.view];
-        [UIView animateWithDuration:0.2 animations:^{
-            self.filterModalViewController.view.frame = CGRectMake(0, screenHeight - kFilterModalHeight, screenWidth, kFilterModalHeight);;
-        } completion:^(BOOL finished) {
-            [self.filterModalViewController didMoveToParentViewController:self];
-        }];
-    }else{
-        [UIView animateWithDuration:0.2 animations:^{
-            self.filterModalViewController.view.frame = CGRectMake(0, screenHeight, screenWidth, kFilterModalHeight);
-        } completion:^(BOOL finished) {
-            [self.filterModalViewController.view removeFromSuperview];
-            [self.filterModalViewController removeFromParentViewController];
-            self.filterModalViewController = nil;
-        }];
-    }
-}
 
 - (void)_setupInitialViewState
 {
