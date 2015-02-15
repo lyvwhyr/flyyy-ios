@@ -9,9 +9,12 @@
 #import "FLYTopicDetailViewController.h"
 #import "FLYBarButtonItem.h"
 #import "FLYFeedTopicTableViewCell.h"
-#import "FLYReplyTableViewCell.h"
+#import "FLYTopicDetailReplyCell.h"
 #import "FLYBarButtonItem.h"
 #import "UIColor+FLYAddition.h"
+#import "FLYTopic.h"
+#import "FLYTopicDetailReplyCell.h"
+#import "FLYTopicDetailTopicCell.h"
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -25,6 +28,26 @@
 
 @implementation FLYTopicDetailViewController
 
+#define kFlyTopicDetailViewControllerTopicCellIdentifier @"flyTopicDetailViewControllerTopicCellIdentifier"
+#define kFlyTopicDetailViewControllerReplyCellIdentifier @"flyTopicDetailViewControllerReplyCellIdentifier"
+
+- (instancetype)initWithTopic:(FLYTopic *)topic
+{
+    if (self = [super init]) {
+        _replies = [NSMutableArray new];
+        [_replies addObject:@"1"];
+        [_replies addObject:@"2"];
+        [_replies addObject:@"3"];
+    }
+    return self;
+}
+
+- (instancetype)initWithTopicId:(NSString *)topicId
+{
+    return self;
+}
+
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
@@ -36,15 +59,23 @@
     return self;
 }
 
+- (void)dealloc
+{
+    UALog(@"dealloc");
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.view.backgroundColor = [UIColor whiteColor];
-    _topicTableView = [UITableView new];
-    _topicTableView.delegate = self;
-    _topicTableView.dataSource = self;
+    
+    self.topicTableView = [UITableView new];
+    self.topicTableView.delegate = self;
+    self.topicTableView.dataSource = self;
+    [self.topicTableView registerClass:[FLYTopicDetailTopicCell class] forCellReuseIdentifier:kFlyTopicDetailViewControllerTopicCellIdentifier];
+    [self.topicTableView registerClass:[FLYTopicDetailReplyCell class] forCellReuseIdentifier:kFlyTopicDetailViewControllerReplyCellIdentifier];
     [self.view addSubview:_topicTableView];
 }
 
@@ -52,8 +83,7 @@
 {
     [super viewWillAppear:animated];
     [_topicTableView reloadData];
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 - (void)viewDidLayoutSubviews
@@ -99,7 +129,7 @@
 {
     UITableViewCell *cell;
     if (indexPath.section == FlyTopicCellSectionIndex) {
-        static NSString *cellIdentifier = @"flyTopicDetailViewControllerTopicCellIdentifier";
+        static NSString *cellIdentifier = kFlyTopicDetailViewControllerTopicCellIdentifier;
         cell = (FLYFeedTopicTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
             cell = [[FLYFeedTopicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
@@ -111,10 +141,10 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     } else {
-        static NSString *cellIdentifier = @"flyTopicDetailViewControllerReplyCellIdentifier";
-        cell = (FLYReplyTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        static NSString *cellIdentifier = kFlyTopicDetailViewControllerReplyCellIdentifier;
+        cell = (FLYTopicDetailReplyCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
-            cell = [[FLYReplyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+            cell = [[FLYTopicDetailReplyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
         if (NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)
         {
@@ -141,7 +171,7 @@
 - (void)loadLeftBarButton
 {
     if ([self.navigationController.viewControllers count] > 1) {
-        FLYBackBarButtonItem *barItem = [FLYBackBarButtonItem barButtonItem:YES];
+        FLYBlueBackBarButtonItem *barItem = [FLYBlueBackBarButtonItem barButtonItem:YES];
         __weak typeof(self)weakSelf = self;
         barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
             __strong typeof(self) strongSelf = weakSelf;
@@ -151,6 +181,8 @@
     }
 }
 
+
+#pragma mark - Navigation bar
 - (void)loadRightBarButton
 {
     FLYFlagTopicBarButtonItem *barItem = [FLYFlagTopicBarButtonItem barButtonItem:NO];
@@ -171,12 +203,12 @@
 #pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor
 {
-    return [UIColor flyBlue];
+    return [UIColor whiteColor];
 }
 
 - (UIColor*)preferredStatusBarColor
 {
-    return [UIColor flyBlue];
+    return [UIColor whiteColor];
 }
 
 @end

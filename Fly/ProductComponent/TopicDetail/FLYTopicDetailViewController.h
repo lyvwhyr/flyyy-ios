@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
+@class FLYTopic;
+
 #import "FLYUniversalViewController.h"
 
 typedef NS_ENUM(NSInteger, FlyTopicDetailCellType) {
@@ -14,5 +16,8 @@ typedef NS_ENUM(NSInteger, FlyTopicDetailCellType) {
 };
 
 @interface FLYTopicDetailViewController : FLYUniversalViewController
+
+- (instancetype)initWithTopicId:(NSString *)topicId;
+- (instancetype)initWithTopic:(FLYTopic *)topic;
 
 @end

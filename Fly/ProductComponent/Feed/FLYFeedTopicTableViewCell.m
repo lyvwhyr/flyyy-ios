@@ -127,14 +127,6 @@
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_commentButton sizeToFit];
         [self.topicContentView addSubview:_commentButton];
-
-//
-//        _postAtLabel = [UILabel new];
-//        _postAtLabel.text = @"19s";
-//        _postAtLabel.font = [UIFont systemFontOfSize:13];
-//        _postAtLabel.textColor = [UIColor flyFeedGrey];
-//        _postAtLabel.translatesAutoresizingMaskIntoConstraints = NO;
-//
     }
     return self;
 }

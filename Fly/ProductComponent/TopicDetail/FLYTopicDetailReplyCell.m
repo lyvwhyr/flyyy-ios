@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-#import "FLYReplyTableViewCell.h"
+#import "FLYTopicDetailReplyCell.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYReplyPlayView.h"
 #import "FLYIconButton.h"
 
-@interface FLYReplyTableViewCell()
+@interface FLYTopicDetailReplyCell()
 
 @property (nonatomic) UIImageView *avatarImageView;
 @property (nonatomic) UILabel *userNameLabel;
@@ -24,7 +24,7 @@
 
 @end
 
-@implementation FLYReplyTableViewCell
+@implementation FLYTopicDetailReplyCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FLYReplyTableViewCell : UITableViewCell
+@interface FLYTopicDetailReplyCell : UITableViewCell
 
 @end
