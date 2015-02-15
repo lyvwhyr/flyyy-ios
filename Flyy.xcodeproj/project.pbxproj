@@ -317,6 +317,7 @@
 		A6D949F31A9089FC003D4265 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6D949F01A9089FC003D4265 /* Info.plist */; };
 		A6D949F41A9089FD003D4265 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D949F21A9089FC003D4265 /* UICKeyChainStore.m */; };
 		A6D949F61A9090BD003D4265 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D949F51A9090BD003D4265 /* Security.framework */; };
+		A6D949F91A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D949F81A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
@@ -821,6 +822,8 @@
 		A6D949F11A9089FC003D4265 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
 		A6D949F21A9089FC003D4265 /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
 		A6D949F51A9090BD003D4265 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A6D949F71A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+RMSaveCustomObject.h"; sourceTree = "<group>"; };
+		A6D949F81A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+RMSaveCustomObject.m"; sourceTree = "<group>"; };
 		A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
@@ -1099,6 +1102,8 @@
 		A6263EBE1A1887DB00C4C3BA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				A6D949F71A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.h */,
+				A6D949F81A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m */,
 				A62B25551A8FECFF007E11C3 /* UIView+Glow.h */,
 				A62B25561A8FECFF007E11C3 /* UIView+Glow.m */,
 				A6A57A991A34103D00610785 /* UIImage+ResizeMagick.h */,
@@ -2264,6 +2269,7 @@
 				A60489961A85DAFD00C67480 /* FLYGroupManager.m in Sources */,
 				A6A4EFB01A2BD4D500FD4066 /* FLYGroupListTableViewCell.m in Sources */,
 				A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */,
+				A6D949F91A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				A6A0E4BE1A1E76110036116E /* FLEXHierarchyTableViewCell.m in Sources */,
 				A6048A3E1A85E63100C67480 /* EXTNil.m in Sources */,
 				A6A0E49C1A1E76110036116E /* FLEXFieldEditorView.m in Sources */,

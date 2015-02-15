@@ -43,11 +43,9 @@
         _audioDuration = [dict fly_integerForKey:@"audio_duration"];
         _createdAt = [[dict fly_objectOrNilForKey:@"created_at"] stringValue];
         _updatedAt = [[dict fly_objectOrNilForKey:@"updated_at"] stringValue];
-        _user = [[FLYUser alloc] initWithDictory:[dict fly_dictionaryForKey:@"user"]];
+        _user = [[FLYUser alloc] initWithDictionary:[dict fly_dictionaryForKey:@"user"]];
         _group = [[FLYGroup alloc] initWithDictory:[dict fly_dictionaryForKey:@"group"]];
         
-        //TODO:remove
-        NSInteger count = [dict fly_integerForKey:@"count"];
     }
     return self;
 }

@@ -25,6 +25,7 @@
 #import "FLYPrePostHeaderView.h"
 #import "FLYFeedViewController.h"
 #import "FLYEndpointRequest.h"
+#import "FLYUser.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -244,19 +245,21 @@
     }
     
     NSString *mediaId = [FLYAppStateManager sharedInstance].mediaId;
+    NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
     if (mediaId) {
-        [self _serviceCreateTopic];
+        [self _serviceCreateTopicWithParams:@{@"user_id":userId}];
     } else {
         //If media id is still empty at this point, try to upload the media again.
         JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         HUD.delegate = self;
         HUD.textLabel.text = @"Posting...";
         [HUD showInView:self.view];
+        
         @weakify(self)
-        [FLYEndpointRequest uploadAudioFileServiceWithSuccessBlock:^(NSString *mediaId) {
+        [FLYEndpointRequest uploadAudioFileServiceWithUserId:userId successBlock:^(NSString *mediaId) {
             @strongify(self);
             [HUD dismiss];
-            [self _serviceCreateTopic];
+            [self _serviceCreateTopicWithParams:@{@"user_id":userId}];
         } failureBlock:^{
             [HUD dismiss];
             [Dialog simpleToast:LOC(@"FLYGenericError")];
@@ -266,15 +269,16 @@
 
 //curl -X POST -i -d "topic_title=abc" -d "media_id=418819451816822124" "localhost:3000/v1/topics?token=secret123&media_id=not_valid&group_id=12345&audio_duration=10&extension=m4a"
 #pragma mark - Service
-- (void)_serviceCreateTopic
+- (void)_serviceCreateTopicWithParams:(NSDictionary *)dict
 {
+    NSString *userId = [dict objectForKey:@"user_id"];
     NSDictionary *params = @{@"topic_title":self.topicTitle,
                              @"media_id":[FLYAppStateManager sharedInstance].mediaId,
                              @"extension":@"m4a",
                              @"group_id":self.selectedGroup.groupId,
                              @"audio_duration":@(self.audioDuration)
                              };
-    NSString *baseURL = @"topics?token=secret123&&media_id=not_valid&user_id=1349703104000715808";
+    NSString *baseURL =  [NSString stringWithFormat:@"topics?token=secret123&&media_id=not_valid&user_id=%@", userId];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:baseURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         FLYTopic *post = [[FLYTopic alloc] initWithDictory:responseObject];

@@ -30,11 +30,12 @@
 }
 
 //curl -X POST -F "media=@/Users/xingxingxu/Desktop/11223632430542967739.m4a" -i "http://localhost:3000/v1/media/upload?token=secret123&user_id=1349703091376390371"
-+ (void)uploadAudioFileServiceWithSuccessBlock:(mediaUploadSuccessBlock)successBlock failureBlock:(mediaUploadFailureBlock)fail
++ (void)uploadAudioFileServiceWithUserId:(NSString *)userId successBlock:(mediaUploadSuccessBlock)successBlock failureBlock:(mediaUploadFailureBlock)fail
 {
     [FLYAppStateManager sharedInstance].mediaId = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"media/upload?token=secret123&user_id=1349703091376390371" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    NSString *urlStr = [NSString stringWithFormat:@"media/upload?token=secret123&user_id=%@", userId];
+    [manager POST:urlStr parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSData *audioData=[NSData dataWithContentsOfFile:[FLYAppStateManager sharedInstance].recordingFilePath];
         [formData appendPartWithFileData:audioData name: kMultiPartName fileName: kMultiPartFileName mimeType:kMimeType];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -48,6 +49,17 @@
             fail();
         }
         NSLog(@"Error: %@", error);
+    }];
+}
+
++ (void)createUserWithUsername:(NSString *)username deviceId:(NSString *)deviceId successBlock:(userCreationSuccessBlock)success
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"device_id":deviceId, @"user_name":username};
+    [manager POST:@"users" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        success(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        UALog(@"Post error %@", error);
     }];
 }
 

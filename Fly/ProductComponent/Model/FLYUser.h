@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FLYUser : NSObject
+@interface FLYUser : NSObject <NSCoding>
 
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *userName;
+@property (nonatomic, copy) NSString *deviceId;
+@property (nonatomic, copy) NSString *createdAt;
 
-- (instancetype)initWithDictory:(NSDictionary *)dict;
+- (instancetype)initWithDictionary:(NSDictionary *)dict;
 
 @end

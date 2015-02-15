@@ -10,6 +10,7 @@
 #import "FLYServerConfig.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "UIDevice+FLYAddition.h"
+#import "FLYUser.h"
 
 @implementation FLYAppStateManager
 

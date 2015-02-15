@@ -28,6 +28,7 @@
 #import "FLYEndpointRequest.h"
 #import "UIView+Glow.h"
 #import "Dialog.h"
+#import "FLYUser.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -244,7 +245,8 @@ static inline float translate(float val, float min, float max) {
 - (void)_nextBarButtonTapped
 {
     [self _setupCompleteViewState];
-    [FLYEndpointRequest uploadAudioFileServiceWithSuccessBlock:nil failureBlock:nil];
+    NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
+    [FLYEndpointRequest uploadAudioFileServiceWithUserId:userId successBlock:nil failureBlock:nil];
     FLYPrePostViewController *prePostVC = [FLYPrePostViewController new];
     prePostVC.audioDuration = self.audioLength;
     [self.navigationController pushViewController:prePostVC animated:YES];

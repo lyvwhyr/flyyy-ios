@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
+@class FLYUser;
+
 @interface FLYAppStateManager : NSObject
 
 @property (nonatomic) BOOL isAutoPlayEnabled;
@@ -14,6 +16,7 @@
 @property (nonatomic) NSArray *groupList;
 @property (nonatomic) NSString *deviceToken;
 @property (nonatomic) NSString *deviceId;
+@property (nonatomic) FLYUser *currentUser;
 
 
 + (instancetype)sharedInstance;
