@@ -4,6 +4,10 @@
 "FLYTapToStartRecordingLabelText" = "Tap to start recording";
 "FLYTapWhenDoneLabelText" = "Tap when you are done";
 
+//Home feed
+"FLYAutoPlayEnabledHudText" = "Auto play enabled";
+"FLYAutoPlayDisabledHudText" = "Auto play disabled";
+
 "FLYGenericError" = "Something went wrong. Please try again later";
 "FLYMaxCaptionLengthExceeded" = "Maximal caption length exceeded";
 "FLYLessThanMinimalRecordingLength" = "Recording must be not less than %ld seconds";

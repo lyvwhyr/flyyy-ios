@@ -9,7 +9,6 @@
 #import "FLYFeedTopicTableViewCell.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYIconButton.h"
-#import "FLYInlineActionView.h"
 #import "UIImage+FLYAddition.h"
 #import "FLYTopic.h"
 #import "FLYIconButton.h"
@@ -33,12 +32,6 @@
 @property (nonatomic) FLYIconButton *likeButton;
 @property (nonatomic) UIButton *groupNameButton;
 @property (nonatomic) FLYIconButton *commentButton;
-
-
-//TODO:remove unused
-@property (nonatomic) UILabel *postAtLabel;
-@property (nonatomic) FLYIconButton *categoryButton;
-@property (nonatomic) FLYInlineActionView *inlineActionView;
 
 
 @property (nonatomic, copy) NSString *topicTitleString;
@@ -79,9 +72,11 @@
         
         //topic content view
         _topicContentView = [UIView new];
+        _topicContentView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_topicContentView];
         
         _speechBubbleView = [UIImageView new];
+        _speechBubbleView.translatesAutoresizingMaskIntoConstraints = NO;
         UIImage* image = [UIImage imageNamed:@"icon_homefeed_speech_bubble"];
         UIEdgeInsets insets = UIEdgeInsetsMake(40, 40, 70, 50);
         image = [image resizableImageWithCapInsets:insets];
@@ -119,6 +114,7 @@
         [self.topicContentView addSubview:_likeButton];
         
         _groupNameButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _groupNameButton.translatesAutoresizingMaskIntoConstraints = NO;
         _groupNameButton.titleLabel.font = inlineActionFont;
         [_groupNameButton setTitleColor:[UIColor flyBlue] forState:UIControlStateNormal];
         _groupNameButton.titleEdgeInsets = UIEdgeInsetsZero;
@@ -186,67 +182,90 @@
     [super updateConstraints];
 }
 
-- (void)_addconstraints
+- (void)_updateViewConstraints:(BOOL)update
 {
-    [_timelineImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    void (^timelineConstraintBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(0);
         make.leading.equalTo(self).offset(kHomeTimeLineLeftPadding);
         make.height.equalTo(self);
-    }];
+    };
     
     CGFloat topicContentLeftPadding = kHomeTimeLineLeftPadding + CGRectGetWidth(_timelineImageView.bounds)/2 + CGRectGetWidth(_playButton.bounds)/2 + kTopicContentLeftPadding;
-    [self.topicContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+    void (^topicContentViewConstraintBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(2);
         make.leading.equalTo(self.contentView).offset(topicContentLeftPadding);
         make.trailing.equalTo(self.contentView).offset(-kTopicContentRightPadding);
         make.bottom.equalTo(self.contentView).offset(-kTopicContentBottomPadding);
-    }];
-    
-    [self.speechBubbleView mas_makeConstraints:^(MASConstraintMaker *make) {
+    };
+
+    void (^speechBubbleViewBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
         make.top.equalTo(self.topicContentView).offset(0);
         make.leading.equalTo(self.topicContentView).offset(0);
         make.trailing.equalTo(self.topicContentView).offset(0);
         make.bottom.equalTo(self.topicContentView).offset(-10);
-    }];
-    
-    [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    };
+
+    void (^playButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.timelineImageView);
         make.bottom.equalTo(self.mas_bottom);
-    }];
-    
-    [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    };
+
+    void (^userNameLabelBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
         make.top.equalTo(self.topicContentView).offset(5);
         make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
         make.width.lessThanOrEqualTo(self.topicContentView).offset(kUsernameOffset);
-    }];
+    };
     
-    [self.shareButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    void (^shareButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
         make.top.equalTo(self.topicContentView).offset(5);
         make.trailing.equalTo(self.speechBubbleView.mas_trailing).offset(-kElementRightPadding);
-    }];
-    
-    [self.topicTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+    };
+
+    void (^topicTitleBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
         make.top.equalTo(self.userNameLabel.mas_bottom).offset(5);
         make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
         make.trailing.equalTo(self.topicContentView).offset(-10);
-    }];
-    
-    [self.likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    };
+
+    void (^likeButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
         make.top.equalTo(self.topicTitle.mas_bottom).offset(kInlineActionTopPadding);
         make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
-    }];
+    };
     
-    [self.groupNameButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    void (^groupNameButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.likeButton);
         make.centerX.equalTo(self.speechBubbleView);
-    }];
+    };
     
-    [self.commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    void (^commentButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.likeButton);
         make.trailing.equalTo(self.speechBubbleView.mas_trailing).offset(-kElementRightPadding);
-    }];
+    };
     
-//    [super updateConstraints];
+    //update or create new one
+    if (update) {
+        [self.timelineImageView mas_updateConstraints:timelineConstraintBlock];
+        [self.topicContentView mas_updateConstraints:topicContentViewConstraintBlock];
+        [self.speechBubbleView mas_updateConstraints:speechBubbleViewBlock];
+        [self.playButton mas_updateConstraints:playButtonBlock];
+        [self.userNameLabel mas_updateConstraints:userNameLabelBlock];
+        [self.shareButton mas_updateConstraints:shareButtonBlock];
+        [self.topicTitle mas_updateConstraints:topicTitleBlock];
+        [self.likeButton mas_updateConstraints:likeButtonBlock];
+        [self.groupNameButton mas_updateConstraints:groupNameButtonBlock];
+        [self.commentButton mas_updateConstraints:commentButtonBlock];
+    } else {
+        [self.timelineImageView mas_makeConstraints:timelineConstraintBlock];
+        [self.topicContentView mas_makeConstraints:topicContentViewConstraintBlock];
+        [self.speechBubbleView mas_makeConstraints:speechBubbleViewBlock];
+        [self.playButton mas_makeConstraints:playButtonBlock];
+        [self.userNameLabel mas_makeConstraints:userNameLabelBlock];
+        [self.shareButton mas_makeConstraints:shareButtonBlock];
+        [self.topicTitle mas_makeConstraints:topicTitleBlock];
+        [self.likeButton mas_makeConstraints:likeButtonBlock];
+        [self.groupNameButton mas_makeConstraints:groupNameButtonBlock];
+        [self.commentButton mas_makeConstraints:commentButtonBlock];
+    }
 }
 
 - (UIActivityIndicatorView *)loadingIndicatorView
@@ -262,7 +281,7 @@
 }
 
 #pragma mark - assign values to cell
-- (void)setupTopic:(FLYTopic *)topic
+- (void)setupTopic:(FLYTopic *)topic needUpdateConstraints:(BOOL)needUpdateConstraints
 {
     self.topic = topic;
     self.userNameLabel.text = topic.user.userName;
@@ -278,7 +297,7 @@
     [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.likeCount]];
     [self.groupNameButton setTitle:[NSString stringWithFormat:@"@%@", topic.group.groupName] forState:UIControlStateNormal];
     [self.commentButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.replyCount]];
-    [self _addconstraints];
+    [self _updateViewConstraints:needUpdateConstraints];
 }
 
 #pragma mark - update play state

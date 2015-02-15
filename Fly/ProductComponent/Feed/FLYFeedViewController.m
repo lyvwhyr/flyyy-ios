@@ -22,6 +22,7 @@
 #import "FLYPlayableItem.h"
 #import "UIColor+FLYAddition.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "Dialog.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -144,7 +145,7 @@
 {
     [super viewWillAppear:animated];
      [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    [self updateViewConstraints];
+//    [self updateViewConstraints];
 }
 
 - (void)updateViewConstraints
@@ -177,18 +178,7 @@
     [super viewDidLayoutSubviews];
 }
 
-//- (UINavigationItem *)navigationItem
-//{
-//    if (!_customizedTitleView) {
-//        _customizedTitleView = [[FLYNavigationBarMyGroupButton alloc] initWithFrame:CGRectMake(0, 0, 120, 32) Title:@"My Groups" icon:@"icon_down_arrow"];
-//        
-//        [_customizedTitleView addTarget:self action:@selector(_filterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-//        [_customizedTitleView sizeToFit];
-//        [self.navigationItem setTitleView:_customizedTitleView];
-//    }
-//    return [super navigationItem];
-//}
-
+#pragma mark - fetch home timeline API
 - (void)_fetchHomeTimelineService:(NSString *)before requestType:(enum RequestType)requestType
 {
     NSString *partialUrl;
@@ -243,7 +233,9 @@
 {
     static NSString *cellIdentifier = @"feedPostCellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    BOOL needUpdateConstraints = YES;
     if (cell == nil) {
+        needUpdateConstraints = NO;
         cell = [[FLYFeedTopicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
@@ -260,9 +252,8 @@
         FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)[FLYAudioStateManager sharedInstance].currentPlayItem.item;
         [topicCell updatePlayState:[FLYAudioStateManager sharedInstance].currentPlayItem.playState];
     }
-    
     topicCell.topic = _posts[indexPath.row];
-    [topicCell setupTopic:_posts[indexPath.row]];
+    [topicCell setupTopic:_posts[indexPath.row] needUpdateConstraints:needUpdateConstraints];
     topicCell.selectionStyle = UITableViewCellSelectionStyleNone;
     topicCell.delegate = self;
     return topicCell;
@@ -271,7 +262,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    return 150;
     return [FLYFeedTopicTableViewCell heightForTopic:_posts[indexPath.row]];
 }
 
@@ -446,7 +436,7 @@
 #pragma mark - navigation bar item tapped 
 - (void)_autoPlayButtonTapped
 {
-    
+    [Dialog simpleToast:LOC(@"FLYAutoPlayEnabledHudText")];
 }
 
 - (void)_profileButtonTapped

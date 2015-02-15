@@ -35,7 +35,7 @@
 #define kFilterModalHeight 80
 #define kMaxRetry 3
 #define kTimeLabelTopPadding 30
-#define kMinimalRecordingLength 3
+#define kMinimalRecordingLength 0
 
 @interface FLYRecordViewController ()<FLYRecordBottomBarDelegate>
 

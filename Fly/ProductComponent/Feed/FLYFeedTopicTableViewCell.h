@@ -24,7 +24,7 @@
 @property (nonatomic) FLYTopic *topic;
 @property id<FLYFeedTopicTableViewCellDelegate>delegate;
 
-- (void)setupTopic:(FLYTopic *)topic;
+- (void)setupTopic:(FLYTopic *)topic needUpdateConstraints:(BOOL)needUpdateConstraints;
 - (void)updatePlayState:(FLYPlayState)state;
 
 
