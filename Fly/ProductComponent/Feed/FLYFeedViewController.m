@@ -8,7 +8,6 @@
 
 #import "FLYFeedViewController.h"
 #import "FLYFeedTopicTableViewCell.h"
-#import "FLYNavigationBarMyGroupButton.h"
 #import "FLYFilterHomeFeedSelectorViewController.h"
 #import "FLYSingleGroupViewController.h"
 #import "FLYInlineReplyView.h"
@@ -29,7 +28,6 @@
 @property (nonatomic) UIView *backgroundView;
 @property (nonatomic) FLYInlineReplyView *inlineReplyView;
 @property (nonatomic) UITableView *feedTableView;
-@property (nonatomic) FLYNavigationBarMyGroupButton *customizedTitleView;
 
 //used for pagination load more
 @property (nonatomic) NSString *beforeTimestamp;

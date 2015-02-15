@@ -67,6 +67,18 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
+    UALog(@"DELEGATE: Device Token is: %@", deviceToken);
+    if (deviceToken) {
+        NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+        token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+        [FLYAppStateManager sharedInstance].deviceToken = token;
+        
+        NSDictionary *params = @{@"device_token":token};
+//        [EPRequest epSetDeviceInfo:params];
+    }
+}
+
 #pragma mark - setup third party libraries
 - (void)_setupThirdLibraries
 {

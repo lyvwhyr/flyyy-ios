@@ -12,6 +12,8 @@
 @property (nonatomic) NSString *recordingFilePath;
 @property (nonatomic) NSString *mediaId;
 @property (nonatomic) NSArray *groupList;
+@property (nonatomic) NSString *deviceToken;
+@property (nonatomic) NSString *deviceId;
 
 
 + (instancetype)sharedInstance;

@@ -9,6 +9,7 @@
 #import "FLYAppStateManager.h"
 #import "FLYServerConfig.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "UIDevice+FLYAddition.h"
 
 @implementation FLYAppStateManager
 
@@ -26,6 +27,7 @@
 {
     if (self = [super init]) {
         _isAutoPlayEnabled = YES;
+        _deviceId = [UIDevice uniqueDeviceIdentifier];
     }
     return self;
 }

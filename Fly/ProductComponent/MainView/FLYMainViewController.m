@@ -22,7 +22,6 @@
 #import "DismissingAnimator.h"
 #import "FLYFilterHomeFeedSelectorViewController.h"
 #import "FLYIconButton.h"
-#import "FLYNavigationBarMyGroupButton.h"
 #import "FLYFileManager.h"
 
 #if DEBUG
