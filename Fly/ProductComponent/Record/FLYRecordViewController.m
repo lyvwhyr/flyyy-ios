@@ -344,6 +344,7 @@ static inline float translate(float val, float min, float max) {
 
 - (void)_setupCompleteViewState
 {
+    self.remainingAudioLength = self.audioLength;
     [self.glowView stopGlowing];
     [self.glowView removeFromSuperview];
     self.glowView = nil;
@@ -395,7 +396,7 @@ static inline float translate(float val, float min, float max) {
     self.remainingTimeLabel.font = [UIFont fontWithName:@"Avenir-Book" size:21];
     self.remainingTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.remainingTimeLabel.textColor = [UIColor flyColorRecordingTimer];
-    self.remainingTimeLabel.text = [NSString stringWithFormat:@":%d", (int)self.audioLength];
+    self.remainingTimeLabel.text = [NSString stringWithFormat:@":%d", (int)self.remainingAudioLength];
     [self.view addSubview:self.remainingTimeLabel];
     [self _setupPlaybackTimer];
 }
@@ -427,7 +428,6 @@ static inline float translate(float val, float min, float max) {
 {
     [self.playbackTimer invalidate];
     self.playbackTimer = nil;
-    self.remainingAudioLength = self.audioLength;
     self.playbackTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(_updatePlayingState) userInfo:nil repeats:YES];
 }
 
@@ -583,6 +583,7 @@ static inline float translate(float val, float min, float max) {
 #pragma mark - FLYRecordBottomBarDelegate
 - (void)trashButtonTapped:(UIButton *)button
 {
+    [self _cleanupTimer];
     [self _setupInitialViewState];
 }
 
