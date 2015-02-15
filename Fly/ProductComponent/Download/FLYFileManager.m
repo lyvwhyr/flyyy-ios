@@ -67,7 +67,7 @@ static const NSInteger kCachMaxSize = 256 * 1024 * 1024;  //256M
         NSDictionary *attributes = [_cleanupFileManager attributesOfItemAtPath:filePath error:nil];
         NSInteger fileSize = [attributes[NSFileSize] integerValue];
         NSString *fileName = [[filePath componentsSeparatedByString:@"/"] lastObject];
-        UALog(@"File name: %@, size %.2fk", fileName, fileSize/1024.0);
+        //UALog(@"File name: %@, size %.2fk", fileName, fileSize/1024.0);
     }
 }
 

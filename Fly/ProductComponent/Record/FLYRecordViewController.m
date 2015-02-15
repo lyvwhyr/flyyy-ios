@@ -191,6 +191,12 @@ static inline float translate(float val, float min, float max) {
 
 - (void) _cleanupTimer
 {
+    [self.recordedTimeLabel removeFromSuperview];
+    self.recordedTimeLabel = nil;
+    
+    [self.remainingTimeLabel removeFromSuperview];
+    self.remainingTimeLabel = nil;
+    
     [self.recordTimer invalidate];
     self.recordTimer = nil;
     
@@ -363,16 +369,7 @@ static inline float translate(float val, float min, float max) {
 
 - (void)_setupPlayingViewState
 {
-    [self.remainingTimeLabel removeFromSuperview];
-    self.remainingTimeLabel = [UILabel new];
-    self.remainingTimeLabel.font = [UIFont fontWithName:@"Avenir-Book" size:21];
-    self.remainingTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.remainingTimeLabel.textColor = [UIColor flyColorRecordingTimer];
-    self.remainingTimeLabel.text = [NSString stringWithFormat:@":%d", (int)self.audioLength];
-    [self.view addSubview:self.remainingTimeLabel];
-    
-    [self _setupPlaybackTimer];
-    
+    [self _addPlaybackTimer];
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_pause"]];
     [self updateViewConstraints];
 }
@@ -387,8 +384,21 @@ static inline float translate(float val, float min, float max) {
 {
     [[FLYAudioStateManager sharedInstance] resumePlayer];
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_pause"]];
+    [self _addPlaybackTimer];
+    [self updateViewConstraints];
 }
 
+- (void)_addPlaybackTimer
+{
+    [self.remainingTimeLabel removeFromSuperview];
+    self.remainingTimeLabel = [UILabel new];
+    self.remainingTimeLabel.font = [UIFont fontWithName:@"Avenir-Book" size:21];
+    self.remainingTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.remainingTimeLabel.textColor = [UIColor flyColorRecordingTimer];
+    self.remainingTimeLabel.text = [NSString stringWithFormat:@":%d", (int)self.audioLength];
+    [self.view addSubview:self.remainingTimeLabel];
+    [self _setupPlaybackTimer];
+}
 
 #pragma mark - Recording state methods
 - (void)_setupRecordTimer
