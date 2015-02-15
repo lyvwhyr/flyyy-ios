@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-//#import <Fabric/Fabric.h>
-//#import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 #import "AppDelegate.h"
 #import "FLYNavigationController.h"
@@ -35,14 +35,13 @@
     FLYNavigationController *navigationVC = [[FLYNavigationController alloc] initWithRootViewController:mainVC];
     self.window.rootViewController = navigationVC;
     
-    [self _setupThirdLibraries];
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [FLYAppStateManager sharedInstance];
         [FLYFileManager sharedInstance];
         [FLYGroupManager sharedInstance];
     });
     
+    [self _setupThirdLibraries];
     return YES;
 }
 
@@ -72,7 +71,7 @@
 - (void)_setupThirdLibraries
 {
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
-//    [Fabric with:@[CrashlyticsKit]];
+    [Fabric with:@[CrashlyticsKit]];
 }
 
 @end

@@ -312,6 +312,8 @@
 		A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */; };
 		A6CD56EB1A4802C3003486DD /* FLYDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56EA1A4802C3003486DD /* FLYDownloadManager.m */; };
 		A6CD56EE1A48079D003486DD /* FLYFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56ED1A48079D003486DD /* FLYFileManager.m */; };
+		A6D949EA1A9079AC003D4265 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D949E81A9079AC003D4265 /* Crashlytics.framework */; };
+		A6D949EB1A9079AC003D4265 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D949E91A9079AC003D4265 /* Fabric.framework */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
@@ -810,6 +812,8 @@
 		A6CD56EA1A4802C3003486DD /* FLYDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDownloadManager.m; sourceTree = "<group>"; };
 		A6CD56EC1A48079D003486DD /* FLYFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFileManager.h; sourceTree = "<group>"; };
 		A6CD56ED1A48079D003486DD /* FLYFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFileManager.m; sourceTree = "<group>"; };
+		A6D949E81A9079AC003D4265 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
+		A6D949E91A9079AC003D4265 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
@@ -828,10 +832,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6D949EB1A9079AC003D4265 /* Fabric.framework in Frameworks */,
 				A60A44F41A8DD42B00BED63A /* Foundation.framework in Frameworks */,
 				A6A30D711A1B1EEE001AE1FE /* QuartzCore.framework in Frameworks */,
 				A60A44F21A8DD41200BED63A /* UIKit.framework in Frameworks */,
 				A6A30D731A1B1EFA001AE1FE /* CoreGraphics.framework in Frameworks */,
+				A6D949EA1A9079AC003D4265 /* Crashlytics.framework in Frameworks */,
 				7D4B72EB34192CBBF4792073 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1688,6 +1694,8 @@
 		A6A30D741A1B1F33001AE1FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6D949E81A9079AC003D4265 /* Crashlytics.framework */,
+				A6D949E91A9079AC003D4265 /* Fabric.framework */,
 				A60A44F31A8DD42B00BED63A /* Foundation.framework */,
 				A60A44F11A8DD41200BED63A /* UIKit.framework */,
 				A6A30D721A1B1EFA001AE1FE /* CoreGraphics.framework */,
@@ -2391,6 +2399,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/External",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Fly/fly-Prefix.pch";
@@ -2413,6 +2422,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/External",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Fly/fly-Prefix.pch";
