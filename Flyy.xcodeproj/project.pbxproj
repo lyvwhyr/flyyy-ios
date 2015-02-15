@@ -407,7 +407,7 @@
 		A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYAppStateManager.m; sourceTree = "<group>"; };
 		A61D18731A1F27E900D188B5 /* FLYPrePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostViewController.h; sourceTree = "<group>"; };
 		A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostViewController.m; sourceTree = "<group>"; };
-		A6263E8C1A187E1200C4C3BA /* Fly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fly.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6263E8C1A187E1200C4C3BA /* Flyy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flyy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6263E901A187E1200C4C3BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6263E911A187E1200C4C3BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A6263E931A187E1200C4C3BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../AppDelegate.h; sourceTree = "<group>"; };
@@ -415,7 +415,7 @@
 		A6263E9A1A187E1200C4C3BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A6263E9C1A187E1200C4C3BA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A6263E9F1A187E1200C4C3BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		A6263EA51A187E1200C4C3BA /* FlyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6263EA51A187E1200C4C3BA /* FlyyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlyyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6263EAA1A187E1200C4C3BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6263EAB1A187E1200C4C3BA /* FlyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlyTests.m; sourceTree = "<group>"; };
 		A6263EB81A18815000C4C3BA /* FLYMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYMainViewController.h; sourceTree = "<group>"; };
@@ -985,8 +985,8 @@
 		A6263E8D1A187E1200C4C3BA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A6263E8C1A187E1200C4C3BA /* Fly.app */,
-				A6263EA51A187E1200C4C3BA /* FlyTests.xctest */,
+				A6263E8C1A187E1200C4C3BA /* Flyy.app */,
+				A6263EA51A187E1200C4C3BA /* FlyyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1798,9 +1798,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A6263E8B1A187E1200C4C3BA /* Fly */ = {
+		A6263E8B1A187E1200C4C3BA /* Flyy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A6263EAF1A187E1200C4C3BA /* Build configuration list for PBXNativeTarget "Fly" */;
+			buildConfigurationList = A6263EAF1A187E1200C4C3BA /* Build configuration list for PBXNativeTarget "Flyy" */;
 			buildPhases = (
 				5FFD8CFC20281036486A4AAC /* Check Pods Manifest.lock */,
 				A6263E881A187E1200C4C3BA /* Sources */,
@@ -1813,27 +1813,28 @@
 			);
 			dependencies = (
 			);
-			name = Fly;
+			name = Flyy;
 			productName = Fly;
-			productReference = A6263E8C1A187E1200C4C3BA /* Fly.app */;
+			productReference = A6263E8C1A187E1200C4C3BA /* Flyy.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A6263EA41A187E1200C4C3BA /* FlyTests */ = {
+		A6263EA41A187E1200C4C3BA /* FlyyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A6263EB21A187E1200C4C3BA /* Build configuration list for PBXNativeTarget "FlyTests" */;
+			buildConfigurationList = A6263EB21A187E1200C4C3BA /* Build configuration list for PBXNativeTarget "FlyyTests" */;
 			buildPhases = (
 				A6263EA11A187E1200C4C3BA /* Sources */,
 				A6263EA21A187E1200C4C3BA /* Frameworks */,
 				A6263EA31A187E1200C4C3BA /* Resources */,
+				A6244F021A907597004C0A40 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				A6263EA71A187E1200C4C3BA /* PBXTargetDependency */,
 			);
-			name = FlyTests;
+			name = FlyyTests;
 			productName = FlyTests;
-			productReference = A6263EA51A187E1200C4C3BA /* FlyTests.xctest */;
+			productReference = A6263EA51A187E1200C4C3BA /* FlyyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1855,7 +1856,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A6263E871A187E1200C4C3BA /* Build configuration list for PBXProject "Fly" */;
+			buildConfigurationList = A6263E871A187E1200C4C3BA /* Build configuration list for PBXProject "Flyy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1868,8 +1869,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A6263E8B1A187E1200C4C3BA /* Fly */,
-				A6263EA41A187E1200C4C3BA /* FlyTests */,
+				A6263E8B1A187E1200C4C3BA /* Flyy */,
+				A6263EA41A187E1200C4C3BA /* FlyyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2052,6 +2053,19 @@
 			showEnvVarsInLog = 0;
 		};
 		A61FEA3F1A8EDDA10088B759 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 63062b02647d45c6bf509e8ceffe93755e1f164e 1eda514ea6517e88f090c93c54592fd6dc656ba4c44ff439cc19d6f4f213d848";
+		};
+		A6244F021A907597004C0A40 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2262,7 +2276,7 @@
 /* Begin PBXTargetDependency section */
 		A6263EA71A187E1200C4C3BA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A6263E8B1A187E1200C4C3BA /* Fly */;
+			target = A6263E8B1A187E1200C4C3BA /* Flyy */;
 			targetProxy = A6263EA61A187E1200C4C3BA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -2383,7 +2397,7 @@
 				INFOPLIST_FILE = Fly/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = Fly;
+				PRODUCT_NAME = Flyy;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2405,7 +2419,7 @@
 				INFOPLIST_FILE = Fly/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = Fly;
+				PRODUCT_NAME = Flyy;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2425,8 +2439,8 @@
 				);
 				INFOPLIST_FILE = FlyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = FlyTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fly.app/Fly";
+				PRODUCT_NAME = FlyyTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flyy.app/Flyy";
 			};
 			name = Debug;
 		};
@@ -2440,15 +2454,15 @@
 				);
 				INFOPLIST_FILE = FlyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = FlyTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fly.app/Fly";
+				PRODUCT_NAME = FlyyTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flyy.app/Flyy";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A6263E871A187E1200C4C3BA /* Build configuration list for PBXProject "Fly" */ = {
+		A6263E871A187E1200C4C3BA /* Build configuration list for PBXProject "Flyy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A6263EAD1A187E1200C4C3BA /* Debug */,
@@ -2457,7 +2471,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A6263EAF1A187E1200C4C3BA /* Build configuration list for PBXNativeTarget "Fly" */ = {
+		A6263EAF1A187E1200C4C3BA /* Build configuration list for PBXNativeTarget "Flyy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A6263EB01A187E1200C4C3BA /* Debug */,
@@ -2466,7 +2480,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A6263EB21A187E1200C4C3BA /* Build configuration list for PBXNativeTarget "FlyTests" */ = {
+		A6263EB21A187E1200C4C3BA /* Build configuration list for PBXNativeTarget "FlyyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A6263EB31A187E1200C4C3BA /* Debug */,
