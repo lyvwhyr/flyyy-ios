@@ -20,7 +20,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "FLYReply.h"
 
-@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate>
+@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate>
 
 @property (nonatomic) UITableView *topicTableView;
 
@@ -151,6 +151,7 @@
             cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        ((FLYTopicDetailReplyCell *)cell).delegate = self;
         [((FLYTopicDetailReplyCell *)cell) setupReply:self.replies[indexPath.row]];
     }
     [cell setNeedsUpdateConstraints];
@@ -196,6 +197,16 @@
 {
     FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForReply];
     recordViewController.topicId = self.topic.topicId;
+    UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
+    [self presentViewController:navigationController animated:NO completion:nil];
+}
+
+#pragma mark - FLYTopicDetailReplyCellDelegate
+- (void)replyToReplyButtonTapped:(FLYReply *)reply
+{
+    FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForReply];
+    recordViewController.topicId = self.topic.topicId;
+    recordViewController.parentReplyId = reply.replyId;
     UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
     [self presentViewController:navigationController animated:NO completion:nil];
 }

@@ -276,7 +276,11 @@ static inline float translate(float val, float min, float max) {
             NSDictionary *dict = @{@"topic_id":self.topicId,
                                    @"media_id":self.replyMediaId,
                                    @"audio_duration":@(self.audioLength)};
-            [self _postReplyServiceWithParams:dict];
+            NSMutableDictionary *mutableDict = [dict mutableCopy];
+            if (self.parentReplyId) {
+                [mutableDict setObject:self.parentReplyId forKey:@"parent_reply_id"];
+            }
+            [self _postReplyServiceWithParams:mutableDict];
         } else {
             self.progressHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
             self.progressHUD.delegate = self;
@@ -290,7 +294,11 @@ static inline float translate(float val, float min, float max) {
                 NSDictionary *dict = @{@"topic_id":self.topicId,
                                        @"media_id":self.replyMediaId,
                                        @"audio_duration":@(self.audioLength)};
-                [self _postReplyServiceWithParams:dict];
+                NSMutableDictionary *mutableDict = [dict mutableCopy];
+                if (self.parentReplyId) {
+                    [mutableDict setObject:self.parentReplyId forKey:@"parent_reply_id"];
+                }
+                [self _postReplyServiceWithParams:mutableDict];
             } failureBlock:^{
                 [self.progressHUD dismiss];
                 [Dialog simpleToast:LOC(@"FLYGenericError")];

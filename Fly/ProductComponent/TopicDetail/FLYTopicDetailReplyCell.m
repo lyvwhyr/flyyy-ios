@@ -74,7 +74,12 @@
 
 - (void)setupReply:(FLYReply *)reply
 {
-    self.bodyLabel.text = reply.user.userName;
+    self.reply = reply;
+    if (reply.parentReplyUser.userId != nil && ![reply.parentReplyUser.userId isEqualToString:reply.user.userId]) {
+        self.bodyLabel.text = [NSString stringWithFormat:@"%@ replied to %@", reply.user.userName, reply.parentReplyUser.userName];
+    } else {
+        self.bodyLabel.text = reply.user.userName;
+    }
     self.postAt.text = @"1d";
     [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)reply.likeCount]];
 }
@@ -125,7 +130,7 @@
 
 - (void)_commentButtonTapped
 {
-    
+    [self.delegate replyToReplyButtonTapped:self.reply];
 }
 
 @end
