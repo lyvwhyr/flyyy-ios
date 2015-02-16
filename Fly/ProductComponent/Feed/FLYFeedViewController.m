@@ -269,7 +269,8 @@
 {
     self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
     [self.view layoutIfNeeded];
-    FLYTopicDetailViewController *viewController = [FLYTopicDetailViewController new];
+    FLYTopic *topic = self.posts[indexPath.row];
+    FLYTopicDetailViewController *viewController = [[FLYTopicDetailViewController alloc] initWithTopic:topic];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 

@@ -20,6 +20,7 @@
 
 @property (nonatomic) UITableView *topicTableView;
 
+@property (nonatomic) FLYTopic *topic;
 @property (nonatomic) NSMutableArray *replies;
 
 @property (nonatomic) BOOL setLayoutConstraints;
@@ -34,6 +35,7 @@
 - (instancetype)initWithTopic:(FLYTopic *)topic
 {
     if (self = [super init]) {
+        _topic = topic;
         _replies = [NSMutableArray new];
         [_replies addObject:@"1"];
         [_replies addObject:@"2"];
@@ -140,6 +142,8 @@
             cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor flyBlue];
+        [((FLYTopicDetailTopicCell *)cell) setupTopic:self.topic];
     } else {
         static NSString *cellIdentifier = kFlyTopicDetailViewControllerReplyCellIdentifier;
         cell = (FLYTopicDetailReplyCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -153,6 +157,8 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraints];
 
     return cell;
 }
@@ -161,7 +167,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == FlyTopicCellSectionIndex) {
-        return 150;
+        return [FLYTopicDetailTopicCell cellHeightForTopic:self.topic];
     }
     return 90;
 }

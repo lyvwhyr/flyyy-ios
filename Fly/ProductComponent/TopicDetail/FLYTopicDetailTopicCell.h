@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class FLYTopic;
+
 @interface FLYTopicDetailTopicCell : UITableViewCell
+
+- (void)setupTopic:(FLYTopic *)topic;
+
++ (CGFloat)cellHeightForTopic:(FLYTopic *)topic;
 
 @end
