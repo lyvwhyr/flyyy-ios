@@ -18,6 +18,7 @@ NS_ENUM(NSInteger, TabBarItemIndex) {
 
 @interface FLYMainViewController : FLYUniversalViewController
 
+@property (nonatomic) UIButton *recordButton;
 
 - (FLYNavigationController *)flyNavigationController;
 

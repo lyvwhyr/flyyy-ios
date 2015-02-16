@@ -39,7 +39,6 @@
 @interface FLYMainViewController() <FLYTabBarViewDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic) FLYTabBarView *tabBarView;
-@property (nonatomic) UIButton *recordButton;
 
 @property (nonatomic) FLYFeedViewController *feedViewController;
 //@property (nonatomic) FLYRecordViewController *recordViewController;
@@ -62,6 +61,9 @@
     if (self = [super init]) {
         NSString *audioDir = [FLYFileManager audioCacheDirectory];
         [[FLYFileManager sharedInstance] debugPrintFilesAndSizeForDirectory:audioDir];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_hideRecordButton) name:kHideRecordIconNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_showRecordButton) name:kShowRecordIconNotification object:nil];
     }
     
     return self;
@@ -253,6 +255,17 @@
     recordViewController.recordingType = RecordingForTopic;
     UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
     [self presentViewController:navigationController animated:NO completion:nil];
+}
+
+#pragma mark - notification
+- (void)_hideRecordButton
+{
+    self.recordButton.hidden = YES;
+}
+
+- (void)_showRecordButton
+{
+    self.recordButton.hidden = NO;
 }
 
 @end
