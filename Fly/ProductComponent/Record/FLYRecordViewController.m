@@ -29,6 +29,9 @@
 #import "UIView+Glow.h"
 #import "Dialog.h"
 #import "FLYUser.h"
+#import "FLYEndpointRequest.h"
+#import "FLYReply.h"
+#import "JGProgressHUD.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -36,9 +39,9 @@
 #define kFilterModalHeight 80
 #define kMaxRetry 3
 #define kTimeLabelTopPadding 30
-#define kMinimalRecordingLength 0
+#define kMinimalRecordingLength 5
 
-@interface FLYRecordViewController ()<FLYRecordBottomBarDelegate>
+@interface FLYRecordViewController ()<FLYRecordBottomBarDelegate, JGProgressHUDDelegate>
 
 @property (nonatomic) UIBarButtonItem *rightNavigationButton;
 
@@ -60,6 +63,9 @@
 @property (nonatomic) PulsingHaloLayer *pulsingHaloLayer;
 @property (nonatomic) DKCircleButton *voiceFilterButton;
 
+//Post reply progress hud
+@property (nonatomic) JGProgressHUD *progressHUD;
+
 @property (nonatomic, weak) AEAudioController *audioController;
 @property (nonatomic, weak) AEAudioFilePlayer *audioPlayer;
 @property (nonatomic, copy) AudioPlayerCompleteblock completionBlock;
@@ -72,6 +78,7 @@
 @property (nonatomic) NSTimer *levelsTimer;
 
 @property (nonatomic) NSString *mediaId;
+@property (nonatomic) NSString *replyMediaId;
 @property (nonatomic) NSInteger retryCount;
 
 @end
@@ -84,6 +91,7 @@
 {
     if (self = [super init]) {
         _recordingType = recordingType;
+        
     }
     return self;
 }
@@ -229,7 +237,12 @@ static inline float translate(float val, float min, float max) {
 -(void)loadRightBarButton
 {
     if (self.currentState == FLYRecordCompleteState) {
-        FLYPostRecordingNextBarButtonItem *barButtonItem = [FLYPostRecordingNextBarButtonItem barButtonItem:NO];
+        FLYBarButtonItem *barButtonItem;
+        if (self.recordingType == RecordingForTopic) {
+            barButtonItem = [FLYPostRecordingNextBarButtonItem barButtonItem:NO];
+        } else {
+            barButtonItem = [FLYPostRecordingPostBarButtonItem barButtonItem:NO];
+        }
         @weakify(self)
         barButtonItem.actionBlock = ^(FLYBarButtonItem *item) {
             @strongify(self)
@@ -252,12 +265,59 @@ static inline float translate(float val, float min, float max) {
 
 - (void)_nextBarButtonTapped
 {
-    [self _setupCompleteViewState];
     NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
-    [FLYEndpointRequest uploadAudioFileServiceWithUserId:userId successBlock:nil failureBlock:nil];
-    FLYPrePostViewController *prePostVC = [FLYPrePostViewController new];
-    prePostVC.audioDuration = self.audioLength;
-    [self.navigationController pushViewController:prePostVC animated:YES];
+    if (self.recordingType == RecordingForTopic) {
+        [FLYEndpointRequest uploadAudioFileServiceWithUserId:userId successBlock:nil failureBlock:nil];
+        [self _setupCompleteViewState];
+        FLYPrePostViewController *prePostVC = [FLYPrePostViewController new];
+        prePostVC.audioDuration = self.audioLength;
+        [self.navigationController pushViewController:prePostVC animated:YES];
+    } else {
+        if (self.replyMediaId) {
+            NSDictionary *dict = @{@"topic_id":self.topicId,
+                                   @"media_id":self.replyMediaId,
+                                   @"audio_duration":@(self.audioLength)};
+            [self _postReplyServiceWithParams:dict];
+        } else {
+            self.progressHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+            self.progressHUD.delegate = self;
+            self.progressHUD.textLabel.text = @"Posting...";
+            [self.progressHUD showInView:self.view];
+            
+            @weakify(self)
+            [FLYEndpointRequest uploadAudioFileServiceWithUserId:userId successBlock:^(NSString *mediaId) {
+                @strongify(self)
+                self.replyMediaId = mediaId;
+                NSDictionary *dict = @{@"topic_id":self.topicId,
+                                       @"media_id":self.replyMediaId,
+                                       @"audio_duration":@(self.audioLength)};
+                [self _postReplyServiceWithParams:dict];
+            } failureBlock:^{
+                [self.progressHUD dismiss];
+                [Dialog simpleToast:LOC(@"FLYGenericError")];
+            }];
+        }
+    }
+}
+
+- (void)_postReplyServiceWithParams:(NSDictionary *)dict
+{
+    NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
+    NSString *baseURL =  [NSString stringWithFormat:@"replies?user_id=%@", userId];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:baseURL parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.progressHUD dismiss];
+        
+        FLYReply *reply = [[FLYReply alloc] initWithDictionary:responseObject];
+        NSDictionary *dict = @{kNewPostKey:reply};
+        [Dialog simpleToast:@"Posted"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNewReplyReceivedNotification object:self userInfo:dict];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.progressHUD dismiss];
+        [Dialog simpleToast:LOC(@"FLYGenericError")];
+        UALog(@"Post error %@", error);
+    }];
 }
 
 

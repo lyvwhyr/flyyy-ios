@@ -180,3 +180,18 @@
 
 @end
 
+@implementation FLYPostRecordingPostBarButtonItem
+
+- (instancetype)initWithSide:(BOOL)left
+{
+    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    nextButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:17];
+    [nextButton setTitle:@"Post" forState:UIControlStateNormal];
+    CGFloat x = (left ? -1 : 1) * 10;
+    nextButton.frame = CGRectMake(x, 0, 52, 44);
+    self = [super initWithButton:nextButton actionBlock:nil];
+    return self;
+}
+
+@end
+

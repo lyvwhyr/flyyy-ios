@@ -197,6 +197,7 @@
 		A65578431A3ADE4E003102CD /* icon_share_post@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A65578421A3ADE4E003102CD /* icon_share_post@3x.png */; };
 		A65ED97F1A91523600E10D5C /* FLYTopicDetailTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED97E1A91523600E10D5C /* FLYTopicDetailTopicCell.m */; };
 		A65ED9821A915FAE00E10D5C /* FLYPlayTimelineView.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED9811A915FAE00E10D5C /* FLYPlayTimelineView.m */; };
+		A65ED98C1A91B4F600E10D5C /* FLYReply.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED98B1A91B4F600E10D5C /* FLYReply.m */; };
 		A6655B551A19DEF000440AAB /* icon_tabbar_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */; };
 		A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */; };
 		A6655B5A1A19ECED00440AAB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B591A19ECED00440AAB /* Default-568h@2x.png */; };
@@ -615,6 +616,8 @@
 		A65ED9801A915FAE00E10D5C /* FLYPlayTimelineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPlayTimelineView.h; sourceTree = "<group>"; };
 		A65ED9811A915FAE00E10D5C /* FLYPlayTimelineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPlayTimelineView.m; sourceTree = "<group>"; };
 		A65ED9871A91A88900E10D5C /* FLYNotificationConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYNotificationConstant.h; sourceTree = "<group>"; };
+		A65ED98A1A91B4F600E10D5C /* FLYReply.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYReply.h; sourceTree = "<group>"; };
+		A65ED98B1A91B4F600E10D5C /* FLYReply.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYReply.m; sourceTree = "<group>"; };
 		A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_home@3x.png"; sourceTree = "<group>"; };
 		A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_me@3x.png"; sourceTree = "<group>"; };
 		A6655B591A19ECED00440AAB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -1501,6 +1504,8 @@
 				A64BDAC51A7B518400B46F18 /* FLYUser.m */,
 				A64BDAC71A7B519400B46F18 /* FLYGroup.h */,
 				A64BDAC81A7B519400B46F18 /* FLYGroup.m */,
+				A65ED98A1A91B4F600E10D5C /* FLYReply.h */,
+				A65ED98B1A91B4F600E10D5C /* FLYReply.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2190,6 +2195,7 @@
 				A6048AD31A8603EF00C67480 /* AFURLConnectionOperation.m in Sources */,
 				A6A0E4961A1E76110036116E /* FLEXArgumentInputStructView.m in Sources */,
 				A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */,
+				A65ED98C1A91B4F600E10D5C /* FLYReply.m in Sources */,
 				A6A0E49B1A1E76110036116E /* FLEXDefaultEditorViewController.m in Sources */,
 				A648C0F21A19C65B00FF1744 /* FLYTabBarView.m in Sources */,
 				A648C0EA1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,

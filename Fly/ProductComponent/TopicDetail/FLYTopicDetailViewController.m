@@ -196,7 +196,8 @@
 #pragma mark - FLYTopicDetailTopicCellDelegate
 - (void)commentButtonTapped:(FLYTopicDetailTopicCell *)cell
 {
-    FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForTopic];
+    FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForReply];
+    recordViewController.topicId = self.topic.topicId;
     UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
     [self presentViewController:navigationController animated:NO completion:nil];
 }

@@ -8,3 +8,4 @@
 
 #define kShowRecordIconNotification @"kShowRecordIconNotification"
 #define kHideRecordIconNotification @"kHideRecordIconNotification"
+#define kNewReplyReceivedNotification @"kNewReplyReceivedNotification"

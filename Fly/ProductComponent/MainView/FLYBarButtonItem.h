@@ -53,3 +53,7 @@ typedef void(^FLYBarButtonItemActionBlock)(FLYBarButtonItem *barButtonItem);
 @interface FLYPostRecordingNextBarButtonItem : FLYBarButtonItem
 
 @end
+
+@interface FLYPostRecordingPostBarButtonItem : FLYBarButtonItem
+
+@end

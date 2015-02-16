@@ -27,6 +27,10 @@ typedef NS_ENUM(NSInteger, FLYRecordingType)
 
 @property (nonatomic) FLYRecordingType recordingType;
 
+//reply recording
+@property (nonatomic) NSString *topicId;
+@property (nonatomic) NSString *parent_reply_id;
+
 - (instancetype)initWithRecordType:(FLYRecordingType)recordingType;
 
 @end

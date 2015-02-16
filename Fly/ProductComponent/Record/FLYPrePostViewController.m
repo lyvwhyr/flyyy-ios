@@ -283,7 +283,6 @@
     [manager POST:baseURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         FLYTopic *post = [[FLYTopic alloc] initWithDictory:responseObject];
         NSDictionary *dict = @{kNewPostKey:post};
-        UALog(@"%@", post);
         [Dialog simpleToast:@"Posted"];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNewPostReceivedNotification object:self userInfo:dict];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
