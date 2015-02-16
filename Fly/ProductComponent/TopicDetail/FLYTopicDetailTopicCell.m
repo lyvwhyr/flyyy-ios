@@ -24,7 +24,8 @@
 @property (nonatomic) UILabel *postAtLabel;
 
 @property (nonatomic) UIButton *bigPostCommentButton;
-@property (nonatomic) FLYPlayTimelineView *playTimelineview;
+@property (nonatomic) UIImageView *lineView;
+@property (nonatomic) UIButton *playButton;
 
 @property (nonatomic) BOOL didSetupConstraints;
 @property (nonatomic) FLYTopic *topic;
@@ -97,6 +98,23 @@
         _postAtLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self.topicContentView addSubview:_postAtLabel];
         
+        _bigPostCommentButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_bigPostCommentButton setImage:[UIImage imageNamed:@"icon_detail_comment"] forState:UIControlStateNormal];
+        [_bigPostCommentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        _bigPostCommentButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_bigPostCommentButton sizeToFit];
+        [self.contentView addSubview:_bigPostCommentButton];
+        
+        _lineView = [UIImageView new];
+        _lineView.image = [UIImage imageNamed:@"icon_detail_timeline"];
+        [self.contentView addSubview:_lineView];
+        
+        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_playButton setImage:[UIImage imageNamed:@"icon_detail_playline"] forState:UIControlStateNormal];
+        [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        [_playButton sizeToFit];
+        [self.contentView addSubview:_playButton];
+        
     }
     return self;
 }
@@ -144,6 +162,23 @@
         [self.postAtLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self.userNameLabel);
             make.top.equalTo(self.topicTitle.mas_bottom).offset(kCommentTopPadding);
+        }];
+        
+        [self.bigPostCommentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.contentView);
+            make.top.equalTo(self.topicContentView.mas_bottom).offset(-15);
+            
+        }];
+        
+        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.userNameLabel);
+            make.trailing.equalTo(self.speechBubbleView);
+            make.top.equalTo(self.bigPostCommentButton.mas_bottom).offset(20);
+        }];
+        
+        [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.lineView).offset(-self.playButton.bounds.size.width);
+            make.centerY.equalTo(self.lineView);
         }];
         
         self.didSetupConstraints = YES;
@@ -201,7 +236,7 @@
 {
     float height = 0;
     //top, bottom, padding
-    height += [FLYTopicDetailTopicCell heightForTopic:topic] + kTopicContentTopPadding + 60;
+    height += [FLYTopicDetailTopicCell heightForTopic:topic] + kTopicContentTopPadding + 100;
     return height;
 }
 
@@ -212,6 +247,11 @@
 }
 
 - (void)_likeButtonTapped
+{
+    
+}
+
+- (void)_playButtonTapped
 {
     
 }
