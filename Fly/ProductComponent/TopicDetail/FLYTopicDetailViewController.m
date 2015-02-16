@@ -17,6 +17,8 @@
 #import "FLYTopicDetailTopicCell.h"
 #import "FLYRecordViewController.h"
 #import "FLYNavigationController.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "FLYReply.h"
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate>
 
@@ -26,6 +28,9 @@
 @property (nonatomic) NSMutableArray *replies;
 
 @property (nonatomic) BOOL setLayoutConstraints;
+
+//used for reply pagination
+@property (nonatomic) NSString *beforeTimestamp;
 
 @end
 
@@ -39,45 +44,12 @@
     if (self = [super init]) {
         _topic = topic;
         _replies = [NSMutableArray new];
-        [_replies addObject:@"1"];
-        [_replies addObject:@"2"];
-        [_replies addObject:@"3"];
-        [_replies addObject:@"1"];
-        [_replies addObject:@"2"];
-        [_replies addObject:@"3"];
-        [_replies addObject:@"1"];
-        [_replies addObject:@"2"];
-        [_replies addObject:@"3"];
-        [_replies addObject:@"1"];
-        [_replies addObject:@"2"];
-        [_replies addObject:@"3"];
     }
     return self;
 }
 
 - (instancetype)initWithTopicId:(NSString *)topicId
 {
-    return self;
-}
-
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        _replies = [NSMutableArray new];
-        [_replies addObject:@"1"];
-        [_replies addObject:@"2"];
-        [_replies addObject:@"3"];
-        [_replies addObject:@"1"];
-        [_replies addObject:@"2"];
-        [_replies addObject:@"3"];
-        [_replies addObject:@"1"];
-        [_replies addObject:@"2"];
-        [_replies addObject:@"3"];
-        [_replies addObject:@"1"];
-        [_replies addObject:@"2"];
-        [_replies addObject:@"3"];
-    }
     return self;
 }
 
@@ -99,6 +71,8 @@
     [self.topicTableView registerClass:[FLYTopicDetailTopicCell class] forCellReuseIdentifier:kFlyTopicDetailViewControllerTopicCellIdentifier];
     [self.topicTableView registerClass:[FLYTopicDetailReplyCell class] forCellReuseIdentifier:kFlyTopicDetailViewControllerReplyCellIdentifier];
     [self.view addSubview:_topicTableView];
+    
+    [self _loadReplies];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -118,7 +92,7 @@
 {
     if (!_setLayoutConstraints) {
         _setLayoutConstraints = YES;
-        CGFloat tableViewHeight = MIN((CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight), _topicTableView.contentSize.height);
+        CGFloat tableViewHeight = CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight;
         [_topicTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
             make.leading.equalTo(self.view);
@@ -177,6 +151,7 @@
             cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [((FLYTopicDetailReplyCell *)cell) setupReply:self.replies[indexPath.row]];
     }
     [cell setNeedsUpdateConstraints];
     [cell updateConstraints];
@@ -191,6 +166,29 @@
         return [FLYTopicDetailTopicCell cellHeightForTopic:self.topic];
     }
     return 90;
+}
+
+- (void)_loadReplies
+{
+    //partialUrl = [NSString stringWithFormat:@"topics?limit=%d&before=%@", kTopicPaginationCount, self.beforeTimestamp];
+    NSString *baseURL = [NSString stringWithFormat: @"topics/%@?limit=%d", self.topic.topicId, KReplyPaginationCount];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:baseURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *results = responseObject;
+        NSArray *repliesArray = [results objectForKey:@"replies"];
+        
+        for(int i = 0; i < repliesArray.count; i++) {
+            FLYReply *reply = [[FLYReply alloc] initWithDictionary:repliesArray[i]];
+            [self.replies addObject:reply];
+        }
+        //Set up before id for load more
+        FLYReply *lastReply = [self.replies lastObject];
+        self.beforeTimestamp = lastReply.createdAt;
+        [self.topicTableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        UALog(@"Post error %@", error);
+    }];
 }
 
 #pragma mark - FLYTopicDetailTopicCellDelegate
@@ -216,7 +214,6 @@
         self.navigationItem.leftBarButtonItem = barItem;
     }
 }
-
 
 #pragma mark - Navigation bar
 - (void)loadRightBarButton

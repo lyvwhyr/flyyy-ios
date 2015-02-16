@@ -26,6 +26,8 @@
 #define kColorFlyGroupNameGrey                  @"#565252"
 #define kColorFlySelectGroupGrey                @"#979797"
 #define kColorFlyRecordingWave                  @"#f58686"
+#define kColorFlyReplyBodyTextGrey              @"#747474"
+#define kColorFlyReplyPostAtGrey                @"#B2B2B2"
 
 @implementation UIColor (FLYAddition)
 
@@ -121,6 +123,16 @@
 + (UIColor *)flyColorFlyRecordingWave
 {
     return [self colorWithHexString:kColorFlyRecordingWave];
+}
+
++ (UIColor *)flyColorFlyReplyBodyTextGrey
+{
+    return [self colorWithHexString:kColorFlyReplyBodyTextGrey];
+}
+
++ (UIColor *)flyColorFlyReplyPostAtGrey
+{
+    return [self colorWithHexString:kColorFlyReplyPostAtGrey];
 }
 
 

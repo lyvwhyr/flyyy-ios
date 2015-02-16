@@ -28,6 +28,8 @@
 + (UIColor *)flyColorFlyGroupNameGrey;
 + (UIColor *)flyColorFlySelectGroupGrey;
 + (UIColor *)flyColorFlyRecordingWave;
++ (UIColor *)flyColorFlyReplyBodyTextGrey;
++ (UIColor *)flyColorFlyReplyPostAtGrey;
 
 
 + (UIColor *)customGrayColor;

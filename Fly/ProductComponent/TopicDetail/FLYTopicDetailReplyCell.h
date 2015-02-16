@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class FLYReply;
+
 @interface FLYTopicDetailReplyCell : UITableViewCell
+
+@property (nonatomic) FLYReply *reply;
+
+- (void)setupReply:(FLYReply *)reply;
 
 @end

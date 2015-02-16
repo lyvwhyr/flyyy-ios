@@ -10,135 +10,122 @@
 #import "UIColor+FLYAddition.h"
 #import "FLYReplyPlayView.h"
 #import "FLYIconButton.h"
+#import "FLYReply.h"
+#import "FLYUser.h"
 
 @interface FLYTopicDetailReplyCell()
 
-@property (nonatomic) UIImageView *avatarImageView;
-@property (nonatomic) UILabel *userNameLabel;
-@property (nonatomic) UILabel *inReplyToUserNameLabel;
-@property (nonatomic) FLYReplyPlayView *replyPlayView;
-@property (nonatomic) UILabel *postAtLabel;
+@property (nonatomic) UIButton *playButton;
+@property (nonatomic) UILabel *bodyLabel;
+@property (nonatomic) UILabel *postAt;
+@property (nonatomic) FLYIconButton *likeButton;
+@property (nonatomic) UIButton *commentButton;
 
-@property (nonatomic) FLYIconButton *flyButton;
-@property (nonatomic) FLYIconButton *commentButton;
+@property (nonatomic) BOOL didSetupConstraints;
 
 @end
 
 @implementation FLYTopicDetailReplyCell
 
+#define kPlayButtonLeftPadding 24
+#define kLikeTopPadding 8
+#define kLikeRightPadding 10
+#define kCommentBottomPadding 8
+#define kBodyLabelYOffset 10
+#define kBodyLabelLeftPadding 20
+#define kPostAtTopPadding 7
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        _avatarImageView = [UIImageView new];
-        NSString *avatarName = [NSString stringWithFormat:@"p%d.jpg", (arc4random()%10 + 1)];
-        UIImage *avatarImage = [UIImage imageNamed:avatarName];
-        [_avatarImageView setImage:avatarImage];
-        [_avatarImageView sizeToFit];
-        _avatarImageView.layer.cornerRadius = 18;
-        _avatarImageView.clipsToBounds = YES;
-        _avatarImageView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_avatarImageView];
-        
-        _userNameLabel = [UILabel new];
-        _userNameLabel.text = @"colorfulmelody";
-        _userNameLabel.font = [UIFont systemFontOfSize:14];
-        _userNameLabel.textColor = [UIColor blackColor];
-        _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_userNameLabel];
-        
-        _inReplyToUserNameLabel = [UILabel new];
-        _inReplyToUserNameLabel.text = @"@natasha";
-        _inReplyToUserNameLabel.font = [UIFont systemFontOfSize:12];
-        _inReplyToUserNameLabel.textColor = [UIColor flyFeedGrey];
-        _inReplyToUserNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_inReplyToUserNameLabel];
-        
-        _replyPlayView = [FLYReplyPlayView new];
-        _replyPlayView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_replyPlayView];
-        
-        _postAtLabel = [UILabel new];
-        _postAtLabel.text = @"3m";
-        _postAtLabel.font = [UIFont systemFontOfSize:13];
-        _postAtLabel.textColor = [UIColor flyFeedGrey];
-        _postAtLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_postAtLabel];
-        
         UIColor *color = [UIColor flyInlineActionGrey];
-        UIFont *font = [UIFont systemFontOfSize:13.0f];
-        _flyButton = [[FLYIconButton alloc] initWithText:@"Fly" textFont:font textColor:color icon:@"icon_inline_wing" isIconLeft:YES];
-        _flyButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_flyButton];
+        UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
+        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:color icon:@"icon_detail_wings" isIconLeft:NO];
+        _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.contentView addSubview:_likeButton];
         
-        _commentButton = [[FLYIconButton alloc] initWithText:@"Comment" textFont:font textColor:color  icon:@"icon_inline_comment" isIconLeft:NO];
-//        [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _playButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_playButton setImage:[UIImage imageNamed:@"icon_detail_play"] forState:UIControlStateNormal];
+        [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:_playButton];
+        
+        _bodyLabel = [UILabel new];
+        _bodyLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _bodyLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14];
+        _bodyLabel.textColor = [UIColor flyColorFlyReplyBodyTextGrey];
+        [self.contentView addSubview:_bodyLabel];
+        
+        _postAt = [UILabel new];
+        _postAt.translatesAutoresizingMaskIntoConstraints = NO;
+        _postAt.font = [UIFont fontWithName:@"Avenir-Book" size:9];
+        _postAt.textColor = [UIColor flyColorFlyReplyPostAtGrey];
+        [self.contentView addSubview:_postAt];
+        
+        _commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_commentButton];
-        
-        [self needsUpdateConstraints];
+        [_commentButton setImage:[UIImage imageNamed:@"icon_detail_graycomment"] forState:UIControlStateNormal];
+        [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:_commentButton];
     }
     
     return self;
 }
 
+- (void)setupReply:(FLYReply *)reply
+{
+    self.bodyLabel.text = reply.user.userName;
+    self.postAt.text = @"1d";
+    [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)reply.likeCount]];
+}
+
 - (void)updateConstraints
 {
-    [_avatarImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(10);
-        make.leading.equalTo(self).offset(20);
-        make.width.equalTo(@(36));
-        make.height.equalTo(@(36));
-    }];
-    
-    [_userNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(10);
-        make.leading.equalTo(_avatarImageView.mas_right).offset(10);
-    }];
-    
-    [_inReplyToUserNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_userNameLabel.mas_bottom).offset(3);
-        make.leading.equalTo(_avatarImageView.mas_right).offset(10);
-    }];
-    
-    [_replyPlayView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(5);
-        make.width.equalTo(@(75));
-        make.height.equalTo((@30));
-    }];
-    
-    [_postAtLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(10);
-        make.trailing.equalTo(self).offset(-20);
-    }];
-    
-    UIView *helperView = [UIView new];
-    [self addSubview:helperView];
-    [helperView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(_userNameLabel.mas_trailing);
-        make.trailing.equalTo(_postAtLabel.mas_leading);
-        make.top.equalTo(self);
-        make.bottom.equalTo(self);
-    }];
-    helperView.userInteractionEnabled = NO;
-    
-    [_replyPlayView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(helperView);
-    }];
-    
-
-    [_commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self).offset(-10);
-        make.trailing.equalTo(self).offset(-10);
-    }];
-    
-    [_flyButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self).offset(-10);
-        make.trailing.equalTo(_commentButton.mas_leading).offset(-40);
-    }];
-
-    
+    if (!self.didSetupConstraints) {
+        [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self);
+            make.leading.equalTo(self).offset(kPlayButtonLeftPadding);
+        }];
+        
+        [self.likeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self).offset(kLikeTopPadding);
+            make.trailing.equalTo(self).offset(-kLikeRightPadding);
+        }];
+        
+        [self.commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.equalTo(self.likeButton);
+            make.bottom.equalTo(self).offset(-kCommentBottomPadding);
+        }];
+        
+        [self.bodyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self).offset(-kBodyLabelYOffset);
+            make.leading.equalTo(self.playButton.mas_trailing).offset(kBodyLabelLeftPadding);
+        }];
+        
+        [self.postAt mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.bodyLabel);
+            make.top.equalTo(self.bodyLabel.mas_bottom).offset(kPostAtTopPadding);
+        }];
+    }
     [super updateConstraints];
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self.contentView setNeedsLayout];
+    [self.contentView layoutIfNeeded];
+}
+
+#pragma mark - User interactions
+- (void)_playButtonTapped
+{
+    
+}
+
+- (void)_commentButtonTapped
+{
+    
+}
 
 @end

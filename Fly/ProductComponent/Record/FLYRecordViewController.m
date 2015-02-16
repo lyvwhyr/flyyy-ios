@@ -111,10 +111,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     _audioLength = 0;
+    
     [self _initVoiceRecording];
-    
     [self _setupInitialViewState];
-    
     [self updateViewConstraints];
 }
 
