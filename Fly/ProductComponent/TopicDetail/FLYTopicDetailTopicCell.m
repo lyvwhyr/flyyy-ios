@@ -243,7 +243,7 @@
 #pragma mark - button taps
 - (void)_commentButtonTapped
 {
-    
+    [self.delegate commentButtonTapped:self];
 }
 
 - (void)_likeButtonTapped

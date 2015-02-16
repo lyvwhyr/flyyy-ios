@@ -15,8 +15,10 @@
 #import "FLYTopic.h"
 #import "FLYTopicDetailReplyCell.h"
 #import "FLYTopicDetailTopicCell.h"
+#import "FLYRecordViewController.h"
+#import "FLYNavigationController.h"
 
-@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate>
 
 @property (nonatomic) UITableView *topicTableView;
 
@@ -40,6 +42,15 @@
         [_replies addObject:@"1"];
         [_replies addObject:@"2"];
         [_replies addObject:@"3"];
+        [_replies addObject:@"1"];
+        [_replies addObject:@"2"];
+        [_replies addObject:@"3"];
+        [_replies addObject:@"1"];
+        [_replies addObject:@"2"];
+        [_replies addObject:@"3"];
+        [_replies addObject:@"1"];
+        [_replies addObject:@"2"];
+        [_replies addObject:@"3"];
     }
     return self;
 }
@@ -54,6 +65,15 @@
 {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         _replies = [NSMutableArray new];
+        [_replies addObject:@"1"];
+        [_replies addObject:@"2"];
+        [_replies addObject:@"3"];
+        [_replies addObject:@"1"];
+        [_replies addObject:@"2"];
+        [_replies addObject:@"3"];
+        [_replies addObject:@"1"];
+        [_replies addObject:@"2"];
+        [_replies addObject:@"3"];
         [_replies addObject:@"1"];
         [_replies addObject:@"2"];
         [_replies addObject:@"3"];
@@ -98,7 +118,7 @@
 {
     if (!_setLayoutConstraints) {
         _setLayoutConstraints = YES;
-        CGFloat tableViewHeight = MIN((CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight - kTabBarViewHeight), _topicTableView.contentSize.height);
+        CGFloat tableViewHeight = MIN((CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight), _topicTableView.contentSize.height);
         [_topicTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
             make.leading.equalTo(self.view);
@@ -143,6 +163,7 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor flyBlue];
+        ((FLYTopicDetailTopicCell *)cell).delegate = self;
         [((FLYTopicDetailTopicCell *)cell) setupTopic:self.topic];
     } else {
         static NSString *cellIdentifier = kFlyTopicDetailViewControllerReplyCellIdentifier;
@@ -170,6 +191,14 @@
         return [FLYTopicDetailTopicCell cellHeightForTopic:self.topic];
     }
     return 90;
+}
+
+#pragma mark - FLYTopicDetailTopicCellDelegate
+- (void)commentButtonTapped:(FLYTopicDetailTopicCell *)cell
+{
+    FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForTopic];
+    UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
+    [self presentViewController:navigationController animated:NO completion:nil];
 }
 
 

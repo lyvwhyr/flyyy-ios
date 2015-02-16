@@ -214,7 +214,6 @@
     [viewController didMoveToParentViewController:self];
     
     CGRect frame = self.view.bounds;
-//    frame.size.height = self.view.bounds.size.height - kTabBarViewHeight;
     frame.size.height = self.view.bounds.size.height - kTabBarViewHeight;
     viewController.view.frame = frame;
     
@@ -251,8 +250,7 @@
 
 - (void)_recordButtonTapped
 {
-    FLYRecordViewController *recordViewController = [FLYRecordViewController new];
-    recordViewController.recordingType = RecordingForTopic;
+    FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForTopic];
     UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
     [self presentViewController:navigationController animated:NO completion:nil];
 }

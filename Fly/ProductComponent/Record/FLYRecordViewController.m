@@ -80,6 +80,14 @@
 
 #define kMaxRecordTime          60
 
+- (instancetype)initWithRecordType:(FLYRecordingType)recordingType
+{
+    if (self = [super init]) {
+        _recordingType = recordingType;
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad
 {

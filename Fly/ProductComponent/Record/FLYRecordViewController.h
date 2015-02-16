@@ -27,4 +27,6 @@ typedef NS_ENUM(NSInteger, FLYRecordingType)
 
 @property (nonatomic) FLYRecordingType recordingType;
 
+- (instancetype)initWithRecordType:(FLYRecordingType)recordingType;
+
 @end

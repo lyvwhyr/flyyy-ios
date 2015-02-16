@@ -9,8 +9,18 @@
 #import <UIKit/UIKit.h>
 
 @class FLYTopic;
+@class FLYTopicDetailTopicCell;
+
+@protocol FLYTopicDetailTopicCellDelegate <NSObject>
+
+- (void)commentButtonTapped:(FLYTopicDetailTopicCell *)cell;
+
+@end
+
 
 @interface FLYTopicDetailTopicCell : UITableViewCell
+
+@property (nonatomic, weak)id<FLYTopicDetailTopicCellDelegate> delegate;
 
 - (void)setupTopic:(FLYTopic *)topic;
 
