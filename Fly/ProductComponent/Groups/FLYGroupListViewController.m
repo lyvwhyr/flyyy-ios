@@ -45,34 +45,59 @@
     [self.view addSubview:_groupsTabelView];
     
     _groups = [NSMutableArray new];
-    [_groups addObject:@"Drugs and alcohol"];
-    [_groups addObject:@"Rape"];
-    [_groups addObject:@"Love confession"];
-    [_groups addObject:@"LGBTQ"];
-    [_groups addObject:@"Relationships"];
+    [_groups addObject:@"Sexually Assaulted"];
+    [_groups addObject:@"Funny Stories"];
+    [_groups addObject:@"Guilt Trips"];
+    [_groups addObject:@"My Fantasies"];
+    [_groups addObject:@"My Crushes"];
     
-    [_groups addObject:@"Tattoosand piercings"];
-    [_groups addObject:@"Travel"];
-    [_groups addObject:@"Money"];
-    [_groups addObject:@"Faith"];
-    [_groups addObject:@"Family"];
+    [_groups addObject:@"Feeling Blue"];
+    [_groups addObject:@"Jokes"];
+    [_groups addObject:@"My Confessions"];
+    [_groups addObject:@"My ex is.."];
+    [_groups addObject:@"Men are.."];
     
-    [_groups addObject:@"Tattoosand piercings"];
-    [_groups addObject:@"Travel"];
-    [_groups addObject:@"Money"];
-    [_groups addObject:@"Faith"];
-    [_groups addObject:@"Family"];
-    [_groups addObject:@"Tattoosand piercings"];
-    [_groups addObject:@"Travel"];
-    [_groups addObject:@"Money"];
-    [_groups addObject:@"Faith"];
-    [_groups addObject:@"Family"];
-    [_groups addObject:@"Tattoosand piercings"];
-    [_groups addObject:@"Travel"];
-    [_groups addObject:@"Money"];
-    [_groups addObject:@"Faith"];
-    [_groups addObject:@"Family"];
-    
+    [_groups addObject:@"Women are.."];
+    [_groups addObject:@"Dating Advice"];
+    [_groups addObject:@"Greatest Fears"];
+    [_groups addObject:@"Accomplishments"];
+    [_groups addObject:@"Breaking up"];
+    [_groups addObject:@"Lonely"];
+    [_groups addObject:@"In the closet"];
+    [_groups addObject:@"Help!"];
+    [_groups addObject:@"Happy"];
+    [_groups addObject:@"Bad Day"];
+    [_groups addObject:@"Good Day"];
+    [_groups addObject:@"My Purpose"];
+    [_groups addObject:@"Fitting In"];
+    [_groups addObject:@"Lies"];
+    [_groups addObject:@"Betrayals"];
+
+    [_groups addObject:@"Shameful Past"];
+    [_groups addObject:@"My Dreams"];
+    [_groups addObject:@"Mood Swings"];
+    [_groups addObject:@"Stress"];
+    [_groups addObject:@"Lies"];
+    [_groups addObject:@"Betrayals"];
+    [_groups addObject:@"Can't Orgasm"];
+    [_groups addObject:@"Family Pressure"];
+    [_groups addObject:@"Forgiveness"];
+    [_groups addObject:@"Karma"];
+    [_groups addObject:@"Success Stories "];
+    [_groups addObject:@"Ask Flyy"];
+    [_groups addObject:@"I discovered"];
+    [_groups addObject:@"First Kiss"];
+    [_groups addObject:@"Lies"];
+    [_groups addObject:@"Betrayals"];
+    [_groups addObject:@"Loosing Virginity"];
+    [_groups addObject:@"Still A Virgin"];
+    [_groups addObject:@"Disordered Eating"];
+    [_groups addObject:@"Can't Sleep"];
+    [_groups addObject:@"Stepmother"];
+    [_groups addObject:@"Stepfather"];
+    [_groups addObject:@"Douchebag"];
+    [_groups addObject:@"Womanizers"];
+    [_groups addObject:@"Nightmares"];
     [self _addViewConstraints];
 }
 
@@ -145,6 +170,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    return;
     if (kSuggestGroupRow == indexPath.row) {
         SCLAlertView *alert = [[SCLAlertView alloc] init];
         
