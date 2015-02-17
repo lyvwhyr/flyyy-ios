@@ -5,6 +5,7 @@ PODS:
   - Mixpanel/MPCategoryHelpers (2.7.1)
   - pop (1.0.7)
   - SCLAlertView-Objective-C (0.3.5)
+  - StreamingKit (0.1.25)
   - SVPullToRefresh (0.4.1)
   - TheAmazingAudioEngine (1.4.5)
   - Waver (0.2.0)
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - Mixpanel
   - pop (~> 1.0)
   - SCLAlertView-Objective-C
+  - StreamingKit
   - SVPullToRefresh
   - TheAmazingAudioEngine
   - Waver (~> 0.2.0)
@@ -23,6 +25,7 @@ SPEC CHECKSUMS:
   Mixpanel: 57314e0e7c0a63a6471618a41002da3e1408532c
   pop: 2f14a1ea61339767af9e66741b418c831b3844df
   SCLAlertView-Objective-C: ba283f4d609d9929d4d2bf66f713db19ae0fe066
+  StreamingKit: 5b36623e7246cccddb8db3aee79c43bb180a51be
   SVPullToRefresh: d5161ebc833a38b465364412e5e307ca80bbb190
   TheAmazingAudioEngine: 34279bc2841262eae7a24c3c7944a43fab72918e
   Waver: 113097c3a025542cd4857d087a9098bc45a51e9e

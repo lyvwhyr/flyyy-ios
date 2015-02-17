@@ -336,6 +336,7 @@
 		A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */; };
 		A6CD56EB1A4802C3003486DD /* FLYDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56EA1A4802C3003486DD /* FLYDownloadManager.m */; };
 		A6CD56EE1A48079D003486DD /* FLYFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56ED1A48079D003486DD /* FLYFileManager.m */; };
+		A6D692241A92F61A00F8EEDE /* SampleQueueId.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D692231A92F61A00F8EEDE /* SampleQueueId.m */; };
 		A6D949EA1A9079AC003D4265 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D949E81A9079AC003D4265 /* Crashlytics.framework */; };
 		A6D949EB1A9079AC003D4265 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D949E91A9079AC003D4265 /* Fabric.framework */; };
 		A6D949EE1A9086FA003D4265 /* UIDevice+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D949ED1A9086FA003D4265 /* UIDevice+FLYAddition.m */; };
@@ -885,6 +886,8 @@
 		A6CD56EA1A4802C3003486DD /* FLYDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDownloadManager.m; sourceTree = "<group>"; };
 		A6CD56EC1A48079D003486DD /* FLYFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFileManager.h; sourceTree = "<group>"; };
 		A6CD56ED1A48079D003486DD /* FLYFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFileManager.m; sourceTree = "<group>"; };
+		A6D692221A92F61A00F8EEDE /* SampleQueueId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleQueueId.h; sourceTree = "<group>"; };
+		A6D692231A92F61A00F8EEDE /* SampleQueueId.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleQueueId.m; sourceTree = "<group>"; };
 		A6D949E81A9079AC003D4265 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		A6D949E91A9079AC003D4265 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		A6D949EC1A9086FA003D4265 /* UIDevice+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+FLYAddition.h"; sourceTree = "<group>"; };
@@ -1130,6 +1133,7 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A6D692211A92F61400F8EEDE /* Datastructure */,
 				A67A5E871A70CC290098DA23 /* Services */,
 				A6E506141A4AA731009C5FAB /* PlayIabletem */,
 				A6CD56E81A480298003486DD /* Download */,
@@ -1950,6 +1954,15 @@
 			path = Download;
 			sourceTree = "<group>";
 		};
+		A6D692211A92F61400F8EEDE /* Datastructure */ = {
+			isa = PBXGroup;
+			children = (
+				A6D692221A92F61A00F8EEDE /* SampleQueueId.h */,
+				A6D692231A92F61A00F8EEDE /* SampleQueueId.m */,
+			);
+			path = Datastructure;
+			sourceTree = "<group>";
+		};
 		A6D949EF1A9089FC003D4265 /* UICKeyChainStore */ = {
 			isa = PBXGroup;
 			children = (
@@ -2330,6 +2343,7 @@
 				A6A0E4A91A1E76110036116E /* FLEXGlobalsTableViewController.m in Sources */,
 				A69C4BD81A2840E700CAD443 /* NSDictionary+FLYAddition.m in Sources */,
 				A63189141A92B2380042E12A /* http_stream.cpp in Sources */,
+				A6D692241A92F61A00F8EEDE /* SampleQueueId.m in Sources */,
 				A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */,
 				A66E204E1A2EBDAE004235F5 /* RDVTabBar.m in Sources */,
 				A6048AD31A8603EF00C67480 /* AFURLConnectionOperation.m in Sources */,

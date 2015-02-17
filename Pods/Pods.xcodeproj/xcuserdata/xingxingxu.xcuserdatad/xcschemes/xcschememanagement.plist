@@ -8,97 +8,91 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Pods-Mixpanel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Pods-SCLAlertView-Objective-C.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Pods-SVPullToRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
+		</dict>
+		<key>Pods-StreamingKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-TheAmazingAudioEngine.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>Pods-Waver.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>7</integer>
 		</dict>
 		<key>Pods-pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0CE38DA9F971930D02F7053E</key>
+		<key>130ACD890526C48ABF5BD760</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>340E87EE5DCC42B706D3366B</key>
+		<key>26E4B16BDBC958025E33B940</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7F54F6F0027A219F2D238DB7</key>
+		<key>2BE3A79D2778F581EA57AAE8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8183B2084E5817E57E1B881D</key>
+		<key>3FD5F5E8213B974B5CF6D926</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9C576F4788462B81AC62DE53</key>
+		<key>49FDC2895034F2CE866DBD39</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DFC49E126943C2A2C4A56291</key>
+		<key>783400DECD1189C9D2C0396B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EA601B13D637F1306312F530</key>
+		<key>8F84C0DEC3940A33E4B1E46C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F94FC983DE6BA22BBC3CDC0F</key>
+		<key>AB0D887A68F8A3EEBAC8697A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE06B00F5BEE45FF411D487D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

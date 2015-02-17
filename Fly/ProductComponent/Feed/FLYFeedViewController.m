@@ -22,8 +22,10 @@
 #import "UIColor+FLYAddition.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "Dialog.h"
+#import "STKAudioPlayer.h"
+#import "SampleQueueId.h"
 
-@interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
+@interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate, STKAudioPlayerDelegate>
 
 @property (nonatomic) UIView *backgroundView;
 @property (nonatomic) FLYInlineReplyView *inlineReplyView;
@@ -35,6 +37,8 @@
 @property (nonatomic) NSMutableArray *posts;
 @property (nonatomic) BOOL didSetConstraints;
 @property (nonatomic) enum RequestType requestType;
+
+@property (nonatomic) STKAudioPlayer *audioPlayer;
 
 @end
 
@@ -51,7 +55,11 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(_newPostReceived:)
                                                      name:kNewPostReceivedNotification object:nil];
-    
+        
+        _audioPlayer = [[STKAudioPlayer alloc] initWithOptions:(STKAudioPlayerOptions){ .flushQueueOnSeek = YES, .enableVolumeMixer = NO, .equalizerBandFrequencies = {50, 100, 200, 400, 800, 1600, 2600, 16000} }];
+        _audioPlayer.meteringEnabled = YES;
+        _audioPlayer.volume = 1;
+        _audioPlayer.delegate = self;
     }
     return self;
 }
@@ -331,6 +339,11 @@
 
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)tappedCell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath
 {
+    NSURL* url = [NSURL URLWithString:post.mediaURL];
+    STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
+    [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0]];
+    return;
+    
     //If currentPlayItem is empty, set the tappedCell as currentPlayItem
     NSIndexPath *tappedCellIndexPath;
     if (!indexPath) {
@@ -459,5 +472,34 @@
     return [UIColor whiteColor];
 }
 
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState
+{
+    UALog(@"stateChanged");
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer unexpectedError:(STKAudioPlayerErrorCode)errorCode
+{
+        UALog(@"unexpceted error");
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(NSObject*)queueItemId
+{
+    SampleQueueId* queueId = (SampleQueueId*)queueItemId;
+    
+    NSLog(@"Started: %@", [queueId.url description]);
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishBufferingSourceWithQueueItemId:(NSObject*)queueItemId
+{
+        UALog(@"finish buffer");
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(NSObject*)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
+{
+    SampleQueueId* queueId = (SampleQueueId*)queueItemId;
+    
+    NSLog(@"Finished: %@", [queueId.url description]);
+}
 
 @end

@@ -36,6 +36,12 @@
 #define COCOAPODS_VERSION_MINOR_SVPullToRefresh 4
 #define COCOAPODS_VERSION_PATCH_SVPullToRefresh 1
 
+// StreamingKit
+#define COCOAPODS_POD_AVAILABLE_StreamingKit
+#define COCOAPODS_VERSION_MAJOR_StreamingKit 0
+#define COCOAPODS_VERSION_MINOR_StreamingKit 1
+#define COCOAPODS_VERSION_PATCH_StreamingKit 25
+
 // TheAmazingAudioEngine
 #define COCOAPODS_POD_AVAILABLE_TheAmazingAudioEngine
 #define COCOAPODS_VERSION_MAJOR_TheAmazingAudioEngine 1
