@@ -3,6 +3,7 @@ PODS:
   - Mixpanel (2.7.1):
     - Mixpanel/MPCategoryHelpers (= 2.7.1)
   - Mixpanel/MPCategoryHelpers (2.7.1)
+  - NSDate+TimeAgo (1.0.3)
   - pop (1.0.7)
   - SCLAlertView-Objective-C (0.3.5)
   - StreamingKit (0.1.25)
@@ -13,6 +14,7 @@ PODS:
 DEPENDENCIES:
   - JGProgressHUD
   - Mixpanel
+  - NSDate+TimeAgo
   - pop (~> 1.0)
   - SCLAlertView-Objective-C
   - StreamingKit
@@ -23,6 +25,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   JGProgressHUD: a7c58f711eec0b67f257a0821c0bac9194c72398
   Mixpanel: 57314e0e7c0a63a6471618a41002da3e1408532c
+  NSDate+TimeAgo: f3533e0198fab05b716368b19f8c2185d53d6f3b
   pop: 2f14a1ea61339767af9e66741b418c831b3844df
   SCLAlertView-Objective-C: ba283f4d609d9929d4d2bf66f713db19ae0fe066
   StreamingKit: 5b36623e7246cccddb8db3aee79c43bb180a51be

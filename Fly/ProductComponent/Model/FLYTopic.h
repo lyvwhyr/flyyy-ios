@@ -38,6 +38,7 @@
 @property (nonatomic) NSInteger replyCount;
 @property (nonatomic) NSInteger audioDuration;
 @property (nonatomic, copy) NSString *createdAt;
+@property (nonatomic, copy) NSString *displayableCreateAt;
 @property (nonatomic, copy) NSString *updatedAt;
 @property (nonatomic, copy) NSString *mediaURL;
 @property (nonatomic) FLYUser *user;

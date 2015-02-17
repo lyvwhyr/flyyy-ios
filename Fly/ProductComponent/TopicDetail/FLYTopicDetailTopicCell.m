@@ -92,7 +92,6 @@
         [self.topicContentView addSubview:_commentButton];
         
         _postAtLabel = [UILabel new];
-        _postAtLabel.text = @"3m";
         _postAtLabel.font = inlineActionFont;
         _postAtLabel.textColor = [UIColor flyFeedGrey];
         _postAtLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -200,6 +199,7 @@
     self.topic = topic;
     self.userNameLabel.text = topic.user.userName;
     
+    self.postAtLabel.text = topic.displayableCreateAt;
     self.topicTitle.text = topic.topicTitle;
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:topic.topicTitle];
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];

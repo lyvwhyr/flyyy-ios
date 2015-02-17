@@ -21,6 +21,7 @@
 @property (nonatomic) NSInteger likeCount;
 @property (nonatomic) NSInteger duration;
 @property (nonatomic, copy) NSString *createdAt;
+@property (nonatomic, copy) NSString *displayableCreateAt;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 

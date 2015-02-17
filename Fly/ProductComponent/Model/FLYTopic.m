@@ -12,6 +12,7 @@
 #import "NSDictionary+FLYAddition.h"
 #import "FLYDownloadableAudio.h"
 #import "FLYURLConstants.h"
+#import "NSDate+TimeAgo.h"
 
 @interface FLYTopic() <FLYDownloadableAudio>
 
@@ -46,6 +47,9 @@
         _user = [[FLYUser alloc] initWithDictionary:[dict fly_dictionaryForKey:@"user"]];
         _group = [[FLYGroup alloc] initWithDictory:[dict fly_dictionaryForKey:@"group"]];
         
+        NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:[_createdAt longLongValue]/1000];
+        NSString *ago = [date timeAgo];
+        _displayableCreateAt = ago;
     }
     return self;
 }

@@ -9,6 +9,7 @@
 #import "FLYReply.h"
 #import "FLYUser.h"
 #import "NSDictionary+FLYAddition.h"
+#import "NSDate+TimeAgo.h"
 
 @implementation FLYReply
 
@@ -24,7 +25,10 @@
         _mediaURL = [NSString stringWithFormat:@"%@/%@", URL_ASSET_STAGING_BASE, mediaPath];
         _likeCount = [dict fly_integerForKey:@"like_count"];
         _duration = [dict fly_integerForKey:@"duration"];
-        _createdAt = [[dict fly_objectOrNilForKey:@"created_at"] stringValue];
+        _createdAt = [[dict fly_objectOrNilForKey:@"created_at"] stringValue];        
+        NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:[_createdAt longLongValue]/1000];
+        NSString *ago = [date timeAgo];
+        _displayableCreateAt = ago;
     }
     return self;
 }

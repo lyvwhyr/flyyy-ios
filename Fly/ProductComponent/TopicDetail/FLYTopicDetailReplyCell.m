@@ -80,7 +80,7 @@
     } else {
         self.bodyLabel.text = reply.user.userName;
     }
-    self.postAt.text = @"1d";
+    self.postAt.text = reply.displayableCreateAt;
     [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)reply.likeCount]];
 }
 
