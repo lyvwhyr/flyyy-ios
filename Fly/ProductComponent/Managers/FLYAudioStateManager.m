@@ -49,6 +49,20 @@
     return self;
 }
 
+- (AEAudioController *)audioController
+{
+    if (_audioController) {
+        _audioController = nil;
+    }
+    if (_audioController) {
+        [_audioController stop];
+        _audioController = nil;
+    }
+    
+    [self _initAudioController];
+    return _audioController;
+}
+
 - (void)startRecord
 {
     [self _initRecordAudioController];

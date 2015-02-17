@@ -125,7 +125,6 @@
 
 - (void)dealloc
 {
-    UALog(@"dealloc called");
     [self _cleanupData];
 }
 

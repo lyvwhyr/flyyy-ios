@@ -77,7 +77,7 @@
 
 - (void)dealloc
 {
-    UALog(@"dealloc");
+    
 }
 
 - (void)_audioState

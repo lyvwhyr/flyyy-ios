@@ -287,7 +287,7 @@
 
 - (void)downloadComplete:(NSNotification *)notificaiton
 {
-    if(![self.navigationController.visibleViewController isKindOfClass:[FLYFeedViewController class]]) {
+    if([self.navigationController.visibleViewController isKindOfClass:[FLYFeedViewController class]]) {
         return;
     }
     

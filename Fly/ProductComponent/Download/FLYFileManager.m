@@ -47,7 +47,7 @@ static const NSInteger kCachMaxSize = 256 * 1024 * 1024;  //256M
 
 - (void)dealloc
 {
-    UALog(@"dealloced");
+    
 }
 
 - (void)_cleanCache

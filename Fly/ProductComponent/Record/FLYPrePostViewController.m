@@ -98,7 +98,7 @@
 
 - (void)dealloc
 {
-    UALog(@"dealloc called");
+    
 }
 
 - (void)updateViewConstraints
