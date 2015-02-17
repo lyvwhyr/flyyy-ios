@@ -17,7 +17,7 @@
 @property (nonatomic, copy) NSString *parentReplyId;
 @property (nonatomic) FLYUser *parentReplyUser;
 @property (nonatomic) FLYUser *user;
-@property (nonatomic, copy) NSString *mediaPath;
+@property (nonatomic, copy) NSString *mediaURL;
 @property (nonatomic) NSInteger likeCount;
 @property (nonatomic) NSInteger duration;
 @property (nonatomic, copy) NSString *createdAt;

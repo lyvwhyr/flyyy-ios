@@ -19,6 +19,10 @@
 #import "FLYNavigationController.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "FLYReply.h"
+#import "FSAudioController.h"
+#import "FSAudioStream.h"
+#import "FLYAudioStateManager.h"
+#import "AEAudioFilePlayer.h"
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate>
 
@@ -31,6 +35,9 @@
 
 //used for reply pagination
 @property (nonatomic) NSString *beforeTimestamp;
+
+@property (nonatomic) FSAudioController *audioController;
+@property (nonatomic) FSAudioStream *audioStream;
 
 @end
 
@@ -48,6 +55,14 @@
     return self;
 }
 
+- (FSAudioController *)audioController
+{
+    if (!_audioController) {
+        _audioController = [[FSAudioController alloc] init];
+    }
+    return _audioController;
+}
+
 - (instancetype)initWithTopicId:(NSString *)topicId
 {
     return self;
@@ -58,9 +73,78 @@
     UALog(@"dealloc");
 }
 
+- (void)_audioState
+{
+    self.audioController.stream.onStateChange = ^(FSAudioStreamState state) {
+        switch (state) {
+            case kFsAudioStreamRetrievingURL:
+                UALog(@"reve");
+                break;
+                
+            case kFsAudioStreamStopped:
+                UALog(@"reve");
+                break;
+                
+            case kFsAudioStreamBuffering:
+                UALog(@"reve");
+                break;
+                
+            case kFsAudioStreamSeeking:
+                UALog(@"reve");
+                break;
+                
+            case kFsAudioStreamPlaying:
+                UALog(@"reve");
+                break;
+                
+            case kFsAudioStreamFailed:
+                UALog(@"reve");
+                break;
+            case kFsAudioStreamPlaybackCompleted:
+                UALog(@"reve");
+                break;
+            default:
+                break;
+        }
+    };
+    
+    self.audioController.stream.onFailure = ^(FSAudioStreamError error, NSString *errorDescription) {
+        NSString *errorCategory;
+        
+        switch (error) {
+            case kFsAudioStreamErrorOpen:
+                errorCategory = @"Cannot open the audio stream: ";
+                break;
+            case kFsAudioStreamErrorStreamParse:
+                errorCategory = @"Cannot read the audio stream: ";
+                break;
+            case kFsAudioStreamErrorNetwork:
+                errorCategory = @"Network failed: cannot play the audio stream: ";
+                break;
+            case kFsAudioStreamErrorUnsupportedFormat:
+                errorCategory = @"Unsupported format: ";
+                break;
+            case kFsAudioStreamErrorStreamBouncing:
+                errorCategory = @"Network failed: cannot get enough data to play: ";
+                break;
+            default:
+                errorCategory = @"Unknown error occurred: ";
+                break;
+        }
+        
+        NSString *formattedError = [NSString stringWithFormat:@"%@ %@", errorCategory, errorDescription];
+        UALog(@"%@", formattedError);
+    };
+
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.audioController setVolume:1];
+    [self _audioState];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.view.backgroundColor = [UIColor whiteColor];
@@ -152,6 +236,7 @@
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         ((FLYTopicDetailReplyCell *)cell).delegate = self;
+        ((FLYTopicDetailReplyCell *)cell).indexPath = indexPath;
         [((FLYTopicDetailReplyCell *)cell) setupReply:self.replies[indexPath.row]];
     }
     [cell setNeedsUpdateConstraints];
@@ -209,6 +294,12 @@
     recordViewController.parentReplyId = reply.replyId;
     UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
     [self presentViewController:navigationController animated:NO completion:nil];
+}
+
+- (void)playReplyWithReply:(FLYReply *)reply indexPath:(NSIndexPath *)indexPath
+{
+    self.audioController.url = [NSURL URLWithString:reply.mediaURL];
+    [self.audioController play];
 }
 
 

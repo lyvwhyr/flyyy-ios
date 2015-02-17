@@ -37,7 +37,7 @@
         _topicId = [[dict fly_objectOrNilForKey:@"topic_id"] stringValue];
         _topicTitle = [dict fly_stringForKey:@"topic_title"];
         NSString *mediaPath = [dict fly_stringForKey:@"media_path"];
-        _mediaURL = [URL_ASSET_STAGING_BASE stringByAppendingPathComponent:mediaPath];
+        _mediaURL = [NSString stringWithFormat:@"%@/%@", URL_ASSET_STAGING_BASE, mediaPath];
         _likeCount = [dict fly_integerForKey:@"like_count"];
         _replyCount = [dict fly_integerForKey:@"reply_count"];
         _audioDuration = [dict fly_integerForKey:@"audio_duration"];

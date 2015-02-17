@@ -10,6 +10,7 @@
 #define DEV_BASE_URL               @"http://localhost:3001/v1"
 #define STAGING_BASE_URL           @"http://api-staging.flyyapp.com/v1"
 #define PROD_BASE_URL              @"http://localhost:3000/v1"
+//#define STAGING_BASE_URL           @"http://localhost:3000/v1"
 
 #define URL_ASSET_STAGING_BASE      @"http://media-staging.flyyapp.com"
 

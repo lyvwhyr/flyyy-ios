@@ -20,7 +20,8 @@
         _parentReplyId = [[dict fly_objectOrNilForKey:@"parent_reply_id"] stringValue];
         _parentReplyUser = [[FLYUser alloc] initWithDictionary:[dict fly_dictionaryForKey:@"parent_reply_user"]];
         _user = [[FLYUser alloc] initWithDictionary:[dict fly_dictionaryForKey:@"user"]];
-        _mediaPath = [dict fly_stringForKey:@"media_path"];
+        NSString *mediaPath = [dict fly_stringForKey:@"media_path"];
+        _mediaURL = [NSString stringWithFormat:@"%@/%@", URL_ASSET_STAGING_BASE, mediaPath];
         _likeCount = [dict fly_integerForKey:@"like_count"];
         _duration = [dict fly_integerForKey:@"duration"];
         _createdAt = [[dict fly_objectOrNilForKey:@"created_at"] stringValue];

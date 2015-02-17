@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[FLYTopicDetailViewController playReplyWithReply:indexPath:]:FLYTopicDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.audioController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[FLYRecordViewController _nextBarButtonTapped]:FLYRecordViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -19,15 +27,15 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[FLYUser initWithDictory:]:FLYUser.m">
+      </ContextState>
+      <ContextState
          contextName = "__46-[FLYFeedViewController updateViewConstraints]_block_invoke:FLYFeedViewController.m">
          <PersistentStrings>
             <PersistentString
                value = "self.view">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[FLYUser initWithDictory:]:FLYUser.m">
       </ContextState>
       <ContextState
          contextName = "-[FLYGroupListViewController viewDidLayoutSubviews]:FLYGroupListViewController.m">
