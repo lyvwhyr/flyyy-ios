@@ -188,9 +188,10 @@
 
 - (void)playAudioURLStr:(NSString *)str withCompletionBlock:(AudioPlayerCompleteblock)block
 {
-    if (_player) {
+    if (_audioController && _player) {
         [_audioController removeChannels:@[_player]];
         self.player = nil;
+        [self _initAudioController];
     }
     
     if (!str) {
@@ -199,7 +200,6 @@
     
     NSError *error = NULL;
     if (![[NSFileManager defaultManager] fileExistsAtPath:str]) {
-//        block();
         return;
     }
     

@@ -23,6 +23,7 @@
 #import "FSAudioStream.h"
 #import "FLYAudioStateManager.h"
 #import "AEAudioFilePlayer.h"
+#import "FLYDownloadManager.h"
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate>
 
@@ -51,6 +52,12 @@
     if (self = [super init]) {
         _topic = topic;
         _replies = [NSMutableArray new];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_newReplyReceived:) name:kNewReplyReceivedNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_downloadComplete:)
+                                                     name:kDownloadCompleteNotification object:nil];
     }
     return self;
 }
@@ -298,8 +305,36 @@
 
 - (void)playReplyWithReply:(FLYReply *)reply indexPath:(NSIndexPath *)indexPath
 {
-    self.audioController.url = [NSURL URLWithString:reply.mediaURL];
-    [self.audioController play];
+    [[FLYDownloadManager sharedInstance] loadAudioByURLString:reply.mediaURL];
+    
+//    self.audioController.url = [NSURL URLWithString:reply.mediaURL];
+//    [self.audioController play];
+}
+
+#pragma mark - Notification
+
+- (void)_newReplyReceived:(NSNotification *)notif
+{
+    FLYReply *reply = [notif.userInfo objectForKey:kNewReplyKey];
+    [self.replies insertObject:reply atIndex:0];
+    [self.topicTableView reloadData];
+    [self _scrollToTop];
+}
+
+- (void)_downloadComplete:(NSNotification *)notif
+{
+    NSString *localPath = [notif.userInfo objectForKey:@"localPath"];
+    
+    [[FLYAudioStateManager sharedInstance] playAudioURLStr:localPath withCompletionBlock:^{
+        
+    }];
+    
+}
+
+- (void)_scrollToTop
+{
+    NSIndexPath* top = [NSIndexPath indexPathForRow:NSNotFound inSection:0];
+    [self.topicTableView scrollToRowAtIndexPath:top atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 

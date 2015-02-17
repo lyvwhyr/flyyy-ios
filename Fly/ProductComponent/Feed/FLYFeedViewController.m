@@ -287,6 +287,10 @@
 
 - (void)downloadComplete:(NSNotification *)notificaiton
 {
+    if(![self.navigationController.visibleViewController isKindOfClass:[FLYFeedViewController class]]) {
+        return;
+    }
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *localPath = [notificaiton.userInfo objectForKey:@"localPath"];
         [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;

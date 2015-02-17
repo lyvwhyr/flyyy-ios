@@ -316,7 +316,7 @@ static inline float translate(float val, float min, float max) {
         [self.progressHUD dismiss];
         
         FLYReply *reply = [[FLYReply alloc] initWithDictionary:responseObject];
-        NSDictionary *dict = @{kNewPostKey:reply};
+        NSDictionary *dict = @{kNewReplyKey:reply};
         [Dialog simpleToast:@"Posted"];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNewReplyReceivedNotification object:self userInfo:dict];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];

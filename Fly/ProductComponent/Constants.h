@@ -12,6 +12,7 @@
 #define kContainerViewHeight  kMainScreenHeight - kStatusBarHeight - kNavBarHeight - kTabBarViewHeight
 
 #define kNewPostKey @"kNewPostKey"
+#define kNewReplyKey @"kNewReplyKey"
 
 #define kAudioCacheFolder   @"flyyapp.com.audios"
 
