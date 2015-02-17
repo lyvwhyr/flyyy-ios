@@ -136,18 +136,19 @@
     CGPoint center = CGPointMake(CGRectGetMidX(self.playButton.bounds),  CGRectGetMidY(self.playButton.bounds));
     
     UIBezierPath *path = [UIBezierPath bezierPath];
-    [path addArcWithCenter:center radius:20 startAngle: -(float)M_PI_2 endAngle:2 * M_PI clockwise:YES];
+    [path addArcWithCenter:center radius:18 startAngle: -(float)M_PI_2 endAngle:2 * M_PI clockwise:YES];
     _arcLayer = [CAShapeLayer layer];
     _arcLayer.path = path.CGPath;
     _arcLayer.strokeColor = [UIColor flyColorPlayAnimation].CGColor;
     _arcLayer.fillColor = [UIColor clearColor].CGColor;
-    _arcLayer.lineWidth = 5;
+    _arcLayer.lineWidth = 3.5;
     [_playButton.layer addSublayer:_arcLayer];
     
     CABasicAnimation *bas=[CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     bas.removedOnCompletion = YES;
-    bas.duration=5;
-    bas.delegate=self;
+    bas.duration = self.topic.audioDuration + self.topic.audioDuration/5;
+    bas.delegate = self;
+    bas.speed = 1.0;
     bas.fromValue=[NSNumber numberWithInteger:0];
     bas.toValue=[NSNumber numberWithInteger:1];
     [_arcLayer addAnimation:bas forKey:@"key"];
@@ -300,7 +301,7 @@
         case FLYPlayStatePlaying: {
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_pause"] forState:UIControlStateNormal];
             
-//            [self drawLineAnimation];
+            [self drawLineAnimation];
             break;
         }
         case FLYPlayStatePaused: {
