@@ -66,8 +66,6 @@
 //Post reply progress hud
 @property (nonatomic) JGProgressHUD *progressHUD;
 
-@property (nonatomic, weak) AEAudioController *audioController;
-@property (nonatomic, weak) AEAudioFilePlayer *audioPlayer;
 @property (nonatomic, copy) AudioPlayerCompleteblock completionBlock;
 
 @property (nonatomic, readonly) UITapGestureRecognizer *userActionTapGestureRecognizer;
@@ -130,6 +128,10 @@
 
 - (void)_initVoiceRecording
 {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[FLYAudioStateManager sharedInstance] initRecordingAudioController];
+    });
+    
     @weakify(self)
     _completionBlock = ^{
         @strongify(self)
@@ -139,60 +141,6 @@
             [self _updateUserState];
         });
     };
-}
-
-- (void)updateLevels:(NSTimer*)timer
-{
-    if (_currentState != FLYRecordRecordingState) {
-        return;
-    }
-    
-    Float32 inputAvg, inputPeak, outputAvg, outputPeak;
-    [_audioController inputAveragePowerLevel:&inputAvg peakHoldLevel:&inputPeak];
-    [_audioController outputAveragePowerLevel:&outputAvg peakHoldLevel:&outputPeak];
-    
-    float voicePower = translate(inputAvg, -20, 0);
-    
-    if (voicePower > 0) {
-        NSLog(@"voice: %f", voicePower);
-    }
-    
-    if (0<voicePower<=0.06) {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_01.png"]];
-    }else if (0.06<voicePower<=0.13) {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_02.png"]];
-    }else if (0.13<voicePower<=0.20) {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_03.png"]];
-    }else if (0.20<voicePower<=0.27) {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_04.png"]];
-    }else if (0.27<voicePower<=0.34) {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_05.png"]];
-    }else if (0.34<voicePower<=0.41) {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_06.png"]];
-    }else if (0.41<voicePower<=0.48) {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_07.png"]];
-    }else if (0.48<voicePower<=0.55) {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_08.png"]];
-    }else if (0.55<voicePower<=0.62) {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_09.png"]];
-    }else if (0.62<voicePower<=0.69) {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_10.png"]];
-    }else if (0.69<voicePower<=0.76) {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_11.png"]];
-    }else if (0.76<voicePower<=0.83) {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_12.png"]];
-    }else if (0.83<voicePower<=0.9) {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_13.png"]];
-    }else {
-        [self.userActionImageView setImage:[UIImage imageNamed:@"record_animate_14.png"]];
-    }
-    
-}
-
-static inline float translate(float val, float min, float max) {
-    if ( val < min ) val = min;
-    if ( val > max ) val = max;
-    return (val - min) / (max - min);
 }
 
 
@@ -341,12 +289,6 @@ static inline float translate(float val, float min, float max) {
     self.recordBottomBar = nil;
     _currentState = FLYRecordInitialState;
     
-//    _outerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kOuterCircleRadius, kOuterCircleRadius) radius:kOuterCircleRadius color:[UIColor whiteColor]];
-//    [self.view addSubview:_outerCircleView];
-//    
-//    _innerCircleView = [[FLYCircleView alloc] initWithCenterPoint:CGPointMake(kInnerCircleRadius, kInnerCircleRadius) radius:kInnerCircleRadius color:[UIColor flyBlue]];
-//    [self.view insertSubview:_innerCircleView aboveSubview:_outerCircleView];
-    
     [_userActionImageView removeFromSuperview];
     _userActionImageView = nil;
     
@@ -386,13 +328,10 @@ static inline float translate(float val, float min, float max) {
     _recordedTimeLabel.text = [NSString stringWithFormat:@":%d", kMaxRecordTime];
     
     [self.view addSubview:_recordedTimeLabel];
-//    [self _addPulsingAnimation];
     
     [self updateViewConstraints];
     
     [[FLYAudioStateManager sharedInstance] startRecord];
-    _audioPlayer = [FLYAudioStateManager sharedInstance].player;
-    _audioController = [FLYAudioStateManager sharedInstance].audioController;
     
     [self _loadWaver];
     [self loadRightBarButton];
@@ -405,12 +344,10 @@ static inline float translate(float val, float min, float max) {
         self.waver = [[Waver alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 230, CGRectGetWidth(self.view.bounds), 100.0)];
         __weak Waver * weakWaver = self.waver;
         self.waver.waveColor = [UIColor flyColorFlyRecordingWave];
-        @weakify(self);
         self.waver.waverLevelCallback = ^() {
-            @strongify(self)
             Float32 inputAvg, inputPeak, outputAvg, outputPeak;
-            [self.audioController inputAveragePowerLevel:&inputAvg peakHoldLevel:&inputPeak];
-            [self.audioController outputAveragePowerLevel:&outputAvg peakHoldLevel:&outputPeak];
+            [[FLYAudioStateManager sharedInstance].audioController inputAveragePowerLevel:&inputAvg peakHoldLevel:&inputPeak];
+            [[FLYAudioStateManager sharedInstance].audioController outputAveragePowerLevel:&outputAvg peakHoldLevel:&outputPeak];
             CGFloat normalizedValue = pow (10,  1.4* (inputAvg - 10) / 40);
             weakWaver.level = normalizedValue;
         };
@@ -532,21 +469,6 @@ static inline float translate(float val, float min, float max) {
 
 -(void)updateViewConstraints
 {
-    
-//    [self.outerCircleView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(@(kOuterCircleRadius * 2));
-//        make.height.equalTo(@(kOuterCircleRadius * 2));
-//        make.centerX.equalTo(self.view);
-//        make.top.equalTo(@(kOutCircleTopPadding));
-//    }];
-//    
-//    
-//    [self.innerCircleView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.width.equalTo(@(kInnerCircleRadius * 2));
-//        make.height.equalTo(@(kInnerCircleRadius * 2));
-//        make.center.equalTo(self.outerCircleView);
-//    }]; 
-    
     [self.userActionImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
         make.centerY.equalTo(self.view).offset(-50);
@@ -614,7 +536,7 @@ static inline float translate(float val, float min, float max) {
         case FLYRecordRecordingState:
         {
             if (self.recordingType == RecordingForTopic && self.audioLength <= kMinimalRecordingLength) {
-                [Dialog simpleToast:[NSString stringWithFormat:LOC(@"FLYLessThanMinimalRecordingLength"), kMinimalRecordingLength]];
+                [Dialog simpleToast:[NSString stringWithFormat:LOC(@"FLYLessThanMinimalRecordingLength"), kMinimalRecordingLength] withDuration:1.0f];
                 [self _setupInitialViewState];
                 return;
             }
@@ -652,7 +574,6 @@ static inline float translate(float val, float min, float max) {
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-//    self.halo.position = self.userActionImageView.center;
     [FLYUtilities printAutolayoutTrace];
 }
 

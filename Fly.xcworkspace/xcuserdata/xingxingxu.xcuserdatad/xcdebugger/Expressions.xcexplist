@@ -3,12 +3,7 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[FLYTopicDetailViewController playReplyWithReply:indexPath:]:FLYTopicDetailViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.audioController">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "-[FLYMainViewController viewWillAppear:]:FLYMainViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[FLYRecordViewController _nextBarButtonTapped]:FLYRecordViewController.m">
@@ -27,7 +22,23 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__37-[FLYRecordViewController _loadWaver]_block_invoke:FLYRecordViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[FLYAudioStateManager sharedInstance].audioController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[FLYUser initWithDictory:]:FLYUser.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[FLYTopicDetailViewController playReplyWithReply:indexPath:]:FLYTopicDetailViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.audioController">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "__46-[FLYFeedViewController updateViewConstraints]_block_invoke:FLYFeedViewController.m">
@@ -38,9 +49,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[FLYGroupListViewController viewDidLayoutSubviews]:FLYGroupListViewController.m">
-      </ContextState>
-      <ContextState
          contextName = "-[FLYGroupListViewController updateViewConstraints]:FLYGroupListViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -49,7 +57,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[FLYMainViewController viewWillAppear:]:FLYMainViewController.m">
+         contextName = "-[FLYGroupListViewController viewDidLayoutSubviews]:FLYGroupListViewController.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

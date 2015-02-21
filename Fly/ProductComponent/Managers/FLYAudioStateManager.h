@@ -30,6 +30,7 @@ typedef void (^AudioPlayerCompleteblock)();
 - (void)removePlayer;
 - (void)applyFilter;
 - (void)removeFilter;
+- (void)initRecordingAudioController;
 - (void)playAudioURLStr:(NSString *)str withCompletionBlock:(AudioPlayerCompleteblock)block;
 - (void)playAudioWithCompletionBlock:(AudioPlayerCompleteblock)block;
 

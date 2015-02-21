@@ -21,6 +21,7 @@
 + (void)toast:(UIViewController *)controller withMessage:(NSString *) message;
 + (void)toast:(NSString *)message;
 + (void)simpleToast:(NSString *)message;
++ (void)simpleToast:(NSString *)message withDuration:(float)duration;
 + (void)hideSimpleToast;
 //显示在屏幕中间
 + (void)toastCenter:(NSString *)message;

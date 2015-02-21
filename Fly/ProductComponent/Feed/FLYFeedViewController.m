@@ -56,10 +56,10 @@
                                                  selector:@selector(_newPostReceived:)
                                                      name:kNewPostReceivedNotification object:nil];
         
-        _audioPlayer = [[STKAudioPlayer alloc] initWithOptions:(STKAudioPlayerOptions){ .flushQueueOnSeek = YES, .enableVolumeMixer = NO, .equalizerBandFrequencies = {50, 100, 200, 400, 800, 1600, 2600, 16000} }];
-        _audioPlayer.meteringEnabled = YES;
-        _audioPlayer.volume = 1;
-        _audioPlayer.delegate = self;
+//        _audioPlayer = [[STKAudioPlayer alloc] initWithOptions:(STKAudioPlayerOptions){ .flushQueueOnSeek = YES, .enableVolumeMixer = NO, .equalizerBandFrequencies = {50, 100, 200, 400, 800, 1600, 2600, 16000} }];
+//        _audioPlayer.meteringEnabled = YES;
+//        _audioPlayer.volume = 1;
+//        _audioPlayer.delegate = self;
     }
     return self;
 }
@@ -89,6 +89,8 @@
     _backgroundView.userInteractionEnabled = NO;
     _backgroundView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_backgroundView];
+    
+    //init audio recording view controller
     
 
     @weakify(self)
@@ -287,7 +289,7 @@
 
 - (void)downloadComplete:(NSNotification *)notificaiton
 {
-    if([self.navigationController.visibleViewController isKindOfClass:[FLYFeedViewController class]]) {
+    if(![self.navigationController.visibleViewController isKindOfClass:[FLYFeedViewController class]]) {
         return;
     }
     
@@ -476,33 +478,33 @@
 }
 
 
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState
-{
-    UALog(@"stateChanged");
-}
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer unexpectedError:(STKAudioPlayerErrorCode)errorCode
-{
-        UALog(@"unexpceted error");
-}
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(NSObject*)queueItemId
-{
-    SampleQueueId* queueId = (SampleQueueId*)queueItemId;
-    
-    NSLog(@"Started: %@", [queueId.url description]);
-}
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishBufferingSourceWithQueueItemId:(NSObject*)queueItemId
-{
-        UALog(@"finish buffer");
-}
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(NSObject*)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
-{
-    SampleQueueId* queueId = (SampleQueueId*)queueItemId;
-    
-    NSLog(@"Finished: %@", [queueId.url description]);
-}
+//-(void) audioPlayer:(STKAudioPlayer*)audioPlayer stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState
+//{
+//    UALog(@"stateChanged");
+//}
+//
+//-(void) audioPlayer:(STKAudioPlayer*)audioPlayer unexpectedError:(STKAudioPlayerErrorCode)errorCode
+//{
+//        UALog(@"unexpceted error");
+//}
+//
+//-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(NSObject*)queueItemId
+//{
+//    SampleQueueId* queueId = (SampleQueueId*)queueItemId;
+//    
+//    NSLog(@"Started: %@", [queueId.url description]);
+//}
+//
+//-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishBufferingSourceWithQueueItemId:(NSObject*)queueItemId
+//{
+//        UALog(@"finish buffer");
+//}
+//
+//-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(NSObject*)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
+//{
+//    SampleQueueId* queueId = (SampleQueueId*)queueItemId;
+//    
+//    NSLog(@"Finished: %@", [queueId.url description]);
+//}
 
 @end

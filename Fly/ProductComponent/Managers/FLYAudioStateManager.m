@@ -42,7 +42,7 @@
 - (id)init
 {
     if (self = [super init]) {
-        [self _initAudioController];
+        [self _initDefaultAudioController];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_appDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     }
@@ -52,20 +52,31 @@
 - (AEAudioController *)audioController
 {
     if (_audioController) {
-        _audioController = nil;
-    }
-    if (_audioController) {
-        [_audioController stop];
-        _audioController = nil;
+        return _audioController;
     }
     
-    [self _initAudioController];
+    [self _initDefaultAudioController];
     return _audioController;
 }
 
 - (void)startRecord
 {
-    [self _initRecordAudioController];
+    if (_audioController) {
+        if (_recorder) {
+            [_recorder finishRecording];
+            [_audioController removeOutputReceiver:_recorder];
+            [_audioController removeInputReceiver:_recorder];
+            self.recorder = nil;
+        }
+        
+        if (_player) {
+            [self removePlayer];
+        }
+    }
+    
+    [self initRecordingAudioController];
+    
+    _recorder = [[AERecorder alloc] initWithAudioController:_audioController];
     
     NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
     [FLYAppStateManager sharedInstance].recordingFilePath = path;
@@ -205,7 +216,7 @@
     if (_audioController && _player) {
         [_audioController removeChannels:@[_player]];
         self.player = nil;
-        [self _initAudioController];
+        [self _initDefaultAudioController];
     }
     
     if (!str) {
@@ -247,44 +258,35 @@
 }
 
 
-- (void)_initAudioController
+// Default audio controller is play back.
+- (void)_initDefaultAudioController
 {
-    if (_audioController) {
-        [_audioController stop];
-        _audioController = nil;
-    }
-    
     self.isRecordAudioMode = NO;
-    
-    _audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleaved16BitStereoAudioDescription] inputEnabled:NO];
-    _audioController.preferredBufferDuration = 0.005;
-    _audioController.useMeasurementMode = YES;
-    _audioController.allowMixingWithOtherApps = NO;
-    _audioController.audioSessionCategory = AVAudioSessionCategoryPlayback;
-    [_audioController start:NULL];
+    [self _initAudioController:AVAudioSessionCategoryPlayback];
 }
 
-- (void)_initRecordAudioController
+// Recording audio controller
+- (void)initRecordingAudioController
 {
+    
     if (self.isRecordAudioMode && _audioController) {
-        _recorder = [[AERecorder alloc] initWithAudioController:_audioController];
         return;
     }
-    
-    if (_audioController) {
-        [_audioController stop];
-        _audioController = nil;
-    }
     self.isRecordAudioMode = YES;
-    
+    [self _initAudioController:AVAudioSessionCategoryPlayAndRecord];
+}
+
+- (void)_initAudioController:(NSString *)audioSessionCategory
+{
+    if (!self.isRecordAudioMode && _audioController) {
+        return;
+    }
     _audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleaved16BitStereoAudioDescription] inputEnabled:YES];
     _audioController.preferredBufferDuration = 0.005;
     _audioController.useMeasurementMode = YES;
     _audioController.allowMixingWithOtherApps = NO;
-    _audioController.audioSessionCategory = AVAudioSessionCategoryPlayAndRecord;
+    _audioController.audioSessionCategory = audioSessionCategory;
     [_audioController start:NULL];
-    
-    _recorder = [[AERecorder alloc] initWithAudioController:_audioController];
 }
 
 
@@ -292,7 +294,7 @@
 - (void)_appWillEnterForeground:(NSNotification *)notification
 {
     if (!_audioController) {
-        [self _initAudioController];
+        [self _initDefaultAudioController];
         [_audioController start:nil];
     }
 }

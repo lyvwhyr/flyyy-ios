@@ -27,7 +27,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        _isAutoPlayEnabled = YES;
+        _isAutoPlayEnabled = NO;
         _deviceId = [UIDevice uniqueDeviceIdentifier];
     }
     return self;
