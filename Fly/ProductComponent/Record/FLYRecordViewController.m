@@ -128,9 +128,7 @@
 
 - (void)_initVoiceRecording
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[FLYAudioStateManager sharedInstance] initRecordingAudioController];
-    });
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(_initRecordingAudioController) userInfo:nil repeats:NO];
     
     @weakify(self)
     _completionBlock = ^{
@@ -143,6 +141,13 @@
     };
 }
 
+- (void)_initRecordingAudioController
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[FLYAudioStateManager sharedInstance] initRecordingAudioController];
+    });
+}
+
 
 #pragma mark - clean up 
 
@@ -150,7 +155,6 @@
 {
     [self _cleanupTimer];
     [self.waver removeFromSuperview];
-    self.waver.waverLevelCallback = nil;
     self.waver = nil;
 }
 
