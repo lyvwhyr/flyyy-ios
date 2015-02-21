@@ -13,6 +13,8 @@
 
 #define kNewPostKey @"kNewPostKey"
 #define kNewReplyKey @"kNewReplyKey"
+#define kDownloadAudioLocalPathkey @"kDownloadAudioLocalPathkey"
+#define kDownloadAudioTypeKey @"kDownloadAudioTypeKey"
 
 #define kAudioCacheFolder   @"flyyapp.com.audios"
 

@@ -8,8 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, FLYDownloadableAudioType) {
+    FLYDownloadableTopic = 0,
+    FLYDownloadableReply
+};
+
 @protocol FLYDownloadableAudio <NSObject>
 
 - (NSString *)audioURLStr;
+- (FLYDownloadableAudioType)downloadableAudioType;
 
 @end

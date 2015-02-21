@@ -10,6 +10,12 @@
 #import "FLYUser.h"
 #import "NSDictionary+FLYAddition.h"
 #import "NSDate+TimeAgo.h"
+#import "FLYDownloadableAudio.h"
+
+
+@interface FLYReply()<FLYDownloadableAudio>
+
+@end
 
 @implementation FLYReply
 
@@ -31,6 +37,17 @@
         _displayableCreateAt = ago;
     }
     return self;
+}
+
+#pragma mark - FLYDownloadableAudioDelegate
+- (NSString *)audioURLStr
+{
+    return self.mediaURL;
+}
+
+- (FLYDownloadableAudioType)downloadableAudioType
+{
+    return FLYDownloadableReply;
 }
 
 @end

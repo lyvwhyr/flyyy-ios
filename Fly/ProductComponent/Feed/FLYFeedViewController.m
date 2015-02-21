@@ -24,6 +24,7 @@
 #import "Dialog.h"
 #import "STKAudioPlayer.h"
 #import "SampleQueueId.h"
+#import "FLYDownloadableAudio.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate, STKAudioPlayerDelegate>
 
@@ -289,15 +290,17 @@
 
 - (void)downloadComplete:(NSNotification *)notificaiton
 {
-    if(![self.navigationController.visibleViewController isKindOfClass:[FLYFeedViewController class]]) {
+    NSString *localPath = [notificaiton.userInfo objectForKey:kDownloadAudioLocalPathkey];
+    FLYDownloadableAudioType type = [[notificaiton.userInfo objectForKey:kDownloadAudioTypeKey] integerValue];
+    if(type != FLYDownloadableTopic) {
         return;
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSString *localPath = [notificaiton.userInfo objectForKey:@"localPath"];
         [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
         FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)[FLYAudioStateManager sharedInstance].currentPlayItem.item;
         [currentCell updatePlayState:FLYPlayStatePlaying];
+        
         
         [[FLYAudioStateManager sharedInstance] playAudioURLStr:localPath withCompletionBlock:^{
             [self clearCurrentPlayingItem];
@@ -365,7 +368,7 @@
         if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateNotSet) {
             [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStateLoading;
             [tappedCell updatePlayState:FLYPlayStateLoading];
-            [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL];
+            [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL audioType:FLYDownloadableTopic];
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateLoading) {
             return;
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStatePlaying) {
@@ -383,7 +386,7 @@
     } else {
         //tap on a different cell
         [[FLYAudioStateManager sharedInstance] removePlayer];
-        [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL];
+        [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL audioType:FLYDownloadableTopic];
         
         //change previous state, remove animation, change current to previous
         [FLYAudioStateManager sharedInstance].previousPlayItem = [FLYAudioStateManager sharedInstance].currentPlayItem;

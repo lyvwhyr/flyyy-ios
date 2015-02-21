@@ -54,6 +54,16 @@
     return self;
 }
 
+- (NSString *)audioURLStr
+{
+    return self.mediaURL;
+}
+
+- (FLYDownloadableAudioType)downloadableAudioType
+{
+    return FLYDownloadableTopic;
+}
+
 
 
 @end

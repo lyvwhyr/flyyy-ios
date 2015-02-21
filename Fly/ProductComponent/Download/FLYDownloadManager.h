@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FLYDownloadableAudio.h"
 
 #define kDownloadCompleteNotification @"kDownloadCompleteNotification"
 
@@ -14,7 +15,7 @@
     dispatch_queue_t _startDownloadQueue;
 }
 
-- (void)loadAudioByURLString:(NSString *)urlStr;
+- (void)loadAudioByURLString:(NSString *)urlStr audioType:(FLYDownloadableAudioType)audioType;
 
 + (instancetype)sharedInstance;
 

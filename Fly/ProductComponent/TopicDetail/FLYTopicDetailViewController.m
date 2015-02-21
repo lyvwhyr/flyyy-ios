@@ -305,7 +305,7 @@
 
 - (void)playReplyWithReply:(FLYReply *)reply indexPath:(NSIndexPath *)indexPath
 {
-    [[FLYDownloadManager sharedInstance] loadAudioByURLString:reply.mediaURL];
+    [[FLYDownloadManager sharedInstance] loadAudioByURLString:reply.mediaURL audioType:FLYDownloadableReply];
     
 //    self.audioController.url = [NSURL URLWithString:reply.mediaURL];
 //    [self.audioController play];
@@ -323,8 +323,12 @@
 
 - (void)_downloadComplete:(NSNotification *)notif
 {
-    NSString *localPath = [notif.userInfo objectForKey:@"localPath"];
+    FLYDownloadableAudioType type = [[notif.userInfo objectForKey:kDownloadAudioTypeKey] integerValue];
+    if(type != FLYDownloadableReply) {
+        return;
+    }
     
+    NSString *localPath = [notif.userInfo objectForKey:kDownloadAudioLocalPathkey];
     [[FLYAudioStateManager sharedInstance] playAudioURLStr:localPath withCompletionBlock:^{
         
     }];

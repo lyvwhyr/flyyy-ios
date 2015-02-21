@@ -38,14 +38,14 @@
     return self;
 }
 
-- (void)loadAudioByURLString:(NSString *)urlStr
+- (void)loadAudioByURLString:(NSString *)urlStr audioType:(FLYDownloadableAudioType)audioType
 {
     dispatch_async(_startDownloadQueue, ^{
         NSURL *url = [NSURL URLWithString:urlStr];
         NSString *localPath = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:[url.pathComponents componentsJoinedByString:@"_"]];
         NSString *downloadingPath = [localPath stringByAppendingString:@".part"];
         if ([[NSFileManager defaultManager] fileExistsAtPath:localPath]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kDownloadCompleteNotification object:nil userInfo:@{@"localPath":localPath}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDownloadCompleteNotification object:nil userInfo:@{kDownloadAudioLocalPathkey:localPath, kDownloadAudioTypeKey:@(audioType)}];
             return;
         }
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -67,7 +67,7 @@
                 return;
             }
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:kDownloadCompleteNotification object:nil userInfo:@{@"localPath":localPath}];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDownloadCompleteNotification object:nil userInfo:@{kDownloadAudioLocalPathkey:localPath, kDownloadAudioTypeKey:@(audioType)}];
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             //retry
