@@ -17,6 +17,7 @@
 @property (nonatomic) CGFloat waveWidth;
 @property (nonatomic) CGFloat waveMid;
 @property (nonatomic) CGFloat maxAmplitude;
+@property (nonatomic) CADisplayLink *displaylink;
 
 @end
 
@@ -30,6 +31,13 @@
     }
     
     return self;
+}
+
+- (void)dealloc
+{
+    [self.displaylink removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    [self.displaylink invalidate];
+    self.displaylink = nil;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -74,8 +82,8 @@
 {
     _waverLevelCallback = waverLevelCallback;
     
-    CADisplayLink *displaylink = [CADisplayLink displayLinkWithTarget:_waverLevelCallback selector:@selector(invoke)];
-    [displaylink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    self.displaylink = [CADisplayLink displayLinkWithTarget:_waverLevelCallback selector:@selector(invoke)];
+    [self.displaylink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
     
     for(int i=0; i < self.numberOfWaves; i++)
     {

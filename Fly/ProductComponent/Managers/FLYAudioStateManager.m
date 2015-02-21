@@ -66,7 +66,7 @@
 {
     if (_audioController) {
         if (_recorder) {
-            [_recorder finishRecording];
+//            [_recorder finishRecording];
             [_audioController removeOutputReceiver:_recorder];
             [_audioController removeInputReceiver:_recorder];
             self.recorder = nil;
@@ -74,6 +74,7 @@
         
         if (_player) {
             [self removePlayer];
+            _player = nil;
         }
     }
     
@@ -270,10 +271,6 @@
 // Recording audio controller
 - (void)initRecordingAudioController
 {
-    
-    if ([self.recordingType isEqualToString:AVAudioSessionCategoryPlayAndRecord] && _audioController) {
-        return;
-    }
     [self _initAudioController:AVAudioSessionCategoryPlayAndRecord];
 }
 
@@ -284,6 +281,18 @@
     }
     self.recordingType = audioSessionCategory;
     if (_audioController) {
+        if (_recorder) {
+            [_recorder finishRecording];
+            [_audioController removeOutputReceiver:_recorder];
+            [_audioController removeInputReceiver:_recorder];
+            self.recorder = nil;
+        }
+        
+        if (_player) {
+            [self removePlayer];
+            _player = nil;
+        }
+        
         [_audioController stop];
         _audioController = nil;
     }

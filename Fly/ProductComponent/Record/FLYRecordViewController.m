@@ -12,7 +12,6 @@
 #import "SVPulsingAnnotationView.h"
 #import "PulsingHaloLayer.h"
 #import "MultiplePulsingHaloLayer.h"
-#import "AERecorder.h"
 #import "AEAudioController.h"
 #import "FLYAudioStateManager.h"
 #import "FLYPrePostViewController.h"
@@ -65,6 +64,7 @@
 
 //Post reply progress hud
 @property (nonatomic) JGProgressHUD *progressHUD;
+
 
 @property (nonatomic, copy) AudioPlayerCompleteblock completionBlock;
 
@@ -149,6 +149,8 @@
 - (void)_cleanupData
 {
     [self _cleanupTimer];
+    [self.waver removeFromSuperview];
+    self.waver.waverLevelCallback = nil;
     self.waver = nil;
 }
 
@@ -345,14 +347,15 @@
 {
     if(!self.waver) {
         self.waver = [[Waver alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.view.bounds) - 230, CGRectGetWidth(self.view.bounds), 100.0)];
-        __weak Waver * weakWaver = self.waver;
         self.waver.waveColor = [UIColor flyColorFlyRecordingWave];
+        @weakify(self)
         self.waver.waverLevelCallback = ^() {
+            @strongify(self)
             Float32 inputAvg, inputPeak, outputAvg, outputPeak;
             [[FLYAudioStateManager sharedInstance].audioController inputAveragePowerLevel:&inputAvg peakHoldLevel:&inputPeak];
             [[FLYAudioStateManager sharedInstance].audioController outputAveragePowerLevel:&outputAvg peakHoldLevel:&outputPeak];
             CGFloat normalizedValue = pow (10,  1.4* (inputAvg - 10) / 40);
-            weakWaver.level = normalizedValue;
+            self.waver.level = normalizedValue;
         };
         [self.view addSubview:self.waver];
     }
