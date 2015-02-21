@@ -20,7 +20,7 @@
 
 @interface FLYAudioStateManager()
 
-@property (nonatomic) BOOL isRecordAudioMode;
+@property (nonatomic) NSString *recordingType;
 @property (nonatomic) BOOL isApplyingFilter;
 @property (nonatomic) AEAudioUnitFilter *pitch;
 
@@ -45,6 +45,9 @@
         [self _initDefaultAudioController];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_appDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_useRecordAndPlaybackAudioController) name:kUseRecordAndPlaybackNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_usePlaybackOnlyAudioController) name:kUsePlaybackOnlyNotification object:nil];
     }
     return self;
 }
@@ -216,7 +219,6 @@
     if (_audioController && _player) {
         [_audioController removeChannels:@[_player]];
         self.player = nil;
-        [self _initDefaultAudioController];
     }
     
     if (!str) {
@@ -261,7 +263,7 @@
 // Default audio controller is play back.
 - (void)_initDefaultAudioController
 {
-    self.isRecordAudioMode = NO;
+    self.recordingType = AVAudioSessionCategoryPlayback;
     [self _initAudioController:AVAudioSessionCategoryPlayback];
 }
 
@@ -269,18 +271,23 @@
 - (void)initRecordingAudioController
 {
     
-    if (self.isRecordAudioMode && _audioController) {
+    if ([self.recordingType isEqualToString:AVAudioSessionCategoryPlayAndRecord] && _audioController) {
         return;
     }
-    self.isRecordAudioMode = YES;
     [self _initAudioController:AVAudioSessionCategoryPlayAndRecord];
 }
 
 - (void)_initAudioController:(NSString *)audioSessionCategory
 {
-    if (!self.isRecordAudioMode && _audioController) {
+    if ([self.recordingType isEqualToString:audioSessionCategory] && _audioController) {
         return;
     }
+    self.recordingType = audioSessionCategory;
+    if (_audioController) {
+        [_audioController stop];
+        _audioController = nil;
+    }
+    
     _audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleaved16BitStereoAudioDescription] inputEnabled:YES];
     _audioController.preferredBufferDuration = 0.005;
     _audioController.useMeasurementMode = YES;
@@ -290,6 +297,7 @@
 }
 
 
+#pragma mark - Notificaiton
 
 - (void)_appWillEnterForeground:(NSNotification *)notification
 {
@@ -308,6 +316,16 @@
         [_audioController stop];
          _audioController = nil;
     }
+}
+
+- (void)_useRecordAndPlaybackAudioController
+{
+    [self initRecordingAudioController];
+}
+
+- (void)_usePlaybackOnlyAudioController
+{
+    [self _initDefaultAudioController];
 }
 
 @end

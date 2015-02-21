@@ -206,6 +206,7 @@
 - (void)_backButtonTapped
 {
     [self _cleanupData];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUsePlaybackOnlyNotification object:self];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -266,6 +267,8 @@
         NSDictionary *dict = @{kNewReplyKey:reply};
         [Dialog simpleToast:@"Posted"];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNewReplyReceivedNotification object:self userInfo:dict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUsePlaybackOnlyNotification object:self];
+        
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self.progressHUD dismiss];

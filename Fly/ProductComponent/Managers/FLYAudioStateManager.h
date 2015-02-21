@@ -15,6 +15,9 @@ typedef void (^AudioPlayerCompleteblock)();
 
 @interface FLYAudioStateManager : NSObject
 
+#define kUseRecordAndPlaybackNotification @"kUseRecordAndPlaybackNotification"
+#define kUsePlaybackOnlyNotification @"kUsePlaybackOnlyNotification"
+
 @property (nonatomic) AEAudioController *audioController;
 
 @property (nonatomic) AERecorder *recorder;
