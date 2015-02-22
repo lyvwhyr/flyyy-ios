@@ -14,7 +14,7 @@
 @protocol FLYTopicDetailReplyCellDelegate <NSObject>
 
 - (void)replyToReplyButtonTapped:(FLYReply *)reply;
-- (void)playReplyWithReply:(FLYReply *)reply indexPath:(NSIndexPath *)indexPath;
+- (void)playReply:(FLYReply *)reply indexPath:(NSIndexPath *)indexPath;
 
 @end
 

@@ -19,13 +19,12 @@
 #import "FLYNavigationController.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "FLYReply.h"
-#import "FSAudioController.h"
-#import "FSAudioStream.h"
 #import "FLYAudioStateManager.h"
 #import "AEAudioFilePlayer.h"
 #import "FLYDownloadManager.h"
+#import "FLYAudioManager.h"
 
-@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate>
+@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYAudioManagerDelegate>
 
 @property (nonatomic) UITableView *topicTableView;
 
@@ -36,9 +35,6 @@
 
 //used for reply pagination
 @property (nonatomic) NSString *beforeTimestamp;
-
-@property (nonatomic) FSAudioController *audioController;
-@property (nonatomic) FSAudioStream *audioStream;
 
 @end
 
@@ -62,14 +58,6 @@
     return self;
 }
 
-- (FSAudioController *)audioController
-{
-    if (!_audioController) {
-        _audioController = [[FSAudioController alloc] init];
-    }
-    return _audioController;
-}
-
 - (instancetype)initWithTopicId:(NSString *)topicId
 {
     return self;
@@ -80,77 +68,9 @@
     
 }
 
-- (void)_audioState
-{
-    self.audioController.stream.onStateChange = ^(FSAudioStreamState state) {
-        switch (state) {
-            case kFsAudioStreamRetrievingURL:
-                UALog(@"reve");
-                break;
-                
-            case kFsAudioStreamStopped:
-                UALog(@"reve");
-                break;
-                
-            case kFsAudioStreamBuffering:
-                UALog(@"reve");
-                break;
-                
-            case kFsAudioStreamSeeking:
-                UALog(@"reve");
-                break;
-                
-            case kFsAudioStreamPlaying:
-                UALog(@"reve");
-                break;
-                
-            case kFsAudioStreamFailed:
-                UALog(@"reve");
-                break;
-            case kFsAudioStreamPlaybackCompleted:
-                UALog(@"reve");
-                break;
-            default:
-                break;
-        }
-    };
-    
-    self.audioController.stream.onFailure = ^(FSAudioStreamError error, NSString *errorDescription) {
-        NSString *errorCategory;
-        
-        switch (error) {
-            case kFsAudioStreamErrorOpen:
-                errorCategory = @"Cannot open the audio stream: ";
-                break;
-            case kFsAudioStreamErrorStreamParse:
-                errorCategory = @"Cannot read the audio stream: ";
-                break;
-            case kFsAudioStreamErrorNetwork:
-                errorCategory = @"Network failed: cannot play the audio stream: ";
-                break;
-            case kFsAudioStreamErrorUnsupportedFormat:
-                errorCategory = @"Unsupported format: ";
-                break;
-            case kFsAudioStreamErrorStreamBouncing:
-                errorCategory = @"Network failed: cannot get enough data to play: ";
-                break;
-            default:
-                errorCategory = @"Unknown error occurred: ";
-                break;
-        }
-        
-        NSString *formattedError = [NSString stringWithFormat:@"%@ %@", errorCategory, errorDescription];
-        UALog(@"%@", formattedError);
-    };
-
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.audioController setVolume:1];
-    [self _audioState];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -303,7 +223,7 @@
     [self presentViewController:navigationController animated:NO completion:nil];
 }
 
-- (void)playReplyWithReply:(FLYReply *)reply indexPath:(NSIndexPath *)indexPath
+- (void)playReply:(FLYReply *)reply indexPath:(NSIndexPath *)indexPath
 {
     [[FLYDownloadManager sharedInstance] loadAudioByURLString:reply.mediaURL audioType:FLYDownloadableReply];
     
@@ -329,10 +249,7 @@
     }
     
     NSString *localPath = [notif.userInfo objectForKey:kDownloadAudioLocalPathkey];
-    [[FLYAudioStateManager sharedInstance] playAudioURLStr:localPath withCompletionBlock:^{
-        
-    }];
-    
+    [[FLYAudioManager sharedInstance] playAudioWithURLStr:localPath];
 }
 
 - (void)_scrollToTop

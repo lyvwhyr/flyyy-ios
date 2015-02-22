@@ -125,7 +125,7 @@
 #pragma mark - User interactions
 - (void)_playButtonTapped
 {
-    [self.delegate playReplyWithReply:self.reply indexPath:self.indexPath];
+    [self.delegate playReply:self.reply indexPath:self.indexPath];
 }
 
 - (void)_commentButtonTapped
