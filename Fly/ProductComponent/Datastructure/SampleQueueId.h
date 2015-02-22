@@ -11,7 +11,8 @@
 @interface SampleQueueId : NSObject
 @property (readwrite) int count;
 @property (readwrite) NSURL* url;
+@property (nonatomic) NSIndexPath *indexPath;
 
--(id) initWithUrl:(NSURL*)url andCount:(int)count;
+-(id) initWithUrl:(NSURL*)url andCount:(int)count indexPath:(NSIndexPath *)indexPath;
 
 @end

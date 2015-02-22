@@ -129,7 +129,7 @@
 - (void)_initVoiceRecording
 {
     //Use NSTimer so it won't block main thread.
-    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(_initRecordingAudioController) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(_initRecordingAudioController) userInfo:nil repeats:NO];
     
     @weakify(self)
     _completionBlock = ^{
@@ -239,6 +239,7 @@
         } else {
             self.progressHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
             self.progressHUD.delegate = self;
+            self.progressHUD.userInteractionEnabled = YES;
             self.progressHUD.textLabel.text = @"Posting...";
             [self.progressHUD showInView:self.view];
             

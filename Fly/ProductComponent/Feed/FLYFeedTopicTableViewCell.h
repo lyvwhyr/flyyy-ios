@@ -22,6 +22,7 @@
 @interface FLYFeedTopicTableViewCell : UITableViewCell
 
 @property (nonatomic) FLYTopic *topic;
+@property (nonatomic) NSIndexPath *indexPath;
 @property id<FLYFeedTopicTableViewCellDelegate>delegate;
 
 - (void)setupTopic:(FLYTopic *)topic needUpdateConstraints:(BOOL)needUpdateConstraints;

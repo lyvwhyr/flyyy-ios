@@ -10,12 +10,13 @@
 
 @implementation SampleQueueId
 
--(id) initWithUrl:(NSURL*)url andCount:(int)count
+-(id) initWithUrl:(NSURL*)url andCount:(int)count indexPath:(NSIndexPath *)indexPath
 {
     if (self = [super init])
     {
-        self.url = url;
-        self.count = count;
+        _url = url;
+        _count = count;
+        _indexPath = indexPath;
     }
     
     return self;

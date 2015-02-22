@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #import "FLYFeedViewController.h"
 #import "FLYFeedTopicTableViewCell.h"
 #import "FLYFilterHomeFeedSelectorViewController.h"
@@ -57,10 +58,15 @@
                                                  selector:@selector(_newPostReceived:)
                                                      name:kNewPostReceivedNotification object:nil];
         
-//        _audioPlayer = [[STKAudioPlayer alloc] initWithOptions:(STKAudioPlayerOptions){ .flushQueueOnSeek = YES, .enableVolumeMixer = NO, .equalizerBandFrequencies = {50, 100, 200, 400, 800, 1600, 2600, 16000} }];
-//        _audioPlayer.meteringEnabled = YES;
-//        _audioPlayer.volume = 1;
-//        _audioPlayer.delegate = self;
+        
+        NSError *error;
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
+        [[AVAudioSession sharedInstance] setActive:YES error:&error];
+        
+        _audioPlayer = [[STKAudioPlayer alloc] initWithOptions:(STKAudioPlayerOptions){ .flushQueueOnSeek = YES, .enableVolumeMixer = NO, .equalizerBandFrequencies = {50, 100, 200, 400, 800, 1600, 2600, 16000} }];
+        _audioPlayer.meteringEnabled = YES;
+        _audioPlayer.volume = 1;
+        _audioPlayer.delegate = self;
     }
     return self;
 }
@@ -112,6 +118,12 @@
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"timeline_view"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self clearCurrentPlayingItem];
 }
 
 - (void)_addInlineReplyBar
@@ -259,10 +271,10 @@
     //set cell state
     [topicCell updatePlayState:FLYPlayStateNotSet];
     if ([[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
-        FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)[FLYAudioStateManager sharedInstance].currentPlayItem.item;
         [topicCell updatePlayState:[FLYAudioStateManager sharedInstance].currentPlayItem.playState];
     }
     topicCell.topic = _posts[indexPath.row];
+    topicCell.indexPath = indexPath;
     [topicCell setupTopic:_posts[indexPath.row] needUpdateConstraints:needUpdateConstraints];
     topicCell.selectionStyle = UITableViewCellSelectionStyleNone;
     topicCell.delegate = self;
@@ -298,8 +310,16 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
-        FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)[FLYAudioStateManager sharedInstance].currentPlayItem.item;
+        FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *) [self.feedTableView cellForRowAtIndexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath];
         [currentCell updatePlayState:FLYPlayStatePlaying];
+        
+        
+        NSURL* url = [NSURL fileURLWithPath:localPath];
+        
+        STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
+        
+        [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath]];
+        return;
         
         
         [[FLYAudioStateManager sharedInstance] playAudioURLStr:localPath withCompletionBlock:^{
@@ -320,6 +340,39 @@
         }];
     });
 }
+
+
+#pragma mark - STKAudioPlayerDelegate
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState
+{
+    NSLog(@"state change");
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer unexpectedError:(STKAudioPlayerErrorCode)errorCode
+{
+    NSLog(@"error");
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(NSObject*)queueItemId
+{
+    [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
+    FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *) [self.feedTableView cellForRowAtIndexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath];
+    [currentCell updatePlayState:FLYPlayStatePlaying];
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishBufferingSourceWithQueueItemId:(NSObject*)queueItemId
+{
+    NSLog(@"finish buffering");
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(SampleQueueId *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
+{
+    if ([FLYAudioStateManager sharedInstance].currentPlayItem.indexPath == queueItemId.indexPath && [FLYAudioStateManager sharedInstance].currentPlayItem.playState != FLYPlayStatePaused) {
+         [self clearCurrentPlayingItem];
+    }
+}
+
 
 - (void)_newPostReceived:(NSNotification *)notif
 {
@@ -348,9 +401,11 @@
 
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)tappedCell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath
 {
-//    NSURL* url = [NSURL URLWithString:post.mediaURL];
-//    STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-//    [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0]];
+    if (post.audioDuration >= kStreamingMinimialLen) {
+        NSURL* url = [NSURL URLWithString:post.mediaURL];
+        STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
+        [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath]];
+    }
     
     //If currentPlayItem is empty, set the tappedCell as currentPlayItem
     NSIndexPath *tappedCellIndexPath;
@@ -368,16 +423,21 @@
         if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateNotSet) {
             [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStateLoading;
             [tappedCell updatePlayState:FLYPlayStateLoading];
-            [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL audioType:FLYDownloadableTopic];
+            if (post.audioDuration < kStreamingMinimialLen) {
+                [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL audioType:FLYDownloadableTopic];
+            }
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateLoading) {
             return;
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStatePlaying) {
+            [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePaused;
             [tappedCell updatePlayState:FLYPlayStatePaused];
-            [[FLYAudioStateManager sharedInstance] pausePlayer];
+            [_audioPlayer pause];
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStatePaused) {
-            [[FLYAudioStateManager sharedInstance] resumePlayer];
+            [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
+            [_audioPlayer resume];
             [tappedCell updatePlayState:FLYPlayStatePlaying];
         }  else {
+            [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStateFinished;
             [[FLYAudioStateManager sharedInstance] removePlayer];
             [tappedCell updatePlayState:FLYPlayStateFinished];
         }
@@ -385,15 +445,16 @@
         [FLYAudioStateManager sharedInstance].currentPlayItem.item = tappedCell;
     } else {
         //tap on a different cell
-        [[FLYAudioStateManager sharedInstance] removePlayer];
-        [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL audioType:FLYDownloadableTopic];
+        //[[FLYAudioStateManager sharedInstance] removePlayer];
+        if (post.audioDuration < kStreamingMinimialLen) {
+            [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL audioType:FLYDownloadableTopic];
+        }
         
         //change previous state, remove animation, change current to previous
         [FLYAudioStateManager sharedInstance].previousPlayItem = [FLYAudioStateManager sharedInstance].currentPlayItem;
         [FLYAudioStateManager sharedInstance].previousPlayItem.playState = FLYPlayStateNotSet;
         FLYFeedTopicTableViewCell *previousCell = (FLYFeedTopicTableViewCell *)[FLYAudioStateManager sharedInstance].previousPlayItem.item;
         [previousCell updatePlayState:FLYPlayStateNotSet];
-        
     
         [FLYAudioStateManager sharedInstance].currentPlayItem =  [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableFeed playState:FLYPlayStateLoading indexPath:tappedCellIndexPath];
         [tappedCell updatePlayState:FLYPlayStateLoading];
@@ -479,35 +540,5 @@
 {
     return [UIColor whiteColor];
 }
-
-
-//-(void) audioPlayer:(STKAudioPlayer*)audioPlayer stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState
-//{
-//    UALog(@"stateChanged");
-//}
-//
-//-(void) audioPlayer:(STKAudioPlayer*)audioPlayer unexpectedError:(STKAudioPlayerErrorCode)errorCode
-//{
-//        UALog(@"unexpceted error");
-//}
-//
-//-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(NSObject*)queueItemId
-//{
-//    SampleQueueId* queueId = (SampleQueueId*)queueItemId;
-//    
-//    NSLog(@"Started: %@", [queueId.url description]);
-//}
-//
-//-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishBufferingSourceWithQueueItemId:(NSObject*)queueItemId
-//{
-//        UALog(@"finish buffer");
-//}
-//
-//-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(NSObject*)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
-//{
-//    SampleQueueId* queueId = (SampleQueueId*)queueItemId;
-//    
-//    NSLog(@"Finished: %@", [queueId.url description]);
-//}
 
 @end

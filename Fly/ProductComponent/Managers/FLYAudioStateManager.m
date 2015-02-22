@@ -290,13 +290,13 @@
 - (void)_useRecordAndPlaybackAudioController
 {
     //Don't block main thread.
-    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(initRecordingAudioController) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(initRecordingAudioController) userInfo:nil repeats:NO];
 }
 
 - (void)_usePlaybackOnlyAudioController
 {
     //Don't block main thread.
-    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(_initDefaultAudioController) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(_initDefaultAudioController) userInfo:nil repeats:NO];
 }
 
 @end

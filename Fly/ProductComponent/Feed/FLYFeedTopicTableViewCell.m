@@ -322,7 +322,7 @@
 #pragma mark - inline actions
 - (void)_playButtonTapped
 {
-    [self.delegate playButtonTapped:self withPost:self.topic withIndexPath:nil];
+    [self.delegate playButtonTapped:self withPost:self.topic withIndexPath:self.indexPath];
 }
 
 - (void)_likeButtonTapped
