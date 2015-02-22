@@ -64,19 +64,8 @@
 
 - (void)startRecord
 {
-    if (_audioController) {
-        if (_recorder) {
-//            [_recorder finishRecording];
-            [_audioController removeOutputReceiver:_recorder];
-            [_audioController removeInputReceiver:_recorder];
-            self.recorder = nil;
-        }
-        
-        if (_player) {
-            [self removePlayer];
-            _player = nil;
-        }
-    }
+    [self stopRecord];
+    [self removePlayer];
     
     [self initRecordingAudioController];
     
@@ -101,7 +90,7 @@
 
 - (void)stopRecord
 {
-    if (_recorder) {
+    if (_audioController && _recorder) {
         [_recorder finishRecording];
         [_audioController removeOutputReceiver:_recorder];
         [_audioController removeInputReceiver:_recorder];
@@ -173,7 +162,6 @@
                                 error:&error];
     AudioUnitSetParameter(_pitch.audioUnit, kAudioUnitScope_Global, 0, kVarispeedParam_PlaybackRate, 1.15, 0);
     [_audioController addFilter:_pitch];
-    [self _writeAudioToFile];
 }
 
 - (void)removeFilter
@@ -182,35 +170,6 @@
         self.isApplyingFilter = NO;
         [_audioController removeFilter:_pitch];
         _pitch = nil;
-        [self _writeAudioToFile];
-    }
-}
-
-- (void)_writeAudioToFile
-{
-    
-    AEAudioFileWriter *audioFileWriter =[[AEAudioFileWriter alloc] initWithAudioDescription:_audioController.audioDescription];
-    
-    
-    NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [documentsFolders[0] stringByAppendingPathComponent:kRecordingAudioFileName];
-    NSError *error = nil;
-//    [audioFileWriter beginWritingToFileAtPath:path fileType:kAudioFileM4AType error:nil];
-    
-    
-    
-    UInt32 numberOfSamples = 4096;
-    
-    AudioBufferList *list = AEAllocateAndInitAudioBufferList(_audioController.audioDescription, numberOfSamples);
-    
-    AudioTimeStamp timeStamp;
-    memset (&timeStamp, 0, sizeof(timeStamp));
-    timeStamp.mFlags = kAudioTimeStampSampleTimeValid;
-    
-    AEAudioControllerRenderMainOutput(_audioController, timeStamp, numberOfSamples, list);
-    OSStatus status = AEAudioFileWriterAddAudioSynchronously(audioFileWriter, list, numberOfSamples);
-    if (status != 0) {
-        NSLog(@"ERROR: %d", (int)status);
     }
 }
 
@@ -243,18 +202,15 @@
         return;
     }
     
-    NSLog(@"audio duration before %f", _player.duration);
-    
     _player.removeUponFinish = YES;
-//    block();
     _player.completionBlock = [block copy];
     [_audioController addChannels:@[_player]];
-    NSLog(@"audio duration after %f", _player.duration);
 }
 
 - (void)removePlayer
 {
     if (_audioController && _player) {
+        _player.channelIsPlaying = NO;
         [_audioController removeChannels:@[_player]];
         self.player = nil;
     }
@@ -264,7 +220,6 @@
 // Default audio controller is play back.
 - (void)_initDefaultAudioController
 {
-    self.recordingType = AVAudioSessionCategoryPlayback;
     [self _initAudioController:AVAudioSessionCategoryPlayback];
 }
 
@@ -281,30 +236,35 @@
     }
     self.recordingType = audioSessionCategory;
     if (_audioController) {
-        if (_recorder) {
-            [_recorder finishRecording];
-            [_audioController removeOutputReceiver:_recorder];
-            [_audioController removeInputReceiver:_recorder];
-            self.recorder = nil;
-        }
-        
         if (_player) {
             [self removePlayer];
-            _player = nil;
         }
-        
-        [_audioController stop];
+        [self _endRecording];
         _audioController = nil;
     }
-    
-    _audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleaved16BitStereoAudioDescription] inputEnabled:YES];
-    _audioController.preferredBufferDuration = 0.005;
-    _audioController.useMeasurementMode = YES;
-    _audioController.allowMixingWithOtherApps = NO;
-    _audioController.audioSessionCategory = audioSessionCategory;
+    if (!_audioController) {
+        BOOL inputEnabled = NO;
+        if (audioSessionCategory == AVAudioSessionCategoryPlayAndRecord) {
+            inputEnabled = YES;
+        }
+        _audioController = [[AEAudioController alloc] initWithAudioDescription:[AEAudioController nonInterleaved16BitStereoAudioDescription] inputEnabled:inputEnabled];
+        _audioController.preferredBufferDuration = 0.005;
+        _audioController.useMeasurementMode = YES;
+        _audioController.allowMixingWithOtherApps = NO;
+    }
     [_audioController start:NULL];
 }
 
+
+- (void)_endRecording
+{
+    if (self. recorder) {
+        [_audioController removeInputReceiver:_recorder];
+        [_audioController removeOutputReceiver:_recorder];
+        [self.recorder finishRecording];
+        self.recorder = nil;
+    }
+}
 
 #pragma mark - Notificaiton
 
@@ -329,12 +289,14 @@
 
 - (void)_useRecordAndPlaybackAudioController
 {
-    [self initRecordingAudioController];
+    //Don't block main thread.
+    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(initRecordingAudioController) userInfo:nil repeats:NO];
 }
 
 - (void)_usePlaybackOnlyAudioController
 {
-    [self _initDefaultAudioController];
+    //Don't block main thread.
+    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(_initDefaultAudioController) userInfo:nil repeats:NO];
 }
 
 @end

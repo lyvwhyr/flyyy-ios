@@ -128,7 +128,8 @@
 
 - (void)_initVoiceRecording
 {
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(_initRecordingAudioController) userInfo:nil repeats:NO];
+    //Use NSTimer so it won't block main thread.
+    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(_initRecordingAudioController) userInfo:nil repeats:NO];
     
     @weakify(self)
     _completionBlock = ^{
