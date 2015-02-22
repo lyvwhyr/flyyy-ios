@@ -18,6 +18,7 @@
 #define kDownloadAudioTypeKey @"kDownloadAudioTypeKey"
 
 #define kAudioCacheFolder   @"flyyapp.com.audios"
+#define kRecordingAudioFileName  @"kRecordingAudioFileName.m4a"
 
 
 

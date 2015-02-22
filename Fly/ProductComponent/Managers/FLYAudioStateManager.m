@@ -15,8 +15,6 @@
 #import "AEAudioFileWriter.h"
 #import "FLYFileManager.h"
 
-#define kRecordingAudioFileName  @"kRecordingAudioFileName.m4a"
-
 
 @interface FLYAudioStateManager()
 
@@ -42,14 +40,19 @@
 - (id)init
 {
     if (self = [super init]) {
-        [self _initDefaultAudioController];
+//        [self _initDefaultAudioController];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_appDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_useRecordAndPlaybackAudioController) name:kUseRecordAndPlaybackNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_usePlaybackOnlyAudioController) name:kUsePlaybackOnlyNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_useRecordAndPlaybackAudioController) name:kUseRecordAndPlaybackNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_usePlaybackOnlyAudioController) name:kUsePlaybackOnlyNotification object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    NSLog(@"dealloc audio manger");
 }
 
 - (AEAudioController *)audioController
@@ -220,7 +223,7 @@
 // Default audio controller is play back.
 - (void)_initDefaultAudioController
 {
-    [self _initAudioController:AVAudioSessionCategoryPlayback];
+    [self _initAudioController:AVAudioSessionCategoryPlayAndRecord];
 }
 
 // Recording audio controller
@@ -240,7 +243,7 @@
             [self removePlayer];
         }
         [self _endRecording];
-        _audioController = nil;
+//        _audioController = nil;
     }
     if (!_audioController) {
         BOOL inputEnabled = NO;
@@ -281,22 +284,20 @@
     if (_audioController.audioInputAvailable) {
         [_audioController removeInputReceiver:_recorder];
         [_audioController removeOutputReceiver:_recorder];
-        
-        [_audioController stop];
          _audioController = nil;
     }
 }
 
-- (void)_useRecordAndPlaybackAudioController
-{
-    //Don't block main thread.
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(initRecordingAudioController) userInfo:nil repeats:NO];
-}
-
-- (void)_usePlaybackOnlyAudioController
-{
-    //Don't block main thread.
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(_initDefaultAudioController) userInfo:nil repeats:NO];
-}
+//- (void)_useRecordAndPlaybackAudioController
+//{
+//    //Don't block main thread.
+//    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(initRecordingAudioController) userInfo:nil repeats:NO];
+//}
+//
+//- (void)_usePlaybackOnlyAudioController
+//{
+//    //Don't block main thread.
+//    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(_initDefaultAudioController) userInfo:nil repeats:NO];
+//}
 
 @end

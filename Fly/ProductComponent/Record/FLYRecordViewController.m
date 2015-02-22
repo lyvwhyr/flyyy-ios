@@ -31,6 +31,10 @@
 #import "FLYEndpointRequest.h"
 #import "FLYReply.h"
 #import "JGProgressHUD.h"
+#import "AFSoundRecord.h"
+#import "FLYFileManager.h"
+#import "STKAudioPlayer.h"
+#import "FLYAudioManager.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -38,9 +42,9 @@
 #define kFilterModalHeight 80
 #define kMaxRetry 3
 #define kTimeLabelTopPadding 30
-#define kMinimalRecordingLength 5
+#define kMinimalRecordingLength 0
 
-@interface FLYRecordViewController ()<FLYRecordBottomBarDelegate, JGProgressHUDDelegate>
+@interface FLYRecordViewController ()<FLYRecordBottomBarDelegate, JGProgressHUDDelegate, FLYAudioManagerDelegate>
 
 @property (nonatomic) UIBarButtonItem *rightNavigationButton;
 
@@ -65,6 +69,11 @@
 //Post reply progress hud
 @property (nonatomic) JGProgressHUD *progressHUD;
 
+@property (nonatomic) STKAudioPlayer *audioPlayer;
+
+//Recorder
+@property (nonatomic) AFSoundRecord *recorder;
+
 
 @property (nonatomic, copy) AudioPlayerCompleteblock completionBlock;
 
@@ -78,6 +87,8 @@
 @property (nonatomic) NSString *mediaId;
 @property (nonatomic) NSString *replyMediaId;
 @property (nonatomic) NSInteger retryCount;
+
+@property (nonatomic) FLYAudioManager *audioManager;
 
 @end
 
@@ -110,6 +121,10 @@
     
     _audioLength = 0;
     
+    
+    self.audioManager = [FLYAudioManager sharedInstance];
+    self.audioManager.delegate = self;
+    
     [self _initVoiceRecording];
     [self _setupInitialViewState];
     [self updateViewConstraints];
@@ -128,9 +143,6 @@
 
 - (void)_initVoiceRecording
 {
-    //Use NSTimer so it won't block main thread.
-    [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(_initRecordingAudioController) userInfo:nil repeats:NO];
-    
     @weakify(self)
     _completionBlock = ^{
         @strongify(self)
@@ -141,14 +153,6 @@
         });
     };
 }
-
-- (void)_initRecordingAudioController
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[FLYAudioStateManager sharedInstance] initRecordingAudioController];
-    });
-}
-
 
 #pragma mark - clean up 
 
@@ -342,7 +346,12 @@
     
     [self updateViewConstraints];
     
-    [[FLYAudioStateManager sharedInstance] startRecord];
+//    [[FLYAudioStateManager sharedInstance] startRecord];
+    
+    NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
+    [FLYAppStateManager sharedInstance].recordingFilePath = path;
+    _recorder = [[AFSoundRecord alloc] initWithFilePath:path];
+    [_recorder startRecording];
     
     [self _loadWaver];
     [self loadRightBarButton];
@@ -357,10 +366,8 @@
         @weakify(self)
         self.waver.waverLevelCallback = ^() {
             @strongify(self)
-            Float32 inputAvg, inputPeak, outputAvg, outputPeak;
-            [[FLYAudioStateManager sharedInstance].audioController inputAveragePowerLevel:&inputAvg peakHoldLevel:&inputPeak];
-            [[FLYAudioStateManager sharedInstance].audioController outputAveragePowerLevel:&outputAvg peakHoldLevel:&outputPeak];
-            CGFloat normalizedValue = pow (10,  1.4* (inputAvg - 10) / 40);
+            [self.recorder.recorder updateMeters];
+            CGFloat normalizedValue = pow (10, [self.recorder.recorder averagePowerForChannel:0] / 40);
             self.waver.level = normalizedValue;
         };
         [self.view addSubview:self.waver];
@@ -377,7 +384,6 @@
     [self.remainingTimeLabel removeFromSuperview];
     self.recordedTimeLabel = nil;
     self.remainingTimeLabel = nil;
-//    [_pulsingHaloLayer removeFromSuperlayer];
     
     _innerCircleView.hidden = YES;
     [_outerCircleView setupLayerFillColor:[UIColor whiteColor] strokeColor:[UIColor flyLightGreen]];
@@ -402,13 +408,15 @@
 
 - (void)_setupPauseViewState
 {
-    [[FLYAudioStateManager sharedInstance] pausePlayer];
+//    [[FLYAudioStateManager sharedInstance] pausePlayer];
+    [[FLYAudioManager sharedInstance].audioPlayer pause];
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_play"]];
 }
 
 - (void)_setupResumeViewState
 {
-    [[FLYAudioStateManager sharedInstance] resumePlayer];
+//    [[FLYAudioStateManager sharedInstance] resumePlayer];
+    [[FLYAudioManager sharedInstance].audioPlayer resume];
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_pause"]];
     [self _addPlaybackTimer];
     [self updateViewConstraints];
@@ -554,14 +562,16 @@
             }
             
             _currentState = FLYRecordCompleteState;
-            [[FLYAudioStateManager sharedInstance] stopRecord];
+            [self.recorder saveRecording];
             [self _setupCompleteViewState];
             break;
         }
         case FLYRecordCompleteState:
         {
-            _currentState = FLYRecordPlayingState;
-            [[FLYAudioStateManager sharedInstance] playAudioWithCompletionBlock:_completionBlock];
+            self.currentState = FLYRecordPlayingState;
+//            [self _updateUserState];
+            NSString *str = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
+            [[FLYAudioManager sharedInstance] playAudioWithURLStr:str];
             [self _setupPlayingViewState];
             break;
         }
@@ -581,6 +591,19 @@
             break;
     }
 
+}
+
+#pragma mark - FLYAudioManagerDelegate
+
+- (void)didFinishPlayingWithQueueItemId:(SampleQueueId *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
+{
+    self.currentState = FLYRecordRecordingState;
+    [self _updateUserState];
+}
+
+- (void)stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState
+{
+    
 }
 
 - (void)viewDidLayoutSubviews

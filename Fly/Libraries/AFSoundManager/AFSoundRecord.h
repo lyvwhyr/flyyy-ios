@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface AFSoundRecord : NSObject
+
+@property (nonatomic, strong) AVAudioRecorder *recorder;
 
 -(id)initWithFilePath:(NSString *)filePath;
 

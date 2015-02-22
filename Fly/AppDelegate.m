@@ -16,6 +16,8 @@
 #import "UIImage+FLYAddition.h"
 #import "FLYFileManager.h"
 #import "FLYGroupManager.h"
+#import "FLYAudioStateManager.h"
+#import "FLYAudioManager.h"
 
 #define MIXPANEL_TOKEN @"4ce141a1dcd56132894230aff97b282b"
 
@@ -39,6 +41,7 @@
         [FLYAppStateManager sharedInstance];
         [FLYFileManager sharedInstance];
         [FLYGroupManager sharedInstance];
+//        [FLYAudioManager sharedInstance];
     });
     
     [self _setupThirdLibraries];
