@@ -124,6 +124,7 @@
 {
     [super viewWillDisappear:animated];
     [self clearCurrentPlayingItem];
+    [self.audioPlayer stop];
 }
 
 - (void)_addInlineReplyBar
@@ -401,11 +402,6 @@
 
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)tappedCell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath
 {
-    if (post.audioDuration >= kStreamingMinimialLen) {
-        NSURL* url = [NSURL URLWithString:post.mediaURL];
-        STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-        [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath]];
-    }
     
     //If currentPlayItem is empty, set the tappedCell as currentPlayItem
     NSIndexPath *tappedCellIndexPath;
@@ -425,6 +421,10 @@
             [tappedCell updatePlayState:FLYPlayStateLoading];
             if (post.audioDuration < kStreamingMinimialLen) {
                 [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL audioType:FLYDownloadableTopic];
+            } else {
+                NSURL* url = [NSURL URLWithString:post.mediaURL];
+                STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
+                [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath]];
             }
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateLoading) {
             return;
@@ -448,8 +448,12 @@
         //[[FLYAudioStateManager sharedInstance] removePlayer];
         if (post.audioDuration < kStreamingMinimialLen) {
             [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL audioType:FLYDownloadableTopic];
+        } else {
+            NSURL* url = [NSURL URLWithString:post.mediaURL];
+            STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
+            [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath]];
         }
-        
+    
         //change previous state, remove animation, change current to previous
         [FLYAudioStateManager sharedInstance].previousPlayItem = [FLYAudioStateManager sharedInstance].currentPlayItem;
         [FLYAudioStateManager sharedInstance].previousPlayItem.playState = FLYPlayStateNotSet;
