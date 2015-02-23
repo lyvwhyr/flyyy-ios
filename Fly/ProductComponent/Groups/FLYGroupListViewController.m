@@ -17,6 +17,11 @@
 #import "FLYMainViewController.h"
 #import "FLYFeedViewController.h"
 #import "FLYGroupViewController.h"
+#import "FLYNavigationController.h"
+#import "FLYNavigationBar.h"
+#import "FLYGroupListCell.h"
+#import "FLYGroupManager.h"
+#import "FLYGroup.h"
 
 #define kSuggestGroupRow 0
 
@@ -24,7 +29,7 @@
 
 @property (nonatomic) UITableView *groupsTabelView;
 
-@property (nonatomic) NSMutableArray *groups;
+@property (nonatomic) NSArray *groups;
 
 
 
@@ -42,62 +47,15 @@
     _groupsTabelView.backgroundColor = [UIColor clearColor];
     _groupsTabelView.delegate = self;
     _groupsTabelView.dataSource = self;
+    _groupsTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_groupsTabelView];
     
-    _groups = [NSMutableArray new];
-    [_groups addObject:@"Sexually Assaulted"];
-    [_groups addObject:@"Funny Stories"];
-    [_groups addObject:@"Guilt Trips"];
-    [_groups addObject:@"My Fantasies"];
-    [_groups addObject:@"My Crushes"];
+    self.title = @"Groups";
+    UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
+    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
     
-    [_groups addObject:@"Feeling Blue"];
-    [_groups addObject:@"Jokes"];
-    [_groups addObject:@"My Confessions"];
-    [_groups addObject:@"My ex is.."];
-    [_groups addObject:@"Men are.."];
+    _groups = [NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList];
     
-    [_groups addObject:@"Women are.."];
-    [_groups addObject:@"Dating Advice"];
-    [_groups addObject:@"Greatest Fears"];
-    [_groups addObject:@"Accomplishments"];
-    [_groups addObject:@"Breaking up"];
-    [_groups addObject:@"Lonely"];
-    [_groups addObject:@"In the closet"];
-    [_groups addObject:@"Help!"];
-    [_groups addObject:@"Happy"];
-    [_groups addObject:@"Bad Day"];
-    [_groups addObject:@"Good Day"];
-    [_groups addObject:@"My Purpose"];
-    [_groups addObject:@"Fitting In"];
-    [_groups addObject:@"Lies"];
-    [_groups addObject:@"Betrayals"];
-
-    [_groups addObject:@"Shameful Past"];
-    [_groups addObject:@"My Dreams"];
-    [_groups addObject:@"Mood Swings"];
-    [_groups addObject:@"Stress"];
-    [_groups addObject:@"Lies"];
-    [_groups addObject:@"Betrayals"];
-    [_groups addObject:@"Can't Orgasm"];
-    [_groups addObject:@"Family Pressure"];
-    [_groups addObject:@"Forgiveness"];
-    [_groups addObject:@"Karma"];
-    [_groups addObject:@"Success Stories "];
-    [_groups addObject:@"Ask Flyy"];
-    [_groups addObject:@"I discovered"];
-    [_groups addObject:@"First Kiss"];
-    [_groups addObject:@"Lies"];
-    [_groups addObject:@"Betrayals"];
-    [_groups addObject:@"Loosing Virginity"];
-    [_groups addObject:@"Still A Virgin"];
-    [_groups addObject:@"Disordered Eating"];
-    [_groups addObject:@"Can't Sleep"];
-    [_groups addObject:@"Stepmother"];
-    [_groups addObject:@"Stepfather"];
-    [_groups addObject:@"Douchebag"];
-    [_groups addObject:@"Womanizers"];
-    [_groups addObject:@"Nightmares"];
     [self _addViewConstraints];
 }
 
@@ -109,6 +67,8 @@
     titleLabel.text = @"Groups";
     [titleLabel sizeToFit];
     self.parentViewController.navigationItem.titleView = titleLabel;
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)viewDidLayoutSubviews
@@ -149,22 +109,27 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        static NSString *cellIdentifier = @"FLYGroupListTableCellIdentifier";
-        FLYGroupListSuggestTableViewCell *cell = (FLYGroupListSuggestTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (cell == nil) {
-            cell = [[FLYGroupListSuggestTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        }
+        UITableViewCell *cell;
+        NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d%d", @"identifier", (int)indexPath.section, (int)indexPath.row];
+        cell = [[FLYGroupListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        FLYGroupListCell *chooseGroupCell = (FLYGroupListCell *)cell;
+        chooseGroupCell.groupName = @"Suggest a Group";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
         return cell;
     }
     
-    static NSString *cellIdentifier = @"FLYGroupsViewControllerTableCellIdentifier";
-    FLYGroupListTableViewCell *cell = (FLYGroupListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[FLYGroupListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
+    
+    UITableViewCell *cell;
+    NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d%d", @"identifier", (int)indexPath.section, (int)indexPath.row];
+    cell = [[FLYGroupListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    
+    FLYGroupListCell *chooseGroupCell = (FLYGroupListCell *)cell;
+    FLYGroup *group = [_groups objectAtIndex:(indexPath.row - 1)];
+    chooseGroupCell.groupName = group.groupName;
+    cell = chooseGroupCell;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.groupName = [_groups objectAtIndex:indexPath.row - 1];
+    cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
 
@@ -202,6 +167,17 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 44.0f;
+}
+
+#pragma mark - Navigation bar and status bar
+- (UIColor *)preferredNavigationBarColor
+{
+    return [UIColor flyBlue];
+}
+
+- (UIColor*)preferredStatusBarColor
+{
+    return [UIColor flyBlue];
 }
 
 @end
