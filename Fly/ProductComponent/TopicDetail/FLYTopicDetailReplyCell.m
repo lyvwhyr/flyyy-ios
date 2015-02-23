@@ -125,11 +125,13 @@
 #pragma mark - User interactions
 - (void)_playButtonTapped
 {
+    [[FLYScribe sharedInstance] logEvent:@"topic_detail" section:@"reply_cell" component:self.reply.replyId element:@"play_button" action:@"click"];
     [self.delegate playReply:self.reply indexPath:self.indexPath];
 }
 
 - (void)_commentButtonTapped
 {
+    [[FLYScribe sharedInstance] logEvent:@"topic_detail" section:@"reply_cell" component:self.reply.replyId element:@"like_button" action:@"click"];
     [self.delegate replyToReplyButtonTapped:self.reply];
 }
 

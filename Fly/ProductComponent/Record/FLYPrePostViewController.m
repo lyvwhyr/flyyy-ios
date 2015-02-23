@@ -89,6 +89,8 @@
     [self.view addSubview:_postButton];
     
     [self updateViewConstraints];
+    
+    [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:nil element:nil action:@"impression"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -235,6 +237,8 @@
 
 - (void)_postButtonTapped
 {
+    [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:nil element:@"post_button" action:@"click"];
+    
     if (!self.topicTitle) {
         [Dialog simpleToast:LOC(@"FLYPrePostDefaultText")];
         return;

@@ -188,6 +188,8 @@
         [self removeViewController:_currentViewController];
         [self addViewController:_feedViewNavigationController];
         _currentViewController = _feedViewNavigationController;
+        
+        [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_home_button" component:nil element:nil action:@"click"];
     } else {
         if (_currentViewController == _groupsListViewNavigationController) {
             return;
@@ -195,6 +197,8 @@
         [self removeViewController:_currentViewController];
         [self addViewController:_groupsListViewNavigationController];
         _currentViewController = _groupsListViewNavigationController;
+        
+        [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_groups_button" component:nil element:nil action:@"click"];
     }
 }
 
@@ -250,6 +254,8 @@
 
 - (void)_recordButtonTapped
 {
+    [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_record_button" component:nil element:nil action:@"click"];
+    
     FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForTopic];
     UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
     [self presentViewController:navigationController animated:NO completion:nil];

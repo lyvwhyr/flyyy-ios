@@ -42,7 +42,7 @@
 #define kFilterModalHeight 80
 #define kMaxRetry 3
 #define kTimeLabelTopPadding 30
-#define kMinimalRecordingLength 0
+#define kMinimalRecordingLength 5
 
 @interface FLYRecordViewController ()<FLYRecordBottomBarDelegate, JGProgressHUDDelegate, FLYAudioManagerDelegate>
 
@@ -128,6 +128,12 @@
     [self _initVoiceRecording];
     [self _setupInitialViewState];
     [self updateViewConstraints];
+    
+    if (self.recordingType == RecordingForTopic) {
+        [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"recording_page" component:@"topic" element:nil action:@"impression"];
+    } else {
+        [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"recording_page" component:@"reply" element:nil action:@"impression"];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -223,6 +229,8 @@
 
 - (void)_nextBarButtonTapped
 {
+    [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"recording_page" component:nil element:@"next_button" action:@"click"];
+    
     NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
     if (self.recordingType == RecordingForTopic) {
         [FLYEndpointRequest uploadAudioFileServiceWithUserId:userId successBlock:nil failureBlock:nil];
@@ -555,6 +563,8 @@
         }
         case FLYRecordRecordingState:
         {
+            [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"recording_page" component:nil element:@"recording_button" action:@"click"];
+            
             if (self.recordingType == RecordingForTopic && self.audioLength <= kMinimalRecordingLength) {
                 [Dialog simpleToast:[NSString stringWithFormat:LOC(@"FLYLessThanMinimalRecordingLength"), kMinimalRecordingLength] withDuration:1.0f];
                 [self _setupInitialViewState];
@@ -577,6 +587,8 @@
         }
         case FLYRecordPlayingState:
         {
+            [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"recording_page" component:nil element:@"replay_button" action:@"click"];
+            
             _currentState = FLYRecordPauseState;
             [self _setupPauseViewState];
             break;
@@ -615,6 +627,8 @@
 #pragma mark - FLYRecordBottomBarDelegate
 - (void)trashButtonTapped:(UIButton *)button
 {
+    [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"recording_page" component:nil element:@"trash_button" action:@"click"];
+    
     [self _cleanupTimer];
     [self _setupInitialViewState];
 }

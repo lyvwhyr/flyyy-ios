@@ -81,6 +81,8 @@
 		A631891E1A92B2380042E12A /* FSXMLHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A631890E1A92B2380042E12A /* FSXMLHttpRequest.m */; };
 		A63189221A92B34E0042E12A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A63189211A92B34E0042E12A /* Reachability.m */; };
 		A63189241A92B3C70042E12A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A63189231A92B3C70042E12A /* libxml2.dylib */; };
+		A636FC381A9AA73E0084DE6A /* FLYScribe.m in Sources */ = {isa = PBXBuildFile; fileRef = A636FC371A9AA73E0084DE6A /* FLYScribe.m */; };
+		A636FC3B1A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A636FC3A1A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.m */; };
 		A640BC3B1A3815B700DC59A7 /* icon_flag_post@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */; };
 		A640BC3D1A381AE900DC59A7 /* icon_navigation_catalog@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3C1A381AE900DC59A7 /* icon_navigation_catalog@3x.png */; };
 		A6450B141A998A08009EF0A3 /* AFSoundItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A6450B0A1A998A08009EF0A3 /* AFSoundItem.m */; };
@@ -514,6 +516,10 @@
 		A63189201A92B34E0042E12A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		A63189211A92B34E0042E12A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		A63189231A92B3C70042E12A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		A636FC361A9AA73E0084DE6A /* FLYScribe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYScribe.h; sourceTree = "<group>"; };
+		A636FC371A9AA73E0084DE6A /* FLYScribe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYScribe.m; sourceTree = "<group>"; };
+		A636FC391A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+FLYAddition.h"; sourceTree = "<group>"; };
+		A636FC3A1A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+FLYAddition.m"; sourceTree = "<group>"; };
 		A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_flag_post@3x.png"; sourceTree = "<group>"; };
 		A640BC3C1A381AE900DC59A7 /* icon_navigation_catalog@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_navigation_catalog@3x.png"; sourceTree = "<group>"; };
 		A6450B091A998A08009EF0A3 /* AFSoundItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSoundItem.h; sourceTree = "<group>"; };
@@ -1154,6 +1160,7 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A636FC351A9AA70F0084DE6A /* Tracking */,
 				A6D692211A92F61400F8EEDE /* Datastructure */,
 				A67A5E871A70CC290098DA23 /* Services */,
 				A6E506141A4AA731009C5FAB /* PlayIabletem */,
@@ -1229,6 +1236,8 @@
 				A67CC61E1A7DF1730092E500 /* CoreGraphics+FLYAddition.m */,
 				A6D949EC1A9086FA003D4265 /* UIDevice+FLYAddition.h */,
 				A6D949ED1A9086FA003D4265 /* UIDevice+FLYAddition.m */,
+				A636FC391A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.h */,
+				A636FC3A1A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1295,6 +1304,15 @@
 				A63189211A92B34E0042E12A /* Reachability.m */,
 			);
 			path = Reachability;
+			sourceTree = "<group>";
+		};
+		A636FC351A9AA70F0084DE6A /* Tracking */ = {
+			isa = PBXGroup;
+			children = (
+				A636FC361A9AA73E0084DE6A /* FLYScribe.h */,
+				A636FC371A9AA73E0084DE6A /* FLYScribe.m */,
+			);
+			path = Tracking;
 			sourceTree = "<group>";
 		};
 		A6450B081A998A00009EF0A3 /* AFSoundManager */ = {
@@ -2470,6 +2488,7 @@
 				A63189131A92B2380042E12A /* file_stream.cpp in Sources */,
 				A6048A421A85E63100C67480 /* EXTSelectorChecking.m in Sources */,
 				A6048A3D1A85E63100C67480 /* EXTConcreteProtocol.m in Sources */,
+				A636FC3B1A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.m in Sources */,
 				A63189151A92B2380042E12A /* id3_parser.cpp in Sources */,
 				A6A0E4AF1A1E76110036116E /* FLEXClassExplorerViewController.m in Sources */,
 				A6048A431A85E63100C67480 /* NSInvocation+EXT.m in Sources */,
@@ -2532,6 +2551,7 @@
 				A63189121A92B2380042E12A /* file_output.cpp in Sources */,
 				A6450B161A998A08009EF0A3 /* AFSoundQueue.m in Sources */,
 				A6048ACF1A8603EF00C67480 /* AFHTTPRequestOperationManager.m in Sources */,
+				A636FC381A9AA73E0084DE6A /* FLYScribe.m in Sources */,
 				A651BD981A4986400081A1E0 /* MBProgressHUD.m in Sources */,
 				A6A0E49F1A1E76110036116E /* FLEXMethodCallingViewController.m in Sources */,
 				A6263ECB1A1897CE00C4C3BA /* UIColor+FLYAddition.m in Sources */,

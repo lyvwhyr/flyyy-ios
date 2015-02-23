@@ -273,19 +273,19 @@
 
 - (void)_appWillEnterForeground:(NSNotification *)notification
 {
-    if (!_audioController) {
-        [self _initDefaultAudioController];
-        [_audioController start:nil];
-    }
+//    if (!_audioController) {
+//        [self _initDefaultAudioController];
+//        [_audioController start:nil];
+//    }
 }
 
 - (void)_appDidEnterBackground:(NSNotification *)notification
 {
-    if (_audioController.audioInputAvailable) {
-        [_audioController removeInputReceiver:_recorder];
-        [_audioController removeOutputReceiver:_recorder];
-         _audioController = nil;
-    }
+//    if (_audioController.audioInputAvailable) {
+//        [_audioController removeInputReceiver:_recorder];
+//        [_audioController removeOutputReceiver:_recorder];
+//         _audioController = nil;
+//    }
 }
 
 //- (void)_useRecordAndPlaybackAudioController

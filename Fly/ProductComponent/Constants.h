@@ -24,6 +24,7 @@
 
 //Mixpanel event
 #define kTrackingEventClientError                               @"client_error"
+#define kTrackingEventClientTracking                            @"flyy_client"
 
 
 //Mixpanel properties

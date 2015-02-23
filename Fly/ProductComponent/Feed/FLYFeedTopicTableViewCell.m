@@ -327,7 +327,7 @@
 
 - (void)_likeButtonTapped
 {
-    
+    [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"" component:self.topic.topicId element:@"like_button" action:@"click"];
 }
 
 - (void)_shareButtonTapped
@@ -337,7 +337,7 @@
 
 - (void)_commentButtonTapped
 {
-    
+    [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"" component:self.topic.topicId element:@"comment_button" action:@"click"];
 }
 
 #pragma mark - Height of the cell

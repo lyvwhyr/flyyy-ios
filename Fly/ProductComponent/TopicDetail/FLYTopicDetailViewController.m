@@ -84,6 +84,8 @@
     [self.view addSubview:_topicTableView];
     
     [self _loadReplies];
+    
+    [[FLYScribe sharedInstance] logEvent:@"topic_detail" section:nil component:nil element:nil action:@"impression"];
 }
 
 - (void)viewWillAppear:(BOOL)animated

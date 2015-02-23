@@ -35,6 +35,7 @@
 
 //used for pagination load more
 @property (nonatomic) NSString *beforeTimestamp;
+@property (nonatomic) NSInteger loadMoreCount;
 
 @property (nonatomic) NSMutableArray *posts;
 @property (nonatomic) BOOL didSetConstraints;
@@ -67,6 +68,8 @@
         _audioPlayer.meteringEnabled = YES;
         _audioPlayer.volume = 1;
         _audioPlayer.delegate = self;
+        
+        _loadMoreCount = 0;
     }
     return self;
 }
@@ -111,13 +114,14 @@
     [_feedTableView addInfiniteScrollingWithActionHandler:^{
         @strongify(self)
         self.requestType = RequestTypeLoadMore;
+        self.loadMoreCount++;
+        [[FLYScribe sharedInstance] logEvent:@"home_page" section:[@(self.loadMoreCount) stringValue] component:nil element:nil action:@"load_more"];
         [self _fetchHomeTimelineService:self.beforeTimestamp requestType:RequestTypeLoadMore];
     }];
 
     [_feedTableView triggerPullToRefresh];
     
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"timeline_view"];
+    [[FLYScribe sharedInstance] logEvent:@"home_page" section:nil component:nil element:nil action:@"impression"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -402,6 +406,8 @@
 
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)tappedCell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath
 {
+    
+    [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"" component:post.topicId element:@"play_button" action:@"click"];
     
     //If currentPlayItem is empty, set the tappedCell as currentPlayItem
     NSIndexPath *tappedCellIndexPath;

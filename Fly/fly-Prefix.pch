@@ -26,5 +26,6 @@
 #import "FLYAppStateManager.h"
 #import "Mixpanel.h"
 #import "EXTScope.h"
+#import "FLYScribe.h"
 
 #endif
