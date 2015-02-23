@@ -237,7 +237,7 @@
 
 - (void)_postButtonTapped
 {
-    [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:nil element:@"post_button" action:@"click"];
+    [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:@"post" element:@"post_button" action:@"click"];
     
     if (!self.topicTitle) {
         [Dialog simpleToast:LOC(@"FLYPrePostDefaultText")];

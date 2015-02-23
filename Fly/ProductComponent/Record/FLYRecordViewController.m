@@ -239,6 +239,8 @@
         prePostVC.audioDuration = self.audioLength;
         [self.navigationController pushViewController:prePostVC animated:YES];
     } else {
+        [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:@"reply" element:@"post_button" action:@"click"];
+        
         if (self.replyMediaId) {
             NSDictionary *dict = @{@"topic_id":self.topicId,
                                    @"media_id":self.replyMediaId,

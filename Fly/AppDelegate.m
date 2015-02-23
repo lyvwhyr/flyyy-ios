@@ -86,6 +86,9 @@
 - (void)_setupThirdLibraries
 {
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    
+    
+    //Fabric should the the last one
     [Fabric with:@[CrashlyticsKit]];
 }
 
