@@ -146,6 +146,9 @@
 - (void)_loadLeftBarItem
 {
     FLYGroupsButtonItem *leftBarItem = [FLYGroupsButtonItem barButtonItem:YES];
+    leftBarItem.actionBlock = ^(FLYBarButtonItem *item) {
+        [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
+    };
     self.navigationItem.leftBarButtonItem = leftBarItem;
 }
 
@@ -532,12 +535,12 @@
 #pragma mark - navigation bar item tapped 
 - (void)_autoPlayButtonTapped
 {
-    [Dialog simpleToast:LOC(@"FLYAutoPlayEnabledHudText")];
+    [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
 }
 
 - (void)_profileButtonTapped
 {
-    
+    [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
 }
 
 #pragma mark - Navigation bar and status bar
