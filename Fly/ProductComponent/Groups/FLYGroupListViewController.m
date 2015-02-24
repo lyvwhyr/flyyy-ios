@@ -135,7 +135,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return;
     if (kSuggestGroupRow == indexPath.row) {
         SCLAlertView *alert = [[SCLAlertView alloc] init];
         
@@ -148,7 +147,7 @@
             HUD.textLabel.text = @"Thank you";
             HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
             [HUD showInView:self.view];
-            [HUD dismissAfterDelay:2.0];
+            [HUD dismissAfterDelay:1.0];
         }];
         
         [alert showCustom:self image:[UIImage imageNamed:@"icon_feed_play"] color:[UIColor flyBlue] title:@"Suggest" subTitle:@"Do you want to suggest a new group? We are open to new ideas." closeButtonTitle:@"Cancel" duration:0.0f];
