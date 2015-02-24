@@ -12,6 +12,7 @@
 #import "FLYIconButton.h"
 #import "FLYReply.h"
 #import "FLYUser.h"
+#import "Dialog.h"
 
 @interface FLYTopicDetailReplyCell()
 
@@ -42,6 +43,7 @@
         UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
         _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:color icon:@"icon_detail_wings" isIconLeft:NO];
         _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_likeButton];
         
         _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -127,6 +129,11 @@
 {
     [[FLYScribe sharedInstance] logEvent:@"topic_detail" section:@"reply_cell" component:self.reply.replyId element:@"play_button" action:@"click"];
     [self.delegate playReply:self.reply indexPath:self.indexPath];
+}
+
+- (void)_likeButtonTapped
+{
+    [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
 }
 
 - (void)_commentButtonTapped

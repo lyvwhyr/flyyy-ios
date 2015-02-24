@@ -14,6 +14,7 @@
 #import "FLYIconButton.h"
 #import "FLYUser.h"
 #import "FLYGroup.h"
+#import "Dialog.h"
 
 @interface FLYFeedTopicTableViewCell()
 
@@ -116,6 +117,7 @@
         
         _groupNameButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _groupNameButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [_groupNameButton addTarget:self action:@selector(_groupNameTapped) forControlEvents:UIControlEventTouchUpInside];
         _groupNameButton.titleLabel.font = inlineActionFont;
         [_groupNameButton setTitleColor:[UIColor flyBlue] forState:UIControlStateNormal];
         _groupNameButton.titleEdgeInsets = UIEdgeInsetsZero;
@@ -328,16 +330,24 @@
 - (void)_likeButtonTapped
 {
     [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"" component:self.topic.topicId element:@"like_button" action:@"click"];
+    
+    [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
 }
 
 - (void)_shareButtonTapped
 {
-    
+    [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
 }
 
 - (void)_commentButtonTapped
 {
     [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"" component:self.topic.topicId element:@"comment_button" action:@"click"];
+    [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
+}
+
+- (void)_groupNameTapped
+{
+    [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
 }
 
 #pragma mark - Height of the cell

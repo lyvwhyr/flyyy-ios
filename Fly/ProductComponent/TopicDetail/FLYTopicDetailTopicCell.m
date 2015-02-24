@@ -12,6 +12,7 @@
 #import "UIColor+FLYAddition.h"
 #import "FLYTopic.h"
 #import "FLYUser.h"
+#import "Dialog.h"
 
 @interface FLYTopicDetailTopicCell()
 
@@ -248,7 +249,7 @@
 
 - (void)_likeButtonTapped
 {
-    
+    [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
 }
 
 - (void)_playButtonTapped

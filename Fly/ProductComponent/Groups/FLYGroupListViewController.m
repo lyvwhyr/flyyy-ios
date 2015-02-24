@@ -22,6 +22,7 @@
 #import "FLYGroupListCell.h"
 #import "FLYGroupManager.h"
 #import "FLYGroup.h"
+#import "Dialog.h"
 
 #define kSuggestGroupRow 0
 
@@ -155,6 +156,9 @@
 //        FLYSingleGroupViewController *vc = [FLYSingleGroupViewController new];
 //        vc.view.translatesAutoresizingMaskIntoConstraints = NO;
 //        [self.navigationController pushViewController:vc animated:YES];
+        
+        [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
+        return;
         
         FLYGroupViewController *vc = [FLYGroupViewController new];
         [self.navigationController pushViewController:vc animated:YES];
