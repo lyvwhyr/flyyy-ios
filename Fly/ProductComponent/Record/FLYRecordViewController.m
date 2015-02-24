@@ -229,6 +229,8 @@
 
 - (void)_nextBarButtonTapped
 {
+    [self _disableUserInteractionsOnAnimation];
+    
     [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"recording_page" component:nil element:@"next_button" action:@"click"];
     
     NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
@@ -255,8 +257,6 @@
             self.progressHUD.delegate = self;
             self.progressHUD.textLabel.text = @"Posting...";
             [self.progressHUD showInView:self.view];
-            
-            [self _disableUserInteractionsOnAnimation];
             
             @weakify(self)
             [FLYEndpointRequest uploadAudioFileServiceWithUserId:userId successBlock:^(NSString *mediaId) {
