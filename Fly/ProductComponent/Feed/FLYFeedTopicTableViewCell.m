@@ -281,7 +281,7 @@
     [self.topicTitle sizeToFit];
     
     [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.likeCount]];
-    [self.groupNameButton setTitle:[NSString stringWithFormat:@"@%@", topic.group.groupName] forState:UIControlStateNormal];
+    [self.groupNameButton setTitle:[NSString stringWithFormat:@"#%@", topic.group.groupName] forState:UIControlStateNormal];
     [self.commentButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.replyCount]];
 }
 

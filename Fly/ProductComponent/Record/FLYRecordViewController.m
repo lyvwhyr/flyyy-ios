@@ -43,6 +43,7 @@
 #define kMaxRetry 3
 #define kTimeLabelTopPadding 30
 #define kMinimalRecordingLength 5
+#define kMaxRecordTime 60
 
 @interface FLYRecordViewController ()<FLYRecordBottomBarDelegate, JGProgressHUDDelegate, FLYAudioManagerDelegate>
 
@@ -93,8 +94,6 @@
 @end
 
 @implementation FLYRecordViewController
-
-#define kMaxRecordTime          60
 
 - (instancetype)initWithRecordType:(FLYRecordingType)recordingType
 {
@@ -407,6 +406,8 @@
 
 - (void)_setupCompleteViewState
 {
+    [self.recorder saveRecording];
+    
     self.remainingAudioLength = self.audioLength;
     [self.glowView stopGlowing];
     [self.glowView removeFromSuperview];
@@ -595,7 +596,6 @@
             }
             
             _currentState = FLYRecordCompleteState;
-            [self.recorder saveRecording];
             [self _setupCompleteViewState];
             break;
         }
