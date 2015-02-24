@@ -251,10 +251,13 @@
     
     NSString *mediaId = [FLYAppStateManager sharedInstance].mediaId;
     NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
+    
+    self.postButton.userInteractionEnabled = NO;
     if (mediaId) {
         [self _serviceCreateTopicWithParams:@{@"user_id":userId}];
     } else {
         //If media id is still empty at this point, try to upload the media again.
+        
         JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         HUD.delegate = self;
         HUD.textLabel.text = @"Posting...";
@@ -266,6 +269,7 @@
             [HUD dismiss];
             [self _serviceCreateTopicWithParams:@{@"user_id":userId}];
         } failureBlock:^{
+            self.postButton.userInteractionEnabled = YES;
             [HUD dismiss];
             [Dialog simpleToast:LOC(@"FLYGenericError")];
         }];
@@ -292,7 +296,9 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kNewPostReceivedNotification object:self userInfo:dict];
         [[NSNotificationCenter defaultCenter] postNotificationName:kUsePlaybackOnlyNotification object:self];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        self.postButton.userInteractionEnabled = YES;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.postButton.userInteractionEnabled = YES;
         UALog(@"Post error %@", error);
     }];
 }

@@ -253,9 +253,10 @@
         } else {
             self.progressHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
             self.progressHUD.delegate = self;
-            self.progressHUD.userInteractionEnabled = YES;
             self.progressHUD.textLabel.text = @"Posting...";
             [self.progressHUD showInView:self.view];
+            
+            [self _disableUserInteractionsOnAnimation];
             
             @weakify(self)
             [FLYEndpointRequest uploadAudioFileServiceWithUserId:userId successBlock:^(NSString *mediaId) {
@@ -270,11 +271,25 @@
                 }
                 [self _postReplyServiceWithParams:mutableDict];
             } failureBlock:^{
+                [self _enableUserInteractionsAfterAnimation];
+                
                 [self.progressHUD dismiss];
                 [Dialog simpleToast:LOC(@"FLYGenericError")];
             }];
         }
     }
+}
+
+- (void)_disableUserInteractionsOnAnimation
+{
+    [[self.view subviews] makeObjectsPerformSelector:@selector(setUserInteractionEnabled:) withObject:@(NO)];
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
+- (void)_enableUserInteractionsAfterAnimation
+{
+    [[self.view subviews] makeObjectsPerformSelector:@selector(setUserInteractionEnabled:) withObject:@(YES)];
+    [self loadRightBarButton];
 }
 
 - (void)_postReplyServiceWithParams:(NSDictionary *)dict
@@ -283,7 +298,9 @@
     NSString *baseURL =  [NSString stringWithFormat:@"replies?user_id=%@", userId];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:baseURL parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self.progressHUD dismiss];
+        if (self.progressHUD && self.progressHUD.visible) {
+            [self.progressHUD dismiss];
+        }
         
         FLYReply *reply = [[FLYReply alloc] initWithDictionary:responseObject];
         NSDictionary *dict = @{kNewReplyKey:reply};
@@ -292,7 +309,11 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kUsePlaybackOnlyNotification object:self];
         
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        
+        [self _enableUserInteractionsAfterAnimation];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self _enableUserInteractionsAfterAnimation];
+        
         [self.progressHUD dismiss];
         [Dialog simpleToast:LOC(@"FLYGenericError")];
         UALog(@"Post error %@", error);
