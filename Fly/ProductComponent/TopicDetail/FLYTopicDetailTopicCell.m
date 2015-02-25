@@ -105,15 +105,15 @@
         [_bigPostCommentButton sizeToFit];
         [self.contentView addSubview:_bigPostCommentButton];
         
-        _lineView = [UIImageView new];
-        _lineView.image = [UIImage imageNamed:@"icon_detail_timeline"];
-        [self.contentView addSubview:_lineView];
-        
-        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_playButton setImage:[UIImage imageNamed:@"icon_detail_playline"] forState:UIControlStateNormal];
-        [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-        [_playButton sizeToFit];
-        [self.contentView addSubview:_playButton];
+//        _lineView = [UIImageView new];
+//        _lineView.image = [UIImage imageNamed:@"icon_detail_timeline"];
+//        [self.contentView addSubview:_lineView];
+//        
+//        _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [_playButton setImage:[UIImage imageNamed:@"icon_detail_playline"] forState:UIControlStateNormal];
+//        [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+//        [_playButton sizeToFit];
+//        [self.contentView addSubview:_playButton];
         
     }
     return self;
@@ -170,16 +170,16 @@
             
         }];
         
-        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(self.userNameLabel);
-            make.trailing.equalTo(self.speechBubbleView);
-            make.top.equalTo(self.bigPostCommentButton.mas_bottom).offset(20);
-        }];
+//        [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.leading.equalTo(self.userNameLabel);
+//            make.trailing.equalTo(self.speechBubbleView);
+//            make.top.equalTo(self.bigPostCommentButton.mas_bottom).offset(20);
+//        }];
         
-        [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(self.lineView).offset(-self.playButton.bounds.size.width);
-            make.centerY.equalTo(self.lineView);
-        }];
+//        [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.leading.equalTo(self.lineView).offset(-self.playButton.bounds.size.width);
+//            make.centerY.equalTo(self.lineView);
+//        }];
         
         self.didSetupConstraints = YES;
         
