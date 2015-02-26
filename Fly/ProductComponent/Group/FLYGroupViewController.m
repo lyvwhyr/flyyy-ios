@@ -11,6 +11,9 @@
 #import "FLYBarButtonItem.h"
 #import "JGProgressHUD.h"
 #import "JGProgressHUDSuccessIndicatorView.h"
+#import "FLYNavigationController.h"
+#import "FLYNavigationBar.h"
+#import "UIColor+FLYAddition.h"
 
 @interface FLYGroupViewController ()
 
@@ -28,6 +31,9 @@
 {
     [super viewDidLoad];
     
+    UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
+    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor flyBlue], NSFontAttributeName:titleFont};
+    self.title = @"#Family pressure";
 }
 
 - (void)viewWillLayoutSubviews
@@ -40,18 +46,32 @@
     [super updateViewConstraints];
 }
 
-- (UINavigationItem *)navigationItem
+//- (UINavigationItem *)navigationItem
+//{
+//    if (!_groupTitleLabel) {
+//        _groupTitleLabel = [UILabel new];
+//        _groupTitleLabel.text = @"I'm so anxious about finals I can't sleep";
+//        _groupTitleLabel.textColor = [UIColor whiteColor];
+//        _groupTitleLabel.font = [UIFont systemFontOfSize:15];
+//        [_groupTitleLabel sizeToFit];
+//        
+//        [self.navigationItem setTitleView:_groupTitleLabel];
+//    }
+//    return [super navigationItem];
+//}
+
+#pragma mark - Navigation bar
+- (void)loadLeftBarButton
 {
-    if (!_groupTitleLabel) {
-        _groupTitleLabel = [UILabel new];
-        _groupTitleLabel.text = @"I'm so anxious about finals I can't sleep";
-        _groupTitleLabel.textColor = [UIColor whiteColor];
-        _groupTitleLabel.font = [UIFont systemFontOfSize:15];
-        [_groupTitleLabel sizeToFit];
-        
-        [self.navigationItem setTitleView:_groupTitleLabel];
+    if ([self.navigationController.viewControllers count] > 1) {
+        FLYBlueBackBarButtonItem *barItem = [FLYBlueBackBarButtonItem barButtonItem:YES];
+        @weakify(self)
+        barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+            @strongify(self)
+            [self _backButtonTapped];
+        };
+        self.navigationItem.leftBarButtonItem = barItem;
     }
-    return [super navigationItem];
 }
 
 - (void)loadRightBarButton
@@ -81,6 +101,11 @@
         };
         self.navigationItem.rightBarButtonItem = barItem;
     }
+}
+
+-(void)_backButtonTapped
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

@@ -157,14 +157,9 @@
 //        vc.view.translatesAutoresizingMaskIntoConstraints = NO;
 //        [self.navigationController pushViewController:vc animated:YES];
         
-        [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
-        return;
-        
         FLYGroupViewController *vc = [FLYGroupViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
-//    FLYGroupListTableViewCell *cell = (FLYGroupListTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
