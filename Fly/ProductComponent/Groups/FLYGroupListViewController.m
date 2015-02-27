@@ -51,10 +51,6 @@
     _groupsTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_groupsTabelView];
     
-    self.title = @"Groups";
-    UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
-    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
-    
     _groups = [NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList];
     
     [self _addViewConstraints];
@@ -70,6 +66,9 @@
     self.parentViewController.navigationItem.titleView = titleLabel;
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.title = @"Groups";
+    UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
+    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
 }
 
 - (void)viewDidLayoutSubviews
