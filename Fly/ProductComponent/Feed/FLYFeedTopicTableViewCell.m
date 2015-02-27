@@ -320,6 +320,7 @@
     [_loadingIndicatorView stopAnimating];
     switch (state) {
         case FLYPlayStateNotSet: {
+            [self.arcLayer removeAllAnimations];
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
             break;
         }
