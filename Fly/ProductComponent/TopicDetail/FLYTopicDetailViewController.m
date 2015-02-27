@@ -101,6 +101,13 @@
     [FLYUtilities printAutolayoutTrace];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[FLYAudioManager sharedInstance].audioPlayer stop];
+    
+}
+
 - (void)updateViewConstraints
 {
     if (!_setLayoutConstraints) {
