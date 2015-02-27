@@ -15,6 +15,7 @@
 #import "FLYUser.h"
 #import "FLYGroup.h"
 #import "Dialog.h"
+#import "CALayer+MBAnimationPersistence.h"
 
 @interface FLYFeedTopicTableViewCell()
 
@@ -129,6 +130,11 @@
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_commentButton sizeToFit];
         [self.topicContentView addSubview:_commentButton];
+        
+        
+        //when it enters background, _arclayer is nil so this doesn't work
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pauseLayer) name:UIApplicationDidEnterBackgroundNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_resumeLayer) name:UIApplicationWillEnterForegroundNotification object:nil];
     }
     return self;
 }
@@ -153,7 +159,30 @@
     bas.speed = 1.0;
     bas.fromValue=[NSNumber numberWithInteger:0];
     bas.toValue=[NSNumber numberWithInteger:1];
-    [_arcLayer addAnimation:bas forKey:@"key"];
+    [_arcLayer addAnimation:bas forKey:@"position"];
+    
+//    self.arcLayer.MB_persistentAnimationKeys = @[@"position"];
+}
+
+-(void)_pauseLayer
+{
+    if (_arcLayer) {
+        CFTimeInterval pausedTime = [_arcLayer convertTime:CACurrentMediaTime() fromLayer:nil];
+        _arcLayer.speed = 0.0;
+        _arcLayer.timeOffset = pausedTime;
+    }
+}
+
+-(void)_resumeLayer
+{
+    if (_arcLayer) {
+        CFTimeInterval pausedTime = [_arcLayer timeOffset];
+        _arcLayer.speed = 1.0;
+        _arcLayer.timeOffset = 0.0;
+        _arcLayer.beginTime = 0.0;
+        CFTimeInterval timeSincePause = [_arcLayer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+        _arcLayer.beginTime = timeSincePause;
+    }
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
@@ -289,7 +318,6 @@
 - (void)updatePlayState:(FLYPlayState)state
 {
     [_loadingIndicatorView stopAnimating];
-    [self.arcLayer removeFromSuperlayer];
     switch (state) {
         case FLYPlayStateNotSet: {
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
@@ -302,19 +330,26 @@
         }
         case FLYPlayStatePlaying: {
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_pause"] forState:UIControlStateNormal];
-            
             [self drawLineAnimation];
             break;
         }
         case FLYPlayStatePaused: {
+            [self _pauseLayer];
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
             break;
         }
+        case FLYPlayStateResume: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_pause"] forState:UIControlStateNormal];
+            [self _resumeLayer];
+            break;
+        }
         case FLYPlayStateFinished: {
+            [self.arcLayer removeFromSuperlayer];
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
             break;
         }
         default: {
+            [self.arcLayer removeFromSuperlayer];
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
             break;
         }

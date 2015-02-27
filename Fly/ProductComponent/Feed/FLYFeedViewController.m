@@ -453,7 +453,7 @@
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStatePaused) {
             [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
             [_audioPlayer resume];
-            [tappedCell updatePlayState:FLYPlayStatePlaying];
+            [tappedCell updatePlayState:FLYPlayStateResume];
         }  else {
             [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStateFinished;
             [[FLYAudioStateManager sharedInstance] removePlayer];

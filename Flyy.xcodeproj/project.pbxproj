@@ -222,6 +222,7 @@
 		A66E204F1A2EBDAE004235F5 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E204C1A2EBDAE004235F5 /* RDVTabBarController.m */; };
 		A66E20551A2EE90F004235F5 /* FLYFeedDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E20541A2EE90F004235F5 /* FLYFeedDelegate.m */; };
 		A66E96521AA01874000B0E83 /* FLYLoaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E96511AA01874000B0E83 /* FLYLoaderView.m */; };
+		A66E96551AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E96541AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m */; };
 		A67208201A35689600B2C5B5 /* icon_seconds@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A672081F1A35689600B2C5B5 /* icon_seconds@3x.png */; };
 		A67208231A3569C600B2C5B5 /* FLYReplyPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = A67208221A3569C600B2C5B5 /* FLYReplyPlayView.m */; };
 		A67208251A356CAE00B2C5B5 /* icon_play_reply@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67208241A356CAE00B2C5B5 /* icon_play_reply@3x.png */; };
@@ -676,6 +677,8 @@
 		A66E20541A2EE90F004235F5 /* FLYFeedDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFeedDelegate.m; sourceTree = "<group>"; };
 		A66E96501AA01874000B0E83 /* FLYLoaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYLoaderView.h; sourceTree = "<group>"; };
 		A66E96511AA01874000B0E83 /* FLYLoaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoaderView.m; sourceTree = "<group>"; };
+		A66E96531AA0457F000B0E83 /* CALayer+MBAnimationPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+MBAnimationPersistence.h"; sourceTree = "<group>"; };
+		A66E96541AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+MBAnimationPersistence.m"; sourceTree = "<group>"; };
 		A672081F1A35689600B2C5B5 /* icon_seconds@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_seconds@3x.png"; sourceTree = "<group>"; };
 		A67208211A3569C600B2C5B5 /* FLYReplyPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYReplyPlayView.h; sourceTree = "<group>"; };
 		A67208221A3569C600B2C5B5 /* FLYReplyPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYReplyPlayView.m; sourceTree = "<group>"; };
@@ -1170,6 +1173,8 @@
 		A6263EBE1A1887DB00C4C3BA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				A66E96531AA0457F000B0E83 /* CALayer+MBAnimationPersistence.h */,
+				A66E96541AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m */,
 				A6D949F71A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.h */,
 				A6D949F81A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m */,
 				A62B25551A8FECFF007E11C3 /* UIView+Glow.h */,
@@ -2389,6 +2394,7 @@
 				A6048A431A85E63100C67480 /* NSInvocation+EXT.m in Sources */,
 				A66E96521AA01874000B0E83 /* FLYLoaderView.m in Sources */,
 				A6A0E4B41A1E76110036116E /* FLEXImageExplorerViewController.m in Sources */,
+				A66E96551AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m in Sources */,
 				A64D15981A29B47D00369D62 /* FLYIconButton.m in Sources */,
 				A6A0E4B01A1E76110036116E /* FLEXDefaultsExplorerViewController.m in Sources */,
 				A6048AD81A8603EF00C67480 /* README.md in Sources */,

@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, FLYPlayState) {
     FLYPlayStateLoading,
     FLYPlayStatePlaying,
     FLYPlayStatePaused,
+    FLYPlayStateResume,
     FLYPlayStateFinished
 };
 
