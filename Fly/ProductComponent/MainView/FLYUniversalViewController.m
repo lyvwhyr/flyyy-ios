@@ -12,6 +12,7 @@
 #import "UIColor+FLYAddition.h"
 #import "FLYBarButtonItem.h"
 #import "UIViewController+StatusBar.h"
+#import "FLYLoaderView.h"
 
 #if DEBUG
 #import "FLEXManager.h"
@@ -20,16 +21,83 @@
 @interface FLYUniversalViewController ()
 
 @property (nonatomic) BOOL hasSetNavigationItem;
+@property (nonatomic) FLYLoaderView *loaderView;
 
 @end
 
 @implementation FLYUniversalViewController
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        _state = FLYViewControllerStateReady;
+    }
+    return self;
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    #if DEBUG
-    [[FLEXManager sharedManager] showExplorer];
-    #endif
+//    #if DEBUG
+//    [[FLEXManager sharedManager] showExplorer];
+//    #endif
+    
+    if (self.state == FLYViewControllerStateLoading) {
+        [self.view addSubview:self.loaderView];
+        [self.loaderView startAnimating];
+    } else if (self.state == FLYViewControllerStateError) {
+        
+    }
+}
+
+- (FLYLoaderView *)loaderView
+{
+    if (_loaderView == nil) {
+        _loaderView = [FLYLoaderView new];
+    }
+    return _loaderView;
+}
+
+- (void)setState:(FLYViewControllerState)state
+{
+    if (_state != state) {
+        FLYViewControllerState previousState = _state;
+        _state = state;
+        
+        if (self.isViewLoaded) {
+            switch (_state) {
+                case FLYViewControllerStateLoading: {
+                    [self.view addSubview:self.loaderView];
+                    [self.view bringSubviewToFront:self.loaderView];
+                    [self.loaderView startAnimating];
+                    break;
+                }
+                case FLYViewControllerStateError: {
+                    [self.loaderView stopAnimating];
+                    _loaderView = nil;
+                    break;
+                }
+                case FLYViewControllerStateReady: {
+                    [self.loaderView stopAnimating];
+                    [self.loaderView removeFromSuperview];
+                    _loaderView = nil;
+                    break;
+                }
+                default:
+                    break;
+            }
+        }
+    }
+}
+
+- (void)updateViewConstraints
+{
+    if (_loaderView) {
+        [_loaderView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.view);
+        }];
+    }
+    [super updateViewConstraints];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -37,6 +105,11 @@
     [super viewWillAppear:animated];
     [self.flyNavigationController.flyNavigationBar setColor:[self preferredNavigationBarColor] animated:YES];
     [self.flyNavigationController setStatusBarColor:[self preferredStatusBarColor]];
+    
+    if (_state == FLYViewControllerStateLoading) {
+        [self.view bringSubviewToFront:_loaderView];
+        [_loaderView startAnimating];
+    }
 }
 
 - (FLYNavigationController *)flyNavigationController

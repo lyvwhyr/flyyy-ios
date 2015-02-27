@@ -213,6 +213,8 @@
 #pragma mark - fetch home timeline API
 - (void)_fetchHomeTimelineService:(NSString *)before requestType:(enum RequestType)requestType
 {
+    self.state = FLYViewControllerStateLoading;
+    
     NSString *partialUrl;
     if (requestType == RequestTypeNormal) {
         partialUrl = [NSString stringWithFormat:@"topics?limit=%d", kTopicPaginationCount];
@@ -226,9 +228,14 @@
         [_feedTableView.pullToRefreshView stopAnimating];
         [_feedTableView.infiniteScrollingView stopAnimating];
         NSArray *results = responseObject;
+        
         if (results == nil ||  results.count == 0) {
+            self.state = FLYViewControllerStateError;
             return;
         }
+        
+        self.state = FLYViewControllerStateReady;
+        
         if (requestType == RequestTypeNormal) {
             [self.posts removeAllObjects];
         }

@@ -8,11 +8,18 @@
 
 @class FLYNavigationController;
 
+typedef NS_ENUM(NSInteger, FLYViewControllerState) {
+    FLYViewControllerStateReady = 0,
+    FLYViewControllerStateLoading,
+    FLYViewControllerStateError
+};
+
 @interface FLYUniversalViewController : UIViewController
 
 @property (nonatomic) UIButton *leftNavBarButton;
 @property (nonatomic) UIButton *rightBarButton;
 @property (nonatomic) UIView *titleNavBarView;
+@property (nonatomic) FLYViewControllerState state;
 
 - (FLYNavigationController *)flyNavigationController;
 - (UIColor *)preferredNavigationBarColor;
