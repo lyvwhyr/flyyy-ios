@@ -26,6 +26,7 @@
 #import "STKAudioPlayer.h"
 #import "SampleQueueId.h"
 #import "FLYDownloadableAudio.h"
+#import "FLYGroup.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate, STKAudioPlayerDelegate>
 
@@ -481,6 +482,13 @@
         [FLYAudioStateManager sharedInstance].currentPlayItem =  [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableItemFeedTopic playState:FLYPlayStateLoading indexPath:tappedCellIndexPath] ;
         [tappedCell updatePlayState:FLYPlayStateLoading];
     }
+}
+
+- (void)groupNameTapped:(FLYFeedTopicTableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    FLYGroup *group = ((FLYTopic *)self.posts[indexPath.row]).group;
+    FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)clearCurrentPlayingItem

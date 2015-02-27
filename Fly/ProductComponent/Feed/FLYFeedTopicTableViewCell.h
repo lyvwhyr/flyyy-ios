@@ -8,6 +8,7 @@
 
 @class FLYFeedTopicTableViewCell;
 @class FLYTopic;
+@class FLYGroup;
 
 #import "FLYPlayableItem.h"
 #import "FLYTopic.h"
@@ -16,6 +17,7 @@
 
 - (void)commentButtonTapped:(FLYFeedTopicTableViewCell *)cell;
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath;
+- (void)groupNameTapped:(FLYFeedTopicTableViewCell *)cell indexPath:(NSIndexPath *)indexPath;
 
 @end
 

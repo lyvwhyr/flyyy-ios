@@ -14,6 +14,7 @@
 #import "FLYNavigationController.h"
 #import "FLYNavigationBar.h"
 #import "UIColor+FLYAddition.h"
+#import "FLYGroup.h"
 
 @interface FLYGroupViewController ()
 
@@ -22,10 +23,19 @@
 @property (nonatomic) UILabel *groupTitleLabel;
 
 @property (nonatomic) BOOL hasJoinedGroup;
+@property (nonatomic) FLYGroup *group;
 
 @end
 
 @implementation FLYGroupViewController
+
+- (instancetype)initWithGroup:(FLYGroup *)group
+{
+    if (self = [super init]) {
+        _group = group;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -33,7 +43,7 @@
     
     UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor flyBlue], NSFontAttributeName:titleFont};
-    self.title = @"#Family pressure";
+    self.title = self.group.groupName;
 }
 
 - (void)viewWillLayoutSubviews

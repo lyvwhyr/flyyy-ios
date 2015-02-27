@@ -6,8 +6,12 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
+@class FLYGroup;
+
 #import "FLYFeedViewController.h"
 
 @interface FLYGroupViewController:FLYFeedViewController
+
+- (instancetype)initWithGroup:(FLYGroup *)group;
 
 @end

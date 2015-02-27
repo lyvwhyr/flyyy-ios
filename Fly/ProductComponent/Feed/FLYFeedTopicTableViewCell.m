@@ -383,8 +383,9 @@
 
 - (void)_groupNameTapped
 {
-    [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
+    [self.delegate groupNameTapped:self indexPath:self.indexPath];
 }
+
 
 #pragma mark - Height of the cell
 + (CGFloat)heightForTopic:(FLYTopic *)topic
