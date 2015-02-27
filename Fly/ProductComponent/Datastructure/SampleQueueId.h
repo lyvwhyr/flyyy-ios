@@ -6,13 +6,21 @@
 //  Copyright (c) 2014 Thong Nguyen. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+
+typedef NS_ENUM(NSInteger, FLYPlayableItemType) {
+    FLYPlayableItemFeedTopic =0,
+    FLYPlayableItemDetailTopic,
+    FLYPlayableItemDetailReply,
+    FLYPlayableItemRecording
+};
+
 
 @interface SampleQueueId : NSObject
 @property (readwrite) int count;
 @property (readwrite) NSURL* url;
 @property (nonatomic) NSIndexPath *indexPath;
+@property (nonatomic) FLYPlayableItemType itemType;
 
--(id) initWithUrl:(NSURL*)url andCount:(int)count indexPath:(NSIndexPath *)indexPath;
+-(id) initWithUrl:(NSURL*)url andCount:(int)count indexPath:(NSIndexPath *)indexPath itemType:(FLYPlayableItemType)itemType;
 
 @end

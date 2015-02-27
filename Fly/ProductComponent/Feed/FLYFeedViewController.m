@@ -335,7 +335,7 @@
         
         STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
         
-        [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath]];
+        [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath itemType:FLYPlayableItemFeedTopic]];
         return;
         
         
@@ -429,7 +429,7 @@
         tappedCellIndexPath = indexPath;
     }
     if (![FLYAudioStateManager sharedInstance].currentPlayItem) {
-        [FLYAudioStateManager sharedInstance].currentPlayItem = [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableFeed playState:FLYPlayStateNotSet indexPath:tappedCellIndexPath];
+        [FLYAudioStateManager sharedInstance].currentPlayItem = [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableItemFeedTopic playState:FLYPlayStateNotSet indexPath:tappedCellIndexPath];
     }
     
     //tap on the same cell
@@ -442,7 +442,7 @@
             } else {
                 NSURL* url = [NSURL URLWithString:post.mediaURL];
                 STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-                [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath]];
+                [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic]];
             }
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateLoading) {
             return;
@@ -469,7 +469,7 @@
         } else {
             NSURL* url = [NSURL URLWithString:post.mediaURL];
             STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-            [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath]];
+            [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic]];
         }
     
         //change previous state, remove animation, change current to previous
@@ -478,7 +478,7 @@
         FLYFeedTopicTableViewCell *previousCell = (FLYFeedTopicTableViewCell *)[FLYAudioStateManager sharedInstance].previousPlayItem.item;
         [previousCell updatePlayState:FLYPlayStateNotSet];
     
-        [FLYAudioStateManager sharedInstance].currentPlayItem =  [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableFeed playState:FLYPlayStateLoading indexPath:tappedCellIndexPath];
+        [FLYAudioStateManager sharedInstance].currentPlayItem =  [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableItemFeedTopic playState:FLYPlayStateLoading indexPath:tappedCellIndexPath] ;
         [tappedCell updatePlayState:FLYPlayStateLoading];
     }
 }

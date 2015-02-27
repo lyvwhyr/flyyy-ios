@@ -6,12 +6,9 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-#define kFeedPlayStateUpdated   @"kFeedPlayStateUpdated"
+#import "SampleQueueId.h"
 
-typedef NS_ENUM(NSInteger, FLYPlayableItemType) {
-    FLYPlayableFeed = 0,
-    FLYPlayableDetail
-};
+#define kFeedPlayStateUpdated   @"kFeedPlayStateUpdated"
 
 typedef NS_ENUM(NSInteger, FLYPlayState) {
     FLYPlayStateNotSet = 0,
@@ -22,6 +19,7 @@ typedef NS_ENUM(NSInteger, FLYPlayState) {
 };
 
 @interface FLYPlayableItem : NSObject
+
 
 @property (nonatomic) id item;
 @property (nonatomic) FLYPlayableItemType playableItemType;

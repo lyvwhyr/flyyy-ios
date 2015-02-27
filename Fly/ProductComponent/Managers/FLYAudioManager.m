@@ -8,7 +8,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import "FLYAudioManager.h"
-#import "SampleQueueId.h"
 #import "FLYDownloadableAudio.h"
 
 @interface FLYAudioManager()<STKAudioPlayerDelegate>
@@ -42,11 +41,11 @@
     return self;
 }
 
-- (void)playAudioWithURLStr:(NSString *)str
+- (void)playAudioWithURLStr:(NSString *)str itemType:(FLYPlayableItemType)itemType
 {
     NSURL* url = [NSURL URLWithString:str];
     STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-    [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:nil]];
+    [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:nil itemType:itemType]];
 }
 
 #pragma mark - STKAudioPlayerDelegate

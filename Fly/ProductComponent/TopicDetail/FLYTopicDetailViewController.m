@@ -251,7 +251,7 @@
     }
     
     NSString *localPath = [notif.userInfo objectForKey:kDownloadAudioLocalPathkey];
-    [[FLYAudioManager sharedInstance] playAudioWithURLStr:localPath];
+    [[FLYAudioManager sharedInstance] playAudioWithURLStr:localPath itemType:FLYPlayableItemDetailReply];
 }
 
 - (void)_scrollToTop

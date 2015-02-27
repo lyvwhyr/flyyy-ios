@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "STKAudioPlayer.h"
+#import "SampleQueueId.h"
 
-@class SampleQueueId;
 
 @protocol FLYAudioManagerDelegate
 
@@ -26,6 +26,6 @@
 
 + (instancetype)sharedInstance;
 
-- (void)playAudioWithURLStr:(NSString *)str;
+- (void)playAudioWithURLStr:(NSString *)str itemType:(FLYPlayableItemType)itemType;
 
 @end

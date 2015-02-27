@@ -604,7 +604,7 @@
             self.currentState = FLYRecordPlayingState;
 //            [self _updateUserState];
             NSString *str = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
-            [[FLYAudioManager sharedInstance] playAudioWithURLStr:str];
+            [[FLYAudioManager sharedInstance] playAudioWithURLStr:str itemType:FLYPlayableItemRecording];
             [self _setupPlayingViewState];
             break;
         }
