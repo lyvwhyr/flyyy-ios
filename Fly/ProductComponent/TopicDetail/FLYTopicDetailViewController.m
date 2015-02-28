@@ -79,6 +79,8 @@
     self.topicTableView = [UITableView new];
     self.topicTableView.delegate = self;
     self.topicTableView.dataSource = self;
+    self.topicTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
     [self.topicTableView registerClass:[FLYTopicDetailTopicCell class] forCellReuseIdentifier:kFlyTopicDetailViewControllerTopicCellIdentifier];
     [self.topicTableView registerClass:[FLYTopicDetailReplyCell class] forCellReuseIdentifier:kFlyTopicDetailViewControllerReplyCellIdentifier];
     [self.view addSubview:_topicTableView];
@@ -187,7 +189,7 @@
     if (indexPath.section == FlyTopicCellSectionIndex) {
         return [FLYTopicDetailTopicCell cellHeightForTopic:self.topic];
     }
-    return 90;
+    return 80;
 }
 
 - (void)_loadReplies

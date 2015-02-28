@@ -216,6 +216,8 @@
 		A6655B551A19DEF000440AAB /* icon_tabbar_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */; };
 		A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */; };
 		A6655B5A1A19ECED00440AAB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B591A19ECED00440AAB /* Default-568h@2x.png */; };
+		A665FC1F1AA263A900490A18 /* FLYServiceBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A665FC1E1AA263A900490A18 /* FLYServiceBase.m */; };
+		A665FC221AA263CE00490A18 /* FLYTimelineService.m in Sources */ = {isa = PBXBuildFile; fileRef = A665FC211AA263CE00490A18 /* FLYTimelineService.m */; };
 		A66D98561A883B5A00C3D75A /* FLYPrePostHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A66D98551A883B5A00C3D75A /* FLYPrePostHeaderView.m */; };
 		A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E20481A2EBDAE004235F5 /* RDVTabBarItem.m */; };
 		A66E204E1A2EBDAE004235F5 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E204A1A2EBDAE004235F5 /* RDVTabBar.m */; };
@@ -665,6 +667,10 @@
 		A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_home@3x.png"; sourceTree = "<group>"; };
 		A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_me@3x.png"; sourceTree = "<group>"; };
 		A6655B591A19ECED00440AAB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		A665FC1D1AA263A900490A18 /* FLYServiceBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYServiceBase.h; sourceTree = "<group>"; };
+		A665FC1E1AA263A900490A18 /* FLYServiceBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYServiceBase.m; sourceTree = "<group>"; };
+		A665FC201AA263CE00490A18 /* FLYTimelineService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTimelineService.h; sourceTree = "<group>"; };
+		A665FC211AA263CE00490A18 /* FLYTimelineService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTimelineService.m; sourceTree = "<group>"; };
 		A66D98541A883B5A00C3D75A /* FLYPrePostHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostHeaderView.h; sourceTree = "<group>"; };
 		A66D98551A883B5A00C3D75A /* FLYPrePostHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostHeaderView.m; sourceTree = "<group>"; };
 		A66E20471A2EBDAE004235F5 /* RDVTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarItem.h; sourceTree = "<group>"; };
@@ -1521,6 +1527,10 @@
 				A64BDACA1A7B647600B46F18 /* FLYURLConstants.h */,
 				A6BCBBFB1A848D16001F8AB0 /* FLYEndpointRequest.h */,
 				A6BCBBFC1A848D16001F8AB0 /* FLYEndpointRequest.m */,
+				A665FC1D1AA263A900490A18 /* FLYServiceBase.h */,
+				A665FC1E1AA263A900490A18 /* FLYServiceBase.m */,
+				A665FC201AA263CE00490A18 /* FLYTimelineService.h */,
+				A665FC211AA263CE00490A18 /* FLYTimelineService.m */,
 			);
 			name = Services;
 			path = ../Services;
@@ -2352,6 +2362,7 @@
 				A69C4BD51A283F6400CAD443 /* FLYTopic.m in Sources */,
 				A6A4EFBE1A2C22EF00FD4066 /* FLYGroupViewController.m in Sources */,
 				A6A0E4911A1E76110036116E /* FLEXArgumentInputFontView.m in Sources */,
+				A665FC221AA263CE00490A18 /* FLYTimelineService.m in Sources */,
 				A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */,
 				A6A0E4A21A1E76110036116E /* FLEXExplorerViewController.m in Sources */,
 				A6A0E48F1A1E76110036116E /* FLEXArgumentInputColorView.m in Sources */,
@@ -2364,6 +2375,7 @@
 				A6048ADC1A8603EF00C67480 /* UIButton+AFNetworking.m in Sources */,
 				A648C0E31A19AD4A00FF1744 /* MASCompositeConstraint.m in Sources */,
 				A6A0E4A71A1E76110036116E /* FLEXFileBrowserSearchOperation.m in Sources */,
+				A665FC1F1AA263A900490A18 /* FLYServiceBase.m in Sources */,
 				A6A0E4971A1E76110036116E /* FLEXArgumentInputSwitchView.m in Sources */,
 				A6A0E4C01A1E76110036116E /* FLEXImagePreviewViewController.m in Sources */,
 				A6A57A981A33D92700610785 /* FLYInlineReplyView.m in Sources */,
