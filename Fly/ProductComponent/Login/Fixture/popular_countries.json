@@ -8,5 +8,16 @@
  "name":"United Kingdom",
  "dial_code":"+44",
  "code":"GB"
+ },
+ {
+ "name":"Canada",
+ "dial_code":"+1",
+ "code":"CA"
+ },
+ {
+ "name":"Australia",
+ "dial_code":"+61",
+ "code":"AU"
  }
+ 
 ]
