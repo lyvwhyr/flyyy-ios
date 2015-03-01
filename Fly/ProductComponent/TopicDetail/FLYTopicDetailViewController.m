@@ -23,6 +23,8 @@
 #import "AEAudioFilePlayer.h"
 #import "FLYDownloadManager.h"
 #import "FLYAudioManager.h"
+#import "FLYReplyService.h"
+#import "SVPullToRefresh.h"
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYAudioManagerDelegate>
 
@@ -35,6 +37,9 @@
 
 //used for reply pagination
 @property (nonatomic) NSString *beforeTimestamp;
+
+//services
+@property (nonatomic) FLYReplyService *replyService;
 
 @end
 
@@ -49,11 +54,15 @@
         _topic = topic;
         _replies = [NSMutableArray new];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_newReplyReceived:) name:kNewReplyReceivedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_newReplyReceived:)
+                                                     name:kNewReplyReceivedNotification
+                                                   object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(_downloadComplete:)
-                                                     name:kDownloadCompleteNotification object:nil];
+                                                     name:kDownloadCompleteNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -85,7 +94,7 @@
     [self.topicTableView registerClass:[FLYTopicDetailReplyCell class] forCellReuseIdentifier:kFlyTopicDetailViewControllerReplyCellIdentifier];
     [self.view addSubview:_topicTableView];
     
-    [self _loadReplies];
+    [self _initService];
     
     [[FLYScribe sharedInstance] logEvent:@"topic_detail" section:nil component:nil element:nil action:@"impression"];
 }
@@ -107,7 +116,6 @@
 {
     [super viewWillDisappear:animated];
     [[FLYAudioManager sharedInstance].audioPlayer stop];
-    
 }
 
 - (void)updateViewConstraints
@@ -192,13 +200,25 @@
     return 80;
 }
 
-- (void)_loadReplies
+
+#pragma mark - services
+- (void)_initService
 {
-    //partialUrl = [NSString stringWithFormat:@"topics?limit=%d&before=%@", kTopicPaginationCount, self.beforeTimestamp];
-    NSString *baseURL = [NSString stringWithFormat: @"topics/%@?limit=%d", self.topic.topicId, KReplyPaginationCount];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:baseURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSDictionary *results = responseObject;
+    self.replyService = [FLYReplyService replyServiceWithTopicId:self.topic.topicId];
+    [self _load:YES before:nil];
+    @weakify(self)
+    [self.topicTableView addInfiniteScrollingWithActionHandler:^{
+        @strongify(self)
+        [self _load:NO before:self.beforeTimestamp];
+    }];
+}
+
+- (void)_load:(BOOL)first before:(NSString *)before
+{
+    @weakify(self)
+    FLYReplyServiceGetRepliesSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        @strongify(self)
+        NSDictionary *results = responseObj;
         NSArray *repliesArray = [results objectForKey:@"replies"];
         
         for(int i = 0; i < repliesArray.count; i++) {
@@ -209,10 +229,8 @@
         FLYReply *lastReply = [self.replies lastObject];
         self.beforeTimestamp = lastReply.createdAt;
         [self.topicTableView reloadData];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UALog(@"Post error %@", error);
-    }];
+    };
+    [self.replyService nextPage:before firstPage:first successBlock:successBlock errorBlock:nil];
 }
 
 #pragma mark - FLYTopicDetailTopicCellDelegate
@@ -237,9 +255,6 @@
 - (void)playReply:(FLYReply *)reply indexPath:(NSIndexPath *)indexPath
 {
     [[FLYDownloadManager sharedInstance] loadAudioByURLString:reply.mediaURL audioType:FLYDownloadableReply];
-    
-//    self.audioController.url = [NSURL URLWithString:reply.mediaURL];
-//    [self.audioController play];
 }
 
 #pragma mark - Notification

@@ -10,4 +10,10 @@
 
 @interface FLYServiceBase : NSObject
 
+@property (nonatomic) NSString *endpoint;
+
++ (instancetype)serviceWithEndpoint:(NSString *)endpoint;
+
+- (instancetype)initWithEndpoint:(NSString *)endpoint;
+
 @end

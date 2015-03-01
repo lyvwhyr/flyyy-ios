@@ -122,7 +122,6 @@
 
     [self _fetchHomeTimelineService:self.beforeTimestamp requestType:RequestTypeNormal];
     
-//    [_feedTableView triggerPullToRefresh];
     
     [[FLYScribe sharedInstance] logEvent:@"home_page" section:nil component:nil element:nil action:@"impression"];
 }

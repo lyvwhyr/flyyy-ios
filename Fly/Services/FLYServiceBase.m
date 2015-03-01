@@ -10,4 +10,17 @@
 
 @implementation FLYServiceBase
 
++ (instancetype)serviceWithEndpoint:(NSString *)endpoint
+{
+    return [[self alloc] initWithEndpoint:endpoint];
+}
+
+- (instancetype)initWithEndpoint:(NSString *)endpoint
+{
+    if (self = [super init]) {
+        _endpoint = endpoint;
+    }
+    return self;
+}
+
 @end
