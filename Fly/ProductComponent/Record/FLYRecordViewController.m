@@ -631,6 +631,10 @@
 
 - (void)didFinishPlayingWithQueueItemId:(SampleQueueId *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
 {
+    if (queueItemId.itemType != FLYPlayableItemRecording) {
+        return;
+    }
+    
     self.currentState = FLYRecordRecordingState;
     [self _updateUserState];
 }
