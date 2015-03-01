@@ -112,7 +112,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSString *countryCode;
+    if (indexPath.section == 0) {
+        countryCode = [self.popularCountries[indexPath.row] objectForKey:@"dial_code"];
+    } else {
+        countryCode = [self.allCountries[indexPath.row] objectForKey:@"dial_code"];
+    }
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (void)_addConstranit
