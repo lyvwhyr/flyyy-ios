@@ -218,8 +218,14 @@
     @weakify(self)
     FLYReplyServiceGetRepliesSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
         @strongify(self)
+        [self.topicTableView.infiniteScrollingView stopAnimating];
         NSDictionary *results = responseObj;
         NSArray *repliesArray = [results objectForKey:@"replies"];
+        
+        self.state = FLYViewControllerStateReady;
+        if (first) {
+            [self.replies removeAllObjects];
+        }
         
         for(int i = 0; i < repliesArray.count; i++) {
             FLYReply *reply = [[FLYReply alloc] initWithDictionary:repliesArray[i]];
@@ -230,7 +236,11 @@
         self.beforeTimestamp = lastReply.createdAt;
         [self.topicTableView reloadData];
     };
-    [self.replyService nextPage:before firstPage:first successBlock:successBlock errorBlock:nil];
+    FLYReplyServiceGetRepliesErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error){
+        @strongify(self)
+        [self.topicTableView.infiniteScrollingView stopAnimating];
+    };
+    [self.replyService nextPage:before firstPage:first successBlock:successBlock errorBlock:errorBlock];
 }
 
 #pragma mark - FLYTopicDetailTopicCellDelegate

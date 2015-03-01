@@ -5,7 +5,7 @@
 #define kNavBarHeight       44
 #define kTabBarViewHeight   44
 #define kTopicPaginationCount 15
-#define KReplyPaginationCount 15
+#define KReplyPaginationCount 10
 #define kStreamingMinimialLen 5
 
 #define kMainScreenWidth      CGRectGetWidth([UIScreen mainScreen].bounds)
