@@ -9,25 +9,27 @@
 #import "UIColor+FLYAddition.h"
 
 
-#define kColorFlyBlue                           @"#4CA8D3"
-#define kColorFlyTabBarBackground               @"#FBFBFB"
-#define kColorFlyTabBarSeparator                @"#a3a3a5"
-#define kColorFlyTabBarGreyText                 @"#bcbcbc"
-#define kColorFlyLightGreen                     @"#8fbfba"
-#define kColorFlyContentBackgroundGrey          @"#eaeaea"
-#define kColorFlyFeedGrey                       @"#a6a6a6"
-#define kColorFlyInlineActionGrey               @"#ababab"
-#define kColorFlyTableHeaderGrey                @"#f2f2f2"
-#define kColorFlyTableHeaderTextGrey            @"#9e9e9e"
-#define kColorFlyPlayAnimation                  @"#60BD88"
-#define kColorRecordingTimer                    @"#C2C2C2"
-#define kColorPostButtonGreen                   @"#45BB77"
-#define kColorFlyBackgroundColorBlue            @"#4CA8D3"
-#define kColorFlyGroupNameGrey                  @"#565252"
-#define kColorFlySelectGroupGrey                @"#979797"
-#define kColorFlyRecordingWave                  @"#f58686"
-#define kColorFlyReplyBodyTextGrey              @"#747474"
-#define kColorFlyReplyPostAtGrey                @"#B2B2B2"
+#define kColorFlyBlue                                   @"#4CA8D3"
+#define kColorFlyTabBarBackground                       @"#FBFBFB"
+#define kColorFlyTabBarSeparator                        @"#a3a3a5"
+#define kColorFlyTabBarGreyText                         @"#bcbcbc"
+#define kColorFlyLightGreen                             @"#8fbfba"
+#define kColorFlyContentBackgroundGrey                  @"#eaeaea"
+#define kColorFlyFeedGrey                               @"#a6a6a6"
+#define kColorFlyInlineActionGrey                       @"#ababab"
+#define kColorFlyTableHeaderGrey                        @"#f2f2f2"
+#define kColorFlyTableHeaderTextGrey                    @"#9e9e9e"
+#define kColorFlyPlayAnimation                          @"#60BD88"
+#define kColorRecordingTimer                            @"#C2C2C2"
+#define kColorPostButtonGreen                           @"#45BB77"
+#define kColorFlyBackgroundColorBlue                    @"#4CA8D3"
+#define kColorFlyGroupNameGrey                          @"#565252"
+#define kColorFlySelectGroupGrey                        @"#979797"
+#define kColorFlyRecordingWave                          @"#f58686"
+#define kColorFlyReplyBodyTextGrey                      @"#747474"
+#define kColorFlyReplyPostAtGrey                        @"#B2B2B2"
+#define kColorFlyCountrySelectorBGColor                 @"#f7f7f7"
+#define kColorFlyCountrySelectorCountryCodeColor        @"#8e8e93"
 
 @implementation UIColor (FLYAddition)
 
@@ -133,6 +135,16 @@
 + (UIColor *)flyColorFlyReplyPostAtGrey
 {
     return [self colorWithHexString:kColorFlyReplyPostAtGrey];
+}
+
++ (UIColor *)flyColorFlyCountrySelectorBGColor
+{
+    return [self colorWithHexString:kColorFlyCountrySelectorBGColor];
+}
+
++ (UIColor *)flyColorFlyCountrySelectorCountryCodeColor
+{
+    return [self colorWithHexString:kColorFlyCountrySelectorCountryCodeColor];
 }
 
 

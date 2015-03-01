@@ -1,0 +1,12 @@
+[
+ {
+ "name":"United States",
+ "dial_code":"+1",
+ "code":"US"
+ },
+ {
+ "name":"United Kingdom",
+ "dial_code":"+44",
+ "code":"GB"
+ }
+]

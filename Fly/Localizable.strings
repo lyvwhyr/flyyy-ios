@@ -13,3 +13,6 @@
 "FLYLessThanMinimalRecordingLength" = "Recording must be not less than %ld seconds";
 
 "FLYWorkingInProgressHUD" = "Working in progress";
+
+//Login
+"FLYCountryCodeTitle" = "Country Code";

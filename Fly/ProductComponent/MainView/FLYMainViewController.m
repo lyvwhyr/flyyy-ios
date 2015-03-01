@@ -29,6 +29,7 @@
 #import "FLYEndpointRequest.h"
 #import "FLYUser.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
+#import "FLYCountrySelectorViewController.h"
 
 #if DEBUG
 #import "FLEXManager.h"
@@ -254,6 +255,13 @@
 
 - (void)_recordButtonTapped
 {
+//    if (![FLYAppStateManager sharedInstance].currentUser) {
+        FLYCountrySelectorViewController *vc = [FLYCountrySelectorViewController new];
+    UINavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:NO completion:nil];
+        return;
+//    }
+    
     [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_record_button" component:nil element:nil action:@"click"];
     
     FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForTopic];

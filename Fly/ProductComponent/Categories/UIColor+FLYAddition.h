@@ -30,7 +30,8 @@
 + (UIColor *)flyColorFlyRecordingWave;
 + (UIColor *)flyColorFlyReplyBodyTextGrey;
 + (UIColor *)flyColorFlyReplyPostAtGrey;
-
++ (UIColor *)flyColorFlyCountrySelectorBGColor;
++ (UIColor *)flyColorFlyCountrySelectorCountryCodeColor;
 
 + (UIColor *)customGrayColor;
 + (UIColor *)customRedColor;

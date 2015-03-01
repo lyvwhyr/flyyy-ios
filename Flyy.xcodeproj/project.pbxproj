@@ -220,6 +220,12 @@
 		A665FC221AA263CE00490A18 /* FLYTimelineService.m in Sources */ = {isa = PBXBuildFile; fileRef = A665FC211AA263CE00490A18 /* FLYTimelineService.m */; };
 		A665FC251AA2830E00490A18 /* FLYTopicService.m in Sources */ = {isa = PBXBuildFile; fileRef = A665FC241AA2830E00490A18 /* FLYTopicService.m */; };
 		A665FC281AA2838800490A18 /* FLYReplyService.m in Sources */ = {isa = PBXBuildFile; fileRef = A665FC271AA2838800490A18 /* FLYReplyService.m */; };
+		A665FC2E1AA2D96000490A18 /* FLYLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A665FC2D1AA2D96000490A18 /* FLYLoginViewController.m */; };
+		A665FC311AA2DB0600490A18 /* FLYCountrySelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A665FC301AA2DB0600490A18 /* FLYCountrySelectorViewController.m */; };
+		A665FC361AA2DBCB00490A18 /* popular_countries.json in Resources */ = {isa = PBXBuildFile; fileRef = A665FC351AA2DBCB00490A18 /* popular_countries.json */; };
+		A665FC391AA2DDA400490A18 /* FLYCountryListDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = A665FC381AA2DDA400490A18 /* FLYCountryListDatasource.m */; };
+		A665FC3C1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A665FC3B1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.m */; };
+		A665FC3E1AA2E2AD00490A18 /* all_countries.json in Resources */ = {isa = PBXBuildFile; fileRef = A665FC3D1AA2E2AD00490A18 /* all_countries.json */; };
 		A66D98561A883B5A00C3D75A /* FLYPrePostHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A66D98551A883B5A00C3D75A /* FLYPrePostHeaderView.m */; };
 		A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E20481A2EBDAE004235F5 /* RDVTabBarItem.m */; };
 		A66E204E1A2EBDAE004235F5 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E204A1A2EBDAE004235F5 /* RDVTabBar.m */; };
@@ -677,6 +683,16 @@
 		A665FC241AA2830E00490A18 /* FLYTopicService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTopicService.m; sourceTree = "<group>"; };
 		A665FC261AA2838800490A18 /* FLYReplyService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYReplyService.h; sourceTree = "<group>"; };
 		A665FC271AA2838800490A18 /* FLYReplyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYReplyService.m; sourceTree = "<group>"; };
+		A665FC2C1AA2D96000490A18 /* FLYLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYLoginViewController.h; sourceTree = "<group>"; };
+		A665FC2D1AA2D96000490A18 /* FLYLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoginViewController.m; sourceTree = "<group>"; };
+		A665FC2F1AA2DB0600490A18 /* FLYCountrySelectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYCountrySelectorViewController.h; sourceTree = "<group>"; };
+		A665FC301AA2DB0600490A18 /* FLYCountrySelectorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYCountrySelectorViewController.m; sourceTree = "<group>"; };
+		A665FC351AA2DBCB00490A18 /* popular_countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = popular_countries.json; sourceTree = "<group>"; };
+		A665FC371AA2DDA400490A18 /* FLYCountryListDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYCountryListDatasource.h; sourceTree = "<group>"; };
+		A665FC381AA2DDA400490A18 /* FLYCountryListDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYCountryListDatasource.m; sourceTree = "<group>"; };
+		A665FC3A1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYCountrySelectorTableViewCell.h; sourceTree = "<group>"; };
+		A665FC3B1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYCountrySelectorTableViewCell.m; sourceTree = "<group>"; };
+		A665FC3D1AA2E2AD00490A18 /* all_countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = all_countries.json; sourceTree = "<group>"; };
 		A66D98541A883B5A00C3D75A /* FLYPrePostHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostHeaderView.h; sourceTree = "<group>"; };
 		A66D98551A883B5A00C3D75A /* FLYPrePostHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostHeaderView.m; sourceTree = "<group>"; };
 		A66E20471A2EBDAE004235F5 /* RDVTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarItem.h; sourceTree = "<group>"; };
@@ -1133,6 +1149,8 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A665FC2B1AA2D94A00490A18 /* Signup */,
+				A665FC2A1AA2D93F00490A18 /* Login */,
 				A636FC351A9AA70F0084DE6A /* Tracking */,
 				A6D692211A92F61400F8EEDE /* Datastructure */,
 				A67A5E871A70CC290098DA23 /* Services */,
@@ -1501,6 +1519,38 @@
 				A65ED9871A91A88900E10D5C /* FLYNotificationConstant.h */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		A665FC2A1AA2D93F00490A18 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				A665FC341AA2DB9B00490A18 /* Fixture */,
+				A665FC2C1AA2D96000490A18 /* FLYLoginViewController.h */,
+				A665FC2D1AA2D96000490A18 /* FLYLoginViewController.m */,
+				A665FC2F1AA2DB0600490A18 /* FLYCountrySelectorViewController.h */,
+				A665FC301AA2DB0600490A18 /* FLYCountrySelectorViewController.m */,
+				A665FC371AA2DDA400490A18 /* FLYCountryListDatasource.h */,
+				A665FC381AA2DDA400490A18 /* FLYCountryListDatasource.m */,
+				A665FC3A1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.h */,
+				A665FC3B1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		A665FC2B1AA2D94A00490A18 /* Signup */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Signup;
+			sourceTree = "<group>";
+		};
+		A665FC341AA2DB9B00490A18 /* Fixture */ = {
+			isa = PBXGroup;
+			children = (
+				A665FC3D1AA2E2AD00490A18 /* all_countries.json */,
+				A665FC351AA2DBCB00490A18 /* popular_countries.json */,
+			);
+			path = Fixture;
 			sourceTree = "<group>";
 		};
 		A66E20461A2EBDA5004235F5 /* RDVTabBarController */ = {
@@ -2083,6 +2133,7 @@
 				A652D2421A7F3ADD00765D45 /* icon_navigation_back.png in Resources */,
 				A64D159F1A29C0BB00369D62 /* icon_inline_comment@3x.png in Resources */,
 				A652D2621A7F3ADD00765D45 /* record_animate_01@3x.png in Resources */,
+				A665FC361AA2DBCB00490A18 /* popular_countries.json in Resources */,
 				A652D24C1A7F3ADD00765D45 /* icon_record_trash_bin.png in Resources */,
 				A652D20D1A7F3ADD00765D45 /* Default-568h@3x.png in Resources */,
 				A651BD941A4985F20081A1E0 /* success@2x.png in Resources */,
@@ -2130,6 +2181,7 @@
 				A652D26D1A7F3ADD00765D45 /* record_animate_05@2x.png in Resources */,
 				A652D25D1A7F3ADD00765D45 /* icon_voice_filter.png in Resources */,
 				A652D2441A7F3ADD00765D45 /* icon_navigation_catalog.png in Resources */,
+				A665FC3E1AA2E2AD00490A18 /* all_countries.json in Resources */,
 				A652D20E1A7F3ADD00765D45 /* icon_audio_wave.png in Resources */,
 				A640BC3D1A381AE900DC59A7 /* icon_navigation_catalog@3x.png in Resources */,
 				A6A0E4C51A1EB5600036116E /* icon_voice_record@2x.png in Resources */,
@@ -2317,6 +2369,7 @@
 				A648C0E91A19AD4A00FF1744 /* NSArray+MASAdditions.m in Sources */,
 				A6A0E4B11A1E76110036116E /* FLEXDescriptionTableViewCell.m in Sources */,
 				A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */,
+				A665FC3C1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.m in Sources */,
 				A6048ADE1A8603EF00C67480 /* UIProgressView+AFNetworking.m in Sources */,
 				A6450B171A998A08009EF0A3 /* AFSoundRecord.m in Sources */,
 				A69C4BB41A27D61000CAD443 /* FLYFilterSelectorGroupTableViewCell.m in Sources */,
@@ -2334,6 +2387,7 @@
 				A6D692241A92F61A00F8EEDE /* SampleQueueId.m in Sources */,
 				A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */,
 				A66E204E1A2EBDAE004235F5 /* RDVTabBar.m in Sources */,
+				A665FC311AA2DB0600490A18 /* FLYCountrySelectorViewController.m in Sources */,
 				A6048AD31A8603EF00C67480 /* AFURLConnectionOperation.m in Sources */,
 				A6A0E4961A1E76110036116E /* FLEXArgumentInputStructView.m in Sources */,
 				A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */,
@@ -2405,6 +2459,7 @@
 				A6A0E4BB1A1E76110036116E /* FLEXResources.m in Sources */,
 				A69C4BCF1A280D8800CAD443 /* GBFlatSelectableButton.m in Sources */,
 				A6A0E4951A1E76110036116E /* FLEXArgumentInputStringView.m in Sources */,
+				A665FC2E1AA2D96000490A18 /* FLYLoginViewController.m in Sources */,
 				A651BD9C1A4986730081A1E0 /* UALogger.m in Sources */,
 				A6A30D6C1A1B0586001AE1FE /* FLYRecordViewController.m in Sources */,
 				A648C0E81A19AD4A00FF1744 /* MASViewConstraint.m in Sources */,
@@ -2457,6 +2512,7 @@
 				A6A0E4B71A1E76110036116E /* FLEXSetExplorerViewController.m in Sources */,
 				A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */,
 				A6A57A901A33B91700610785 /* UIView+FLYAddition.m in Sources */,
+				A665FC391AA2DDA400490A18 /* FLYCountryListDatasource.m in Sources */,
 				A69C4BB11A271B8E00CAD443 /* DismissingAnimator.m in Sources */,
 				A6E506171A4AA74C009C5FAB /* FLYPlayableItem.m in Sources */,
 				A66E204F1A2EBDAE004235F5 /* RDVTabBarController.m in Sources */,
