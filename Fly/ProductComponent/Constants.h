@@ -23,6 +23,10 @@
 //sign up and login
 #define kFromViewControllerKey  @"kFromViewControllerKey"
 
+//phone number
+#define kPhoneDialCodeKey @"dial_code"
+#define kPhoneCodeKey @"code"
+#define kPhoneNameKey @"name"
 
 
 //Mixpanel event

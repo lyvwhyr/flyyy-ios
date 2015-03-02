@@ -70,11 +70,11 @@
     NSString *countryName;
     NSString *countryCode;
     if (indexPath.section == 0) {
-        countryName = [self.popularCountries[indexPath.row] objectForKey:@"name"];
-        countryCode = [self.popularCountries[indexPath.row] objectForKey:@"dial_code"];
+        countryName = [self.popularCountries[indexPath.row] objectForKey:kPhoneNameKey];
+        countryCode = [self.popularCountries[indexPath.row] objectForKey:kPhoneDialCodeKey];
     } else {
-        countryName = [self.allCountries[indexPath.row] objectForKey:@"name"];
-        countryCode = [self.allCountries[indexPath.row] objectForKey:@"dial_code"];
+        countryName = [self.allCountries[indexPath.row] objectForKey:kPhoneNameKey];
+        countryCode = [self.allCountries[indexPath.row] objectForKey:kPhoneDialCodeKey];
     }
     
     [cell configCellWithName:countryName code:countryCode];
@@ -114,9 +114,9 @@
 {
     NSString *countryCode;
     if (indexPath.section == 0) {
-        countryCode = [self.popularCountries[indexPath.row] objectForKey:@"dial_code"];
+        countryCode = [self.popularCountries[indexPath.row] objectForKey:kPhoneDialCodeKey];
     } else {
-        countryCode = [self.allCountries[indexPath.row] objectForKey:@"dial_code"];
+        countryCode = [self.allCountries[indexPath.row] objectForKey:kPhoneDialCodeKey];
     }
     [self dismissViewControllerAnimated:YES completion:^{
         

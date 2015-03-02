@@ -14,6 +14,7 @@
 #import "UIFont+FLYAddition.h"
 #import "FLYIconButton.h"
 #import "ECPhoneNumberFormatter.h"
+#import "FLYCountryListDatasource.h"
 
 #define kTitleTopPadding 50
 #define kSubtitleTopPadding 50
@@ -74,7 +75,8 @@
     self.phoneFieldView.layer.borderWidth = borderWidth;
     [self.view addSubview:self.phoneFieldView];
     
-    self.countryCodeChooser = [[FLYIconButton alloc] initWithText:@"+23" textFont:[UIFont flyFontWithSize:16] textColor:[UIColor blackColor] icon:@"icon_login_country_code" isIconLeft:NO];
+    
+    self.countryCodeChooser = [[FLYIconButton alloc] initWithText:[FLYUtilities getCountryDialCode] textFont:[UIFont flyFontWithSize:16] textColor:[UIColor blackColor] icon:@"icon_login_country_code" isIconLeft:NO];
     self.countryCodeChooser.translatesAutoresizingMaskIntoConstraints = NO;
     [self.phoneFieldView addSubview:self.countryCodeChooser];
     
@@ -97,7 +99,6 @@
     self.phoneNumberTextField.placeholder = LOC(@"FLYSignupEnterPhoneNumberHint");
     [self.phoneNumberTextField addTarget:self action:@selector(_textFieldDidChange)
         forControlEvents:UIControlEventEditingChanged];
-    
     [self.phoneFieldView addSubview:self.phoneNumberTextField];
     
     self.hintLabel = [UILabel new];

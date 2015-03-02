@@ -2,5 +2,6 @@
 
 + (CGFloat) FLYMainScreenScale;
 + (void)printAutolayoutTrace;
++ (NSString *)getCountryDialCode;
 
 @end
