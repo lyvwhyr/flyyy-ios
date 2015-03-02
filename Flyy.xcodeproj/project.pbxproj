@@ -337,6 +337,7 @@
 		A6A57AA91A34345600610785 /* FLYTopicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57AA81A34345600610785 /* FLYTopicDetailViewController.m */; };
 		A6A57AAD1A34555400610785 /* FLYTopicDetailReplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57AAB1A34555400610785 /* FLYTopicDetailReplyCell.m */; };
 		A6A70CD71AA4010D0000F784 /* FLYSignupPhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A70CD61AA4010D0000F784 /* FLYSignupPhoneNumberViewController.m */; };
+		A6A70CDB1AA4597A0000F784 /* ECPhoneNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A70CDA1AA4597A0000F784 /* ECPhoneNumberFormatter.m */; };
 		A6BCBBFD1A848D16001F8AB0 /* FLYEndpointRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BCBBFC1A848D16001F8AB0 /* FLYEndpointRequest.m */; };
 		A6CD56E41A47D891003486DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6CD56E31A47D891003486DD /* Localizable.strings */; };
 		A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */; };
@@ -894,6 +895,8 @@
 		A6A57AAB1A34555400610785 /* FLYTopicDetailReplyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTopicDetailReplyCell.m; sourceTree = "<group>"; };
 		A6A70CD51AA4010D0000F784 /* FLYSignupPhoneNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSignupPhoneNumberViewController.h; sourceTree = "<group>"; };
 		A6A70CD61AA4010D0000F784 /* FLYSignupPhoneNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSignupPhoneNumberViewController.m; sourceTree = "<group>"; };
+		A6A70CD91AA4597A0000F784 /* ECPhoneNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPhoneNumberFormatter.h; sourceTree = "<group>"; };
+		A6A70CDA1AA4597A0000F784 /* ECPhoneNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPhoneNumberFormatter.m; sourceTree = "<group>"; };
 		A6BCBBFB1A848D16001F8AB0 /* FLYEndpointRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYEndpointRequest.h; sourceTree = "<group>"; };
 		A6BCBBFC1A848D16001F8AB0 /* FLYEndpointRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYEndpointRequest.m; sourceTree = "<group>"; };
 		A6CD56E31A47D891003486DD /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -1437,6 +1440,7 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A6A70CD81AA4597A0000F784 /* ECPhoneNumberFormatter */,
 				A6450B081A998A00009EF0A3 /* AFSoundManager */,
 				A631891F1A92B3460042E12A /* Reachability */,
 				A6D949EF1A9089FC003D4265 /* UICKeyChainStore */,
@@ -1986,6 +1990,15 @@
 			path = TopicDetail;
 			sourceTree = "<group>";
 		};
+		A6A70CD81AA4597A0000F784 /* ECPhoneNumberFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				A6A70CD91AA4597A0000F784 /* ECPhoneNumberFormatter.h */,
+				A6A70CDA1AA4597A0000F784 /* ECPhoneNumberFormatter.m */,
+			);
+			path = ECPhoneNumberFormatter;
+			sourceTree = "<group>";
+		};
 		A6CD56E81A480298003486DD /* Download */ = {
 			isa = PBXGroup;
 			children = (
@@ -2509,6 +2522,7 @@
 				A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */,
 				A60489961A85DAFD00C67480 /* FLYGroupManager.m in Sources */,
 				A6A4EFB01A2BD4D500FD4066 /* FLYGroupListTableViewCell.m in Sources */,
+				A6A70CDB1AA4597A0000F784 /* ECPhoneNumberFormatter.m in Sources */,
 				A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */,
 				A6D949F91A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				A6A0E4BE1A1E76110036116E /* FLEXHierarchyTableViewCell.m in Sources */,

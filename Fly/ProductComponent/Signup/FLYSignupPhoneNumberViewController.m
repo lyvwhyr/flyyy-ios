@@ -13,6 +13,7 @@
 #import "FLYBarButtonItem.h"
 #import "UIFont+FLYAddition.h"
 #import "FLYIconButton.h"
+#import "ECPhoneNumberFormatter.h"
 
 #define kTitleTopPadding 50
 #define kSubtitleTopPadding 50
@@ -193,6 +194,9 @@
     if (self.phoneNumberTextField.text > 0) {
         self.nextButton.backgroundColor = [UIColor flyBlue];
     }
+    ECPhoneNumberFormatter *formatter = [[ECPhoneNumberFormatter alloc] init];
+    NSString *formattedNumber = [formatter stringForObjectValue:self.phoneNumberTextField.text];
+    self.phoneNumberTextField.text = formattedNumber;
 }
 
 
