@@ -10,6 +10,8 @@
 
 @interface UIFont (FLYAddition)
 
-+(UIFont *)flyToolBarFont;
++ (UIFont *)flyToolBarFont;
++ (UIFont *)flyFontWithSize:(CGFloat)size;
++ (UIFont *)flyLightFontWithSize:(CGFloat)size;
 
 @end

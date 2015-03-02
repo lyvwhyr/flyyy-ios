@@ -23,3 +23,5 @@
 "FLYSignupSubTitle" = "Can we have your number?";
 "FLYSignupHintText" = "Don't worry, we promise no one will ever see your number.";
 "FLYSignupAlreadyHaveAccount" = "Already have an account?";
+"FLYSignupEnterPhoneNumberHint" = "Enter phone number";
+"FLYSignupEnterPhoneNumberOKButton" = "Okay";

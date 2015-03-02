@@ -18,4 +18,14 @@
     return font;
 }
 
++ (UIFont *)flyFontWithSize:(CGFloat)size
+{
+    return [UIFont fontWithName:@"Avenir-Book" size:size];
+}
+
++ (UIFont *)flyLightFontWithSize:(CGFloat)size
+{
+    return [UIFont fontWithName:@"Avenir-Light" size:size];
+}
+
 @end
