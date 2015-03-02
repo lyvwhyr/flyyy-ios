@@ -30,6 +30,7 @@
 #define kColorFlyReplyPostAtGrey                        @"#B2B2B2"
 #define kColorFlyCountrySelectorBGColor                 @"#f7f7f7"
 #define kColorFlyCountrySelectorCountryCodeColor        @"#8e8e93"
+#define kColorFlySignupGrey                             @"#B7B5B5"
 
 @implementation UIColor (FLYAddition)
 
@@ -145,6 +146,11 @@
 + (UIColor *)flyColorFlyCountrySelectorCountryCodeColor
 {
     return [self colorWithHexString:kColorFlyCountrySelectorCountryCodeColor];
+}
+
++ (UIColor *)flyColorFlySignupGrey
+{
+    return [self colorWithHexString:kColorFlySignupGrey];
 }
 
 

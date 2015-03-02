@@ -94,13 +94,13 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
  
     
-    BOOL hasCreatedUser = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHasCreatedUser"];
-    if (!hasCreatedUser) {
-        [self _testCreateUser];
-    } else {
-        FLYUser *user = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"kUserObj"];
-        [FLYAppStateManager sharedInstance].currentUser = user;
-    }
+//    BOOL hasCreatedUser = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHasCreatedUser"];
+//    if (!hasCreatedUser) {
+//        [self _testCreateUser];
+//    } else {
+//        FLYUser *user = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"kUserObj"];
+//        [FLYAppStateManager sharedInstance].currentUser = user;
+//    }
 }
 
 - (void)_testCreateUser
@@ -255,13 +255,11 @@
 
 - (void)_recordButtonTapped
 {
-//    if (![FLYAppStateManager sharedInstance].currentUser) {
-        FLYCountrySelectorViewController *vc = [FLYCountrySelectorViewController new];
-    UINavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:nav animated:NO completion:nil];
+    if (![FLYAppStateManager sharedInstance].currentUser) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRequireSignupNotification object:self userInfo:@{kFromViewControllerKey:self}];
         return;
-//    }
-    
+    }
+
     [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_record_button" component:nil element:nil action:@"click"];
     
     FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForTopic];

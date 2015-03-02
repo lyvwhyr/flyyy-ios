@@ -9,3 +9,7 @@
 #define kShowRecordIconNotification @"kShowRecordIconNotification"
 #define kHideRecordIconNotification @"kHideRecordIconNotification"
 #define kNewReplyReceivedNotification @"kNewReplyReceivedNotification"
+
+//login and sign up notification
+#define kRequireSignupNotification @"kRequireSignupNotification"
+#define kRequireLoginNotification @"kRequireLoginNotification"

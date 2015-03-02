@@ -32,6 +32,7 @@
 + (UIColor *)flyColorFlyReplyPostAtGrey;
 + (UIColor *)flyColorFlyCountrySelectorBGColor;
 + (UIColor *)flyColorFlyCountrySelectorCountryCodeColor;
++ (UIColor *)flyColorFlySignupGrey;
 
 + (UIColor *)customGrayColor;
 + (UIColor *)customRedColor;

@@ -16,3 +16,10 @@
 
 //Login
 "FLYCountryCodeTitle" = "Country Code";
+
+//sign up
+"FLYSignupPageTitle" = "Sign up";
+"FLYSignupTitle" = "How will you start a revolution?";
+"FLYSignupSubTitle" = "Can we have your number?";
+"FLYSignupHintText" = "Don't worry, we promise no one will ever see your number.";
+"FLYSignupAlreadyHaveAccount" = "Already have an account?";
