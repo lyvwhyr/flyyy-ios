@@ -7,7 +7,10 @@
 //
 
 #import "FLYUniversalViewController.h"
+#import "FLYSignupPhoneNumberViewController.h"
 
 @interface FLYCountrySelectorViewController : FLYUniversalViewController
+
+@property (nonatomic, copy) FLYCountrySelectedBlock countrySelectedBlock;
 
 @end

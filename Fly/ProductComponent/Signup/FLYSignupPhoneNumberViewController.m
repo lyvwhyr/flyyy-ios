@@ -15,6 +15,7 @@
 #import "FLYIconButton.h"
 #import "ECPhoneNumberFormatter.h"
 #import "FLYCountryListDatasource.h"
+#import "FLYCountrySelectorViewController.h"
 
 #define kTitleTopPadding 50
 #define kSubtitleTopPadding 50
@@ -77,6 +78,7 @@
     
     
     self.countryCodeChooser = [[FLYIconButton alloc] initWithText:[FLYUtilities getCountryDialCode] textFont:[UIFont flyFontWithSize:16] textColor:[UIColor blackColor] icon:@"icon_login_country_code" isIconLeft:NO];
+    [self.countryCodeChooser addTarget:self action:@selector(_countrySelectorSelected) forControlEvents:UIControlEventTouchUpInside];
     self.countryCodeChooser.translatesAutoresizingMaskIntoConstraints = NO;
     [self.phoneFieldView addSubview:self.countryCodeChooser];
     
@@ -120,7 +122,7 @@
     self.alreadyHaveAccountLabel.text = LOC(@"FLYSignupAlreadyHaveAccount");
     [self.view addSubview:self.alreadyHaveAccountLabel];
     
-    [self _addConstraints];
+    [self _addConstranits];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -129,7 +131,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
-- (void)_addConstraints
+- (void)_addConstranits
 {
     CGFloat separatorHeight = 1.0/[FLYUtilities FLYMainScreenScale];
     
@@ -151,8 +153,10 @@
         
     }];
     
+    [self.countryCodeChooser sizeToFit];
     [self.countryCodeChooser mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.phoneFieldView).offset(5);
+        make.width.equalTo(@(50));
         make.centerY.equalTo(self.phoneFieldView);
     }];
     
@@ -187,6 +191,25 @@
         make.height.equalTo(@(separatorHeight));
         make.bottom.equalTo(self.alreadyHaveAccountLabel.mas_top);
     }];
+    
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    [FLYUtilities printAutolayoutTrace];
+}
+
+- (void)_countrySelectorSelected
+{
+    FLYCountrySelectorViewController *vc = [FLYCountrySelectorViewController new];
+    @weakify(self)
+    vc.countrySelectedBlock = ^(NSString *countryDialCode) {
+        @strongify(self)
+        [self.countryCodeChooser setLabelText:countryDialCode];
+    };
+    FLYNavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - Text change

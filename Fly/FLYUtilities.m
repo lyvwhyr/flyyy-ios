@@ -25,7 +25,7 @@
 + (void)printAutolayoutTrace
 {
     
-//    [FLYUtilities performSelector:@selector(_wrapperForLoggingConstraints) withObject:nil afterDelay:.3];
+    [FLYUtilities performSelector:@selector(_wrapperForLoggingConstraints) withObject:nil afterDelay:.3];
 }
 
 + (void)_wrapperForLoggingConstraints

@@ -19,6 +19,7 @@
 @property (nonatomic) NSArray *popularCountries;
 @property (nonatomic) NSArray *allCountries;
 
+
 @end
 
 @implementation FLYCountrySelectorViewController
@@ -118,8 +119,10 @@
     } else {
         countryCode = [self.allCountries[indexPath.row] objectForKey:kPhoneDialCodeKey];
     }
+    @weakify(self)
     [self dismissViewControllerAnimated:YES completion:^{
-        
+        @strongify(self)
+        self.countrySelectedBlock(countryCode);
     }];
 }
 

@@ -8,6 +8,8 @@
 
 #import "FLYUniversalViewController.h"
 
+typedef void (^FLYCountrySelectedBlock)(NSString *countryDialCode);
+
 @interface FLYSignupPhoneNumberViewController : FLYUniversalViewController
 
 @end
