@@ -16,6 +16,8 @@
 #import "ECPhoneNumberFormatter.h"
 #import "FLYCountryListDatasource.h"
 #import "FLYCountrySelectorViewController.h"
+#import "PXAlertView.h"
+#import "PXAlertView+Customization.h"
 
 #define kTitleTopPadding 50
 #define kSubtitleTopPadding 50
@@ -39,6 +41,9 @@
 @property (nonatomic) UILabel *hintLabel;
 @property (nonatomic) UIView *separator;
 @property (nonatomic) UILabel *alreadyHaveAccountLabel;
+
+@property (nonatomic) NSString *countryAreaCode;
+@property (nonatomic) NSString *formattedPhoneNumber;
 
 @end
 
@@ -87,11 +92,13 @@
     self.countryCodePhoneNumberSeparator.backgroundColor = [UIColor flyColorFlySignupGrey];
     [self.phoneFieldView addSubview:self.countryCodePhoneNumberSeparator];
     
+    self.countryAreaCode = [FLYUtilities getCountryDialCode];
+    
     
     self.nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 44)];
     self.nextButton.backgroundColor = [UIColor flyColorFlySignupGrey];
     [self.nextButton setTitle:LOC(@"FLYSignupEnterPhoneNumberOKButton") forState:UIControlStateNormal];
-    
+    [self.nextButton addTarget:self action:@selector(_nextButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     
     self.phoneNumberTextField = [UITextField new];
     self.phoneNumberTextField.translatesAutoresizingMaskIntoConstraints = NO;
@@ -207,6 +214,7 @@
     vc.countrySelectedBlock = ^(NSString *countryDialCode) {
         @strongify(self)
         [self.countryCodeChooser setLabelText:countryDialCode];
+        self.countryAreaCode = countryDialCode;
     };
     FLYNavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
@@ -221,6 +229,7 @@
     ECPhoneNumberFormatter *formatter = [[ECPhoneNumberFormatter alloc] init];
     NSString *formattedNumber = [formatter stringForObjectValue:self.phoneNumberTextField.text];
     self.phoneNumberTextField.text = formattedNumber;
+    self.formattedPhoneNumber = formattedNumber;
 }
 
 
@@ -239,6 +248,28 @@
 - (void)_backButtonTapped
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)_nextButtonTapped
+{
+    NSString *phoneNumber = [NSString stringWithFormat:@"%@ %@", self.countryAreaCode, self.formattedPhoneNumber];
+    @weakify(self)
+    PXAlertView *alertView = [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPhoneNumberConfirmationAlert")
+                                                     message: phoneNumber
+                                                 cancelTitle:@"Cancel"
+                                                  otherTitle:@"Ok"
+                                                 contentView:nil
+                                                  completion:^(BOOL cancelled, NSInteger buttonIndex) {
+                                                      @strongify(self)
+                                                      if (buttonIndex == 1) {
+                                                          ECPhoneNumberFormatter *formatter = [[ECPhoneNumberFormatter alloc] init];
+                                                          NSString *unformattedPhoneNumber;
+                                                          NSString *error;
+                                                          [formatter getObjectValue:&unformattedPhoneNumber forString:phoneNumber errorDescription:&error];
+                                                          
+                                                      }
+                                                  }];
+    [alertView useDefaultIOS7Style];
 }
 
 #pragma mark - Navigation bar and status bar

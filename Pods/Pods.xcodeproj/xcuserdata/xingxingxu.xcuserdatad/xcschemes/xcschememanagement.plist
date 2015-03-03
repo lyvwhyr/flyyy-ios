@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-PXAlertView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SCLAlertView-Objective-C.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,52 +62,57 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>2E45A24EBDC8A0516B08DACE</key>
+		<key>0B9486DA47A906C82E7FE571</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>593345192D3AC4A6F927EB75</key>
+		<key>0E5384E0ED501F24030C2B37</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5B187BA7194F58ECE6EF5B0B</key>
+		<key>4A35F6D3F44C852B8DEA1F21</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5C69CA47F2D598846DBB5E6E</key>
+		<key>54DC5E8999457E251C054906</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>833CF44E2721993F3F364364</key>
+		<key>6420DE96BB3A612322D484E7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>924FBAC12D0FDC2877E37936</key>
+		<key>81BFB352EBFE2DCBA99FA6C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B94F949477A8EB7B76922169</key>
+		<key>87BD660E85756FC36E2DAEB5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA89671453F4EEF38C156697</key>
+		<key>AAC2AD5E7BCF78E733E602A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E5056A063C47C803F85295C9</key>
+		<key>ADF8173A81F599E1979B4A85</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F35909157F48E1BF2CF95401</key>
+		<key>C0D3A62028D9E55CC339B5F4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DA385EE39A80B23C670E7491</key>
 		<dict>
 			<key>primary</key>
 			<true/>

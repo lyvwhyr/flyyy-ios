@@ -25,3 +25,4 @@
 "FLYSignupAlreadyHaveAccount" = "Already have an account?";
 "FLYSignupEnterPhoneNumberHint" = "Enter phone number";
 "FLYSignupEnterPhoneNumberOKButton" = "Okay";
+"FLYSignupPhoneNumberConfirmationAlert" = "Is this your mobile phone number?";

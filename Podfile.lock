@@ -5,6 +5,7 @@ PODS:
   - Mixpanel/MPCategoryHelpers (2.7.1)
   - NSDate+TimeAgo (1.0.3)
   - pop (1.0.7)
+  - PXAlertView (0.1.1)
   - SCLAlertView-Objective-C (0.3.5)
   - StreamingKit (0.1.25)
   - SVPullToRefresh (0.4.1)
@@ -16,6 +17,7 @@ DEPENDENCIES:
   - Mixpanel
   - NSDate+TimeAgo
   - pop (~> 1.0)
+  - PXAlertView (~> 0.1.0)
   - SCLAlertView-Objective-C
   - StreamingKit
   - SVPullToRefresh
@@ -27,6 +29,7 @@ SPEC CHECKSUMS:
   Mixpanel: 57314e0e7c0a63a6471618a41002da3e1408532c
   NSDate+TimeAgo: f3533e0198fab05b716368b19f8c2185d53d6f3b
   pop: 2f14a1ea61339767af9e66741b418c831b3844df
+  PXAlertView: 3b390ec26b4ce68cffb650ebabf2cb5011026e14
   SCLAlertView-Objective-C: ba283f4d609d9929d4d2bf66f713db19ae0fe066
   StreamingKit: 5b36623e7246cccddb8db3aee79c43bb180a51be
   SVPullToRefresh: d5161ebc833a38b465364412e5e307ca80bbb190

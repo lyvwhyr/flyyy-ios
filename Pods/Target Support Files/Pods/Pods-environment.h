@@ -30,6 +30,12 @@
 #define COCOAPODS_VERSION_MINOR_NSDate_TimeAgo 0
 #define COCOAPODS_VERSION_PATCH_NSDate_TimeAgo 3
 
+// PXAlertView
+#define COCOAPODS_POD_AVAILABLE_PXAlertView
+#define COCOAPODS_VERSION_MAJOR_PXAlertView 0
+#define COCOAPODS_VERSION_MINOR_PXAlertView 1
+#define COCOAPODS_VERSION_PATCH_PXAlertView 1
+
 // SCLAlertView-Objective-C
 #define COCOAPODS_POD_AVAILABLE_SCLAlertView_Objective_C
 #define COCOAPODS_VERSION_MAJOR_SCLAlertView_Objective_C 0
