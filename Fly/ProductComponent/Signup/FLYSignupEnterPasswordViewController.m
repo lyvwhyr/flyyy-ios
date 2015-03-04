@@ -1,32 +1,42 @@
 //
-//  FLYSignupFieldViewController.m
+//  FLYSignupEnterPasswordViewController.m
 //  Flyy
 //
 //  Created by Xingxing Xu on 3/3/15.
 //  Copyright (c) 2015 Fly. All rights reserved.
 //
 
-#import "FLYSignupUsernameViewController.h"
+#import "FLYSignupEnterPasswordViewController.h"
 #import "UIFont+FLYAddition.h"
 #import "UIColor+FLYAddition.h"
 #import "PXAlertView.h"
-#import "FLYSignupEnterPasswordViewController.h"
 
 #define kTitleTopPadding 20
 
+@interface FLYSignupEnterPasswordViewController ()
 
-@interface FLYSignupUsernameViewController ()
+@property (nonatomic, copy) NSString *username;
 
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIImageView *iconView;
 @property (nonatomic) UIView *inputPhoneView;
 @property (nonatomic) UIImageView *inputIconView;
 @property (nonatomic) UITextField *inputTextField;
+@property (nonatomic) UILabel *passwordLengthHintLabel;
 @property (nonatomic) UIButton *confirmButton;
 
 @end
 
-@implementation FLYSignupUsernameViewController
+@implementation FLYSignupEnterPasswordViewController
+
+- (instancetype)initWithUsername:(NSString *)username
+{
+    if (self = [super init]) {
+        _username = username;
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad
 {
@@ -37,7 +47,7 @@
     self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.titleLabel.font = [UIFont flyFontWithSize:21];
     self.titleLabel.textColor = [UIColor flyBlue];
-    self.titleLabel.text = LOC(@"FLYSignupUsernameTitle");
+    self.titleLabel.text = LOC(@"FLYSignupPasswordPageTitle");
     [self.view addSubview:self.titleLabel];
     
     self.iconView = [UIImageView new];
@@ -54,29 +64,32 @@
     
     self.inputIconView = [UIImageView new];
     self.inputIconView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.inputIconView.image = [UIImage imageNamed:@"icon_login_username"];
+    self.inputIconView.image = [UIImage imageNamed:@"icon_login_password"];
     [self.inputIconView sizeToFit];
     [self.inputPhoneView addSubview:self.inputIconView];
     
-    
     self.confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 44)];
     self.confirmButton.backgroundColor = [UIColor flyBlue];
-    [self.confirmButton setTitle:LOC(@"FLYSignupUsernameContinueButton") forState:UIControlStateNormal];
+    [self.confirmButton setTitle:LOC(@"FLYSignupPasswordOkButton") forState:UIControlStateNormal];
     [self.confirmButton addTarget:self action:@selector(_continueButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     
     self.inputTextField = [UITextField new];
     self.inputTextField.translatesAutoresizingMaskIntoConstraints = NO;
     self.inputTextField.inputAccessoryView = self.confirmButton;
-    self.inputTextField.placeholder = LOC(@"FLYSignupUsernameHint");
+    self.inputTextField.secureTextEntry = YES;
+    self.inputTextField.placeholder = LOC(@"FLYSignupPasswordInputFieldHint");
     [self.inputPhoneView addSubview:self.inputTextField];
     [self.inputTextField becomeFirstResponder];
     
+    self.passwordLengthHintLabel = [UILabel new];
+    self.passwordLengthHintLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.passwordLengthHintLabel.font = [UIFont flyFontWithSize:8];
+    self.passwordLengthHintLabel.textColor = [UIColor flyColorFlySignupGrey];
+    self.passwordLengthHintLabel.text = LOC(@"FLYSignupPasswordLengthHint");
+    [self.view addSubview:self.passwordLengthHintLabel];
+    
     [self _addConstraints];
-}
 
-- (void)loadLeftBarButton
-{
-    self.navigationItem.hidesBackButton = YES;
 }
 
 - (void)_addConstraints
@@ -110,30 +123,24 @@
         make.trailing.equalTo(self.inputPhoneView);
         make.centerY.equalTo(self.inputPhoneView);
     }];
+    
+    [self.passwordLengthHintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(self.inputTextField);
+        make.top.equalTo(self.inputPhoneView.mas_bottom).offset(5);
+    }];
 }
 
 - (void)_continueButtonTapped
 {
-    NSString *username = self.inputTextField.text;
-    if ([username length] == 0 || username.length > kUsernameMaxLen) {
-        [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUsernameLenError")];
+    NSString *password = self.inputTextField.text;
+    if (password.length < 6) {
+        [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPasswordLengthError")];
         return;
     }
-    
-    NSString *myRegex = @"[A-Z0-9a-z_]*";
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", myRegex];
-    BOOL valid = [predicate evaluateWithObject:username];
-    if (!valid) {
-        [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUsernameAlhpanumeric")];
-        return;
-    }
-    
-    //TODO:username in use error
-    FLYSignupEnterPasswordViewController *vc = [[FLYSignupEnterPasswordViewController alloc] initWithUsername:username];
-    [self.navigationController pushViewController:vc animated:YES];
-    
+    //TODO: valid password character check.
     
 }
+
 
 #pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor

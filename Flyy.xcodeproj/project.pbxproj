@@ -241,6 +241,7 @@
 		A67CC61F1A7DF1730092E500 /* CoreGraphics+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A67CC61E1A7DF1730092E500 /* CoreGraphics+FLYAddition.m */; };
 		A6852B821A875EE70093C75C /* FLYRecordBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6852B811A875EE70093C75C /* FLYRecordBottomBar.m */; };
 		A690F2821AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A690F2811AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m */; };
+		A690F2851AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A690F2841AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m */; };
 		A69C4B941A27094B00CAD443 /* icon_tabbar_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */; };
 		A69C4B981A270E1400CAD443 /* PaperButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4B971A270E1400CAD443 /* PaperButton.m */; };
 		A69C4B9A1A27111700CAD443 /* icon_filter_feed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B991A27111700CAD443 /* icon_filter_feed@3x.png */; };
@@ -726,6 +727,8 @@
 		A6852B811A875EE70093C75C /* FLYRecordBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYRecordBottomBar.m; sourceTree = "<group>"; };
 		A690F2801AA6D64100B0D3E8 /* FLYSignupUsernameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSignupUsernameViewController.h; sourceTree = "<group>"; };
 		A690F2811AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSignupUsernameViewController.m; sourceTree = "<group>"; };
+		A690F2831AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSignupEnterPasswordViewController.h; sourceTree = "<group>"; };
+		A690F2841AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSignupEnterPasswordViewController.m; sourceTree = "<group>"; };
 		A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_group@3x.png"; sourceTree = "<group>"; };
 		A69C4B961A270E1400CAD443 /* PaperButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperButton.h; sourceTree = "<group>"; };
 		A69C4B971A270E1400CAD443 /* PaperButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperButton.m; sourceTree = "<group>"; };
@@ -1562,6 +1565,8 @@
 				A6BAD40B1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m */,
 				A690F2801AA6D64100B0D3E8 /* FLYSignupUsernameViewController.h */,
 				A690F2811AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m */,
+				A690F2831AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.h */,
+				A690F2841AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -2433,6 +2438,7 @@
 				A6A0E49E1A1E76110036116E /* FLEXIvarEditorViewController.m in Sources */,
 				A67208231A3569C600B2C5B5 /* FLYReplyPlayView.m in Sources */,
 				A6A0E4A41A1E76110036116E /* FLEXToolbarItem.m in Sources */,
+				A690F2851AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m in Sources */,
 				A65578411A3ADCC3003102CD /* FLYPostButtonView.m in Sources */,
 				A612753F1A2EFB72004D25D3 /* DKCircleButton.m in Sources */,
 				A6A0E4AD1A1E76110036116E /* FLEXWebViewController.m in Sources */,

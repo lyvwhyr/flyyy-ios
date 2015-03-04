@@ -13,10 +13,9 @@
 #import "PXAlertView.h"
 #import "PXAlertView+Customization.h"
 #import "FLYSignupUsernameViewController.h"
+#import "NSDictionary+FLYAddition.h"
 
 #define kTitleTopPadding 20
-#define kPhoneIconTopPadding 10
-#define kHintTextTopPadding 10
 
 @interface FLYSignupConfirmCodeViewController ()<UITextFieldDelegate>
 
@@ -148,10 +147,14 @@
         if (responseObj == nil) {
             [PXAlertView showAlertWithTitle:LOC(@"FLYInvalidVerificationCode")];
         } else {
-            FLYSignupUsernameViewController *vc = [FLYSignupUsernameViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
+            BOOL valid = [responseObj fly_boolForKey:@"valid" defaultValue:NO];
+            if (valid) {
+                FLYSignupUsernameViewController *vc = [FLYSignupUsernameViewController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                [PXAlertView showAlertWithTitle:LOC(@"FLYInvalidVerificationCode")];
+            }
         }
-        
     };
     
     FLYVerifyCodeErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {

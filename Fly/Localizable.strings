@@ -34,3 +34,16 @@
 "FLYInvalidPhoneNumberTitle" = "Invalid phone number";
 "FLYInvalidPhoneNumberBodyText" = "Please enter a correct phone number.";
 "FLYInvalidVerificationCode" = "Incorrect verification code";
+"FLYSignupUsernameTitle" = "You're almost there!";
+"FLYSignupUsernameHint" = "Username (alphanumeric only)";
+"FLYSignupUsernameContinueButton" = "Continue";
+"FLYSignupUsernameLenError" = "Username must be 1 to 20 characters long";
+"FLYSignupUsernameAlhpanumeric" = "Invalid username! Alphanumerics only";
+"FLYSignupPasswordPageTitle" = "Last step";
+"FLYSignupPasswordInputFieldHint" = "Choose a password";
+"FLYSignupPasswordOkButton" = "OK";
+"FLYSignupPasswordLengthHint" = "at least 6 characters";
+"FLYSignupPasswordLengthError" = "Password must be at least 6 characters";
+
+
+

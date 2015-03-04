@@ -7,6 +7,7 @@
 #define kTopicPaginationCount 15
 #define KReplyPaginationCount 10
 #define kStreamingMinimialLen 5
+#define kUsernameMaxLen 20
 
 #define kMainScreenWidth      CGRectGetWidth([UIScreen mainScreen].bounds)
 #define kMainScreenHeight     CGRectGetHeight([UIScreen mainScreen].bounds)
