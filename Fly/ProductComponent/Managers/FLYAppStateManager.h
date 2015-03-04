@@ -11,13 +11,17 @@
 @interface FLYAppStateManager : NSObject
 
 @property (nonatomic) BOOL isAutoPlayEnabled;
-@property (nonatomic) NSString *recordingFilePath;
-@property (nonatomic) NSString *mediaId;
+@property (nonatomic, copy) NSString *recordingFilePath;
+@property (nonatomic, copy) NSString *mediaId;
 @property (nonatomic) NSArray *groupList;
-@property (nonatomic) NSString *deviceToken;
-@property (nonatomic) NSString *deviceId;
+@property (nonatomic, copy) NSString *deviceToken;
+@property (nonatomic, copy) NSString *deviceId;
 @property (nonatomic) FLYUser *currentUser;
 
+//Phone sign up
+@property (nonatomic, copy) NSString *phoneHash;
+@property (nonatomic, copy) NSString *createdAt;
+@property (nonatomic, copy) NSString *phoneNumber;
 
 + (instancetype)sharedInstance;
 

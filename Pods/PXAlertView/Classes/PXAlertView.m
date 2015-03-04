@@ -7,6 +7,7 @@
 //
 
 #import "PXAlertView.h"
+#import "PXAlertView+Customization.h"
 
 @interface PXAlertViewStack : NSObject
 
@@ -188,6 +189,8 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
         self.alertView.center = [self centerWithFrame:frame];
         
         [self setupGestures];
+        
+        [self useDefaultIOS7Style];
     }
     return self;
 }

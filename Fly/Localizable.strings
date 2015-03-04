@@ -26,3 +26,11 @@
 "FLYSignupEnterPhoneNumberHint" = "Enter phone number";
 "FLYSignupEnterPhoneNumberOKButton" = "Okay";
 "FLYSignupPhoneNumberConfirmationAlert" = "Is this your mobile phone number?";
+
+// sign up verification code
+"FLYConfirmCodeTitle" = "Did you get our text?";
+"FLYConfirmCodeHint" = "Enter your verification code.";
+"FLYConfirmCodeConfirmButton" = "Confirm";
+"FLYInvalidPhoneNumberTitle" = "Invalid phone number";
+"FLYInvalidPhoneNumberBodyText" = "Please enter a correct phone number.";
+"FLYInvalidVerificationCode" = "Incorrect verification code";

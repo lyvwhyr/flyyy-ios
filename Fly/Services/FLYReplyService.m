@@ -8,8 +8,6 @@
 
 #import "FLYReplyService.h"
 #import "FLYReply.h"
-#import "AFHTTPRequestOperationManager.h"
-#import "AFHTTPRequestOperation.h"
 
 @implementation FLYReplyService
 

@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFHTTPRequestOperationManager.h"
+#import "AFHTTPRequestOperation.h"
 
 @interface FLYServiceBase : NSObject
 

@@ -18,6 +18,8 @@
 #import "FLYCountrySelectorViewController.h"
 #import "PXAlertView.h"
 #import "PXAlertView+Customization.h"
+#import "FLYPhoneService.h"
+#import "FLYSignupConfirmCodeViewController.h"
 
 #define kTitleTopPadding 50
 #define kSubtitleTopPadding 50
@@ -257,7 +259,7 @@
     PXAlertView *alertView = [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPhoneNumberConfirmationAlert")
                                                      message: phoneNumber
                                                  cancelTitle:@"Cancel"
-                                                  otherTitle:@"Ok"
+                                                  otherTitle:@"Yes"
                                                  contentView:nil
                                                   completion:^(BOOL cancelled, NSInteger buttonIndex) {
                                                       @strongify(self)
@@ -267,6 +269,21 @@
                                                           NSString *error;
                                                           [formatter getObjectValue:&unformattedPhoneNumber forString:phoneNumber errorDescription:&error];
                                                           
+                                                          [FLYAppStateManager sharedInstance].phoneNumber = unformattedPhoneNumber;
+                                                          FLYPhoneService *service = [FLYPhoneService phoneServiceWithPhoneNumber:phoneNumber];
+                                                          [service serviceSendCodeWithPhone:unformattedPhoneNumber success:^(AFHTTPRequestOperation *operation, id responseObj) {
+                                                              if (responseObj) {
+                                                                  [FLYAppStateManager sharedInstance].phoneHash = [responseObj objectForKey:@"phone_hash"];
+                                                                  FLYSignupConfirmCodeViewController *vc = [FLYSignupConfirmCodeViewController new];
+                                                                  [self.navigationController pushViewController:vc animated:YES];
+                                                              } else {
+                                                                  PXAlertView *errorAlert = [PXAlertView showAlertWithTitle:@"Something went wrong. Please try again later"];
+                                                                  [errorAlert useDefaultIOS7Style];
+                                                              }
+                                                              
+                                                          } error:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                              //TODO: ERROR handling
+                                                          }];
                                                       }
                                                   }];
     [alertView useDefaultIOS7Style];
