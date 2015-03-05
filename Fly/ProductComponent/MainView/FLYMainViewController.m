@@ -30,6 +30,7 @@
 #import "FLYUser.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
 #import "FLYCountrySelectorViewController.h"
+#import "FLYLoginSignupViewController.h"
 
 #if DEBUG
 #import "FLEXManager.h"

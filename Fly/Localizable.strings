@@ -14,8 +14,17 @@
 
 "FLYWorkingInProgressHUD" = "Working in progress";
 
+//Sign up and login page
+"FLYLoginButtonText" = "Login";
+"FLYSignupButtonText" = "Sign up";
+
 //Login
 "FLYCountryCodeTitle" = "Country Code";
+"FLYLoginNavigationTitle" = "Login";
+"FLYLoginTitle" = "Let the world hear your voice.";
+"FLYLoginDefaultPhoneNumberTextFieldText" = "Phone number";
+"FLYLoginDefaultPasswordTextFieldText" = "Password";
+"FLYLoginForgetPasswordText" = "Forgot password?";
 
 //sign up
 "FLYSignupPageTitle" = "Sign up";
@@ -44,6 +53,7 @@
 "FLYSignupPasswordOkButton" = "OK";
 "FLYSignupPasswordLengthHint" = "at least 6 characters";
 "FLYSignupPasswordLengthError" = "Password must be at least 6 characters";
+
 
 
 

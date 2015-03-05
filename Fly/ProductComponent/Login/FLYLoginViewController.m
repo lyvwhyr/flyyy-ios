@@ -7,16 +7,29 @@
 //
 
 #import "FLYLoginViewController.h"
+#import "FLYIconButton.h"
 
 @interface FLYLoginViewController ()
+
+@property (nonatomic) UILabel *titleLabel;
+@property (nonatomic) UIView *phoneNumberView;
+@property (nonatomic) FLYIconButton *countryCodeChooser;
+@property (nonatomic) UITextField *phoneNumberTextField;
+@property (nonatomic) UIImageView *passwordIcon;
+@property (nonatomic) UITextField *passwordTextField;
+@property (nonatomic) UILabel *forgetPasswordLabel;
+
+@property (nonatomic) UIButton *loginButton;
 
 @end
 
 @implementation FLYLoginViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.titleLabel = [UILabel new];
+    
 }
 
 @end

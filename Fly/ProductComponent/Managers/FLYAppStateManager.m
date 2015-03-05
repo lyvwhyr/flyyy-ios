@@ -13,6 +13,7 @@
 #import "FLYUser.h"
 #import "FLYSignupPhoneNumberViewController.h"
 #import "FLYNavigationController.h"
+#import "FLYLoginSignupViewController.h"
 
 @implementation FLYAppStateManager
 
@@ -41,7 +42,7 @@
 - (void)_requireSignup:(NSNotification *)notification
 {
     UIViewController *fromVC = [notification.userInfo objectForKey:kFromViewControllerKey];
-    FLYSignupPhoneNumberViewController *vc = [FLYSignupPhoneNumberViewController new];
+    FLYLoginSignupViewController *vc = [FLYLoginSignupViewController new];
     UINavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
     [fromVC presentViewController:nav animated:NO completion:nil];
 }
