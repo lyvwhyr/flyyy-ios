@@ -49,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-libPhoneNumber-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,57 +67,62 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0B9486DA47A906C82E7FE571</key>
+		<key>10C0A5E5B049C6ECD4DE7E7C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0E5384E0ED501F24030C2B37</key>
+		<key>1D0A08B0E736BFDAAF6295CC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4A35F6D3F44C852B8DEA1F21</key>
+		<key>499D402E582943CE3D9F6430</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>54DC5E8999457E251C054906</key>
+		<key>5130CDCDBA6F320E2B29F74A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6420DE96BB3A612322D484E7</key>
+		<key>600160A741119E17A8CE9C2B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>81BFB352EBFE2DCBA99FA6C1</key>
+		<key>700148C9D76A3155F84BA5AB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>87BD660E85756FC36E2DAEB5</key>
+		<key>9048DB428138A7CA6E36935F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AAC2AD5E7BCF78E733E602A7</key>
+		<key>9CD55521064540C4A0048286</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ADF8173A81F599E1979B4A85</key>
+		<key>CA2F09B64A0EBDFA0F7511D8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C0D3A62028D9E55CC339B5F4</key>
+		<key>CD488662CB92C2A1E148350A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DA385EE39A80B23C670E7491</key>
+		<key>ED88CD03E2DEC26EC4D80B5E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FF4439DE87E5FD0DDD926003</key>
 		<dict>
 			<key>primary</key>
 			<true/>

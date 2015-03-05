@@ -355,6 +355,7 @@
 		A6D949F41A9089FD003D4265 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D949F21A9089FC003D4265 /* UICKeyChainStore.m */; };
 		A6D949F61A9090BD003D4265 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D949F51A9090BD003D4265 /* Security.framework */; };
 		A6D949F91A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D949F81A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m */; };
+		A6DFD1311AA80670008520F5 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DFD1301AA80670008520F5 /* CoreTelephony.framework */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
@@ -930,6 +931,7 @@
 		A6D949F51A9090BD003D4265 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A6D949F71A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+RMSaveCustomObject.h"; sourceTree = "<group>"; };
 		A6D949F81A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+RMSaveCustomObject.m"; sourceTree = "<group>"; };
+		A6DFD1301AA80670008520F5 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
@@ -948,6 +950,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6DFD1311AA80670008520F5 /* CoreTelephony.framework in Frameworks */,
 				A63189241A92B3C70042E12A /* libxml2.dylib in Frameworks */,
 				A63188EB1A92B1890042E12A /* MediaPlayer.framework in Frameworks */,
 				A63188E91A92B1810042E12A /* AVFoundation.framework in Frameworks */,
@@ -1933,6 +1936,7 @@
 		A6A30D741A1B1F33001AE1FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6DFD1301AA80670008520F5 /* CoreTelephony.framework */,
 				A63189231A92B3C70042E12A /* libxml2.dylib */,
 				A63188EA1A92B1890042E12A /* MediaPlayer.framework */,
 				A63188E81A92B1810042E12A /* AVFoundation.framework */,

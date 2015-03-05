@@ -65,6 +65,7 @@ install_resource()
                     install_resource "Mixpanel/Mixpanel/MPNotification.storyboard"
                     install_resource "Mixpanel/Mixpanel/MPSurvey.storyboard"
                     install_resource "NSDate+TimeAgo/NSDateTimeAgo.bundle"
+                    install_resource "libPhoneNumber-iOS/libPhoneNumber/NBPhoneNumberMetadata.plist"
           
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 if [[ "${ACTION}" == "install" ]]; then

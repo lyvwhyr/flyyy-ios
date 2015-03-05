@@ -20,6 +20,7 @@
 #import "PXAlertView+Customization.h"
 #import "FLYPhoneService.h"
 #import "FLYSignupConfirmCodeViewController.h"
+#import "NBPhoneNumberUtil.h"
 
 #define kTitleTopPadding 50
 #define kSubtitleTopPadding 50
@@ -252,10 +253,21 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-//TODO: phone number validation: https://github.com/iziz/libPhoneNumber-iOS
 - (void)_nextButtonTapped
 {
     NSString *phoneNumber = [NSString stringWithFormat:@"%@ %@", self.countryAreaCode, self.formattedPhoneNumber];
+    
+    //TODO: wrap it in feature switch in case there is false positive
+    NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
+    NSError *anError = nil;
+    NBPhoneNumber *myNumber = [phoneUtil parse:phoneNumber
+                                 defaultRegion:nil error:&anError];
+    BOOL isValid = [phoneUtil isValidNumber:myNumber];
+    if (!isValid) {
+        [PXAlertView showAlertWithTitle:@"Phone number is not valid"];
+        return;
+    }
+    
     @weakify(self)
     PXAlertView *alertView = [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPhoneNumberConfirmationAlert")
                                                      message: phoneNumber
