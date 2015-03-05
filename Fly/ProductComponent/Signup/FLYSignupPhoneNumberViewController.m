@@ -252,6 +252,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+//TODO: phone number validation: https://github.com/iziz/libPhoneNumber-iOS
 - (void)_nextButtonTapped
 {
     NSString *phoneNumber = [NSString stringWithFormat:@"%@ %@", self.countryAreaCode, self.formattedPhoneNumber];

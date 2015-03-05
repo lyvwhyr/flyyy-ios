@@ -136,7 +136,8 @@
 {
     NSString *confirmCode = self.verificationCodeField.text;
     if (confirmCode.length == 6) {
-//        [self.confirmButton setEnabled:NO];
+        self.confirmButton.backgroundColor = [UIColor flyBlue];
+        [self.confirmButton setEnabled:YES];
 //        [self _verifyCode];
     }
 }
