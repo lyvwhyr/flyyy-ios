@@ -22,6 +22,10 @@
 @property (nonatomic, copy) NSString *phoneHash;
 @property (nonatomic, copy) NSString *createdAt;
 @property (nonatomic, copy) NSString *phoneNumber;
+@property (nonatomic, copy) NSString *confirmationCode;
+
+//auth token
+@property (nonatomic, copy) NSString *authToken;
 
 + (instancetype)sharedInstance;
 

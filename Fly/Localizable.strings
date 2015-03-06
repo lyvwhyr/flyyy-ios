@@ -53,7 +53,7 @@
 "FLYSignupPasswordOkButton" = "OK";
 "FLYSignupPasswordLengthHint" = "at least 6 characters";
 "FLYSignupPasswordLengthError" = "Password must be at least 6 characters";
-
-
+"FLYSignupUserNameAlreadyExist" = "User name already exists";
+"FLYSignupPhoneNumberAlreadyExist" = "The phone number is already registered by another user";
 
 

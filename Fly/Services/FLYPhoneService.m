@@ -21,8 +21,8 @@
     NSDictionary *params = @{@"device_id":[FLYAppStateManager sharedInstance].deviceId, @"phone":number};
     [manager POST:self.endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         successBlock(operation, responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UALog(@"Post error %@", error);
+    } failure:^(id responseObj, NSError *error) {
+        errorBlock(responseObj, error);
     }];
 }
 
@@ -33,8 +33,8 @@
     NSDictionary *params = @{@"device_id":[FLYAppStateManager sharedInstance].deviceId, @"phone":phoneNumber, @"code":code};
     [manager GET:endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         successBlock(operation, responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        errorBlock(operation, error);
+    } failure:^(id responseObj, NSError *error) {
+        errorBlock(responseObj, error);
     }];
 }
 

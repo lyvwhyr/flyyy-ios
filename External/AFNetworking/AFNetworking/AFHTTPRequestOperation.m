@@ -139,8 +139,14 @@ static dispatch_group_t http_request_operation_completion_group() {
                             [[FLYScribe sharedInstance] logEvent:@"client_error" section:[responseObject objectForKey:@"code"] component:[responseObject objectForKey:@"context"] element:[responseObject objectForKey:@"error"] action:[responseObject objectForKey:@"message"]];
                         }
                         
+                        @weakify(self)
                         dispatch_group_async(self.completionGroup ?: http_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
-                            failure(self, self.error);
+                            @strongify(self)
+                            //error handling
+                            if (self.responseObject) {
+                                [self _handleErrorWithResponseObject:self.responseObject];
+                            }
+                            failure(self.responseObject, self.error);
                         });
                     }
                 } else {
@@ -213,6 +219,11 @@ static dispatch_group_t http_request_operation_completion_group() {
     operation.completionGroup = self.completionGroup;
 
     return operation;
+}
+
+- (void)_handleErrorWithResponseObject:(id)responseObj
+{
+    
 }
 
 @end

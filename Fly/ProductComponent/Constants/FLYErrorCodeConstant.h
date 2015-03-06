@@ -1,0 +1,2 @@
+#define kUserNameAlreadyExist 1012
+#define kPhoneNumberAlreadyClaimed 1010

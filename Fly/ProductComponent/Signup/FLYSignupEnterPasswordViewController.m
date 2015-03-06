@@ -10,6 +10,8 @@
 #import "UIFont+FLYAddition.h"
 #import "UIColor+FLYAddition.h"
 #import "PXAlertView.h"
+#import "FLYUsersService.h"
+#import "PXAlertView.h"
 
 #define kTitleTopPadding 20
 
@@ -25,6 +27,9 @@
 @property (nonatomic) UILabel *passwordLengthHintLabel;
 @property (nonatomic) UIButton *confirmButton;
 
+//service
+@property (nonatomic) FLYUsersService *usersService;
+
 @end
 
 @implementation FLYSignupEnterPasswordViewController
@@ -33,6 +38,7 @@
 {
     if (self = [super init]) {
         _username = username;
+        _usersService = [FLYUsersService usersService];
     }
     return self;
 }
@@ -89,6 +95,8 @@
     [self.view addSubview:self.passwordLengthHintLabel];
     
     [self _addConstraints];
+    
+    
 
 }
 
@@ -137,8 +145,35 @@
         [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPasswordLengthError")];
         return;
     }
+    
     //TODO: valid password character check.
     
+    
+    [self _createUserService];
+}
+
+- (void)_createUserService
+{
+    FLYCreateUserSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        UALog(@"success");
+        if (!responseObj) {
+            UALog(@"responseObj is empty");
+        }
+        [FLYAppStateManager sharedInstance].authToken = [responseObj objectForKey:@"auth_token"];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    };
+    
+    //TODO:error handling
+    FLYCreateuserErrorBlock errorBlock = ^(id responseObj, NSError *error) {
+        if ([[responseObj objectForKey:@"code"] integerValue] == kUserNameAlreadyExist) {
+            [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUserNameAlreadyExist")];
+        } else {
+            [PXAlertView showAlertWithTitle:[responseObj objectForKey:@"message"]];
+        }
+        
+    };
+    NSString *password = self.inputTextField.text;
+    [self.usersService createUserWithPhoneHash:[FLYAppStateManager sharedInstance].phoneHash code:[FLYAppStateManager sharedInstance].confirmationCode userName:self.username password:password success:successBlock error:errorBlock];
 }
 
 

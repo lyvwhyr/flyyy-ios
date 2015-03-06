@@ -69,6 +69,7 @@
 		A636FC3B1A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A636FC3A1A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.m */; };
 		A640BC3B1A3815B700DC59A7 /* icon_flag_post@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */; };
 		A640BC3D1A381AE900DC59A7 /* icon_navigation_catalog@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3C1A381AE900DC59A7 /* icon_navigation_catalog@3x.png */; };
+		A643AE3F1AA9336D00BF4E0F /* FLYUsersService.m in Sources */ = {isa = PBXBuildFile; fileRef = A643AE3E1AA9336D00BF4E0F /* FLYUsersService.m */; };
 		A6450B141A998A08009EF0A3 /* AFSoundItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A6450B0A1A998A08009EF0A3 /* AFSoundItem.m */; };
 		A6450B151A998A08009EF0A3 /* AFSoundPlayback.m in Sources */ = {isa = PBXBuildFile; fileRef = A6450B0D1A998A08009EF0A3 /* AFSoundPlayback.m */; };
 		A6450B161A998A08009EF0A3 /* AFSoundQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A6450B0F1A998A08009EF0A3 /* AFSoundQueue.m */; };
@@ -495,6 +496,9 @@
 		A636FC3A1A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+FLYAddition.m"; sourceTree = "<group>"; };
 		A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_flag_post@3x.png"; sourceTree = "<group>"; };
 		A640BC3C1A381AE900DC59A7 /* icon_navigation_catalog@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_navigation_catalog@3x.png"; sourceTree = "<group>"; };
+		A643AE3D1AA9336D00BF4E0F /* FLYUsersService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUsersService.h; sourceTree = "<group>"; };
+		A643AE3E1AA9336D00BF4E0F /* FLYUsersService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUsersService.m; sourceTree = "<group>"; };
+		A643AE401AA93CFB00BF4E0F /* FLYErrorCodeConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYErrorCodeConstant.h; sourceTree = "<group>"; };
 		A6450B091A998A08009EF0A3 /* AFSoundItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSoundItem.h; sourceTree = "<group>"; };
 		A6450B0A1A998A08009EF0A3 /* AFSoundItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSoundItem.m; sourceTree = "<group>"; };
 		A6450B0B1A998A08009EF0A3 /* AFSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSoundManager.h; sourceTree = "<group>"; };
@@ -1542,6 +1546,7 @@
 			children = (
 				A6263EC51A1891D100C4C3BA /* Constants.h */,
 				A65ED9871A91A88900E10D5C /* FLYNotificationConstant.h */,
+				A643AE401AA93CFB00BF4E0F /* FLYErrorCodeConstant.h */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -1628,6 +1633,8 @@
 				A665FC271AA2838800490A18 /* FLYReplyService.m */,
 				A6BAD4071AA57C4D00DB10F7 /* FLYPhoneService.h */,
 				A6BAD4081AA57C4D00DB10F7 /* FLYPhoneService.m */,
+				A643AE3D1AA9336D00BF4E0F /* FLYUsersService.h */,
+				A643AE3E1AA9336D00BF4E0F /* FLYUsersService.m */,
 			);
 			name = Services;
 			path = ../Services;
@@ -2465,6 +2472,7 @@
 				A6A30D6F1A1B1DF8001AE1FE /* FLYCircleView.m in Sources */,
 				A6048AD11A8603EF00C67480 /* AFNetworkReachabilityManager.m in Sources */,
 				A648C0E71A19AD4A00FF1744 /* MASViewAttribute.m in Sources */,
+				A643AE3F1AA9336D00BF4E0F /* FLYUsersService.m in Sources */,
 				A651BD951A4985F20081A1E0 /* SVProgressHUD.m in Sources */,
 				A6048A411A85E63100C67480 /* EXTScope.m in Sources */,
 				A690F2821AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m in Sources */,

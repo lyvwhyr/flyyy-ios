@@ -1,5 +1,6 @@
 
 #include "FLYNotificationConstant.h"
+#include "FLYErrorCodeConstant.h"
 
 #define kStatusBarHeight    20
 #define kNavBarHeight       44

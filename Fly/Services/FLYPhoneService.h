@@ -9,10 +9,10 @@
 #import "FLYServiceBase.h"
 
 typedef void(^FLYSendCodeSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
-typedef void(^FLYSendCodeErrorBlock)(AFHTTPRequestOperation *operation, NSError *error);
+typedef void(^FLYSendCodeErrorBlock)(id responseObj, NSError *error);
 
 typedef void(^FLYVerifyCodeSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
-typedef void(^FLYVerifyCodeErrorBlock)(AFHTTPRequestOperation *operation, NSError *error);
+typedef void(^FLYVerifyCodeErrorBlock)(id responseObj, NSError *error);
 
 @interface FLYPhoneService : FLYServiceBase
 

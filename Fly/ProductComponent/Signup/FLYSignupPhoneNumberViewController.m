@@ -226,7 +226,7 @@
 #pragma mark - Text change
 - (void)_textFieldDidChange
 {
-    if (self.phoneNumberTextField.text > 0) {
+    if ([self.phoneNumberTextField.text length] > 0) {
         self.nextButton.backgroundColor = [UIColor flyBlue];
     }
     ECPhoneNumberFormatter *formatter = [[ECPhoneNumberFormatter alloc] init];
@@ -294,8 +294,10 @@
                                                                   [errorAlert useDefaultIOS7Style];
                                                               }
                                                               
-                                                          } error:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                              //TODO: ERROR handling
+                                                          } error:^(id responseObj, NSError *error) {
+                                                              if ([[responseObj objectForKey:@"code"] integerValue] == kPhoneNumberAlreadyClaimed) {
+                                                                  [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPhoneNumberAlreadyExist")];
+                                                              }
                                                           }];
                                                       }
                                                   }];

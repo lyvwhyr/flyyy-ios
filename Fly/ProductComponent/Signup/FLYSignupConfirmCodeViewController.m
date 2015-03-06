@@ -138,18 +138,19 @@
     if (confirmCode.length == 6) {
         self.confirmButton.backgroundColor = [UIColor flyBlue];
         [self.confirmButton setEnabled:YES];
-//        [self _verifyCode];
     }
 }
 
 - (void)_verifyCode
 {
+    NSString *confirmCode = self.verificationCodeField.text;
     FLYVerifyCodeSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
         if (responseObj == nil) {
             [PXAlertView showAlertWithTitle:LOC(@"FLYInvalidVerificationCode")];
         } else {
             BOOL valid = [responseObj fly_boolForKey:@"valid" defaultValue:NO];
             if (valid) {
+                [FLYAppStateManager sharedInstance].confirmationCode = confirmCode;
                 FLYSignupUsernameViewController *vc = [FLYSignupUsernameViewController new];
                 [self.navigationController pushViewController:vc animated:YES];
             } else {
@@ -158,10 +159,9 @@
         }
     };
     
-    FLYVerifyCodeErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FLYVerifyCodeErrorBlock errorBlock = ^(id responseObj, NSError *error) {
         [PXAlertView showAlertWithTitle:LOC(@"FLYInvalidVerificationCode")];
     };
-    NSString *confirmCode = self.verificationCodeField.text;
     [self.phoneService serviceVerifyCode:confirmCode phonehash:[FLYAppStateManager sharedInstance].phoneHash phoneNumber:[FLYAppStateManager sharedInstance].phoneNumber success:successBlock error:errorBlock];
 }
 

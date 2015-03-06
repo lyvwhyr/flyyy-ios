@@ -22,6 +22,11 @@
     return kScale;
 }
 
++ (CGFloat)hairlineHeight
+{
+    return 1.0/[FLYUtilities FLYMainScreenScale];
+}
+
 + (void)printAutolayoutTrace
 {
     

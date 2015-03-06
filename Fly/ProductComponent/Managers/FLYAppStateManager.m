@@ -32,14 +32,13 @@
     if (self = [super init]) {
         _isAutoPlayEnabled = NO;
         _deviceId = [UIDevice uniqueDeviceIdentifier];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_requireSignup:) name:kRequireSignupNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_requireLogin) name:kRequireLoginNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_requireSignupOrLogin:) name:kRequireSignupNotification object:nil];
         
     }
     return self;
 }
 
-- (void)_requireSignup:(NSNotification *)notification
+- (void)_requireSignupOrLogin:(NSNotification *)notification
 {
     UIViewController *fromVC = [notification.userInfo objectForKey:kFromViewControllerKey];
     FLYLoginSignupViewController *vc = [FLYLoginSignupViewController new];
