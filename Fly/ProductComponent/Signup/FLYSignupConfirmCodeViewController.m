@@ -15,7 +15,7 @@
 #import "FLYSignupUsernameViewController.h"
 #import "NSDictionary+FLYAddition.h"
 
-#define kTitleTopPadding 20
+#define kTitleTopPadding 5
 
 @interface FLYSignupConfirmCodeViewController ()<UITextFieldDelegate>
 
@@ -39,12 +39,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.titleLabel = [UILabel new];
-    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.titleLabel.font = [UIFont flyFontWithSize:21];
-    self.titleLabel.textColor = [UIColor flyBlue];
-    self.titleLabel.text = LOC(@"FLYConfirmCodeTitle");
-    [self.view addSubview:self.titleLabel];
+//    self.titleLabel = [UILabel new];
+//    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.titleLabel.font = [UIFont flyFontWithSize:21];
+//    self.titleLabel.textColor = [UIColor flyBlue];
+//    self.titleLabel.text = LOC(@"FLYConfirmCodeTitle");
+//    [self.view addSubview:self.titleLabel];
     
     self.phoneIconView = [UIImageView new];
     self.phoneIconView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -80,6 +80,7 @@
     self.verificationCodeField = [UITextField new];
     self.verificationCodeField.translatesAutoresizingMaskIntoConstraints = NO;
     self.verificationCodeField.keyboardType = UIKeyboardTypeNumberPad;
+    self.verificationCodeField.placeholder = LOC(@"FLYConfirmCodeTextFieldDefaultText");
     self.verificationCodeField.delegate = self;
     self.verificationCodeField.inputAccessoryView = self.confirmButton;
     [self.verificationCodeField addTarget:self action:@selector(_textFieldDidChange)
@@ -95,14 +96,14 @@
 
 - (void)_addConstraints
 {
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.top.equalTo(self.view).offset(kTitleTopPadding + kStatusBarHeight + kNavBarHeight);
-    }];
+//    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(self.view);
+//        make.top.equalTo(self.view).offset(kTitleTopPadding + kStatusBarHeight + kNavBarHeight);
+//    }];
     
     [self.phoneIconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.view).offset(kTitleTopPadding + kStatusBarHeight + kNavBarHeight);
     }];
     
     [self.hintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -118,14 +119,14 @@
     }];
     
     [self.lockImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.inputPhoneView).offset(10);
+        make.leading.equalTo(self.inputPhoneView).offset(5);
         make.width.equalTo(@(CGRectGetWidth(self.lockImageView.bounds)));
         make.height.equalTo(@(CGRectGetHeight(self.lockImageView.bounds)));
         make.centerY.equalTo(self.inputPhoneView);
     }];
     
     [self.verificationCodeField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.lockImageView.mas_trailing).offset(10);
+        make.leading.equalTo(self.lockImageView.mas_trailing).offset(5);
         make.trailing.equalTo(self.inputPhoneView);
         make.centerY.equalTo(self.inputPhoneView);
     }];

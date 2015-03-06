@@ -13,6 +13,7 @@
 #import "ECPhoneNumberFormatter.h"
 #import "FLYCountrySelectorViewController.h"
 #import "FLYNavigationController.h"
+#import "FLYNavigationBar.h"
 
 #define kTitleTopPadding 20
 #define kLeftIconWidth 50
@@ -46,7 +47,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.title = @"Login";
+    self.title = LOC(@"FLYLoginNavigationTitle");
+    UIFont *titleFont = [UIFont flyFontWithSize:16];
+    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
     
 //    self.titleLabel = [UILabel new];
 //    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;

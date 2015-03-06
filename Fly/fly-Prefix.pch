@@ -21,6 +21,7 @@
 #import "FLYURLConstants.h"
 #import "FLYUtilities.h"
 #import "Masonry.h"
+#import "NIAttributedLabel.h"
 #import "NSBundle+FLYAddition.h"
 #import "UALogger.h"
 #import "FLYAppStateManager.h"

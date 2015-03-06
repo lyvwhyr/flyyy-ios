@@ -22,14 +22,14 @@
 #import "FLYSignupConfirmCodeViewController.h"
 #import "NBPhoneNumberUtil.h"
 
-#define kTitleTopPadding 50
+#define kTitleTopPadding 10
 #define kSubtitleTopPadding 50
 #define kPhoneBackgroundImageViewTopPadding 10
 #define kHintLabelPadding 10
 #define kCountryCodeLabelWidth 44
 #define kCountryCodeLabelHeight 22
 
-@interface FLYSignupPhoneNumberViewController () <UITextFieldDelegate>
+@interface FLYSignupPhoneNumberViewController () <UITextFieldDelegate, NIAttributedLabelDelegate>
 
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UILabel *subTitleLabel;
@@ -40,8 +40,9 @@
 @property (nonatomic) UIView *countryCodePhoneNumberSeparator;
 @property (nonatomic) UITextField *phoneNumberTextField;
 @property (nonatomic) UIButton *nextButton;
+@property (nonatomic) NIAttributedLabel *agreeTermsOfServiceLabel;
 
-@property (nonatomic) UILabel *hintLabel;
+//@property (nonatomic) UILabel *hintLabel;
 @property (nonatomic) UIView *separator;
 @property (nonatomic) UILabel *alreadyHaveAccountLabel;
 
@@ -61,13 +62,6 @@
     self.title = LOC(@"FLYSignupPageTitle");
     UIFont *titleFont = [UIFont flyFontWithSize:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
-    
-    self.titleLabel = [UILabel new];
-    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.titleLabel.font = [UIFont flyFontWithSize:21];
-    self.titleLabel.textColor = [UIColor flyBlue];
-    self.titleLabel.text = LOC(@"FLYSignupTitle");
-    [self.view addSubview:self.titleLabel];
     
     self.subTitleLabel = [UILabel new];
     self.subTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -113,12 +107,12 @@
         forControlEvents:UIControlEventEditingChanged];
     [self.phoneFieldView addSubview:self.phoneNumberTextField];
     
-    self.hintLabel = [UILabel new];
-    self.hintLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.hintLabel.font = [UIFont flyLightFontWithSize:12];
-    self.hintLabel.textColor = [UIColor flyColorFlySignupGrey];
-    self.hintLabel.text = LOC(@"FLYSignupHintText");
-    [self.view addSubview:self.hintLabel];
+//    self.hintLabel = [UILabel new];
+//    self.hintLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.hintLabel.font = [UIFont flyLightFontWithSize:12];
+//    self.hintLabel.textColor = [UIColor flyColorFlySignupGrey];
+//    self.hintLabel.text = LOC(@"FLYSignupHintText");
+//    [self.view addSubview:self.hintLabel];
     
     self.separator = [UIView new];
     self.separator.translatesAutoresizingMaskIntoConstraints = NO;
@@ -132,12 +126,33 @@
     self.alreadyHaveAccountLabel.text = LOC(@"FLYSignupAlreadyHaveAccount");
     [self.view addSubview:self.alreadyHaveAccountLabel];
     
+    self.agreeTermsOfServiceLabel = [NIAttributedLabel new];
+    self.agreeTermsOfServiceLabel.numberOfLines = 0;
+    self.agreeTermsOfServiceLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.agreeTermsOfServiceLabel.autoresizingMask = UIViewAutoresizingFlexibleDimensions;
+    self.agreeTermsOfServiceLabel.textColor = [UIColor flyColorFlySignupGrey];
+    self.agreeTermsOfServiceLabel.font = [UIFont flyLightFontWithSize:12];
+    
+    self.agreeTermsOfServiceLabel.delegate = self;
+    self.agreeTermsOfServiceLabel.autoDetectLinks = NO;
+    self.agreeTermsOfServiceLabel.text = LOC(@"FLYSignupAgreeTermsOfService");
+    NSRange linkRange = [_agreeTermsOfServiceLabel.text rangeOfString:LOC(@"FLYSignupTermsOfServiceLinkText")];
+    NSRange linkRange2 = [_agreeTermsOfServiceLabel.text rangeOfString:LOC(@"FLYSignupPrivacyPolicyLinkText")];
+    
+    //TODO:add right terms of service and privacy policy link
+    [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:@""]
+                                 range:linkRange];
+    [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:@""]
+                                 range:linkRange2];
+    [self.view addSubview:self.agreeTermsOfServiceLabel];
+    
     [self _addConstranits];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.phoneNumberTextField becomeFirstResponder];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
@@ -145,21 +160,16 @@
 {
     CGFloat separatorHeight = 1.0/[FLYUtilities FLYMainScreenScale];
     
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
         make.top.equalTo(self.view).offset(kTitleTopPadding + kStatusBarHeight + kNavBarHeight);
     }];
     
-    [self.subTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(kSubtitleTopPadding);
-    }];
-    
     [self.phoneFieldView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.subTitleLabel.mas_bottom).offset(kPhoneBackgroundImageViewTopPadding);
-        make.width.equalTo(@(300));
+        make.leading.equalTo(self.view).offset(10);
+        make.trailing.equalTo(self.view).offset(-10);
         make.height.equalTo(@(44));
-        make.centerX.equalTo(self.view);
         
     }];
     
@@ -184,9 +194,10 @@
         make.bottom.equalTo(self.phoneFieldView);
     }];
     
-    [self.hintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.top.equalTo(self.phoneFieldView.mas_bottom).offset(kHintLabelPadding);
+    [self.agreeTermsOfServiceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.phoneFieldView);
+        make.top.equalTo(self.phoneFieldView.mas_bottom).offset(10);
+        make.trailing.equalTo(self.phoneFieldView);
     }];
     
     [self.alreadyHaveAccountLabel mas_makeConstraints:^(MASConstraintMaker *make) {

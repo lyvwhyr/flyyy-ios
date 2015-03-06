@@ -35,10 +35,14 @@
 "FLYSignupEnterPhoneNumberHint" = "Enter phone number";
 "FLYSignupEnterPhoneNumberOKButton" = "Okay";
 "FLYSignupPhoneNumberConfirmationAlert" = "Is this your mobile phone number?";
+"FLYSignupAgreeTermsOfService" = "By signing up, you are indicating that you have read and agreed to our Terms of Service and Privacy Policy";
+"FLYSignupTermsOfServiceLinkText" = "Terms of Service";
+"FLYSignupPrivacyPolicyLinkText" = "Privacy Policy";
 
 // sign up verification code
 "FLYConfirmCodeTitle" = "Did you get our text?";
 "FLYConfirmCodeHint" = "Enter your verification code.";
+"FLYConfirmCodeTextFieldDefaultText" = "Verification code";
 "FLYConfirmCodeConfirmButton" = "Confirm";
 "FLYInvalidPhoneNumberTitle" = "Invalid phone number";
 "FLYInvalidPhoneNumberBodyText" = "Please enter a correct phone number.";
