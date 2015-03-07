@@ -46,8 +46,8 @@
 @property (nonatomic) UIView *separator;
 @property (nonatomic) UILabel *alreadyHaveAccountLabel;
 
-@property (nonatomic) NSString *countryAreaCode;
-@property (nonatomic) NSString *formattedPhoneNumber;
+@property (nonatomic, copy) NSString *countryAreaCode;
+@property (nonatomic, copy) NSString *formattedPhoneNumber;
 
 @end
 

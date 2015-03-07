@@ -14,6 +14,10 @@
 #import "FLYCountrySelectorViewController.h"
 #import "FLYNavigationController.h"
 #import "FLYNavigationBar.h"
+#import "FLYLoginService.h"
+#import "FLYUser.h"
+#import "NSDictionary+FLYAddition.h"
+#import "UICKeyChainStore.h"
 
 #define kTitleTopPadding 20
 #define kLeftIconWidth 50
@@ -37,6 +41,10 @@
 
 @property (nonatomic, copy) NSString *formattedPhoneNumber;
 @property (nonatomic, copy) NSString *unformattedPhoneNumber;
+@property (nonatomic, copy) NSString *countryAreaCode;
+
+//service
+@property (nonatomic) FLYLoginService *loginService;
 
 @end
 
@@ -76,6 +84,7 @@
     [self.countryCodeChooser addTarget:self action:@selector(_countrySelectorSelected) forControlEvents:UIControlEventTouchUpInside];
     self.countryCodeChooser.translatesAutoresizingMaskIntoConstraints = NO;
     [self.phoneNumberView addSubview:self.countryCodeChooser];
+    self.countryAreaCode = [FLYUtilities getCountryDialCode];
     
     self.phoneNumberTextField = [UITextField new];
     self.phoneNumberTextField.translatesAutoresizingMaskIntoConstraints = NO;
@@ -116,6 +125,8 @@
     [self.view addSubview:self.forgetPasswordLabel];
     
     [self _addConstraints];
+    
+    self.loginService = [FLYLoginService loginService];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -192,7 +203,8 @@
     ECPhoneNumberFormatter *formatter = [[ECPhoneNumberFormatter alloc] init];
     NSString *formattedNumber = [formatter stringForObjectValue:self.phoneNumberTextField.text];
     self.phoneNumberTextField.text = formattedNumber;
-    self.formattedPhoneNumber = formattedNumber;
+    
+    self.formattedPhoneNumber = [NSString stringWithFormat:@"%@%@", self.countryAreaCode, formattedNumber];
 }
 
 - (void)_passwordTextFieldDidChange
@@ -212,6 +224,7 @@
     @weakify(self)
     vc.countrySelectedBlock = ^(NSString *countryDialCode) {
         @strongify(self)
+        self.countryAreaCode = countryDialCode;
         [self.countryCodeChooser setLabelText:countryDialCode];
     };
     FLYNavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
@@ -220,6 +233,43 @@
 
 - (void)_loginButtonTapped
 {
+    //get phone number
+    
+    ECPhoneNumberFormatter *formatter = [[ECPhoneNumberFormatter alloc] init];
+    NSString *unformattedPhoneNumber;
+    NSString *error;
+    [formatter getObjectValue:&unformattedPhoneNumber forString:self.formattedPhoneNumber errorDescription:&error];
+    
+    //get password
+    NSString *password = self.passwordTextField.text;
+    
+    FLYLoginUserSuccessBlock successBlock= ^(AFHTTPRequestOperation *operation, id responseObj) {
+        NSString *authToken = [responseObj fly_stringForKey:@"auth_token"];
+        if (!authToken) {
+            UALog(@"Auth token is empty");
+            return;
+        }
+        //store token
+        [FLYAppStateManager sharedInstance].authToken = authToken;
+        [UICKeyChainStore setString:[FLYAppStateManager sharedInstance].authToken forKey:kAuthTokenKey];
+        
+        //init current logged in user
+        NSDictionary *userDict = [responseObj fly_dictionaryForKey:@"user"];
+        if (!userDict) {
+            UALog(@"User is empty");
+            return;
+        }
+        FLYUser *user = [[FLYUser alloc] initWithDictionary:userDict];
+        [FLYAppStateManager sharedInstance].currentUser = user;
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    };
+    
+    FLYLoginUserErrorBlock errorBlock= ^(id responseObj, NSError *error) {
+        
+    };
+    
+    [self.loginService loginWithPhoneNumber:unformattedPhoneNumber password:password success:successBlock error:errorBlock];
     
 }
 

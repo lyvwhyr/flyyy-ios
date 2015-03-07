@@ -41,6 +41,7 @@
 		A60A44F41A8DD42B00BED63A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60A44F31A8DD42B00BED63A /* Foundation.framework */; };
 		A612753F1A2EFB72004D25D3 /* DKCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A612753E1A2EFB72004D25D3 /* DKCircleButton.m */; };
 		A6162C721A318F1100A3B277 /* FLYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6162C711A318F1100A3B277 /* FLYNavigationBar.m */; };
+		A61B6D3B1AAAD7EA00A5B696 /* FLYLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = A61B6D3A1AAAD7EA00A5B696 /* FLYLoginService.m */; };
 		A61D18661A1EE6ED00D188B5 /* FLYAudioStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */; };
 		A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */; };
 		A61D18761A1F27E900D188B5 /* FLYPrePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */; };
@@ -474,6 +475,8 @@
 		A612753E1A2EFB72004D25D3 /* DKCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKCircleButton.m; sourceTree = "<group>"; };
 		A6162C701A318F1100A3B277 /* FLYNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYNavigationBar.h; sourceTree = "<group>"; };
 		A6162C711A318F1100A3B277 /* FLYNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYNavigationBar.m; sourceTree = "<group>"; };
+		A61B6D391AAAD7EA00A5B696 /* FLYLoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYLoginService.h; sourceTree = "<group>"; };
+		A61B6D3A1AAAD7EA00A5B696 /* FLYLoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoginService.m; sourceTree = "<group>"; };
 		A61D18641A1EE6ED00D188B5 /* FLYAudioStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYAudioStateManager.h; sourceTree = "<group>"; };
 		A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYAudioStateManager.m; sourceTree = "<group>"; };
 		A61D18671A1EE70900D188B5 /* FLYAppStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYAppStateManager.h; sourceTree = "<group>"; };
@@ -1828,6 +1831,8 @@
 				A6BAD4081AA57C4D00DB10F7 /* FLYPhoneService.m */,
 				A643AE3D1AA9336D00BF4E0F /* FLYUsersService.h */,
 				A643AE3E1AA9336D00BF4E0F /* FLYUsersService.m */,
+				A61B6D391AAAD7EA00A5B696 /* FLYLoginService.h */,
+				A61B6D3A1AAAD7EA00A5B696 /* FLYLoginService.m */,
 			);
 			name = Services;
 			path = ../Services;
@@ -2668,6 +2673,7 @@
 				A6A0E4B21A1E76110036116E /* FLEXDictionaryExplorerViewController.m in Sources */,
 				A643AEEB1AA9539E00BF4E0F /* NIError.m in Sources */,
 				A6048A401A85E63100C67480 /* EXTSafeCategory.m in Sources */,
+				A61B6D3B1AAAD7EA00A5B696 /* FLYLoginService.m in Sources */,
 				A6A0E4A01A1E76110036116E /* FLEXPropertyEditorViewController.m in Sources */,
 				A6A4EFAD1A2B05C700FD4066 /* FLYGroupListViewController.m in Sources */,
 				A643AEF91AA9539E00BF4E0F /* NIViewRecycler.m in Sources */,

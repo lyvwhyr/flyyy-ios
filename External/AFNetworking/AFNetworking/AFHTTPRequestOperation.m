@@ -21,6 +21,8 @@
 // THE SOFTWARE.
 
 #import "AFHTTPRequestOperation.h"
+#import "NSDictionary+FLYAddition.h"
+#import "PXAlertView.h"
 
 static dispatch_queue_t http_request_operation_processing_queue() {
     static dispatch_queue_t af_http_request_operation_processing_queue;
@@ -143,8 +145,8 @@ static dispatch_group_t http_request_operation_completion_group() {
                         dispatch_group_async(self.completionGroup ?: http_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
                             @strongify(self)
                             //error handling
-                            if (self.responseObject) {
-                                [self _handleErrorWithResponseObject:self.responseObject];
+                            if (responseObject) {
+                                [self _handleErrorWithResponseObject:responseObject];
                             }
                             failure(self.responseObject, self.error);
                         });
@@ -223,7 +225,12 @@ static dispatch_group_t http_request_operation_completion_group() {
 
 - (void)_handleErrorWithResponseObject:(id)responseObj
 {
-    
+    NSInteger code = [responseObj fly_integerForKey:@"code"];
+    if (code == kInvalidPassword) {
+        [PXAlertView showAlertWithTitle:LOC(@"FLYLoginWrongPassword")];
+    } else if (code == kLoginPhoneNotFound) {
+        [PXAlertView showAlertWithTitle:LOC(@"FLYLoginPhoneNumberNotFound")];
+    }
 }
 
 @end
