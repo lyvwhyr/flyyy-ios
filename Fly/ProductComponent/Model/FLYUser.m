@@ -20,7 +20,6 @@
         }
         _userId = [[dict fly_objectOrNilForKey:@"user_id"] stringValue];
         _userName = [dict fly_stringForKey:@"user_name"];
-        _deviceId = [dict fly_stringForKey:@"device_id"];
         _createdAt = [[dict fly_objectOrNilForKey:@"created_at"] stringValue];
     }
     return self;
@@ -30,7 +29,6 @@
 {
     [coder encodeObject:_userId forKey:@"user_id"];
     [coder encodeObject:_userName forKey:@"user_name"];
-    [coder encodeObject:_deviceId forKey:@"device_id"];
     [coder encodeObject:_createdAt forKey:@"created_at"];
 }
 
@@ -39,7 +37,6 @@
     if (self = [super init]) {
         _userId = [aDecoder decodeObjectForKey:@"user_id"];
         _userName = [aDecoder decodeObjectForKey:@"user_name"];
-        _deviceId = [aDecoder decodeObjectForKey:@"device_id"];
         _createdAt = [aDecoder decodeObjectForKey:@"created_at"];
     }
     return self;

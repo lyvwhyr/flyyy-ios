@@ -14,6 +14,7 @@
 #import "FLYSignupPhoneNumberViewController.h"
 #import "FLYNavigationController.h"
 #import "FLYLoginSignupViewController.h"
+#import "UICKeyChainStore.h"
 
 @implementation FLYAppStateManager
 
@@ -32,10 +33,19 @@
     if (self = [super init]) {
         _isAutoPlayEnabled = NO;
         _deviceId = [UIDevice uniqueDeviceIdentifier];
+        [self _initSession];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_requireSignupOrLogin:) name:kRequireSignupNotification object:nil];
         
     }
     return self;
+}
+
+- (void)_initSession
+{
+    NSString *authToken = [UICKeyChainStore stringForKey:kAuthTokenKey];
+    if (authToken) {
+        _authToken = authToken;
+    }
 }
 
 - (void)_requireSignupOrLogin:(NSNotification *)notification

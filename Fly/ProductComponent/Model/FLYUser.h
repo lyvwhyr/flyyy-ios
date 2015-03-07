@@ -12,7 +12,6 @@
 
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *userName;
-@property (nonatomic, copy) NSString *deviceId;
 @property (nonatomic, copy) NSString *createdAt;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

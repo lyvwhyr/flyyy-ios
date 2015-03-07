@@ -451,6 +451,10 @@ forHTTPHeaderField:(NSString *)field
         }
     }];
 
+    if ([FLYAppStateManager sharedInstance].authToken) {
+        [mutableRequest setValue:[FLYAppStateManager sharedInstance].authToken forHTTPHeaderField:@"X-Flyy-Auth"];
+    }
+    
     if (parameters) {
         NSString *query = nil;
         if (self.queryStringSerialization) {

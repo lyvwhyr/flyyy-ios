@@ -12,7 +12,7 @@
 
 + (instancetype)phoneServiceWithPhoneNumber:(NSString *)phoneNumber
 {
-    return [[FLYPhoneService alloc] initWithEndpoint:@"users/phones"];
+    return [[FLYPhoneService alloc] initWithEndpoint:@"phones"];
 }
 
 - (void)serviceSendCodeWithPhone:(NSString *)number success:(FLYSendCodeSuccessBlock)successBlock error:(FLYSendCodeErrorBlock)errorBlock

@@ -12,6 +12,8 @@
 #import "PXAlertView.h"
 #import "FLYUsersService.h"
 #import "PXAlertView.h"
+#import "UICKeyChainStore.h"
+#import "FLYUser.h"
 
 #define kTitleTopPadding 20
 
@@ -159,7 +161,14 @@
         if (!responseObj) {
             UALog(@"responseObj is empty");
         }
-        [FLYAppStateManager sharedInstance].authToken = [responseObj objectForKey:@"auth_token"];
+        if ([responseObj objectForKey:@"auth_token"]) {
+            [FLYAppStateManager sharedInstance].authToken = [responseObj objectForKey:@"auth_token"];
+            [UICKeyChainStore setString:[FLYAppStateManager sharedInstance].authToken forKey:kAuthTokenKey];
+        }
+        if ([responseObj objectForKey:@"user"]) {
+            FLYUser *user = [[FLYUser alloc] initWithDictionary:[responseObj objectForKey:@"user"]];
+            [FLYAppStateManager sharedInstance].currentUser = user;
+        }
         [self dismissViewControllerAnimated:YES completion:nil];
     };
     

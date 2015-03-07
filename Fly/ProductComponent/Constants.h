@@ -40,3 +40,8 @@
 #define kTrackingPropertyStatusCode                             @"status_code"
 #define kTrackingPropertyErrorMessage                           @"error_message"
 #define kTrackingPropertyServerResponseBody                     @"server_response_body"
+
+//Auth
+#define kKeyChainServiceURL @"flyyapp.com"
+#define kAuthTokenKey @"kAuthTokenKey"
+#define kLoggedInUserDefaultKey @"kLoggedInUserDefaultKey"

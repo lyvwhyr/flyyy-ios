@@ -10,19 +10,18 @@
 #import "UICKeyChainStore.h"
 
 #define kUniqueDeviceId @"uniqueId"
-#define kServiceURL @"flyyapp.com"
 
 @implementation UIDevice (FLYAddition)
 
 + (NSString *)uniqueDeviceIdentifier
 {
-    NSString *deviceUUID = [UICKeyChainStore stringForKey:kUniqueDeviceId service:kServiceURL];
+    NSString *deviceUUID = [UICKeyChainStore stringForKey:kUniqueDeviceId service:kKeyChainServiceURL];
     if (!deviceUUID) {
         CFUUIDRef uuidRef = CFUUIDCreate(NULL);
         CFStringRef uuidStringRef = CFUUIDCreateString(NULL, uuidRef);
         CFRelease(uuidRef);
         deviceUUID = [NSString stringWithFormat:@"%@",[NSString stringWithString:(__bridge_transfer NSString *)uuidStringRef]];
-        [UICKeyChainStore setString:deviceUUID forKey:kUniqueDeviceId service:kServiceURL];
+        [UICKeyChainStore setString:deviceUUID forKey:kUniqueDeviceId service:kKeyChainServiceURL];
     }
     return deviceUUID;
 }
