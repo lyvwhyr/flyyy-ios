@@ -148,7 +148,7 @@ static dispatch_group_t http_request_operation_completion_group() {
                             if (responseObject) {
                                 [self _handleErrorWithResponseObject:responseObject];
                             }
-                            failure(self.responseObject, self.error);
+                            failure(responseObject, self.error);
                         });
                     }
                 } else {
@@ -225,12 +225,14 @@ static dispatch_group_t http_request_operation_completion_group() {
 
 - (void)_handleErrorWithResponseObject:(id)responseObj
 {
-    NSInteger code = [responseObj fly_integerForKey:@"code"];
-    if (code == kInvalidPassword) {
-        [PXAlertView showAlertWithTitle:LOC(@"FLYLoginWrongPassword")];
-    } else if (code == kLoginPhoneNotFound) {
-        [PXAlertView showAlertWithTitle:LOC(@"FLYLoginPhoneNumberNotFound")];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSInteger code = [responseObj fly_integerForKey:@"code"];
+        if (code == kInvalidPassword) {
+            [PXAlertView showAlertWithTitle:LOC(@"FLYLoginWrongPassword")];
+        } else if (code == kLoginPhoneNotFound) {
+            [PXAlertView showAlertWithTitle:LOC(@"FLYLoginPhoneNumberNotFound")];
+        }
+    });
 }
 
 @end

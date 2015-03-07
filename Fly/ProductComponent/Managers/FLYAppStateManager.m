@@ -15,6 +15,14 @@
 #import "FLYNavigationController.h"
 #import "FLYLoginSignupViewController.h"
 #import "UICKeyChainStore.h"
+#import "FLYUsersService.h"
+#import "NSDictionary+FLYAddition.h"
+
+@interface FLYAppStateManager()
+
+@property (nonatomic) FLYUsersService *usersService;
+
+@end
 
 @implementation FLYAppStateManager
 

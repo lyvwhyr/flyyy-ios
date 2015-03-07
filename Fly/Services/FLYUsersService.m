@@ -30,7 +30,17 @@
         errorBlock(responseObj, error);
         UALog(@"create user error %@", error);
     }];
-    
+}
+
+- (void)getMeWithsuccessBlock:(FLYGetMeSuccessBlock)successBlock error:(FLYGetMeErrorBlock)errorBlock
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *endpoint = [NSString stringWithFormat:@"%@/%@", self.endpoint, @"me"];
+    [manager GET:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        successBlock(operation, responseObject);
+    } failure:^(id responseObj, NSError *error) {
+        errorBlock(responseObj, error);
+    }];
 }
 
 

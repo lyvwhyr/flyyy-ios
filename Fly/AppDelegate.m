@@ -18,6 +18,7 @@
 #import "FLYGroupManager.h"
 #import "FLYAudioStateManager.h"
 #import "FLYAudioManager.h"
+#import "FLYRequestManager.h"
 
 #define MIXPANEL_TOKEN @"4ce141a1dcd56132894230aff97b282b"
 
@@ -41,6 +42,7 @@
         [FLYAppStateManager sharedInstance];
         [FLYFileManager sharedInstance];
         [FLYGroupManager sharedInstance];
+        [FLYRequestManager sharedInstance];
 //        [FLYAudioManager sharedInstance];
     });
     
