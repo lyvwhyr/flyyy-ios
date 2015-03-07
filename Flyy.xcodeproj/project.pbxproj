@@ -42,6 +42,8 @@
 		A612753F1A2EFB72004D25D3 /* DKCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A612753E1A2EFB72004D25D3 /* DKCircleButton.m */; };
 		A6162C721A318F1100A3B277 /* FLYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6162C711A318F1100A3B277 /* FLYNavigationBar.m */; };
 		A61B6D3B1AAAD7EA00A5B696 /* FLYLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = A61B6D3A1AAAD7EA00A5B696 /* FLYLoginService.m */; };
+		A61B6D411AAAE3DD00A5B696 /* RNLoadingButton.podspec in Resources */ = {isa = PBXBuildFile; fileRef = A61B6D3E1AAAE3DD00A5B696 /* RNLoadingButton.podspec */; };
+		A61B6D421AAAE3DD00A5B696 /* RNLoadingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A61B6D401AAAE3DD00A5B696 /* RNLoadingButton.m */; };
 		A61D18661A1EE6ED00D188B5 /* FLYAudioStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */; };
 		A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */; };
 		A61D18761A1F27E900D188B5 /* FLYPrePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */; };
@@ -477,6 +479,9 @@
 		A6162C711A318F1100A3B277 /* FLYNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYNavigationBar.m; sourceTree = "<group>"; };
 		A61B6D391AAAD7EA00A5B696 /* FLYLoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYLoginService.h; sourceTree = "<group>"; };
 		A61B6D3A1AAAD7EA00A5B696 /* FLYLoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoginService.m; sourceTree = "<group>"; };
+		A61B6D3E1AAAE3DD00A5B696 /* RNLoadingButton.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RNLoadingButton.podspec; sourceTree = "<group>"; };
+		A61B6D3F1AAAE3DD00A5B696 /* RNLoadingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNLoadingButton.h; sourceTree = "<group>"; };
+		A61B6D401AAAE3DD00A5B696 /* RNLoadingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNLoadingButton.m; sourceTree = "<group>"; };
 		A61D18641A1EE6ED00D188B5 /* FLYAudioStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYAudioStateManager.h; sourceTree = "<group>"; };
 		A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYAudioStateManager.m; sourceTree = "<group>"; };
 		A61D18671A1EE70900D188B5 /* FLYAppStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYAppStateManager.h; sourceTree = "<group>"; };
@@ -1183,6 +1188,24 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		A61B6D3C1AAAE3DD00A5B696 /* RNLoadingButton */ = {
+			isa = PBXGroup;
+			children = (
+				A61B6D3D1AAAE3DD00A5B696 /* 0.0.1 */,
+				A61B6D3F1AAAE3DD00A5B696 /* RNLoadingButton.h */,
+				A61B6D401AAAE3DD00A5B696 /* RNLoadingButton.m */,
+			);
+			path = RNLoadingButton;
+			sourceTree = "<group>";
+		};
+		A61B6D3D1AAAE3DD00A5B696 /* 0.0.1 */ = {
+			isa = PBXGroup;
+			children = (
+				A61B6D3E1AAAE3DD00A5B696 /* RNLoadingButton.podspec */,
+			);
+			path = 0.0.1;
+			sourceTree = "<group>";
+		};
 		A61D18631A1EE6C500D188B5 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1657,6 +1680,7 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A61B6D3C1AAAE3DD00A5B696 /* RNLoadingButton */,
 				A643AE9F1AA9539E00BF4E0F /* Nimbus */,
 				A6A70CD81AA4597A0000F784 /* ECPhoneNumberFormatter */,
 				A6450B081A998A00009EF0A3 /* AFSoundManager */,
@@ -2462,6 +2486,7 @@
 				A652D21B1A7F3ADD00765D45 /* icon_filter_feed@2x.png in Resources */,
 				A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */,
 				A652D21C1A7F3ADD00765D45 /* icon_flag_post.png in Resources */,
+				A61B6D411AAAE3DD00A5B696 /* RNLoadingButton.podspec in Resources */,
 				A651BD901A4985F20081A1E0 /* SVProgressHUD.bundle in Resources */,
 				A652D2171A7F3ADD00765D45 /* icon_feed_group@2x.png in Resources */,
 				A652D2401A7F3ADD00765D45 /* icon_nav_filter.png in Resources */,
@@ -2652,6 +2677,7 @@
 				A65ED98C1A91B4F600E10D5C /* FLYReply.m in Sources */,
 				A6A0E49B1A1E76110036116E /* FLEXDefaultEditorViewController.m in Sources */,
 				A648C0F21A19C65B00FF1744 /* FLYTabBarView.m in Sources */,
+				A61B6D421AAAE3DD00A5B696 /* RNLoadingButton.m in Sources */,
 				A648C0EA1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				A62B25571A8FECFF007E11C3 /* UIView+Glow.m in Sources */,
 				A6A0E49E1A1E76110036116E /* FLEXIvarEditorViewController.m in Sources */,

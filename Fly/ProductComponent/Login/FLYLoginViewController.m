@@ -18,6 +18,7 @@
 #import "FLYUser.h"
 #import "NSDictionary+FLYAddition.h"
 #import "UICKeyChainStore.h"
+#import "RNLoadingButton.h"
 
 #define kTitleTopPadding 20
 #define kLeftIconWidth 50
@@ -37,7 +38,7 @@
 @property (nonatomic) UITextField *passwordTextField;
 @property (nonatomic) UILabel *forgetPasswordLabel;
 
-@property (nonatomic) UIButton *loginButton;
+@property (nonatomic) RNLoadingButton *loginButton;
 
 @property (nonatomic, copy) NSString *formattedPhoneNumber;
 @property (nonatomic, copy) NSString *unformattedPhoneNumber;
@@ -74,8 +75,16 @@
     self.phoneNumberView.layer.borderWidth = borderWidth;
     [self.view addSubview:self.phoneNumberView];
     
-    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 44)];
+//    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 44)];
+    self.loginButton = [[RNLoadingButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 44)];
+    self.loginButton.hideTextWhenLoading = NO;
+    self.loginButton.loading = NO;
     self.loginButton.backgroundColor = [UIColor flyColorFlySignupGrey];
+    [self.loginButton setActivityIndicatorAlignment:RNLoadingButtonAlignmentLeft];
+    [self.loginButton setActivityIndicatorStyle:UIActivityIndicatorViewStyleGray forState:UIControlStateDisabled];
+    self.loginButton.activityIndicatorEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+  
+    
     [self.loginButton setEnabled:NO];
     [self.loginButton setTitle:LOC(@"FLYLoginButtonText") forState:UIControlStateNormal];
     [self.loginButton addTarget:self action:@selector(_loginButtonTapped) forControlEvents:UIControlEventTouchUpInside];
@@ -233,6 +242,10 @@
 
 - (void)_loginButtonTapped
 {
+    [self.loginButton setTitle:@"Logging In" forState:UIControlStateDisabled];
+    self.loginButton.enabled = NO;
+    self.loginButton.loading = YES;
+    
     //get phone number
     
     ECPhoneNumberFormatter *formatter = [[ECPhoneNumberFormatter alloc] init];
@@ -244,6 +257,10 @@
     NSString *password = self.passwordTextField.text;
     
     FLYLoginUserSuccessBlock successBlock= ^(AFHTTPRequestOperation *operation, id responseObj) {
+        self.loginButton.enabled = YES;
+        self.loginButton.loading = NO;
+        [self.loginButton setTitle:@"Login" forState:UIControlStateDisabled];
+        
         NSString *authToken = [responseObj fly_stringForKey:@"auth_token"];
         if (!authToken) {
             UALog(@"Auth token is empty");
@@ -266,7 +283,9 @@
     };
     
     FLYLoginUserErrorBlock errorBlock= ^(id responseObj, NSError *error) {
-        
+        self.loginButton.enabled = YES;
+        self.loginButton.loading = NO;
+        [self.loginButton setTitle:@"Login" forState:UIControlStateDisabled];
     };
     
     [self.loginService loginWithPhoneNumber:unformattedPhoneNumber password:password success:successBlock error:errorBlock];
