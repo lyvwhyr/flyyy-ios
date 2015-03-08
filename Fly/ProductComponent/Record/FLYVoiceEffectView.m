@@ -10,6 +10,11 @@
 #import "UIColor+FLYAddition.h"
 #import "UIFont+FLYAddition.h"
 
+typedef NS_ENUM(NSInteger, FLYVoiceFilterEffect) {
+    FLYVoiceEffectMe = 0,
+    FLYVoiceEffectDisguise
+};
+
 @interface FLYVoiceEffectView()
 
 @property (nonatomic) UILabel *voiceEffectTitleLabel;
@@ -17,6 +22,8 @@
 @property (nonatomic) UILabel *meLabel;
 @property (nonatomic) UIButton *disguseButton;
 @property (nonatomic) UILabel *disguseLabel;
+
+@property (nonatomic) FLYVoiceFilterEffect selectedEffect;
 
 @end
 
@@ -35,8 +42,8 @@
         //me button and label
         _meButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_meButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateNormal];
-        [_meButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateSelected| UIControlStateHighlighted];
-        [_meButton setSelected:YES];
+//        [_meButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateSelected| UIControlStateHighlighted];
+        [_meButton addTarget:self action:@selector(_meButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_meButton];
         
         _meLabel = [UILabel new];
@@ -48,7 +55,8 @@
         //disguise button and label
         _disguseButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_disguseButton setImage:[UIImage imageNamed:@"icon_record_unselect"] forState:UIControlStateNormal];
-        [_disguseButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateSelected| UIControlStateHighlighted];
+//        [_disguseButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateSelected| UIControlStateHighlighted];
+        [_disguseButton addTarget:self action:@selector(_disguseButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_disguseButton];
         
         _disguseLabel = [UILabel new];
@@ -57,6 +65,7 @@
         _disguseLabel.text = LOC(@"FLYRecordingDisguise");
         [self addSubview:_disguseLabel];
         
+        _selectedEffect = FLYVoiceEffectMe;
     }
     return self;
 }
@@ -89,6 +98,40 @@
     }];
     
     [super updateConstraints];
+}
+
+#pragma mark - button tap
+
+- (void)_meButtonTapped
+{
+    if (self.selectedEffect == FLYVoiceEffectMe) {
+        return;
+    }
+
+    // deselect disguseButton
+    [self.disguseButton setImage:[UIImage imageNamed:@"icon_record_unselect"] forState:UIControlStateNormal];
+    self.disguseLabel.textColor = [UIColor flyBlue];
+
+    // select me
+    self.selectedEffect = FLYVoiceEffectMe;
+    [self.meButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateNormal];
+    self.meLabel.textColor = [UIColor flyGreen];
+}
+
+- (void)_disguseButtonTapped
+{
+    if (self.selectedEffect == FLYVoiceEffectDisguise) {
+        return;
+    }
+    
+    // deselect disguseButton
+    [self.meButton setImage:[UIImage imageNamed:@"icon_record_unselect"] forState:UIControlStateNormal];
+    self.meLabel.textColor = [UIColor flyBlue];
+    
+    // select me
+    self.selectedEffect = FLYVoiceEffectDisguise;
+    [self.disguseButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateNormal];
+    self.disguseLabel.textColor = [UIColor greenColor];
 }
 
 

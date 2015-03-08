@@ -37,6 +37,7 @@
 #import "FLYAudioManager.h"
 #import "FLYVoiceFilterManager.h"
 #import "FLYVoiceEffectView.h"
+#import "SDiPhoneVersion.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -529,9 +530,17 @@
 
 -(void)updateViewConstraints
 {
+    CGFloat userActionOffset = -50;
+    CGFloat filterViewTopOffset = 20;
+    
+    if ([SDiPhoneVersion deviceVersion] == iPhone6Plus) {
+        userActionOffset = -100;
+        filterViewTopOffset = 70;
+    }
+    
     [self.userActionImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.centerY.equalTo(self.view).offset(-50);
+        make.centerY.equalTo(self.view).offset(userActionOffset);
     }];
     
     if (self.glowView) {
@@ -565,15 +574,15 @@
             make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
             make.height.equalTo(@44);
         }];
-    }
-    
-    if (self.filterView) {
-        [self.filterView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.userActionImageView.mas_bottom).offset(20);
-            make.leading.equalTo(self.view);
-            make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
-            make.height.equalTo(@60);
-        }];
+        
+        if (self.filterView) {
+            [self.filterView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.userActionImageView.mas_bottom).offset(filterViewTopOffset);
+                make.leading.equalTo(self.view);
+                make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
+                make.bottom.equalTo(self.recordBottomBar.mas_top);
+            }];
+        }
     }
     
     if (self.waver) {
