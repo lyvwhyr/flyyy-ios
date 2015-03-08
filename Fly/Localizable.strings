@@ -64,4 +64,10 @@
 "FLYSignupUserNameAlreadyExist" = "User name already exists";
 "FLYSignupPhoneNumberAlreadyExist" = "The phone number is already registered by another user";
 
+//Recording
+"FLYRecordingVoiceEffect" = "Voice effect";
+"FLYRecordingMe" = "Me";
+"FLYRecordingDisguise" = "Disguise";
+
+
 

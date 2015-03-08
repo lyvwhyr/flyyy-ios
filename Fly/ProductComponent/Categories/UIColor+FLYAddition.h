@@ -24,7 +24,7 @@
 + (UIColor *)tableHeaderTextGrey;
 + (UIColor *)flyColorPlayAnimation;
 + (UIColor *)flyColorRecordingTimer;
-+ (UIColor *)flyColorPostButtonGreen;
++ (UIColor *)flyGreen;
 + (UIColor *)flyColorFlyGroupNameGrey;
 + (UIColor *)flyColorFlySelectGroupGrey;
 + (UIColor *)flyColorFlyRecordingWave;

@@ -273,6 +273,7 @@
 		A6799C821AABDE47003DAE5B /* libZtx_iOS-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6799C811AABDE47003DAE5B /* libZtx_iOS-fat.a */; };
 		A6799C881AABDFB7003DAE5B /* FLYVoiceFilterManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6799C871AABDFB7003DAE5B /* FLYVoiceFilterManager.mm */; };
 		A6799C8B1AABE048003DAE5B /* Utilities.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6799C8A1AABE048003DAE5B /* Utilities.mm */; };
+		A6799C8E1AABEB3D003DAE5B /* FLYVoiceEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6799C8D1AABEB3D003DAE5B /* FLYVoiceEffectView.m */; };
 		A67A5E851A70CBA60098DA23 /* FLYServerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A67A5E841A70CBA60098DA23 /* FLYServerConfig.m */; };
 		A67CC61C1A7DDE360092E500 /* topics.json in Resources */ = {isa = PBXBuildFile; fileRef = A67CC61B1A7DDE360092E500 /* topics.json */; };
 		A67CC61F1A7DF1730092E500 /* CoreGraphics+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A67CC61E1A7DF1730092E500 /* CoreGraphics+FLYAddition.m */; };
@@ -835,6 +836,8 @@
 		A6799C871AABDFB7003DAE5B /* FLYVoiceFilterManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLYVoiceFilterManager.mm; sourceTree = "<group>"; };
 		A6799C891AABE048003DAE5B /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		A6799C8A1AABE048003DAE5B /* Utilities.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Utilities.mm; sourceTree = "<group>"; };
+		A6799C8C1AABEB3D003DAE5B /* FLYVoiceEffectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYVoiceEffectView.h; sourceTree = "<group>"; };
+		A6799C8D1AABEB3D003DAE5B /* FLYVoiceEffectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYVoiceEffectView.m; sourceTree = "<group>"; };
 		A67A5E831A70CBA60098DA23 /* FLYServerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYServerConfig.h; sourceTree = "<group>"; };
 		A67A5E841A70CBA60098DA23 /* FLYServerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYServerConfig.m; sourceTree = "<group>"; };
 		A67A5E881A70CC450098DA23 /* FLYEndPointConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLYEndPointConstant.h; sourceTree = "<group>"; };
@@ -2193,6 +2196,8 @@
 				A6852B811A875EE70093C75C /* FLYRecordBottomBar.m */,
 				A66D98541A883B5A00C3D75A /* FLYPrePostHeaderView.h */,
 				A66D98551A883B5A00C3D75A /* FLYPrePostHeaderView.m */,
+				A6799C8C1AABEB3D003DAE5B /* FLYVoiceEffectView.h */,
+				A6799C8D1AABEB3D003DAE5B /* FLYVoiceEffectView.m */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -2680,6 +2685,7 @@
 				A64BDACB1A7B647600B46F18 /* FLYURLConstants.h in Sources */,
 				A6048A3F1A85E63100C67480 /* EXTRuntimeExtensions.m in Sources */,
 				A643AEE61AA9539E00BF4E0F /* NIButtonUtilities.m in Sources */,
+				A6799C8E1AABEB3D003DAE5B /* FLYVoiceEffectView.m in Sources */,
 				A6A0E4BD1A1E76110036116E /* FLEXUtility.m in Sources */,
 				A67A5E851A70CBA60098DA23 /* FLYServerConfig.m in Sources */,
 				A6A0E4B51A1E76110036116E /* FLEXObjectExplorerFactory.m in Sources */,

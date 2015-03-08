@@ -36,6 +36,7 @@
 #import "STKAudioPlayer.h"
 #import "FLYAudioManager.h"
 #import "FLYVoiceFilterManager.h"
+#import "FLYVoiceEffectView.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -50,23 +51,23 @@
 
 @property (nonatomic) UIBarButtonItem *rightNavigationButton;
 
-@property (nonatomic) FLYCircleView *innerCircleView;
-@property (nonatomic) FLYCircleView *outerCircleView;
 @property (nonatomic) UIImageView *userActionImageView;
 @property (nonatomic) UIImageView *glowView;
 @property (nonatomic) UILabel *recordedTimeLabel;
 @property (nonatomic) UILabel *remainingTimeLabel;
 @property (nonatomic) SVPulsingAnnotationView *pulsingView;
 @property (nonatomic, weak) PulsingHaloLayer *halo;
+
+//Record complete state
 @property (nonatomic) UIButton *trashButton;
 @property (nonatomic) FLYRecordBottomBar *recordBottomBar;
 @property (nonatomic) Waver *waver;
+@property (nonatomic) FLYVoiceEffectView *filterView;
 
 @property (nonatomic) FLYRecordState currentState;
 @property (nonatomic) NSTimer *recordTimer;
 @property (nonatomic) NSTimer *playbackTimer;
 @property (nonatomic) PulsingHaloLayer *pulsingHaloLayer;
-@property (nonatomic) DKCircleButton *voiceFilterButton;
 
 //Post reply progress hud
 @property (nonatomic) JGProgressHUD *progressHUD;
@@ -335,6 +336,9 @@
     self.recordBottomBar = nil;
     _currentState = FLYRecordInitialState;
     
+    [self.filterView removeFromSuperview];
+    self.filterView = nil;
+    
     [_userActionImageView removeFromSuperview];
     _userActionImageView = nil;
     
@@ -418,14 +422,17 @@
     self.recordedTimeLabel = nil;
     self.remainingTimeLabel = nil;
     
-    _innerCircleView.hidden = YES;
-    [_outerCircleView setupLayerFillColor:[UIColor whiteColor] strokeColor:[UIColor flyLightGreen]];
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_play"]];
     
     [self.recordBottomBar removeFromSuperview];
     self.recordBottomBar = nil;
     self.recordBottomBar = [FLYRecordBottomBar new];
     [self.view addSubview:self.recordBottomBar];
+    
+    [self.filterView removeFromSuperview];
+    self.filterView = nil;
+    self.filterView = [FLYVoiceEffectView new];
+    [self.view addSubview:self.filterView];
     
     self.recordBottomBar.delegate = self;
     [self loadRightBarButton];
@@ -557,6 +564,15 @@
             make.bottom.equalTo(self.view);
             make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
             make.height.equalTo(@44);
+        }];
+    }
+    
+    if (self.filterView) {
+        [self.filterView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.userActionImageView.mas_bottom).offset(20);
+            make.leading.equalTo(self.view);
+            make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
+            make.height.equalTo(@60);
         }];
     }
     

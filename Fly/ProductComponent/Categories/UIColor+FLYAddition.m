@@ -21,7 +21,7 @@
 #define kColorFlyTableHeaderTextGrey                    @"#9e9e9e"
 #define kColorFlyPlayAnimation                          @"#60BD88"
 #define kColorRecordingTimer                            @"#C2C2C2"
-#define kColorPostButtonGreen                           @"#45BB77"
+#define kColorGreen                                     @"#45BB77"
 #define kColorFlyBackgroundColorBlue                    @"#4CA8D3"
 #define kColorFlyGroupNameGrey                          @"#565252"
 #define kColorFlySelectGroupGrey                        @"#979797"
@@ -108,9 +108,9 @@
     return [self colorWithHexString:kColorRecordingTimer];
 }
 
-+ (UIColor *)flyColorPostButtonGreen
++ (UIColor *)flyGreen
 {
-    return [self colorWithHexString:kColorPostButtonGreen];
+    return [self colorWithHexString:kColorGreen];
 }
 
 + (UIColor *)flyColorFlyGroupNameGrey
