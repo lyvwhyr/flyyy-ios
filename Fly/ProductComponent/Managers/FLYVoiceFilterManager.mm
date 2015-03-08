@@ -61,7 +61,7 @@ double gExecTimeTotal = 0.;
 {
     
     
-    int numChannels = (int)ZtxValidateNumChannels(1);		// ZtxLE allows mono only
+    int numChannels = (int)ZtxValidateNumChannels(2);		// ZtxLE allows mono only
     float sampleRate = 44100.;
     
     // open input file
@@ -72,14 +72,14 @@ double gExecTimeTotal = 0.;
     
     // ZTX parameters
     // Here we set our time an pitch manipulation values
-    float time      = 1.2;                 // 115% length
-    float pitch     = pow(2., -2/12.);     // pitch shift (0 semitones)
-    float formant   = pow(2., -2/12.);    // formant shift (0 semitones). Note formants are reciprocal to pitch in natural transposing
+    float time      = 1;                 // 115% length
+    float pitch     = pow(2., 3/12.);     // pitch shift (0 semitones)
+    float formant   = pow(2., 0/12.);    // formant shift (0 semitones). Note formants are reciprocal to pitch in natural transposing
     
     // First we set up ZTX to process numChannels of audio at 44.1kHz
     // N.b.: The fastest option is kZtxLambdaPreview / kZtxQualityPreview, best is kZtxLambda3, kZtxQualityBest
     // The probably best *default* option for general purpose signals is kZtxLambda3 / kZtxQualityGood
-    void *ztx = ZtxCreate(kZtxLambdaPreview, kZtxQualityPreview, numChannels, sampleRate, &myReadData, (__bridge void*)self);
+    void *ztx = ZtxCreate(kZtxLambda2, kZtxQualityBetter, numChannels, sampleRate, &myReadData, (__bridge void*)self);
     //	void *ztx = ZtxCreate(kZtxLambda3, kZtxQualityBest, numChannels, sampleRate, &myReadData);
     if (!ztx) {
         printf("!! ERROR !!\n\n\tCould not create ZTX instance\n\tCheck number of channels and sample rate!\n");

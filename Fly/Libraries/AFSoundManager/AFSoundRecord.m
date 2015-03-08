@@ -41,10 +41,6 @@
         
         _recorder.meteringEnabled = YES;
         
-        
-//        AVAudioSession *session = [AVAudioSession sharedInstance];
-//        [session setCategory:AVAudioSessionCategoryRecord error:nil];
-//        [session setActive:YES error:nil];
         NSError *error;
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:&error];
         [_recorder prepareToRecord];
@@ -62,6 +58,9 @@
 -(void)saveRecording {
     
     [_recorder stop];
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [session setActive:NO error:nil];
 }
 
 -(void)cancelCurrentRecording {
