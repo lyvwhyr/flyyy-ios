@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, FLYVoiceFilterEffect) {
+    FLYVoiceEffectMe = 0,
+    FLYVoiceEffectDisguise
+};
+
 @interface FLYVoiceEffectView : UIView
 
 @end

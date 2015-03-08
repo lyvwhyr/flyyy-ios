@@ -10,11 +10,6 @@
 #import "UIColor+FLYAddition.h"
 #import "UIFont+FLYAddition.h"
 
-typedef NS_ENUM(NSInteger, FLYVoiceFilterEffect) {
-    FLYVoiceEffectMe = 0,
-    FLYVoiceEffectDisguise
-};
-
 @interface FLYVoiceEffectView()
 
 @property (nonatomic) UILabel *voiceEffectTitleLabel;
@@ -42,7 +37,6 @@ typedef NS_ENUM(NSInteger, FLYVoiceFilterEffect) {
         //me button and label
         _meButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_meButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateNormal];
-//        [_meButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateSelected| UIControlStateHighlighted];
         [_meButton addTarget:self action:@selector(_meButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_meButton];
         
@@ -55,7 +49,6 @@ typedef NS_ENUM(NSInteger, FLYVoiceFilterEffect) {
         //disguise button and label
         _disguseButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_disguseButton setImage:[UIImage imageNamed:@"icon_record_unselect"] forState:UIControlStateNormal];
-//        [_disguseButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateSelected| UIControlStateHighlighted];
         [_disguseButton addTarget:self action:@selector(_disguseButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_disguseButton];
         
@@ -131,7 +124,7 @@ typedef NS_ENUM(NSInteger, FLYVoiceFilterEffect) {
     // select me
     self.selectedEffect = FLYVoiceEffectDisguise;
     [self.disguseButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateNormal];
-    self.disguseLabel.textColor = [UIColor greenColor];
+    self.disguseLabel.textColor = [UIColor flyGreen];
 }
 
 

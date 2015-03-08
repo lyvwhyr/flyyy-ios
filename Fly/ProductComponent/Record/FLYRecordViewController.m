@@ -328,7 +328,7 @@
     [self.levelsTimer invalidate];
     self.levelsTimer = nil;
     
-    [[FLYAudioStateManager sharedInstance] removePlayer];
+    [[FLYAudioManager sharedInstance].audioPlayer stop];
     
     [_trashButton removeFromSuperview];
     _trashButton = nil;
@@ -660,7 +660,7 @@
 
 - (void)didFinishPlayingWithQueueItemId:(SampleQueueId *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
 {
-    if (queueItemId.itemType != FLYPlayableItemRecording) {
+    if (queueItemId.itemType != FLYPlayableItemRecording || stopReason == STKAudioPlayerStopReasonUserAction) {
         return;
     }
     
