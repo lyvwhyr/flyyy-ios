@@ -42,7 +42,7 @@
 #define kFilterModalHeight 80
 #define kMaxRetry 3
 #define kTimeLabelTopPadding 30
-#define kMinimalRecordingLength 5
+//#define kMinimalRecordingLength 5
 #define kMaxRecordTime 60
 
 @interface FLYRecordViewController ()<FLYRecordBottomBarDelegate, JGProgressHUDDelegate, FLYAudioManagerDelegate>
@@ -589,11 +589,11 @@
         {
             [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"recording_page" component:nil element:@"recording_button" action:@"click"];
             
-            if (self.recordingType == RecordingForTopic && self.audioLength <= kMinimalRecordingLength) {
-                [Dialog simpleToast:[NSString stringWithFormat:LOC(@"FLYLessThanMinimalRecordingLength"), kMinimalRecordingLength] withDuration:1.0f];
-                [self _setupInitialViewState];
-                return;
-            }
+//            if (self.recordingType == RecordingForTopic && self.audioLength <= kMinimalRecordingLength) {
+//                [Dialog simpleToast:[NSString stringWithFormat:LOC(@"FLYLessThanMinimalRecordingLength"), kMinimalRecordingLength] withDuration:1.0f];
+//                [self _setupInitialViewState];
+//                return;
+//            }
             
             _currentState = FLYRecordCompleteState;
             [self _setupCompleteViewState];

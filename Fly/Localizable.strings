@@ -41,6 +41,7 @@
 "FLYSignupAgreeTermsOfService" = "By signing up, you are indicating that you have read and agreed to our Terms of Service and Privacy Policy";
 "FLYSignupTermsOfServiceLinkText" = "Terms of Service";
 "FLYSignupPrivacyPolicyLinkText" = "Privacy Policy";
+"FLYSignupNotValidPhoneNumber" = "Not a valid phone number";
 
 // sign up verification code
 "FLYConfirmCodeTitle" = "Did you get our text?";

@@ -21,6 +21,7 @@
 #import "FLYPhoneService.h"
 #import "FLYSignupConfirmCodeViewController.h"
 #import "NBPhoneNumberUtil.h"
+#import "NSDictionary+FLYAddition.h"
 
 #define kTitleTopPadding 10
 #define kSubtitleTopPadding 50
@@ -306,8 +307,11 @@
                                                               }
                                                               
                                                           } error:^(id responseObj, NSError *error) {
-                                                              if ([[responseObj objectForKey:@"code"] integerValue] == kPhoneNumberAlreadyClaimed) {
+                                                              NSInteger code = [responseObj fly_integerForKey:@"code"];
+                                                              if (code == kPhoneNumberAlreadyClaimed) {
                                                                   [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPhoneNumberAlreadyExist")];
+                                                              } else if(code == kNotValidPhoneNumber) {
+                                                                  [PXAlertView showAlertWithTitle:LOC(@"FLYSignupNotValidPhoneNumber")];
                                                               }
                                                           }];
                                                       }
