@@ -274,6 +274,7 @@
 		A6799C881AABDFB7003DAE5B /* FLYVoiceFilterManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6799C871AABDFB7003DAE5B /* FLYVoiceFilterManager.mm */; };
 		A6799C8B1AABE048003DAE5B /* Utilities.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6799C8A1AABE048003DAE5B /* Utilities.mm */; };
 		A6799C8E1AABEB3D003DAE5B /* FLYVoiceEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6799C8D1AABEB3D003DAE5B /* FLYVoiceEffectView.m */; };
+		A6799C921AAC1071003DAE5B /* SDiPhoneVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = A6799C911AAC1071003DAE5B /* SDiPhoneVersion.m */; };
 		A67A5E851A70CBA60098DA23 /* FLYServerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = A67A5E841A70CBA60098DA23 /* FLYServerConfig.m */; };
 		A67CC61C1A7DDE360092E500 /* topics.json in Resources */ = {isa = PBXBuildFile; fileRef = A67CC61B1A7DDE360092E500 /* topics.json */; };
 		A67CC61F1A7DF1730092E500 /* CoreGraphics+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A67CC61E1A7DF1730092E500 /* CoreGraphics+FLYAddition.m */; };
@@ -838,6 +839,8 @@
 		A6799C8A1AABE048003DAE5B /* Utilities.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Utilities.mm; sourceTree = "<group>"; };
 		A6799C8C1AABEB3D003DAE5B /* FLYVoiceEffectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYVoiceEffectView.h; sourceTree = "<group>"; };
 		A6799C8D1AABEB3D003DAE5B /* FLYVoiceEffectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYVoiceEffectView.m; sourceTree = "<group>"; };
+		A6799C901AAC1071003DAE5B /* SDiPhoneVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDiPhoneVersion.h; sourceTree = "<group>"; };
+		A6799C911AAC1071003DAE5B /* SDiPhoneVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDiPhoneVersion.m; sourceTree = "<group>"; };
 		A67A5E831A70CBA60098DA23 /* FLYServerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYServerConfig.h; sourceTree = "<group>"; };
 		A67A5E841A70CBA60098DA23 /* FLYServerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYServerConfig.m; sourceTree = "<group>"; };
 		A67A5E881A70CC450098DA23 /* FLYEndPointConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLYEndPointConstant.h; sourceTree = "<group>"; };
@@ -1707,6 +1710,7 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A6799C8F1AAC1071003DAE5B /* SDiPhoneVersion */,
 				A61B6D3C1AAAE3DD00A5B696 /* RNLoadingButton */,
 				A643AE9F1AA9539E00BF4E0F /* Nimbus */,
 				A6A70CD81AA4597A0000F784 /* ECPhoneNumberFormatter */,
@@ -1866,6 +1870,15 @@
 				A6799C7D1AABDE3D003DAE5B /* EAFWrite.mm */,
 			);
 			path = ZTX;
+			sourceTree = "<group>";
+		};
+		A6799C8F1AAC1071003DAE5B /* SDiPhoneVersion */ = {
+			isa = PBXGroup;
+			children = (
+				A6799C901AAC1071003DAE5B /* SDiPhoneVersion.h */,
+				A6799C911AAC1071003DAE5B /* SDiPhoneVersion.m */,
+			);
+			path = SDiPhoneVersion;
 			sourceTree = "<group>";
 		};
 		A67A5E821A70CB810098DA23 /* Config */ = {
@@ -2753,6 +2766,7 @@
 				A6A4EFAD1A2B05C700FD4066 /* FLYGroupListViewController.m in Sources */,
 				A643AEF91AA9539E00BF4E0F /* NIViewRecycler.m in Sources */,
 				A643AEF51AA9539E00BF4E0F /* NIRuntimeClassModifications.m in Sources */,
+				A6799C921AAC1071003DAE5B /* SDiPhoneVersion.m in Sources */,
 				A6A30D6F1A1B1DF8001AE1FE /* FLYCircleView.m in Sources */,
 				A6048AD11A8603EF00C67480 /* AFNetworkReachabilityManager.m in Sources */,
 				A648C0E71A19AD4A00FF1744 /* MASViewAttribute.m in Sources */,
