@@ -35,6 +35,7 @@
 #import "FLYFileManager.h"
 #import "STKAudioPlayer.h"
 #import "FLYAudioManager.h"
+#import "FLYVoiceFilterManager.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -602,6 +603,9 @@
         case FLYRecordCompleteState:
         {
             self.currentState = FLYRecordPlayingState;
+            
+//            [[FLYVoiceFilterManager sharedInstance] applyFiltering];
+            
             NSString *str = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
             [[FLYAudioManager sharedInstance] playAudioWithURLStr:str itemType:FLYPlayableItemRecording];
             [self _setupPlayingViewState];
