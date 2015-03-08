@@ -76,6 +76,7 @@
     
     NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
     [FLYAppStateManager sharedInstance].recordingFilePath = path;
+    [FLYAppStateManager sharedInstance].recordingFilePathSelected = path;
     
     NSError *error = nil;
     if ( ![_recorder beginRecordingToFileAtPath:path fileType:kAudioFileM4AType error:&error] ) {

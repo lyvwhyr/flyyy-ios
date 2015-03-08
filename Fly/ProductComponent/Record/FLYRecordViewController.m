@@ -392,6 +392,7 @@
     
     NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
     [FLYAppStateManager sharedInstance].recordingFilePath = path;
+    [FLYAppStateManager sharedInstance].recordingFilePathSelected = path;
     _recorder = [[AFSoundRecord alloc] initWithFilePath:path];
     [_recorder startRecording];
     
@@ -638,10 +639,7 @@
         {
             self.currentState = FLYRecordPlayingState;
             
-//            [[FLYVoiceFilterManager sharedInstance] applyFiltering];
-            
-            NSString *str = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
-            [[FLYAudioManager sharedInstance] playAudioWithURLStr:str itemType:FLYPlayableItemRecording];
+            [[FLYAudioManager sharedInstance] playAudioWithURLStr:[FLYAppStateManager sharedInstance].recordingFilePathSelected itemType:FLYPlayableItemRecording];
             [self _setupPlayingViewState];
             break;
         }
@@ -697,8 +695,14 @@
 
 - (void)_vioceFilterApplied
 {
-    NSString *str = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileNameAfterFilter];
-    [[FLYAudioManager sharedInstance] playAudioWithURLStr:str itemType:FLYPlayableItemRecording];
+    if (self.filterEffect == FLYVoiceEffectMe) {
+        [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
+    } else {
+        [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileNameAfterFilter];
+    }
+    
+//    NSString *str = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileNameAfterFilter];
+//    [[FLYAudioManager sharedInstance] playAudioWithURLStr:str itemType:FLYPlayableItemRecording];
 }
 
 - (void)viewDidLayoutSubviews

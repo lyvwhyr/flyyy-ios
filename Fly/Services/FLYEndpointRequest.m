@@ -34,9 +34,9 @@
 {
     [FLYAppStateManager sharedInstance].mediaId = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *urlStr = [NSString stringWithFormat:@"media/upload?token=secret123&user_id=%@", userId];
+    NSString *urlStr = [NSString stringWithFormat:@"media/upload?user_id=%@", userId];
     [manager POST:urlStr parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        NSData *audioData=[NSData dataWithContentsOfFile:[FLYAppStateManager sharedInstance].recordingFilePath];
+        NSData *audioData=[NSData dataWithContentsOfFile:[FLYAppStateManager sharedInstance].recordingFilePathSelected];
         [formData appendPartWithFileData:audioData name: kMultiPartName fileName: kMultiPartFileName mimeType:kMimeType];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [FLYAppStateManager sharedInstance].mediaId = [[responseObject fly_objectOrNilForKey:@"media_id"] stringValue];
