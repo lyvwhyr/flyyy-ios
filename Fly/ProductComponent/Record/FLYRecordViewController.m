@@ -48,7 +48,7 @@
 //#define kMinimalRecordingLength 5
 #define kMaxRecordTime 60
 
-@interface FLYRecordViewController ()<FLYRecordBottomBarDelegate, JGProgressHUDDelegate, FLYAudioManagerDelegate>
+@interface FLYRecordViewController ()<FLYRecordBottomBarDelegate, JGProgressHUDDelegate, FLYAudioManagerDelegate, FLYVoiceEffectViewDelegate>
 
 @property (nonatomic) UIBarButtonItem *rightNavigationButton;
 
@@ -78,6 +78,9 @@
 //Recorder
 @property (nonatomic) AFSoundRecord *recorder;
 
+// Voice filter
+@property (nonatomic) FLYVoiceFilterEffect filterEffect;
+
 
 @property (nonatomic, copy) AudioPlayerCompleteblock completionBlock;
 
@@ -102,6 +105,9 @@
 {
     if (self = [super init]) {
         _recordingType = recordingType;
+        _filterEffect = FLYVoiceEffectMe;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_vioceFilterApplied) name:kVoiceFilterApplied object:nil];
         
     }
     return self;
@@ -430,10 +436,13 @@
     self.recordBottomBar = [FLYRecordBottomBar new];
     [self.view addSubview:self.recordBottomBar];
     
-    [self.filterView removeFromSuperview];
-    self.filterView = nil;
-    self.filterView = [FLYVoiceEffectView new];
-    [self.view addSubview:self.filterView];
+    if (!self.filterView) {
+        [self.filterView removeFromSuperview];
+        self.filterView = nil;
+        self.filterView = [FLYVoiceEffectView new];
+        [self.view addSubview:self.filterView];
+        self.filterView.delegate = self;
+    }
     
     self.recordBottomBar.delegate = self;
     [self loadRightBarButton];
@@ -671,6 +680,25 @@
 - (void)stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState
 {
     
+}
+
+#pragma mark - FLYVoiceEffectViewDelegate
+
+- (void)voiceEffectTapped:(FLYVoiceFilterEffect)effect
+{
+    self.filterEffect = effect;
+    FLYVoiceFilterManager *filterManager = [FLYVoiceFilterManager new];
+    if (effect == FLYVoiceEffectDisguise) {
+        [filterManager applyFiltering];
+    }
+}
+
+# pragma mark - Notificaiton
+
+- (void)_vioceFilterApplied
+{
+    NSString *str = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileNameAfterFilter];
+    [[FLYAudioManager sharedInstance] playAudioWithURLStr:str itemType:FLYPlayableItemRecording];
 }
 
 - (void)viewDidLayoutSubviews

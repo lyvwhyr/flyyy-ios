@@ -109,6 +109,8 @@
     self.selectedEffect = FLYVoiceEffectMe;
     [self.meButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateNormal];
     self.meLabel.textColor = [UIColor flyGreen];
+    
+    [self.delegate voiceEffectTapped:FLYVoiceEffectMe];
 }
 
 - (void)_disguseButtonTapped
@@ -125,6 +127,8 @@
     self.selectedEffect = FLYVoiceEffectDisguise;
     [self.disguseButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateNormal];
     self.disguseLabel.textColor = [UIColor flyGreen];
+    
+    [self.delegate voiceEffectTapped:FLYVoiceEffectDisguise];
 }
 
 

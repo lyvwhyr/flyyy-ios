@@ -13,6 +13,14 @@ typedef NS_ENUM(NSInteger, FLYVoiceFilterEffect) {
     FLYVoiceEffectDisguise
 };
 
+@protocol FLYVoiceEffectViewDelegate <NSObject>
+
+- (void)voiceEffectTapped:(FLYVoiceFilterEffect)effect;
+
+@end
+
 @interface FLYVoiceEffectView : UIView
+
+@property (nonatomic) id<FLYVoiceEffectViewDelegate>delegate;
 
 @end

@@ -29,15 +29,15 @@ double gExecTimeTotal = 0.;
 
 @implementation FLYVoiceFilterManager
 
-+ (instancetype)sharedInstance
-{
-    static FLYVoiceFilterManager *instance;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        instance = [[FLYVoiceFilterManager alloc] init];
-    });
-    return instance;
-}
+//+ (instancetype)sharedInstance
+//{
+//    static FLYVoiceFilterManager *instance;
+//    static dispatch_once_t once;
+//    dispatch_once(&once, ^{
+//        instance = [[FLYVoiceFilterManager alloc] init];
+//    });
+//    return instance;
+//}
 
 - (instancetype)init
 {
@@ -173,8 +173,10 @@ double gExecTimeTotal = 0.;
     _reader = nil;
     _writer = nil; // important - flushes data to file
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:kVoiceFilterApplied object:self];
+    
     // start playback on main thread
-    [self performSelectorOnMainThread:@selector(_playOnMainThread) withObject:self waitUntilDone:NO];
+//    [self performSelectorOnMainThread:@selector(_playOnMainThread) withObject:self waitUntilDone:NO];
 }
 
 - (void)_playOnMainThread

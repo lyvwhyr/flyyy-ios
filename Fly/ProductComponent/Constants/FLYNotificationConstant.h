@@ -13,3 +13,6 @@
 //login and sign up notification
 #define kRequireSignupNotification @"kRequireSignupNotification"
 #define kRequireLoginNotification @"kRequireLoginNotification"
+
+// Apply voice filter
+#define kVoiceFilterApplied @"kVoiceFilterApplied"
