@@ -72,14 +72,14 @@ double gExecTimeTotal = 0.;
     
     // ZTX parameters
     // Here we set our time an pitch manipulation values
-    float time      = 1;                 // 115% length
-    float pitch     = pow(2., 3/12.);     // pitch shift (0 semitones)
+    float time      = 1.15;                 // 115% length
+    float pitch     = pow(2., -2/12.);     // pitch shift (0 semitones)
     float formant   = pow(2., 0/12.);    // formant shift (0 semitones). Note formants are reciprocal to pitch in natural transposing
     
     // First we set up ZTX to process numChannels of audio at 44.1kHz
     // N.b.: The fastest option is kZtxLambdaPreview / kZtxQualityPreview, best is kZtxLambda3, kZtxQualityBest
     // The probably best *default* option for general purpose signals is kZtxLambda3 / kZtxQualityGood
-    void *ztx = ZtxCreate(kZtxLambda2, kZtxQualityBetter, numChannels, sampleRate, &myReadData, (__bridge void*)self);
+    void *ztx = ZtxCreate(kZtxLambda1, kZtxQualityGood, numChannels, sampleRate, &myReadData, (__bridge void*)self);
     //	void *ztx = ZtxCreate(kZtxLambda3, kZtxQualityBest, numChannels, sampleRate, &myReadData);
     if (!ztx) {
         printf("!! ERROR !!\n\n\tCould not create ZTX instance\n\tCheck number of channels and sample rate!\n");
@@ -123,7 +123,7 @@ double gExecTimeTotal = 0.;
         _percent = 100.f*(double)outframes / (double)newOutframe;
         long ipercent = _percent;
         if (lastPercent != _percent) {
-            printf("\rProgress: %3li%% [%-40s] ", ipercent, &"||||||||||||||||||||||||||||||||||||||||"[40 - ((ipercent>100)?40:(2*ipercent/5))] );
+//            printf("\rProgress: %3li%% [%-40s] ", ipercent, &"||||||||||||||||||||||||||||||||||||||||"[40 - ((ipercent>100)?40:(2*ipercent/5))] );
             lastPercent = ipercent;
             fflush(stdout);
         }
@@ -136,7 +136,7 @@ double gExecTimeTotal = 0.;
         bavg += (numFrames/sampleRate);
         gExecTimeTotal += ZtxClockTimeSeconds();		// ............................. stop timer ..........................................
         
-        printf("x realtime = %3.3f : 1 (DSP only), CPU load (peak, DSP+disk): %3.2f%%\n", bavg/gExecTimeTotal, ZtxPeakCpuUsagePercent(ztx));
+//        printf("x realtime = %3.3f : 1 (DSP only), CPU load (peak, DSP+disk): %3.2f%%\n", bavg/gExecTimeTotal, ZtxPeakCpuUsagePercent(ztx));
         
         // Process only as many frames as needed
         long framesToWrite = numFrames;

@@ -688,6 +688,10 @@
     FLYVoiceFilterManager *filterManager = [FLYVoiceFilterManager new];
     if (effect == FLYVoiceEffectDisguise) {
         [filterManager applyFiltering];
+    } else {
+        [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
+        self.state = FLYRecordCompleteState;
+        [self _updateUserState];
     }
 }
 
@@ -695,14 +699,8 @@
 
 - (void)_vioceFilterApplied
 {
-    if (self.filterEffect == FLYVoiceEffectMe) {
-        [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
-    } else {
-        [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileNameAfterFilter];
-    }
-    
-//    NSString *str = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileNameAfterFilter];
-//    [[FLYAudioManager sharedInstance] playAudioWithURLStr:str itemType:FLYPlayableItemRecording];
+    self.state = FLYRecordCompleteState;
+    [self _updateUserState];
 }
 
 - (void)viewDidLayoutSubviews
