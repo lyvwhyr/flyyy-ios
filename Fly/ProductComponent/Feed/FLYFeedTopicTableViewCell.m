@@ -20,14 +20,11 @@
 @interface FLYFeedTopicTableViewCell()
 
 //timeline and play button
-@property (nonatomic) UIImageView *timelineImageView;
 @property (nonatomic) UIButton *playButton;
 @property (nonatomic) CAShapeLayer *arcLayer;
 @property (nonatomic) UIActivityIndicatorView *loadingIndicatorView;
 
 //topic content view
-@property (nonatomic) UIView *topicContentView;
-@property (nonatomic) UIImageView *speechBubbleView;
 @property (nonatomic) UILabel *userNameLabel;
 @property (nonatomic) UIButton *shareButton;
 @property (nonatomic) UILabel *topicTitle;
@@ -43,13 +40,16 @@
 
 @implementation FLYFeedTopicTableViewCell
 
-#define kTopicContentBottomPadding      0
-#define kTopicContentLeftPadding        5
-#define kHomeTimeLineLeftPadding        25
+#define kPlaybuttonLeftPadding 21
+#define kTopicTitleTopPadding  25
+#define kTopicTitleLeftPadding 15
+#define kTopicTitleRightPadding 130
+#define kInlineActionTopPadding 10
+#define kInlineActionRightPadding 15
+#define kGroupLeftPadding 20
+
 #define kTopicContentRightPadding       10
-#define kInlineActionTopPadding         10
 //padding for user name, topic title to it's parent view
-#define kElementLeftPadding             30
 #define kElementRightPadding            10
 #define kUsernameOffset                 -100
 
@@ -58,78 +58,48 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        //left timeline
-        _timelineImageView = [UIImageView new];
-        UIImage *timelineImage = [UIImage imageNamed:@"icon_homefeed_timeline"];
-        [_timelineImageView setImage:timelineImage];
-        _timelineImageView.translatesAutoresizingMaskIntoConstraints = NO;
-        [_timelineImageView sizeToFit];
-        [self.contentView addSubview:_timelineImageView];
-        
         _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _playButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-        [_playButton setImage:[UIImage imageNamed:@"icon_homefeed_backplay"] forState:UIControlStateNormal];
+        [_playButton setImage:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] forState:UIControlStateNormal];
         [_playButton sizeToFit];
-        [self.contentView insertSubview:self.playButton aboveSubview:self.timelineImageView];
-        
-        //topic content view
-        _topicContentView = [UIView new];
-        _topicContentView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.contentView addSubview:_topicContentView];
-        
-        _speechBubbleView = [UIImageView new];
-        _speechBubbleView.translatesAutoresizingMaskIntoConstraints = NO;
-        UIImage* image = [UIImage imageNamed:@"icon_homefeed_speech_bubble"];
-        UIEdgeInsets insets = UIEdgeInsetsMake(40, 40, 70, 50);
-        image = [image resizableImageWithCapInsets:insets];
-        self.speechBubbleView.image = image;
-        [self.topicContentView addSubview:self.speechBubbleView];
-        
-        _userNameLabel = [UILabel new];
-        _userNameLabel.textColor = [UIColor flyBlue];
-        //Avenir-Roman
-        _userNameLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14];
-        _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.topicContentView addSubview:_userNameLabel];
-        
-        _shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _shareButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_shareButton addTarget:self action:@selector(_shareButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-        [_shareButton setImage:[UIImage imageNamed:@"icon_homefeed_share"] forState:UIControlStateNormal];
-        [_shareButton sizeToFit];
-        [self.topicContentView addSubview:_shareButton];
+        [self.contentView insertSubview:self.playButton aboveSubview:self.contentView];
         
         _topicTitle = [UILabel new];
-        _topicTitle.numberOfLines = 2;
+        _topicTitle.numberOfLines = 1;
         _topicTitle.adjustsFontSizeToFitWidth = NO;
+        _topicTitle.textColor = [UIColor flyGrey];
         _topicTitle.lineBreakMode = NSLineBreakByTruncatingTail;
-        _topicTitle.font = [UIFont fontWithName:@"Avenir-Book" size:17];
+        _topicTitle.font = [UIFont fontWithName:@"Avenir-Book" size:15];
         _topicTitle.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.topicContentView insertSubview:self.topicTitle aboveSubview:self.speechBubbleView];
+        [self.contentView addSubview:_topicTitle];
         
-        //shared font
-        UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:14];
-        
-        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_wings" isIconLeft:YES]  ;
-        [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-        _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.topicContentView addSubview:_likeButton];
+        _userNameLabel = [UILabel new];
+        _userNameLabel.textColor = [UIColor flyGrey];
+        _userNameLabel.font = [UIFont fontWithName:@"Avenir-Book" size:8];
+        _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.contentView addSubview:_userNameLabel];
         
         _groupNameButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _groupNameButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_groupNameButton addTarget:self action:@selector(_groupNameTapped) forControlEvents:UIControlEventTouchUpInside];
-        _groupNameButton.titleLabel.font = inlineActionFont;
+        _groupNameButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:13];
         [_groupNameButton setTitleColor:[UIColor flyBlue] forState:UIControlStateNormal];
         _groupNameButton.titleEdgeInsets = UIEdgeInsetsZero;
         [_groupNameButton sizeToFit];
-        [self.topicContentView addSubview:_groupNameButton];
+        [self.contentView addSubview:_groupNameButton];
         
-        _commentButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue] icon:@"icon_homefeed_comment" isIconLeft:NO];
+        UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
+        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_wings" isIconLeft:YES]  ;
+        [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.contentView addSubview:_likeButton];
+        
+        _commentButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue] icon:@"icon_homefeed_comment2" isIconLeft:YES];
         [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_commentButton sizeToFit];
-        [self.topicContentView addSubview:_commentButton];
+        [self.contentView addSubview:_commentButton];
         
         
         //when it enters background, _arclayer is nil so this doesn't work
@@ -208,73 +178,45 @@
     }
     
     if (!self.didSetupConstraints) {
-        void (^timelineConstraintBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
-            make.top.equalTo(self).offset(0);
-            make.leading.equalTo(self).offset(kHomeTimeLineLeftPadding);
-            make.height.equalTo(self);
-        };
-        
-        CGFloat topicContentLeftPadding = kHomeTimeLineLeftPadding + CGRectGetWidth(_timelineImageView.bounds)/2 + CGRectGetWidth(_playButton.bounds)/2 + kTopicContentLeftPadding;
-        void (^topicContentViewConstraintBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView).offset(2);
-            make.leading.equalTo(self.contentView).offset(topicContentLeftPadding);
-            make.trailing.equalTo(self.contentView).offset(-kTopicContentRightPadding);
-            make.bottom.equalTo(self.contentView).offset(-kTopicContentBottomPadding);
-        };
-        
-        void (^speechBubbleViewBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
-            make.top.equalTo(self.topicContentView).offset(0);
-            make.leading.equalTo(self.topicContentView).offset(0);
-            make.trailing.equalTo(self.topicContentView).offset(0);
-            make.bottom.equalTo(self.topicContentView).offset(-10);
-        };
         
         void (^playButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.timelineImageView);
-            make.bottom.equalTo(self.mas_bottom);
-        };
-        
-        void (^userNameLabelBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
-            make.top.equalTo(self.topicContentView).offset(5);
-            make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
-            make.width.lessThanOrEqualTo(self.topicContentView).offset(kUsernameOffset);
-        };
-        
-        void (^shareButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
-            make.top.equalTo(self.topicContentView).offset(5);
-            make.trailing.equalTo(self.speechBubbleView.mas_trailing).offset(-kElementRightPadding);
+            make.leading.equalTo(self.contentView).offset(kPlaybuttonLeftPadding);
+            make.centerY.equalTo(self.contentView);
         };
         
         void (^topicTitleBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
-            make.top.equalTo(self.userNameLabel.mas_bottom).offset(5);
-            make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
-            make.trailing.equalTo(self.topicContentView).offset(-10);
+            make.top.equalTo(self.contentView).offset(kTopicTitleTopPadding);
+            make.leading.equalTo(self.playButton.mas_trailing).offset(kTopicTitleLeftPadding);
+            make.width.lessThanOrEqualTo(self.contentView).offset(-kTopicTitleRightPadding);
         };
         
+        void (^userNameLabelBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
+            make.top.equalTo(self.topicTitle.mas_bottom).offset(10);
+            make.leading.equalTo(self.topicTitle);
+//            make.width.lessThanOrEqualTo(self.topicContentView).offset(kUsernameOffset);
+        };
+
         void (^likeButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
-            make.top.equalTo(self.topicTitle.mas_bottom).offset(kInlineActionTopPadding);
-            make.leading.equalTo(self.topicContentView).offset(kElementLeftPadding);
-        };
-        
-        void (^groupNameButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.likeButton);
-            make.centerX.equalTo(self.speechBubbleView);
+            make.top.equalTo(self.contentView).offset(kInlineActionTopPadding);
+            make.trailing.equalTo(self.contentView).offset(-kInlineActionRightPadding);
         };
         
         void (^commentButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.likeButton);
-            make.trailing.equalTo(self.speechBubbleView.mas_trailing).offset(-kElementRightPadding);
+            make.bottom.equalTo(self.contentView).offset(-kInlineActionTopPadding);
+            make.trailing.equalTo(self.likeButton);
         };
         
-        [self.timelineImageView mas_makeConstraints:timelineConstraintBlock];
-        [self.topicContentView mas_makeConstraints:topicContentViewConstraintBlock];
-        [self.speechBubbleView mas_makeConstraints:speechBubbleViewBlock];
+        
+        void (^groupNameButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.userNameLabel);
+            make.leading.equalTo(self.userNameLabel.mas_trailing).offset(kGroupLeftPadding);
+        };
+        
         [self.playButton mas_makeConstraints:playButtonBlock];
-        [self.userNameLabel mas_makeConstraints:userNameLabelBlock];
-        [self.shareButton mas_makeConstraints:shareButtonBlock];
         [self.topicTitle mas_makeConstraints:topicTitleBlock];
-        [self.likeButton mas_makeConstraints:likeButtonBlock];
         [self.groupNameButton mas_makeConstraints:groupNameButtonBlock];
+        [self.userNameLabel mas_makeConstraints:userNameLabelBlock];
+        [self.likeButton mas_makeConstraints:likeButtonBlock];
         [self.commentButton mas_makeConstraints:commentButtonBlock];
         
         self.didSetupConstraints = YES;
@@ -299,7 +241,7 @@
 - (void)setupTopic:(FLYTopic *)topic needUpdateConstraints:(BOOL)needUpdateConstraints
 {
     self.topic = topic;
-    self.userNameLabel.text = topic.user.userName;
+    self.userNameLabel.text = [NSString stringWithFormat:@"by %@", topic.user.userName];
     
     self.topicTitle.text = topic.topicTitle;
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:topic.topicTitle];
@@ -321,11 +263,11 @@
     switch (state) {
         case FLYPlayStateNotSet: {
             [self.arcLayer removeAllAnimations];
-            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] forState:UIControlStateNormal];
             break;
         }
         case FLYPlayStateLoading: {
-            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backplay_bg"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] forState:UIControlStateNormal];
             [self loadingIndicatorView];
             break;
         }
@@ -336,7 +278,7 @@
         }
         case FLYPlayStatePaused: {
             [self _pauseLayer];
-            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] forState:UIControlStateNormal];
             break;
         }
         case FLYPlayStateResume: {
@@ -346,12 +288,12 @@
         }
         case FLYPlayStateFinished: {
             [self.arcLayer removeFromSuperlayer];
-            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] forState:UIControlStateNormal];
             break;
         }
         default: {
             [self.arcLayer removeFromSuperlayer];
-            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_backgroundplay"] forState:UIControlStateNormal];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] forState:UIControlStateNormal];
             break;
         }
     }
@@ -390,45 +332,47 @@
 #pragma mark - Height of the cell
 + (CGFloat)heightForTopic:(FLYTopic *)topic
 {
-    CGFloat height = 0;
-    
-    UILabel *dummyLabel = [UILabel new];
-    dummyLabel.font = [UIFont fontWithName:@"Avenir-Book" size:17];
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:topic.topicTitle];
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-//    paragraphStyle.lineBreakMode= NSLineBreakByTruncatingTail;
-    paragraphStyle.lineSpacing = 2;
-    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, topic.topicTitle.length)];
-    [attrStr addAttribute:NSFontAttributeName value:dummyLabel.font range:NSMakeRange(0, topic.topicTitle.length)];
-    dummyLabel.attributedText = attrStr;
-    
-    CGFloat rightPadding = kTopicContentRightPadding + kElementRightPadding;
-    //half 5/2 timeline width, 19.5 = 117/3/ radius for play button
-    CGFloat leftPadding = kElementLeftPadding + 5/2 + 19.5 + kTopicContentLeftPadding + kElementLeftPadding;
-    CGFloat maxWidth = CGRectGetWidth([[UIScreen mainScreen] bounds]) - rightPadding - leftPadding;
-    
-    CGRect rect = [attrStr boundingRectWithSize:CGSizeMake(maxWidth, 10000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-    
-    
-    //
-    NSString *dummyString = @"dummyText";
-    NSMutableAttributedString *attrStrSingleLine = [[NSMutableAttributedString alloc] initWithString:dummyString];
-    paragraphStyle.lineSpacing = 2;
-    [attrStrSingleLine addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, dummyString.length)];
-    [attrStrSingleLine addAttribute:NSFontAttributeName value:dummyLabel.font range:NSMakeRange(0, dummyString.length)];
-    CGRect rectSingleLine = [attrStrSingleLine boundingRectWithSize:CGSizeMake(maxWidth, 10000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-
-    CGFloat labelHeight = 0.0;
-    int numberOfLines = ceil(rect.size.height / rectSingleLine.size.height);
-    if (numberOfLines >= 2) {
-        labelHeight = rectSingleLine.size.height * 2 + paragraphStyle.lineSpacing;
-    } else {
-        labelHeight = rect.size.height;
-    }
-    //top, bottom, padding
-    height += labelHeight + 44 + 70;
-    
-    return height;
+    return 90;
+//    
+//    CGFloat height = 0;
+//    
+//    UILabel *dummyLabel = [UILabel new];
+//    dummyLabel.font = [UIFont fontWithName:@"Avenir-Book" size:17];
+//    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:topic.topicTitle];
+//    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+////    paragraphStyle.lineBreakMode= NSLineBreakByTruncatingTail;
+//    paragraphStyle.lineSpacing = 2;
+//    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, topic.topicTitle.length)];
+//    [attrStr addAttribute:NSFontAttributeName value:dummyLabel.font range:NSMakeRange(0, topic.topicTitle.length)];
+//    dummyLabel.attributedText = attrStr;
+//    
+//    CGFloat rightPadding = kTopicContentRightPadding + kElementRightPadding;
+//    //half 5/2 timeline width, 19.5 = 117/3/ radius for play button
+//    CGFloat leftPadding = kElementLeftPadding + 5/2 + 19.5 + kTopicContentLeftPadding + kElementLeftPadding;
+//    CGFloat maxWidth = CGRectGetWidth([[UIScreen mainScreen] bounds]) - rightPadding - leftPadding;
+//    
+//    CGRect rect = [attrStr boundingRectWithSize:CGSizeMake(maxWidth, 10000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+//    
+//    
+//    //
+//    NSString *dummyString = @"dummyText";
+//    NSMutableAttributedString *attrStrSingleLine = [[NSMutableAttributedString alloc] initWithString:dummyString];
+//    paragraphStyle.lineSpacing = 2;
+//    [attrStrSingleLine addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, dummyString.length)];
+//    [attrStrSingleLine addAttribute:NSFontAttributeName value:dummyLabel.font range:NSMakeRange(0, dummyString.length)];
+//    CGRect rectSingleLine = [attrStrSingleLine boundingRectWithSize:CGSizeMake(maxWidth, 10000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+//
+//    CGFloat labelHeight = 0.0;
+//    int numberOfLines = ceil(rect.size.height / rectSingleLine.size.height);
+//    if (numberOfLines >= 2) {
+//        labelHeight = rectSingleLine.size.height * 2 + paragraphStyle.lineSpacing;
+//    } else {
+//        labelHeight = rect.size.height;
+//    }
+//    //top, bottom, padding
+//    height += labelHeight + 44 + 70;
+//    
+//    return height;
 }
 
 @end

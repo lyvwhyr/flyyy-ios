@@ -29,7 +29,7 @@
 - (void)serviceVerifyCode:(NSString *)code phonehash:(NSString *)phoneHash phoneNumber:(NSString *)phoneNumber success:(FLYVerifyCodeSuccessBlock)successBlock error:(FLYVerifyCodeErrorBlock)errorBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *endpoint = [NSString stringWithFormat:@"%@/%@", self.endpoint, phoneHash];
+    NSString *endpoint = [NSString stringWithFormat:@"%@/%@/verify", self.endpoint, phoneHash];
     NSDictionary *params = @{@"device_id":[FLYAppStateManager sharedInstance].deviceId, @"phone":phoneNumber, @"code":code};
     [manager GET:endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         successBlock(operation, responseObject);

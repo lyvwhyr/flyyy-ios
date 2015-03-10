@@ -79,7 +79,7 @@
     [super viewDidLoad];
     _posts = [NSMutableArray new];
     
-    self.view.backgroundColor = [UIColor flyBackgroundColorBlue];
+    self.view.backgroundColor = [UIColor whiteColor];
     if (![self isKindOfClass:[FLYGroupViewController class]]) {
         [self _loadLeftBarItem];
     }
@@ -93,7 +93,9 @@
     [_feedTableView registerClass:[FLYFeedTopicTableViewCell class] forCellReuseIdentifier:@"feedPostCellIdentifier"];
     [self.view addSubview:_feedTableView];
     
-    _feedTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    _feedTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _feedTableView.separatorInset = UIEdgeInsetsZero;
+    _feedTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     _feedTableView.scrollsToTop = YES;
     
     _backgroundView = [UIView new];
@@ -147,35 +149,17 @@
 
 - (void)_loadLeftBarItem
 {
-    FLYGroupsButtonItem *leftBarItem = [FLYGroupsButtonItem barButtonItem:YES];
+    FLYCatalogBarButtonItem *leftBarItem = [FLYCatalogBarButtonItem barButtonItem:YES];
     leftBarItem.actionBlock = ^(FLYBarButtonItem *item) {
         [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
     };
     self.navigationItem.leftBarButtonItem = leftBarItem;
 }
 
-- (void)loadRightBarButton
-{
-    UIImage *autoPlayImage = [UIImage imageNamed:@"icon_homefeed_playall"];
-    UIButton *autoPlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [autoPlayButton setImage:autoPlayImage forState:UIControlStateNormal];
-    [autoPlayButton addTarget:self action:@selector(_autoPlayButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [autoPlayButton setFrame:CGRectMake(0, 0, 39, 39)];
-    UIBarButtonItem *autoPlayItem = [[UIBarButtonItem alloc] initWithCustomView:autoPlayButton];
-    
-    UIImage *profileButtonImage = [UIImage imageNamed:@"icon_homefeed_profile"];
-    UIButton *profileButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [profileButton setImage:profileButtonImage forState:UIControlStateNormal];
-    [profileButton addTarget:self action:@selector(_profileButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [profileButton setFrame:CGRectMake(0, 0, 39, 39)];
-    UIBarButtonItem *profileItem = [[UIBarButtonItem alloc] initWithCustomView:profileButton];
-    self.navigationItem.rightBarButtonItems = @[profileItem, autoPlayItem];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[NSNotificationCenter defaultCenter] postNotificationName:kShowRecordIconNotification object:self];
 //    [self updateViewConstraints];
 }
@@ -562,12 +546,12 @@
 #pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor
 {
-    return [UIColor whiteColor];
+    return [UIColor flyBlue];
 }
 
 - (UIColor*)preferredStatusBarColor
 {
-    return [UIColor whiteColor];
+    return [UIColor flyBlue];
 }
 
 @end

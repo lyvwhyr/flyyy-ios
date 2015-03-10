@@ -144,8 +144,8 @@
     self.tabBarView = [FLYTabBarView new];
     [self.view addSubview:self.tabBarView];
     
-    FLYTabView *hogroupsTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_home" recordTab:NO];
-    FLYTabView *groupsTab = [[FLYTabView alloc] initWithTitle:@"Groups" image:@"icon_homefeed_group" recordTab:NO];
+    FLYTabView *hogroupsTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_tabbar_wave" recordTab:NO];
+    FLYTabView *groupsTab = [[FLYTabView alloc] initWithTitle:@"Groups" image:@"icon_tabbar_group" recordTab:NO];
     
     NSArray *tabs = @[hogroupsTab, groupsTab];
     [self.tabBarView setTabViews:tabs];

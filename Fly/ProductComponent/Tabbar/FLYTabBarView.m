@@ -10,7 +10,7 @@
 #import "FLYTabView.h"
 #import "UIColor+FLYAddition.h"
 
-#define kTabLeadingMargin        20
+#define kTabLeadingMargin        10
 #define kTabTopMargin            1
 #define kTabWidth                80
 #define kTabHeight               44

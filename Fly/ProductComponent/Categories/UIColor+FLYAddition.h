@@ -26,7 +26,7 @@
 + (UIColor *)flyColorRecordingTimer;
 + (UIColor *)flyGreen;
 + (UIColor *)flyColorFlyGroupNameGrey;
-+ (UIColor *)flyColorFlySelectGroupGrey;
++ (UIColor *)flyGrey;
 + (UIColor *)flyColorFlyRecordingWave;
 + (UIColor *)flyColorFlyReplyBodyTextGrey;
 + (UIColor *)flyColorFlyReplyPostAtGrey;

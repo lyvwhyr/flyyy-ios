@@ -24,7 +24,7 @@
 #define kColorGreen                                     @"#45BB77"
 #define kColorFlyBackgroundColorBlue                    @"#4CA8D3"
 #define kColorFlyGroupNameGrey                          @"#565252"
-#define kColorFlySelectGroupGrey                        @"#979797"
+#define kColorFlyGrey                                   @"#979797"
 #define kColorFlyRecordingWave                          @"#f58686"
 #define kColorFlyReplyBodyTextGrey                      @"#747474"
 #define kColorFlyReplyPostAtGrey                        @"#B2B2B2"
@@ -118,9 +118,9 @@
     return [self colorWithHexString:kColorFlyGroupNameGrey];
 }
 
-+ (UIColor *)flyColorFlySelectGroupGrey
++ (UIColor *)flyGrey
 {
-    return [self colorWithHexString:kColorFlySelectGroupGrey];
+    return [self colorWithHexString:kColorFlyGrey];
 }
 
 + (UIColor *)flyColorFlyRecordingWave

@@ -34,12 +34,12 @@
             [_imageView setImage:image];
             [self addSubview:_imageView];
             
-            _label = [UILabel new];
-            _label.translatesAutoresizingMaskIntoConstraints = NO;
-            _label.font = [UIFont flyToolBarFont];
-            _label.textColor = [UIColor flyBlue];
-            _label.text = title;
-            [self addSubview:_label];
+//            _label = [UILabel new];
+//            _label.translatesAutoresizingMaskIntoConstraints = NO;
+//            _label.font = [UIFont flyToolBarFont];
+//            _label.textColor = [UIColor flyBlue];
+//            _label.text = title;
+//            [self addSubview:_label];
         } else {
             _imageView = [UIImageView new];
             _imageView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -55,23 +55,28 @@
 
 - (void)updateConstraints
 {
-    NSDictionary *metrics = @{@"imagePosV":@(kImagePosV), @"labelPosV":@(kLabelPosV)};
-    
-    NSArray *imagePosV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-imagePosV-[_imageView]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_imageView)];
-    [self addConstraints:imagePosV];
-    
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
+        make.leading.equalTo(self).offset(20);
+        make.centerY.equalTo(self);
     }];
     
+//    NSDictionary *metrics = @{@"imagePosV":@(kImagePosV), @"labelPosV":@(kLabelPosV)};
+//    
+//    NSArray *imagePosV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-imagePosV-[_imageView]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_imageView)];
+//    [self addConstraints:imagePosV];
+//    
+//    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.equalTo(self);
+//    }];
+
     //label constraints
-    if (!self.isRecordTab) {
-        NSArray *labelPosV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-labelPosV-[_label]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_label)];
-        [self addConstraints:labelPosV];
-        [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self);
-        }];
-    }
+//    if (!self.isRecordTab) {
+//        NSArray *labelPosV = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-labelPosV-[_label]" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(_label)];
+//        [self addConstraints:labelPosV];
+//        [self.label mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.centerX.equalTo(self);
+//        }];
+//    }
     [super updateConstraints];
 }
 

@@ -35,7 +35,7 @@
         [self addSubview:_checkButton];
         
         _separator = [UIView new];
-        _separator.backgroundColor = [UIColor flyColorFlySelectGroupGrey];
+        _separator.backgroundColor = [UIColor flyGrey];
         _separator.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_separator];
         
