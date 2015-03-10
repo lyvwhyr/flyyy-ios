@@ -25,10 +25,12 @@
 #import "FLYAudioManager.h"
 #import "FLYReplyService.h"
 #import "SVPullToRefresh.h"
+#import "FLYTopicDetailTabbar.h"
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYAudioManagerDelegate>
 
 @property (nonatomic) UITableView *topicTableView;
+@property (nonatomic) FLYTopicDetailTabbar *tabbar;
 
 @property (nonatomic) FLYTopic *topic;
 @property (nonatomic) NSMutableArray *replies;
@@ -92,7 +94,10 @@
 
     [self.topicTableView registerClass:[FLYTopicDetailTopicCell class] forCellReuseIdentifier:kFlyTopicDetailViewControllerTopicCellIdentifier];
     [self.topicTableView registerClass:[FLYTopicDetailReplyCell class] forCellReuseIdentifier:kFlyTopicDetailViewControllerReplyCellIdentifier];
-    [self.view addSubview:_topicTableView];
+    [self.view addSubview:self.topicTableView];
+    
+    self.tabbar = [FLYTopicDetailTabbar new];
+    [self.view addSubview:self.tabbar];
     
     [self _initService];
     
@@ -128,6 +133,13 @@
             make.leading.equalTo(self.view);
             make.width.equalTo(self.view);
             make.height.equalTo(@(tableViewHeight));
+        }];
+        
+        [self.tabbar mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.view);
+            make.leading.equalTo(self.view);
+            make.trailing.equalTo(self.view);
+            make.height.equalTo(@(44));
         }];
     }
     

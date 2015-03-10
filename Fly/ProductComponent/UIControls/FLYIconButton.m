@@ -55,6 +55,11 @@
 
 - (void)updateConstraints
 {
+    CGFloat rightPadding = kIconRightPadding;
+    if (self.overrideIconRightPadding > 0) {
+        rightPadding = self.overrideIconRightPadding;
+    }
+    
     CGFloat intrinsicHeight = MAX(CGRectGetHeight(_localIconView.bounds), CGRectGetHeight(_localTitleLabel.bounds));
     CGFloat iconExtraOffset = FLYFloorToPixel((intrinsicHeight - CGRectGetHeight(_localIconView.bounds))/2);
     CGFloat labelExtraOffset = FLYFloorToPixel((intrinsicHeight - CGRectGetHeight(_localTitleLabel.bounds))/2);
@@ -66,7 +71,7 @@
         
         [_localTitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self).offset(labelExtraOffset);
-            make.leading.equalTo(_localIconView.mas_right).offset(kIconRightPadding);
+            make.leading.equalTo(_localIconView.mas_right).offset(rightPadding);
         }];
     } else {
         [_localIconView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -76,7 +81,7 @@
         
         [_localTitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self).offset(labelExtraOffset);
-            make.trailing.equalTo(self.localIconView.mas_leading).offset(-kIconRightPadding);
+            make.trailing.equalTo(self.localIconView.mas_leading).offset(-rightPadding);
         }];
 
     }
@@ -86,9 +91,14 @@
 
 - (CGSize)intrinsicContentSize
 {
+    CGFloat rightPadding = kIconRightPadding;
+    if (self.overrideIconRightPadding > 0) {
+        rightPadding = self.overrideIconRightPadding;
+    }
+    
     [_localTitleLabel sizeToFit];
     CGFloat intrinsicHeight = MAX(CGRectGetHeight(_localIconView.bounds), CGRectGetHeight(_localTitleLabel.bounds));
-    CGFloat intrinsicWidth = CGRectGetWidth(_localIconView.bounds) + CGRectGetWidth(_localTitleLabel.bounds) + kIconRightPadding;
+    CGFloat intrinsicWidth = CGRectGetWidth(_localIconView.bounds) + CGRectGetWidth(_localTitleLabel.bounds) + rightPadding;
     return CGSizeMake(intrinsicWidth, intrinsicHeight);
 }
 

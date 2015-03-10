@@ -69,5 +69,9 @@
 "FLYRecordingMe" = "Me";
 "FLYRecordingDisguise" = "Disguise";
 
+//Topic detail
+"FLYTopicDetailTabbarComment" = "Comment";
+"FLYTopicDetailTabbarPlayAll" = "Play all";
+
 
 

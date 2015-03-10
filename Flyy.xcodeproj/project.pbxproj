@@ -127,7 +127,6 @@
 		A64BDACB1A7B647600B46F18 /* FLYURLConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = A64BDACA1A7B647600B46F18 /* FLYURLConstants.h */; };
 		A64D157F1A29985600369D62 /* icon_feed_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D157E1A29985600369D62 /* icon_feed_play@3x.png */; };
 		A64D15981A29B47D00369D62 /* FLYIconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D15971A29B47D00369D62 /* FLYIconButton.m */; };
-		A64D159B1A29BC6E00369D62 /* FLYInlineActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A64D159A1A29BC6E00369D62 /* FLYInlineActionView.m */; };
 		A64D159F1A29C0BB00369D62 /* icon_inline_comment@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D159C1A29C0BB00369D62 /* icon_inline_comment@3x.png */; };
 		A64D15A01A29C0BB00369D62 /* icon_inline_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D159D1A29C0BB00369D62 /* icon_inline_share@3x.png */; };
 		A64D15A11A29C0BB00369D62 /* icon_inline_wing@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A64D159E1A29C0BB00369D62 /* icon_inline_wing@3x.png */; };
@@ -387,6 +386,7 @@
 		A6CD56EB1A4802C3003486DD /* FLYDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56EA1A4802C3003486DD /* FLYDownloadManager.m */; };
 		A6CD56EE1A48079D003486DD /* FLYFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56ED1A48079D003486DD /* FLYFileManager.m */; };
 		A6D692241A92F61A00F8EEDE /* SampleQueueId.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D692231A92F61A00F8EEDE /* SampleQueueId.m */; };
+		A6D7038E1AAEBC2A002C8D89 /* FLYTopicDetailTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D7038D1AAEBC2A002C8D89 /* FLYTopicDetailTabbar.m */; };
 		A6D949EA1A9079AC003D4265 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D949E81A9079AC003D4265 /* Crashlytics.framework */; };
 		A6D949EB1A9079AC003D4265 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D949E91A9079AC003D4265 /* Fabric.framework */; };
 		A6D949EE1A9086FA003D4265 /* UIDevice+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D949ED1A9086FA003D4265 /* UIDevice+FLYAddition.m */; };
@@ -657,8 +657,6 @@
 		A64D157E1A29985600369D62 /* icon_feed_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_feed_play@3x.png"; sourceTree = "<group>"; };
 		A64D15961A29B47D00369D62 /* FLYIconButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYIconButton.h; sourceTree = "<group>"; };
 		A64D15971A29B47D00369D62 /* FLYIconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYIconButton.m; sourceTree = "<group>"; };
-		A64D15991A29BC6E00369D62 /* FLYInlineActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYInlineActionView.h; sourceTree = "<group>"; };
-		A64D159A1A29BC6E00369D62 /* FLYInlineActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYInlineActionView.m; sourceTree = "<group>"; };
 		A64D159C1A29C0BB00369D62 /* icon_inline_comment@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_comment@3x.png"; sourceTree = "<group>"; };
 		A64D159D1A29C0BB00369D62 /* icon_inline_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_share@3x.png"; sourceTree = "<group>"; };
 		A64D159E1A29C0BB00369D62 /* icon_inline_wing@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inline_wing@3x.png"; sourceTree = "<group>"; };
@@ -1044,6 +1042,8 @@
 		A6CD56ED1A48079D003486DD /* FLYFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFileManager.m; sourceTree = "<group>"; };
 		A6D692221A92F61A00F8EEDE /* SampleQueueId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleQueueId.h; sourceTree = "<group>"; };
 		A6D692231A92F61A00F8EEDE /* SampleQueueId.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleQueueId.m; sourceTree = "<group>"; };
+		A6D7038C1AAEBC2A002C8D89 /* FLYTopicDetailTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTopicDetailTabbar.h; sourceTree = "<group>"; };
+		A6D7038D1AAEBC2A002C8D89 /* FLYTopicDetailTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTopicDetailTabbar.m; sourceTree = "<group>"; };
 		A6D949E81A9079AC003D4265 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		A6D949E91A9079AC003D4265 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
 		A6D949EC1A9086FA003D4265 /* UIDevice+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+FLYAddition.h"; sourceTree = "<group>"; };
@@ -2011,8 +2011,6 @@
 				A69C4BE31A284B6F00CAD443 /* FLYFeedViewController.m */,
 				A69C4BE71A2851FD00CAD443 /* FLYFeedTopicTableViewCell.h */,
 				A69C4BE81A2851FD00CAD443 /* FLYFeedTopicTableViewCell.m */,
-				A64D15991A29BC6E00369D62 /* FLYInlineActionView.h */,
-				A64D159A1A29BC6E00369D62 /* FLYInlineActionView.m */,
 				A66E20531A2EE90F004235F5 /* FLYFeedDelegate.h */,
 				A66E20541A2EE90F004235F5 /* FLYFeedDelegate.m */,
 				A67CC61A1A7DDE100092E500 /* fixture */,
@@ -2301,6 +2299,8 @@
 				A65ED97E1A91523600E10D5C /* FLYTopicDetailTopicCell.m */,
 				A65ED9801A915FAE00E10D5C /* FLYPlayTimelineView.h */,
 				A65ED9811A915FAE00E10D5C /* FLYPlayTimelineView.m */,
+				A6D7038C1AAEBC2A002C8D89 /* FLYTopicDetailTabbar.h */,
+				A6D7038D1AAEBC2A002C8D89 /* FLYTopicDetailTabbar.m */,
 			);
 			path = TopicDetail;
 			sourceTree = "<group>";
@@ -2781,6 +2781,7 @@
 				A6A0E4AE1A1E76110036116E /* FLEXArrayExplorerViewController.m in Sources */,
 				A64BDAC61A7B518400B46F18 /* FLYUser.m in Sources */,
 				A69C4BAE1A271B8600CAD443 /* PresentingAnimator.m in Sources */,
+				A6D7038E1AAEBC2A002C8D89 /* FLYTopicDetailTabbar.m in Sources */,
 				A69C4BD51A283F6400CAD443 /* FLYTopic.m in Sources */,
 				A643AEF71AA9539E00BF4E0F /* NISnapshotRotation.m in Sources */,
 				A6A4EFBE1A2C22EF00FD4066 /* FLYGroupViewController.m in Sources */,
@@ -2827,7 +2828,6 @@
 				A643AEF41AA9539E00BF4E0F /* NIPaths.m in Sources */,
 				A6A30D6C1A1B0586001AE1FE /* FLYRecordViewController.m in Sources */,
 				A648C0E81A19AD4A00FF1744 /* MASViewConstraint.m in Sources */,
-				A64D159B1A29BC6E00369D62 /* FLYInlineActionView.m in Sources */,
 				A6A0E4A51A1E76110036116E /* FLEXWindow.m in Sources */,
 				A6048A421A85E63100C67480 /* EXTSelectorChecking.m in Sources */,
 				A6048A3D1A85E63100C67480 /* EXTConcreteProtocol.m in Sources */,
