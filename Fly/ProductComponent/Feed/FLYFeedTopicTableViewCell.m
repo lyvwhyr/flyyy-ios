@@ -114,12 +114,12 @@
     CGPoint center = CGPointMake(CGRectGetMidX(self.playButton.bounds),  CGRectGetMidY(self.playButton.bounds));
     
     UIBezierPath *path = [UIBezierPath bezierPath];
-    [path addArcWithCenter:center radius:18 startAngle: -(float)M_PI_2 endAngle:2 * M_PI clockwise:YES];
+    [path addArcWithCenter:center radius:17 startAngle: -(float)M_PI_2 endAngle:2 * M_PI clockwise:YES];
     _arcLayer = [CAShapeLayer layer];
     _arcLayer.path = path.CGPath;
     _arcLayer.strokeColor = [UIColor flyColorPlayAnimation].CGColor;
     _arcLayer.fillColor = [UIColor clearColor].CGColor;
-    _arcLayer.lineWidth = 3.5;
+    _arcLayer.lineWidth = 3;
     [_playButton.layer addSublayer:_arcLayer];
     
     CABasicAnimation *bas=[CABasicAnimation animationWithKeyPath:@"strokeEnd"];

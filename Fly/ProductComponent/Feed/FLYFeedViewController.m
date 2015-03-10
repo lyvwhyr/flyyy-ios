@@ -311,34 +311,11 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
-        FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *) [self.feedTableView cellForRowAtIndexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath];
-        [currentCell updatePlayState:FLYPlayStatePlaying];
-        
-        
         NSURL* url = [NSURL fileURLWithPath:localPath];
         
         STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
         
         [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath itemType:FLYPlayableItemFeedTopic]];
-        return;
-        
-        
-        [[FLYAudioStateManager sharedInstance] playAudioURLStr:localPath withCompletionBlock:^{
-            [self clearCurrentPlayingItem];
-            //If auto play is enabled, play next audio file
-            BOOL isAutoPlayEnabled = [FLYAppStateManager sharedInstance].isAutoPlayEnabled;
-            if (isAutoPlayEnabled) {
-                NSIndexPath *preIndexPath = [FLYAudioStateManager sharedInstance].previousPlayItem.indexPath;
-                NSInteger toPlayRow = preIndexPath.row + 1;
-                if (toPlayRow >= [self.posts count]) {
-                    return;
-                }
-                FLYTopic *postToPlay = self.posts[toPlayRow];
-                NSIndexPath *indexPathToPlay = [NSIndexPath indexPathForRow:toPlayRow inSection:preIndexPath.section];
-                FLYFeedTopicTableViewCell *toPlayCell = (FLYFeedTopicTableViewCell *)[self.feedTableView cellForRowAtIndexPath:indexPathToPlay];
-                [self playButtonTapped:toPlayCell withPost:postToPlay withIndexPath:indexPathToPlay];
-            }
-        }];
     });
 }
 
