@@ -228,7 +228,7 @@
 - (UIActivityIndicatorView *)loadingIndicatorView
 {
     if (_loadingIndicatorView == nil) {
-        _loadingIndicatorView = [UIActivityIndicatorView new];
+        _loadingIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         _loadingIndicatorView.hidesWhenStopped = YES;
         [self.contentView insertSubview:_loadingIndicatorView aboveSubview:self.playButton];
     }
