@@ -46,7 +46,7 @@
 #define kTopicTitleRightPadding 130
 #define kInlineActionTopPadding 10
 #define kInlineActionRightPadding 15
-#define kGroupLeftPadding 20
+#define kGroupLeftPadding 30
 
 #define kTopicContentRightPadding       10
 //padding for user name, topic title to it's parent view
@@ -68,9 +68,9 @@
         _topicTitle = [UILabel new];
         _topicTitle.numberOfLines = 1;
         _topicTitle.adjustsFontSizeToFitWidth = NO;
-        _topicTitle.textColor = [UIColor flyGrey];
+        _topicTitle.textColor = [UIColor colorWithHexString:@"#727272"];
         _topicTitle.lineBreakMode = NSLineBreakByTruncatingTail;
-        _topicTitle.font = [UIFont fontWithName:@"Avenir-Book" size:15];
+        _topicTitle.font = [UIFont fontWithName:@"Avenir-Roman" size:16];
         _topicTitle.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_topicTitle];
         
@@ -84,18 +84,18 @@
         _groupNameButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_groupNameButton addTarget:self action:@selector(_groupNameTapped) forControlEvents:UIControlEventTouchUpInside];
         _groupNameButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:13];
-        [_groupNameButton setTitleColor:[UIColor flyBlue] forState:UIControlStateNormal];
+        [_groupNameButton setTitleColor:[UIColor colorWithHexString:@"#79B4D2"] forState:UIControlStateNormal];
         _groupNameButton.titleEdgeInsets = UIEdgeInsetsZero;
         [_groupNameButton sizeToFit];
         [self.contentView addSubview:_groupNameButton];
         
         UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
-        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_wings" isIconLeft:YES]  ;
+        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyInlineAction]  icon:@"icon_homefeed_wings" isIconLeft:YES]  ;
         [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_likeButton];
         
-        _commentButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue] icon:@"icon_homefeed_comment2" isIconLeft:YES];
+        _commentButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyInlineAction] icon:@"icon_homefeed_comment2" isIconLeft:YES];
         [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_commentButton sizeToFit];
