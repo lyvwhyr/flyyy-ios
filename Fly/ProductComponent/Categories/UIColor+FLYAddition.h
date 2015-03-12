@@ -33,6 +33,7 @@
 + (UIColor *)flyColorFlyCountrySelectorBGColor;
 + (UIColor *)flyColorFlyCountrySelectorCountryCodeColor;
 + (UIColor *)flyColorFlySignupGrey;
++ (UIColor *)flyColorPlayAllControlPanelBackground;
 
 + (UIColor *)customGrayColor;
 + (UIColor *)customRedColor;

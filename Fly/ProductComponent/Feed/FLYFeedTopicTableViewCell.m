@@ -332,7 +332,7 @@
 #pragma mark - Height of the cell
 + (CGFloat)heightForTopic:(FLYTopic *)topic
 {
-    return 96;
+    return 90;
 //    
 //    CGFloat height = 0;
 //    

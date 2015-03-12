@@ -31,6 +31,7 @@
 #define kColorFlyCountrySelectorBGColor                 @"#f7f7f7"
 #define kColorFlyCountrySelectorCountryCodeColor        @"#8e8e93"
 #define kColorFlySignupGrey                             @"#B7B5B5"
+#define kColorFlyPlayAllControlPanelBackground          @"#949494"
 
 @implementation UIColor (FLYAddition)
 
@@ -151,6 +152,11 @@
 + (UIColor *)flyColorFlySignupGrey
 {
     return [self colorWithHexString:kColorFlySignupGrey];
+}
+
++ (UIColor *)flyColorPlayAllControlPanelBackground
+{
+    return [self colorWithHexString:kColorFlyPlayAllControlPanelBackground];
 }
 
 

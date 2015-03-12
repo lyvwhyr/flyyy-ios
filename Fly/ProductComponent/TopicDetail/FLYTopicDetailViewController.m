@@ -26,11 +26,13 @@
 #import "FLYReplyService.h"
 #import "SVPullToRefresh.h"
 #import "FLYTopicDetailTabbar.h"
+#import "FLYPlayAllControlPanel.h"
 
-@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYAudioManagerDelegate>
+@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYAudioManagerDelegate, FLYTopicDetailTabbarDelegate>
 
 @property (nonatomic) UITableView *topicTableView;
 @property (nonatomic) FLYTopicDetailTabbar *tabbar;
+@property (nonatomic) FLYPlayAllControlPanel *playAllControlPanel;
 
 @property (nonatomic) FLYTopic *topic;
 @property (nonatomic) NSMutableArray *replies;
@@ -97,7 +99,11 @@
     [self.view addSubview:self.topicTableView];
     
     self.tabbar = [FLYTopicDetailTabbar new];
+    self.tabbar.delegate = self;
     [self.view addSubview:self.tabbar];
+    
+    self.playAllControlPanel = [FLYPlayAllControlPanel new];
+    [self.view addSubview:self.playAllControlPanel];
     
     [self _initService];
     
@@ -140,6 +146,13 @@
             make.leading.equalTo(self.view);
             make.trailing.equalTo(self.view);
             make.height.equalTo(@(44));
+        }];
+        
+        [self.playAllControlPanel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.tabbar.mas_top);
+            make.leading.equalTo(self.view);
+            make.trailing.equalTo(self.view);
+            make.height.equalTo(@(99));
         }];
     }
     
@@ -267,16 +280,32 @@
 #pragma mark - FLYTopicDetailReplyCellDelegate
 - (void)replyToReplyButtonTapped:(FLYReply *)reply
 {
-    FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForReply];
-    recordViewController.topicId = self.topic.topicId;
-    recordViewController.parentReplyId = reply.replyId;
-    UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
-    [self presentViewController:navigationController animated:NO completion:nil];
+    [self _commentButtonTapped];
 }
 
 - (void)playReply:(FLYReply *)reply indexPath:(NSIndexPath *)indexPath
 {
     [[FLYDownloadManager sharedInstance] loadAudioByURLString:reply.mediaURL audioType:FLYDownloadableReply];
+}
+
+#pragma mark - FLYTopicDetailTabbarDelegate
+
+- (void)commentButtonOnTabbarTapped:(id)sender
+{
+    [self _commentButtonTapped];
+}
+
+- (void)playAllButtonOnTabbarTapped:(id)sender
+{
+    
+}
+
+- (void)_commentButtonTapped
+{
+    FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForReply];
+    recordViewController.topicId = self.topic.topicId;
+    UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
+    [self presentViewController:navigationController animated:NO completion:nil];
 }
 
 #pragma mark - Notification

@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol FLYTopicDetailTabbarDelegate <NSObject>
+
+- (void)commentButtonOnTabbarTapped:(id)sender;
+- (void)playAllButtonOnTabbarTapped:(id)sender;
+
+@end
+
+
 @interface FLYTopicDetailTabbar : UIView
+
+@property (nonatomic) id<FLYTopicDetailTabbarDelegate>delegate;
 
 @end

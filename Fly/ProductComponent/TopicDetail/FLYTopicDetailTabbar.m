@@ -94,12 +94,12 @@
 
 - (void)_commentButtonTapped
 {
-    
+    [self.delegate commentButtonOnTabbarTapped:self.commentButton];
 }
 
 - (void)_playAllButtonTapped
 {
-    
+    [self.delegate playAllButtonOnTabbarTapped:self.playAllButton];
 }
 
 @end
