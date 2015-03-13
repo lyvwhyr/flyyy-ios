@@ -110,7 +110,7 @@
 {
     [super viewWillAppear:animated];
     [_topicTableView reloadData];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)viewDidLayoutSubviews
@@ -342,7 +342,7 @@
 - (void)loadLeftBarButton
 {
     if ([self.navigationController.viewControllers count] > 1) {
-        FLYBlueBackBarButtonItem *barItem = [FLYBlueBackBarButtonItem barButtonItem:YES];
+        FLYBackBarButtonItem *barItem = [FLYBackBarButtonItem barButtonItem:YES];
         __weak typeof(self)weakSelf = self;
         barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
             __strong typeof(self) strongSelf = weakSelf;
@@ -373,12 +373,12 @@
 #pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor
 {
-    return [UIColor whiteColor];
+    return [UIColor flyBlue];
 }
 
 - (UIColor*)preferredStatusBarColor
 {
-    return [UIColor whiteColor];
+    return [UIColor flyBlue];
 }
 
 @end
