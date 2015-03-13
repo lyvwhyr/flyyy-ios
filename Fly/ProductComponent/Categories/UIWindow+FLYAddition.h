@@ -11,6 +11,8 @@
 @interface UIWindow (FLYAddition)
 
 + (UIWindow *)keyWindow;
+#ifdef DEBUG
 - (NSString *)_autolayoutTrace;
+#endif
 
 @end

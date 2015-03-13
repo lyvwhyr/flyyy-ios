@@ -35,8 +35,10 @@
 
 + (void)_wrapperForLoggingConstraints
 {
+#ifdef DEBUG
     NSString *result = [[UIWindow keyWindow] _autolayoutTrace];
     NSLog(@"%@", result);
+#endif
 }
 
 + (NSString *)getCountryDialCode

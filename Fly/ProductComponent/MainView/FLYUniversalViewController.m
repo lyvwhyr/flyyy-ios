@@ -38,9 +38,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    #if DEBUG
-    [[FLEXManager sharedManager] showExplorer];
-    #endif
+    //#if DEBUG
+    //[[FLEXManager sharedManager] showExplorer];
+    //#endif
     
     if (self.state == FLYViewControllerStateLoading) {
         [self.view addSubview:self.loaderView];
