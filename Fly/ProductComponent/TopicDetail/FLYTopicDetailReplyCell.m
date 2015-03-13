@@ -48,7 +48,7 @@
         
         _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _playButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_playButton setImage:[UIImage imageNamed:@"icon_detail_play"] forState:UIControlStateNormal];
+        [_playButton setImage:[UIImage imageNamed:@"icon_homefeed_blueplayempty"] forState:UIControlStateNormal];
         [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_playButton];
         

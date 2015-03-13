@@ -26,13 +26,12 @@
 #import "FLYReplyService.h"
 #import "SVPullToRefresh.h"
 #import "FLYTopicDetailTabbar.h"
-#import "FLYPlayAllControlPanel.h"
+#import "FLYFeedTopicTableViewCell.h"
 
-@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYAudioManagerDelegate, FLYTopicDetailTabbarDelegate>
+@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYAudioManagerDelegate, FLYTopicDetailTabbarDelegate, FLYFeedTopicTableViewCellDelegate>
 
 @property (nonatomic) UITableView *topicTableView;
 @property (nonatomic) FLYTopicDetailTabbar *tabbar;
-@property (nonatomic) FLYPlayAllControlPanel *playAllControlPanel;
 
 @property (nonatomic) FLYTopic *topic;
 @property (nonatomic) NSMutableArray *replies;
@@ -94,16 +93,13 @@
     self.topicTableView.dataSource = self;
     self.topicTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 
-    [self.topicTableView registerClass:[FLYTopicDetailTopicCell class] forCellReuseIdentifier:kFlyTopicDetailViewControllerTopicCellIdentifier];
+    [self.topicTableView registerClass:[FLYFeedTopicTableViewCell class] forCellReuseIdentifier:kFlyTopicDetailViewControllerTopicCellIdentifier];
     [self.topicTableView registerClass:[FLYTopicDetailReplyCell class] forCellReuseIdentifier:kFlyTopicDetailViewControllerReplyCellIdentifier];
     [self.view addSubview:self.topicTableView];
     
     self.tabbar = [FLYTopicDetailTabbar new];
     self.tabbar.delegate = self;
     [self.view addSubview:self.tabbar];
-    
-    self.playAllControlPanel = [FLYPlayAllControlPanel new];
-    [self.view addSubview:self.playAllControlPanel];
     
     [self _initService];
     
@@ -148,12 +144,6 @@
             make.height.equalTo(@(44));
         }];
         
-        [self.playAllControlPanel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.tabbar.mas_top);
-            make.leading.equalTo(self.view);
-            make.trailing.equalTo(self.view);
-            make.height.equalTo(@(99));
-        }];
     }
     
     [super updateViewConstraints];
@@ -181,19 +171,31 @@
     UITableViewCell *cell;
     if (indexPath.section == FlyTopicCellSectionIndex) {
         static NSString *cellIdentifier = kFlyTopicDetailViewControllerTopicCellIdentifier;
-        cell = (FLYFeedTopicTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        BOOL needUpdateConstraints = YES;
         if (cell == nil) {
+            needUpdateConstraints = NO;
             cell = [[FLYFeedTopicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         }
+        
+        FLYFeedTopicTableViewCell *topicCell = (FLYFeedTopicTableViewCell *)cell;
         if (NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)
         {
-            cell.contentView.frame = cell.bounds;
-            cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+            topicCell.contentView.frame = cell.bounds;
+            topicCell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
         }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor flyBlue];
-        ((FLYTopicDetailTopicCell *)cell).delegate = self;
-        [((FLYTopicDetailTopicCell *)cell) setupTopic:self.topic];
+        topicCell.backgroundColor = [UIColor clearColor];
+        //set cell state
+        [topicCell updatePlayState:FLYPlayStateNotSet];
+        if ([[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
+            [topicCell updatePlayState:[FLYAudioStateManager sharedInstance].currentPlayItem.playState];
+        }
+        topicCell.topic = self.topic;
+        topicCell.indexPath = indexPath;
+        [topicCell setupTopic:self.topic needUpdateConstraints:needUpdateConstraints];
+        topicCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        topicCell.delegate = self;
+        cell = topicCell;
     } else {
         static NSString *cellIdentifier = kFlyTopicDetailViewControllerReplyCellIdentifier;
         cell = (FLYTopicDetailReplyCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -220,7 +222,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == FlyTopicCellSectionIndex) {
-        return [FLYTopicDetailTopicCell cellHeightForTopic:self.topic];
+        return 90;
     }
     return 80;
 }
