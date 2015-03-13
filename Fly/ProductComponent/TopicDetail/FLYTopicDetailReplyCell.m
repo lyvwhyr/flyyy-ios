@@ -30,7 +30,7 @@
 
 #define kPlayButtonLeftPadding 24
 #define kLikeTopPadding 8
-#define kLikeRightPadding 10
+#define kLikeRightPadding 15
 #define kCommentBottomPadding 8
 #define kBodyLabelYOffset 10
 #define kBodyLabelLeftPadding 20
@@ -41,7 +41,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         UIColor *color = [UIColor flyInlineActionGrey];
         UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
-        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:color icon:@"icon_detail_wings" isIconLeft:NO];
+        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:color icon:@"icon_homefeed_wings" isIconLeft:YES];
         _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_likeButton];
@@ -66,7 +66,7 @@
         
         _commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_commentButton setImage:[UIImage imageNamed:@"icon_detail_graycomment"] forState:UIControlStateNormal];
+        [_commentButton setImage:[UIImage imageNamed:@"icon_homefeed_comment2"] forState:UIControlStateNormal];
         [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_commentButton];
     }
@@ -100,7 +100,7 @@
         }];
         
         [self.commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.trailing.equalTo(self.likeButton);
+            make.leading.equalTo(self.likeButton);
             make.bottom.equalTo(self).offset(-kCommentBottomPadding);
         }];
         
