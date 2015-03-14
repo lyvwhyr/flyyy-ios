@@ -687,6 +687,7 @@
     self.filterEffect = effect;
     FLYVoiceFilterManager *filterManager = [FLYVoiceFilterManager new];
     if (effect == FLYVoiceEffectDisguise) {
+        [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileNameAfterFilter];
         [filterManager applyFiltering];
     } else {
         [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
@@ -706,7 +707,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [FLYUtilities printAutolayoutTrace];
+//    [FLYUtilities printAutolayoutTrace];
 }
 
 #pragma mark - FLYRecordBottomBarDelegate

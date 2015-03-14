@@ -51,7 +51,7 @@
 #define kTopicContentRightPadding       10
 //padding for user name, topic title to it's parent view
 #define kElementRightPadding            10
-#define kUsernameOffset                 -100
+#define kUsernameOffset                -100
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
