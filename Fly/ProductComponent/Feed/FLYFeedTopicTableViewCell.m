@@ -108,8 +108,15 @@
         //when it enters background, _arclayer is nil so this doesn't work
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pauseLayer) name:UIApplicationDidEnterBackgroundNotification object:nil];
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_resumeLayer) name:UIApplicationWillEnterForegroundNotification object:nil];
+        
+        [self _addObservers];
     }
     return self;
+}
+
+- (void)_addObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_likeUpdated:) name:kNotificationTopicLikeChanged object:nil];
 }
 
 -(void)drawLineAnimation
@@ -400,6 +407,16 @@
 //    height += labelHeight + 44 + 70;
 //    
 //    return height;
+}
+
+#pragma mark - notification
+- (void)_likeUpdated:(NSNotification *)notif
+{
+    FLYTopic *topic = [notif.userInfo objectForKey:@"topic"];
+    if (!topic || ![topic.topicId isEqualToString:self.topic.topicId]) {
+        return;
+    }
+    [self setLiked:topic.liked animated:YES];
 }
 
 @end

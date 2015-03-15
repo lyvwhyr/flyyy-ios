@@ -79,7 +79,7 @@
 
 - (void)_addObservers
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_likeUpdated:) name:kNotificationTopicLikeChanged object:nil];
+    
 }
 
 - (void)viewDidLoad {
@@ -345,27 +345,6 @@
         
         [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath itemType:FLYPlayableItemFeedTopic]];
     });
-}
-
-- (void)_likeUpdated:(NSNotification *)notif
-{
-    FLYTopic *topic = [notif.userInfo objectForKey:@"topic"];
-    if (!topic) {
-        return;
-    }
-    NSInteger index = [self.posts indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        if ([topic.topicId isEqual:((FLYTopic *)obj).topicId]) {
-            *stop = YES;
-            return YES;
-        } else {
-            return NO;
-        }
-    }];
-    if (index != NSNotFound && index < [self.posts count]) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-        FLYFeedTopicTableViewCell *cell = (FLYFeedTopicTableViewCell *)[self.feedTableView cellForRowAtIndexPath:indexPath];
-        [cell setLiked:topic.liked animated:YES];
-    }
 }
 
 
