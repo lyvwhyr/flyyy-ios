@@ -41,7 +41,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         UIColor *color = [UIColor flyInlineActionGrey];
         UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
-        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:color icon:@"icon_homefeed_wings" isIconLeft:YES];
+        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:color icon:@"icon_homefeed_like" isIconLeft:YES];
         _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_likeButton];

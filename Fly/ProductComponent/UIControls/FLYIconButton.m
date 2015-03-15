@@ -53,6 +53,18 @@
     [self updateConstraints];
 }
 
+- (void)setLabelTextColor:(UIColor *)color
+{
+    _localTitleLabel.textColor = color;
+}
+
+- (void)setIconImage:(UIImage *)image
+{
+    [_localIconView setImage:image];
+    [_localIconView sizeToFit];
+    [self updateConstraints];
+}
+
 - (void)updateConstraints
 {
     CGFloat rightPadding = kIconRightPadding;

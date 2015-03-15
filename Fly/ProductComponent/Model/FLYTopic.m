@@ -13,6 +13,7 @@
 #import "FLYDownloadableAudio.h"
 #import "FLYURLConstants.h"
 #import "NSDate+TimeAgo.h"
+#import "FLYTopicService.h"
 
 @interface FLYTopic() <FLYDownloadableAudio>
 
@@ -46,6 +47,7 @@
         _updatedAt = [[dict fly_objectOrNilForKey:@"updated_at"] stringValue];
         _user = [[FLYUser alloc] initWithDictionary:[dict fly_dictionaryForKey:@"user"]];
         _group = [[FLYGroup alloc] initWithDictory:[dict fly_dictionaryForKey:@"group"]];
+        _liked = [dict fly_boolForKey:@"liked" defaultValue:0];
         
         NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:[_createdAt longLongValue]/1000];
         NSString *ago = [date timeAgo];
@@ -62,6 +64,19 @@
 - (FLYDownloadableAudioType)downloadableAudioType
 {
     return FLYDownloadableTopic;
+}
+
+- (void)serverLike:(BOOL)liked
+{
+    FLYLikeSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        UALog(@"liked");
+    };
+    
+    FLYLikeErrorBlock errorBlock = ^(id responseObj, NSError *error) {
+        
+    };
+    
+    [FLYTopicService likeTopicWithId:self.topicId liked:liked successBlock:successBlock errorBlock:errorBlock];
 }
 
 

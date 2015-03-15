@@ -33,6 +33,7 @@
 #define kColorFlySignupGrey                             @"#B7B5B5"
 #define kColorFlyPlayAllControlPanelBackground          @"#949494"
 #define kColorFlyInlineAction                           @"#B5CBD6"
+#define kColorFlyHomefeedBlue                           @"#79B4D2"
 
 @implementation UIColor (FLYAddition)
 
@@ -163,6 +164,11 @@
 + (UIColor *)flyInlineAction
 {
     return [self colorWithHexString:kColorFlyInlineAction];
+}
+
++ (UIColor *)flyHomefeedBlue
+{
+    return [self colorWithHexString:kColorFlyHomefeedBlue];
 }
 
 

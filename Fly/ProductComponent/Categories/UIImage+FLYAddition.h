@@ -31,4 +31,6 @@
 
 + (UIImage *)roundedImageWithImage:(UIImage *)image;
 
+- (UIImage*)imageWithColorOverlay:(UIColor*)colorOverlay;
+
 @end

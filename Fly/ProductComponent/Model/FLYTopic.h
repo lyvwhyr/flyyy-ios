@@ -41,13 +41,14 @@
 @property (nonatomic, copy) NSString *displayableCreateAt;
 @property (nonatomic, copy) NSString *updatedAt;
 @property (nonatomic, copy) NSString *mediaURL;
+@property (nonatomic) BOOL liked;
+
 @property (nonatomic) FLYUser *user;
 @property (nonatomic) FLYGroup *group;
 
 @property (nonatomic) BOOL isAudioDownloaded;
 
-//TODO:remove this
-
 - (instancetype)initWithDictory:(NSDictionary *)dict;
+- (void)serverLike:(BOOL)liked;
 
 @end

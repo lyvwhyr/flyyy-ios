@@ -13,6 +13,7 @@
 #import "FLYTopic.h"
 #import "FLYUser.h"
 #import "Dialog.h"
+#import "FLYTopicService.h"
 
 @interface FLYTopicDetailTopicCell()
 
@@ -73,7 +74,7 @@
         //shared font
         UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:14];
         
-        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_wings" isIconLeft:YES]  ;
+        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue]  icon:@"icon_homefeed_like" isIconLeft:YES]  ;
         [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self.topicContentView addSubview:_likeButton];
@@ -249,7 +250,7 @@
 
 - (void)_likeButtonTapped
 {
-    [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
+    [self.topic serverLike:self.topic.liked];
 }
 
 - (void)_playButtonTapped

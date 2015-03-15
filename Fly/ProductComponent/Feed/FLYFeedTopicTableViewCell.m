@@ -16,6 +16,8 @@
 #import "FLYGroup.h"
 #import "Dialog.h"
 #import "CALayer+MBAnimationPersistence.h"
+#import "FLYTopicService.h"
+#import "UIColor+FLYAddition.h"
 
 @interface FLYFeedTopicTableViewCell()
 
@@ -84,13 +86,13 @@
         _groupNameButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_groupNameButton addTarget:self action:@selector(_groupNameTapped) forControlEvents:UIControlEventTouchUpInside];
         _groupNameButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:13];
-        [_groupNameButton setTitleColor:[UIColor colorWithHexString:@"#79B4D2"] forState:UIControlStateNormal];
+        [_groupNameButton setTitleColor:[UIColor flyHomefeedBlue] forState:UIControlStateNormal];
         _groupNameButton.titleEdgeInsets = UIEdgeInsetsZero;
         [_groupNameButton sizeToFit];
         [self.contentView addSubview:_groupNameButton];
         
         UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
-        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyInlineAction]  icon:@"icon_homefeed_wings" isIconLeft:YES]  ;
+        _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyInlineAction]  icon:@"icon_homefeed_like" isIconLeft:YES]  ;
         [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_likeButton];
@@ -251,9 +253,29 @@
     self.topicTitle.attributedText = attrStr;
     [self.topicTitle sizeToFit];
     
-    [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.likeCount]];
+    if (self.topic.liked) {
+        [self _setLiked:YES animated:NO];
+    } else {
+        [self _setLiked:NO animated:NO];
+    }
+    
     [self.groupNameButton setTitle:[NSString stringWithFormat:@"#%@", topic.group.groupName] forState:UIControlStateNormal];
     [self.commentButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.replyCount]];
+}
+
+- (void)_setLiked:(BOOL)liked animated:(BOOL)animated
+{
+    if (liked) {
+        [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)self.topic.likeCount]];
+        [self.likeButton setLabelTextColor:[UIColor flyHomefeedBlue]];
+        UIImage *image = [[UIImage imageNamed:@"icon_homefeed_like"] imageWithColorOverlay:[UIColor flyHomefeedBlue]];
+        [self.likeButton setIconImage:image];
+    } else {
+        [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)self.topic.likeCount]];
+        [self.likeButton setLabelTextColor:[UIColor flyInlineAction]];
+        UIImage *image = [UIImage imageNamed:@"icon_homefeed_like"];
+        [self.likeButton setIconImage:image];
+    }
 }
 
 #pragma mark - update play state
@@ -309,7 +331,7 @@
 {
     [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"" component:self.topic.topicId element:@"like_button" action:@"click"];
     
-    [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
+   [self.topic serverLike:self.topic.liked];
 }
 
 - (void)_shareButtonTapped

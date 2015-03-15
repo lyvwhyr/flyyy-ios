@@ -35,6 +35,7 @@
 + (UIColor *)flyColorFlySignupGrey;
 + (UIColor *)flyColorPlayAllControlPanelBackground;
 + (UIColor *)flyInlineAction;
++ (UIColor *)flyHomefeedBlue;
 
 + (UIColor *)customGrayColor;
 + (UIColor *)customRedColor;
