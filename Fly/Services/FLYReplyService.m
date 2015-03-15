@@ -33,4 +33,24 @@
     }];
 }
 
++ (void)likeReplyWithId:(NSString *)replyId liked:(BOOL)liked successBlock:(FLYReplyLikeSuccessBlock)successBlock errorBlock:(FLYReplyLikeErrorBlock)errorBlock
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *endpoint = [NSString stringWithFormat:@"replies/%@/like", replyId];
+    
+    if (!liked) {
+        [manager PUT:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            successBlock(operation, responseObject);
+        } failure:^(id responseObj, NSError *error) {
+            errorBlock(responseObj, error);
+        }];
+    } else {
+        [manager DELETE:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            successBlock(operation, responseObject);
+        } failure:^(id responseObj, NSError *error) {
+            errorBlock(responseObj, error);
+        }];
+    }
+}
+
 @end

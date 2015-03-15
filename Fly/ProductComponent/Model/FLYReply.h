@@ -22,7 +22,9 @@
 @property (nonatomic) NSInteger duration;
 @property (nonatomic, copy) NSString *createdAt;
 @property (nonatomic, copy) NSString *displayableCreateAt;
+@property (nonatomic) BOOL liked;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
+- (void)like;
 
 @end

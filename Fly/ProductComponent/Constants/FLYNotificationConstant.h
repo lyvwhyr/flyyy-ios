@@ -18,3 +18,4 @@
 #define kVoiceFilterApplied @"kVoiceFilterApplied"
 
 #define kNotificationTopicLikeChanged @"kNotificationTopicLikeChanged"
+#define kNotificationReplyLikeChanged @"kNotificationReplyLikeChanged"

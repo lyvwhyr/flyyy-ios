@@ -11,6 +11,7 @@
 #import "NSDictionary+FLYAddition.h"
 #import "NSDate+TimeAgo.h"
 #import "FLYDownloadableAudio.h"
+#import "FLYReplyService.h"
 
 
 @interface FLYReply()<FLYDownloadableAudio>
@@ -37,6 +38,7 @@
         NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:[_createdAt longLongValue]/1000];
         NSString *ago = [date timeAgo];
         _displayableCreateAt = ago;
+        _liked = [dict fly_boolForKey:@"liked" defaultValue:NO];
     }
     return self;
 }
@@ -50,6 +52,43 @@
 - (FLYDownloadableAudioType)downloadableAudioType
 {
     return FLYDownloadableReply;
+}
+
+- (void)like
+{
+    [self _serverLike:self.liked];
+    if (self.liked) {
+        [self _clientLike:self.liked];
+    } else {
+        [self _clientLike:self.liked];
+    }
+}
+
+- (void)_clientLike:(BOOL)liked
+{
+    if (self.liked) {
+        if (liked >= 1) {
+            self.likeCount -= 1;
+        }
+    } else {
+        self.likeCount += 1;
+    }
+    self.liked = !liked;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationReplyLikeChanged object:self userInfo:@{@"reply":self}];
+}
+
+- (void)_serverLike:(BOOL)liked
+{
+    FLYReplyLikeSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        
+    };
+    
+    FLYReplyLikeErrorBlock errorBlock = ^(id responseObj, NSError *error) {
+        // revert like
+        [self _clientLike:self.liked];
+    };
+    
+    [FLYReplyService likeReplyWithId:self.replyId liked:liked successBlock:successBlock errorBlock:errorBlock];
 }
 
 @end

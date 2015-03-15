@@ -13,6 +13,8 @@
 #import "FLYReply.h"
 #import "FLYUser.h"
 #import "Dialog.h"
+#import "UIView+FLYAddition.h"
+#import "UIImage+FLYAddition.h"
 
 @interface FLYTopicDetailReplyCell()
 
@@ -69,9 +71,16 @@
         [_commentButton setImage:[UIImage imageNamed:@"icon_homefeed_comment_light"] forState:UIControlStateNormal];
         [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_commentButton];
+        
+        [self _addObservers];
     }
     
     return self;
+}
+
+- (void)_addObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_likeUpdated:) name:kNotificationReplyLikeChanged object:nil];
 }
 
 - (void)setupReply:(FLYReply *)reply
@@ -83,7 +92,33 @@
         self.bodyLabel.text = reply.user.userName;
     }
     self.postAt.text = reply.displayableCreateAt;
+    
+    //set like
     [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)reply.likeCount]];
+    if (self.reply.liked) {
+        [self setLiked:YES animated:NO];
+    } else {
+        [self setLiked:NO animated:NO];
+    }
+}
+
+- (void)setLiked:(BOOL)liked animated:(BOOL)animated
+{
+    if (liked) {
+        if (animated) {
+            [self.likeButton enlargeAnimation];
+        }
+        
+        [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)self.reply.likeCount]];
+        [self.likeButton setLabelTextColor:[UIColor flyHomefeedBlue]];
+        UIImage *image = [[UIImage imageNamed:@"icon_homefeed_like"] imageWithColorOverlay:[UIColor flyHomefeedBlue]];
+        [self.likeButton setIconImage:image];
+    } else {
+        [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)self.reply.likeCount]];
+        [self.likeButton setLabelTextColor:[UIColor flyInlineAction]];
+        UIImage *image = [UIImage imageNamed:@"icon_homefeed_like"];
+        [self.likeButton setIconImage:image];
+    }
 }
 
 - (void)updateConstraints
@@ -124,6 +159,16 @@
     [self.contentView layoutIfNeeded];
 }
 
+#pragma mark - notification
+- (void)_likeUpdated:(NSNotification *)notif
+{
+    FLYReply *reply = [notif.userInfo objectForKey:@"reply"];
+    if (!reply || ![reply.replyId isEqualToString:self.reply.replyId]) {
+        return;
+    }
+    [self setLiked:reply.liked animated:YES];
+}
+
 #pragma mark - User interactions
 - (void)_playButtonTapped
 {
@@ -133,7 +178,7 @@
 
 - (void)_likeButtonTapped
 {
-    [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
+    [self.reply like];
 }
 
 - (void)_commentButtonTapped

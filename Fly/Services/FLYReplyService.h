@@ -14,6 +14,8 @@
 
 typedef void(^FLYReplyServiceGetRepliesSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
 typedef void(^FLYReplyServiceGetRepliesErrorBlock)(AFHTTPRequestOperation *operation, NSError *error);
+typedef void(^FLYReplyLikeSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
+typedef void(^FLYReplyLikeErrorBlock)(id responseObj, NSError *error);
 
 @interface FLYReplyService : FLYServiceBase
 
@@ -21,5 +23,6 @@ typedef void(^FLYReplyServiceGetRepliesErrorBlock)(AFHTTPRequestOperation *opera
 
 
 + (instancetype)replyServiceWithTopicId:(NSString *)topicId;
++ (void)likeReplyWithId:(NSString *)replyId liked:(BOOL)liked successBlock:(FLYReplyLikeSuccessBlock)successBlock errorBlock:(FLYReplyLikeErrorBlock)errorBlock;
 
 @end
