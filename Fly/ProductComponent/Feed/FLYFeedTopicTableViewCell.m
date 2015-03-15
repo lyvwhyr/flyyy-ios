@@ -254,18 +254,22 @@
     [self.topicTitle sizeToFit];
     
     if (self.topic.liked) {
-        [self _setLiked:YES animated:NO];
+        [self setLiked:YES animated:NO];
     } else {
-        [self _setLiked:NO animated:NO];
+        [self setLiked:NO animated:NO];
     }
     
     [self.groupNameButton setTitle:[NSString stringWithFormat:@"#%@", topic.group.groupName] forState:UIControlStateNormal];
     [self.commentButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.replyCount]];
 }
 
-- (void)_setLiked:(BOOL)liked animated:(BOOL)animated
+- (void)setLiked:(BOOL)liked animated:(BOOL)animated
 {
     if (liked) {
+        if (animated) {
+            //TODO: add animation
+        }
+        
         [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)self.topic.likeCount]];
         [self.likeButton setLabelTextColor:[UIColor flyHomefeedBlue]];
         UIImage *image = [[UIImage imageNamed:@"icon_homefeed_like"] imageWithColorOverlay:[UIColor flyHomefeedBlue]];
@@ -331,7 +335,7 @@
 {
     [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"" component:self.topic.topicId element:@"like_button" action:@"click"];
     
-   [self.topic serverLike:self.topic.liked];
+    [self.topic like];
 }
 
 - (void)_shareButtonTapped

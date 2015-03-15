@@ -16,3 +16,5 @@
 
 // Apply voice filter
 #define kVoiceFilterApplied @"kVoiceFilterApplied"
+
+#define kNotificationTopicLikeChanged @"kNotificationTopicLikeChanged"

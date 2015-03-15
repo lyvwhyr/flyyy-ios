@@ -49,6 +49,7 @@
 @property (nonatomic) BOOL isAudioDownloaded;
 
 - (instancetype)initWithDictory:(NSDictionary *)dict;
+- (void)like;
 - (void)serverLike:(BOOL)liked;
 
 @end

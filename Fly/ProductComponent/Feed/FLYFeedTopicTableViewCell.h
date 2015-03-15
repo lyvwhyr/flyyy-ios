@@ -29,6 +29,7 @@
 
 - (void)setupTopic:(FLYTopic *)topic needUpdateConstraints:(BOOL)needUpdateConstraints;
 - (void)updatePlayState:(FLYPlayState)state;
+- (void)setLiked:(BOOL)liked animated:(BOOL)animated;
 
 
 + (CGFloat)heightForTopic:(FLYTopic *)topic;

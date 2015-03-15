@@ -66,6 +66,28 @@
     return FLYDownloadableTopic;
 }
 
+- (void)like
+{
+    if (self.liked) {
+        [self _clientLike:self.liked];
+    } else {
+        [self _clientLike:self.liked];
+    }
+}
+
+- (void)_clientLike:(BOOL)liked
+{
+    if (self.liked) {
+        if (liked >= 1) {
+            self.likeCount -= 1;
+        }
+    } else {
+        self.likeCount += 1;
+    }
+    self.liked = !liked;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTopicLikeChanged object:self userInfo:@{@"topic":self}];
+}
+
 - (void)serverLike:(BOOL)liked
 {
     FLYLikeSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
