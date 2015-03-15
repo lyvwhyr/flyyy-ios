@@ -66,7 +66,7 @@
         
         _commentButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_commentButton setImage:[UIImage imageNamed:@"icon_homefeed_comment2"] forState:UIControlStateNormal];
+        [_commentButton setImage:[UIImage imageNamed:@"icon_homefeed_comment_light"] forState:UIControlStateNormal];
         [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_commentButton];
     }

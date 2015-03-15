@@ -87,7 +87,7 @@
         _topicTitle.translatesAutoresizingMaskIntoConstraints = NO;
         [self.topicContentView insertSubview:self.topicTitle aboveSubview:self.speechBubbleView];
         
-        _commentButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue] icon:@"icon_homefeed_comment" isIconLeft:NO];
+        _commentButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyBlue] icon:@"icon_homefeed_comment_light" isIconLeft:NO];
         [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_commentButton sizeToFit];

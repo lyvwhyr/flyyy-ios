@@ -310,6 +310,14 @@
     [self presentViewController:navigationController animated:NO completion:nil];
 }
 
+
+# pragma mark - FLYTopicDetailReplyCellDelegate
+
+- (void)playButtonTapped:(FLYFeedTopicTableViewCell *)tappedCell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
 #pragma mark - Notification
 
 - (void)_newReplyReceived:(NSNotification *)notif

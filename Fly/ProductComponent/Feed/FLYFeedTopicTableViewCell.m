@@ -98,7 +98,7 @@
         _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_likeButton];
         
-        _commentButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyInlineAction] icon:@"icon_homefeed_comment2" isIconLeft:YES];
+        _commentButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyInlineAction] icon:@"icon_homefeed_comment_light" isIconLeft:YES];
         [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_commentButton sizeToFit];
