@@ -14,7 +14,7 @@
 {
     if (self = [super init]) {
         self.userInteractionEnabled = NO;
-        self.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+        self.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
     }
     return self;
 }
