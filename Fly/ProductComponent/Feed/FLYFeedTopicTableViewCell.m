@@ -18,6 +18,7 @@
 #import "CALayer+MBAnimationPersistence.h"
 #import "FLYTopicService.h"
 #import "UIColor+FLYAddition.h"
+#import "UIView+FLYAddition.h"
 
 @interface FLYFeedTopicTableViewCell()
 
@@ -267,7 +268,7 @@
 {
     if (liked) {
         if (animated) {
-            //TODO: add animation
+            [self.likeButton enlargeAnimation];
         }
         
         [self.likeButton setLabelText:[NSString stringWithFormat:@"%d", (int)self.topic.likeCount]];

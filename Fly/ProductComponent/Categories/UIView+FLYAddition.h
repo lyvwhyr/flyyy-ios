@@ -138,4 +138,6 @@
  */
 - (void)setLongPressActionWithBlock:(void (^)(void))block;
 
+- (void)enlargeAnimation;
+
 @end

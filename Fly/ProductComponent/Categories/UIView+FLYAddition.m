@@ -325,4 +325,18 @@ static char kDTActionHandlerLongPressGestureKey;
     }
 }
 
+#pragma mark - animation
+- (void)enlargeAnimation
+{
+    [UIView animateWithDuration:0.09 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.transform = CGAffineTransformMakeScale(1.5, 1.5);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.09 animations:^{
+            self.transform = CGAffineTransformMakeScale(1, 1);
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
+}
+
 @end
