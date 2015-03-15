@@ -11,9 +11,9 @@
 @class FLYNavigationController;
 @class FLYTabBarView;
 
-NS_ENUM(NSInteger, TabBarItemIndex) {
+typedef NS_ENUM(NSInteger, TabBarItemIndex) {
     TABBAR_HOME = 0,
-    TABBAR_ME
+    TABBAR_GROUP
 };
 
 @interface FLYMainViewController : FLYUniversalViewController

@@ -13,5 +13,6 @@
 @property (nonatomic) BOOL isRecordTab;
 
 - (instancetype)initWithTitle:(NSString *)title image:(NSString *)imageName recordTab:(BOOL)isRecordTab;
+- (void)setTabImage:(UIImage *)image;
 
 @end

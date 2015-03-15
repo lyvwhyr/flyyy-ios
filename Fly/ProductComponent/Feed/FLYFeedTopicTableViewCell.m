@@ -71,7 +71,7 @@
         _topicTitle = [UILabel new];
         _topicTitle.numberOfLines = 1;
         _topicTitle.adjustsFontSizeToFitWidth = NO;
-        _topicTitle.textColor = [UIColor colorWithHexString:@"#727272"];
+        _topicTitle.textColor = [UIColor colorWithHexString:@"#676666"];
         _topicTitle.lineBreakMode = NSLineBreakByTruncatingTail;
         _topicTitle.font = [UIFont fontWithName:@"Avenir-Roman" size:16];
         _topicTitle.translatesAutoresizingMaskIntoConstraints = NO;

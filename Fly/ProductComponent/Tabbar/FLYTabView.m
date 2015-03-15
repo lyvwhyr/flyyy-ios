@@ -53,6 +53,11 @@
     return self;
 }
 
+- (void)setTabImage:(UIImage *)image
+{
+    _imageView.image = image;
+}
+
 - (void)updateConstraints
 {
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {

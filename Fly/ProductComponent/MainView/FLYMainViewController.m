@@ -41,6 +41,8 @@
 @interface FLYMainViewController() <FLYTabBarViewDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic) FLYTabBarView *tabBarView;
+@property (nonatomic) FLYTabView *homeTab;
+@property (nonatomic) FLYTabView *groupsTab;
 
 @property (nonatomic) FLYFeedViewController *feedViewController;
 //@property (nonatomic) FLYRecordViewController *recordViewController;
@@ -144,10 +146,10 @@
     self.tabBarView = [FLYTabBarView new];
     [self.view addSubview:self.tabBarView];
     
-    FLYTabView *hogroupsTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_tabbar_wave" recordTab:NO];
-    FLYTabView *groupsTab = [[FLYTabView alloc] initWithTitle:@"Groups" image:@"icon_tabbar_group" recordTab:NO];
+    self.homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_tabbar_home_selected" recordTab:NO];
+    self.groupsTab = [[FLYTabView alloc] initWithTitle:@"Groups" image:@"icon_tabbar_group_unselected" recordTab:NO];
     
-    NSArray *tabs = @[hogroupsTab, groupsTab];
+    NSArray *tabs = @[self.homeTab, self.groupsTab];
     [self.tabBarView setTabViews:tabs];
     self.tabBarView.delegate = self;
 }
@@ -191,6 +193,8 @@
         [self addViewController:_feedViewNavigationController];
         _currentViewController = _feedViewNavigationController;
         
+        [self _updateActiveTab:TABBAR_HOME];
+        
         [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_home_button" component:nil element:nil action:@"click"];
     } else {
         if (_currentViewController == _groupsListViewNavigationController) {
@@ -199,8 +203,27 @@
         [self removeViewController:_currentViewController];
         [self addViewController:_groupsListViewNavigationController];
         _currentViewController = _groupsListViewNavigationController;
+        [self _updateActiveTab:TABBAR_GROUP];
         
         [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_groups_button" component:nil element:nil action:@"click"];
+    }
+}
+
+- (void)_updateActiveTab:(TabBarItemIndex)index
+{
+    switch (index) {
+        case TABBAR_HOME: {
+            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_tabbar_group_unselected"]];
+            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_tabbar_home_selected"]];
+            break;
+        }
+        case TABBAR_GROUP: {
+            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_tabbar_wave_unselected"]];
+            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_tabbar_group_selected"]];
+            break;
+        }
+        default:
+            break;
     }
 }
 
