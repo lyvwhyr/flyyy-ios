@@ -68,6 +68,7 @@
 
 - (void)like
 {
+    [self _serverLike:self.liked];
     if (self.liked) {
         [self _clientLike:self.liked];
     } else {
@@ -88,14 +89,15 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTopicLikeChanged object:self userInfo:@{@"topic":self}];
 }
 
-- (void)serverLike:(BOOL)liked
+- (void)_serverLike:(BOOL)liked
 {
     FLYLikeSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
-        UALog(@"liked");
+        
     };
     
     FLYLikeErrorBlock errorBlock = ^(id responseObj, NSError *error) {
-        
+        // revert like
+        [self _clientLike:self.liked];
     };
     
     [FLYTopicService likeTopicWithId:self.topicId liked:liked successBlock:successBlock errorBlock:errorBlock];

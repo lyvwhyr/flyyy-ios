@@ -250,7 +250,7 @@
 
 - (void)_likeButtonTapped
 {
-    [self.topic serverLike:self.topic.liked];
+    
 }
 
 - (void)_playButtonTapped
