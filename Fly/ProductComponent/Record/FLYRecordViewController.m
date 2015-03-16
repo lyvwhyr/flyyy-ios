@@ -80,6 +80,7 @@
 
 // Voice filter
 @property (nonatomic) FLYVoiceFilterEffect filterEffect;
+@property (nonatomic) UIActivityIndicatorView *loadingView;
 
 
 @property (nonatomic, copy) AudioPlayerCompleteblock completionBlock;
@@ -155,6 +156,14 @@
     [self _cleanupData];
 }
 
+- (UIActivityIndicatorView *)loadingView
+{
+    if (_loadingView == nil) {
+        _loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    }
+    return _loadingView;
+}
+
 - (void)_initVoiceRecording
 {
     @weakify(self)
@@ -224,6 +233,8 @@
         self.navigationItem.rightBarButtonItem = nil;
     }
 }
+
+
 
 
 #pragma mark - navigation bar actions
@@ -592,6 +603,13 @@
                 make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
                 make.bottom.equalTo(self.recordBottomBar.mas_top);
             }];
+            
+            if (_loadingView) {
+                [_loadingView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.centerX.equalTo(self.userActionImageView);
+                    make.centerY.equalTo(self.userActionImageView);
+                }];
+            }
         }
     }
     
@@ -687,12 +705,20 @@
     self.filterEffect = effect;
     FLYVoiceFilterManager *filterManager = [FLYVoiceFilterManager new];
     if (effect == FLYVoiceEffectDisguise) {
+        //Loading view
+        [self.view addSubview:self.loadingView];
+        [self updateViewConstraints];
+        self.userActionImageView.userInteractionEnabled = NO;
+        [self.view bringSubviewToFront:self.loadingView];
+        [self.loadingView startAnimating];
+        
+        
         [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileNameAfterFilter];
         [filterManager applyFiltering];
     } else {
         [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
-        self.state = FLYRecordCompleteState;
-        [self _updateUserState];
+//        self.state = FLYRecordCompleteState;
+//        [self _updateUserState];
     }
 }
 
@@ -700,8 +726,13 @@
 
 - (void)_vioceFilterApplied
 {
-    self.state = FLYRecordCompleteState;
-    [self _updateUserState];
+    self.userActionImageView.userInteractionEnabled = YES;
+    [_loadingView stopAnimating];
+    [_loadingView removeFromSuperview];
+    _loadingView = nil;
+    
+//    self.state = FLYRecordCompleteState;
+//    [self _updateUserState];
 }
 
 - (void)viewDidLayoutSubviews

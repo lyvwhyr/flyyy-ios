@@ -27,6 +27,8 @@
 #import "SampleQueueId.h"
 #import "FLYDownloadableAudio.h"
 #import "FLYGroup.h"
+#import "FLYNavigationController.h"
+#import "FLYNavigationBar.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate, STKAudioPlayerDelegate>
 
@@ -84,6 +86,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIFont *titleFont = [UIFont fontWithName:@"Avenir-Roman" size:16];
+    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
+    self.title = LOC(@"FLYHomeTitle");
+    
     _posts = [NSMutableArray new];
     
     self.view.backgroundColor = [UIColor whiteColor];
@@ -166,6 +173,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
      [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[NSNotificationCenter defaultCenter] postNotificationName:kShowRecordIconNotification object:self];
 //    [self updateViewConstraints];

@@ -5,6 +5,7 @@
 "FLYTapWhenDoneLabelText" = "Tap when you are done";
 
 //Home feed
+"FLYHomeTitle" = "Home";
 "FLYAutoPlayEnabledHudText" = "Auto play enabled";
 "FLYAutoPlayDisabledHudText" = "Auto play disabled";
 
