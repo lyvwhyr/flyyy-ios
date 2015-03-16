@@ -16,6 +16,8 @@
 
 #define kNewPostKey @"kNewPostKey"
 #define kNewReplyKey @"kNewReplyKey"
+#define kTopicOfNewReplyKey @"kTopicOfNewReplyKey"
+
 #define kDownloadAudioLocalPathkey @"kDownloadAudioLocalPathkey"
 #define kDownloadAudioTypeKey @"kDownloadAudioTypeKey"
 

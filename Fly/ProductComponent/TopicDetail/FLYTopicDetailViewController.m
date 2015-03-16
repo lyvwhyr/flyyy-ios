@@ -59,7 +59,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(_newReplyReceived:)
-                                                     name:kNewReplyReceivedNotification
+                                                     name:kNewReplyPostedNotification
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -274,7 +274,7 @@
 - (void)commentButtonTapped:(FLYTopicDetailTopicCell *)cell
 {
     FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForReply];
-    recordViewController.topicId = self.topic.topicId;
+    recordViewController.topic = self.topic;
     UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
     [self presentViewController:navigationController animated:NO completion:nil];
 }
@@ -305,7 +305,7 @@
 - (void)_commentButtonTapped
 {
     FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForReply];
-    recordViewController.topicId = self.topic.topicId;
+    recordViewController.topic = self.topic;
     UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
     [self presentViewController:navigationController animated:NO completion:nil];
 }

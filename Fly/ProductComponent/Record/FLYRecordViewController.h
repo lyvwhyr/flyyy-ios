@@ -8,6 +8,8 @@
 
 #import "FLYUniversalViewController.h"
 
+@class FLYTopic;
+
 typedef NS_ENUM(NSInteger, FLYRecordState)
 {
     FLYRecordInitialState = 0,
@@ -28,7 +30,7 @@ typedef NS_ENUM(NSInteger, FLYRecordingType)
 @property (nonatomic) FLYRecordingType recordingType;
 
 //reply recording
-@property (nonatomic) NSString *topicId;
+@property (nonatomic) FLYTopic *topic;
 @property (nonatomic) NSString *parentReplyId;
 
 - (instancetype)initWithRecordType:(FLYRecordingType)recordingType;

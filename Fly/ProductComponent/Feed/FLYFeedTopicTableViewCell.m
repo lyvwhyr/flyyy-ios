@@ -19,6 +19,7 @@
 #import "FLYTopicService.h"
 #import "UIColor+FLYAddition.h"
 #import "UIView+FLYAddition.h"
+#import "FLYReply.h"
 
 @interface FLYFeedTopicTableViewCell()
 
@@ -117,6 +118,8 @@
 - (void)_addObservers
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_likeUpdated:) name:kNotificationTopicLikeChanged object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_replyCountUpdated:) name:kNewReplyPostedNotification object:nil];
+    
 }
 
 -(void)drawLineAnimation
@@ -290,6 +293,11 @@
     }
 }
 
+- (void)_updateReplyCount:(NSInteger)replyCount
+{
+    [self.commentButton setLabelText:[NSString stringWithFormat:@"%d", (int)replyCount]];
+}
+
 #pragma mark - update play state
 - (void)updatePlayState:(FLYPlayState)state
 {
@@ -417,6 +425,15 @@
         return;
     }
     [self setLiked:topic.liked animated:YES];
+}
+
+- (void)_replyCountUpdated:(NSNotification *)notif
+{
+    FLYTopic *topic = [notif.userInfo objectForKey:kTopicOfNewReplyKey];
+    if (!topic || ![self.topic.topicId isEqualToString:topic.topicId]) {
+        return;
+    }
+    [self _updateReplyCount:topic.replyCount];
 }
 
 @end

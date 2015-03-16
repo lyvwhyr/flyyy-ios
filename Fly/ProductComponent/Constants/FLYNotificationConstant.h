@@ -8,6 +8,7 @@
 
 #define kShowRecordIconNotification @"kShowRecordIconNotification"
 #define kHideRecordIconNotification @"kHideRecordIconNotification"
+#define kNewReplyPostedNotification @"kNewReplyPostedNotification"
 #define kNewReplyReceivedNotification @"kNewReplyReceivedNotification"
 
 //login and sign up notification

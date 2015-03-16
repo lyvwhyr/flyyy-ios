@@ -38,6 +38,7 @@
 #import "FLYVoiceFilterManager.h"
 #import "FLYVoiceEffectView.h"
 #import "SDiPhoneVersion.h"
+#import "FLYTopic.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -263,7 +264,7 @@
         [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:@"reply" element:@"post_button" action:@"click"];
         
         if (self.replyMediaId) {
-            NSDictionary *dict = @{@"topic_id":self.topicId,
+            NSDictionary *dict = @{@"topic_id":self.topic.topicId,
                                    @"media_id":self.replyMediaId,
                                    @"audio_duration":@(self.audioLength)};
             NSMutableDictionary *mutableDict = [dict mutableCopy];
@@ -281,7 +282,7 @@
             [FLYEndpointRequest uploadAudioFileServiceWithUserId:userId successBlock:^(NSString *mediaId) {
                 @strongify(self)
                 self.replyMediaId = mediaId;
-                NSDictionary *dict = @{@"topic_id":self.topicId,
+                NSDictionary *dict = @{@"topic_id":self.topic.topicId,
                                        @"media_id":self.replyMediaId,
                                        @"audio_duration":@(self.audioLength)};
                 NSMutableDictionary *mutableDict = [dict mutableCopy];
@@ -322,10 +323,10 @@
         }
         
         FLYReply *reply = [[FLYReply alloc] initWithDictionary:responseObject];
-        NSDictionary *dict = @{kNewReplyKey:reply};
+        NSDictionary *dict = @{kNewReplyKey:reply, kTopicOfNewReplyKey:self.topic};
         [Dialog simpleToast:@"Posted"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNewReplyReceivedNotification object:self userInfo:dict];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUsePlaybackOnlyNotification object:self];
+        
+        [self.topic incrementReplyCount:dict];
         
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         
@@ -538,15 +539,6 @@
     self.remainingAudioLength--;
     self.remainingTimeLabel.text = [NSString stringWithFormat:@":%ld", self.remainingAudioLength];
     [self.view setNeedsLayout];
-}
-
-
-- (void)_addPulsingAnimation
-{
-    _pulsingHaloLayer = [PulsingHaloLayer layer];
-    self.halo = _pulsingHaloLayer;
-    self.halo.radius = 150;
-    [self.view.layer insertSublayer:self.halo below:self.userActionImageView.layer];
 }
 
 -(void)updateViewConstraints
