@@ -42,8 +42,8 @@
     [super viewDidLoad];
     
     UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
-    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor flyBlue], NSFontAttributeName:titleFont};
-    self.title = self.group.groupName;
+    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
+    self.title = [NSString stringWithFormat:@"#%@", self.group.groupName];
 }
 
 - (void)viewWillLayoutSubviews
@@ -56,29 +56,15 @@
     [super updateViewConstraints];
 }
 
-//- (UINavigationItem *)navigationItem
-//{
-//    if (!_groupTitleLabel) {
-//        _groupTitleLabel = [UILabel new];
-//        _groupTitleLabel.text = @"I'm so anxious about finals I can't sleep";
-//        _groupTitleLabel.textColor = [UIColor whiteColor];
-//        _groupTitleLabel.font = [UIFont systemFontOfSize:15];
-//        [_groupTitleLabel sizeToFit];
-//        
-//        [self.navigationItem setTitleView:_groupTitleLabel];
-//    }
-//    return [super navigationItem];
-//}
-
 #pragma mark - Navigation bar
 - (void)loadLeftBarButton
 {
     if ([self.navigationController.viewControllers count] > 1) {
-        FLYBlueBackBarButtonItem *barItem = [FLYBlueBackBarButtonItem barButtonItem:YES];
-        @weakify(self)
+        FLYBackBarButtonItem *barItem = [FLYBackBarButtonItem barButtonItem:YES];
+        __weak typeof(self)weakSelf = self;
         barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
-            @strongify(self)
-            [self _backButtonTapped];
+            __strong typeof(self) strongSelf = weakSelf;
+            [strongSelf _backButtonTapped];
         };
         self.navigationItem.leftBarButtonItem = barItem;
     }

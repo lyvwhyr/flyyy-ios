@@ -27,6 +27,8 @@
 #import "SVPullToRefresh.h"
 #import "FLYTopicDetailTabbar.h"
 #import "FLYFeedTopicTableViewCell.h"
+#import "FLYNavigationBar.h"
+#import "FLYNavigationController.h"
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYAudioManagerDelegate, FLYTopicDetailTabbarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -83,6 +85,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIFont *titleFont = [UIFont fontWithName:@"Avenir-Roman" size:16];
+    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
+    self.title = LOC(@"FLYTopicDetailTitle");
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
