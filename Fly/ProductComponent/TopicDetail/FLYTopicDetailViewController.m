@@ -386,15 +386,23 @@
 
 - (void)_reportPost
 {
+    @weakify(self)
     [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailReportPostTitle")
                             message:LOC(@"FLYTopicDetailReportPostMessage")
                         cancelTitle:@"No"
                          otherTitle:@"Yes"
                          completion:^(BOOL cancelled, NSInteger buttonIndex) {
-                             if (!cancelled) {
-                                 // TODO: make an endpoint call
+                             @strongify(self)
+                             if (!cancelled && buttonIndex != 0) {
+                                 [self _reportAction];
                              }
                          }];
+}
+
+- (void)_reportAction
+{
+    // TODO: make an endpoint call
+    [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailReportPostSuccessTitle") message:LOC(@"FLYTopicDetailReportPostSuccessMessage")];
 }
 
 
