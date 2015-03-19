@@ -74,6 +74,8 @@
 "FLYTopicDetailTabbarComment" = "Comment";
 "FLYTopicDetailTabbarPlayAll" = "Play all";
 "FLYTopicDetailTitle" = "Details";
+"FLYTopicDetailReportPostTitle" = "Report this post";
+"FLYTopicDetailReportPostMessage" = "Are you sure you want to report this post?";
 
 
 

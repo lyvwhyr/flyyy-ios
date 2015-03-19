@@ -418,7 +418,7 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
 - (CALayer *)lineLayer
 {
     CALayer *lineLayer = [CALayer layer];
-    lineLayer.backgroundColor = [[UIColor colorWithWhite:0.90 alpha:0.3] CGColor];
+    lineLayer.backgroundColor = [[UIColor colorWithWhite:0.80 alpha:0.7] CGColor];
     return lineLayer;
 }
 

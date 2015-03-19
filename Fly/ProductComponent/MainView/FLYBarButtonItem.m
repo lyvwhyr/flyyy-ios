@@ -138,7 +138,7 @@
 {
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //12 * 21
-    UIImage *image = [UIImage imageNamed:@"icon_detail_option"];
+    UIImage *image = [UIImage imageNamed:@"icon_flag_white"];
     CGFloat x = (left ? -1 : 1) * 10;
     backButton.frame = CGRectMake(x, 0, 52, 44);
     [backButton setImage:image forState:UIControlStateNormal];
@@ -155,6 +155,21 @@
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //12 * 21
     UIImage *image = [UIImage imageNamed:@"icon_navigation_catalog"];
+    CGFloat x = (left ? -1 : 1) * 10;
+    backButton.frame = CGRectMake(x, 0, 52, 44);
+    [backButton setImage:image forState:UIControlStateNormal];
+    self = [super initWithButton:backButton actionBlock:nil];
+    return self;
+}
+@end
+
+@implementation FLYFlagBarButtonItem : FLYBarButtonItem
+
+- (instancetype)initWithSide:(BOOL)left
+{
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //12 * 21
+    UIImage *image = [UIImage imageNamed:@"icon_flag_white"];
     CGFloat x = (left ? -1 : 1) * 10;
     backButton.frame = CGRectMake(x, 0, 52, 44);
     [backButton setImage:image forState:UIControlStateNormal];

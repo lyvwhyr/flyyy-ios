@@ -29,6 +29,7 @@
 #import "FLYFeedTopicTableViewCell.h"
 #import "FLYNavigationBar.h"
 #import "FLYNavigationController.h"
+#import "PXAlertView.h"
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYAudioManagerDelegate, FLYTopicDetailTabbarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -370,9 +371,8 @@
 - (void)loadRightBarButton
 {
     FLYFlagTopicBarButtonItem *barItem = [FLYFlagTopicBarButtonItem barButtonItem:NO];
-    __weak typeof(self)weakSelf = self;
     barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
-        
+        [self _reportPost];
     };
     self.navigationItem.rightBarButtonItem = barItem;
 }
@@ -383,6 +383,20 @@
     [self.view layoutIfNeeded];
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (void)_reportPost
+{
+    [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailReportPostTitle")
+                            message:LOC(@"FLYTopicDetailReportPostMessage")
+                        cancelTitle:@"No"
+                         otherTitle:@"Yes"
+                         completion:^(BOOL cancelled, NSInteger buttonIndex) {
+                             if (!cancelled) {
+                                 // TODO: make an endpoint call
+                             }
+                         }];
+}
+
 
 #pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor
