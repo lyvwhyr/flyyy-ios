@@ -30,6 +30,7 @@
 #import "FLYNavigationBar.h"
 #import "FLYNavigationController.h"
 #import "PXAlertView.h"
+#import "Dialog.h"
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYAudioManagerDelegate, FLYTopicDetailTabbarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -123,7 +124,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [FLYUtilities printAutolayoutTrace];
+//    [FLYUtilities printAutolayoutTrace];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -371,7 +372,9 @@
 - (void)loadRightBarButton
 {
     FLYFlagTopicBarButtonItem *barItem = [FLYFlagTopicBarButtonItem barButtonItem:NO];
+    @weakify(self)
     barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+        @strongify(self)
         [self _reportPost];
     };
     self.navigationItem.rightBarButtonItem = barItem;
@@ -402,7 +405,7 @@
 - (void)_reportAction
 {
     // TODO: make an endpoint call
-    [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailReportPostSuccessTitle") message:LOC(@"FLYTopicDetailReportPostSuccessMessage")];
+    [Dialog simpleToast:LOC(@"FLYTopicDetailReportPostSuccessTitle")];
 }
 
 
