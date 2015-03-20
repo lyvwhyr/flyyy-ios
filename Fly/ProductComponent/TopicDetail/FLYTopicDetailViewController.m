@@ -228,6 +228,14 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //reply section tapped
+    if (indexPath.section == 1) {
+        [self _replyRowTapped:indexPath];
+    }
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -414,6 +422,20 @@
     [actionSheet showInView:self.view];
 }
 
+- (void)_reportReply:(FLYReply *)reply
+{
+    [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailReportReplyTitle")
+                            message:LOC(@"FLYTopicDetailReportReplyMessage")
+                        cancelTitle:@"No"
+                         otherTitle:@"Yes"
+                         completion:^(BOOL cancelled, NSInteger buttonIndex) {
+                             if (!cancelled && buttonIndex != 0) {
+                                 // TODO: make an endpoint call
+                                 [Dialog simpleToast:LOC(@"FLYTopicDetailReportReplySuccessTitle")];
+                             }
+                         }];
+}
+
 - (void)_reportPost
 {
     [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailReportPostTitle")
@@ -445,6 +467,46 @@
                                  [self.navigationController popViewControllerAnimated:YES];
                              }
                          }];
+}
+
+- (void)_deleteReply:(FLYReply *)reply
+{
+    // TODO: call endpoint to delete reply
+    [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailActionsheetDeleteReply")
+                            message:LOC(@"FLYTopicDetailReportReplyMessage")
+                        cancelTitle:@"No"
+                         otherTitle:@"Yes"
+                         completion:^(BOOL cancelled, NSInteger buttonIndex) {
+                             
+                         }];
+    
+    [self.replies removeObject:reply];
+    [self.topicTableView reloadData];
+}
+
+- (void)_replyRowTapped:(NSIndexPath *)indexPath
+{
+    BOOL isAuthor = NO;
+    FLYReply *reply = [self.replies objectAtIndex:indexPath.row];
+    if ([FLYAppStateManager sharedInstance].currentUser && [[FLYAppStateManager sharedInstance].currentUser.userId isEqualToString:reply.user.userId]) {
+        isAuthor = YES;
+    }
+    
+    NSMutableArray *otherButtons = [NSMutableArray new];
+    [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetReportReply")];
+    if (isAuthor) {
+        [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetDeleteReply")];
+    }
+    IBActionSheet *actionSheet = [[IBActionSheet alloc] initWithTitle:nil callback:^(IBActionSheet *actionSheet, NSInteger buttonIndex) {
+        if (actionSheet.cancelButtonIndex != buttonIndex) {
+            if (buttonIndex == 0) {
+                [self _reportReply:reply];
+            } else if (buttonIndex == 1) {
+                [self _deleteReply:reply];
+            }
+        }
+    } cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitlesArray:otherButtons];
+    [actionSheet showInView:self.view];
 }
 
 #pragma mark - Navigation bar and status bar
