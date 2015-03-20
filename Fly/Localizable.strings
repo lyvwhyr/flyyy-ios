@@ -74,9 +74,14 @@
 "FLYTopicDetailTabbarComment" = "Comment";
 "FLYTopicDetailTabbarPlayAll" = "Play all";
 "FLYTopicDetailTitle" = "Details";
+"FLYTopicDetailActionsheetReport" = "Report this post";
+"FLYTopicDetailActionsheetDeletePost" = "Delete this post";
 "FLYTopicDetailReportPostTitle" = "Report this post";
 "FLYTopicDetailReportPostMessage" = "Are you sure you want to report this post?";
 "FLYTopicDetailReportPostSuccessTitle" = "Post reported";
+"FLYTopicDetailDeletePostAlertTitle" = "Delete post";
+"FLYTopicDetailDeletePostAlertMessage" = "Are you sure you want to delete this post?";
+"FLYTopicDetailDeletedHUD" = "Deleted";
 
 
 

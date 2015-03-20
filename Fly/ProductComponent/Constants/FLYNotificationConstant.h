@@ -20,3 +20,6 @@
 
 #define kNotificationTopicLikeChanged @"kNotificationTopicLikeChanged"
 #define kNotificationReplyLikeChanged @"kNotificationReplyLikeChanged"
+
+// Detail page
+#define kNotificationTopicDeleted @"kNotificationTopicDeleted"

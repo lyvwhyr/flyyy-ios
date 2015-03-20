@@ -62,6 +62,9 @@
                                                  selector:@selector(_newPostReceived:)
                                                      name:kNewPostReceivedNotification object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_topicDeleted:)
+                                                     name:kNotificationTopicDeleted object:nil];
         
         NSError *error;
         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
@@ -394,6 +397,13 @@
     [self.posts insertObject:topic atIndex:0];
     [self.feedTableView reloadData];
     [self _scrollToTop];
+}
+
+- (void)_topicDeleted:(NSNotification *)notif
+{
+    FLYTopic *topic = [notif.userInfo objectForKey:@"topic"];
+    [self.posts removeObject:topic];
+    [self.feedTableView reloadData];
 }
 
 - (void)_scrollToTop

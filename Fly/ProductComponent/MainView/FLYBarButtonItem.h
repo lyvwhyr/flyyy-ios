@@ -42,7 +42,7 @@ typedef void(^FLYBarButtonItemActionBlock)(FLYBarButtonItem *barButtonItem);
 
 @end
 
-@interface FLYFlagTopicBarButtonItem : FLYBarButtonItem
+@interface FLYOptionBarButtonItem : FLYBarButtonItem
 
 @end
 

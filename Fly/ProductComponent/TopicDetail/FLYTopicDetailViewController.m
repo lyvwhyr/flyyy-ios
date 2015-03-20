@@ -31,8 +31,10 @@
 #import "FLYNavigationController.h"
 #import "PXAlertView.h"
 #import "Dialog.h"
+#import "IBActionSheet.h"
+#import "FLYUser.h"
 
-@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYAudioManagerDelegate, FLYTopicDetailTabbarDelegate, FLYFeedTopicTableViewCellDelegate>
+@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYAudioManagerDelegate, FLYTopicDetailTabbarDelegate, FLYFeedTopicTableViewCellDelegate, IBActionSheetDelegate>
 
 @property (nonatomic) UITableView *topicTableView;
 @property (nonatomic) FLYTopicDetailTabbar *tabbar;
@@ -371,11 +373,11 @@
 #pragma mark - Navigation bar
 - (void)loadRightBarButton
 {
-    FLYFlagTopicBarButtonItem *barItem = [FLYFlagTopicBarButtonItem barButtonItem:NO];
+    FLYOptionBarButtonItem *barItem = [FLYOptionBarButtonItem barButtonItem:NO];
     @weakify(self)
     barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
         @strongify(self)
-        [self _reportPost];
+        [self _optionTapped];
     };
     self.navigationItem.rightBarButtonItem = barItem;
 }
@@ -387,27 +389,63 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+- (void)_optionTapped
+{
+    BOOL isAuthor = NO;
+    if ([FLYAppStateManager sharedInstance].currentUser && [[FLYAppStateManager sharedInstance].currentUser.userId isEqualToString:self.topic.user.userId]) {
+        isAuthor = YES;
+    }
+    
+    NSMutableArray *otherButtons = [NSMutableArray new];
+    [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetReport")];
+    if (isAuthor) {
+        [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetDeletePost")];
+    }
+    IBActionSheet *actionSheet = [[IBActionSheet alloc] initWithTitle:nil callback:^(IBActionSheet *actionSheet, NSInteger buttonIndex) {
+        if (actionSheet.cancelButtonIndex != buttonIndex) {
+            if (buttonIndex == 0) {
+                [self _reportPost];
+            } else if (buttonIndex == 1) {
+                [self _deletePost];
+            }
+        }
+    } cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitlesArray:otherButtons];
+    [actionSheet showInView:self.view];
+}
+
 - (void)_reportPost
 {
-    @weakify(self)
     [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailReportPostTitle")
                             message:LOC(@"FLYTopicDetailReportPostMessage")
                         cancelTitle:@"No"
                          otherTitle:@"Yes"
                          completion:^(BOOL cancelled, NSInteger buttonIndex) {
-                             @strongify(self)
                              if (!cancelled && buttonIndex != 0) {
-                                 [self _reportAction];
+                                 // TODO: make an endpoint call
+                                 [Dialog simpleToast:LOC(@"FLYTopicDetailReportPostSuccessTitle")];
                              }
                          }];
 }
 
-- (void)_reportAction
-{
-    // TODO: make an endpoint call
-    [Dialog simpleToast:LOC(@"FLYTopicDetailReportPostSuccessTitle")];
-}
 
+- (void)_deletePost
+{
+    // TODO: endpoint call
+    [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailDeletePostAlertTitle")
+                            message:LOC(@"FLYTopicDetailDeletePostAlertMessage")
+                        cancelTitle:@"No"
+                         otherTitle:@"Yes"
+                         completion:^(BOOL cancelled, NSInteger buttonIndex) {
+                             if (!cancelled && buttonIndex != 0) {
+                                 // TODO: make an endpoint call
+                                 NSDictionary *dict = @{@"topic":self.topic};
+                                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTopicDeleted object:self userInfo:dict];
+                                 [Dialog simpleToast:LOC(@"FLYTopicDetailDeletedHUD")];
+                                 [self.navigationController popViewControllerAnimated:YES];
+                             }
+                         }];
+}
 
 #pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor

@@ -132,13 +132,13 @@
 @end
 
 
-@implementation FLYFlagTopicBarButtonItem : FLYBarButtonItem
+@implementation FLYOptionBarButtonItem : FLYBarButtonItem
 
 - (instancetype)initWithSide:(BOOL)left
 {
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //12 * 21
-    UIImage *image = [UIImage imageNamed:@"icon_flag_white"];
+    UIImage *image = [UIImage imageNamed:@"icon_detail_option"];
     CGFloat x = (left ? -1 : 1) * 10;
     backButton.frame = CGRectMake(x, 0, 52, 44);
     [backButton setImage:image forState:UIControlStateNormal];
