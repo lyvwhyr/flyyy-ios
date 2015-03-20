@@ -219,7 +219,6 @@
             make.trailing.equalTo(self.likeButton);
         };
         
-        
         void (^groupNameButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.userNameLabel);
             make.leading.equalTo(self.userNameLabel.mas_trailing).offset(kGroupLeftPadding);
@@ -227,7 +226,9 @@
         
         [self.playButton mas_makeConstraints:playButtonBlock];
         [self.topicTitle mas_makeConstraints:topicTitleBlock];
-        [self.groupNameButton mas_makeConstraints:groupNameButtonBlock];
+        if (self.groupNameButton) {
+            [self.groupNameButton mas_makeConstraints:groupNameButtonBlock];
+        }
         [self.userNameLabel mas_makeConstraints:userNameLabelBlock];
         [self.likeButton mas_makeConstraints:likeButtonBlock];
         [self.commentButton mas_makeConstraints:commentButtonBlock];
@@ -272,6 +273,11 @@
     
     [self.groupNameButton setTitle:[NSString stringWithFormat:@"#%@", topic.group.groupName] forState:UIControlStateNormal];
     [self.commentButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.replyCount]];
+    
+    if (self.options & FLYTopicCellOptionGroupName) {
+        [self.groupNameButton removeFromSuperview];
+        self.groupNameButton = nil;
+    }
 }
 
 - (void)setLiked:(BOOL)liked animated:(BOOL)animated

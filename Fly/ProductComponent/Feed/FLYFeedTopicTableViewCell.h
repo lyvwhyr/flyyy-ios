@@ -13,6 +13,12 @@
 #import "FLYPlayableItem.h"
 #import "FLYTopic.h"
 
+typedef NS_OPTIONS(NSUInteger, FLYTopicCellOptions) {
+    FLYTopicCellOptionGroupName = 1 << 0,
+    FLYTopicCellOptionPostAt = 1 << 1
+};
+
+
 @protocol FLYFeedTopicTableViewCellDelegate <NSObject>
 
 - (void)commentButtonTapped:(FLYFeedTopicTableViewCell *)cell;
@@ -25,6 +31,7 @@
 
 @property (nonatomic) FLYTopic *topic;
 @property (nonatomic) NSIndexPath *indexPath;
+@property (nonatomic) FLYTopicCellOptions options;
 @property id<FLYFeedTopicTableViewCellDelegate>delegate;
 
 - (void)setupTopic:(FLYTopic *)topic needUpdateConstraints:(BOOL)needUpdateConstraints;

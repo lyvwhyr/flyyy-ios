@@ -79,6 +79,7 @@
         
         _loadMoreCount = 0;
         
+        _feedType = FLYFeedTypeHome;
         [self _addObservers];
     }
     return self;
@@ -334,6 +335,9 @@
     }
     topicCell.topic = _posts[indexPath.row];
     topicCell.indexPath = indexPath;
+    if (self.feedType == FLYFeedTypeGroup) {
+        topicCell.options |= FLYTopicCellOptionGroupName;
+    }
     [topicCell setupTopic:_posts[indexPath.row] needUpdateConstraints:needUpdateConstraints];
     topicCell.selectionStyle = UITableViewCellSelectionStyleNone;
     topicCell.delegate = self;

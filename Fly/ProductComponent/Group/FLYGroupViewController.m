@@ -35,6 +35,7 @@
     if (self = [super init]) {
         _group = group;
         [super setTopicService:[FLYTopicService topicsServiceWithGroupIds:self.group.groupId]];
+        self.feedType = FLYFeedTypeGroup;
     }
     return self;
 }
