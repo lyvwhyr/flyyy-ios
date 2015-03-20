@@ -8,13 +8,18 @@
 
 #import "FLYServiceBase.h"
 
+typedef void(^FlYGetTopicsSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
+typedef void(^FLYGetTopicsErrorBlock)(id responseObj, NSError *error);
 typedef void(^FLYLikeSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
 typedef void(^FLYLikeErrorBlock)(id responseObj, NSError *error);
 
 @interface FLYTopicService : FLYServiceBase
 
 + (instancetype)topicService;
++ (instancetype)topicsServiceWithGroupIds:(NSString *)groupIds;
 
 + (void)likeTopicWithId:(NSString *)topicId liked:(BOOL)liked successBlock:(FLYLikeSuccessBlock)successBlock errorBlock:(FLYLikeErrorBlock)errorBlock;
+
+- (void)nextPageBefore:(NSString *)before firstPage:(BOOL)first successBlock:(FlYGetTopicsSuccessBlock)successBlock errorBlock:(FLYGetTopicsErrorBlock)errorBlock;
 
 @end

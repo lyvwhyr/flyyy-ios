@@ -15,6 +15,7 @@
 #import "FLYNavigationBar.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYGroup.h"
+#import "FLYTopicService.h"
 
 @interface FLYGroupViewController ()
 
@@ -33,6 +34,7 @@
 {
     if (self = [super init]) {
         _group = group;
+        [super setTopicService:[FLYTopicService topicsServiceWithGroupIds:self.group.groupId]];
     }
     return self;
 }

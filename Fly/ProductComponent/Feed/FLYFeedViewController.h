@@ -8,10 +8,15 @@
 
 #import "FLYUniversalViewController.h"
 
+@class FLYTopicService;
+
 #define kNewPostReceivedNotification @"kNewPostReceivedNotification"
 
 
 @interface FLYFeedViewController : FLYUniversalViewController
+
+// service
+@property (nonatomic) FLYTopicService *topicService;
 
 - (void)clearCurrentPlayingItem;
 

@@ -29,6 +29,7 @@
 #import "FLYGroup.h"
 #import "FLYNavigationController.h"
 #import "FLYNavigationBar.h"
+#import "FLYTopicService.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate, STKAudioPlayerDelegate>
 
@@ -45,6 +46,7 @@
 @property (nonatomic) enum RequestType requestType;
 
 @property (nonatomic) STKAudioPlayer *audioPlayer;
+
 
 @end
 
@@ -120,29 +122,67 @@
     _backgroundView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_backgroundView];
     
-    //init audio recording view controller
+    [self _initService];
     
+    [[FLYScribe sharedInstance] logEvent:@"home_page" section:nil component:nil element:nil action:@"impression"];
+}
 
+#pragma mark - service
+
+- (void)_initService
+{
     @weakify(self)
     [_feedTableView addPullToRefreshWithActionHandler:^{
         @strongify(self)
-        self.requestType = RequestTypeNormal;
-        [self _fetchHomeTimelineService:nil requestType:RequestTypeNormal];
+        [self _load:YES before:nil];
     }];
     
-    // setup infinite scrolling
-    [_feedTableView addInfiniteScrollingWithActionHandler:^{
+    [self.feedTableView addInfiniteScrollingWithActionHandler:^{
         @strongify(self)
-        self.requestType = RequestTypeLoadMore;
-        self.loadMoreCount++;
-        [[FLYScribe sharedInstance] logEvent:@"home_page" section:[@(self.loadMoreCount) stringValue] component:nil element:nil action:@"load_more"];
-        [self _fetchHomeTimelineService:self.beforeTimestamp requestType:RequestTypeLoadMore];
+        [self _load:NO before:self.beforeTimestamp];
     }];
+    [self _load:YES before:nil];
+}
 
-    [self _fetchHomeTimelineService:self.beforeTimestamp requestType:RequestTypeNormal];
+- (void)_load:(BOOL)first before:(NSString *)before
+{
+    self.state = FLYViewControllerStateLoading;
+    if (self.topicService == nil) {
+        self.topicService = [[FLYTopicService alloc] initWithEndpoint:@"topics"];
+    }
     
-    
-    [[FLYScribe sharedInstance] logEvent:@"home_page" section:nil component:nil element:nil action:@"impression"];
+    @weakify(self)
+    FlYGetTopicsSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        @strongify(self)
+        [self.feedTableView.pullToRefreshView stopAnimating];
+        [self.feedTableView.infiniteScrollingView stopAnimating];
+        NSArray *topicsArray = responseObj;
+        
+        if (topicsArray == nil ||  topicsArray.count == 0) {
+            self.state = FLYViewControllerStateError;
+            return;
+        }
+        
+        self.state = FLYViewControllerStateReady;
+        if (first) {
+            [self.posts removeAllObjects];
+        }
+        
+        for(int i = 0; i < topicsArray.count; i++) {
+            FLYTopic *topic = [[FLYTopic alloc] initWithDictory:topicsArray[i]];
+            [self.posts addObject:topic];
+        }
+        //Set up before id for load more
+        FLYTopic *lastTopic = [self.posts lastObject];
+        self.beforeTimestamp = lastTopic.createdAt;
+        [self.feedTableView reloadData];
+    };
+    FLYGetTopicsErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error){
+        @strongify(self)
+        [self.feedTableView.pullToRefreshView stopAnimating];
+        [self.feedTableView.infiniteScrollingView stopAnimating];
+    };
+    [self.topicService nextPageBefore:before firstPage:first successBlock:successBlock errorBlock:errorBlock];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
