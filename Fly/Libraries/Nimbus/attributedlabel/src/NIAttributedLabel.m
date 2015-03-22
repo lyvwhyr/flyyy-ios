@@ -16,7 +16,6 @@
 //
 
 #import "NIAttributedLabel.h"
-
 #import "NSMutableAttributedString+NimbusAttributedLabel.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -1028,6 +1027,10 @@ CGSize NISizeOfAttributedStringConstrainedToSize(NSAttributedString* attributedS
     if (self.linkColor) {
       [attributedString setTextColor:self.linkColor range:result.range];
     }
+      
+      if (self.linkFont) {
+          [attributedString addAttribute: NSFontAttributeName value:self.linkFont range:result.range];
+      }
 
     // We add a no-op attribute in order to force a run to exist for each link. Otherwise the
     // runCount will be one in this line, causing the entire line to be highlighted rather than

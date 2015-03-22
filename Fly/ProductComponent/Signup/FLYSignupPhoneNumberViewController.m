@@ -59,7 +59,7 @@
     [super viewDidLoad];
     
     //Navigation title
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor flyBlue];
     self.title = LOC(@"FLYSignupPageTitle");
     UIFont *titleFont = [UIFont flyFontWithSize:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
@@ -67,12 +67,13 @@
     self.subTitleLabel = [UILabel new];
     self.subTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.subTitleLabel.font = [UIFont flyFontWithSize:21];
-    self.subTitleLabel.textColor = [UIColor flyColorFlySignupGrey];
+    self.subTitleLabel.textColor = [UIColor whiteColor];
     self.subTitleLabel.text = LOC(@"FLYSignupSubTitle");
     [self.view addSubview:self.subTitleLabel];
     
     //country code and phone number
     self.phoneFieldView = [UIView new];
+    self.phoneFieldView.backgroundColor = [UIColor whiteColor];
     self.phoneFieldView.translatesAutoresizingMaskIntoConstraints = NO;
     CGFloat borderWidth = 1.0/[FLYUtilities FLYMainScreenScale];
     self.phoneFieldView.layer.borderColor = [UIColor flyColorFlySignupGrey].CGColor;
@@ -131,11 +132,13 @@
     self.agreeTermsOfServiceLabel.numberOfLines = 0;
     self.agreeTermsOfServiceLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.agreeTermsOfServiceLabel.autoresizingMask = UIViewAutoresizingFlexibleDimensions;
-    self.agreeTermsOfServiceLabel.textColor = [UIColor flyColorFlySignupGrey];
+    self.agreeTermsOfServiceLabel.textColor = [UIColor whiteColor];
     self.agreeTermsOfServiceLabel.font = [UIFont flyLightFontWithSize:12];
     
     self.agreeTermsOfServiceLabel.delegate = self;
     self.agreeTermsOfServiceLabel.autoDetectLinks = NO;
+    self.agreeTermsOfServiceLabel.linkFont = [UIFont fontWithName:@"AvenirNext-Italic" size:12];
+    self.agreeTermsOfServiceLabel.linkColor = [UIColor whiteColor];
     self.agreeTermsOfServiceLabel.text = LOC(@"FLYSignupAgreeTermsOfService");
     NSRange linkRange = [_agreeTermsOfServiceLabel.text rangeOfString:LOC(@"FLYSignupTermsOfServiceLinkText")];
     NSRange linkRange2 = [_agreeTermsOfServiceLabel.text rangeOfString:LOC(@"FLYSignupPrivacyPolicyLinkText")];
@@ -239,7 +242,7 @@
 - (void)_textFieldDidChange
 {
     if ([self.phoneNumberTextField.text length] > 0) {
-        self.nextButton.backgroundColor = [UIColor flyBlue];
+        self.nextButton.backgroundColor = [UIColor flyButtonGreen];
     }
     ECPhoneNumberFormatter *formatter = [[ECPhoneNumberFormatter alloc] init];
     NSString *formattedNumber = [formatter stringForObjectValue:self.phoneNumberTextField.text];
