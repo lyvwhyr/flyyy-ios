@@ -14,6 +14,8 @@
 #import "PXAlertView.h"
 #import "UICKeyChainStore.h"
 #import "FLYUser.h"
+#import "FLYNavigationBar.h"
+#import "FLYNavigationController.h"
 
 #define kTitleTopPadding 20
 
@@ -22,7 +24,6 @@
 @property (nonatomic, copy) NSString *username;
 
 @property (nonatomic) UILabel *titleLabel;
-@property (nonatomic) UIImageView *iconView;
 @property (nonatomic) UIView *inputPhoneView;
 @property (nonatomic) UIImageView *inputIconView;
 @property (nonatomic) UITextField *inputTextField;
@@ -49,21 +50,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor flyBlue];
+    
+    self.title = LOC(@"FLYSignupPageTitle");
+    UIFont *titleFont = [UIFont flyFontWithSize:16];
+    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
     
     self.titleLabel = [UILabel new];
     self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.titleLabel.font = [UIFont flyFontWithSize:21];
-    self.titleLabel.textColor = [UIColor flyBlue];
+    self.titleLabel.textColor = [UIColor whiteColor];
     self.titleLabel.text = LOC(@"FLYSignupPasswordPageTitle");
     [self.view addSubview:self.titleLabel];
     
-    self.iconView = [UIImageView new];
-    self.iconView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.iconView.image = [UIImage imageNamed:@"icon_login_verify"];
-    [self.view addSubview:self.iconView];
-    
     self.inputPhoneView = [UIView new];
+    self.inputPhoneView.backgroundColor = [UIColor whiteColor];
     self.inputPhoneView.translatesAutoresizingMaskIntoConstraints = NO;
     CGFloat borderWidth = 1.0/[FLYUtilities FLYMainScreenScale];
     self.inputPhoneView.layer.borderColor = [UIColor flyColorFlySignupGrey].CGColor;
@@ -77,7 +78,7 @@
     [self.inputPhoneView addSubview:self.inputIconView];
     
     self.confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 44)];
-    self.confirmButton.backgroundColor = [UIColor flyBlue];
+    self.confirmButton.backgroundColor = [UIColor flyButtonGreen];
     [self.confirmButton setTitle:LOC(@"FLYSignupPasswordOkButton") forState:UIControlStateNormal];
     [self.confirmButton addTarget:self action:@selector(_continueButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     
@@ -92,7 +93,7 @@
     self.passwordLengthHintLabel = [UILabel new];
     self.passwordLengthHintLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.passwordLengthHintLabel.font = [UIFont flyFontWithSize:8];
-    self.passwordLengthHintLabel.textColor = [UIColor flyColorFlySignupGrey];
+    self.passwordLengthHintLabel.textColor = [UIColor whiteColor];
     self.passwordLengthHintLabel.text = LOC(@"FLYSignupPasswordLengthHint");
     [self.view addSubview:self.passwordLengthHintLabel];
     
@@ -109,13 +110,8 @@
         make.top.equalTo(self.view).offset(kTitleTopPadding + kStatusBarHeight + kNavBarHeight);
     }];
     
-    [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(20);
-    }];
-    
     [self.inputPhoneView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.iconView.mas_bottom).offset(20);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
         make.leading.equalTo(self.view).offset(10);
         make.trailing.equalTo(self.view).offset(-10);
         make.height.equalTo(@(44));

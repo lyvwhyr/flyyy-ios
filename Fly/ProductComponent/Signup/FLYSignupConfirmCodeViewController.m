@@ -14,6 +14,8 @@
 #import "PXAlertView+Customization.h"
 #import "FLYSignupUsernameViewController.h"
 #import "NSDictionary+FLYAddition.h"
+#import "FLYNavigationBar.h"
+#import "FLYNavigationController.h"
 
 #define kTitleTopPadding 5
 
@@ -36,6 +38,10 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor flyBlue];
+    
+    self.title = LOC(@"FLYSignupPageTitle");
+    UIFont *titleFont = [UIFont flyFontWithSize:16];
+    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
     
     self.hintLabel = [UILabel new];
     self.hintLabel.translatesAutoresizingMaskIntoConstraints = NO;

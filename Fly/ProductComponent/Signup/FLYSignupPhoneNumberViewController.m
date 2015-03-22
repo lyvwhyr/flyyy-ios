@@ -109,13 +109,6 @@
         forControlEvents:UIControlEventEditingChanged];
     [self.phoneFieldView addSubview:self.phoneNumberTextField];
     
-//    self.hintLabel = [UILabel new];
-//    self.hintLabel.translatesAutoresizingMaskIntoConstraints = NO;
-//    self.hintLabel.font = [UIFont flyLightFontWithSize:12];
-//    self.hintLabel.textColor = [UIColor flyColorFlySignupGrey];
-//    self.hintLabel.text = LOC(@"FLYSignupHintText");
-//    [self.view addSubview:self.hintLabel];
-    
     self.separator = [UIView new];
     self.separator.translatesAutoresizingMaskIntoConstraints = NO;
     self.separator.backgroundColor = [UIColor flyTabBarSeparator];

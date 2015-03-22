@@ -19,6 +19,7 @@
 #import "NSDictionary+FLYAddition.h"
 #import "UICKeyChainStore.h"
 #import "RNLoadingButton.h"
+#import "PXAlertView.h"
 
 #define kTitleTopPadding 20
 #define kLeftIconWidth 50
@@ -54,28 +55,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor flyBlue];
     
     self.title = LOC(@"FLYLoginNavigationTitle");
     UIFont *titleFont = [UIFont flyFontWithSize:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
-    
-//    self.titleLabel = [UILabel new];
-//    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-//    self.titleLabel.font = [UIFont flyFontWithSize:16];
-//    self.titleLabel.textColor = [UIColor flyBlue];
-//    self.titleLabel.text = LOC(@"FLYLoginTitle");
-//    [self.view addSubview:self.titleLabel];
-    
-    
+
     self.phoneNumberView = [UIView new];
+    self.phoneNumberView.backgroundColor = [UIColor whiteColor];
     self.phoneNumberView.translatesAutoresizingMaskIntoConstraints = NO;
     CGFloat borderWidth = 1.0/[FLYUtilities FLYMainScreenScale];
     self.phoneNumberView.layer.borderColor = [UIColor flyColorFlySignupGrey].CGColor;
     self.phoneNumberView.layer.borderWidth = borderWidth;
     [self.view addSubview:self.phoneNumberView];
     
-//    self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 44)];
     self.loginButton = [[RNLoadingButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 44)];
     self.loginButton.hideTextWhenLoading = NO;
     self.loginButton.loading = NO;
@@ -104,9 +97,9 @@
                         forControlEvents:UIControlEventEditingChanged];
     self.phoneNumberTextField.delegate = self;
     [self.phoneNumberView addSubview:self.phoneNumberTextField];
-    [self.phoneNumberTextField becomeFirstResponder];
     
     self.passwordView = [UIView new];
+    self.passwordView.backgroundColor = [UIColor whiteColor];
     self.passwordView.translatesAutoresizingMaskIntoConstraints = NO;
     self.passwordView.layer.borderColor = [UIColor flyColorFlySignupGrey].CGColor;
     self.passwordView.layer.borderWidth = [FLYUtilities hairlineHeight];
@@ -129,7 +122,7 @@
     self.forgetPasswordLabel = [UILabel new];
     self.forgetPasswordLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.forgetPasswordLabel.font = [UIFont flyFontWithSize:16];
-    self.forgetPasswordLabel.textColor = [UIColor flyColorFlySignupGrey];
+    self.forgetPasswordLabel.textColor = [UIColor whiteColor];
     self.forgetPasswordLabel.text = LOC(@"FLYLoginForgetPasswordText");
     [self.view addSubview:self.forgetPasswordLabel];
     
@@ -141,16 +134,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.phoneNumberTextField becomeFirstResponder];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)_addConstraints
 {
-    //title
-//    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.equalTo(self.view);
-//        make.top.equalTo(self.view).offset(kTitleTopPadding + kStatusBarHeight + kNavBarHeight);
-//    }];
     
     //phone field
     [self.phoneNumberView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -203,7 +192,7 @@
 - (void)_phoneNumberTextFieldDidChange
 {
     if ([self.phoneNumberTextField.text length] > 0 && [self.passwordTextField.text length] > 0) {
-        self.loginButton.backgroundColor = [UIColor flyBlue];
+        self.loginButton.backgroundColor = [UIColor flyButtonGreen];
         [self.loginButton setEnabled:YES];
     } else {
         self.loginButton.backgroundColor = [UIColor flyColorFlySignupGrey];
@@ -219,7 +208,7 @@
 - (void)_passwordTextFieldDidChange
 {
     if ([self.phoneNumberTextField.text length] > 0 && [self.passwordTextField.text length] > 0) {
-        self.loginButton.backgroundColor = [UIColor flyBlue];
+        self.loginButton.backgroundColor = [UIColor flyButtonGreen];
         [self.loginButton setEnabled:YES];
     } else {
         self.loginButton.backgroundColor = [UIColor flyColorFlySignupGrey];
@@ -235,6 +224,10 @@
         @strongify(self)
         self.countryAreaCode = countryDialCode;
         [self.countryCodeChooser setLabelText:countryDialCode];
+        
+        ECPhoneNumberFormatter *formatter = [[ECPhoneNumberFormatter alloc] init];
+        NSString *formattedNumber = [formatter stringForObjectValue:self.phoneNumberTextField.text];
+        self.formattedPhoneNumber = [NSString stringWithFormat:@"%@%@", self.countryAreaCode, formattedNumber];
     };
     FLYNavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:nil];
@@ -286,6 +279,13 @@
         self.loginButton.enabled = YES;
         self.loginButton.loading = NO;
         [self.loginButton setTitle:@"Login" forState:UIControlStateDisabled];
+        
+        NSInteger code = [responseObj fly_integerForKey:@"code"];
+        if (code == kInvalidPassword) {
+            [PXAlertView showAlertWithTitle:LOC(@"FLYLoginWrongPassword")];
+        } else if (code == kLoginPhoneNotFound) {
+            [PXAlertView showAlertWithTitle:LOC(@"FLYLoginPhoneNumberNotFound")];
+        }
     };
     
     [self.loginService loginWithPhoneNumber:unformattedPhoneNumber password:password success:successBlock error:errorBlock];

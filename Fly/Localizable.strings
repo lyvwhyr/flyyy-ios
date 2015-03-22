@@ -46,20 +46,20 @@
 
 // sign up verification code
 "FLYConfirmCodeTitle" = "Did you get our text?";
-"FLYConfirmCodeHint" = "Enter your verification code.";
+"FLYConfirmCodeHint" = "Enter your verification code";
 "FLYConfirmCodeTextFieldDefaultText" = "Verification code";
-"FLYConfirmCodeConfirmButton" = "Confirm";
+"FLYConfirmCodeConfirmButton" = "Okay";
 "FLYInvalidPhoneNumberTitle" = "Invalid phone number";
 "FLYInvalidPhoneNumberBodyText" = "Please enter a correct phone number.";
 "FLYInvalidVerificationCode" = "Incorrect verification code";
-"FLYSignupUsernameTitle" = "You're almost there!";
+"FLYSignupUsernameTitle" = "Choose a unique username";
 "FLYSignupUsernameHint" = "Username (alphanumeric only)";
 "FLYSignupUsernameContinueButton" = "Continue";
 "FLYSignupUsernameLenError" = "Username must be 1 to 20 characters long";
 "FLYSignupUsernameAlhpanumeric" = "Invalid username! Alphanumerics only";
-"FLYSignupPasswordPageTitle" = "Last step";
-"FLYSignupPasswordInputFieldHint" = "Choose a password";
-"FLYSignupPasswordOkButton" = "OK";
+"FLYSignupPasswordPageTitle" = "Choose a password";
+"FLYSignupPasswordInputFieldHint" = "Password";
+"FLYSignupPasswordOkButton" = "Okay";
 "FLYSignupPasswordLengthHint" = "at least 6 characters";
 "FLYSignupPasswordLengthError" = "Password must be at least 6 characters";
 "FLYSignupUserNameAlreadyExist" = "User name already exists";
