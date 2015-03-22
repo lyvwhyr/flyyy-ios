@@ -20,6 +20,7 @@
 #import "UIColor+FLYAddition.h"
 #import "UIView+FLYAddition.h"
 #import "FLYReply.h"
+#import "UAProgressView.h"
 
 @interface FLYFeedTopicTableViewCell()
 
@@ -36,8 +37,14 @@
 @property (nonatomic) UIButton *groupNameButton;
 @property (nonatomic) FLYIconButton *commentButton;
 
-@property (nonatomic) BOOL didSetupConstraints;
+// play progress view
+@property (nonatomic) UAProgressView *progressView;
+@property (nonatomic) NSTimer *progressTimer;
+@property (nonatomic) BOOL paused;
+@property (nonatomic) CGFloat timeElapsed;
+@property (nonatomic) CGFloat localProgress;
 
+@property (nonatomic) BOOL didSetupConstraints;
 @property (nonatomic, copy) NSString *topicTitleString;
 
 @end
@@ -113,6 +120,45 @@
         [self _addObservers];
     }
     return self;
+}
+
+- (UAProgressView *)progressView
+{
+    if (!_progressView) {
+        //reset timer
+        _timeElapsed = 0;
+        
+        _progressView = [[UAProgressView alloc] init];
+        _progressView.tintColor = [UIColor flyColorPlayAnimation];
+        _progressView.lineWidth = 3;
+        _progressView.fillOnTouch = NO;
+        _progressView.borderWidth = 0;
+        @weakify(self)
+        _progressView.didSelectBlock = ^(UAProgressView *progressView){
+            @strongify(self)
+            self.paused = !self.paused;
+        };
+        _progressView.progress = 0;
+        _progressView.animationDuration = self.topic.audioDuration;
+        [self addSubview:_progressView];
+        _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
+    }
+    return _progressView;
+}
+
+- (void)updateProgress:(NSTimer *)timer {
+    if (_timeElapsed >= self.topic.audioDuration) {
+        [_progressView removeFromSuperview];
+        _progressView = nil;
+        [_progressTimer invalidate];
+        _progressTimer = nil;
+    }
+    if (!_paused) {
+        _timeElapsed += 0.1;
+        _localProgress = _timeElapsed / self.topic.audioDuration;
+        [_progressView setProgress:_localProgress];
+        [self updateConstraints];
+    }
 }
 
 - (void)_addObservers
@@ -234,7 +280,13 @@
         [self.commentButton mas_makeConstraints:commentButtonBlock];
         
         self.didSetupConstraints = YES;
-        
+    }
+    if (_progressView) {
+        [_progressView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(self.playButton);
+            make.width.equalTo(self.playButton).offset(-1.5);
+            make.height.equalTo(self.playButton).offset(-1.5);
+        }];
     }
     [super updateConstraints];
 }
@@ -304,7 +356,7 @@
     [self.commentButton setLabelText:[NSString stringWithFormat:@"%d", (int)replyCount]];
 }
 
-#pragma mark - update play state
+#pragma mark - update play state. After user action, play state.
 - (void)updatePlayState:(FLYPlayState)state
 {
     [_loadingIndicatorView stopAnimating];
@@ -321,7 +373,7 @@
         }
         case FLYPlayStatePlaying: {
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_pause"] forState:UIControlStateNormal];
-            [self drawLineAnimation];
+            [self progressView];
             break;
         }
         case FLYPlayStatePaused: {

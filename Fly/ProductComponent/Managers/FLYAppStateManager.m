@@ -54,6 +54,7 @@
     if (authToken) {
         _authToken = authToken;
     }
+    [UICKeyChainStore removeItemForKey:kAuthTokenKey];
 }
 
 - (void)_requireSignupOrLogin:(NSNotification *)notification

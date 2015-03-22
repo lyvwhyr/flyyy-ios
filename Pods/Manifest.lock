@@ -11,6 +11,7 @@ PODS:
   - StreamingKit (0.1.25)
   - SVPullToRefresh (0.4.1)
   - TheAmazingAudioEngine (1.4.5)
+  - UAProgressView (0.1.1)
   - Waver (0.2.0)
 
 DEPENDENCIES:
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - StreamingKit
   - SVPullToRefresh
   - TheAmazingAudioEngine
+  - UAProgressView
   - Waver (~> 0.2.0)
 
 SPEC CHECKSUMS:
@@ -37,6 +39,7 @@ SPEC CHECKSUMS:
   StreamingKit: 5b36623e7246cccddb8db3aee79c43bb180a51be
   SVPullToRefresh: d5161ebc833a38b465364412e5e307ca80bbb190
   TheAmazingAudioEngine: 34279bc2841262eae7a24c3c7944a43fab72918e
+  UAProgressView: c393bc53d1cabc077279e957c5898a5bb7bdb3ce
   Waver: 113097c3a025542cd4857d087a9098bc45a51e9e
 
 COCOAPODS: 0.35.0

@@ -13,6 +13,7 @@
 
 @interface FLYLoginSignupViewController ()
 
+@property (nonatomic) UIImageView *backgroundImageView;
 @property (nonatomic) UIButton *loginButton;
 @property (nonatomic) UIButton *signupButton;
 
@@ -23,7 +24,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+
+    self.backgroundImageView = [UIImageView new];
+    self.backgroundImageView.image = [UIImage imageNamed:@"icon_login_signup_bg"];
+    [self.view addSubview:self.backgroundImageView];
 
     self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
@@ -43,6 +47,11 @@
 
 - (void)_addViewConstraints
 {
+    [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view);
+        make.top.equalTo(self.view);
+    }];
+    
     [self.signupButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self.view);
         make.bottom.equalTo(self.view);
