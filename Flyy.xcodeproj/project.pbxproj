@@ -258,6 +258,19 @@
 		A665FC391AA2DDA400490A18 /* FLYCountryListDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = A665FC381AA2DDA400490A18 /* FLYCountryListDatasource.m */; };
 		A665FC3C1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A665FC3B1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.m */; };
 		A665FC3E1AA2E2AD00490A18 /* all_countries.json in Resources */ = {isa = PBXBuildFile; fileRef = A665FC3D1AA2E2AD00490A18 /* all_countries.json */; };
+		A669FB311ABFD8C200A96D24 /* SVWebViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = A669FB2B1ABFD8C200A96D24 /* SVWebViewController.strings */; };
+		A669FB321ABFD8C200A96D24 /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A669FB2D1ABFD8C200A96D24 /* SVModalWebViewController.m */; };
+		A669FB331ABFD8C200A96D24 /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A669FB2E1ABFD8C200A96D24 /* SVWebViewController.bundle */; };
+		A669FB341ABFD8C200A96D24 /* SVWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A669FB301ABFD8C200A96D24 /* SVWebViewController.m */; };
+		A669FB5B1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = A669FB4E1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome-iPad.png */; };
+		A669FB5C1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome-iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A669FB4F1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome-iPad@2x.png */; };
+		A669FB5D1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome.m in Sources */ = {isa = PBXBuildFile; fileRef = A669FB511ABFD99B00A96D24 /* SVWebViewControllerActivityChrome.m */; };
+		A669FB5E1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A669FB521ABFD99B00A96D24 /* SVWebViewControllerActivityChrome@2x.png */; };
+		A669FB5F1ABFD99B00A96D24 /* SVWebViewControllerActivitySafari-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = A669FB541ABFD99B00A96D24 /* SVWebViewControllerActivitySafari-iPad.png */; };
+		A669FB601ABFD99B00A96D24 /* SVWebViewControllerActivitySafari-iPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A669FB551ABFD99B00A96D24 /* SVWebViewControllerActivitySafari-iPad@2x.png */; };
+		A669FB611ABFD99B00A96D24 /* SVWebViewControllerActivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = A669FB571ABFD99B00A96D24 /* SVWebViewControllerActivitySafari.m */; };
+		A669FB621ABFD99B00A96D24 /* SVWebViewControllerActivitySafari@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A669FB581ABFD99B00A96D24 /* SVWebViewControllerActivitySafari@2x.png */; };
+		A669FB631ABFD99B00A96D24 /* SVWebViewControllerActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = A669FB5A1ABFD99B00A96D24 /* SVWebViewControllerActivity.m */; };
 		A66D98561A883B5A00C3D75A /* FLYPrePostHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A66D98551A883B5A00C3D75A /* FLYPrePostHeaderView.m */; };
 		A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E20481A2EBDAE004235F5 /* RDVTabBarItem.m */; };
 		A66E204E1A2EBDAE004235F5 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E204A1A2EBDAE004235F5 /* RDVTabBar.m */; };
@@ -811,6 +824,24 @@
 		A665FC3A1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYCountrySelectorTableViewCell.h; sourceTree = "<group>"; };
 		A665FC3B1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYCountrySelectorTableViewCell.m; sourceTree = "<group>"; };
 		A665FC3D1AA2E2AD00490A18 /* all_countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = all_countries.json; sourceTree = "<group>"; };
+		A669FB2B1ABFD8C200A96D24 /* SVWebViewController.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = SVWebViewController.strings; sourceTree = "<group>"; };
+		A669FB2C1ABFD8C200A96D24 /* SVModalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVModalWebViewController.h; sourceTree = "<group>"; };
+		A669FB2D1ABFD8C200A96D24 /* SVModalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVModalWebViewController.m; sourceTree = "<group>"; };
+		A669FB2E1ABFD8C200A96D24 /* SVWebViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVWebViewController.bundle; sourceTree = "<group>"; };
+		A669FB2F1ABFD8C200A96D24 /* SVWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVWebViewController.h; sourceTree = "<group>"; };
+		A669FB301ABFD8C200A96D24 /* SVWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewController.m; sourceTree = "<group>"; };
+		A669FB4E1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SVWebViewControllerActivityChrome-iPad.png"; sourceTree = "<group>"; };
+		A669FB4F1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome-iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SVWebViewControllerActivityChrome-iPad@2x.png"; sourceTree = "<group>"; };
+		A669FB501ABFD99B00A96D24 /* SVWebViewControllerActivityChrome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVWebViewControllerActivityChrome.h; sourceTree = "<group>"; };
+		A669FB511ABFD99B00A96D24 /* SVWebViewControllerActivityChrome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewControllerActivityChrome.m; sourceTree = "<group>"; };
+		A669FB521ABFD99B00A96D24 /* SVWebViewControllerActivityChrome@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SVWebViewControllerActivityChrome@2x.png"; sourceTree = "<group>"; };
+		A669FB541ABFD99B00A96D24 /* SVWebViewControllerActivitySafari-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SVWebViewControllerActivitySafari-iPad.png"; sourceTree = "<group>"; };
+		A669FB551ABFD99B00A96D24 /* SVWebViewControllerActivitySafari-iPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SVWebViewControllerActivitySafari-iPad@2x.png"; sourceTree = "<group>"; };
+		A669FB561ABFD99B00A96D24 /* SVWebViewControllerActivitySafari.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVWebViewControllerActivitySafari.h; sourceTree = "<group>"; };
+		A669FB571ABFD99B00A96D24 /* SVWebViewControllerActivitySafari.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewControllerActivitySafari.m; sourceTree = "<group>"; };
+		A669FB581ABFD99B00A96D24 /* SVWebViewControllerActivitySafari@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SVWebViewControllerActivitySafari@2x.png"; sourceTree = "<group>"; };
+		A669FB591ABFD99B00A96D24 /* SVWebViewControllerActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVWebViewControllerActivity.h; sourceTree = "<group>"; };
+		A669FB5A1ABFD99B00A96D24 /* SVWebViewControllerActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewControllerActivity.m; sourceTree = "<group>"; };
 		A66D98541A883B5A00C3D75A /* FLYPrePostHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostHeaderView.h; sourceTree = "<group>"; };
 		A66D98551A883B5A00C3D75A /* FLYPrePostHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostHeaderView.m; sourceTree = "<group>"; };
 		A66E20471A2EBDAE004235F5 /* RDVTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarItem.h; sourceTree = "<group>"; };
@@ -1716,6 +1747,7 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A669FB2A1ABFD8B800A96D24 /* SVWebViewController */,
 				A66499531ABBB2B500C4FF08 /* IBActionSheet */,
 				A6799C8F1AAC1071003DAE5B /* SDiPhoneVersion */,
 				A61B6D3C1AAAE3DD00A5B696 /* RNLoadingButton */,
@@ -1858,6 +1890,55 @@
 				A665FC351AA2DBCB00490A18 /* popular_countries.json */,
 			);
 			path = Fixture;
+			sourceTree = "<group>";
+		};
+		A669FB2A1ABFD8B800A96D24 /* SVWebViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A669FB351ABFD97700A96D24 /* UIActivities */,
+				A669FB2B1ABFD8C200A96D24 /* SVWebViewController.strings */,
+				A669FB2C1ABFD8C200A96D24 /* SVModalWebViewController.h */,
+				A669FB2D1ABFD8C200A96D24 /* SVModalWebViewController.m */,
+				A669FB2E1ABFD8C200A96D24 /* SVWebViewController.bundle */,
+				A669FB2F1ABFD8C200A96D24 /* SVWebViewController.h */,
+				A669FB301ABFD8C200A96D24 /* SVWebViewController.m */,
+			);
+			path = SVWebViewController;
+			sourceTree = "<group>";
+		};
+		A669FB351ABFD97700A96D24 /* UIActivities */ = {
+			isa = PBXGroup;
+			children = (
+				A669FB4D1ABFD99B00A96D24 /* Chrome */,
+				A669FB531ABFD99B00A96D24 /* Safari */,
+				A669FB591ABFD99B00A96D24 /* SVWebViewControllerActivity.h */,
+				A669FB5A1ABFD99B00A96D24 /* SVWebViewControllerActivity.m */,
+			);
+			path = UIActivities;
+			sourceTree = "<group>";
+		};
+		A669FB4D1ABFD99B00A96D24 /* Chrome */ = {
+			isa = PBXGroup;
+			children = (
+				A669FB4E1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome-iPad.png */,
+				A669FB4F1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome-iPad@2x.png */,
+				A669FB501ABFD99B00A96D24 /* SVWebViewControllerActivityChrome.h */,
+				A669FB511ABFD99B00A96D24 /* SVWebViewControllerActivityChrome.m */,
+				A669FB521ABFD99B00A96D24 /* SVWebViewControllerActivityChrome@2x.png */,
+			);
+			path = Chrome;
+			sourceTree = "<group>";
+		};
+		A669FB531ABFD99B00A96D24 /* Safari */ = {
+			isa = PBXGroup;
+			children = (
+				A669FB541ABFD99B00A96D24 /* SVWebViewControllerActivitySafari-iPad.png */,
+				A669FB551ABFD99B00A96D24 /* SVWebViewControllerActivitySafari-iPad@2x.png */,
+				A669FB561ABFD99B00A96D24 /* SVWebViewControllerActivitySafari.h */,
+				A669FB571ABFD99B00A96D24 /* SVWebViewControllerActivitySafari.m */,
+				A669FB581ABFD99B00A96D24 /* SVWebViewControllerActivitySafari@2x.png */,
+			);
+			path = Safari;
 			sourceTree = "<group>";
 		};
 		A66E20461A2EBDA5004235F5 /* RDVTabBarController */ = {
@@ -2490,9 +2571,12 @@
 				A651BD941A4985F20081A1E0 /* success@2x.png in Resources */,
 				A652D2791A7F3ADD00765D45 /* record_animate_09@2x.png in Resources */,
 				A69C4BBE1A27E2A400CAD443 /* icon_unchecked@3x.png in Resources */,
+				A669FB621ABFD99B00A96D24 /* SVWebViewControllerActivitySafari@2x.png in Resources */,
 				A651BD921A4985F20081A1E0 /* error@2x.png in Resources */,
 				A652D26B1A7F3ADD00765D45 /* record_animate_04@3x.png in Resources */,
+				A669FB311ABFD8C200A96D24 /* SVWebViewController.strings in Resources */,
 				A652D2651A7F3ADD00765D45 /* record_animate_02@3x.png in Resources */,
+				A669FB331ABFD8C200A96D24 /* SVWebViewController.bundle in Resources */,
 				A652D2821A7F3ADD00765D45 /* record_animate_12@2x.png in Resources */,
 				A6A0E4191A1DD5130036116E /* icon_record_trash_bin@3x.png in Resources */,
 				A6A4EFA31A2A76FC00FD4066 /* icon_feed_group@3x.png in Resources */,
@@ -2524,6 +2608,7 @@
 				A652D20F1A7F3ADD00765D45 /* icon_audio_wave@2x.png in Resources */,
 				A652D25A1A7F3ADD00765D45 /* icon_tabbar_voice.png in Resources */,
 				A652D2631A7F3ADD00765D45 /* record_animate_02.png in Resources */,
+				A669FB5B1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome-iPad.png in Resources */,
 				A6A57A921A33C1E100610785 /* icon_join_group@3x.png in Resources */,
 				A652D25F1A7F3ADD00765D45 /* icon_voice_record.png in Resources */,
 				A652D2411A7F3ADD00765D45 /* icon_nav_filter@2x.png in Resources */,
@@ -2552,6 +2637,7 @@
 				A652D2861A7F3ADD00765D45 /* record_animate_13@3x.png in Resources */,
 				A648C0F61A19D1FF00FF1744 /* icon_tabbar_voice@2x.png in Resources */,
 				A6263E9B1A187E1200C4C3BA /* Main.storyboard in Resources */,
+				A669FB5F1ABFD99B00A96D24 /* SVWebViewControllerActivitySafari-iPad.png in Resources */,
 				A6655B551A19DEF000440AAB /* icon_tabbar_home@3x.png in Resources */,
 				A6A0E4131A1DB9480036116E /* icon_navigation_back@3x.png in Resources */,
 				A652D23A1A7F3ADD00765D45 /* icon_inline_share.png in Resources */,
@@ -2578,6 +2664,7 @@
 				A652D2681A7F3ADD00765D45 /* record_animate_03@3x.png in Resources */,
 				A69C4B9A1A27111700CAD443 /* icon_filter_feed@3x.png in Resources */,
 				A652D2571A7F3ADD00765D45 /* icon_tabbar_group@2x.png in Resources */,
+				A669FB5E1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome@2x.png in Resources */,
 				A6A57A9D1A34134200610785 /* icon_reply_record@3x.png in Resources */,
 				A652D2471A7F3ADD00765D45 /* icon_play_reply@2x.png in Resources */,
 				A652D2191A7F3ADD00765D45 /* icon_feed_play@2x.png in Resources */,
@@ -2591,6 +2678,7 @@
 				A69C4B9C1A27186300CAD443 /* icon_nav_filter@3x.png in Resources */,
 				A652D24E1A7F3ADD00765D45 /* icon_reply_record.png in Resources */,
 				A652D2811A7F3ADD00765D45 /* record_animate_12.png in Resources */,
+				A669FB5C1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome-iPad@2x.png in Resources */,
 				A652D2611A7F3ADD00765D45 /* record_animate_01@2x.png in Resources */,
 				A652D2871A7F3ADD00765D45 /* record_animate_14.png in Resources */,
 				A652D2851A7F3ADD00765D45 /* record_animate_13@2x.png in Resources */,
@@ -2618,6 +2706,7 @@
 				A652D20C1A7F3ADD00765D45 /* Default-568h.png in Resources */,
 				A652D2891A7F3ADD00765D45 /* record_animate_14@3x.png in Resources */,
 				A6A4EFA51A2A7CF600FD4066 /* icon_down_arrow@3x.png in Resources */,
+				A669FB601ABFD99B00A96D24 /* SVWebViewControllerActivitySafari-iPad@2x.png in Resources */,
 				A652D2721A7F3ADD00765D45 /* record_animate_07.png in Resources */,
 				A652D2511A7F3ADD00765D45 /* icon_seconds@2x.png in Resources */,
 				A69C4BC01A27E89A00CAD443 /* icon_checked@3x.png in Resources */,
@@ -2793,6 +2882,7 @@
 				A651BD951A4985F20081A1E0 /* SVProgressHUD.m in Sources */,
 				A6048A411A85E63100C67480 /* EXTScope.m in Sources */,
 				A690F2821AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m in Sources */,
+				A669FB611ABFD99B00A96D24 /* SVWebViewControllerActivitySafari.m in Sources */,
 				A648C0E61A19AD4A00FF1744 /* MASLayoutConstraint.m in Sources */,
 				A6BCBBFD1A848D16001F8AB0 /* FLYEndpointRequest.m in Sources */,
 				A6A0E4991A1E76110036116E /* FLEXArgumentInputView.m in Sources */,
@@ -2819,6 +2909,7 @@
 				A6048ADC1A8603EF00C67480 /* UIButton+AFNetworking.m in Sources */,
 				A648C0E31A19AD4A00FF1744 /* MASCompositeConstraint.m in Sources */,
 				A643AEF81AA9539E00BF4E0F /* NIState.m in Sources */,
+				A669FB321ABFD8C200A96D24 /* SVModalWebViewController.m in Sources */,
 				A6A0E4A71A1E76110036116E /* FLEXFileBrowserSearchOperation.m in Sources */,
 				A665FC1F1AA263A900490A18 /* FLYServiceBase.m in Sources */,
 				A6A0E4971A1E76110036116E /* FLEXArgumentInputSwitchView.m in Sources */,
@@ -2837,6 +2928,7 @@
 				A6A0E4981A1E76110036116E /* FLEXArgumentInputTextView.m in Sources */,
 				A69C4BE51A284B6F00CAD443 /* FLYFeedViewController.m in Sources */,
 				A6048AE01A8603EF00C67480 /* UIWebView+AFNetworking.m in Sources */,
+				A669FB631ABFD99B00A96D24 /* SVWebViewControllerActivity.m in Sources */,
 				A69C4B981A270E1400CAD443 /* PaperButton.m in Sources */,
 				A6A57AAD1A34555400610785 /* FLYTopicDetailReplyCell.m in Sources */,
 				A6A0E4BB1A1E76110036116E /* FLEXResources.m in Sources */,
@@ -2891,8 +2983,10 @@
 				A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */,
 				A60489961A85DAFD00C67480 /* FLYGroupManager.m in Sources */,
 				A6A4EFB01A2BD4D500FD4066 /* FLYGroupListTableViewCell.m in Sources */,
+				A669FB5D1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome.m in Sources */,
 				A643AEEC1AA9539E00BF4E0F /* NIFoundationMethods.m in Sources */,
 				A6A70CDB1AA4597A0000F784 /* ECPhoneNumberFormatter.m in Sources */,
+				A669FB341ABFD8C200A96D24 /* SVWebViewController.m in Sources */,
 				A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */,
 				A6D949F91A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				A6A0E4BE1A1E76110036116E /* FLEXHierarchyTableViewCell.m in Sources */,

@@ -22,6 +22,7 @@
 #import "FLYSignupConfirmCodeViewController.h"
 #import "NBPhoneNumberUtil.h"
 #import "NSDictionary+FLYAddition.h"
+#import "SVWebViewController.h"
 
 #define kTitleTopPadding 10
 #define kSubtitleTopPadding 50
@@ -137,9 +138,9 @@
     NSRange linkRange2 = [_agreeTermsOfServiceLabel.text rangeOfString:LOC(@"FLYSignupPrivacyPolicyLinkText")];
     
     //TODO:add right terms of service and privacy policy link
-    [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:@""]
+    [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:@"https://www.confess.ly/footer/terms"]
                                  range:linkRange];
-    [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:@""]
+    [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:@"https://www.confess.ly/footer/privacy"]
                                  range:linkRange2];
     [self.view addSubview:self.agreeTermsOfServiceLabel];
     
@@ -313,6 +314,17 @@
                                                       }
                                                   }];
     [alertView useDefaultIOS7Style];
+}
+
+#pragma mark - NIAttributedLabelDelegate
+- (void)attributedLabel:(NIAttributedLabel *)attributedLabel didSelectTextCheckingResult:(NSTextCheckingResult *)result atPoint:(CGPoint)point
+{
+    NSURL *url = result.URL;
+    if (url) {
+        NSString *urlString = [url absoluteString];
+        SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:urlString];
+        [self.navigationController pushViewController:webViewController animated:YES];
+    }
 }
 
 #pragma mark - Navigation bar and status bar
