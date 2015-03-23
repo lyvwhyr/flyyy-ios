@@ -50,6 +50,11 @@
         }
         FLYUser *user = [[FLYUser alloc] initWithDictionary:userDict];
         [FLYAppStateManager sharedInstance].currentUser = user;
+        
+        //save user id to NSUserDefault
+        NSUserDefaults *defalut = [NSUserDefaults standardUserDefaults];
+        [defalut setObject:user.userId forKey:kLoggedInUserNsUserDefaultKey];
+        [defalut synchronize];
     };
     FLYGetMeErrorBlock errorBlock = ^(id responseObj, NSError *error) {
         UALog(@"%@", responseObj);

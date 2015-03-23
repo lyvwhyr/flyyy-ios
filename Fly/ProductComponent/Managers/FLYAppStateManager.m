@@ -54,7 +54,15 @@
     if (authToken) {
         _authToken = authToken;
     }
-    [UICKeyChainStore removeItemForKey:kAuthTokenKey];
+}
+
+- (NSString *)userDefaultUserId
+{
+    if (!_userDefaultUserId) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        return [defaults objectForKey:kLoggedInUserNsUserDefaultKey];
+    }
+    return _userDefaultUserId;
 }
 
 - (void)_requireSignupOrLogin:(NSNotification *)notification

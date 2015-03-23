@@ -451,7 +451,9 @@ forHTTPHeaderField:(NSString *)field
         }
     }];
 
-    if ([FLYAppStateManager sharedInstance].authToken) {
+    // Since authToken is stored in keychain, it won't be empty after the app is deleted and reinstalled.
+    // We check userDefaultUserId so it won't auto log in
+    if ([FLYAppStateManager sharedInstance].authToken && [FLYAppStateManager sharedInstance].userDefaultUserId) {
         [mutableRequest setValue:[FLYAppStateManager sharedInstance].authToken forHTTPHeaderField:@"X-Flyy-Auth"];
     }
     

@@ -29,6 +29,7 @@
 
 //auth token
 @property (nonatomic, copy) NSString *authToken;
+@property (nonatomic, copy) NSString *userDefaultUserId;
 
 + (instancetype)sharedInstance;
 

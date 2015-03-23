@@ -48,3 +48,4 @@
 #define kKeyChainServiceURL @"flyyapp.com"
 #define kAuthTokenKey @"kAuthTokenKey"
 #define kLoggedInUserDefaultKey @"kLoggedInUserDefaultKey"
+#define kLoggedInUserNsUserDefaultKey @"kLoggedInUserNsUserDefaultKey"
