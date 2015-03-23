@@ -13,6 +13,8 @@
 #import "FLYSignupEnterPasswordViewController.h"
 #import "FLYNavigationController.h"
 #import "FLYNavigationBar.h"
+#import "FLYUsernameService.h"
+#import "NSDictionary+FLYAddition.h"
 
 #define kTitleTopPadding 20
 
@@ -24,6 +26,9 @@
 @property (nonatomic) UIImageView *inputIconView;
 @property (nonatomic) UITextField *inputTextField;
 @property (nonatomic) UIButton *confirmButton;
+
+//service
+@property (nonatomic) FLYUsernameService *usernameService;
 
 @end
 
@@ -72,6 +77,8 @@
     [self.inputPhoneView addSubview:self.inputTextField];
     
     [self _addConstraints];
+    
+    self.usernameService = [FLYUsernameService usernameService];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -121,6 +128,11 @@
         return;
     }
     
+    if ([username containsString:@" "]) {
+        [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUsernameIncludeSpaceError")];
+        return;
+    }
+    
     NSString *myRegex = @"[A-Z0-9a-z_]*";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", myRegex];
     BOOL valid = [predicate evaluateWithObject:username];
@@ -128,12 +140,29 @@
         [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUsernameAlhpanumeric")];
         return;
     }
+    [self _serverUsernameVerify:username];
+}
+
+- (void)_serverUsernameVerify:(NSString *)username
+{
+    FLYUsernameVerifySuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        if (!responseObj) {
+            [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUsernameInuse")];
+            return;
+        }
+        BOOL valid = [responseObj fly_boolForKey:@"valid" defaultValue:NO];
+        if (valid) {
+            FLYSignupEnterPasswordViewController *vc = [[FLYSignupEnterPasswordViewController alloc] initWithUsername:username];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUsernameInuse")];
+        }
+    };
     
-    //TODO:username in use error
-    FLYSignupEnterPasswordViewController *vc = [[FLYSignupEnterPasswordViewController alloc] initWithUsername:username];
-    [self.navigationController pushViewController:vc animated:YES];
-    
-    
+    FLYUsernameVerifyErrorBlock errorBlock = ^(id responseObj, NSError *error) {
+        UALog(@"error");
+    };
+    [self.usernameService verifyUsername:username success:successBlock error:errorBlock];
 }
 
 #pragma mark - Navigation bar and status bar

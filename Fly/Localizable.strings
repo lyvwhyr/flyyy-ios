@@ -56,7 +56,9 @@
 "FLYSignupUsernameHint" = "Username (alphanumeric only)";
 "FLYSignupUsernameContinueButton" = "Continue";
 "FLYSignupUsernameLenError" = "Username must be 1 to 20 characters long";
+"FLYSignupUsernameIncludeSpaceError" = "Username cannot include empty space";
 "FLYSignupUsernameAlhpanumeric" = "Invalid username! Alphanumerics only";
+"FLYSignupUsernameInuse" = "This username is already taken";
 "FLYSignupPasswordPageTitle" = "Choose a password";
 "FLYSignupPasswordInputFieldHint" = "Password";
 "FLYSignupPasswordOkButton" = "Okay";

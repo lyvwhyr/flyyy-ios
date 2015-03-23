@@ -271,6 +271,7 @@
 		A669FB611ABFD99B00A96D24 /* SVWebViewControllerActivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = A669FB571ABFD99B00A96D24 /* SVWebViewControllerActivitySafari.m */; };
 		A669FB621ABFD99B00A96D24 /* SVWebViewControllerActivitySafari@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A669FB581ABFD99B00A96D24 /* SVWebViewControllerActivitySafari@2x.png */; };
 		A669FB631ABFD99B00A96D24 /* SVWebViewControllerActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = A669FB5A1ABFD99B00A96D24 /* SVWebViewControllerActivity.m */; };
+		A669FB661ABFE5B600A96D24 /* FLYUsernameService.m in Sources */ = {isa = PBXBuildFile; fileRef = A669FB651ABFE5B600A96D24 /* FLYUsernameService.m */; };
 		A66D98561A883B5A00C3D75A /* FLYPrePostHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A66D98551A883B5A00C3D75A /* FLYPrePostHeaderView.m */; };
 		A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E20481A2EBDAE004235F5 /* RDVTabBarItem.m */; };
 		A66E204E1A2EBDAE004235F5 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E204A1A2EBDAE004235F5 /* RDVTabBar.m */; };
@@ -842,6 +843,8 @@
 		A669FB581ABFD99B00A96D24 /* SVWebViewControllerActivitySafari@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SVWebViewControllerActivitySafari@2x.png"; sourceTree = "<group>"; };
 		A669FB591ABFD99B00A96D24 /* SVWebViewControllerActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVWebViewControllerActivity.h; sourceTree = "<group>"; };
 		A669FB5A1ABFD99B00A96D24 /* SVWebViewControllerActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewControllerActivity.m; sourceTree = "<group>"; };
+		A669FB641ABFE5B600A96D24 /* FLYUsernameService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUsernameService.h; sourceTree = "<group>"; };
+		A669FB651ABFE5B600A96D24 /* FLYUsernameService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUsernameService.m; sourceTree = "<group>"; };
 		A66D98541A883B5A00C3D75A /* FLYPrePostHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostHeaderView.h; sourceTree = "<group>"; };
 		A66D98551A883B5A00C3D75A /* FLYPrePostHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostHeaderView.m; sourceTree = "<group>"; };
 		A66E20471A2EBDAE004235F5 /* RDVTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarItem.h; sourceTree = "<group>"; };
@@ -2009,6 +2012,8 @@
 				A643AE3E1AA9336D00BF4E0F /* FLYUsersService.m */,
 				A61B6D391AAAD7EA00A5B696 /* FLYLoginService.h */,
 				A61B6D3A1AAAD7EA00A5B696 /* FLYLoginService.m */,
+				A669FB641ABFE5B600A96D24 /* FLYUsernameService.h */,
+				A669FB651ABFE5B600A96D24 /* FLYUsernameService.m */,
 			);
 			name = Services;
 			path = ../Services;
@@ -2904,6 +2909,7 @@
 				A651BD871A4985D40081A1E0 /* Dialog.m in Sources */,
 				A6A0E4AC1A1E76110036116E /* FLEXLiveObjectsTableViewController.m in Sources */,
 				A643AEE91AA9539E00BF4E0F /* NIDebuggingTools.m in Sources */,
+				A669FB661ABFE5B600A96D24 /* FLYUsernameService.m in Sources */,
 				A6048AD21A8603EF00C67480 /* AFSecurityPolicy.m in Sources */,
 				A6A4EFC21A2C634900FD4066 /* FLYSingleGroupViewController.m in Sources */,
 				A6048ADC1A8603EF00C67480 /* UIButton+AFNetworking.m in Sources */,
