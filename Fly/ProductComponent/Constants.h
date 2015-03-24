@@ -49,3 +49,6 @@
 #define kAuthTokenKey @"kAuthTokenKey"
 #define kLoggedInUserDefaultKey @"kLoggedInUserDefaultKey"
 #define kLoggedInUserNsUserDefaultKey @"kLoggedInUserNsUserDefaultKey"
+
+#define kPrivacyPolicyURL   @"https://www.flyyapp.com/privacy.html"
+#define kTermsOfServiceURL  @"https://www.flyyapp.com/terms.html"

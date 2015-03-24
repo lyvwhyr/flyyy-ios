@@ -138,9 +138,9 @@
     NSRange linkRange2 = [_agreeTermsOfServiceLabel.text rangeOfString:LOC(@"FLYSignupPrivacyPolicyLinkText")];
     
     //TODO:add right terms of service and privacy policy link
-    [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:@"https://www.confess.ly/footer/terms"]
+    [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:kTermsOfServiceURL]
                                  range:linkRange];
-    [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:@"https://www.confess.ly/footer/privacy"]
+    [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:kPrivacyPolicyURL]
                                  range:linkRange2];
     [self.view addSubview:self.agreeTermsOfServiceLabel];
     
