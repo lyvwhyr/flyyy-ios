@@ -11,10 +11,12 @@
 #import "NSDictionary+FLYAddition.h"
 #import "UICKeyChainStore.h"
 #import "FLYUser.h"
+#import "FLYConfigService.h"
 
 @interface FLYRequestManager()
 
 @property (nonatomic) FLYUsersService *usersService;
+@property (nonatomic) FLYConfigService *configsService;
 
 @end
 
@@ -35,6 +37,7 @@
 {
     if (self = [super init]) {
         [self _initMe];
+        [self _initConfigs];
     }
     return self;
 }
@@ -62,6 +65,21 @@
     
     _usersService = [FLYUsersService usersService];
     [_usersService getMeWithsuccessBlock:successBlock error:errorBlock];
+}
+
+- (void)_initConfigs
+{
+    _configsService = [FLYConfigService configService];
+    FLYGetConfigsSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        if (responseObj && [responseObj isKindOfClass:[NSDictionary class]]) {
+            [FLYAppStateManager sharedInstance].configs = responseObj;
+        }
+    };
+    
+    FLYGetConfigsErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        UALog(@"Error fetching configs");
+    };
+    [_configsService getConfigsWithSuccess:successBlock error:errorBlock];
 }
 
 @end

@@ -31,6 +31,9 @@
 @property (nonatomic, copy) NSString *authToken;
 @property (nonatomic, copy) NSString *userDefaultUserId;
 
+//server configs
+@property (nonatomic) NSMutableDictionary *configs;
+
 + (instancetype)sharedInstance;
 
 @end
