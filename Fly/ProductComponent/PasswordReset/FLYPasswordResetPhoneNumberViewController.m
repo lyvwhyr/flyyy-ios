@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Fly. All rights reserved.
 //
 
-#import "FLYSignupPasswordResetPhoneNumberViewController.h"
+#import "FLYPasswordResetPhoneNumberViewController.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYNavigationController.h"
 #import "FLYNavigationBar.h"
@@ -24,6 +24,7 @@
 #import "NSDictionary+FLYAddition.h"
 #import "SVWebViewController.h"
 #import "NSDictionary+FLYAddition.h"
+#import "FLYPasswordResetConfirmCodeViewController.h"
 
 #define kTitleTopPadding 10
 #define kSubtitleTopPadding 50
@@ -32,7 +33,7 @@
 #define kCountryCodeLabelWidth 44
 #define kCountryCodeLabelHeight 22
 
-@interface FLYSignupPasswordResetPhoneNumberViewController () <UITextFieldDelegate>
+@interface FLYPasswordResetPhoneNumberViewController () <UITextFieldDelegate>
 
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UILabel *subTitleLabel;
@@ -49,7 +50,7 @@
 
 @end
 
-@implementation FLYSignupPasswordResetPhoneNumberViewController
+@implementation FLYPasswordResetPhoneNumberViewController
 
 - (void)viewDidLoad
 {
@@ -224,39 +225,44 @@
     }
     
     @weakify(self)
-    PXAlertView *alertView = [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPhoneNumberConfirmationAlert")
-                                                     message: phoneNumber
-                                                 cancelTitle:@"Cancel"
-                                                  otherTitle:@"Yes"
-                                                 contentView:nil
-                                                  completion:^(BOOL cancelled, NSInteger buttonIndex) {
-                                                      @strongify(self)
-                                                      if (buttonIndex == 1) {
-                                                          ECPhoneNumberFormatter *formatter = [[ECPhoneNumberFormatter alloc] init];
-                                                          NSString *unformattedPhoneNumber;
-                                                          NSString *error;
-                                                          [formatter getObjectValue:&unformattedPhoneNumber forString:phoneNumber errorDescription:&error];
-                                                          
+    PXAlertView *alertView =
+        [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPhoneNumberConfirmationAlert")
+                                message: phoneNumber
+                            cancelTitle:@"Cancel"
+                             otherTitle:@"Yes"
+                            contentView:nil
+                             completion:^(BOOL cancelled, NSInteger buttonIndex) {
+                                 @strongify(self)
+                                 if (buttonIndex == 1) {
+                                     ECPhoneNumberFormatter *formatter = [[ECPhoneNumberFormatter alloc] init];
+                                     NSString *unformattedPhoneNumber;
+                                     NSString *error;
+                                     [formatter getObjectValue:&unformattedPhoneNumber forString:phoneNumber errorDescription:&error];
+                                     
+                                     FLYPasswordResetConfirmCodeViewController *vc = [FLYPasswordResetConfirmCodeViewController new];
+                                     [self.navigationController pushViewController:vc animated:NO];
+                                     
+                                     
                                                           [FLYAppStateManager sharedInstance].phoneNumber = unformattedPhoneNumber;
-                                                          FLYPhoneService *service = [FLYPhoneService phoneServiceWithPhoneNumber:phoneNumber];
-                                                          [service serviceSendCodeWithPhone:unformattedPhoneNumber success:^(AFHTTPRequestOperation *operation, id responseObj) {
-                                                              if (responseObj) {
-                                                                  [FLYAppStateManager sharedInstance].phoneHash = [responseObj objectForKey:@"phone_hash"];
-                                                                  FLYSignupConfirmCodeViewController *vc = [FLYSignupConfirmCodeViewController new];
-                                                                  [self.navigationController pushViewController:vc animated:YES];
-                                                              } else {
-                                                                  PXAlertView *errorAlert = [PXAlertView showAlertWithTitle:@"Something went wrong. Please try again later"];
-                                                                  [errorAlert useDefaultIOS7Style];
-                                                              }
-                                                              
-                                                          } error:^(id responseObj, NSError *error) {
-                                                              NSInteger code = [responseObj fly_integerForKey:@"code"];
-                                                              if (code == kPhoneNumberAlreadyClaimed) {
-                                                                  [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPhoneNumberAlreadyExist")];
-                                                              } else if(code == kNotValidPhoneNumber) {
-                                                                  [PXAlertView showAlertWithTitle:LOC(@"FLYSignupNotValidPhoneNumber")];
-                                                              }
-                                                          }];
+//                                                          FLYPhoneService *service = [FLYPhoneService phoneServiceWithPhoneNumber:phoneNumber];
+//                                                          [service serviceSendCodeWithPhone:unformattedPhoneNumber success:^(AFHTTPRequestOperation *operation, id responseObj) {
+//                                                              if (responseObj) {
+//                                                                  [FLYAppStateManager sharedInstance].phoneHash = [responseObj objectForKey:@"phone_hash"];
+//                                                                  FLYSignupConfirmCodeViewController *vc = [FLYSignupConfirmCodeViewController new];
+//                                                                  [self.navigationController pushViewController:vc animated:YES];
+//                                                              } else {
+//                                                                  PXAlertView *errorAlert = [PXAlertView showAlertWithTitle:@"Something went wrong. Please try again later"];
+//                                                                  [errorAlert useDefaultIOS7Style];
+//                                                              }
+//                                                              
+//                                                          } error:^(id responseObj, NSError *error) {
+//                                                              NSInteger code = [responseObj fly_integerForKey:@"code"];
+//                                                              if (code == kPhoneNumberAlreadyClaimed) {
+//                                                                  [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPhoneNumberAlreadyExist")];
+//                                                              } else if(code == kNotValidPhoneNumber) {
+//                                                                  [PXAlertView showAlertWithTitle:LOC(@"FLYSignupNotValidPhoneNumber")];
+//                                                              }
+//                                                          }];
                                                       }
                                                   }];
     [alertView useDefaultIOS7Style];

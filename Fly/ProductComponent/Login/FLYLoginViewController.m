@@ -20,7 +20,7 @@
 #import "UICKeyChainStore.h"
 #import "RNLoadingButton.h"
 #import "PXAlertView.h"
-#import "FLYSignupPasswordResetPhoneNumberViewController.h"
+#import "FLYPasswordResetPhoneNumberViewController.h"
 
 #define kTitleTopPadding 20
 #define kLeftIconWidth 50
@@ -220,8 +220,8 @@
 
 - (void)_forgetPasswordButtonTapped
 {
-    FLYSignupPasswordResetPhoneNumberViewController *vc = [FLYSignupPasswordResetPhoneNumberViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
+    FLYPasswordResetPhoneNumberViewController *vc = [FLYPasswordResetPhoneNumberViewController new];
+    [self.navigationController pushViewController:vc animated:NO];
     
 }
 

@@ -96,6 +96,11 @@
 "FLYResetPasswordHint" = "Please enter your phone number";
 "FLYResetPasswordTextFieldDefaultValue" = "Phone number";
 "FLYResetPassword" = "Reset password";
+"FLYResetPasswordNewPassword" = "New password";
+"FLYResetPasswordNewPasswordAgain" = "New password again";
+"FLYResetPasswordNewPasswordDoesNotMatch" = "Please enter the same password";
+"FLYValidPasswordCharacters" = "Valid password characters are A-Za-z0-9!#$%&+-=?@[] ^_{|}";
+
 
 
 

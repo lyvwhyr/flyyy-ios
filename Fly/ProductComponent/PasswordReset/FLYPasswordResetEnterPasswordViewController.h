@@ -8,7 +8,7 @@
 
 #import "FLYUniversalViewController.h"
 
-@interface FLYSignupPasswordResetEnterPasswordViewController : FLYUniversalViewController
+@interface FLYPasswordResetEnterPasswordViewController : FLYUniversalViewController
 
 - (instancetype)initWithUsername:(NSString *)username;
 

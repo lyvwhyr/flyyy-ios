@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Fly. All rights reserved.
 //
 
-#import "FLYSignupPasswordResetEnterPasswordViewController.h"
+#import "FLYPasswordResetEnterPasswordViewController.h"
 #import "UIFont+FLYAddition.h"
 #import "UIColor+FLYAddition.h"
 #import "PXAlertView.h"
@@ -19,14 +19,16 @@
 
 #define kTitleTopPadding 20
 
-@interface FLYSignupPasswordResetEnterPasswordViewController ()
+@interface FLYPasswordResetEnterPasswordViewController ()
 
 @property (nonatomic, copy) NSString *username;
 
-@property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIView *inputPhoneView;
 @property (nonatomic) UIImageView *inputIconView;
 @property (nonatomic) UITextField *inputTextField;
+@property (nonatomic) UIView *inputPasswordAgainView;
+@property (nonatomic) UIImageView *inputPasswordAgainIconView;
+@property (nonatomic) UITextField *inputPasswordAgainTextField;
 @property (nonatomic) UILabel *passwordLengthHintLabel;
 @property (nonatomic) UIButton *confirmButton;
 
@@ -35,7 +37,7 @@
 
 @end
 
-@implementation FLYSignupPasswordResetEnterPasswordViewController
+@implementation FLYPasswordResetEnterPasswordViewController
 
 - (instancetype)initWithUsername:(NSString *)username
 {
@@ -52,16 +54,9 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor flyBlue];
     
-    self.title = LOC(@"FLYSignupPageTitle");
+    self.title = LOC(@"FLYResetPassword");
     UIFont *titleFont = [UIFont flyFontWithSize:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
-    
-    self.titleLabel = [UILabel new];
-    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.titleLabel.font = [UIFont flyFontWithSize:21];
-    self.titleLabel.textColor = [UIColor whiteColor];
-    self.titleLabel.text = LOC(@"FLYSignupPasswordPageTitle");
-    [self.view addSubview:self.titleLabel];
     
     self.inputPhoneView = [UIView new];
     self.inputPhoneView.backgroundColor = [UIColor whiteColor];
@@ -86,9 +81,29 @@
     self.inputTextField.translatesAutoresizingMaskIntoConstraints = NO;
     self.inputTextField.inputAccessoryView = self.confirmButton;
     self.inputTextField.secureTextEntry = YES;
-    self.inputTextField.placeholder = LOC(@"FLYSignupPasswordInputFieldHint");
+    self.inputTextField.placeholder = LOC(@"FLYResetPasswordNewPassword");
     [self.inputPhoneView addSubview:self.inputTextField];
     [self.inputTextField becomeFirstResponder];
+    
+    self.inputPasswordAgainView = [UIView new];
+    self.inputPasswordAgainView.backgroundColor = [UIColor whiteColor];
+    self.inputPasswordAgainView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.inputPasswordAgainView.layer.borderColor = [UIColor flyColorFlySignupGrey].CGColor;
+    self.inputPasswordAgainView.layer.borderWidth = borderWidth;
+    [self.view addSubview:self.inputPasswordAgainView];
+    
+    self.inputPasswordAgainIconView = [UIImageView new];
+    self.inputPasswordAgainIconView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.inputPasswordAgainIconView.image = [UIImage imageNamed:@"icon_login_password"];
+    [self.inputPasswordAgainIconView sizeToFit];
+    [self.inputPasswordAgainView addSubview:self.inputPasswordAgainIconView];
+    
+    self.inputPasswordAgainTextField = [UITextField new];
+    self.inputPasswordAgainTextField.inputAccessoryView = self.confirmButton;
+    self.inputPasswordAgainTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    self.inputPasswordAgainTextField.secureTextEntry = YES;
+    self.inputPasswordAgainTextField.placeholder = LOC(@"FLYResetPasswordNewPasswordAgain");
+    [self.inputPasswordAgainView addSubview:self.inputPasswordAgainTextField];
     
     self.passwordLengthHintLabel = [UILabel new];
     self.passwordLengthHintLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -105,13 +120,9 @@
 
 - (void)_addConstraints
 {
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.top.equalTo(self.view).offset(kTitleTopPadding + kStatusBarHeight + kNavBarHeight);
-    }];
     
     [self.inputPhoneView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.view).offset(kTitleTopPadding + kStatusBarHeight + kNavBarHeight);
         make.leading.equalTo(self.view).offset(10);
         make.trailing.equalTo(self.view).offset(-10);
         make.height.equalTo(@(44));
@@ -130,6 +141,26 @@
         make.centerY.equalTo(self.inputPhoneView);
     }];
     
+    [self.inputPasswordAgainView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.inputPhoneView.mas_bottom).offset(10);
+        make.leading.equalTo(self.inputPhoneView);
+        make.trailing.equalTo(self.inputPhoneView);
+        make.height.equalTo(@(44));
+    }];
+    
+    [self.inputPasswordAgainIconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.inputPasswordAgainView).offset(10);
+        make.width.equalTo(@(CGRectGetWidth(self.inputPasswordAgainIconView.bounds)));
+        make.height.equalTo(@(CGRectGetHeight(self.inputPasswordAgainIconView.bounds)));
+        make.centerY.equalTo(self.inputPasswordAgainView);
+    }];
+    
+    [self.inputPasswordAgainTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.inputPasswordAgainIconView.mas_trailing).offset(10);
+        make.trailing.equalTo(self.inputPasswordAgainView);
+        make.centerY.equalTo(self.inputPasswordAgainView);
+    }];
+    
     [self.passwordLengthHintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(self.inputTextField);
         make.top.equalTo(self.inputPhoneView.mas_bottom).offset(5);
@@ -144,10 +175,13 @@
         return;
     }
     
-    //TODO: valid password character check.
+    NSString *passwordAgain = self.inputPasswordAgainTextField.text;
+    if (![password isEqualToString:passwordAgain]) {
+        [PXAlertView showAlertWithTitle:LOC(@"FLYResetPasswordNewPasswordDoesNotMatch")];
+        return;
+    }
     
-    
-    [self _createUserService];
+//    [self _createUserService];
 }
 
 - (void)_createUserService

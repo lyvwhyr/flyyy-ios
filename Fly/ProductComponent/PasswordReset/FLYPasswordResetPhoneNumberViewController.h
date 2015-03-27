@@ -10,6 +10,6 @@
 
 typedef void (^FLYCountrySelectedBlock)(NSString *countryDialCode);
 
-@interface FLYSignupPasswordResetPhoneNumberViewController : FLYUniversalViewController
+@interface FLYPasswordResetPhoneNumberViewController : FLYUniversalViewController
 
 @end

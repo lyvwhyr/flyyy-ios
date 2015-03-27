@@ -16,6 +16,7 @@
 #import "NSDictionary+FLYAddition.h"
 #import "FLYNavigationBar.h"
 #import "FLYNavigationController.h"
+#import "FLYPasswordResetEnterPasswordViewController.h"
 
 #define kTitleTopPadding 5
 
@@ -39,7 +40,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor flyBlue];
     
-    self.title = LOC(@"FLYSignupPageTitle");
+    self.title = LOC(@"FLYResetPassword");
     UIFont *titleFont = [UIFont flyFontWithSize:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
     
@@ -151,7 +152,9 @@
 
 - (void)_confirmButtonTapped
 {
-    [self _verifyCode];
+    FLYPasswordResetEnterPasswordViewController *vc = [FLYPasswordResetEnterPasswordViewController new];
+    [self.navigationController pushViewController:vc animated:NO];
+//    [self _verifyCode];
 }
 
 #pragma mark - Navigation bar and status bar

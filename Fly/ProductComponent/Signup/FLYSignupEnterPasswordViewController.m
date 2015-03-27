@@ -143,10 +143,6 @@
         [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPasswordLengthError")];
         return;
     }
-    
-    //TODO: valid password character check.
-    
-    
     [self _createUserService];
 }
 
