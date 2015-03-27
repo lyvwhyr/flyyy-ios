@@ -91,5 +91,11 @@
 "FLYTopicDetailReportReplyMessage" = "Are you sure you want to report this comment?";
 "FLYTopicDetailReportReplySuccessTitle" = "Comment reported";
 
+// reset password
+"FLYResetPasswordNavigationTitle" = "Reset password";
+"FLYResetPasswordHint" = "Please enter your phone number";
+"FLYResetPasswordTextFieldDefaultValue" = "Phone number";
+"FLYResetPassword" = "Reset password";
+
 
 

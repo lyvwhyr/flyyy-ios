@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Fly. All rights reserved.
 //
 
-#import "FLYSignupPhoneNumberViewController.h"
+#import "FLYSignupPasswordResetPhoneNumberViewController.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYNavigationController.h"
 #import "FLYNavigationBar.h"
@@ -32,7 +32,7 @@
 #define kCountryCodeLabelWidth 44
 #define kCountryCodeLabelHeight 22
 
-@interface FLYSignupPhoneNumberViewController () <UITextFieldDelegate, NIAttributedLabelDelegate>
+@interface FLYSignupPasswordResetPhoneNumberViewController () <UITextFieldDelegate>
 
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UILabel *subTitleLabel;
@@ -43,18 +43,13 @@
 @property (nonatomic) UIView *countryCodePhoneNumberSeparator;
 @property (nonatomic) UITextField *phoneNumberTextField;
 @property (nonatomic) UIButton *nextButton;
-@property (nonatomic) NIAttributedLabel *agreeTermsOfServiceLabel;
-
-//@property (nonatomic) UILabel *hintLabel;
-@property (nonatomic) UIView *separator;
-@property (nonatomic) UILabel *alreadyHaveAccountLabel;
 
 @property (nonatomic, copy) NSString *countryAreaCode;
 @property (nonatomic, copy) NSString *formattedPhoneNumber;
 
 @end
 
-@implementation FLYSignupPhoneNumberViewController
+@implementation FLYSignupPasswordResetPhoneNumberViewController
 
 - (void)viewDidLoad
 {
@@ -62,7 +57,7 @@
     
     //Navigation title
     self.view.backgroundColor = [UIColor flyBlue];
-    self.title = LOC(@"FLYSignupPageTitle");
+    self.title = LOC(@"FLYResetPasswordNavigationTitle");
     UIFont *titleFont = [UIFont flyFontWithSize:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
     
@@ -70,7 +65,7 @@
     self.subTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.subTitleLabel.font = [UIFont flyFontWithSize:21];
     self.subTitleLabel.textColor = [UIColor whiteColor];
-    self.subTitleLabel.text = LOC(@"FLYSignupSubTitle");
+    self.subTitleLabel.text = LOC(@"FLYResetPasswordHint");
     [self.view addSubview:self.subTitleLabel];
     
     //country code and phone number
@@ -98,7 +93,7 @@
     
     self.nextButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 44)];
     self.nextButton.backgroundColor = [UIColor flyColorFlySignupGrey];
-    [self.nextButton setTitle:LOC(@"FLYSignupEnterPhoneNumberOKButton") forState:UIControlStateNormal];
+    [self.nextButton setTitle:LOC(@"FLYResetPassword") forState:UIControlStateNormal];
     [self.nextButton addTarget:self action:@selector(_nextButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     
     self.phoneNumberTextField = [UITextField new];
@@ -106,44 +101,10 @@
     self.phoneNumberTextField.keyboardType = UIKeyboardTypeNumberPad;
     self.phoneNumberTextField.delegate = self;
     self.phoneNumberTextField.inputAccessoryView = self.nextButton;
-    self.phoneNumberTextField.placeholder = LOC(@"FLYSignupEnterPhoneNumberHint");
+    self.phoneNumberTextField.placeholder = LOC(@"FLYResetPasswordTextFieldDefaultValue");
     [self.phoneNumberTextField addTarget:self action:@selector(_textFieldDidChange)
         forControlEvents:UIControlEventEditingChanged];
     [self.phoneFieldView addSubview:self.phoneNumberTextField];
-    
-    self.separator = [UIView new];
-    self.separator.translatesAutoresizingMaskIntoConstraints = NO;
-    self.separator.backgroundColor = [UIColor flyTabBarSeparator];
-    [self.view addSubview:self.separator];
-    
-    self.alreadyHaveAccountLabel = [UILabel new];
-    self.alreadyHaveAccountLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.alreadyHaveAccountLabel.font = [UIFont flyFontWithSize:14];
-    self.alreadyHaveAccountLabel.textColor = [UIColor flyBlue];
-    self.alreadyHaveAccountLabel.text = LOC(@"FLYSignupAlreadyHaveAccount");
-    [self.view addSubview:self.alreadyHaveAccountLabel];
-    
-    self.agreeTermsOfServiceLabel = [NIAttributedLabel new];
-    self.agreeTermsOfServiceLabel.numberOfLines = 0;
-    self.agreeTermsOfServiceLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.agreeTermsOfServiceLabel.autoresizingMask = UIViewAutoresizingFlexibleDimensions;
-    self.agreeTermsOfServiceLabel.textColor = [UIColor whiteColor];
-    self.agreeTermsOfServiceLabel.font = [UIFont flyLightFontWithSize:12];
-    
-    self.agreeTermsOfServiceLabel.delegate = self;
-    self.agreeTermsOfServiceLabel.autoDetectLinks = NO;
-    self.agreeTermsOfServiceLabel.linkFont = [UIFont fontWithName:@"AvenirNext-Italic" size:12];
-    self.agreeTermsOfServiceLabel.linkColor = [UIColor whiteColor];
-    self.agreeTermsOfServiceLabel.text = LOC(@"FLYSignupAgreeTermsOfService");
-    NSRange linkRange = [_agreeTermsOfServiceLabel.text rangeOfString:LOC(@"FLYSignupTermsOfServiceLinkText")];
-    NSRange linkRange2 = [_agreeTermsOfServiceLabel.text rangeOfString:LOC(@"FLYSignupPrivacyPolicyLinkText")];
-    
-    //TODO:add right terms of service and privacy policy link
-    [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:kTermsOfServiceURL]
-                                 range:linkRange];
-    [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:kPrivacyPolicyURL]
-                                 range:linkRange2];
-    [self.view addSubview:self.agreeTermsOfServiceLabel];
     
     [self _addConstranits];
 }
@@ -191,25 +152,6 @@
         make.trailing.equalTo(self.phoneFieldView);
         make.top.equalTo(self.phoneFieldView);
         make.bottom.equalTo(self.phoneFieldView);
-    }];
-    
-    [self.agreeTermsOfServiceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.phoneFieldView);
-        make.top.equalTo(self.phoneFieldView.mas_bottom).offset(10);
-        make.trailing.equalTo(self.phoneFieldView);
-    }];
-    
-    [self.alreadyHaveAccountLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.height.equalTo(@(kNavBarHeight));
-        make.bottom.equalTo(self.view);
-    }];
-    
-    [self.separator mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.view);
-        make.width.equalTo(@(self.view.bounds.size.width));
-        make.height.equalTo(@(separatorHeight));
-        make.bottom.equalTo(self.alreadyHaveAccountLabel.mas_top);
     }];
     
 }
@@ -260,7 +202,7 @@
 
 - (void)_backButtonTapped
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)_nextButtonTapped
@@ -318,17 +260,6 @@
                                                       }
                                                   }];
     [alertView useDefaultIOS7Style];
-}
-
-#pragma mark - NIAttributedLabelDelegate
-- (void)attributedLabel:(NIAttributedLabel *)attributedLabel didSelectTextCheckingResult:(NSTextCheckingResult *)result atPoint:(CGPoint)point
-{
-    NSURL *url = result.URL;
-    if (url) {
-        NSString *urlString = [url absoluteString];
-        SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:urlString];
-        [self.navigationController pushViewController:webViewController animated:YES];
-    }
 }
 
 #pragma mark - Navigation bar and status bar

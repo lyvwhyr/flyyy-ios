@@ -394,6 +394,9 @@
 		A6A57AAD1A34555400610785 /* FLYTopicDetailReplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57AAB1A34555400610785 /* FLYTopicDetailReplyCell.m */; };
 		A6A70CD71AA4010D0000F784 /* FLYSignupPhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A70CD61AA4010D0000F784 /* FLYSignupPhoneNumberViewController.m */; };
 		A6A70CDB1AA4597A0000F784 /* ECPhoneNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A70CDA1AA4597A0000F784 /* ECPhoneNumberFormatter.m */; };
+		A6A8DFF91AC4D92500BF77BB /* FLYPasswordResetConfirmCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8DFF41AC4D92500BF77BB /* FLYPasswordResetConfirmCodeViewController.m */; };
+		A6A8DFFA1AC4D92500BF77BB /* FLYSignupPasswordResetEnterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8DFF61AC4D92500BF77BB /* FLYSignupPasswordResetEnterPasswordViewController.m */; };
+		A6A8DFFB1AC4D92500BF77BB /* FLYSignupPasswordResetPhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8DFF81AC4D92500BF77BB /* FLYSignupPasswordResetPhoneNumberViewController.m */; };
 		A6BAD4091AA57C4D00DB10F7 /* FLYPhoneService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BAD4081AA57C4D00DB10F7 /* FLYPhoneService.m */; };
 		A6BAD40C1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BAD40B1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m */; };
 		A6BCBBFD1A848D16001F8AB0 /* FLYEndpointRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BCBBFC1A848D16001F8AB0 /* FLYEndpointRequest.m */; };
@@ -1068,6 +1071,12 @@
 		A6A70CD61AA4010D0000F784 /* FLYSignupPhoneNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSignupPhoneNumberViewController.m; sourceTree = "<group>"; };
 		A6A70CD91AA4597A0000F784 /* ECPhoneNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPhoneNumberFormatter.h; sourceTree = "<group>"; };
 		A6A70CDA1AA4597A0000F784 /* ECPhoneNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPhoneNumberFormatter.m; sourceTree = "<group>"; };
+		A6A8DFF31AC4D92500BF77BB /* FLYPasswordResetConfirmCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPasswordResetConfirmCodeViewController.h; sourceTree = "<group>"; };
+		A6A8DFF41AC4D92500BF77BB /* FLYPasswordResetConfirmCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPasswordResetConfirmCodeViewController.m; sourceTree = "<group>"; };
+		A6A8DFF51AC4D92500BF77BB /* FLYSignupPasswordResetEnterPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSignupPasswordResetEnterPasswordViewController.h; sourceTree = "<group>"; };
+		A6A8DFF61AC4D92500BF77BB /* FLYSignupPasswordResetEnterPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSignupPasswordResetEnterPasswordViewController.m; sourceTree = "<group>"; };
+		A6A8DFF71AC4D92500BF77BB /* FLYSignupPasswordResetPhoneNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSignupPasswordResetPhoneNumberViewController.h; sourceTree = "<group>"; };
+		A6A8DFF81AC4D92500BF77BB /* FLYSignupPasswordResetPhoneNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSignupPasswordResetPhoneNumberViewController.m; sourceTree = "<group>"; };
 		A6BAD4071AA57C4D00DB10F7 /* FLYPhoneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPhoneService.h; sourceTree = "<group>"; };
 		A6BAD4081AA57C4D00DB10F7 /* FLYPhoneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPhoneService.m; sourceTree = "<group>"; };
 		A6BAD40A1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSignupConfirmCodeViewController.h; sourceTree = "<group>"; };
@@ -1362,6 +1371,7 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A6A8DFF21AC4C06400BF77BB /* PasswordReset */,
 				A665FC2B1AA2D94A00490A18 /* Signup */,
 				A665FC2A1AA2D93F00490A18 /* Login */,
 				A636FC351A9AA70F0084DE6A /* Tracking */,
@@ -2423,6 +2433,19 @@
 			path = ECPhoneNumberFormatter;
 			sourceTree = "<group>";
 		};
+		A6A8DFF21AC4C06400BF77BB /* PasswordReset */ = {
+			isa = PBXGroup;
+			children = (
+				A6A8DFF31AC4D92500BF77BB /* FLYPasswordResetConfirmCodeViewController.h */,
+				A6A8DFF41AC4D92500BF77BB /* FLYPasswordResetConfirmCodeViewController.m */,
+				A6A8DFF51AC4D92500BF77BB /* FLYSignupPasswordResetEnterPasswordViewController.h */,
+				A6A8DFF61AC4D92500BF77BB /* FLYSignupPasswordResetEnterPasswordViewController.m */,
+				A6A8DFF71AC4D92500BF77BB /* FLYSignupPasswordResetPhoneNumberViewController.h */,
+				A6A8DFF81AC4D92500BF77BB /* FLYSignupPasswordResetPhoneNumberViewController.m */,
+			);
+			path = PasswordReset;
+			sourceTree = "<group>";
+		};
 		A6CD56E81A480298003486DD /* Download */ = {
 			isa = PBXGroup;
 			children = (
@@ -2874,6 +2897,7 @@
 				A6450B141A998A08009EF0A3 /* AFSoundItem.m in Sources */,
 				A66D98561A883B5A00C3D75A /* FLYPrePostHeaderView.m in Sources */,
 				A6263EBA1A18815000C4C3BA /* FLYMainViewController.m in Sources */,
+				A6A8DFF91AC4D92500BF77BB /* FLYPasswordResetConfirmCodeViewController.m in Sources */,
 				A6450B181A998A08009EF0A3 /* NSTimer+AFSoundManager.m in Sources */,
 				A61B6D451AAAF3A000A5B696 /* FLYRequestManager.m in Sources */,
 				A6A0E4B21A1E76110036116E /* FLEXDictionaryExplorerViewController.m in Sources */,
@@ -2952,6 +2976,7 @@
 				A6A30D6C1A1B0586001AE1FE /* FLYRecordViewController.m in Sources */,
 				A648C0E81A19AD4A00FF1744 /* MASViewConstraint.m in Sources */,
 				A6A0E4A51A1E76110036116E /* FLEXWindow.m in Sources */,
+				A6A8DFFA1AC4D92500BF77BB /* FLYSignupPasswordResetEnterPasswordViewController.m in Sources */,
 				A6048A421A85E63100C67480 /* EXTSelectorChecking.m in Sources */,
 				A6048A3D1A85E63100C67480 /* EXTConcreteProtocol.m in Sources */,
 				A636FC3B1A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.m in Sources */,
@@ -2966,6 +2991,7 @@
 				A6048AD81A8603EF00C67480 /* README.md in Sources */,
 				A6A0E4B61A1E76110036116E /* FLEXObjectExplorerViewController.m in Sources */,
 				A6A0E4941A1E76110036116E /* FLEXArgumentInputNumberView.m in Sources */,
+				A6A8DFFB1AC4D92500BF77BB /* FLYSignupPasswordResetPhoneNumberViewController.m in Sources */,
 				A6263ED01A18A10E00C4C3BA /* UIImage+FLYAddition.m in Sources */,
 				A6A0E4B31A1E76110036116E /* FLEXGlobalsTableViewControllerEntry.m in Sources */,
 				A6263E951A187E1200C4C3BA /* AppDelegate.m in Sources */,

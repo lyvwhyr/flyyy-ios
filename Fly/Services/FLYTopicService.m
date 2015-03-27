@@ -7,6 +7,7 @@
 //
 
 #import "FLYTopicService.h"
+#import "NSDictionary+FLYAddition.h"
 
 @implementation FLYTopicService
 
@@ -42,11 +43,13 @@
 
 - (void)nextPageBefore:(NSString *)before firstPage:(BOOL)first successBlock:(FlYGetTopicsSuccessBlock)successBlock errorBlock:(FLYGetTopicsErrorBlock)errorBlock
 {
+    NSInteger topicsPerPage = [[FLYAppStateManager sharedInstance].configs fly_integerForKey:@"topicsPerPage" defaultValue:kTopicPaginationCount];
+    
     NSDictionary *params = [NSDictionary new];
     if (first) {
-        params = @{@"limit":@(kTopicPaginationCount)};
+        params = @{@"limit":@(topicsPerPage)};
     } else {
-        params = @{@"limit":@(kTopicPaginationCount), @"before":before};
+        params = @{@"limit":@(topicsPerPage), @"before":before};
     }
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:self.endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

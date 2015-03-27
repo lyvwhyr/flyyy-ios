@@ -20,6 +20,7 @@
 #import "UICKeyChainStore.h"
 #import "RNLoadingButton.h"
 #import "PXAlertView.h"
+#import "FLYSignupPasswordResetPhoneNumberViewController.h"
 
 #define kTitleTopPadding 20
 #define kLeftIconWidth 50
@@ -37,7 +38,7 @@
 @property (nonatomic) UIView *passwordView;
 @property (nonatomic) UIImageView *passwordIcon;
 @property (nonatomic) UITextField *passwordTextField;
-@property (nonatomic) UILabel *forgetPasswordLabel;
+@property (nonatomic) UIButton *forgetPasswordButton;
 
 @property (nonatomic) RNLoadingButton *loginButton;
 
@@ -119,12 +120,13 @@
                         forControlEvents:UIControlEventEditingChanged];
     [self.passwordView addSubview:self.passwordTextField];
     
-    self.forgetPasswordLabel = [UILabel new];
-    self.forgetPasswordLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.forgetPasswordLabel.font = [UIFont flyFontWithSize:16];
-    self.forgetPasswordLabel.textColor = [UIColor whiteColor];
-    self.forgetPasswordLabel.text = LOC(@"FLYLoginForgetPasswordText");
-    [self.view addSubview:self.forgetPasswordLabel];
+    self.forgetPasswordButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.forgetPasswordButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.forgetPasswordButton.titleLabel.font = [UIFont flyFontWithSize:16];
+    [self.forgetPasswordButton setTitle:LOC(@"FLYLoginForgetPasswordText") forState:UIControlStateNormal];
+    self.forgetPasswordButton.titleLabel.textColor = [UIColor whiteColor];
+    [self.forgetPasswordButton addTarget:self action:@selector(_forgetPasswordButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.forgetPasswordButton];
     
     [self _addConstraints];
     
@@ -183,7 +185,7 @@
         make.bottom.equalTo(self.passwordView);
     }];
     
-    [self.forgetPasswordLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.forgetPasswordButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.passwordView.mas_bottom).offset(10);
         make.centerX.equalTo(self.view);
     }];
@@ -214,6 +216,13 @@
         self.loginButton.backgroundColor = [UIColor flyColorFlySignupGrey];
         [self.loginButton setEnabled:NO];
     }
+}
+
+- (void)_forgetPasswordButtonTapped
+{
+    FLYSignupPasswordResetPhoneNumberViewController *vc = [FLYSignupPasswordResetPhoneNumberViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)_countrySelectorSelected

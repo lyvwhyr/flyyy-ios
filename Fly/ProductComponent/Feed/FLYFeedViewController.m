@@ -253,52 +253,6 @@
     [super viewDidLayoutSubviews];
 }
 
-#pragma mark - fetch home timeline API
-- (void)_fetchHomeTimelineService:(NSString *)before requestType:(enum RequestType)requestType
-{
-    self.state = FLYViewControllerStateLoading;
-    
-    NSString *partialUrl;
-    if (requestType == RequestTypeNormal) {
-        partialUrl = [NSString stringWithFormat:@"topics?limit=%d", kTopicPaginationCount];
-    } else {
-        partialUrl = [NSString stringWithFormat:@"topics?limit=%d&before=%@", kTopicPaginationCount, self.beforeTimestamp];
-    }
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    @weakify(self)
-    [manager GET:partialUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        @strongify(self)
-        [_feedTableView.pullToRefreshView stopAnimating];
-        [_feedTableView.infiniteScrollingView stopAnimating];
-        NSArray *results = responseObject;
-        
-        if (results == nil ||  results.count == 0) {
-            self.state = FLYViewControllerStateError;
-            return;
-        }
-        
-        self.state = FLYViewControllerStateReady;
-        
-        if (requestType == RequestTypeNormal) {
-            [self.posts removeAllObjects];
-        }
-        for(int i = 0; i < results.count; i++) {
-            FLYTopic *post = [[FLYTopic alloc] initWithDictory:results[i]];
-            [self.posts addObject:post];
-        }
-        //Set up before id for load more
-        FLYTopic *lastTopic = [self.posts lastObject];
-        self.beforeTimestamp = lastTopic.createdAt;
-        
-        [self.feedTableView reloadData];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [_feedTableView.pullToRefreshView stopAnimating];
-        [_feedTableView.infiniteScrollingView stopAnimating];
-        UALog(@"Post error %@", error);
-    }];
-    
-}
 
 - (void)_filterButtonTapped
 {

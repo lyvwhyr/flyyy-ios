@@ -41,6 +41,7 @@
     if (self = [super init]) {
         _isAutoPlayEnabled = NO;
         _deviceId = [UIDevice uniqueDeviceIdentifier];
+        _configs = [NSMutableDictionary new];
         [self _initSession];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_requireSignupOrLogin:) name:kRequireSignupNotification object:nil];
         
