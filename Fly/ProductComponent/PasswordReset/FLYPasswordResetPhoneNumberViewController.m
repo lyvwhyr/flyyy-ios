@@ -238,31 +238,27 @@
                                      NSString *unformattedPhoneNumber;
                                      NSString *error;
                                      [formatter getObjectValue:&unformattedPhoneNumber forString:phoneNumber errorDescription:&error];
-                                     
-                                     FLYPasswordResetConfirmCodeViewController *vc = [FLYPasswordResetConfirmCodeViewController new];
-                                     [self.navigationController pushViewController:vc animated:NO];
-                                     
-                                     
                                                           [FLYAppStateManager sharedInstance].phoneNumber = unformattedPhoneNumber;
-//                                                          FLYPhoneService *service = [FLYPhoneService phoneServiceWithPhoneNumber:phoneNumber];
-//                                                          [service serviceSendCodeWithPhone:unformattedPhoneNumber success:^(AFHTTPRequestOperation *operation, id responseObj) {
-//                                                              if (responseObj) {
-//                                                                  [FLYAppStateManager sharedInstance].phoneHash = [responseObj objectForKey:@"phone_hash"];
-//                                                                  FLYSignupConfirmCodeViewController *vc = [FLYSignupConfirmCodeViewController new];
-//                                                                  [self.navigationController pushViewController:vc animated:YES];
-//                                                              } else {
-//                                                                  PXAlertView *errorAlert = [PXAlertView showAlertWithTitle:@"Something went wrong. Please try again later"];
-//                                                                  [errorAlert useDefaultIOS7Style];
-//                                                              }
-//                                                              
-//                                                          } error:^(id responseObj, NSError *error) {
-//                                                              NSInteger code = [responseObj fly_integerForKey:@"code"];
-//                                                              if (code == kPhoneNumberAlreadyClaimed) {
-//                                                                  [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPhoneNumberAlreadyExist")];
-//                                                              } else if(code == kNotValidPhoneNumber) {
-//                                                                  [PXAlertView showAlertWithTitle:LOC(@"FLYSignupNotValidPhoneNumber")];
-//                                                              }
-//                                                          }];
+                                                          FLYPhoneService *service = [FLYPhoneService phoneServiceWithPhoneNumber:phoneNumber];
+                                     [service serviceSendCodeWithPhone:unformattedPhoneNumber isPasswordReset:YES success:^(AFHTTPRequestOperation *operation, id responseObj) {
+                                                              if (responseObj) {
+                                                                  [FLYAppStateManager sharedInstance].phoneHash = [responseObj objectForKey:@"phone_hash"];
+                                                                  
+                                                                  FLYPasswordResetConfirmCodeViewController *vc = [FLYPasswordResetConfirmCodeViewController new];
+                                                                  [self.navigationController pushViewController:vc animated:NO];
+                                                              } else {
+                                                                  PXAlertView *errorAlert = [PXAlertView showAlertWithTitle:@"Something went wrong. Please try again later"];
+                                                                  [errorAlert useDefaultIOS7Style];
+                                                              }
+                                                              
+                                                          } error:^(id responseObj, NSError *error) {
+                                                              NSInteger code = [responseObj fly_integerForKey:@"code"];
+                                                              if(code == kNotValidPhoneNumber) {
+                                                                  [PXAlertView showAlertWithTitle:LOC(@"FLYSignupNotValidPhoneNumber")];
+                                                              } else if (code ==  kLoginPhoneNotFound) {
+                                                                  [PXAlertView showAlertWithTitle:LOC(@"FLYLoginPhoneNumberNotFound")];
+                                                              }
+                                                          }];
                                                       }
                                                   }];
     [alertView useDefaultIOS7Style];

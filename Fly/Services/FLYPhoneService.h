@@ -18,7 +18,7 @@ typedef void(^FLYVerifyCodeErrorBlock)(id responseObj, NSError *error);
 
 + (instancetype)phoneServiceWithPhoneNumber:(NSString *)phoneNumber;
 
-- (void)serviceSendCodeWithPhone:(NSString *)number success:(FLYSendCodeSuccessBlock)successBlock error:(FLYSendCodeErrorBlock)errorBlock;
+- (void)serviceSendCodeWithPhone:(NSString *)number isPasswordReset:(BOOL)isPasswordReset success:(FLYSendCodeSuccessBlock)successBlock error:(FLYSendCodeErrorBlock)errorBlock;
 
 - (void)serviceVerifyCode:(NSString *)code phonehash:(NSString *)phoneHash phoneNumber:(NSString *)phoneNumber success:(FLYVerifyCodeSuccessBlock)successBlock error:(FLYVerifyCodeErrorBlock)errorBlock;
 

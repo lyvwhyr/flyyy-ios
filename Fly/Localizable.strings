@@ -100,6 +100,7 @@
 "FLYResetPasswordNewPasswordAgain" = "New password again";
 "FLYResetPasswordNewPasswordDoesNotMatch" = "Please enter the same password";
 "FLYValidPasswordCharacters" = "Valid password characters are A-Za-z0-9!#$%&+-=?@[] ^_{|}";
+"FLYResetPasswordSuccessResetMessage" = "Your password has been reset successfully.";
 
 
 

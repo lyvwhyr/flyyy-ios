@@ -11,6 +11,11 @@
 typedef void(^FLYCreateUserSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
 typedef void(^FLYCreateuserErrorBlock)(id responseObj, NSError *error);
 
+//reset password
+typedef void(^FLYResetPasswordSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
+typedef void(^FLYResetPasswordErrorBlock)(id responseObj, NSError *error);
+
+
 // users/me
 typedef void(^FLYGetMeSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
 typedef void(^FLYGetMeErrorBlock)(id responseObj, NSError *error);
@@ -20,6 +25,7 @@ typedef void(^FLYGetMeErrorBlock)(id responseObj, NSError *error);
 + (instancetype)usersService;
 
 - (void)createUserWithPhoneHash:(NSString *)phoneHash code:(NSString *)code userName:(NSString *)userName password:(NSString *)password success:(FLYCreateUserSuccessBlock)successBlock error:(FLYCreateuserErrorBlock)errorBlock;
+- (void)resetPasswordWithPhoneHash:(NSString *)phoneHash code:(NSString *)code password:(NSString *)password success:(FLYResetPasswordSuccessBlock)successBlock error:(FLYResetPasswordErrorBlock)errorBlock;
 - (void)getMeWithsuccessBlock:(FLYGetMeSuccessBlock)successBlock error:(FLYGetMeErrorBlock)errorBlock;
 
 @end

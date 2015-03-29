@@ -136,8 +136,8 @@
             BOOL valid = [responseObj fly_boolForKey:@"valid" defaultValue:NO];
             if (valid) {
                 [FLYAppStateManager sharedInstance].confirmationCode = confirmCode;
-                FLYSignupUsernameViewController *vc = [FLYSignupUsernameViewController new];
-                [self.navigationController pushViewController:vc animated:YES];
+                FLYPasswordResetEnterPasswordViewController *vc = [FLYPasswordResetEnterPasswordViewController new];
+                [self.navigationController pushViewController:vc animated:NO];
             } else {
                 [PXAlertView showAlertWithTitle:LOC(@"FLYInvalidVerificationCode")];
             }
@@ -152,9 +152,7 @@
 
 - (void)_confirmButtonTapped
 {
-    FLYPasswordResetEnterPasswordViewController *vc = [FLYPasswordResetEnterPasswordViewController new];
-    [self.navigationController pushViewController:vc animated:NO];
-//    [self _verifyCode];
+    [self _verifyCode];
 }
 
 #pragma mark - Navigation bar and status bar

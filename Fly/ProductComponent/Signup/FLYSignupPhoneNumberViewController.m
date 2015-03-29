@@ -297,7 +297,7 @@
                                                           
                                                           [FLYAppStateManager sharedInstance].phoneNumber = unformattedPhoneNumber;
                                                           FLYPhoneService *service = [FLYPhoneService phoneServiceWithPhoneNumber:phoneNumber];
-                                                          [service serviceSendCodeWithPhone:unformattedPhoneNumber success:^(AFHTTPRequestOperation *operation, id responseObj) {
+                                                          [service serviceSendCodeWithPhone:unformattedPhoneNumber isPasswordReset:NO success:^(AFHTTPRequestOperation *operation, id responseObj) {
                                                               if (responseObj) {
                                                                   [FLYAppStateManager sharedInstance].phoneHash = [responseObj objectForKey:@"phone_hash"];
                                                                   FLYSignupConfirmCodeViewController *vc = [FLYSignupConfirmCodeViewController new];

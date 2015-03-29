@@ -16,6 +16,7 @@
 #import "FLYUser.h"
 #import "FLYNavigationBar.h"
 #import "FLYNavigationController.h"
+#import "Dialog.h"
 
 #define kTitleTopPadding 20
 
@@ -39,10 +40,9 @@
 
 @implementation FLYPasswordResetEnterPasswordViewController
 
-- (instancetype)initWithUsername:(NSString *)username
+- (instancetype)init
 {
     if (self = [super init]) {
-        _username = username;
         _usersService = [FLYUsersService usersService];
     }
     return self;
@@ -181,13 +181,12 @@
         return;
     }
     
-//    [self _createUserService];
+    [self _resetPasswordService];
 }
 
-- (void)_createUserService
+- (void)_resetPasswordService
 {
-    FLYCreateUserSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
-        UALog(@"success");
+    FLYResetPasswordSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
         if (!responseObj) {
             UALog(@"responseObj is empty");
         }
@@ -204,22 +203,17 @@
             [defalut setObject:user.userId forKey:kLoggedInUserNsUserDefaultKey];
             [defalut synchronize];
         }
+        [Dialog simpleToast:LOC(@"FLYResetPasswordSuccessResetMessage")];
+        
         [self dismissViewControllerAnimated:YES completion:nil];
     };
     
-    //TODO:error handling
-    FLYCreateuserErrorBlock errorBlock = ^(id responseObj, NSError *error) {
-        if ([[responseObj objectForKey:@"code"] integerValue] == kUserNameAlreadyExist) {
-            [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUserNameAlreadyExist")];
-        } else {
-            [PXAlertView showAlertWithTitle:[responseObj objectForKey:@"message"]];
-        }
-        
+    FLYResetPasswordErrorBlock errorBlock = ^(id responseObj, NSError *error) {
+        [PXAlertView showAlertWithTitle:[responseObj objectForKey:@"message"]];
     };
     NSString *password = self.inputTextField.text;
-    [self.usersService createUserWithPhoneHash:[FLYAppStateManager sharedInstance].phoneHash code:[FLYAppStateManager sharedInstance].confirmationCode userName:self.username password:password success:successBlock error:errorBlock];
+    [self.usersService resetPasswordWithPhoneHash:[FLYAppStateManager sharedInstance].phoneHash code:[FLYAppStateManager sharedInstance].confirmationCode password:password success:successBlock error:errorBlock];
 }
-
 
 #pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor

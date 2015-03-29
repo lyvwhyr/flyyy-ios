@@ -10,6 +10,4 @@
 
 @interface FLYPasswordResetEnterPasswordViewController : FLYUniversalViewController
 
-- (instancetype)initWithUsername:(NSString *)username;
-
 @end

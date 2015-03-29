@@ -15,10 +15,10 @@
     return [[FLYPhoneService alloc] initWithEndpoint:@"phones"];
 }
 
-- (void)serviceSendCodeWithPhone:(NSString *)number success:(FLYSendCodeSuccessBlock)successBlock error:(FLYSendCodeErrorBlock)errorBlock
+- (void)serviceSendCodeWithPhone:(NSString *)number isPasswordReset:(BOOL)isPasswordReset success:(FLYSendCodeSuccessBlock)successBlock error:(FLYSendCodeErrorBlock)errorBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *params = @{@"device_id":[FLYAppStateManager sharedInstance].deviceId, @"phone":number};
+    NSDictionary *params = @{@"device_id":[FLYAppStateManager sharedInstance].deviceId, @"phone":number, @"reset":@(isPasswordReset)};
     [manager POST:self.endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         successBlock(operation, responseObject);
     } failure:^(id responseObj, NSError *error) {

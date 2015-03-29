@@ -32,6 +32,21 @@
     }];
 }
 
+- (void)resetPasswordWithPhoneHash:(NSString *)phoneHash code:(NSString *)code password:(NSString *)password success:(FLYResetPasswordSuccessBlock)successBlock error:(FLYResetPasswordErrorBlock)errorBlock
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"device_id":[FLYAppStateManager sharedInstance].deviceId,
+                             @"phone_hash":phoneHash,
+                             @"code":code,
+                             @"password":password
+                             };
+    [manager POST:@"users/reset" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        successBlock(operation, responseObject);
+    } failure:^(id responseObj, NSError *error) {
+        errorBlock(responseObj, error);
+    }];
+}
+
 - (void)getMeWithsuccessBlock:(FLYGetMeSuccessBlock)successBlock error:(FLYGetMeErrorBlock)errorBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
