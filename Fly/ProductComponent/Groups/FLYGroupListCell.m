@@ -28,9 +28,9 @@
         _checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _checkButton.translatesAutoresizingMaskIntoConstraints = NO;
         _checkButton.userInteractionEnabled = NO;
-        [_checkButton setImage:[UIImage imageNamed:@"icon_record_empty"] forState:UIControlStateNormal];
-        [_checkButton setImage:[UIImage imageNamed:@"icon_record_checked"] forState:UIControlStateHighlighted];
-        [_checkButton setImage:[UIImage imageNamed:@"icon_record_checked"] forState:UIControlStateSelected];
+        [_checkButton setImage:[UIImage imageNamed:@"icon_right_arrow"] forState:UIControlStateNormal];
+        [_checkButton setImage:[UIImage imageNamed:@"icon_right_arrow"] forState:UIControlStateHighlighted];
+        [_checkButton setImage:[UIImage imageNamed:@"icon_right_arrow"] forState:UIControlStateSelected];
         [_checkButton sizeToFit];
         [self addSubview:_checkButton];
         

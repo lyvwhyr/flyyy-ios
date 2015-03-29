@@ -113,6 +113,7 @@
         NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d%d", @"identifier", (int)indexPath.section, (int)indexPath.row];
         cell = [[FLYGroupListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         FLYGroupListCell *chooseGroupCell = (FLYGroupListCell *)cell;
+        [chooseGroupCell.checkButton setImage:[UIImage imageNamed:@"icon_suggest_group"] forState:UIControlStateNormal];
         chooseGroupCell.groupName = @"Suggest a Group";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
