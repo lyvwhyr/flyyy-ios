@@ -475,7 +475,7 @@
 - (void)_deleteReply:(FLYReply *)reply
 {
     [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailActionsheetDeleteReply")
-                            message:LOC(@"FLYTopicDetailReportReplyMessage")
+                            message:LOC(@"FLYTopicDetailDeleteReplyMessage")
                         cancelTitle:@"No"
                          otherTitle:@"Yes"
                          completion:^(BOOL cancelled, NSInteger buttonIndex) {

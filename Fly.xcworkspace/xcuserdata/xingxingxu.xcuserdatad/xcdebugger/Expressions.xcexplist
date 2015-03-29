@@ -3,21 +3,7 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[FLYGroupListViewController viewDidLayoutSubviews]:FLYGroupListViewController.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[FLYRecordViewController _nextBarButtonTapped]:FLYRecordViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.navigationController">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[FLYAudioStateManager startRecord]:FLYAudioStateManager.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[FLYFeedViewController updateViewConstraints]:FLYFeedViewController.m">
+         contextName = "__46-[FLYFeedViewController updateViewConstraints]_block_invoke:FLYFeedViewController.m">
          <PersistentStrings>
             <PersistentString
                value = "self.view">
@@ -25,10 +11,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__37-[FLYRecordViewController _loadWaver]_block_invoke:FLYRecordViewController.m">
+         contextName = "__41-[FLYFeedTopicTableViewCell progressView]_block_invoke:FLYFeedTopicTableViewCell.m">
          <PersistentStrings>
             <PersistentString
-               value = "[FLYAudioStateManager sharedInstance].audioController">
+               value = "self.paused">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FLYFeedViewController updateViewConstraints]:FLYFeedViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.view">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -52,10 +46,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__46-[FLYFeedViewController updateViewConstraints]_block_invoke:FLYFeedViewController.m">
+         contextName = "__37-[FLYRecordViewController _loadWaver]_block_invoke:FLYRecordViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.view">
+               value = "[FLYAudioStateManager sharedInstance].audioController">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -69,6 +63,20 @@
       </ContextState>
       <ContextState
          contextName = "-[FLYMainViewController viewWillAppear:]:FLYMainViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[FLYRecordViewController _nextBarButtonTapped]:FLYRecordViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.navigationController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FLYAudioStateManager startRecord]:FLYAudioStateManager.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[FLYGroupListViewController viewDidLayoutSubviews]:FLYGroupListViewController.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

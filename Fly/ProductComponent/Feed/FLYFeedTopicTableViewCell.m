@@ -66,6 +66,8 @@
 #define kElementRightPadding            10
 #define kUsernameOffset                -100
 
+#define kUpdateProgressInterval 0.05
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -137,12 +139,16 @@
         @weakify(self)
         _progressView.didSelectBlock = ^(UAProgressView *progressView){
             @strongify(self)
+            [self.delegate playButtonTapped:self withPost:self.topic withIndexPath:self.indexPath];
             self.paused = !self.paused;
         };
         _progressView.progress = 0;
         _progressView.animationDuration = self.topic.audioDuration;
         [self addSubview:_progressView];
-        _progressTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
+        
+        // We need to run the timer in runloop because the timer will be paused while scrolling or touch event
+        _progressTimer = [NSTimer timerWithTimeInterval:kUpdateProgressInterval target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:_progressTimer forMode:NSRunLoopCommonModes];
     }
     return _progressView;
 }
@@ -155,7 +161,7 @@
         _progressTimer = nil;
     }
     if (!_paused) {
-        _timeElapsed += 0.1;
+        _timeElapsed += kUpdateProgressInterval;
         _localProgress = _timeElapsed / self.topic.audioDuration;
         [_progressView setProgress:_localProgress];
         [self updateConstraints];

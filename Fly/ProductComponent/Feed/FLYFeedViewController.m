@@ -267,7 +267,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"feedPostCellIdentifier";
+    NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d_%d", @"feedPostCellIdentifier", (int)indexPath.section, (int)indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     BOOL needUpdateConstraints = YES;
     if (cell == nil) {
