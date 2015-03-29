@@ -324,8 +324,6 @@
         
         FLYReply *reply = [[FLYReply alloc] initWithDictionary:responseObject];
         NSDictionary *dict = @{kNewReplyKey:reply, kTopicOfNewReplyKey:self.topic};
-        [Dialog simpleToast:@"Posted"];
-        
         [self.topic incrementReplyCount:dict];
         
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];

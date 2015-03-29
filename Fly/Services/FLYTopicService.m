@@ -41,6 +41,21 @@
     }
 }
 
++ (void)deleteTopicWithId:(NSString *)topicId successBlock:(FLYDeleteTopicSuccessBlock)successBlock errorBlock:(FLYDeleteTopicErrorBlock)errorBlock
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *endpoint = [NSString stringWithFormat:@"topics/%@", topicId];
+    [manager DELETE:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
+    } failure:^(id responseObj, NSError *error) {
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
+    }];
+}
+
 - (void)nextPageBefore:(NSString *)before firstPage:(BOOL)first successBlock:(FlYGetTopicsSuccessBlock)successBlock errorBlock:(FLYGetTopicsErrorBlock)errorBlock
 {
     NSInteger topicsPerPage = [[FLYAppStateManager sharedInstance].configs fly_integerForKey:@"topicsPerPage" defaultValue:kTopicPaginationCount];

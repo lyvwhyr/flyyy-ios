@@ -33,6 +33,8 @@
 #import "Dialog.h"
 #import "IBActionSheet.h"
 #import "FLYUser.h"
+#import "FLYTopicService.h"
+#import "FLYReplyService.h"
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYAudioManagerDelegate, FLYTopicDetailTabbarDelegate, FLYFeedTopicTableViewCellDelegate, IBActionSheetDelegate>
 
@@ -453,14 +455,15 @@
 
 - (void)_deletePost
 {
-    // TODO: endpoint call
     [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailDeletePostAlertTitle")
                             message:LOC(@"FLYTopicDetailDeletePostAlertMessage")
                         cancelTitle:@"No"
                          otherTitle:@"Yes"
                          completion:^(BOOL cancelled, NSInteger buttonIndex) {
                              if (!cancelled && buttonIndex != 0) {
-                                 // TODO: make an endpoint call
+
+                                 [FLYTopicService deleteTopicWithId:self.topic.topicId successBlock:nil errorBlock:nil];
+                                 
                                  NSDictionary *dict = @{@"topic":self.topic};
                                  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTopicDeleted object:self userInfo:dict];
                                  [Dialog simpleToast:LOC(@"FLYTopicDetailDeletedHUD")];
@@ -471,17 +474,19 @@
 
 - (void)_deleteReply:(FLYReply *)reply
 {
-    // TODO: call endpoint to delete reply
     [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailActionsheetDeleteReply")
                             message:LOC(@"FLYTopicDetailReportReplyMessage")
                         cancelTitle:@"No"
                          otherTitle:@"Yes"
                          completion:^(BOOL cancelled, NSInteger buttonIndex) {
-                             
+                             if (!cancelled && buttonIndex != 0) {
+                                 [FLYReplyService deleteReplyWithId:reply.replyId successBlock:nil errorBlock:nil];
+                                 [self.replies removeObject:reply];
+                                 NSDictionary *dict = @{kNewReplyKey:reply, kTopicOfNewReplyKey:self.topic};
+                                 [self.topic decrementReplyCount:dict];
+                                 [self.topicTableView reloadData];
+                             }
                          }];
-    
-    [self.replies removeObject:reply];
-    [self.topicTableView reloadData];
 }
 
 - (void)_replyRowTapped:(NSIndexPath *)indexPath

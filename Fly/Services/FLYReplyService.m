@@ -27,9 +27,13 @@
     }
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:requestEndpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        successBlock(operation, responseObject);
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        errorBlock(operation, error);
+        if (errorBlock) {
+            errorBlock(operation, error);
+        }
     }];
 }
 
@@ -40,9 +44,13 @@
     
     if (!liked) {
         [manager PUT:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            successBlock(operation, responseObject);
+            if (successBlock) {
+                successBlock(operation, responseObject);
+            }
         } failure:^(id responseObj, NSError *error) {
-            errorBlock(responseObj, error);
+            if (errorBlock) {
+                errorBlock(responseObj, error);
+            }
         }];
     } else {
         [manager DELETE:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -51,6 +59,21 @@
             errorBlock(responseObj, error);
         }];
     }
+}
+
++ (void)deleteReplyWithId:(NSString *)replyId successBlock:(FLYDeleteReplySuccessBlock)successBlock errorBlock:(FLYDeleteReplyErrorBlock)errorBlock
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *endpoint = [NSString stringWithFormat:@"replies/%@", replyId];
+    [manager DELETE:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
+    } failure:^(id responseObj, NSError *error) {
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
+    }];
 }
 
 @end

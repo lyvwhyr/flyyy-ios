@@ -165,7 +165,7 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_likeUpdated:) name:kNotificationTopicLikeChanged object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_replyCountUpdated:) name:kNewReplyPostedNotification object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_replyCountUpdated:) name:kNewReplyDeletedNotification object:nil];
 }
 
 -(void)drawLineAnimation

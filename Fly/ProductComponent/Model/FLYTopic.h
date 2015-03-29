@@ -51,5 +51,6 @@
 - (instancetype)initWithDictory:(NSDictionary *)dict;
 - (void)like;
 - (void)incrementReplyCount:(NSDictionary *)dict;
+- (void)decrementReplyCount:(NSDictionary *)dict;
 
 @end

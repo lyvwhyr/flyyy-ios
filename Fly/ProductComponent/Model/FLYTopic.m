@@ -103,6 +103,13 @@
     [FLYTopicService likeTopicWithId:self.topicId liked:liked successBlock:successBlock errorBlock:errorBlock];
 }
 
+- (void)decrementReplyCount:(NSDictionary *)dict
+{
+    self.replyCount -= 1;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNewReplyDeletedNotification object:self userInfo:dict];
+    
+}
+
 - (void)incrementReplyCount:(NSDictionary *)dict
 {
     self.replyCount += 1;

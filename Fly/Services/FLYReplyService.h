@@ -17,6 +17,10 @@ typedef void(^FLYReplyServiceGetRepliesErrorBlock)(AFHTTPRequestOperation *opera
 typedef void(^FLYReplyLikeSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
 typedef void(^FLYReplyLikeErrorBlock)(id responseObj, NSError *error);
 
+//delete reply
+typedef void(^FLYDeleteReplySuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
+typedef void(^FLYDeleteReplyErrorBlock)(id responseObj, NSError *error);
+
 @interface FLYReplyService : FLYServiceBase
 
 - (void)nextPage:(NSString *)before firstPage:(BOOL)first successBlock:(FLYReplyServiceGetRepliesSuccessBlock)successBlock errorBlock:(FLYReplyServiceGetRepliesErrorBlock)errorBlock;
@@ -24,5 +28,6 @@ typedef void(^FLYReplyLikeErrorBlock)(id responseObj, NSError *error);
 
 + (instancetype)replyServiceWithTopicId:(NSString *)topicId;
 + (void)likeReplyWithId:(NSString *)replyId liked:(BOOL)liked successBlock:(FLYReplyLikeSuccessBlock)successBlock errorBlock:(FLYReplyLikeErrorBlock)errorBlock;
++ (void)deleteReplyWithId:(NSString *)replyId successBlock:(FLYDeleteReplySuccessBlock)successBlock errorBlock:(FLYDeleteReplyErrorBlock)errorBlock;
 
 @end
