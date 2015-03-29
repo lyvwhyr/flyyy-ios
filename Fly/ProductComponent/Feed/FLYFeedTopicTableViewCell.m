@@ -51,12 +51,14 @@
 
 @implementation FLYFeedTopicTableViewCell
 
-#define kPlaybuttonLeftPadding 21
-#define kTopicTitleTopPadding  25
+#define kPlaybuttonLeftPadding 15
+#define kPlayButtonSize 36
+#define kTopicTitleTopPadding  20
 #define kTopicTitleLeftPadding 15
-#define kTopicTitleRightPadding 130
+#define kTopicTitleRightPadding 5
 #define kInlineActionTopPadding 10
-#define kInlineActionRightPadding 15
+#define kMaxInlineActionWidth 51
+#define kInlineActionRightPadding 10
 #define kGroupLeftPadding 30
 
 #define kTopicContentRightPadding       10
@@ -77,10 +79,9 @@
         [self.contentView insertSubview:self.playButton aboveSubview:self.contentView];
         
         _topicTitle = [UILabel new];
-        _topicTitle.numberOfLines = 1;
+        _topicTitle.numberOfLines = 0;
         _topicTitle.adjustsFontSizeToFitWidth = NO;
         _topicTitle.textColor = [UIColor colorWithHexString:@"#676666"];
-        _topicTitle.lineBreakMode = NSLineBreakByTruncatingTail;
         _topicTitle.font = [UIFont fontWithName:@"Avenir-Roman" size:16];
         _topicTitle.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_topicTitle];
@@ -243,10 +244,13 @@
             make.centerY.equalTo(self.contentView);
         };
         
+        
+        CGFloat leftPadding = kPlaybuttonLeftPadding + kPlayButtonSize + kTopicTitleLeftPadding;
+        CGFloat rightPadding = kInlineActionRightPadding + kMaxInlineActionWidth + kTopicTitleRightPadding;
         void (^topicTitleBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView).offset(kTopicTitleTopPadding);
             make.leading.equalTo(self.playButton.mas_trailing).offset(kTopicTitleLeftPadding);
-            make.width.lessThanOrEqualTo(self.contentView).offset(-kTopicTitleRightPadding);
+            make.width.lessThanOrEqualTo(self.contentView).offset(-leftPadding-rightPadding);
         };
         
         void (^userNameLabelBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
@@ -427,47 +431,25 @@
 #pragma mark - Height of the cell
 + (CGFloat)heightForTopic:(FLYTopic *)topic
 {
-    return 90;
-//    
-//    CGFloat height = 0;
-//    
-//    UILabel *dummyLabel = [UILabel new];
-//    dummyLabel.font = [UIFont fontWithName:@"Avenir-Book" size:17];
-//    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:topic.topicTitle];
-//    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-////    paragraphStyle.lineBreakMode= NSLineBreakByTruncatingTail;
+    CGFloat leftPadding = kPlaybuttonLeftPadding + kPlayButtonSize + kTopicTitleLeftPadding;
+    CGFloat rightPadding = kInlineActionRightPadding + kMaxInlineActionWidth + kTopicTitleRightPadding;
+    CGFloat height = 0;
+    UILabel *dummyLabel = [UILabel new];
+    dummyLabel.font = [UIFont fontWithName:@"Avenir-Roman" size:16];
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:topic.topicTitle];
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
 //    paragraphStyle.lineSpacing = 2;
-//    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, topic.topicTitle.length)];
-//    [attrStr addAttribute:NSFontAttributeName value:dummyLabel.font range:NSMakeRange(0, topic.topicTitle.length)];
-//    dummyLabel.attributedText = attrStr;
-//    
-//    CGFloat rightPadding = kTopicContentRightPadding + kElementRightPadding;
-//    //half 5/2 timeline width, 19.5 = 117/3/ radius for play button
-//    CGFloat leftPadding = kElementLeftPadding + 5/2 + 19.5 + kTopicContentLeftPadding + kElementLeftPadding;
-//    CGFloat maxWidth = CGRectGetWidth([[UIScreen mainScreen] bounds]) - rightPadding - leftPadding;
-//    
-//    CGRect rect = [attrStr boundingRectWithSize:CGSizeMake(maxWidth, 10000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-//    
-//    
-//    //
-//    NSString *dummyString = @"dummyText";
-//    NSMutableAttributedString *attrStrSingleLine = [[NSMutableAttributedString alloc] initWithString:dummyString];
-//    paragraphStyle.lineSpacing = 2;
-//    [attrStrSingleLine addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, dummyString.length)];
-//    [attrStrSingleLine addAttribute:NSFontAttributeName value:dummyLabel.font range:NSMakeRange(0, dummyString.length)];
-//    CGRect rectSingleLine = [attrStrSingleLine boundingRectWithSize:CGSizeMake(maxWidth, 10000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
-//
-//    CGFloat labelHeight = 0.0;
-//    int numberOfLines = ceil(rect.size.height / rectSingleLine.size.height);
-//    if (numberOfLines >= 2) {
-//        labelHeight = rectSingleLine.size.height * 2 + paragraphStyle.lineSpacing;
-//    } else {
-//        labelHeight = rect.size.height;
-//    }
-//    //top, bottom, padding
-//    height += labelHeight + 44 + 70;
-//    
-//    return height;
+    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, topic.topicTitle.length)];
+    [attrStr addAttribute:NSFontAttributeName value:dummyLabel.font range:NSMakeRange(0, topic.topicTitle.length)];
+    dummyLabel.attributedText = attrStr;
+    CGFloat maxWidth = CGRectGetWidth([[UIScreen mainScreen] bounds]) - rightPadding - leftPadding;
+    
+    CGRect rect = [attrStr boundingRectWithSize:CGSizeMake(maxWidth, 10000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    
+    //top, bottom, padding
+    height += rect.size.height + 20 + 40;
+    
+    return height;
 }
 
 #pragma mark - notification
