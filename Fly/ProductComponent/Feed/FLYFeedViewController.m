@@ -283,7 +283,7 @@
     }
     topicCell.backgroundColor = [UIColor clearColor];
     //set cell state
-    [topicCell updatePlayState:FLYPlayStateNotSet];
+//    [topicCell updatePlayState:FLYPlayStateNotSet];
     if ([[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
         [topicCell updatePlayState:[FLYAudioStateManager sharedInstance].currentPlayItem.playState];
     }

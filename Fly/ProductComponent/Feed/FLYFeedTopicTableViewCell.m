@@ -26,7 +26,6 @@
 
 //timeline and play button
 @property (nonatomic) UIButton *playButton;
-@property (nonatomic) CAShapeLayer *arcLayer;
 @property (nonatomic) UIActivityIndicatorView *loadingIndicatorView;
 
 //topic content view
@@ -46,6 +45,8 @@
 
 @property (nonatomic) BOOL didSetupConstraints;
 @property (nonatomic, copy) NSString *topicTitleString;
+
+@property (nonatomic) NSArray *progressViewConstraints;
 
 @end
 
@@ -128,8 +129,7 @@
 - (UAProgressView *)progressView
 {
     if (!_progressView) {
-        //reset timer
-        _timeElapsed = 0;
+        [self _clearProgressView];
         
         _progressView = [[UAProgressView alloc] init];
         _progressView.tintColor = [UIColor flyColorPlayAnimation];
@@ -151,6 +151,17 @@
         [[NSRunLoop mainRunLoop] addTimer:_progressTimer forMode:NSRunLoopCommonModes];
     }
     return _progressView;
+}
+
+- (void)_clearProgressView
+{
+    [_progressTimer invalidate];
+    _progressTimer = nil;
+    
+    _timeElapsed = 0;
+    _progressViewConstraints = nil;
+    [_progressView removeFromSuperview];
+    _progressView = nil;
 }
 
 - (void)updateProgress:(NSTimer *)timer {
@@ -175,57 +186,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_replyCountUpdated:) name:kNewReplyDeletedNotification object:nil];
 }
 
--(void)drawLineAnimation
-{
-    CGPoint center = CGPointMake(CGRectGetMidX(self.playButton.bounds),  CGRectGetMidY(self.playButton.bounds));
-    
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    [path addArcWithCenter:center radius:17 startAngle: -(float)M_PI_2 endAngle:2 * M_PI clockwise:YES];
-    _arcLayer = [CAShapeLayer layer];
-    _arcLayer.path = path.CGPath;
-    _arcLayer.strokeColor = [UIColor flyColorPlayAnimation].CGColor;
-    _arcLayer.fillColor = [UIColor clearColor].CGColor;
-    _arcLayer.lineWidth = 3;
-    [_playButton.layer addSublayer:_arcLayer];
-    
-    CABasicAnimation *bas=[CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    bas.removedOnCompletion = YES;
-    bas.duration = self.topic.audioDuration + self.topic.audioDuration/5;
-    bas.delegate = self;
-    bas.speed = 1.0;
-    bas.fromValue=[NSNumber numberWithInteger:0];
-    bas.toValue=[NSNumber numberWithInteger:1];
-    [_arcLayer addAnimation:bas forKey:@"position"];
-    
-//    self.arcLayer.MB_persistentAnimationKeys = @[@"position"];
-}
-
--(void)_pauseLayer
-{
-    if (_arcLayer) {
-        CFTimeInterval pausedTime = [_arcLayer convertTime:CACurrentMediaTime() fromLayer:nil];
-        _arcLayer.speed = 0.0;
-        _arcLayer.timeOffset = pausedTime;
-    }
-}
-
--(void)_resumeLayer
-{
-    if (_arcLayer) {
-        CFTimeInterval pausedTime = [_arcLayer timeOffset];
-        _arcLayer.speed = 1.0;
-        _arcLayer.timeOffset = 0.0;
-        _arcLayer.beginTime = 0.0;
-        CFTimeInterval timeSincePause = [_arcLayer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
-        _arcLayer.beginTime = timeSincePause;
-    }
-}
-
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
-{
-    [self.arcLayer removeFromSuperlayer];
-}
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -237,7 +197,7 @@
 - (void)updateConstraints
 {
     if (_loadingIndicatorView) {
-        [_loadingIndicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+         [_loadingIndicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.playButton);
             make.centerY.equalTo(self.playButton);
         }];
@@ -291,8 +251,8 @@
         
         self.didSetupConstraints = YES;
     }
-    if (_progressView) {
-        [_progressView mas_makeConstraints:^(MASConstraintMaker *make) {
+    if (_progressView  && !_progressViewConstraints) {
+        _progressViewConstraints = [_progressView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self.playButton);
             make.width.equalTo(self.playButton).offset(-1.5);
             make.height.equalTo(self.playButton).offset(-1.5);
@@ -372,7 +332,7 @@
     [_loadingIndicatorView stopAnimating];
     switch (state) {
         case FLYPlayStateNotSet: {
-            [self.arcLayer removeAllAnimations];
+            [self _clearProgressView];
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] forState:UIControlStateNormal];
             break;
         }
@@ -387,22 +347,19 @@
             break;
         }
         case FLYPlayStatePaused: {
-            [self _pauseLayer];
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] forState:UIControlStateNormal];
             break;
         }
         case FLYPlayStateResume: {
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_pause"] forState:UIControlStateNormal];
-            [self _resumeLayer];
             break;
         }
         case FLYPlayStateFinished: {
-            [self.arcLayer removeFromSuperlayer];
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] forState:UIControlStateNormal];
             break;
         }
         default: {
-            [self.arcLayer removeFromSuperlayer];
+            [self _clearProgressView];
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] forState:UIControlStateNormal];
             break;
         }
