@@ -76,4 +76,15 @@
     }];
 }
 
++ (void)reportReplyWithId:(NSString *)replyId
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *endpoint = [NSString stringWithFormat:@"replies/%@/flag", replyId];
+    [manager POST:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(id responseObj, NSError *error) {
+        
+    }];
+}
+
 @end

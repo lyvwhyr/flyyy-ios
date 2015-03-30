@@ -438,7 +438,7 @@
                          otherTitle:@"Yes"
                          completion:^(BOOL cancelled, NSInteger buttonIndex) {
                              if (!cancelled && buttonIndex != 0) {
-                                 // TODO: make an endpoint call
+                                 [FLYReplyService reportReplyWithId:reply.replyId];
                                  [Dialog simpleToast:LOC(@"FLYTopicDetailReportReplySuccessTitle")];
                              }
                          }];
@@ -452,7 +452,7 @@
                          otherTitle:@"Yes"
                          completion:^(BOOL cancelled, NSInteger buttonIndex) {
                              if (!cancelled && buttonIndex != 0) {
-                                 // TODO: make an endpoint call
+                                 [FLYTopicService reportTopicWithId:self.topic.topicId];
                                  [Dialog simpleToast:LOC(@"FLYTopicDetailReportPostSuccessTitle")];
                              }
                          }];

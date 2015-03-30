@@ -29,5 +29,6 @@ typedef void(^FLYDeleteReplyErrorBlock)(id responseObj, NSError *error);
 + (instancetype)replyServiceWithTopicId:(NSString *)topicId;
 + (void)likeReplyWithId:(NSString *)replyId liked:(BOOL)liked successBlock:(FLYReplyLikeSuccessBlock)successBlock errorBlock:(FLYReplyLikeErrorBlock)errorBlock;
 + (void)deleteReplyWithId:(NSString *)replyId successBlock:(FLYDeleteReplySuccessBlock)successBlock errorBlock:(FLYDeleteReplyErrorBlock)errorBlock;
++ (void)reportReplyWithId:(NSString *)replyId;
 
 @end
