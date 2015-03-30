@@ -10,9 +10,9 @@
 #import "FLYTabView.h"
 #import "UIColor+FLYAddition.h"
 
-#define kTabLeadingMargin        10
+#define kTabLeadingMargin        20
 #define kTabTopMargin            1
-#define kTabWidth                80
+#define kTabWidth                60
 #define kTabHeight               44
 
 
@@ -45,7 +45,7 @@
 - (void)setTabViews:(NSArray *)tabViews
 {
     _tabViews = tabViews;
-    NSInteger count = _tabViews.count;
+    NSInteger count = _tabViews.count;    
     for (int i = 0; i < count; i++) {
         FLYTabView *tabView = (FLYTabView *)[_tabViews objectAtIndex:i];
         tabView.translatesAutoresizingMaskIntoConstraints = NO;

@@ -61,7 +61,7 @@
 - (void)updateConstraints
 {
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self).offset(20);
+        make.centerX.equalTo(self);
         make.centerY.equalTo(self);
     }];
     

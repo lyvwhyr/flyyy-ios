@@ -1371,6 +1371,7 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A657BAE11AC925CB00886C0F /* Catalog */,
 				A6A8DFF21AC4C06400BF77BB /* PasswordReset */,
 				A665FC2B1AA2D94A00490A18 /* Signup */,
 				A665FC2A1AA2D93F00490A18 /* Login */,
@@ -1845,6 +1846,13 @@
 				A651BD9B1A4986730081A1E0 /* UALogger.m */,
 			);
 			path = UALogger;
+			sourceTree = "<group>";
+		};
+		A657BAE11AC925CB00886C0F /* Catalog */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Catalog;
 			sourceTree = "<group>";
 		};
 		A65ED9861A91A84600E10D5C /* Constants */ = {
