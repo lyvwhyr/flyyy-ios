@@ -148,8 +148,8 @@
     self.tabBarView = [FLYTabBarView new];
     [self.view addSubview:self.tabBarView];
     
-    self.homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_tabbar_home_selected" recordTab:NO];
-    self.groupsTab = [[FLYTabView alloc] initWithTitle:@"Groups" image:@"icon_tabbar_group_unselected" recordTab:NO];
+    self.homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_home" recordTab:NO];
+    self.groupsTab = [[FLYTabView alloc] initWithTitle:@"Groups" image:@"icon_homefeed_groups_gray" recordTab:NO];
     
     NSArray *tabs = @[self.homeTab, self.groupsTab];
     [self.tabBarView setTabViews:tabs];
@@ -215,13 +215,13 @@
 {
     switch (index) {
         case TABBAR_HOME: {
-            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_tabbar_group_unselected"]];
-            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_tabbar_home_selected"]];
+            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home"]];
+            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_groups_gray"]];
             break;
         }
         case TABBAR_GROUP: {
-            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_tabbar_wave_unselected"]];
-            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_tabbar_group_selected"]];
+            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home_gray"]];
+            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_groups"]];
             break;
         }
         default:
