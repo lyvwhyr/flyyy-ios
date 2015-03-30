@@ -241,6 +241,9 @@
 		A655783E1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A655783D1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m */; };
 		A65578411A3ADCC3003102CD /* FLYPostButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A65578401A3ADCC3003102CD /* FLYPostButtonView.m */; };
 		A65578431A3ADE4E003102CD /* icon_share_post@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A65578421A3ADE4E003102CD /* icon_share_post@3x.png */; };
+		A657BAE41AC93B0300886C0F /* FLYCatalogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A657BAE31AC93B0300886C0F /* FLYCatalogViewController.m */; };
+		A657BAEA1AC9410500886C0F /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A657BAE81AC9410500886C0F /* HMSegmentedControl.m */; };
+		A657BAEB1AC9410500886C0F /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A657BAE91AC9410500886C0F /* Launch Screen.xib */; };
 		A65ED97F1A91523600E10D5C /* FLYTopicDetailTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED97E1A91523600E10D5C /* FLYTopicDetailTopicCell.m */; };
 		A65ED9821A915FAE00E10D5C /* FLYPlayTimelineView.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED9811A915FAE00E10D5C /* FLYPlayTimelineView.m */; };
 		A65ED98C1A91B4F600E10D5C /* FLYReply.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED98B1A91B4F600E10D5C /* FLYReply.m */; };
@@ -799,6 +802,11 @@
 		A655783F1A3ADCC3003102CD /* FLYPostButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPostButtonView.h; sourceTree = "<group>"; };
 		A65578401A3ADCC3003102CD /* FLYPostButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPostButtonView.m; sourceTree = "<group>"; };
 		A65578421A3ADE4E003102CD /* icon_share_post@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_share_post@3x.png"; sourceTree = "<group>"; };
+		A657BAE21AC93B0300886C0F /* FLYCatalogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYCatalogViewController.h; sourceTree = "<group>"; };
+		A657BAE31AC93B0300886C0F /* FLYCatalogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYCatalogViewController.m; sourceTree = "<group>"; };
+		A657BAE71AC9410500886C0F /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
+		A657BAE81AC9410500886C0F /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
+		A657BAE91AC9410500886C0F /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		A65ED97D1A91523600E10D5C /* FLYTopicDetailTopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTopicDetailTopicCell.h; sourceTree = "<group>"; };
 		A65ED97E1A91523600E10D5C /* FLYTopicDetailTopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTopicDetailTopicCell.m; sourceTree = "<group>"; };
 		A65ED9801A915FAE00E10D5C /* FLYPlayTimelineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPlayTimelineView.h; sourceTree = "<group>"; };
@@ -1764,6 +1772,7 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A657BAE61AC9410500886C0F /* HMSegmentedControl */,
 				A669FB2A1ABFD8B800A96D24 /* SVWebViewController */,
 				A66499531ABBB2B500C4FF08 /* IBActionSheet */,
 				A6799C8F1AAC1071003DAE5B /* SDiPhoneVersion */,
@@ -1851,8 +1860,28 @@
 		A657BAE11AC925CB00886C0F /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
+				A657BAE51AC93C2F00886C0F /* Notifications */,
+				A657BAE21AC93B0300886C0F /* FLYCatalogViewController.h */,
+				A657BAE31AC93B0300886C0F /* FLYCatalogViewController.m */,
 			);
 			path = Catalog;
+			sourceTree = "<group>";
+		};
+		A657BAE51AC93C2F00886C0F /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		A657BAE61AC9410500886C0F /* HMSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				A657BAE71AC9410500886C0F /* HMSegmentedControl.h */,
+				A657BAE81AC9410500886C0F /* HMSegmentedControl.m */,
+				A657BAE91AC9410500886C0F /* Launch Screen.xib */,
+			);
+			path = HMSegmentedControl;
 			sourceTree = "<group>";
 		};
 		A65ED9861A91A84600E10D5C /* Constants */ = {
@@ -2737,6 +2766,7 @@
 				A652D2531A7F3ADD00765D45 /* icon_share_post@2x.png in Resources */,
 				A652D2591A7F3ADD00765D45 /* icon_tabbar_me.png in Resources */,
 				A651BD931A4985F20081A1E0 /* success.png in Resources */,
+				A657BAEB1AC9410500886C0F /* Launch Screen.xib in Resources */,
 				A65578431A3ADE4E003102CD /* icon_share_post@3x.png in Resources */,
 				A652D2831A7F3ADD00765D45 /* record_animate_12@3x.png in Resources */,
 				A652D2661A7F3ADD00765D45 /* record_animate_03.png in Resources */,
@@ -2837,6 +2867,7 @@
 				A6A0E4931A1E76110036116E /* FLEXArgumentInputNotSupportedView.m in Sources */,
 				A6D949EE1A9086FA003D4265 /* UIDevice+FLYAddition.m in Sources */,
 				A648C0F11A19B18B00FF1744 /* UIFont+FLYAddition.m in Sources */,
+				A657BAE41AC93B0300886C0F /* FLYCatalogViewController.m in Sources */,
 				A643AEEA1AA9539E00BF4E0F /* NIDeviceOrientation.m in Sources */,
 				A69C4BA71A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.m in Sources */,
 				A6162C721A318F1100A3B277 /* FLYNavigationBar.m in Sources */,
@@ -3038,6 +3069,7 @@
 				A6A0E4BE1A1E76110036116E /* FLEXHierarchyTableViewCell.m in Sources */,
 				A6048A3E1A85E63100C67480 /* EXTNil.m in Sources */,
 				A6A0E49C1A1E76110036116E /* FLEXFieldEditorView.m in Sources */,
+				A657BAEA1AC9410500886C0F /* HMSegmentedControl.m in Sources */,
 				A6450B1B1A99C27F009EF0A3 /* FLYAudioManager.m in Sources */,
 				A6A0E4B71A1E76110036116E /* FLEXSetExplorerViewController.m in Sources */,
 				A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */,

@@ -30,6 +30,7 @@
 #import "FLYNavigationController.h"
 #import "FLYNavigationBar.h"
 #import "FLYTopicService.h"
+#import "FLYCatalogViewController.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate, STKAudioPlayerDelegate>
 
@@ -209,7 +210,11 @@
 {
     FLYCatalogBarButtonItem *leftBarItem = [FLYCatalogBarButtonItem barButtonItem:YES];
     leftBarItem.actionBlock = ^(FLYBarButtonItem *item) {
-        [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kHideRecordIconNotification object:self];
+        self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+        [self.view layoutIfNeeded];
+        FLYCatalogViewController *vc = [FLYCatalogViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
     };
     self.navigationItem.leftBarButtonItem = leftBarItem;
 }
