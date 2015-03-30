@@ -111,6 +111,10 @@
 "FLYMicroPhonePermissionSettingsButton" = "Settings";
 "FLYMicroPhonePermissionOkButton" = "OK";
 
+// everything else page
+"FLYEverythingElseMyPosts" = "My posts";
+"FLYEverythingElseMyReplies" = "My replies";
+"FLYEverythingElseSettings" = "Settings";
 
 
 
