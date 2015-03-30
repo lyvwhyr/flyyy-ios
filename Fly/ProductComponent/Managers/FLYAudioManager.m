@@ -9,6 +9,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "FLYAudioManager.h"
 #import "FLYDownloadableAudio.h"
+#import "PXAlertView.h"
+#import "SDiPhoneVersion.h"
 
 @interface FLYAudioManager()<STKAudioPlayerDelegate>
 
@@ -75,6 +77,32 @@
     [self.delegate didFinishPlayingWithQueueItemId:queueItemId withReason:stopReason andProgress:progress andDuration:duration];
 }
 
-
+- (void)checkRecordingPermissionWithSuccessBlock:(FLYRecordingPermissionGrantedSuccessBlock)successBlock
+{
+    [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+        if (granted) {
+            successBlock();
+        } else {
+            if (iOSVersionGreaterThanOrEqualTo(@"8")) {
+                [PXAlertView showAlertWithTitle:LOC(@"FLYMicroPhonePermissionRequiredTitle")
+                                        message: LOC(@"FLYMicroPhonePermissionRequiredMessageIOS8")
+                                    cancelTitle:LOC(@"FLYMicroPhonePermissionCancelButton")
+                                     otherTitle:LOC(@"FLYMicroPhonePermissionSettingsButton")
+                                    contentView:nil
+                                     completion:^(BOOL cancelled, NSInteger buttonIndex) {
+                                         if (buttonIndex == 1) {
+                                             BOOL canOpenSettings = (&UIApplicationOpenSettingsURLString != NULL);
+                                             if (canOpenSettings) {
+                                                 NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                                                 [[UIApplication sharedApplication] openURL:url];
+                                             }
+                                         }
+                                     }];
+            } else {
+                [PXAlertView showAlertWithTitle:LOC(@"FLYMicroPhonePermissionRequiredTitle") message:LOC(@"FLYMicroPhonePermissionRequiredMessageIOS7")];
+            }
+        }
+    }];
+}
 
 @end

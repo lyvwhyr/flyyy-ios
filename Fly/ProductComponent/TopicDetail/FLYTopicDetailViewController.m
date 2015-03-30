@@ -302,6 +302,8 @@
 #pragma mark - FLYTopicDetailReplyCellDelegate
 - (void)replyToReplyButtonTapped:(FLYReply *)reply
 {
+    
+    
     [self _commentButtonTapped];
 }
 
@@ -324,10 +326,14 @@
 
 - (void)_commentButtonTapped
 {
-    FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForReply];
-    recordViewController.topic = self.topic;
-    UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
-    [self presentViewController:navigationController animated:NO completion:nil];
+    FLYRecordingPermissionGrantedSuccessBlock successBlock = ^{
+        FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForReply];
+        recordViewController.topic = self.topic;
+        UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
+        [self presentViewController:navigationController animated:NO completion:nil];
+    };
+    
+    [[FLYAudioManager sharedInstance] checkRecordingPermissionWithSuccessBlock:successBlock];
 }
 
 

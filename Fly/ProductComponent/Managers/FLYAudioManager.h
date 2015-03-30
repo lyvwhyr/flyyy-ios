@@ -10,6 +10,7 @@
 #import "STKAudioPlayer.h"
 #import "SampleQueueId.h"
 
+typedef void(^FLYRecordingPermissionGrantedSuccessBlock)();
 
 @protocol FLYAudioManagerDelegate
 
@@ -27,5 +28,7 @@
 + (instancetype)sharedInstance;
 
 - (void)playAudioWithURLStr:(NSString *)str itemType:(FLYPlayableItemType)itemType;
+
+- (void)checkRecordingPermissionWithSuccessBlock:(FLYRecordingPermissionGrantedSuccessBlock)successBlock;
 
 @end

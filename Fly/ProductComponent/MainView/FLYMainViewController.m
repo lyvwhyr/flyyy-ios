@@ -31,6 +31,8 @@
 #import "NSUserDefaults+RMSaveCustomObject.h"
 #import "FLYCountrySelectorViewController.h"
 #import "FLYLoginSignupViewController.h"
+#import "FLYAudioManager.h"
+#import <AVFoundation/AVFoundation.h>
 
 #if DEBUG
 #import "FLEXManager.h"
@@ -283,12 +285,14 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kRequireSignupNotification object:self userInfo:@{kFromViewControllerKey:self}];
         return;
     }
-
-    [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_record_button" component:nil element:nil action:@"click"];
     
-    FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForTopic];
-    UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
-    [self presentViewController:navigationController animated:NO completion:nil];
+    FLYRecordingPermissionGrantedSuccessBlock successBlock = ^{
+        FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForTopic];
+        UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
+        [self presentViewController:navigationController animated:NO completion:nil];
+    };
+    [[FLYAudioManager sharedInstance] checkRecordingPermissionWithSuccessBlock:successBlock];
+    
 }
 
 #pragma mark - notification

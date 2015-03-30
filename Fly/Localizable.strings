@@ -103,6 +103,14 @@
 "FLYValidPasswordCharacters" = "Valid password characters are A-Za-z0-9!#$%&+-=?@[] ^_{|}";
 "FLYResetPasswordSuccessResetMessage" = "Your password has been reset successfully.";
 
+// microphone permission required
+"FLYMicroPhonePermissionRequiredTitle" = "Microphone permission required";
+"FLYMicroPhonePermissionRequiredMessageIOS8" = "Flyy needs to access the microphone on your device. Click the settings button, then toggle on the switch for Microphone.";
+"FLYMicroPhonePermissionRequiredMessageIOS7" = "Flyy needs to access the microphone on your device. Go to your settings and toggle on the switch for Microphone.";
+"FLYMicroPhonePermissionCancelButton" = "Cancel";
+"FLYMicroPhonePermissionSettingsButton" = "Settings";
+"FLYMicroPhonePermissionOkButton" = "OK";
+
 
 
 
