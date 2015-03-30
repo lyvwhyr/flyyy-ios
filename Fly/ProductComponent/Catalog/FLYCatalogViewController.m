@@ -25,7 +25,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"Notifications", @"Everything else"]];
-    self.segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
+    self.segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 20, 0, 20);
     self.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
     self.segmentedControl.selectionIndicatorHeight = 2.0f;
@@ -48,6 +48,10 @@
         make.trailing.equalTo(self.view);
         make.height.equalTo(@(44));
     }];
+}
+
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
+    NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
 }
 
 #pragma mark - Navigation bar and status bar
