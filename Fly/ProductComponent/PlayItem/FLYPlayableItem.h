@@ -8,17 +8,7 @@
 
 #import "SampleQueueId.h"
 
-typedef NS_ENUM(NSInteger, FLYPlayState) {
-    FLYPlayStateNotSet = 0,
-    FLYPlayStateLoading,
-    FLYPlayStatePlaying,
-    FLYPlayStatePaused,
-    FLYPlayStateResume,
-    FLYPlayStateFinished
-};
-
 @interface FLYPlayableItem : NSObject
-
 
 @property (nonatomic) id item;
 @property (nonatomic) FLYPlayableItemType playableItemType;

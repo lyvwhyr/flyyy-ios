@@ -395,10 +395,7 @@
     _recordedTimeLabel.text = [NSString stringWithFormat:@":%d", kMaxRecordTime];
     
     [self.view addSubview:_recordedTimeLabel];
-    
     [self updateViewConstraints];
-    
-//    [[FLYAudioStateManager sharedInstance] startRecord];
     
     NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
     [FLYAppStateManager sharedInstance].recordingFilePath = path;
@@ -469,14 +466,12 @@
 
 - (void)_setupPauseViewState
 {
-//    [[FLYAudioStateManager sharedInstance] pausePlayer];
     [[FLYAudioManager sharedInstance].audioPlayer pause];
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_play"]];
 }
 
 - (void)_setupResumeViewState
 {
-//    [[FLYAudioStateManager sharedInstance] resumePlayer];
     [[FLYAudioManager sharedInstance].audioPlayer resume];
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_pause"]];
     [self _addPlaybackTimer];

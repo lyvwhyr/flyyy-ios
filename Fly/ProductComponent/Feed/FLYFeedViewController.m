@@ -347,7 +347,7 @@
         [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
         NSURL* url = [NSURL fileURLWithPath:localPath];
         STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-        [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath itemType:FLYPlayableItemFeedTopic]];
+        [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath itemType:FLYPlayableItemFeedTopic playState:FLYPlayStatePlaying]];
     });
 }
 
@@ -440,7 +440,7 @@
             } else {
                 NSURL* url = [NSURL URLWithString:post.mediaURL];
                 STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-                [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic]];
+                [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic playState:FLYPlayStateLoading]];
             }
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateLoading) {
             return;
@@ -467,7 +467,7 @@
         } else {
             NSURL* url = [NSURL URLWithString:post.mediaURL];
             STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-            [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic]];
+            [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic playState:FLYPlayStateLoading]];
         }
     
         //change previous state, remove animation, change current to previous
@@ -499,12 +499,6 @@
     
     [FLYAudioStateManager sharedInstance].previousPlayItem = [FLYAudioStateManager sharedInstance].currentPlayItem;
     [FLYAudioStateManager sharedInstance].currentPlayItem = nil;
-}
-
-#pragma mark - download audios
-- (void)_autoDownloadAudios
-{
-    
 }
 
 #pragma mark - reply view move in and off screen

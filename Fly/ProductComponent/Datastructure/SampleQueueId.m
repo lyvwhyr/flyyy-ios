@@ -10,7 +10,7 @@
 
 @implementation SampleQueueId
 
--(id) initWithUrl:(NSURL*)url andCount:(int)count indexPath:(NSIndexPath *)indexPath itemType:(FLYPlayableItemType)itemType
+-(id) initWithUrl:(NSURL*)url andCount:(int)count indexPath:(NSIndexPath *)indexPath itemType:(FLYPlayableItemType)itemType playState:(FLYPlayState)playState;
 {
     if (self = [super init])
     {
@@ -18,6 +18,7 @@
         _count = count;
         _indexPath = indexPath;
         _itemType = itemType;
+        _playState = playState;
     }
     
     return self;
@@ -36,7 +37,7 @@
     }
     
     return [((SampleQueueId*)object).url isEqual: self.url] && ((SampleQueueId*)object).count == self.count
-            && ((SampleQueueId*)object).itemType == self.itemType;
+            && ((SampleQueueId*)object).itemType == self.itemType && ((SampleQueueId*)object).playState == self.playState;
 }
 
 -(NSString*) description

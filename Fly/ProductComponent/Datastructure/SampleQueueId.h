@@ -14,13 +14,22 @@ typedef NS_ENUM(NSInteger, FLYPlayableItemType) {
     FLYPlayableItemRecording
 };
 
+typedef NS_ENUM(NSInteger, FLYPlayState) {
+    FLYPlayStateNotSet = 0,
+    FLYPlayStateLoading,
+    FLYPlayStatePlaying,
+    FLYPlayStatePaused,
+    FLYPlayStateResume,
+    FLYPlayStateFinished
+};
 
 @interface SampleQueueId : NSObject
 @property (readwrite) int count;
 @property (readwrite) NSURL* url;
 @property (nonatomic) NSIndexPath *indexPath;
 @property (nonatomic) FLYPlayableItemType itemType;
+@property (nonatomic) FLYPlayState playState;
 
--(id) initWithUrl:(NSURL*)url andCount:(int)count indexPath:(NSIndexPath *)indexPath itemType:(FLYPlayableItemType)itemType;
+-(id) initWithUrl:(NSURL*)url andCount:(int)count indexPath:(NSIndexPath *)indexPath itemType:(FLYPlayableItemType)itemType playState:(FLYPlayState)playState;
 
 @end
