@@ -20,6 +20,8 @@
 #define kNewReplyKey @"kNewReplyKey"
 #define kTopicOfNewReplyKey @"kTopicOfNewReplyKey"
 
+#define kFeedPlayStateUpdated   @"kFeedPlayStateUpdated"
+
 #define kDownloadAudioLocalPathkey @"kDownloadAudioLocalPathkey"
 #define kDownloadAudioTypeKey @"kDownloadAudioTypeKey"
 

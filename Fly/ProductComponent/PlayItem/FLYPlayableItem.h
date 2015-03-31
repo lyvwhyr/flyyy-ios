@@ -8,8 +8,6 @@
 
 #import "SampleQueueId.h"
 
-#define kFeedPlayStateUpdated   @"kFeedPlayStateUpdated"
-
 typedef NS_ENUM(NSInteger, FLYPlayState) {
     FLYPlayStateNotSet = 0,
     FLYPlayStateLoading,

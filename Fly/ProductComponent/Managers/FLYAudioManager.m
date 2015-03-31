@@ -11,8 +11,12 @@
 #import "FLYDownloadableAudio.h"
 #import "PXAlertView.h"
 #import "SDiPhoneVersion.h"
+#import "FLYAudioStateManager.h"
+#import "FLYPlayableItem.h"
+#import "FLYFeedTopicTableViewCell.h"
+#import "SampleQueueId.h"
 
-@interface FLYAudioManager()<STKAudioPlayerDelegate>
+@interface FLYAudioManager()
 
 @end
 
@@ -38,7 +42,6 @@
         _audioPlayer = [[STKAudioPlayer alloc] initWithOptions:(STKAudioPlayerOptions){ .flushQueueOnSeek = YES, .enableVolumeMixer = NO, .equalizerBandFrequencies = {50, 100, 200, 400, 800, 1600, 2600, 16000} }];
         _audioPlayer.meteringEnabled = YES;
         _audioPlayer.volume = 1;
-        _audioPlayer.delegate = self;
     }
     return self;
 }
@@ -48,33 +51,6 @@
     NSURL* url = [NSURL URLWithString:str];
     STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
     [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:nil itemType:itemType]];
-}
-
-#pragma mark - STKAudioPlayerDelegate
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState
-{
-    NSLog(@"state change");
-}
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer unexpectedError:(STKAudioPlayerErrorCode)errorCode
-{
-    NSLog(@"error");
-}
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(NSObject*)queueItemId
-{
-
-}
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishBufferingSourceWithQueueItemId:(NSObject*)queueItemId
-{
-    NSLog(@"finish buffering");
-}
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(SampleQueueId *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
-{
-    [self.delegate didFinishPlayingWithQueueItemId:queueItemId withReason:stopReason andProgress:progress andDuration:duration];
 }
 
 - (void)checkRecordingPermissionWithSuccessBlock:(FLYRecordingPermissionGrantedSuccessBlock)successBlock

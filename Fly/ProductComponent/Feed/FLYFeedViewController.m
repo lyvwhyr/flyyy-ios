@@ -31,6 +31,7 @@
 #import "FLYNavigationBar.h"
 #import "FLYTopicService.h"
 #import "FLYCatalogViewController.h"
+#import "FLYAudioManager.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate, STKAudioPlayerDelegate>
 
@@ -45,9 +46,6 @@
 @property (nonatomic) NSMutableArray *posts;
 @property (nonatomic) BOOL didSetConstraints;
 @property (nonatomic) enum RequestType requestType;
-
-@property (nonatomic) STKAudioPlayer *audioPlayer;
-
 
 @end
 
@@ -68,19 +66,9 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(_topicDeleted:)
                                                      name:kNotificationTopicDeleted object:nil];
-        
-        NSError *error;
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
-        [[AVAudioSession sharedInstance] setActive:YES error:&error];
-        
-        _audioPlayer = [[STKAudioPlayer alloc] initWithOptions:(STKAudioPlayerOptions){ .flushQueueOnSeek = YES, .enableVolumeMixer = NO, .equalizerBandFrequencies = {50, 100, 200, 400, 800, 1600, 2600, 16000} }];
-        _audioPlayer.meteringEnabled = YES;
-        _audioPlayer.volume = 1;
-        _audioPlayer.delegate = self;
-        
         _loadMoreCount = 0;
-        
         _feedType = FLYFeedTypeHome;
+        [FLYAudioManager sharedInstance].audioPlayer.delegate = self;
         [self _addObservers];
     }
     return self;
@@ -196,7 +184,7 @@
 {
     [super viewWillDisappear:animated];
     [self clearCurrentPlayingItem];
-    [self.audioPlayer stop];
+    [[FLYAudioManager sharedInstance].audioPlayer stop];
 }
 
 - (void)_addInlineReplyBar
@@ -355,14 +343,11 @@
     if(type != FLYDownloadableTopic) {
         return;
     }
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
         NSURL* url = [NSURL fileURLWithPath:localPath];
-        
         STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-        
-        [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath itemType:FLYPlayableItemFeedTopic]];
+        [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath itemType:FLYPlayableItemFeedTopic]];
     });
 }
 
@@ -379,11 +364,13 @@
     NSLog(@"error");
 }
 
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(NSObject*)queueItemId
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(SampleQueueId *)queueItemId
 {
-    [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
-    FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *) [self.feedTableView cellForRowAtIndexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath];
-    [currentCell updatePlayState:FLYPlayStatePlaying];
+    if ([FLYAudioStateManager sharedInstance].currentPlayItem.playableItemType == queueItemId.itemType) {
+        [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
+        FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *) [self.feedTableView cellForRowAtIndexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath];
+        [currentCell updatePlayState:FLYPlayStatePlaying];
+    }
 }
 
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishBufferingSourceWithQueueItemId:(NSObject*)queueItemId
@@ -397,7 +384,6 @@
          [self clearCurrentPlayingItem];
     }
 }
-
 
 - (void)_newPostReceived:(NSNotification *)notif
 {
@@ -433,9 +419,6 @@
 
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)tappedCell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath
 {
-    
-    [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"" component:post.topicId element:@"play_button" action:@"click"];
-    
     //If currentPlayItem is empty, set the tappedCell as currentPlayItem
     NSIndexPath *tappedCellIndexPath;
     if (!indexPath) {
@@ -457,17 +440,17 @@
             } else {
                 NSURL* url = [NSURL URLWithString:post.mediaURL];
                 STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-                [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic]];
+                [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic]];
             }
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateLoading) {
             return;
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStatePlaying) {
             [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePaused;
             [tappedCell updatePlayState:FLYPlayStatePaused];
-            [_audioPlayer pause];
+            [[FLYAudioManager sharedInstance].audioPlayer pause];
         } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStatePaused) {
             [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
-            [_audioPlayer resume];
+            [[FLYAudioManager sharedInstance].audioPlayer resume];
             [tappedCell updatePlayState:FLYPlayStateResume];
         }  else {
             [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStateFinished;
@@ -484,7 +467,7 @@
         } else {
             NSURL* url = [NSURL URLWithString:post.mediaURL];
             STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-            [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic]];
+            [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic]];
         }
     
         //change previous state, remove animation, change current to previous
