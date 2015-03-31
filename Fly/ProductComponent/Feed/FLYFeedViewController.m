@@ -184,7 +184,12 @@
         [self.feedTableView.pullToRefreshView stopAnimating];
         [self.feedTableView.infiniteScrollingView stopAnimating];
     };
-    [self.topicService nextPageBefore:before firstPage:first successBlock:successBlock errorBlock:errorBlock];
+    if (first || before) {
+        [self.topicService nextPageBefore:before firstPage:first successBlock:successBlock errorBlock:errorBlock];
+    } else {
+        [self.feedTableView.pullToRefreshView stopAnimating];
+        [self.feedTableView.infiniteScrollingView stopAnimating];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
