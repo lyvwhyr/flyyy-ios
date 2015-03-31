@@ -4,5 +4,6 @@
 + (CGFloat)hairlineHeight;
 + (void)printAutolayoutTrace;
 + (NSString *)getCountryDialCode;
++ (void)gotoReviews;
 
 @end

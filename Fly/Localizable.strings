@@ -127,5 +127,15 @@
 "FLYSettingPrivacyPolicy" = "Privacy Policy";
 "FLYSettingLogout" = "Logout";
 
+//Logout
+"FLYLogout" = "Logout";
+"FLYLogoutWarning" = "Are you sure you want to logout?";
+"FLYNo" = "No";
+"FLYYes" = "Yes";
+"FLYSuccessfullyLoggedOut" = "You have successfully logged out.";
+
+// feedback
+"FLYFeedbackMailTitle" = "Flyy App Feedback";
+"FLYFeedbackMailNotSetup" = "To send feedback via email, you'll first need to setup email on your device.";
 
 

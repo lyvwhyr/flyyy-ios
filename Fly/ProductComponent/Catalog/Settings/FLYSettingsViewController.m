@@ -12,6 +12,10 @@
 #import "UIFont+FLYAddition.h"
 #import "FLYNavigationController.h"
 #import "FLYNavigationBar.h"
+#import "PXAlertView.h"
+#import "FLYUtilities.h"
+#import <MessageUI/MessageUI.h>
+#import "SVWebViewController.h"
 
 #define kTableCellHeaderHeight 40
 
@@ -21,7 +25,7 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
     FLYSettingsLogout
 };
 
-@interface FLYSettingsViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface FLYSettingsViewController ()<UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic) UITableView *settingsTableView;
 
@@ -69,9 +73,38 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
         [cell configCellWithTitle:LOC(@"FLYSettingLogout") hideRightArrow:YES];
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == FLYSettingsLoveFlyy) {
+        [FLYUtilities gotoReviews];
+    } else if (indexPath.section == FLYSettingsSupport) {
+        if (indexPath.row == 0) {
+            [self _sendFeedback];
+        } else if (indexPath.row == 1) {
+            [self _viewRules];
+        } else if (indexPath.row == 2) {
+            [self _viewTerms];
+        } else if (indexPath.row == 3) {
+            [self _viewPrivacyPolicy];
+        }
+        
+        
+    } else if (indexPath.section == FLYSettingsLogout) {
+        [PXAlertView showAlertWithTitle:LOC(@"FLYLogout")
+                                message: LOC(@"FLYLogoutWarning")
+                            cancelTitle:LOC(@"FLYNo")
+                             otherTitle:LOC(@"FLYYes")
+                            contentView:nil
+                             completion:^(BOOL cancelled, NSInteger buttonIndex) {
+                                 if (buttonIndex == 1) {
+                                     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLogout object:self userInfo:@{kFromViewControllerKey:self}];
+                                 }
+                             }];
+    }
+    [self.settingsTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)_addViewConstraints
@@ -91,7 +124,11 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    if(![FLYAppStateManager sharedInstance].currentUser) {
+        return 2;
+    } else {
+        return 3;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -155,6 +192,46 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return kTableCellHeaderHeight;
+}
+
+
+#pragma mark - Cell click
+
+- (void)_sendFeedback
+{
+    if ([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *vc = [MFMailComposeViewController new];
+        [vc setToRecipients:@[@"support@flyyapp.com"]];
+        [vc setSubject:LOC(@"FLYFeedbackMailTitle")];
+        [vc setMessageBody:@"" isHTML:NO];
+        vc.mailComposeDelegate = self;
+        [self presentViewController:vc animated:YES completion:nil];
+    } else {
+        [PXAlertView showAlertWithTitle:LOC(@"FLYFeedbackMailNotSetup")];
+    }
+}
+
+- (void)_viewRules
+{
+    
+}
+
+- (void)_viewTerms
+{
+    SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:kTermsOfServiceURL];
+    [self.navigationController pushViewController:webViewController animated:YES];
+}
+
+- (void)_viewPrivacyPolicy
+{
+    SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:kPrivacyPolicyURL];
+    [self.navigationController pushViewController:webViewController animated:YES];
+}
+
+#pragma mark - MFMessageComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Navigation bar and status bar

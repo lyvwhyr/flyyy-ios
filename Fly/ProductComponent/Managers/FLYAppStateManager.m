@@ -17,6 +17,7 @@
 #import "UICKeyChainStore.h"
 #import "FLYUsersService.h"
 #import "NSDictionary+FLYAddition.h"
+#import "Dialog.h"
 
 @interface FLYAppStateManager()
 
@@ -44,6 +45,7 @@
         _configs = [NSMutableDictionary new];
         [self _initSession];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_requireSignupOrLogin:) name:kRequireSignupNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_logout:) name:kNotificationLogout object:nil];
         
     }
     return self;
@@ -72,6 +74,22 @@
     FLYLoginSignupViewController *vc = [FLYLoginSignupViewController new];
     UINavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
     [fromVC presentViewController:nav animated:NO completion:nil];
+}
+
+- (void)_logout:(NSNotification *)notification
+{
+    self.currentUser = nil;
+    self.authToken = nil;
+    self.userDefaultUserId = nil;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:kLoggedInUserNsUserDefaultKey];
+    
+    UIViewController *fromVC = [notification.userInfo objectForKey:kFromViewControllerKey];
+    FLYLoginSignupViewController *vc = [FLYLoginSignupViewController new];
+    UINavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
+    [fromVC presentViewController:nav animated:NO completion:nil];
+    
+    [Dialog simpleToast:LOC(@"FLYSuccessfullyLoggedOut")];
 }
 
 @end

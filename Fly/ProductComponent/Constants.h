@@ -2,6 +2,8 @@
 #include "FLYNotificationConstant.h"
 #include "FLYErrorCodeConstant.h"
 
+#define kFlyyAppID  @"968961270"
+
 #define kStatusBarHeight    20
 #define kNavBarHeight       44
 #define kTabBarViewHeight   44

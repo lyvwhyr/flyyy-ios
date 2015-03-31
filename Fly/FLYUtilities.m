@@ -61,4 +61,10 @@
     return countryDialCode;
 }
 
++ (void)gotoReviews
+{
+    NSString *str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", kFlyyAppID];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+}
+
 @end

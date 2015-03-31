@@ -26,3 +26,7 @@
 
 // Detail page
 #define kNotificationTopicDeleted @"kNotificationTopicDeleted"
+
+// logout
+
+#define kNotificationLogout @"kNotificationLogout"
