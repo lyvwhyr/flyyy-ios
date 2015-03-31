@@ -10,6 +10,7 @@
 #import "FLYEverythingElseCell.h"
 #import "FLYSettingsViewController.h"
 #import "FLYNavigationController.h"
+#import "FLYFeedViewController.h"
 
 #define kNumberOfItems 3
 
@@ -68,7 +69,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+{  
     [self.delegate everythingElseCellTapped:self type:indexPath.row];
 }
 

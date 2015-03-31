@@ -68,13 +68,15 @@
 
 - (void)loadLeftBarButton
 {
-    FLYBackBarButtonItem *barItem = [FLYBackBarButtonItem barButtonItem:YES];
-    @weakify(self)
-    barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
-        @strongify(self)
-        [self _backButtonTapped];
-    };
-    self.navigationItem.leftBarButtonItem = barItem;
+    if (self.canGoBack) {
+        FLYBackBarButtonItem *barItem = [FLYBackBarButtonItem barButtonItem:YES];
+        @weakify(self)
+        barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+            @strongify(self)
+            [self _backButtonTapped];
+        };
+        self.navigationItem.leftBarButtonItem = barItem;
+    }
 }
 
 - (void)_backButtonTapped

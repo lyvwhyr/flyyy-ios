@@ -21,6 +21,7 @@
 #import "RNLoadingButton.h"
 #import "PXAlertView.h"
 #import "FLYPasswordResetPhoneNumberViewController.h"
+#import "FLYMainViewController.h"
 
 #define kTitleTopPadding 20
 #define kLeftIconWidth 50
@@ -286,7 +287,14 @@
         [defalut setObject:user.userId forKey:kLoggedInUserNsUserDefaultKey];
         [defalut synchronize];
         
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if ([FLYAppStateManager sharedInstance].needRestartNavigationStackAfterLogin) {
+            [FLYAppStateManager sharedInstance].needRestartNavigationStackAfterLogin = NO;
+            FLYMainViewController *mainVC = [FLYMainViewController new];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainVC];
+            [self presentViewController:nav animated:YES completion:nil];
+        } else {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
     };
     
     FLYLoginUserErrorBlock errorBlock= ^(id responseObj, NSError *error) {

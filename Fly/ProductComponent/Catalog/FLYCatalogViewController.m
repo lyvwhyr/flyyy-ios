@@ -13,6 +13,8 @@
 #import "FLYNotificationViewController.h"
 #import "FLYEverythingElseViewController.h"
 #import "FLYSettingsViewController.h"
+#import "FLYBarButtonItem.h"
+#import "FLYFeedViewController.h"
 
 #define kSegmentedControlHeight 44
 
@@ -74,6 +76,20 @@
     [self _addViewConstraints];
 }
 
+#pragma mark - Navigation bar
+- (void)loadLeftBarButton
+{
+    if ([self.navigationController.viewControllers count] > 1) {
+        FLYBackBarButtonItem *barItem = [FLYBackBarButtonItem barButtonItem:YES];
+        __weak typeof(self)weakSelf = self;
+        barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+            __strong typeof(self) strongSelf = weakSelf;
+            [strongSelf _backButtonTapped];
+        };
+        self.navigationItem.leftBarButtonItem = barItem;
+    }
+}
+
 - (void)_addViewConstraints
 {
     CGFloat scrollViewWidth = CGRectGetWidth(self.view.bounds);
@@ -121,6 +137,9 @@
     if (type == FLYEverythingElseCellTypeSettings) {
         FLYSettingsViewController *vc = [FLYSettingsViewController new];
         [self.navigationController pushViewController:vc animated:YES];
+    } else if (type == FLYEverythingElseCellTypePosts) {
+        FLYFeedViewController *vc = [FLYFeedViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -133,6 +152,13 @@
 - (UIColor*)preferredStatusBarColor
 {
     return [UIColor flyBlue];
+}
+
+- (void)_backButtonTapped
+{
+    self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
+    [self.view layoutIfNeeded];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

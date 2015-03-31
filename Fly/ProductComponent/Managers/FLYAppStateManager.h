@@ -34,6 +34,9 @@
 //server configs
 @property (nonatomic) NSMutableDictionary *configs;
 
+// need reset navigation stack after login. After logout and relogin, we cannnot just dimiss the login view because it will not end in home page.
+@property (nonatomic) BOOL needRestartNavigationStackAfterLogin;
+
 + (instancetype)sharedInstance;
 
 @end

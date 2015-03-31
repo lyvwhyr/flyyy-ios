@@ -10,4 +10,6 @@
 
 @interface FLYLoginSignupViewController : FLYUniversalViewController
 
+@property (nonatomic) BOOL canGoBack;
+
 @end

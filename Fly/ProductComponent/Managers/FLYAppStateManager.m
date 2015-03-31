@@ -72,6 +72,7 @@
 {
     UIViewController *fromVC = [notification.userInfo objectForKey:kFromViewControllerKey];
     FLYLoginSignupViewController *vc = [FLYLoginSignupViewController new];
+    vc.canGoBack = YES;
     UINavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
     [fromVC presentViewController:nav animated:NO completion:nil];
 }
@@ -81,11 +82,13 @@
     self.currentUser = nil;
     self.authToken = nil;
     self.userDefaultUserId = nil;
+    self.needRestartNavigationStackAfterLogin = YES;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults removeObjectForKey:kLoggedInUserNsUserDefaultKey];
     
     UIViewController *fromVC = [notification.userInfo objectForKey:kFromViewControllerKey];
     FLYLoginSignupViewController *vc = [FLYLoginSignupViewController new];
+    vc.canGoBack = NO;
     UINavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
     [fromVC presentViewController:nav animated:NO completion:nil];
     

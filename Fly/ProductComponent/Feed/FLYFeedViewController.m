@@ -212,7 +212,7 @@
     leftBarItem.actionBlock = ^(FLYBarButtonItem *item) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kHideRecordIconNotification object:self];
         self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
-        [self.view layoutIfNeeded];
+//        [self.view layoutIfNeeded];
         FLYCatalogViewController *vc = [FLYCatalogViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     };
