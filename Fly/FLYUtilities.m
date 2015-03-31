@@ -67,4 +67,9 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
 }
 
++ (NSString*) appVersion
+{
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+}
+
 @end

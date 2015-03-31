@@ -302,9 +302,7 @@
 #pragma mark - FLYTopicDetailReplyCellDelegate
 - (void)replyToReplyButtonTapped:(FLYReply *)reply
 {
-    
-    
-    [self _commentButtonTapped];
+    [self _commentButtonTapped:reply];
 }
 
 - (void)playReply:(FLYReply *)reply indexPath:(NSIndexPath *)indexPath
@@ -316,7 +314,7 @@
 
 - (void)commentButtonOnTabbarTapped:(id)sender
 {
-    [self _commentButtonTapped];
+    [self _commentButtonTapped:nil];
 }
 
 - (void)playAllButtonOnTabbarTapped:(id)sender
@@ -324,10 +322,15 @@
     
 }
 
-- (void)_commentButtonTapped
+- (void)_commentButtonTapped:(FLYReply *)reply
 {
+    FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForReply];
+    if (reply) {
+        if (![reply.user.userId isEqualToString:[FLYAppStateManager sharedInstance].currentUser.userId]) {
+            recordViewController.parentReplyId = reply.replyId;
+        }
+    }
     FLYRecordingPermissionGrantedSuccessBlock successBlock = ^{
-        FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForReply];
         recordViewController.topic = self.topic;
         UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
         [self presentViewController:navigationController animated:NO completion:nil];

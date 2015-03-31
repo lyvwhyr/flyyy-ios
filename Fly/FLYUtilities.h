@@ -5,5 +5,6 @@
 + (void)printAutolayoutTrace;
 + (NSString *)getCountryDialCode;
 + (void)gotoReviews;
++ (NSString *)appVersion;
 
 @end
