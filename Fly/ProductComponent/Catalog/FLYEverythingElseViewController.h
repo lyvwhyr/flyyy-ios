@@ -8,6 +8,20 @@
 
 #import "FLYUniversalViewController.h"
 
+typedef NS_ENUM(NSInteger, FLYEverythingElseCellType) {
+    FLYEverythingElseCellTypePosts = 0,
+    FLYEverythingElseCellTypeReplies,
+    FLYEverythingElseCellTypeSettings
+};
+
+@protocol FLYEverythingElseViewControllerDelegate <NSObject>
+
+- (void)everythingElseCellTapped:(FLYUniversalViewController *)vc type:(FLYEverythingElseCellType)type;
+
+@end
+
 @interface FLYEverythingElseViewController : FLYUniversalViewController
+
+@property (nonatomic) id<FLYEverythingElseViewControllerDelegate>delegate;
 
 @end

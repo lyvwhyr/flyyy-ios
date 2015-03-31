@@ -12,10 +12,11 @@
 #import "UIFont+FLYAddition.h"
 #import "FLYNotificationViewController.h"
 #import "FLYEverythingElseViewController.h"
+#import "FLYSettingsViewController.h"
 
 #define kSegmentedControlHeight 44
 
-@interface FLYCatalogViewController ()<UIScrollViewDelegate>
+@interface FLYCatalogViewController ()<UIScrollViewDelegate, FLYEverythingElseViewControllerDelegate>
 
 @property (nonatomic) HMSegmentedControl *segmentedControl;
 @property (nonatomic) UIScrollView *scrollView;
@@ -67,6 +68,7 @@
     
     self.everythingElseVC = [FLYEverythingElseViewController new];
     [self.scrollView addSubview:self.everythingElseVC.view];
+    self.everythingElseVC.delegate = self;
     
     
     [self _addViewConstraints];
@@ -111,6 +113,15 @@
     NSInteger page = scrollView.contentOffset.x / pageWidth;
     
     [self.segmentedControl setSelectedSegmentIndex:page animated:YES];
+}
+
+#pragma mark - FLYEverythingelseDelegate
+- (void)everythingElseCellTapped:(FLYUniversalViewController *)vc type:(FLYEverythingElseCellType)type
+{
+    if (type == FLYEverythingElseCellTypeSettings) {
+        FLYSettingsViewController *vc = [FLYSettingsViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - Navigation bar and status bar

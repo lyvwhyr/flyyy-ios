@@ -74,6 +74,8 @@
 		A638D82D1AC9C73000E67ED3 /* FLYNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A638D82C1AC9C73000E67ED3 /* FLYNotificationViewController.m */; };
 		A638D8301AC9C88800E67ED3 /* FLYEverythingElseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A638D82F1AC9C88800E67ED3 /* FLYEverythingElseViewController.m */; };
 		A638D8331AC9FF2D00E67ED3 /* FLYEverythingElseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A638D8321AC9FF2D00E67ED3 /* FLYEverythingElseCell.m */; };
+		A638D8381ACA0D9100E67ED3 /* FLYSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A638D8371ACA0D9100E67ED3 /* FLYSettingsViewController.m */; };
+		A638D83B1ACA17C100E67ED3 /* FLYSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A638D83A1ACA17C100E67ED3 /* FLYSettingsCell.m */; };
 		A63B78351AC272B100E770C9 /* FLYConfigService.m in Sources */ = {isa = PBXBuildFile; fileRef = A63B78341AC272B100E770C9 /* FLYConfigService.m */; };
 		A640BC3B1A3815B700DC59A7 /* icon_flag_post@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */; };
 		A640BC3D1A381AE900DC59A7 /* icon_navigation_catalog@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3C1A381AE900DC59A7 /* icon_navigation_catalog@3x.png */; };
@@ -571,6 +573,10 @@
 		A638D82F1AC9C88800E67ED3 /* FLYEverythingElseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYEverythingElseViewController.m; sourceTree = "<group>"; };
 		A638D8311AC9FF2D00E67ED3 /* FLYEverythingElseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYEverythingElseCell.h; sourceTree = "<group>"; };
 		A638D8321AC9FF2D00E67ED3 /* FLYEverythingElseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYEverythingElseCell.m; sourceTree = "<group>"; };
+		A638D8361ACA0D9100E67ED3 /* FLYSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSettingsViewController.h; sourceTree = "<group>"; };
+		A638D8371ACA0D9100E67ED3 /* FLYSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSettingsViewController.m; sourceTree = "<group>"; };
+		A638D8391ACA17C100E67ED3 /* FLYSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSettingsCell.h; sourceTree = "<group>"; };
+		A638D83A1ACA17C100E67ED3 /* FLYSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSettingsCell.m; sourceTree = "<group>"; };
 		A63B78331AC272B100E770C9 /* FLYConfigService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYConfigService.h; sourceTree = "<group>"; };
 		A63B78341AC272B100E770C9 /* FLYConfigService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYConfigService.m; sourceTree = "<group>"; };
 		A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_flag_post@3x.png"; sourceTree = "<group>"; };
@@ -1496,6 +1502,17 @@
 			path = Tracking;
 			sourceTree = "<group>";
 		};
+		A638D8351ACA0D8000E67ED3 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A638D8361ACA0D9100E67ED3 /* FLYSettingsViewController.h */,
+				A638D8371ACA0D9100E67ED3 /* FLYSettingsViewController.m */,
+				A638D8391ACA17C100E67ED3 /* FLYSettingsCell.h */,
+				A638D83A1ACA17C100E67ED3 /* FLYSettingsCell.m */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		A643AE9F1AA9539E00BF4E0F /* Nimbus */ = {
 			isa = PBXGroup;
 			children = (
@@ -1869,6 +1886,7 @@
 		A657BAE11AC925CB00886C0F /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
+				A638D8351ACA0D8000E67ED3 /* Settings */,
 				A657BAE51AC93C2F00886C0F /* Notifications */,
 				A657BAE21AC93B0300886C0F /* FLYCatalogViewController.h */,
 				A657BAE31AC93B0300886C0F /* FLYCatalogViewController.m */,
@@ -2906,6 +2924,7 @@
 				A665FC3C1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.m in Sources */,
 				A6799C881AABDFB7003DAE5B /* FLYVoiceFilterManager.mm in Sources */,
 				A6BAD4091AA57C4D00DB10F7 /* FLYPhoneService.m in Sources */,
+				A638D8381ACA0D9100E67ED3 /* FLYSettingsViewController.m in Sources */,
 				A643AEFA1AA9539E00BF4E0F /* UIResponder+NimbusCore.m in Sources */,
 				A6048ADE1A8603EF00C67480 /* UIProgressView+AFNetworking.m in Sources */,
 				A6450B171A998A08009EF0A3 /* AFSoundRecord.m in Sources */,
@@ -2943,6 +2962,7 @@
 				A6A0E4A41A1E76110036116E /* FLEXToolbarItem.m in Sources */,
 				A690F2851AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m in Sources */,
 				A65578411A3ADCC3003102CD /* FLYPostButtonView.m in Sources */,
+				A638D83B1ACA17C100E67ED3 /* FLYSettingsCell.m in Sources */,
 				A612753F1A2EFB72004D25D3 /* DKCircleButton.m in Sources */,
 				A6A0E4AD1A1E76110036116E /* FLEXWebViewController.m in Sources */,
 				A643AEF31AA9539E00BF4E0F /* NIOperations.m in Sources */,

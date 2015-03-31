@@ -116,5 +116,16 @@
 "FLYEverythingElseMyReplies" = "My replies";
 "FLYEverythingElseSettings" = "Settings";
 
+// settings
+"FLYYSettings" = "Settings";
+"FLYYSettingLoveFlyy" = "Love Flyy";
+"FLYSettingRateUs" = "Rate us";
+"FLYSettingSupport" = "Support";
+"FLYSettingSendFeedback" = "Send feedback";
+"FLYSettingRules" = "Rules";
+"FLYSettingTermsOfSerivce" = "Terms of Service";
+"FLYSettingPrivacyPolicy" = "Privacy Policy";
+"FLYSettingLogout" = "Logout";
+
 
 

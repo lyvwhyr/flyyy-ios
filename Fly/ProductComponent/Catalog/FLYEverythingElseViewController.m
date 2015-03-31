@@ -8,12 +8,8 @@
 
 #import "FLYEverythingElseViewController.h"
 #import "FLYEverythingElseCell.h"
-
-typedef NS_ENUM(NSInteger, FLYCellType) {
-    FLYCellTypePosts = 0,
-    FLYCellTypeReplies,
-    FLYCellTypeSettings
-};
+#import "FLYSettingsViewController.h"
+#import "FLYNavigationController.h"
 
 #define kNumberOfItems 3
 
@@ -33,8 +29,6 @@ typedef NS_ENUM(NSInteger, FLYCellType) {
     self.tableView = [UITableView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-//    self.tableView.separatorInset = UIEdgeInsetsZero;
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
     [self _addViewConstraints];
@@ -48,22 +42,22 @@ typedef NS_ENUM(NSInteger, FLYCellType) {
     FLYEverythingElseCell *cell = [[FLYEverythingElseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     
     switch (indexPath.row) {
-        case FLYCellTypePosts: {
+        case FLYEverythingElseCellTypePosts: {
             [cell configCellWithImage:@"icon_everything_else_my_posts" text:LOC(@"FLYEverythingElseMyPosts")];
             break;
         }
-        case FLYCellTypeReplies: {
+        case FLYEverythingElseCellTypeReplies: {
             [cell configCellWithImage:@"icon_everything_else_my_replies" text:LOC(@"FLYEverythingElseMyReplies")];
             break;
         }
-        case FLYCellTypeSettings: {
+        case FLYEverythingElseCellTypeSettings: {
             [cell configCellWithImage:@"icon_everything_else_settings" text:LOC(@"FLYEverythingElseSettings")];
             break;
         }
         default:
             break;
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -71,6 +65,11 @@ typedef NS_ENUM(NSInteger, FLYCellType) {
 {
     // 44 - segmented control height
     return (CGRectGetHeight([UIScreen mainScreen].bounds) - kStatusBarHeight - kNavBarHeight - 44)/kNumberOfItems;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.delegate everythingElseCellTapped:self type:indexPath.row];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
