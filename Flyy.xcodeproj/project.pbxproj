@@ -45,7 +45,6 @@
 		A61B6D411AAAE3DD00A5B696 /* RNLoadingButton.podspec in Resources */ = {isa = PBXBuildFile; fileRef = A61B6D3E1AAAE3DD00A5B696 /* RNLoadingButton.podspec */; };
 		A61B6D421AAAE3DD00A5B696 /* RNLoadingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A61B6D401AAAE3DD00A5B696 /* RNLoadingButton.m */; };
 		A61B6D451AAAF3A000A5B696 /* FLYRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61B6D441AAAF3A000A5B696 /* FLYRequestManager.m */; };
-		A61D18661A1EE6ED00D188B5 /* FLYAudioStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */; };
 		A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */; };
 		A61D18761A1F27E900D188B5 /* FLYPrePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */; };
 		A6263E921A187E1200C4C3BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263E911A187E1200C4C3BA /* main.m */; };
@@ -427,7 +426,6 @@
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
-		A6E506171A4AA74C009C5FAB /* FLYPlayableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E506161A4AA74C009C5FAB /* FLYPlayableItem.m */; };
 		A6F27CAB1A2085D6000EC0B3 /* icon_audio_wave@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */; };
 /* End PBXBuildFile section */
 
@@ -520,8 +518,6 @@
 		A61B6D401AAAE3DD00A5B696 /* RNLoadingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNLoadingButton.m; sourceTree = "<group>"; };
 		A61B6D431AAAF3A000A5B696 /* FLYRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYRequestManager.h; sourceTree = "<group>"; };
 		A61B6D441AAAF3A000A5B696 /* FLYRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYRequestManager.m; sourceTree = "<group>"; };
-		A61D18641A1EE6ED00D188B5 /* FLYAudioStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYAudioStateManager.h; sourceTree = "<group>"; };
-		A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYAudioStateManager.m; sourceTree = "<group>"; };
 		A61D18671A1EE70900D188B5 /* FLYAppStateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYAppStateManager.h; sourceTree = "<group>"; };
 		A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYAppStateManager.m; sourceTree = "<group>"; };
 		A61D18731A1F27E900D188B5 /* FLYPrePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostViewController.h; sourceTree = "<group>"; };
@@ -1138,8 +1134,6 @@
 		A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PulsingHaloLayer.m; sourceTree = "<group>"; };
 		A6E171FA1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplePulsingHaloLayer.h; sourceTree = "<group>"; };
 		A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplePulsingHaloLayer.m; sourceTree = "<group>"; };
-		A6E506151A4AA74C009C5FAB /* FLYPlayableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPlayableItem.h; sourceTree = "<group>"; };
-		A6E506161A4AA74C009C5FAB /* FLYPlayableItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPlayableItem.m; sourceTree = "<group>"; };
 		A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_audio_wave@3x.png"; sourceTree = "<group>"; };
 		DEF027D145FDC2CC1553A7A5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F4DA38F875E9D2C76E94F1F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1310,8 +1304,6 @@
 		A61D18631A1EE6C500D188B5 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				A61D18641A1EE6ED00D188B5 /* FLYAudioStateManager.h */,
-				A61D18651A1EE6ED00D188B5 /* FLYAudioStateManager.m */,
 				A61D18671A1EE70900D188B5 /* FLYAppStateManager.h */,
 				A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */,
 				A60489941A85DAFD00C67480 /* FLYGroupManager.h */,
@@ -1401,7 +1393,6 @@
 				A636FC351A9AA70F0084DE6A /* Tracking */,
 				A6D692211A92F61400F8EEDE /* Datastructure */,
 				A67A5E871A70CC290098DA23 /* Services */,
-				A6E506141A4AA731009C5FAB /* PlayIabletem */,
 				A6CD56E81A480298003486DD /* Download */,
 				A6A57AA61A34344900610785 /* TopicDetail */,
 				A6A57A951A33D8DE00610785 /* ReplyView */,
@@ -2567,16 +2558,6 @@
 			path = PulsingHalo;
 			sourceTree = "<group>";
 		};
-		A6E506141A4AA731009C5FAB /* PlayIabletem */ = {
-			isa = PBXGroup;
-			children = (
-				A6E506151A4AA74C009C5FAB /* FLYPlayableItem.h */,
-				A6E506161A4AA74C009C5FAB /* FLYPlayableItem.m */,
-			);
-			name = PlayIabletem;
-			path = PlayItem;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3073,7 +3054,6 @@
 				A6263E951A187E1200C4C3BA /* AppDelegate.m in Sources */,
 				A6A0E49D1A1E76110036116E /* FLEXFieldEditorViewController.m in Sources */,
 				A6A57A9B1A34103D00610785 /* UIImage+ResizeMagick.m in Sources */,
-				A61D18661A1EE6ED00D188B5 /* FLYAudioStateManager.m in Sources */,
 				A655783E1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m in Sources */,
 				A6A0E4C31A1E7EFA0036116E /* UIWindow+FLYAddition.m in Sources */,
 				A6048A441A85E63100C67480 /* NSMethodSignature+EXT.m in Sources */,
@@ -3115,7 +3095,6 @@
 				A665FC391AA2DDA400490A18 /* FLYCountryListDatasource.m in Sources */,
 				A69C4BB11A271B8E00CAD443 /* DismissingAnimator.m in Sources */,
 				A6D703911AAED0FD002C8D89 /* FLYPlayAllControlPanel.m in Sources */,
-				A6E506171A4AA74C009C5FAB /* FLYPlayableItem.m in Sources */,
 				A66E204F1A2EBDAE004235F5 /* RDVTabBarController.m in Sources */,
 				A6CD56EE1A48079D003486DD /* FLYFileManager.m in Sources */,
 				A6A0E4BC1A1E76110036116E /* FLEXRuntimeUtility.m in Sources */,

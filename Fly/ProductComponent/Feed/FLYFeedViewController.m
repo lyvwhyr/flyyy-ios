@@ -18,8 +18,6 @@
 #import "FLYDownloadManager.h"
 #import "FLYTopic.h"
 #import "SVPullToRefresh.h"
-#import "FLYAudioStateManager.h"
-#import "FLYPlayableItem.h"
 #import "UIColor+FLYAddition.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "Dialog.h"
@@ -282,8 +280,8 @@
     topicCell.backgroundColor = [UIColor clearColor];
     //set cell state
 //    [topicCell updatePlayState:FLYPlayStateNotSet];
-    if ([[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
-        [topicCell updatePlayState:[FLYAudioStateManager sharedInstance].currentPlayItem.playState];
+    if ([[FLYAudioManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
+        [topicCell updatePlayState:[FLYAudioManager sharedInstance].currentPlayItem.playState];
     }
     topicCell.topic = _posts[indexPath.row];
     topicCell.indexPath = indexPath;
@@ -344,10 +342,10 @@
         return;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
+        [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
         NSURL* url = [NSURL fileURLWithPath:localPath];
         STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-        [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath itemType:FLYPlayableItemFeedTopic playState:FLYPlayStatePlaying]];
+        [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath itemType:FLYPlayableItemFeedTopic playState:FLYPlayStatePlaying]];
     });
 }
 
@@ -366,9 +364,9 @@
 
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(SampleQueueId *)queueItemId
 {
-    if ([FLYAudioStateManager sharedInstance].currentPlayItem.playableItemType == queueItemId.itemType) {
-        [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
-        FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *) [self.feedTableView cellForRowAtIndexPath:[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath];
+    if ([FLYAudioManager sharedInstance].currentPlayItem.itemType == queueItemId.itemType) {
+        [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
+        FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *) [self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath];
         [currentCell updatePlayState:FLYPlayStatePlaying];
     }
 }
@@ -380,7 +378,7 @@
 
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(SampleQueueId *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
 {
-    if ([FLYAudioStateManager sharedInstance].currentPlayItem.indexPath == queueItemId.indexPath && [FLYAudioStateManager sharedInstance].currentPlayItem.playState != FLYPlayStatePaused) {
+    if ([FLYAudioManager sharedInstance].currentPlayItem.indexPath == queueItemId.indexPath && [FLYAudioManager sharedInstance].currentPlayItem.playState != FLYPlayStatePaused) {
          [self clearCurrentPlayingItem];
     }
 }
@@ -426,14 +424,14 @@
     } else {
         tappedCellIndexPath = indexPath;
     }
-    if (![FLYAudioStateManager sharedInstance].currentPlayItem) {
-        [FLYAudioStateManager sharedInstance].currentPlayItem = [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableItemFeedTopic playState:FLYPlayStateNotSet indexPath:tappedCellIndexPath];
+    if (![FLYAudioManager sharedInstance].currentPlayItem) {
+        [FLYAudioManager sharedInstance].currentPlayItem = [[SampleQueueId alloc] initWithUrl:[NSURL URLWithString:post.mediaURL] andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic playState:FLYPlayStateNotSet];
     }
     
     //tap on the same cell
-    if ([FLYAudioStateManager sharedInstance].currentPlayItem.indexPath == tappedCellIndexPath) {
-        if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateNotSet) {
-            [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStateLoading;
+    if ([FLYAudioManager sharedInstance].currentPlayItem.indexPath == tappedCellIndexPath) {
+        if ([FLYAudioManager sharedInstance].currentPlayItem.playState == FLYPlayStateNotSet) {
+            [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateLoading;
             [tappedCell updatePlayState:FLYPlayStateLoading];
             if (post.audioDuration < kStreamingMinimialLen) {
                 [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL audioType:FLYDownloadableTopic];
@@ -442,26 +440,23 @@
                 STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
                 [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic playState:FLYPlayStateLoading]];
             }
-        } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStateLoading) {
+        } else if ([FLYAudioManager sharedInstance].currentPlayItem.playState == FLYPlayStateLoading) {
             return;
-        } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStatePlaying) {
-            [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePaused;
+        } else if ([FLYAudioManager sharedInstance].currentPlayItem.playState == FLYPlayStatePlaying) {
+            [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStatePaused;
             [tappedCell updatePlayState:FLYPlayStatePaused];
             [[FLYAudioManager sharedInstance].audioPlayer pause];
-        } else if ([FLYAudioStateManager sharedInstance].currentPlayItem.playState == FLYPlayStatePaused) {
-            [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
+        } else if ([FLYAudioManager sharedInstance].currentPlayItem.playState == FLYPlayStatePaused) {
+            [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
             [[FLYAudioManager sharedInstance].audioPlayer resume];
             [tappedCell updatePlayState:FLYPlayStateResume];
         }  else {
-            [FLYAudioStateManager sharedInstance].currentPlayItem.playState = FLYPlayStateFinished;
-            [[FLYAudioStateManager sharedInstance] removePlayer];
+            [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateFinished;
+            [[FLYAudioManager sharedInstance].audioPlayer stop];
             [tappedCell updatePlayState:FLYPlayStateFinished];
         }
-        
-        [FLYAudioStateManager sharedInstance].currentPlayItem.item = tappedCell;
     } else {
         //tap on a different cell
-        //[[FLYAudioStateManager sharedInstance] removePlayer];
         if (post.audioDuration < kStreamingMinimialLen) {
             [[FLYDownloadManager sharedInstance] loadAudioByURLString:post.mediaURL audioType:FLYDownloadableTopic];
         } else {
@@ -471,12 +466,15 @@
         }
     
         //change previous state, remove animation, change current to previous
-        [FLYAudioStateManager sharedInstance].previousPlayItem = [FLYAudioStateManager sharedInstance].currentPlayItem;
-        [FLYAudioStateManager sharedInstance].previousPlayItem.playState = FLYPlayStateNotSet;
-        FLYFeedTopicTableViewCell *previousCell = (FLYFeedTopicTableViewCell *)[FLYAudioStateManager sharedInstance].previousPlayItem.item;
+        [FLYAudioManager sharedInstance].previousPlayItem = [FLYAudioManager sharedInstance].currentPlayItem;
+        [FLYAudioManager sharedInstance].previousPlayItem.playState = FLYPlayStateNotSet;
+//        FLYFeedTopicTableViewCell *previousCell = (FLYFeedTopicTableViewCell *)[FLYAudioManager sharedInstance].previousPlayItem.item;
+        FLYFeedTopicTableViewCell *previousCell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].previousPlayItem.indexPath]);
         [previousCell updatePlayState:FLYPlayStateNotSet];
     
-        [FLYAudioStateManager sharedInstance].currentPlayItem =  [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableItemFeedTopic playState:FLYPlayStateLoading indexPath:tappedCellIndexPath] ;
+//        [FLYAudioManager sharedInstance].currentPlayItem =  [[FLYPlayableItem alloc] initWithItem:tappedCell playableItemType:FLYPlayableItemFeedTopic playState:FLYPlayStateLoading indexPath:tappedCellIndexPath] ;
+        
+        [FLYAudioManager sharedInstance].currentPlayItem = [[SampleQueueId alloc] initWithUrl:[NSURL URLWithString:post.mediaURL] andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic playState:FLYPlayStateLoading];
         [tappedCell updatePlayState:FLYPlayStateLoading];
     }
 }
@@ -490,15 +488,16 @@
 
 - (void)clearCurrentPlayingItem
 {
-    if (![FLYAudioStateManager sharedInstance].currentPlayItem) {
-        [FLYAudioStateManager sharedInstance].previousPlayItem = nil;
+    if (![FLYAudioManager sharedInstance].currentPlayItem) {
+        [FLYAudioManager sharedInstance].previousPlayItem = nil;
         return;
     }
-    FLYFeedTopicTableViewCell *currentPlayingCell = (FLYFeedTopicTableViewCell *)[FLYAudioStateManager sharedInstance].currentPlayItem.item;
+    FLYFeedTopicTableViewCell *currentPlayingCell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
+    
     [currentPlayingCell updatePlayState:FLYPlayStateNotSet];
     
-    [FLYAudioStateManager sharedInstance].previousPlayItem = [FLYAudioStateManager sharedInstance].currentPlayItem;
-    [FLYAudioStateManager sharedInstance].currentPlayItem = nil;
+    [FLYAudioManager sharedInstance].previousPlayItem = [FLYAudioManager sharedInstance].currentPlayItem;
+    [FLYAudioManager sharedInstance].currentPlayItem = nil;
 }
 
 #pragma mark - reply view move in and off screen

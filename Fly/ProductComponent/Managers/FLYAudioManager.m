@@ -11,8 +11,6 @@
 #import "FLYDownloadableAudio.h"
 #import "PXAlertView.h"
 #import "SDiPhoneVersion.h"
-#import "FLYAudioStateManager.h"
-#import "FLYPlayableItem.h"
 #import "FLYFeedTopicTableViewCell.h"
 #import "SampleQueueId.h"
 

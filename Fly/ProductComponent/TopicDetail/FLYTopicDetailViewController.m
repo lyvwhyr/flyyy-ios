@@ -19,7 +19,6 @@
 #import "FLYNavigationController.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "FLYReply.h"
-#import "FLYAudioStateManager.h"
 #import "AEAudioFilePlayer.h"
 #import "FLYDownloadManager.h"
 #import "FLYAudioManager.h"
@@ -199,8 +198,8 @@
         topicCell.backgroundColor = [UIColor clearColor];
         //set cell state
         [topicCell updatePlayState:FLYPlayStateNotSet];
-        if ([[FLYAudioStateManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
-            [topicCell updatePlayState:[FLYAudioStateManager sharedInstance].currentPlayItem.playState];
+        if ([[FLYAudioManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
+            [topicCell updatePlayState:[FLYAudioManager sharedInstance].currentPlayItem.playState];
         }
         topicCell.topic = self.topic;
         topicCell.indexPath = indexPath;

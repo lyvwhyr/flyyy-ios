@@ -10,8 +10,8 @@
 @class FLYTopic;
 @class FLYGroup;
 
-#import "FLYPlayableItem.h"
 #import "FLYTopic.h"
+#import "SampleQueueId.h"
 
 typedef NS_OPTIONS(NSUInteger, FLYTopicCellOptions) {
     FLYTopicCellOptionGroupName = 1 << 0,

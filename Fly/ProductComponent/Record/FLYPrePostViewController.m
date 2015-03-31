@@ -26,7 +26,6 @@
 #import "FLYFeedViewController.h"
 #import "FLYEndpointRequest.h"
 #import "FLYUser.h"
-#import "FLYAudioStateManager.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -294,7 +293,6 @@
         NSDictionary *dict = @{kNewPostKey:post};
         [Dialog simpleToast:@"Posted"];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNewPostReceivedNotification object:self userInfo:dict];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUsePlaybackOnlyNotification object:self];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         self.postButton.userInteractionEnabled = YES;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

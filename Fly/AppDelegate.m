@@ -16,7 +16,6 @@
 #import "UIImage+FLYAddition.h"
 #import "FLYFileManager.h"
 #import "FLYGroupManager.h"
-#import "FLYAudioStateManager.h"
 #import "FLYAudioManager.h"
 #import "FLYRequestManager.h"
 

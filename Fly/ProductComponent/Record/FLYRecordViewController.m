@@ -13,7 +13,6 @@
 #import "PulsingHaloLayer.h"
 #import "MultiplePulsingHaloLayer.h"
 #import "AEAudioController.h"
-#import "FLYAudioStateManager.h"
 #import "FLYPrePostViewController.h"
 #import "GBFlatButton.h"
 #import "DKCircleButton.h"
@@ -83,9 +82,6 @@
 @property (nonatomic) FLYVoiceFilterEffect filterEffect;
 @property (nonatomic) UIActivityIndicatorView *loadingView;
 
-
-@property (nonatomic, copy) AudioPlayerCompleteblock completionBlock;
-
 @property (nonatomic, readonly) UITapGestureRecognizer *userActionTapGestureRecognizer;
 @property (nonatomic, readonly) UITapGestureRecognizer *deleteRecordingTapGestureRecognizer;
 
@@ -135,7 +131,6 @@
     self.audioManager = [FLYAudioManager sharedInstance];
     self.audioManager.delegate = self;
     
-    [self _initVoiceRecording];
     [self _setupInitialViewState];
     [self updateViewConstraints];
     
@@ -163,19 +158,6 @@
         _loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     }
     return _loadingView;
-}
-
-- (void)_initVoiceRecording
-{
-    @weakify(self)
-    _completionBlock = ^{
-        @strongify(self)
-        //Set currentState to FLYRecordRecordingState, so next state will be complete state
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.currentState = FLYRecordRecordingState;
-            [self _updateUserState];
-        });
-    };
 }
 
 #pragma mark - clean up 
@@ -243,7 +225,6 @@
 - (void)_backButtonTapped
 {
     [self _cleanupData];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kUsePlaybackOnlyNotification object:self];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

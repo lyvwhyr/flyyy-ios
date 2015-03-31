@@ -25,6 +25,9 @@ typedef void(^FLYRecordingPermissionGrantedSuccessBlock)();
 @property (nonatomic) STKAudioPlayer *audioPlayer;
 @property (nonatomic) id<FLYAudioManagerDelegate> delegate;
 
+@property (nonatomic) SampleQueueId *previousPlayItem;
+@property (nonatomic) SampleQueueId *currentPlayItem;
+
 + (instancetype)sharedInstance;
 
 - (void)playAudioWithURLStr:(NSString *)str itemType:(FLYPlayableItemType)itemType;
