@@ -105,7 +105,6 @@
     [_feedTableView registerClass:[FLYFeedTopicTableViewCell class] forCellReuseIdentifier:@"feedPostCellIdentifier"];
     [self.view addSubview:_feedTableView];
     
-//    _feedTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _feedTableView.separatorInset = UIEdgeInsetsZero;
     _feedTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     _feedTableView.scrollsToTop = YES;
@@ -282,8 +281,7 @@
     }
     topicCell.backgroundColor = [UIColor clearColor];
     //set cell state
-//    [topicCell updatePlayState:FLYPlayStateNotSet];
-    if ([[FLYAudioManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
+    if (([FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemFeedTopic) && [[FLYAudioManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
         [topicCell updatePlayState:[FLYAudioManager sharedInstance].currentPlayItem.playState];
     }
     topicCell.topic = _posts[indexPath.row];
@@ -318,8 +316,8 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // stop previous
-    if (![[FLYAudioManager sharedInstance].previousPlayItem isEqual:[FLYAudioManager sharedInstance].currentPlayItem] &&  [FLYAudioManager sharedInstance].previousPlayItem && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemFeedTopic && indexPath == [FLYAudioManager sharedInstance].previousPlayItem.indexPath) {
+    // stop previous. same cell.
+    if (![[FLYAudioManager sharedInstance].previousPlayItem isEqual:[FLYAudioManager sharedInstance].currentPlayItem] && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemFeedTopic && indexPath == [FLYAudioManager sharedInstance].previousPlayItem.indexPath) {
             [self clearPreviousPlayingItem];
     }
     
@@ -470,6 +468,7 @@
 
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)tappedCell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath
 {
+    // clear the reset of the cells
     NSArray *visibleCells = [self.feedTableView visibleCells];
     for (int i = 0; i < visibleCells.count; i++) {
         FLYFeedTopicTableViewCell *visibleCell = (FLYFeedTopicTableViewCell *)(visibleCells[i]);
