@@ -186,7 +186,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-//    [self clearCurrentPlayingItem];
+    [self clearAllPlaying];
     [[FLYAudioManager sharedInstance].audioPlayer stop];
 }
 
@@ -208,7 +208,6 @@
     leftBarItem.actionBlock = ^(FLYBarButtonItem *item) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kHideRecordIconNotification object:self];
         self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
-//        [self.view layoutIfNeeded];
         FLYCatalogViewController *vc = [FLYCatalogViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     };
@@ -221,7 +220,6 @@
     
      [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[NSNotificationCenter defaultCenter] postNotificationName:kShowRecordIconNotification object:self];
-//    [self updateViewConstraints];
 }
 
 - (void)updateViewConstraints
@@ -371,16 +369,6 @@
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState
 {
     NSLog(@"state change");
-//    if ([FLYAudioManager sharedInstance].currentPlayItem) {
-//        FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *) [self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath];
-//        if (previousState == STKAudioPlayerStatePaused) {
-//            [currentCell updatePlayState:FLYPlayStateResume];
-//        } else if (previousState == STKAudioPlayerStatePlaying && state == STKAudioPlayerStatePaused) {
-//            [currentCell updatePlayState:FLYPlayStatePaused];
-//        } else if (previousState == STKAudioPlayerStatePlaying && state == STKAudioPlayerStateStopped) {
-//            [currentCell updatePlayState:FLYPlayStateNotSet];
-//        }
-//    }
 }
 
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer unexpectedError:(STKAudioPlayerErrorCode)errorCode
@@ -390,11 +378,6 @@
 
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(FLYAudioItem *)queueItemId
 {
-//    if ([FLYAudioManager sharedInstance].currentPlayItem.itemType == queueItemId.itemType) {
-//        [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
-//        FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *) [self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath];
-//        [currentCell updatePlayState:FLYPlayStatePlaying];
-//    }
     [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationAudioPlayStateChanged object:self];
 }
@@ -520,6 +503,21 @@
     FLYFeedTopicTableViewCell *previousPlayingCell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].previousPlayItem.indexPath]);
     [FLYAudioManager sharedInstance].previousPlayItem.playState = FLYPlayStateNotSet;
     [previousPlayingCell updatePlayState:FLYPlayStateNotSet];
+}
+
+- (void)clearAllPlaying
+{
+    if ([FLYAudioManager sharedInstance].previousPlayItem) {
+        FLYFeedTopicTableViewCell *previousPlayingCell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].previousPlayItem.indexPath]);
+        [previousPlayingCell updatePlayState:FLYPlayStateNotSet];
+        [FLYAudioManager sharedInstance].previousPlayItem = nil;
+    }
+    
+    if ([FLYAudioManager sharedInstance].currentPlayItem) {
+        FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
+        [currentCell updatePlayState:FLYPlayStateNotSet];
+        [FLYAudioManager sharedInstance].currentPlayItem = nil;
+    }
 }
 
 #pragma mark - reply view move in and off screen
