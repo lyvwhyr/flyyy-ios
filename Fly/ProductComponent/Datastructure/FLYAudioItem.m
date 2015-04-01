@@ -10,7 +10,7 @@
 
 @implementation FLYAudioItem
 
--(id) initWithUrl:(NSURL*)url andCount:(int)count indexPath:(NSIndexPath *)indexPath itemType:(FLYPlayableItemType)itemType playState:(FLYPlayState)playState;
+-(id) initWithUrl:(NSURL*)url andCount:(int)count indexPath:(NSIndexPath *)indexPath itemType:(FLYPlayableItemType)itemType playState:(FLYPlayState)playState audioDuration:(NSInteger)audioDuration;
 {
     if (self = [super init])
     {
@@ -19,6 +19,7 @@
         _indexPath = indexPath;
         _itemType = itemType;
         _playState = playState;
+        _audioDuration = audioDuration;
     }
     
     return self;
@@ -36,8 +37,8 @@
         return NO;
     }
     
-    return [((FLYAudioItem*)object).url isEqual: self.url] && ((FLYAudioItem*)object).count == self.count
-            && ((FLYAudioItem*)object).itemType == self.itemType && ((FLYAudioItem*)object).playState == self.playState;
+    return [((FLYAudioItem*)object).url isEqual: self.url]
+            && ((FLYAudioItem*)object).itemType == self.itemType;
 }
 
 -(NSString*) description

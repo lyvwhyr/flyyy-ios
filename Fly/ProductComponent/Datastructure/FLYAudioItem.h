@@ -29,7 +29,8 @@ typedef NS_ENUM(NSInteger, FLYPlayState) {
 @property (nonatomic) NSIndexPath *indexPath;
 @property (nonatomic) FLYPlayableItemType itemType;
 @property (nonatomic) FLYPlayState playState;
+@property (nonatomic) NSInteger audioDuration;
 
--(id) initWithUrl:(NSURL*)url andCount:(int)count indexPath:(NSIndexPath *)indexPath itemType:(FLYPlayableItemType)itemType playState:(FLYPlayState)playState;
+-(id) initWithUrl:(NSURL*)url andCount:(int)count indexPath:(NSIndexPath *)indexPath itemType:(FLYPlayableItemType)itemType playState:(FLYPlayState)playState audioDuration:(NSInteger)audioDuration;
 
 @end

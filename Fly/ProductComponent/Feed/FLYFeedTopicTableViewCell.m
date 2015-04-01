@@ -159,6 +159,7 @@
     _progressTimer = nil;
     
     _timeElapsed = 0;
+    _paused = NO;
     _progressViewConstraints = nil;
     [_progressView removeFromSuperview];
     _progressView = nil;

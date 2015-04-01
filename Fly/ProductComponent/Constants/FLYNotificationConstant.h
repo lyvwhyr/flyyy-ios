@@ -27,6 +27,8 @@
 // Detail page
 #define kNotificationTopicDeleted @"kNotificationTopicDeleted"
 
-// logout
+// Audio play state
+#define kNotificationAudioPlayStateChanged @"kNotificationAudioPlayStateChanged"
 
+// logout
 #define kNotificationLogout @"kNotificationLogout"

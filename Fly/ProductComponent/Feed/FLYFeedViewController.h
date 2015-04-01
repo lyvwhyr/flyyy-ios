@@ -25,6 +25,6 @@ typedef NS_ENUM(NSInteger, FLYFeedType) {
 // feed type. default is home
 @property (nonatomic) FLYFeedType feedType;
 
-- (void)clearCurrentPlayingItem;
+//- (void)clearCurrentPlayingItem;
 
 @end

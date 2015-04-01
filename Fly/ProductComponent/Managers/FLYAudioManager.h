@@ -31,7 +31,7 @@ typedef void(^FLYRecordingPermissionGrantedSuccessBlock)();
 + (instancetype)sharedInstance;
 
 - (void)playAudioWithURLStr:(NSString *)str itemType:(FLYPlayableItemType)itemType;
-
+- (void)updateAudioState:(FLYAudioItem *)audioItem;
 - (void)checkRecordingPermissionWithSuccessBlock:(FLYRecordingPermissionGrantedSuccessBlock)successBlock;
 
 @end

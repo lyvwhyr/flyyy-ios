@@ -46,6 +46,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[FLYFeedViewController playButtonTapped:withPost:withIndexPath:]:FLYFeedViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[FLYAudioManager sharedInstance].currentPlayItem">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__37-[FLYRecordViewController _loadWaver]_block_invoke:FLYRecordViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -58,6 +66,33 @@
          <PersistentStrings>
             <PersistentString
                value = "self.view">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FLYFeedViewController tableView:willDisplayCell:forRowAtIndexPath:]:FLYFeedViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[FLYAudioManager sharedInstance].previousPlayItem">
+            </PersistentString>
+            <PersistentString
+               value = "[FLYAudioManager sharedInstance].currentPlayItem">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FLYAudioManager updateAudioState:]:FLYAudioManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[FLYAudioManager sharedInstance].previousPlayItem">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FLYFeedViewController _audioPlayStateChanged:]:FLYFeedViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentItem">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
