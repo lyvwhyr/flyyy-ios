@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, FLYPlayState) {
     FLYPlayStateFinished
 };
 
-@interface SampleQueueId : NSObject
+@interface FLYAudioItem : NSObject
 @property (readwrite) int count;
 @property (readwrite) NSURL* url;
 @property (nonatomic) NSIndexPath *indexPath;

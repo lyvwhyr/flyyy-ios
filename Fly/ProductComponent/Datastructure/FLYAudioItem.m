@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Thong Nguyen. All rights reserved.
 //
 
-#import "SampleQueueId.h"
+#import "FLYAudioItem.h"
 
-@implementation SampleQueueId
+@implementation FLYAudioItem
 
 -(id) initWithUrl:(NSURL*)url andCount:(int)count indexPath:(NSIndexPath *)indexPath itemType:(FLYPlayableItemType)itemType playState:(FLYPlayState)playState;
 {
@@ -31,13 +31,13 @@
         return NO;
     }
     
-    if ([object class] != [SampleQueueId class])
+    if ([object class] != [FLYAudioItem class])
     {
         return NO;
     }
     
-    return [((SampleQueueId*)object).url isEqual: self.url] && ((SampleQueueId*)object).count == self.count
-            && ((SampleQueueId*)object).itemType == self.itemType && ((SampleQueueId*)object).playState == self.playState;
+    return [((FLYAudioItem*)object).url isEqual: self.url] && ((FLYAudioItem*)object).count == self.count
+            && ((FLYAudioItem*)object).itemType == self.itemType && ((FLYAudioItem*)object).playState == self.playState;
 }
 
 -(NSString*) description

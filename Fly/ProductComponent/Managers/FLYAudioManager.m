@@ -12,7 +12,7 @@
 #import "PXAlertView.h"
 #import "SDiPhoneVersion.h"
 #import "FLYFeedTopicTableViewCell.h"
-#import "SampleQueueId.h"
+#import "FLYAudioItem.h"
 
 @interface FLYAudioManager()
 
@@ -48,7 +48,7 @@
 {
     NSURL* url = [NSURL URLWithString:str];
     STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-    [_audioPlayer setDataSource:dataSource withQueueItemId:[[SampleQueueId alloc] initWithUrl:url andCount:0 indexPath:nil itemType:itemType playState:FLYPlayStatePlaying]];
+    [_audioPlayer setDataSource:dataSource withQueueItemId:[[FLYAudioItem alloc] initWithUrl:url andCount:0 indexPath:nil itemType:itemType playState:FLYPlayStatePlaying]];
 }
 
 - (void)checkRecordingPermissionWithSuccessBlock:(FLYRecordingPermissionGrantedSuccessBlock)successBlock

@@ -11,7 +11,7 @@
 @class FLYGroup;
 
 #import "FLYTopic.h"
-#import "SampleQueueId.h"
+#import "FLYAudioItem.h"
 
 typedef NS_OPTIONS(NSUInteger, FLYTopicCellOptions) {
     FLYTopicCellOptionGroupName = 1 << 0,

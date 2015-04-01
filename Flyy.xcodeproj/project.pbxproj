@@ -411,7 +411,7 @@
 		A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */; };
 		A6CD56EB1A4802C3003486DD /* FLYDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56EA1A4802C3003486DD /* FLYDownloadManager.m */; };
 		A6CD56EE1A48079D003486DD /* FLYFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56ED1A48079D003486DD /* FLYFileManager.m */; };
-		A6D692241A92F61A00F8EEDE /* SampleQueueId.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D692231A92F61A00F8EEDE /* SampleQueueId.m */; };
+		A6D692241A92F61A00F8EEDE /* FLYAudioItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D692231A92F61A00F8EEDE /* FLYAudioItem.m */; };
 		A6D7038E1AAEBC2A002C8D89 /* FLYTopicDetailTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D7038D1AAEBC2A002C8D89 /* FLYTopicDetailTabbar.m */; };
 		A6D703911AAED0FD002C8D89 /* FLYPlayAllControlPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D703901AAED0FD002C8D89 /* FLYPlayAllControlPanel.m */; };
 		A6D949EA1A9079AC003D4265 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D949E81A9079AC003D4265 /* Crashlytics.framework */; };
@@ -1109,8 +1109,8 @@
 		A6CD56EA1A4802C3003486DD /* FLYDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDownloadManager.m; sourceTree = "<group>"; };
 		A6CD56EC1A48079D003486DD /* FLYFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFileManager.h; sourceTree = "<group>"; };
 		A6CD56ED1A48079D003486DD /* FLYFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFileManager.m; sourceTree = "<group>"; };
-		A6D692221A92F61A00F8EEDE /* SampleQueueId.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleQueueId.h; sourceTree = "<group>"; };
-		A6D692231A92F61A00F8EEDE /* SampleQueueId.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleQueueId.m; sourceTree = "<group>"; };
+		A6D692221A92F61A00F8EEDE /* FLYAudioItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYAudioItem.h; sourceTree = "<group>"; };
+		A6D692231A92F61A00F8EEDE /* FLYAudioItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYAudioItem.m; sourceTree = "<group>"; };
 		A6D7038C1AAEBC2A002C8D89 /* FLYTopicDetailTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTopicDetailTabbar.h; sourceTree = "<group>"; };
 		A6D7038D1AAEBC2A002C8D89 /* FLYTopicDetailTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTopicDetailTabbar.m; sourceTree = "<group>"; };
 		A6D7038F1AAED0FD002C8D89 /* FLYPlayAllControlPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPlayAllControlPanel.h; sourceTree = "<group>"; };
@@ -2522,8 +2522,8 @@
 		A6D692211A92F61400F8EEDE /* Datastructure */ = {
 			isa = PBXGroup;
 			children = (
-				A6D692221A92F61A00F8EEDE /* SampleQueueId.h */,
-				A6D692231A92F61A00F8EEDE /* SampleQueueId.m */,
+				A6D692221A92F61A00F8EEDE /* FLYAudioItem.h */,
+				A6D692231A92F61A00F8EEDE /* FLYAudioItem.m */,
 			);
 			path = Datastructure;
 			sourceTree = "<group>";
@@ -2924,7 +2924,7 @@
 				A6A4EFB31A2BE71000FD4066 /* FLYGroupListSuggestTableViewCell.m in Sources */,
 				A6A0E4A91A1E76110036116E /* FLEXGlobalsTableViewController.m in Sources */,
 				A69C4BD81A2840E700CAD443 /* NSDictionary+FLYAddition.m in Sources */,
-				A6D692241A92F61A00F8EEDE /* SampleQueueId.m in Sources */,
+				A6D692241A92F61A00F8EEDE /* FLYAudioItem.m in Sources */,
 				A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */,
 				A66E204E1A2EBDAE004235F5 /* RDVTabBar.m in Sources */,
 				A665FC311AA2DB0600490A18 /* FLYCountrySelectorViewController.m in Sources */,

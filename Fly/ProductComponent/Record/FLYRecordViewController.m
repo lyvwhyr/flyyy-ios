@@ -649,7 +649,7 @@
 
 #pragma mark - FLYAudioManagerDelegate
 
-- (void)didFinishPlayingWithQueueItemId:(SampleQueueId *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
+- (void)didFinishPlayingWithQueueItemId:(FLYAudioItem *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
 {
     if (queueItemId.itemType != FLYPlayableItemRecording || stopReason == STKAudioPlayerStopReasonUserAction) {
         return;

@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "STKAudioPlayer.h"
-#import "SampleQueueId.h"
+#import "FLYAudioItem.h"
 
 typedef void(^FLYRecordingPermissionGrantedSuccessBlock)();
 
 @protocol FLYAudioManagerDelegate
 
-- (void)didFinishPlayingWithQueueItemId:(SampleQueueId *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration;
+- (void)didFinishPlayingWithQueueItemId:(FLYAudioItem *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration;
 
 -(void)stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState;
 
@@ -25,8 +25,8 @@ typedef void(^FLYRecordingPermissionGrantedSuccessBlock)();
 @property (nonatomic) STKAudioPlayer *audioPlayer;
 @property (nonatomic) id<FLYAudioManagerDelegate> delegate;
 
-@property (nonatomic) SampleQueueId *previousPlayItem;
-@property (nonatomic) SampleQueueId *currentPlayItem;
+@property (nonatomic) FLYAudioItem *previousPlayItem;
+@property (nonatomic) FLYAudioItem *currentPlayItem;
 
 + (instancetype)sharedInstance;
 
