@@ -349,15 +349,14 @@
 - (void)downloadComplete:(NSNotification *)notificaiton
 {
     NSString *localPath = [notificaiton.userInfo objectForKey:kDownloadAudioLocalPathkey];
-    FLYDownloadableAudioType type = [[notificaiton.userInfo objectForKey:kDownloadAudioTypeKey] integerValue];
-    if(type != FLYDownloadableTopic) {
+    if([FLYAudioManager sharedInstance].currentPlayItem.itemType != FLYPlayableItemFeedTopic) {
         return;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
         NSURL* url = [NSURL fileURLWithPath:localPath];
         STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-        [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[FLYAudioItem alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath itemType:FLYPlayableItemFeedTopic playState:FLYPlayStatePlaying audioDuration:0]];
+        [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[FLYAudioManager sharedInstance].currentPlayItem];
     });
 }
 
@@ -389,8 +388,9 @@
 {
     if (stopReason == STKAudioPlayerStopReasonEof) {
         // stop current
-        if([FLYAudioManager sharedInstance].currentPlayItem) {
+        if([FLYAudioManager sharedInstance].currentPlayItem && [FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemFeedTopic && [FLYAudioManager sharedInstance].currentPlayItem.indexPath == queueItemId.indexPath) {
             FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
+            [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateNotSet;
             [currentCell updatePlayState:FLYPlayStateNotSet];
         }
     }

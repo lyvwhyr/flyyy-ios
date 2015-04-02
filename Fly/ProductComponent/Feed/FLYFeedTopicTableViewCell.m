@@ -365,6 +365,7 @@
             break;
         }
     }
+    [self layoutIfNeeded];
 }
 
 #pragma mark - inline actions
