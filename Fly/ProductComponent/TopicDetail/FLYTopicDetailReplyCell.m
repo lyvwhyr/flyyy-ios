@@ -15,6 +15,9 @@
 #import "Dialog.h"
 #import "UIView+FLYAddition.h"
 #import "UIImage+FLYAddition.h"
+#import "UAProgressView.h"
+
+#define kUpdateProgressInterval 0.05
 
 @interface FLYTopicDetailReplyCell()
 
@@ -25,6 +28,18 @@
 @property (nonatomic) UIButton *commentButton;
 
 @property (nonatomic) BOOL didSetupConstraints;
+
+
+// play progress view
+@property (nonatomic) UAProgressView *progressView;
+@property (nonatomic) NSTimer *progressTimer;
+@property (nonatomic) BOOL paused;
+@property (nonatomic) CGFloat timeElapsed;
+@property (nonatomic) CGFloat localProgress;
+@property (nonatomic) NSArray *progressViewConstraints;
+
+
+@property (nonatomic) UIActivityIndicatorView *loadingIndicatorView;
 
 @end
 
@@ -50,7 +65,7 @@
         
         _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _playButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_playButton setImage:[UIImage imageNamed:@"icon_homefeed_blueplayempty"] forState:UIControlStateNormal];
+        [_playButton setImage:[UIImage imageNamed:@"icon_reply_play_play"] forState:UIControlStateNormal];
         [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_playButton];
         
@@ -76,6 +91,60 @@
     }
     
     return self;
+}
+
+- (UAProgressView *)progressView
+{
+    if (!_progressView) {
+        [self _clearProgressView];
+        
+        _progressView = [[UAProgressView alloc] init];
+        _progressView.tintColor = [UIColor flyColorPlayAnimation];
+        _progressView.lineWidth = 3;
+        _progressView.fillOnTouch = NO;
+        _progressView.borderWidth = 0;
+        @weakify(self)
+        _progressView.didSelectBlock = ^(UAProgressView *progressView){
+            @strongify(self)
+            [self.delegate playButtonTapped:self withReply:self.reply withIndexPath:self.indexPath];
+            self.paused = !self.paused;
+        };
+        _progressView.progress = 0;
+        _progressView.animationDuration = self.reply.audioDuration;
+        [self addSubview:_progressView];
+        
+        // We need to run the timer in runloop because the timer will be paused while scrolling or touch event
+        _progressTimer = [NSTimer timerWithTimeInterval:kUpdateProgressInterval target:self selector:@selector(updateProgress:) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:_progressTimer forMode:NSRunLoopCommonModes];
+    }
+    return _progressView;
+}
+
+- (void)_clearProgressView
+{
+    [_progressTimer invalidate];
+    _progressTimer = nil;
+    
+    _timeElapsed = 0;
+    _paused = NO;
+    _progressViewConstraints = nil;
+    [_progressView removeFromSuperview];
+    _progressView = nil;
+}
+
+- (void)updateProgress:(NSTimer *)timer {
+    if (_timeElapsed >= self.reply.audioDuration) {
+        [_progressView removeFromSuperview];
+        _progressView = nil;
+        [_progressTimer invalidate];
+        _progressTimer = nil;
+    }
+    if (!_paused) {
+        _timeElapsed += kUpdateProgressInterval;
+        _localProgress = _timeElapsed / self.reply.audioDuration;
+        [_progressView setProgress:_localProgress];
+        [self updateConstraints];
+    }
 }
 
 - (void)_addObservers
@@ -148,8 +217,28 @@
             make.leading.equalTo(self.bodyLabel);
             make.top.equalTo(self.bodyLabel.mas_bottom).offset(kPostAtTopPadding);
         }];
+        
+        if (_progressView  && !_progressViewConstraints) {
+            _progressViewConstraints = [_progressView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.center.equalTo(self.playButton);
+                make.width.equalTo(self.playButton).offset(-1.5);
+                make.height.equalTo(self.playButton).offset(-1.5);
+            }];
+        }
     }
     [super updateConstraints];
+}
+
+- (UIActivityIndicatorView *)loadingIndicatorView
+{
+    if (_loadingIndicatorView == nil) {
+        _loadingIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        _loadingIndicatorView.hidesWhenStopped = YES;
+        [self.contentView insertSubview:_loadingIndicatorView aboveSubview:self.playButton];
+    }
+    [self updateConstraints];
+    [_loadingIndicatorView startAnimating];
+    return _loadingIndicatorView;
 }
 
 - (void)layoutSubviews
@@ -173,7 +262,7 @@
 - (void)_playButtonTapped
 {
     [[FLYScribe sharedInstance] logEvent:@"topic_detail" section:@"reply_cell" component:self.reply.replyId element:@"play_button" action:@"click"];
-    [self.delegate playReply:self.reply indexPath:self.indexPath];
+        [self.delegate playButtonTapped:self withReply:self.reply withIndexPath:self.indexPath];
 }
 
 - (void)_likeButtonTapped
@@ -185,6 +274,46 @@
 {
     [[FLYScribe sharedInstance] logEvent:@"topic_detail" section:@"reply_cell" component:self.reply.replyId element:@"like_button" action:@"click"];
     [self.delegate replyToReplyButtonTapped:self.reply];
+}
+
+#pragma mark - update play state. After user action, play state.
+- (void)updatePlayState:(FLYPlayState)state
+{
+    [_loadingIndicatorView stopAnimating];
+    switch (state) {
+        case FLYPlayStateNotSet: {
+            [self _clearProgressView];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_reply_play_play"] forState:UIControlStateNormal];
+            break;
+        }
+        case FLYPlayStateLoading: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_reply_play_play"] forState:UIControlStateNormal];
+            [self loadingIndicatorView];
+            break;
+        }
+        case FLYPlayStatePlaying: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_reply_play_pause"] forState:UIControlStateNormal];
+            [self progressView];
+            break;
+        }
+        case FLYPlayStatePaused: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_reply_play_play"] forState:UIControlStateNormal];
+            break;
+        }
+        case FLYPlayStateResume: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_reply_play_pause"] forState:UIControlStateNormal];
+            break;
+        }
+        case FLYPlayStateFinished: {
+            [self.playButton setImage:[UIImage imageNamed:@"icon_reply_play_play"] forState:UIControlStateNormal];
+            break;
+        }
+        default: {
+            [self _clearProgressView];
+            [self.playButton setImage:[UIImage imageNamed:@"icon_reply_play_play"] forState:UIControlStateNormal];
+            break;
+        }
+    }
 }
 
 @end

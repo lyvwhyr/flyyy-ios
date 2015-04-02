@@ -75,7 +75,7 @@
                 [[FLYDownloadManager sharedInstance] loadAudioByURLString:audioURLStr audioType:FLYDownloadableTopic];
             } else {
                 STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:[FLYAudioManager sharedInstance].currentPlayItem.url];
-                [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[FLYAudioItem alloc] initWithUrl:[FLYAudioManager sharedInstance].currentPlayItem.url andCount:0 indexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath itemType:FLYPlayableItemFeedTopic playState:FLYPlayStateLoading audioDuration:[FLYAudioManager sharedInstance].currentPlayItem.audioDuration]];
+                [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[FLYAudioItem alloc] initWithUrl:[FLYAudioManager sharedInstance].currentPlayItem.url andCount:0 indexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath itemType:tappedAudioItem.itemType playState:FLYPlayStateLoading audioDuration:[FLYAudioManager sharedInstance].currentPlayItem.audioDuration]];
             }
         } else if ([FLYAudioManager sharedInstance].previousPlayItem.playState == FLYPlayStateLoading) {
             return;
@@ -99,7 +99,7 @@
         } else {
             NSURL* url = [NSURL URLWithString:audioURLStr];
             STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
-            [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[FLYAudioItem alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath itemType:FLYPlayableItemFeedTopic playState:FLYPlayStateLoading audioDuration:[FLYAudioManager sharedInstance].currentPlayItem.audioDuration]];
+            [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[FLYAudioItem alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath itemType:tappedAudioItem.itemType playState:FLYPlayStateLoading audioDuration:[FLYAudioManager sharedInstance].currentPlayItem.audioDuration]];
             
             [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateLoading;
             //        [tappedCell updatePlayState:FLYPlayStateLoading];

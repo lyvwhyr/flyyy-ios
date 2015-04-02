@@ -19,7 +19,7 @@
 @property (nonatomic) FLYUser *user;
 @property (nonatomic, copy) NSString *mediaURL;
 @property (nonatomic) NSInteger likeCount;
-@property (nonatomic) NSInteger duration;
+@property (nonatomic) NSInteger audioDuration;
 @property (nonatomic, copy) NSString *createdAt;
 @property (nonatomic, copy) NSString *displayableCreateAt;
 @property (nonatomic) BOOL liked;

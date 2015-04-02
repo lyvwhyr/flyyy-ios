@@ -204,7 +204,7 @@
         }
         topicCell.backgroundColor = [UIColor clearColor];
         //set cell state
-        [topicCell updatePlayState:FLYPlayStateNotSet];
+//        [topicCell updatePlayState:FLYPlayStateNotSet];
         if ([[FLYAudioManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
             [topicCell updatePlayState:[FLYAudioManager sharedInstance].currentPlayItem.playState];
         }
@@ -348,18 +348,38 @@
 
 # pragma mark - FLYTopicDetailReplyCellDelegate
 
-- (void)playButtonTapped:(FLYFeedTopicTableViewCell *)tappedCell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath
+- (void)playButtonTapped:(FLYTopicDetailReplyCell *)tappedCell withReply:(FLYReply *)reply withIndexPath:(NSIndexPath *)indexPath
 {
     // clear the reset of the cells
-    NSArray *visibleCells = [self.topicTableView visibleCells];
-    for (int i = 0; i < visibleCells.count; i++) {
-        FLYFeedTopicTableViewCell *visibleCell = (FLYFeedTopicTableViewCell *)(visibleCells[i]);
-        if (visibleCell.indexPath != tappedCell.indexPath) {
-            [visibleCell updatePlayState:FLYPlayStateNotSet];
-        }
+//    NSArray *visibleCells = [self.topicTableView visibleCells];
+//    for (int i = 0; i < visibleCells.count; i++) {
+//        FLYTopicDetailReplyCell *visibleCell = (FLYTopicDetailReplyCell *)(visibleCells[i]);
+//        if (visibleCell.indexPath != tappedCell.indexPath) {
+//            [visibleCell updatePlayState:FLYPlayStateNotSet];
+//        }
+//    }
+    
+    FLYAudioItem *newItem = [[FLYAudioItem alloc] initWithUrl:[NSURL URLWithString:reply.mediaURL] andCount:0 indexPath:indexPath itemType:FLYPlayableItemDetailReply playState:FLYPlayStateNotSet audioDuration:reply.audioDuration];
+    
+    if ([newItem isEqual:[FLYAudioManager sharedInstance].currentPlayItem]) {
+        newItem = [FLYAudioManager sharedInstance].currentPlayItem;
     }
     
-    FLYAudioItem *newItem = [[FLYAudioItem alloc] initWithUrl:[NSURL URLWithString:post.mediaURL] andCount:0 indexPath:indexPath itemType:FLYPlayableItemFeedTopic playState:FLYPlayStateNotSet audioDuration:post.audioDuration];
+    [[FLYAudioManager sharedInstance] updateAudioState:newItem];
+}
+
+- (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath
+{
+    // clear the reset of the cells
+//    NSArray *visibleCells = [self.topicTableView visibleCells];
+//    for (int i = 0; i < visibleCells.count; i++) {
+//        FLYFeedTopicTableViewCell *visibleCell = (FLYFeedTopicTableViewCell *)(visibleCells[i]);
+//        if (visibleCell.indexPath != cell.indexPath) {
+//            [visibleCell updatePlayState:FLYPlayStateNotSet];
+//        }
+//    }
+    
+    FLYAudioItem *newItem = [[FLYAudioItem alloc] initWithUrl:[NSURL URLWithString:post.mediaURL] andCount:0 indexPath:indexPath itemType:FLYPlayableItemDetailTopic playState:FLYPlayStateNotSet audioDuration:post.audioDuration];
     
     if ([newItem isEqual:[FLYAudioManager sharedInstance].currentPlayItem]) {
         newItem = [FLYAudioManager sharedInstance].currentPlayItem;
@@ -578,7 +598,7 @@
     }
     
     // stop previous
-    if ([FLYAudioManager sharedInstance].previousPlayItem && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemFeedTopic) {
+    if ([FLYAudioManager sharedInstance].previousPlayItem && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemDetailTopic) {
         [self _clearPreviousPlayingItem];
     }
 }
@@ -586,33 +606,65 @@
 - (void)_audioPlayStateChanged:(NSNotification *)notif
 {
     FLYAudioItem *currentItem = [FLYAudioManager sharedInstance].currentPlayItem;
-    FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *) [self.topicTableView cellForRowAtIndexPath:currentItem.indexPath];
-    if (!currentCell) {
-        return;
-    }
-    switch (currentItem.playState) {
-        case FLYPlayStateLoading:{
-            [currentCell updatePlayState:FLYPlayStateLoading];
-            break;
+    if (currentItem.itemType == FLYPlayableItemDetailTopic) {
+        FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *) [self.topicTableView cellForRowAtIndexPath:currentItem.indexPath];
+        if (!currentCell) {
+            return;
         }
-        case FLYPlayStatePlaying:{
-            [currentCell updatePlayState:FLYPlayStatePlaying];
-            break;
+        switch (currentItem.playState) {
+            case FLYPlayStateLoading:{
+                [currentCell updatePlayState:FLYPlayStateLoading];
+                break;
+            }
+            case FLYPlayStatePlaying:{
+                [currentCell updatePlayState:FLYPlayStatePlaying];
+                break;
+            }
+            case FLYPlayStatePaused:{
+                [currentCell updatePlayState:FLYPlayStatePaused];
+                break;
+            }
+            case FLYPlayStateResume:{
+                [currentCell updatePlayState:FLYPlayStateResume];
+                break;
+            }
+            case FLYPlayStateFinished:{
+                [currentCell updatePlayState:FLYPlayStateFinished];
+                break;
+            }
+            default:
+                break;
         }
-        case FLYPlayStatePaused:{
-            [currentCell updatePlayState:FLYPlayStatePaused];
-            break;
+    } else if(currentItem.itemType == FLYPlayableItemDetailReply) {
+        FLYTopicDetailReplyCell *currentCell = (FLYTopicDetailReplyCell *) [self.topicTableView cellForRowAtIndexPath:currentItem.indexPath];
+        if (!currentCell) {
+            return;
         }
-        case FLYPlayStateResume:{
-            [currentCell updatePlayState:FLYPlayStateResume];
-            break;
+        switch (currentItem.playState) {
+            case FLYPlayStateLoading:{
+                [currentCell updatePlayState:FLYPlayStateLoading];
+                break;
+            }
+            case FLYPlayStatePlaying:{
+                [currentCell updatePlayState:FLYPlayStatePlaying];
+                break;
+            }
+            case FLYPlayStatePaused:{
+                [currentCell updatePlayState:FLYPlayStatePaused];
+                break;
+            }
+            case FLYPlayStateResume:{
+                [currentCell updatePlayState:FLYPlayStateResume];
+                break;
+            }
+            case FLYPlayStateFinished:{
+                [currentCell updatePlayState:FLYPlayStateFinished];
+                break;
+            }
+            default:
+                break;
         }
-        case FLYPlayStateFinished:{
-            [currentCell updatePlayState:FLYPlayStateFinished];
-            break;
-        }
-        default:
-            break;
+
     }
 }
 

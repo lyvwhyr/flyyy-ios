@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FLYAudioItem.h"
 
 @class FLYReply;
 @class FLYTopicDetailReplyCell;
@@ -14,7 +15,7 @@
 @protocol FLYTopicDetailReplyCellDelegate <NSObject>
 
 - (void)replyToReplyButtonTapped:(FLYReply *)reply;
-- (void)playReply:(FLYReply *)reply indexPath:(NSIndexPath *)indexPath;
+- (void)playButtonTapped:(FLYTopicDetailReplyCell *)tappedCell withReply:(FLYReply *)reply withIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -26,5 +27,6 @@
 @property (nonatomic, weak) id<FLYTopicDetailReplyCellDelegate> delegate;
 
 - (void)setupReply:(FLYReply *)reply;
+- (void)updatePlayState:(FLYPlayState)state;
 
 @end

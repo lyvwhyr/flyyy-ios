@@ -33,7 +33,7 @@
         NSString *mediaPath = [dict fly_stringForKey:@"media_path"];
         _mediaURL = [NSString stringWithFormat:@"%@/%@", URL_ASSET_STAGING_BASE, mediaPath];
         _likeCount = [dict fly_integerForKey:@"like_count"];
-        _duration = [dict fly_integerForKey:@"duration"];
+        _audioDuration = [dict fly_integerForKey:@"audio_duration"];
         _createdAt = [[dict fly_objectOrNilForKey:@"created_at"] stringValue];        
         NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:[_createdAt longLongValue]/1000];
         NSString *ago = [date timeAgo];

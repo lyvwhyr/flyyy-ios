@@ -419,6 +419,10 @@
 - (void)_audioPlayStateChanged:(NSNotification *)notif
 {
     FLYAudioItem *currentItem = [FLYAudioManager sharedInstance].currentPlayItem;
+    if (currentItem.itemType != FLYPlayableItemFeedTopic) {
+        return;
+    }
+    
     FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *) [self.feedTableView cellForRowAtIndexPath:currentItem.indexPath];
     if (!currentCell) {
         return;
