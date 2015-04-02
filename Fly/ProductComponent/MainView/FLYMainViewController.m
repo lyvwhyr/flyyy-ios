@@ -217,11 +217,11 @@
     switch (index) {
         case TABBAR_HOME: {
             [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home"]];
-            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_tags_grey"]];
+            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_tag_blue_notselected"]];
             break;
         }
         case TABBAR_GROUP: {
-            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home_gray"]];
+            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home_not_selected"]];
             [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_tag_blue"]];
             break;
         }

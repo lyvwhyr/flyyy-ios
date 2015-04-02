@@ -351,13 +351,22 @@
 - (void)playButtonTapped:(FLYTopicDetailReplyCell *)tappedCell withReply:(FLYReply *)reply withIndexPath:(NSIndexPath *)indexPath
 {
     // clear the reset of the cells
-//    NSArray *visibleCells = [self.topicTableView visibleCells];
-//    for (int i = 0; i < visibleCells.count; i++) {
-//        FLYTopicDetailReplyCell *visibleCell = (FLYTopicDetailReplyCell *)(visibleCells[i]);
-//        if (visibleCell.indexPath != tappedCell.indexPath) {
-//            [visibleCell updatePlayState:FLYPlayStateNotSet];
-//        }
-//    }
+    NSArray *visibleCells = [self.topicTableView visibleCells];
+    for (int i = 0; i < visibleCells.count; i++) {
+        // topic cell
+        if (indexPath.section == 0) {
+            FLYFeedTopicTableViewCell *visibleCell = (FLYFeedTopicTableViewCell *)(visibleCells[i]);
+            if (visibleCell.indexPath != tappedCell.indexPath) {
+                [visibleCell updatePlayState:FLYPlayStateNotSet];
+            }
+        } else {
+            // reply cell
+            FLYTopicDetailReplyCell *visibleCell = (FLYTopicDetailReplyCell *)(visibleCells[i]);
+            if (visibleCell.indexPath != tappedCell.indexPath) {
+                [visibleCell updatePlayState:FLYPlayStateNotSet];
+            }
+        }
+    }
     
     FLYAudioItem *newItem = [[FLYAudioItem alloc] initWithUrl:[NSURL URLWithString:reply.mediaURL] andCount:0 indexPath:indexPath itemType:FLYPlayableItemDetailReply playState:FLYPlayStateNotSet audioDuration:reply.audioDuration];
     
@@ -371,13 +380,22 @@
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath
 {
     // clear the reset of the cells
-//    NSArray *visibleCells = [self.topicTableView visibleCells];
-//    for (int i = 0; i < visibleCells.count; i++) {
-//        FLYFeedTopicTableViewCell *visibleCell = (FLYFeedTopicTableViewCell *)(visibleCells[i]);
-//        if (visibleCell.indexPath != cell.indexPath) {
-//            [visibleCell updatePlayState:FLYPlayStateNotSet];
-//        }
-//    }
+    NSArray *visibleCells = [self.topicTableView visibleCells];
+    for (int i = 0; i < visibleCells.count; i++) {
+        // topic cell
+        if (indexPath.section == 0) {
+            FLYFeedTopicTableViewCell *visibleCell = (FLYFeedTopicTableViewCell *)(visibleCells[i]);
+            if (visibleCell.indexPath != cell.indexPath) {
+                [visibleCell updatePlayState:FLYPlayStateNotSet];
+            }
+        } else {
+            // reply cell
+            FLYTopicDetailReplyCell *visibleCell = (FLYTopicDetailReplyCell *)(visibleCells[i]);
+            if (visibleCell.indexPath != cell.indexPath) {
+                [visibleCell updatePlayState:FLYPlayStateNotSet];
+            }
+        }
+    }
     
     FLYAudioItem *newItem = [[FLYAudioItem alloc] initWithUrl:[NSURL URLWithString:post.mediaURL] andCount:0 indexPath:indexPath itemType:FLYPlayableItemDetailTopic playState:FLYPlayStateNotSet audioDuration:post.audioDuration];
     
@@ -592,13 +610,18 @@
     if (stopReason == STKAudioPlayerStopReasonEof) {
         // stop current
         if([FLYAudioManager sharedInstance].currentPlayItem) {
-            FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)([self.topicTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
-            [currentCell updatePlayState:FLYPlayStateNotSet];
+            if ([FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemDetailTopic) {
+                FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)([self.topicTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
+                [currentCell updatePlayState:FLYPlayStateNotSet];
+            } else if ([FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemDetailReply){
+                FLYTopicDetailReplyCell *currentCell = (FLYTopicDetailReplyCell *)([self.topicTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
+                [currentCell updatePlayState:FLYPlayStateNotSet];
+            }
         }
     }
     
     // stop previous
-    if ([FLYAudioManager sharedInstance].previousPlayItem && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemDetailTopic) {
+    if ([FLYAudioManager sharedInstance].previousPlayItem) {
         [self _clearPreviousPlayingItem];
     }
 }
@@ -674,9 +697,15 @@
         return;
     }
     
-    FLYFeedTopicTableViewCell *previousPlayingCell = (FLYFeedTopicTableViewCell *)([self.topicTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].previousPlayItem.indexPath]);
-    [FLYAudioManager sharedInstance].previousPlayItem.playState = FLYPlayStateNotSet;
-    [previousPlayingCell updatePlayState:FLYPlayStateNotSet];
+    if ([FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemDetailTopic) {
+        FLYFeedTopicTableViewCell *previousPlayingCell = (FLYFeedTopicTableViewCell *)([self.topicTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].previousPlayItem.indexPath]);
+        [FLYAudioManager sharedInstance].previousPlayItem.playState = FLYPlayStateNotSet;
+        [previousPlayingCell updatePlayState:FLYPlayStateNotSet];
+    } else if ([FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemDetailReply){
+        FLYTopicDetailReplyCell *previousPlayingCell = (FLYTopicDetailReplyCell *)([self.topicTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].previousPlayItem.indexPath]);
+        [FLYAudioManager sharedInstance].previousPlayItem.playState = FLYPlayStateNotSet;
+        [previousPlayingCell updatePlayState:FLYPlayStateNotSet];
+    }
 }
 
 #pragma mark - Navigation bar and status bar
