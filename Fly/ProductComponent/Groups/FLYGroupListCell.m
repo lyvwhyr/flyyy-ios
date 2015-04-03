@@ -51,7 +51,7 @@
 
 - (void)setGroupName:(NSString *)groupName
 {
-    self.groupNameLabel.text = groupName;
+    self.groupNameLabel.text = [NSString stringWithFormat:@"#%@", groupName];
 }
 
 - (void)updateConstraints
