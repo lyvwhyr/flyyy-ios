@@ -521,6 +521,7 @@
         [currentCell updatePlayState:FLYPlayStateNotSet];
         [FLYAudioManager sharedInstance].currentPlayItem = nil;
     }
+    [[FLYAudioManager sharedInstance].audioPlayer stop];
 }
 
 #pragma mark - reply view move in and off screen
