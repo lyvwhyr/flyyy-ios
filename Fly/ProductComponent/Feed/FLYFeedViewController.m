@@ -362,25 +362,6 @@
     });
 }
 
-
-//
-//-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(FLYAudioItem *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
-//{
-//    if (stopReason == STKAudioPlayerStopReasonEof) {
-//        // stop current
-//        if([FLYAudioManager sharedInstance].currentPlayItem && [FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemFeedTopic && [FLYAudioManager sharedInstance].currentPlayItem.indexPath == queueItemId.indexPath) {
-//            FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
-//            [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateNotSet;
-//            [currentCell updatePlayState:FLYPlayStateNotSet];
-//        }
-//    }
-//    
-//    // stop previous
-//    if ([FLYAudioManager sharedInstance].previousPlayItem && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemFeedTopic) {
-//        [self clearPreviousPlayingItem];
-//    }
-//}
-
 - (void)_newPostReceived:(NSNotification *)notif
 {
     FLYTopic *topic = [notif.userInfo objectForKey:kNewPostKey];

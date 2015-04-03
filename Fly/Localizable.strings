@@ -140,4 +140,6 @@
 
 // tags
 "FLYTags" = "Tags";
+"FLYSuggestATag" = "Suggest a tag";
+"FLYEnterTagNamePopupHintText" = "Enter a tag name";
 

@@ -114,7 +114,7 @@
         cell = [[FLYGroupListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         FLYGroupListCell *chooseGroupCell = (FLYGroupListCell *)cell;
         [chooseGroupCell.checkButton setImage:[UIImage imageNamed:@"icon_suggest_group"] forState:UIControlStateNormal];
-        chooseGroupCell.groupName = @"Suggest a Group";
+        chooseGroupCell.groupName = LOC(@"FLYSuggestATag");
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         return cell;
@@ -139,10 +139,12 @@
     if (kSuggestGroupRow == indexPath.row) {
         SCLAlertView *alert = [[SCLAlertView alloc] init];
         
-        UITextField *textField = [alert addTextField:@"Enter group name"];
+        UITextField *textField = [alert addTextField:LOC(@"FLYEnterTagNamePopupHintText")];
         
         [alert addButton:@"Suggest" actionBlock:^(void) {
-            NSLog(@"Text value: %@", textField.text);
+            NSDictionary *properties = @{kSuggestTagName:textField.text};
+            [[Mixpanel sharedInstance]  track:kTrackingEventClientSuggestTag properties:properties];
+            
             
             JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
             HUD.textLabel.text = @"Thank you";
@@ -151,9 +153,9 @@
             [HUD dismissAfterDelay:1.0];
         }];
         
-        [alert showCustom:self image:[UIImage imageNamed:@"icon_feed_play"] color:[UIColor flyBlue] title:@"Suggest" subTitle:@"Do you want to suggest a new tag? We are open to new ideas." closeButtonTitle:@"Cancel" duration:0.0f];
+        [alert showCustom:self image:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] color:[UIColor flyBlue] title:@"Suggest" subTitle:@"Do you want to suggest a new tag? We are open to new ideas." closeButtonTitle:@"Cancel" duration:0.0f];
     } else {
-        //Because the first cell is "Suggest a Group", we need to use indexPath.row - 1
+        //Because the first cell is "Suggest a tag", we need to use indexPath.row - 1
         FLYGroup *group = self.groups[indexPath.row - 1];
         FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
         [self.navigationController pushViewController:vc animated:YES];

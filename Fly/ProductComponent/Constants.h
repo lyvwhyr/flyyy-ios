@@ -41,12 +41,15 @@
 //Mixpanel event
 #define kTrackingEventClientError                               @"client_error"
 #define kTrackingEventClientTracking                            @"flyy_client"
+#define kTrackingEventClientSuggestTag                          @"suggest_tag"
 
 
 //Mixpanel properties
 #define kTrackingPropertyStatusCode                             @"status_code"
 #define kTrackingPropertyErrorMessage                           @"error_message"
 #define kTrackingPropertyServerResponseBody                     @"server_response_body"
+
+#define kSuggestTagName @"tag_name"
 
 //Auth
 #define kKeyChainServiceURL @"flyyapp.com"
