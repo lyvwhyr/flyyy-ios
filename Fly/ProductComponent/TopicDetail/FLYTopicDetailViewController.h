@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger, FlyTopicDetailCellType) {
 
 @interface FLYTopicDetailViewController : FLYUniversalViewController
 
+@property (nonatomic) BOOL isBackFullScreen;
+
 - (instancetype)initWithTopicId:(NSString *)topicId;
 - (instancetype)initWithTopic:(FLYTopic *)topic;
 

@@ -509,9 +509,7 @@
 
 - (void)_backButtonTapped
 {
-    self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
-    [self.view layoutIfNeeded];
-    [self.flyNavigationController popViewControllerAnimated:YES];
+    [self _popViewController];
 }
 
 
@@ -582,8 +580,8 @@
                                  NSDictionary *dict = @{@"topic":self.topic};
                                  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTopicDeleted object:self userInfo:dict];
                                  [Dialog simpleToast:LOC(@"FLYTopicDetailDeletedHUD")];
-                                 self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
-                                 [self.flyNavigationController popViewControllerAnimated:YES];
+                                 
+                                 [self _popViewController];
                              }
                          }];
 }
@@ -723,13 +721,22 @@
     return [UIColor flyBlue];
 }
 
+- (void)_popViewController
+{
+    if (self.isBackFullScreen) {
+        self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+    } else {
+        self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
+    }
+    [self.view layoutIfNeeded];
+    [self.flyNavigationController popViewControllerAnimated:YES];
+}
+
 - (void)_interactivePopGesture:(UIGestureRecognizer *)gesture
 {
     if (gesture.state == UIGestureRecognizerStateBegan)
     {
-        self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
-        [self.view layoutIfNeeded];
-        [self.flyNavigationController popViewControllerAnimated:YES];
+        [self _popViewController];
     }
 }
 

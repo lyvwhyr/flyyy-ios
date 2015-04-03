@@ -316,6 +316,7 @@
     [self.view layoutIfNeeded];
     FLYTopic *topic = self.posts[indexPath.row];
     FLYTopicDetailViewController *viewController = [[FLYTopicDetailViewController alloc] initWithTopic:topic];
+    viewController.isBackFullScreen = [self isFullScreen];
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
