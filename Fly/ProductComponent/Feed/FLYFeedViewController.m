@@ -30,6 +30,7 @@
 #import "FLYTopicService.h"
 #import "FLYCatalogViewController.h"
 #import "FLYAudioManager.h"
+#import "FLYMeViewController.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -209,7 +210,7 @@
     leftBarItem.actionBlock = ^(FLYBarButtonItem *item) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kHideRecordIconNotification object:self];
         self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
-        FLYCatalogViewController *vc = [FLYCatalogViewController new];
+        FLYMeViewController *vc = [FLYMeViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     };
     self.navigationItem.leftBarButtonItem = leftBarItem;

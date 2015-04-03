@@ -288,6 +288,8 @@
     
     if (topic.group.groupName) {
         [self.groupNameButton setTitle:[NSString stringWithFormat:@"#%@", topic.group.groupName] forState:UIControlStateNormal];
+    } else {
+        self.groupNameButton.userInteractionEnabled = NO;
     }
     [self.commentButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.replyCount]];
     
