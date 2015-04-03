@@ -112,6 +112,7 @@
 		A6450B171A998A08009EF0A3 /* AFSoundRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A6450B111A998A08009EF0A3 /* AFSoundRecord.m */; };
 		A6450B181A998A08009EF0A3 /* NSTimer+AFSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6450B131A998A08009EF0A3 /* NSTimer+AFSoundManager.m */; };
 		A6450B1B1A99C27F009EF0A3 /* FLYAudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6450B1A1A99C27F009EF0A3 /* FLYAudioManager.m */; };
+		A647008B1ACE68070074F990 /* FLYLogoutService.m in Sources */ = {isa = PBXBuildFile; fileRef = A647008A1ACE68070074F990 /* FLYLogoutService.m */; };
 		A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0C21A1962A200FF1744 /* FLYUtilities.m */; };
 		A648C0C61A1982D900FF1744 /* FLYTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0C51A1982D900FF1744 /* FLYTabView.m */; };
 		A648C0E31A19AD4A00FF1744 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0CD1A19AD4A00FF1744 /* MASCompositeConstraint.m */; };
@@ -652,6 +653,8 @@
 		A6450B131A998A08009EF0A3 /* NSTimer+AFSoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+AFSoundManager.m"; sourceTree = "<group>"; };
 		A6450B191A99C27F009EF0A3 /* FLYAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYAudioManager.h; sourceTree = "<group>"; };
 		A6450B1A1A99C27F009EF0A3 /* FLYAudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYAudioManager.m; sourceTree = "<group>"; };
+		A64700891ACE68070074F990 /* FLYLogoutService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYLogoutService.h; sourceTree = "<group>"; };
+		A647008A1ACE68070074F990 /* FLYLogoutService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLogoutService.m; sourceTree = "<group>"; };
 		A648C0BB1A1956AA00FF1744 /* FLYTabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTabBarView.h; sourceTree = "<group>"; };
 		A648C0BC1A1956AA00FF1744 /* FLYTabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTabBarView.m; sourceTree = "<group>"; };
 		A648C0C11A1962A200FF1744 /* FLYUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUtilities.h; sourceTree = "<group>"; };
@@ -2090,6 +2093,8 @@
 				A669FB651ABFE5B600A96D24 /* FLYUsernameService.m */,
 				A63B78331AC272B100E770C9 /* FLYConfigService.h */,
 				A63B78341AC272B100E770C9 /* FLYConfigService.m */,
+				A64700891ACE68070074F990 /* FLYLogoutService.h */,
+				A647008A1ACE68070074F990 /* FLYLogoutService.m */,
 			);
 			name = Services;
 			path = ../Services;
@@ -2931,6 +2936,7 @@
 				A6048AD31A8603EF00C67480 /* AFURLConnectionOperation.m in Sources */,
 				A6A0E4961A1E76110036116E /* FLEXArgumentInputStructView.m in Sources */,
 				A63B78351AC272B100E770C9 /* FLYConfigService.m in Sources */,
+				A647008B1ACE68070074F990 /* FLYLogoutService.m in Sources */,
 				A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */,
 				A65ED98C1A91B4F600E10D5C /* FLYReply.m in Sources */,
 				A6A0E49B1A1E76110036116E /* FLEXDefaultEditorViewController.m in Sources */,

@@ -18,6 +18,7 @@
 #import "FLYUsersService.h"
 #import "NSDictionary+FLYAddition.h"
 #import "Dialog.h"
+#import "FLYLogoutService.h"
 
 @interface FLYAppStateManager()
 
@@ -79,6 +80,8 @@
 
 - (void)_logout:(NSNotification *)notification
 {
+    [FLYLogoutService logoutWithSuccess:nil error:nil];
+    
     self.currentUser = nil;
     self.authToken = nil;
     self.userDefaultUserId = nil;
