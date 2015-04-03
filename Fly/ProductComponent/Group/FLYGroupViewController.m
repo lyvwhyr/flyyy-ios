@@ -18,9 +18,6 @@
 #import "FLYTopicService.h"
 
 @interface FLYGroupViewController ()
-
-//@property (nonatomic) FLYFeedViewController *feedViewController;
-
 @property (nonatomic) UILabel *groupTitleLabel;
 
 @property (nonatomic) BOOL hasJoinedGroup;
@@ -29,6 +26,8 @@
 @end
 
 @implementation FLYGroupViewController
+
+@synthesize isFullScreen = _isFullScreen;
 
 - (instancetype)initWithGroup:(FLYGroup *)group
 {
@@ -49,14 +48,9 @@
     self.title = [NSString stringWithFormat:@"#%@", self.group.groupName];
 }
 
-- (void)viewWillLayoutSubviews
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillLayoutSubviews];
-}
-
-- (void)updateViewConstraints
-{
-    [super updateViewConstraints];
+    [super viewWillAppear:animated];
 }
 
 #pragma mark - Navigation bar
@@ -100,6 +94,17 @@
 //        };
 //        self.navigationItem.rightBarButtonItem = barItem;
 //    }
+//}
+}
+
+- (BOOL)isFullScreen
+{
+    return _isFullScreen;
+}
+
+- (BOOL)hideLeftBarItem
+{
+    return YES;
 }
 
 -(void)_backButtonTapped

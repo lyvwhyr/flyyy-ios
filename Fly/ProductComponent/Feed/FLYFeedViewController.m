@@ -96,7 +96,7 @@
     _posts = [NSMutableArray new];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    if (![self isKindOfClass:[FLYGroupViewController class]]) {
+    if (![self hideLeftBarItem]) {
         [self _loadLeftBarItem];
     }
     [self _addInlineReplyBar];
@@ -221,7 +221,9 @@
     [super viewWillAppear:animated];
     
      [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kShowRecordIconNotification object:self];
+    if (![self isFullScreen]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kShowRecordIconNotification object:self];
+    }
 }
 
 - (void)updateViewConstraints
@@ -478,7 +480,8 @@
 {
     FLYGroup *group = ((FLYTopic *)self.posts[indexPath.row]).group;
     FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
-    [self.navigationController pushViewController:vc animated:YES];
+    vc.isFullScreen = [self isFullScreen];
+    [self.flyNavigationController pushViewController:vc animated:YES];
 }
 
 - (void)clearPreviousPlayingItem
@@ -567,6 +570,16 @@
 - (UIColor*)preferredStatusBarColor
 {
     return [UIColor flyBlue];
+}
+
+- (BOOL)hideLeftBarItem
+{
+    return NO;
+}
+
+- (BOOL)isFullScreen
+{
+    return _isFullScreen;
 }
 
 @end

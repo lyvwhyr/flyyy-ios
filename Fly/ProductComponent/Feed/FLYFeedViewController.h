@@ -22,9 +22,12 @@ typedef NS_ENUM(NSInteger, FLYFeedType) {
 // service
 @property (nonatomic) FLYTopicService *topicService;
 
+@property (nonatomic) BOOL isFullScreen;
+
 // feed type. default is home
 @property (nonatomic) FLYFeedType feedType;
 
-//- (void)clearCurrentPlayingItem;
+- (BOOL)hideLeftBarItem;
+- (BOOL)isFullScreen;
 
 @end

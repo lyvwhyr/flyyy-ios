@@ -116,6 +116,10 @@
 "FLYEverythingElseMyReplies" = "My replies";
 "FLYEverythingElseSettings" = "Settings";
 
+// me page
+"FLYMe" = "Me";
+"FLYMyPosts" = "My Posts";
+
 // settings
 "FLYYSettings" = "Settings";
 "FLYYSettingLoveFlyy" = "Love Flyy";

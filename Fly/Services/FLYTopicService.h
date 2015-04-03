@@ -20,6 +20,7 @@ typedef void(^FLYDeleteTopicErrorBlock)(id responseObj, NSError *error);
 
 + (instancetype)topicService;
 + (instancetype)topicsServiceWithGroupIds:(NSString *)groupIds;
++ (instancetype)myTopics;
 
 + (void)likeTopicWithId:(NSString *)topicId liked:(BOOL)liked successBlock:(FLYLikeSuccessBlock)successBlock errorBlock:(FLYLikeErrorBlock)errorBlock;
 + (void)deleteTopicWithId:(NSString *)topicId successBlock:(FLYDeleteTopicSuccessBlock)successBlock errorBlock:(FLYDeleteTopicErrorBlock)errorBlock;

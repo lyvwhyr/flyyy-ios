@@ -47,6 +47,7 @@
 		A61B6D451AAAF3A000A5B696 /* FLYRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61B6D441AAAF3A000A5B696 /* FLYRequestManager.m */; };
 		A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */; };
 		A61D18761A1F27E900D188B5 /* FLYPrePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */; };
+		A6227D0A1ACF23700039083D /* FLYMyTopicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6227D091ACF23700039083D /* FLYMyTopicsViewController.m */; };
 		A6263E921A187E1200C4C3BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263E911A187E1200C4C3BA /* main.m */; };
 		A6263E951A187E1200C4C3BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263E941A187E1200C4C3BA /* AppDelegate.m */; };
 		A6263E9B1A187E1200C4C3BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6263E991A187E1200C4C3BA /* Main.storyboard */; };
@@ -524,6 +525,8 @@
 		A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYAppStateManager.m; sourceTree = "<group>"; };
 		A61D18731A1F27E900D188B5 /* FLYPrePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPrePostViewController.h; sourceTree = "<group>"; };
 		A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostViewController.m; sourceTree = "<group>"; };
+		A6227D081ACF23700039083D /* FLYMyTopicsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYMyTopicsViewController.h; sourceTree = "<group>"; };
+		A6227D091ACF23700039083D /* FLYMyTopicsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYMyTopicsViewController.m; sourceTree = "<group>"; };
 		A6263E8C1A187E1200C4C3BA /* Flyy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flyy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6263E901A187E1200C4C3BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6263E911A187E1200C4C3BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1893,6 +1896,8 @@
 				A638D8321AC9FF2D00E67ED3 /* FLYEverythingElseCell.m */,
 				A647008C1ACE6C720074F990 /* FLYMeViewController.h */,
 				A647008D1ACE6C720074F990 /* FLYMeViewController.m */,
+				A6227D081ACF23700039083D /* FLYMyTopicsViewController.h */,
+				A6227D091ACF23700039083D /* FLYMyTopicsViewController.m */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -2976,6 +2981,7 @@
 				A6A0E4A01A1E76110036116E /* FLEXPropertyEditorViewController.m in Sources */,
 				A6A4EFAD1A2B05C700FD4066 /* FLYGroupListViewController.m in Sources */,
 				A643AEF91AA9539E00BF4E0F /* NIViewRecycler.m in Sources */,
+				A6227D0A1ACF23700039083D /* FLYMyTopicsViewController.m in Sources */,
 				A643AEF51AA9539E00BF4E0F /* NIRuntimeClassModifications.m in Sources */,
 				A6799C921AAC1071003DAE5B /* SDiPhoneVersion.m in Sources */,
 				A6A30D6F1A1B1DF8001AE1FE /* FLYCircleView.m in Sources */,

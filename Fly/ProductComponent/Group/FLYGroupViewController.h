@@ -12,6 +12,9 @@
 
 @interface FLYGroupViewController:FLYFeedViewController
 
+@property (nonatomic) BOOL isFullScreen;
+
 - (instancetype)initWithGroup:(FLYGroup *)group;
+
 
 @end

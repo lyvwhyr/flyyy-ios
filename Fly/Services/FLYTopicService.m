@@ -21,6 +21,11 @@
     return [FLYTopicService serviceWithEndpoint:[NSString stringWithFormat:@"topics?group_id=%@", groupIds]];
 }
 
++ (instancetype)myTopics
+{
+    return [FLYTopicService serviceWithEndpoint:[NSString stringWithFormat:@"topics/me"]];
+}
+
 + (void)likeTopicWithId:(NSString *)topicId liked:(BOOL)liked successBlock:(FLYLikeSuccessBlock)successBlock errorBlock:(FLYLikeErrorBlock)errorBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

@@ -14,6 +14,9 @@
 #import "FLYBarButtonItem.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYSettingsViewController.h"
+#import "FLYNavigationBar.h"
+#import "FLYFeedViewController.h"
+#import "FLYMyTopicsViewController.h"
 
 #define kNumberOfItems 3
 
@@ -28,6 +31,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIFont *titleFont = [UIFont fontWithName:@"Avenir-Roman" size:16];
+    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
+    self.title = LOC(@"FLYMe");
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.tableView = [UITableView new];
@@ -43,6 +51,8 @@
     [super viewWillAppear:animated];
     [self.flyNavigationController.interactivePopGestureRecognizer addTarget:self
                                                                      action:@selector(interactivePopGesture:)];
+    
+    self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -109,6 +119,10 @@
     
     switch (indexPath.row) {
         case FLYEverythingElseCellTypePosts: {
+            FLYMyTopicsViewController *myPostsVC = [FLYMyTopicsViewController new];
+            
+            self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+            [self.flyNavigationController pushViewController:myPostsVC animated:YES];
             break;
         }
         case FLYEverythingElseCellTypeReplies: {
@@ -116,7 +130,7 @@
         }
         case FLYEverythingElseCellTypeSettings: {
             FLYSettingsViewController *vc = [FLYSettingsViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
+            [self.flyNavigationController pushViewController:vc animated:YES];
             break;
         }
         default:
