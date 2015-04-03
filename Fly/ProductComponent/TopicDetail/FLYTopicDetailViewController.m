@@ -131,6 +131,12 @@
     [super viewWillAppear:animated];
     [_topicTableView reloadData];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    // There are 3 ways to navigatate back. We need to adjust navigation controller's frame.
+    // 1). Back button click  2). Swipe back  3). A post is deleted
+    // During swipe back, we pop the view directly so the bottom navigation bar will show immediately to avoid recording button and the other two buttons show at different time.
+    [self.flyNavigationController.interactivePopGestureRecognizer addTarget:self
+                                                                     action:@selector(_interactivePopGesture:)];
 }
 
 - (void)viewDidLayoutSubviews
@@ -143,6 +149,7 @@
 {
     [super viewWillDisappear:animated];
     [[FLYAudioManager sharedInstance].audioPlayer stop];
+    [self.flyNavigationController.interactivePopGestureRecognizer removeTarget:self action:nil];
 }
 
 - (void)updateViewConstraints
@@ -493,9 +500,9 @@
 
 - (void)_backButtonTapped
 {
-    self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
+    self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
     [self.view layoutIfNeeded];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.flyNavigationController popViewControllerAnimated:YES];
 }
 
 
@@ -566,7 +573,8 @@
                                  NSDictionary *dict = @{@"topic":self.topic};
                                  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTopicDeleted object:self userInfo:dict];
                                  [Dialog simpleToast:LOC(@"FLYTopicDetailDeletedHUD")];
-                                 [self.navigationController popViewControllerAnimated:YES];
+                                 self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
+                                 [self.flyNavigationController popViewControllerAnimated:YES];
                              }
                          }];
 }
@@ -704,6 +712,16 @@
 - (UIColor*)preferredStatusBarColor
 {
     return [UIColor flyBlue];
+}
+
+- (void)_interactivePopGesture:(UIGestureRecognizer *)gesture
+{
+    if (gesture.state == UIGestureRecognizerStateBegan)
+    {
+        self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
+        [self.view layoutIfNeeded];
+        [self.flyNavigationController popViewControllerAnimated:YES];
+    }
 }
 
 @end

@@ -17,7 +17,7 @@
 
 #define kNumberOfItems 3
 
-@interface FLYMeViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
+@interface FLYMeViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) UITableView *tableView;
 
