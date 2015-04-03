@@ -34,6 +34,7 @@
 #import "FLYUser.h"
 #import "FLYTopicService.h"
 #import "FLYReplyService.h"
+#import "FLYGroupViewController.h"
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYTopicDetailTabbarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -312,6 +313,14 @@
     recordViewController.topic = self.topic;
     UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
     [self presentViewController:navigationController animated:NO completion:nil];
+}
+
+- (void)groupNameTapped:(FLYFeedTopicTableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    FLYGroup *group = cell.topic.group;
+    FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
+    vc.isFullScreen = [self isFullScreen];
+    [self.flyNavigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - FLYTopicDetailReplyCellDelegate
@@ -722,6 +731,11 @@
         [self.view layoutIfNeeded];
         [self.flyNavigationController popViewControllerAnimated:YES];
     }
+}
+
+- (BOOL)isFullScreen
+{
+    return YES;
 }
 
 @end
