@@ -192,6 +192,13 @@
 
 - (void)updateConstraints
 {
+    if (_loadingIndicatorView) {
+        [_loadingIndicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.playButton);
+            make.centerY.equalTo(self.playButton);
+        }];
+    }
+    
     if (!self.didSetupConstraints) {
         [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self);
@@ -239,13 +246,6 @@
     [self updateConstraints];
     [_loadingIndicatorView startAnimating];
     return _loadingIndicatorView;
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    [self.contentView setNeedsLayout];
-    [self.contentView layoutIfNeeded];
 }
 
 #pragma mark - notification

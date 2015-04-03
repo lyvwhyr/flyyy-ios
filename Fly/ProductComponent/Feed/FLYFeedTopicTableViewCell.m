@@ -187,14 +187,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_replyCountUpdated:) name:kNewReplyDeletedNotification object:nil];
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    
-    [self.contentView setNeedsLayout];
-    [self.contentView layoutIfNeeded];
-}
-
 - (void)updateConstraints
 {
     if (_loadingIndicatorView) {
@@ -365,7 +357,6 @@
             break;
         }
     }
-    [self layoutIfNeeded];
 }
 
 #pragma mark - inline actions
