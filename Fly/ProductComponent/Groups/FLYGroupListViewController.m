@@ -41,7 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Groups";
+    self.title = LOC(@"FLYTags");
     
     _groupsTabelView = [UITableView new];
     _groupsTabelView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -61,12 +61,12 @@
     [super viewWillAppear:animated];
     UILabel *titleLabel = [UILabel new];
     titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.text = @"Groups";
+    titleLabel.text = LOC(@"FLYTags");
     [titleLabel sizeToFit];
     self.parentViewController.navigationItem.titleView = titleLabel;
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    self.title = @"Groups";
+    self.title = LOC(@"FLYTags");
     UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
 }
@@ -151,7 +151,7 @@
             [HUD dismissAfterDelay:1.0];
         }];
         
-        [alert showCustom:self image:[UIImage imageNamed:@"icon_feed_play"] color:[UIColor flyBlue] title:@"Suggest" subTitle:@"Do you want to suggest a new group? We are open to new ideas." closeButtonTitle:@"Cancel" duration:0.0f];
+        [alert showCustom:self image:[UIImage imageNamed:@"icon_feed_play"] color:[UIColor flyBlue] title:@"Suggest" subTitle:@"Do you want to suggest a new tag? We are open to new ideas." closeButtonTitle:@"Cancel" duration:0.0f];
     } else {
         //Because the first cell is "Suggest a Group", we need to use indexPath.row - 1
         FLYGroup *group = self.groups[indexPath.row - 1];

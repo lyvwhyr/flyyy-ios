@@ -138,4 +138,6 @@
 "FLYFeedbackMailTitle" = "Flyy App Feedback";
 "FLYFeedbackMailNotSetup" = "To send feedback via email, you'll first need to setup email on your device.";
 
+// tags
+"FLYTags" = "Tags";
 

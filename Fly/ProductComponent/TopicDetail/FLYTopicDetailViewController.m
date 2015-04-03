@@ -250,7 +250,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == FlyTopicCellSectionIndex) {
-        return 90;
+        return [FLYFeedTopicTableViewCell heightForTopic:self.topic];
     }
     return 80;
 }

@@ -26,7 +26,7 @@
         [self addSubview:_suggestImageView];
         
         _suggestTextLabel = [UILabel new];
-        _suggestTextLabel.text = @"Suggest a group";
+        _suggestTextLabel.text = @"Suggest a tag";
         [self addSubview:_suggestTextLabel];
         
         [self setNeedsUpdateConstraints];

@@ -150,7 +150,7 @@
     
     self.homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_home" recordTab:NO];
 //    self.groupsTab = [[FLYTabView alloc] initWithTitle:@"Groups" image:@"icon_homefeed_tags_grey" recordTab:NO];
-    self.groupsTab = [[FLYTabView alloc] initWithTitle:@"Groups" image:@"icon_homefeed_tag_blue_notselected" recordTab:NO];
+    self.groupsTab = [[FLYTabView alloc] initWithTitle:LOC(@"FLYTags") image:@"icon_homefeed_tag_blue_notselected" recordTab:NO];
     
     NSArray *tabs = @[self.homeTab, self.groupsTab];
     [self.tabBarView setTabViews:tabs];
