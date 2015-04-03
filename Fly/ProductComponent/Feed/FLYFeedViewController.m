@@ -224,6 +224,12 @@
     if (![self isFullScreen]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kShowRecordIconNotification object:self];
     }
+    
+    if ([self isFullScreen]) {
+        self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+    } else {
+        self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
+    }
 }
 
 - (void)updateViewConstraints
