@@ -35,6 +35,9 @@
 #import "FLYTopicService.h"
 #import "FLYReplyService.h"
 #import "FLYGroupViewController.h"
+#import "UIFont+FLYAddition.h"
+
+#define kReplyHeaderHeight 32
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYTopicDetailTabbarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -261,6 +264,36 @@
         return [FLYFeedTopicTableViewCell heightForTopic:self.topic];
     }
     return 80;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), kReplyHeaderHeight)];
+    customView.backgroundColor = [UIColor colorWithHexString:@"#F9F8F8"];
+    UILabel * sectionHeader = [UILabel new];
+    [customView addSubview:sectionHeader];
+    
+    CGRect frame = customView.frame;
+    frame.origin.x += 20;
+    frame.size.width = CGRectGetWidth(frame) - 20;
+    sectionHeader.frame = frame;
+    
+    sectionHeader.textAlignment = NSTextAlignmentLeft;
+    sectionHeader.font = [UIFont flyFontWithSize:15];
+    sectionHeader.textColor = [UIColor flyBlue];
+    if (section == 1) {
+        sectionHeader.text = LOC(@"FLYTopicDetailReplySectionHeaderText");
+        return customView;
+    }
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 0;
+    }
+    return kReplyHeaderHeight;
 }
 
 

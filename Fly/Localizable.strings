@@ -84,6 +84,7 @@
 "FLYTopicDetailDeletePostAlertTitle" = "Delete post";
 "FLYTopicDetailDeletePostAlertMessage" = "Are you sure you want to delete this post?";
 "FLYTopicDetailDeletedHUD" = "Deleted";
+"FLYTopicDetailReplySectionHeaderText" = "Replies:";
 
 "FLYTopicDetailActionsheetReportReply" = "Report comment";
 "FLYTopicDetailActionsheetDeleteReply" = "Delete comment";
