@@ -31,7 +31,7 @@
 #import "FLYCatalogViewController.h"
 #import "FLYAudioManager.h"
 
-@interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate, STKAudioPlayerDelegate>
+@interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
 @property (nonatomic) UIView *backgroundView;
 @property (nonatomic) FLYInlineReplyView *inlineReplyView;
@@ -68,10 +68,13 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(_audioPlayStateChanged:)
                                                      name:kNotificationAudioPlayStateChanged object:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_audioFinishedPlaying:)
+                                                     name:kNotificationDidFinishPlaying object:nil];
         
         _loadMoreCount = 0;
         _feedType = FLYFeedTypeHome;
-        [FLYAudioManager sharedInstance].audioPlayer.delegate = self;
         [self _addObservers];
     }
     return self;
@@ -186,7 +189,6 @@
 {
     [super viewWillDisappear:animated];
     [self clearAllPlaying];
-    [[FLYAudioManager sharedInstance].audioPlayer stop];
 }
 
 - (void)_addInlineReplyBar
@@ -361,45 +363,23 @@
 }
 
 
-#pragma mark - STKAudioPlayerDelegate
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState
-{
-    NSLog(@"state change");
-}
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer unexpectedError:(STKAudioPlayerErrorCode)errorCode
-{
-    NSLog(@"error");
-}
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(FLYAudioItem *)queueItemId
-{
-    [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationAudioPlayStateChanged object:self];
-}
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishBufferingSourceWithQueueItemId:(NSObject*)queueItemId
-{
-    
-}
-
--(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(FLYAudioItem *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
-{
-    if (stopReason == STKAudioPlayerStopReasonEof) {
-        // stop current
-        if([FLYAudioManager sharedInstance].currentPlayItem && [FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemFeedTopic && [FLYAudioManager sharedInstance].currentPlayItem.indexPath == queueItemId.indexPath) {
-            FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
-            [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateNotSet;
-            [currentCell updatePlayState:FLYPlayStateNotSet];
-        }
-    }
-    
-    // stop previous
-    if ([FLYAudioManager sharedInstance].previousPlayItem && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemFeedTopic) {
-        [self clearPreviousPlayingItem];
-    }
-}
+//
+//-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(FLYAudioItem *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
+//{
+//    if (stopReason == STKAudioPlayerStopReasonEof) {
+//        // stop current
+//        if([FLYAudioManager sharedInstance].currentPlayItem && [FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemFeedTopic && [FLYAudioManager sharedInstance].currentPlayItem.indexPath == queueItemId.indexPath) {
+//            FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
+//            [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateNotSet;
+//            [currentCell updatePlayState:FLYPlayStateNotSet];
+//        }
+//    }
+//    
+//    // stop previous
+//    if ([FLYAudioManager sharedInstance].previousPlayItem && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemFeedTopic) {
+//        [self clearPreviousPlayingItem];
+//    }
+//}
 
 - (void)_newPostReceived:(NSNotification *)notif
 {
@@ -450,6 +430,28 @@
         }
         default:
             break;
+    }
+}
+
+
+- (void)_audioFinishedPlaying:(NSNotification *)notif
+{
+    NSInteger stopReason = [[notif.userInfo objectForKey:kAudioStopReasonKey] integerValue];
+    FLYAudioItem *queueItemId = [notif.userInfo objectForKey:kAudioItemkey];
+    
+    
+    if (stopReason == STKAudioPlayerStopReasonEof) {
+        // stop current
+        if([FLYAudioManager sharedInstance].currentPlayItem && [FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemFeedTopic && [FLYAudioManager sharedInstance].currentPlayItem.indexPath == queueItemId.indexPath) {
+            FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
+            [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateNotSet;
+            [currentCell updatePlayState:FLYPlayStateNotSet];
+        }
+    }
+    
+    // stop previous
+    if ([FLYAudioManager sharedInstance].previousPlayItem && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemFeedTopic) {
+        [self clearPreviousPlayingItem];
     }
 }
 

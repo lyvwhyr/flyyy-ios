@@ -15,7 +15,7 @@
 #import "FLYAudioItem.h"
 #import "FLYDownloadManager.h"
 
-@interface FLYAudioManager()
+@interface FLYAudioManager()<STKAudioPlayerDelegate>
 
 @end
 
@@ -41,6 +41,7 @@
         _audioPlayer = [[STKAudioPlayer alloc] initWithOptions:(STKAudioPlayerOptions){ .flushQueueOnSeek = YES, .enableVolumeMixer = NO, .equalizerBandFrequencies = {50, 100, 200, 400, 800, 1600, 2600, 16000} }];
         _audioPlayer.meteringEnabled = YES;
         _audioPlayer.volume = 1;
+        _audioPlayer.delegate = self;
     }
     return self;
 }
@@ -70,7 +71,6 @@
     if (samePage && [FLYAudioManager sharedInstance].previousPlayItem.indexPath == tappedCellIndexPath) {
         if ([FLYAudioManager sharedInstance].previousPlayItem.playState == FLYPlayStateNotSet) {
             [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateLoading;
-//            [tappedCell updatePlayState:FLYPlayStateLoading];
             if ([FLYAudioManager sharedInstance].currentPlayItem.audioDuration < kStreamingMinimialLen) {
                 [[FLYDownloadManager sharedInstance] loadAudioByURLString:audioURLStr audioType:FLYDownloadableTopic];
             } else {
@@ -81,16 +81,13 @@
             return;
         } else if ([FLYAudioManager sharedInstance].previousPlayItem.playState == FLYPlayStatePlaying) {
             [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStatePaused;
-//            [tappedCell updatePlayState:FLYPlayStatePaused];
             [[FLYAudioManager sharedInstance].audioPlayer pause];
         } else if ([FLYAudioManager sharedInstance].previousPlayItem.playState == FLYPlayStatePaused) {
             [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
             [[FLYAudioManager sharedInstance].audioPlayer resume];
-//            [tappedCell updatePlayState:FLYPlayStateResume];
         }  else {
             [FLYAudioManager sharedInstance].previousPlayItem.playState = FLYPlayStateFinished;
             [[FLYAudioManager sharedInstance].audioPlayer stop];
-//            [tappedCell updatePlayState:FLYPlayStateFinished];
         }
     } else {
         //tap on a different cell
@@ -102,7 +99,6 @@
             [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[[FLYAudioItem alloc] initWithUrl:url andCount:0 indexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath itemType:tappedAudioItem.itemType playState:FLYPlayStateLoading audioDuration:[FLYAudioManager sharedInstance].currentPlayItem.audioDuration]];
             
             [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateLoading;
-            //        [tappedCell updatePlayState:FLYPlayStateLoading];
         }
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationAudioPlayStateChanged object:self];
@@ -135,6 +131,36 @@
             }
         }
     }];
+}
+
+#pragma mark - STKAudioPlayerDelegate
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState
+{
+    NSLog(@"state change");
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer unexpectedError:(STKAudioPlayerErrorCode)errorCode
+{
+    NSLog(@"error");
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(FLYAudioItem *)queueItemId
+{
+    [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationAudioPlayStateChanged object:self];
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishBufferingSourceWithQueueItemId:(NSObject*)queueItemId
+{
+    
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(FLYAudioItem *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
+{
+    
+    NSDictionary *dict = @{kAudioStopReasonKey:@(stopReason), kAudioItemkey:queueItemId};
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidFinishPlaying object:self userInfo:dict];
 }
 
 @end

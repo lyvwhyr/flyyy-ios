@@ -45,9 +45,9 @@
 
 @implementation FLYTopicDetailReplyCell
 
-#define kPlayButtonLeftPadding 24
+#define kPlayButtonLeftPadding 16.5
 #define kLikeTopPadding 8
-#define kLikeRightPadding 15
+#define kLikeRightPadding 10
 #define kCommentBottomPadding 8
 #define kBodyLabelYOffset 10
 #define kBodyLabelLeftPadding 20
@@ -99,7 +99,7 @@
         [self _clearProgressView];
         
         _progressView = [[UAProgressView alloc] init];
-        _progressView.tintColor = [UIColor flyColorPlayAnimation];
+        _progressView.tintColor = [UIColor flyBlue];
         _progressView.lineWidth = 3;
         _progressView.fillOnTouch = NO;
         _progressView.borderWidth = 0;

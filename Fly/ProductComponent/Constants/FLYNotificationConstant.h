@@ -29,6 +29,9 @@
 
 // Audio play state
 #define kNotificationAudioPlayStateChanged @"kNotificationAudioPlayStateChanged"
+#define kNotificationDidFinishPlaying @"kNotificationDidFinishPlaying"
+#define kAudioStopReasonKey @"kAudioStopReasonKey"
+#define kAudioItemkey @"kAudioItemkey"
 
 // logout
 #define kNotificationLogout @"kNotificationLogout"
