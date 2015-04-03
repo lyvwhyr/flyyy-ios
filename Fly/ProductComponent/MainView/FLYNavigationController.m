@@ -36,12 +36,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    __weak typeof(self)weakSelf = self;
     
-    if (!self.delegate) {
-        self.delegate = self;
+    if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)])
+    {
+        self.interactivePopGestureRecognizer.delegate = weakSelf;
+        [self.interactivePopGestureRecognizer addTarget:self action:@selector(interactivePopGesture:)];
+        self.delegate = weakSelf;
     }
-    
-    self.interactivePopGestureRecognizer.delegate = self;
 }
 
 - (FLYNavigationBar *)flyNavigationBar
@@ -64,6 +66,9 @@
                   animated:(BOOL)animated __attribute__((objc_requires_super))
 {
     self.duringPushAnimation = YES;
+    if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.interactivePopGestureRecognizer.enabled = NO;
+    }
     [super pushViewController:viewController animated:animated];
 }
 
@@ -73,9 +78,19 @@
        didShowViewController:(UIViewController *)viewController
                     animated:(BOOL)animated
 {
-    NSCAssert(self.interactivePopGestureRecognizer.delegate == self, @"AHKNavigationController won't work correctly if you change interactivePopGestureRecognizer's delegate.");
+//    NSCAssert(self.interactivePopGestureRecognizer.delegate == self, @"AHKNavigationController won't work correctly if you change interactivePopGestureRecognizer's delegate.");
     
     self.duringPushAnimation = NO;
+    
+    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        // disable interactivePopGestureRecognizer in the rootViewController of navigationController
+        if ([[navigationController.viewControllers firstObject] isEqual:viewController]) {
+            navigationController.interactivePopGestureRecognizer.enabled = NO;
+        } else {
+            // enable interactivePopGestureRecognizer
+            navigationController.interactivePopGestureRecognizer.enabled = YES;
+        }
+    }
     
     if ([self.realDelegate respondsToSelector:_cmd]) {
         [self.realDelegate navigationController:navigationController didShowViewController:viewController animated:animated];
@@ -87,7 +102,15 @@
 - (void)dealloc
 {
     self.delegate = nil;
+    [self.interactivePopGestureRecognizer removeTarget:self action:nil];
     self.interactivePopGestureRecognizer.delegate = nil;
+}
+
+- (void)interactivePopGesture:(UIGestureRecognizer *)interactivePopGesture
+{
+    if (interactivePopGesture.state == UIGestureRecognizerStateCancelled || interactivePopGesture.state == UIGestureRecognizerStateEnded) {
+        _duringPushAnimation = NO;
+    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate

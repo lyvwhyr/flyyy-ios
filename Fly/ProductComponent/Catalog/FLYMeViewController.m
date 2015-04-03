@@ -17,7 +17,7 @@
 
 #define kNumberOfItems 3
 
-@interface FLYMeViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface FLYMeViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic) UITableView *tableView;
 
@@ -36,6 +36,25 @@
     [self.view addSubview:self.tableView];
     
     [self _addViewConstraints];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.flyNavigationController.interactivePopGestureRecognizer addTarget:self
+                                                                     action:@selector(interactivePopGesture:)];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.flyNavigationController.interactivePopGestureRecognizer removeTarget:self action:nil];
+    
+}
+
+- (void)dealloc
+{
+    
 }
 
 #pragma mark - Navigation bar
@@ -153,9 +172,19 @@
 
 - (void)_backButtonTapped
 {
-    self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
+    self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
     [self.view layoutIfNeeded];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.flyNavigationController popViewControllerAnimated:YES];
+}
+
+- (void)interactivePopGesture:(UIGestureRecognizer *)gesture
+{
+    if (gesture.state == UIGestureRecognizerStateBegan)
+    {
+        self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
+        [self.view layoutIfNeeded];
+        [self.flyNavigationController popViewControllerAnimated:YES];
+    }
 }
 
 @end
