@@ -286,7 +286,9 @@
         [self setLiked:NO animated:NO];
     }
     
-    [self.groupNameButton setTitle:[NSString stringWithFormat:@"#%@", topic.group.groupName] forState:UIControlStateNormal];
+    if (topic.group.groupName) {
+        [self.groupNameButton setTitle:[NSString stringWithFormat:@"#%@", topic.group.groupName] forState:UIControlStateNormal];
+    }
     [self.commentButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.replyCount]];
     
     if (self.options & FLYTopicCellOptionGroupName) {
