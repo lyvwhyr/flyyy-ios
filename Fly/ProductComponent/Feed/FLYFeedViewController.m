@@ -175,6 +175,7 @@
     };
     FLYGetTopicsErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error){
         @strongify(self)
+        self.state = FLYViewControllerStateError;
         [self.feedTableView.pullToRefreshView stopAnimating];
         [self.feedTableView.infiniteScrollingView stopAnimating];
     };

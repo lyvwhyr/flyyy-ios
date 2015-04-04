@@ -21,7 +21,12 @@
 @interface FLYLoginSignupViewController ()
 
 @property (nonatomic) UIImageView *backgroundImageView;
-@property (nonatomic) FLYIconButton *logoButton;
+
+@property (nonatomic) UIView *logoView;
+@property (nonatomic) UIImageView *logoImageView;
+@property (nonatomic) UIView *logoSeparator;
+@property (nonatomic) UILabel *logoText;
+
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIButton *loginButton;
 @property (nonatomic) UIButton *signupButton;
@@ -36,11 +41,29 @@
     
     // hide the 1px bottom line in navigation bar
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-    self.view.backgroundColor = [UIColor flyBlue];
+    
+    self.backgroundImageView = [UIImageView new];
+    self.backgroundImageView.image = [UIImage imageNamed:@"icon_login_background"];
+    [self.view addSubview:self.backgroundImageView];
+    
+    self.logoView = [UIView new];
+    [self.view addSubview:self.logoView];
+    
+    self.logoImageView = [UIImageView new];
+    self.logoImageView.image = [UIImage imageNamed:@"icon_login_wings"];
+    [self.logoView addSubview:self.logoImageView];
+    
+    self.logoSeparator = [UIView new];
+    self.logoSeparator.backgroundColor = [UIColor whiteColor];
+    [self.logoView addSubview:self.logoSeparator];
     
     UIFont *font = [UIFont flyFontWithSize:24];
-    self.logoButton = [[FLYIconButton alloc] initWithText:@"Flyy" textFont:font textColor:[UIColor whiteColor]  icon:@"icon_login_wings" isIconLeft:YES];
-    [self.view addSubview:self.logoButton];
+    self.logoText = [UILabel new];
+    self.logoText.text = LOC(@"FLYFlyy");
+    self.logoText.font = font;
+    self.logoText.textColor = [UIColor whiteColor];
+    [self.logoView addSubview:self.logoText];
+    
     
     _titleLabel = [UILabel new];
     _titleLabel.text = LOC(@"FLYLoginTitle");
@@ -62,6 +85,19 @@
     [self.view addSubview:self.signupButton];
     
     [self _addViewConstraints];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 #pragma mark - Navigation bar
@@ -86,19 +122,37 @@
 
 - (void)_addViewConstraints
 {
-    [self.logoButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.logoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(85));
+        make.height.equalTo(@(35));
         make.centerX.equalTo(self.view);
         make.centerY.equalTo(self.view).offset(-90);
     }];
     
+    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.logoView);
+        make.centerY.equalTo(self.logoView);
+    }];
+    
+    [self.logoSeparator mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.logoImageView.mas_trailing).offset(5);
+        make.top.equalTo(self.logoView).offset(3);
+        make.width.equalTo(@(1));
+        make.bottom.equalTo(self.logoView).offset(-3);
+    }];
+    
+    [self.logoText mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.logoSeparator.mas_trailing).offset(5);
+        make.centerY.equalTo(self.logoView);
+    }];
+    
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.top.equalTo(self.logoButton.mas_bottom).offset(kTitleTopPadding);
+        make.top.equalTo(self.logoView.mas_bottom).offset(kTitleTopPadding);
     }];
     
     [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.view);
-        make.top.equalTo(self.view);
+        make.edges.equalTo(self.view);
     }];
     
     [self.signupButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -131,12 +185,12 @@
 #pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor
 {
-    return [UIColor flyBlue];
+    return [UIColor clearColor];
 }
 
 - (UIColor*)preferredStatusBarColor
 {
-    return [UIColor flyBlue];
+    return [UIColor colorWithPatternImage: [UIImage imageNamed:@"icon_login_background"]];
 }
 
 @end

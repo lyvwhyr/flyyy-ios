@@ -66,6 +66,7 @@
     self.repliesTableView = [UITableView new];
     self.repliesTableView.delegate = self;
     self.repliesTableView.dataSource = self;
+    self.repliesTableView.scrollsToTop = YES;
     self.repliesTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.repliesTableView];
     
@@ -165,8 +166,6 @@
 #pragma mark - services
 - (void)_initService
 {
-    self.replyService = [FLYReplyService getMyReplies];
-    [self _load:YES before:nil];
     @weakify(self)
     [self.repliesTableView addPullToRefreshWithActionHandler:^{
         @strongify(self)
@@ -178,10 +177,17 @@
         @strongify(self)
         [self _load:NO before:self.beforeTimestamp];
     }];
+    
+    [self _load:YES before:nil];
 }
 
 - (void)_load:(BOOL)first before:(NSString *)before
 {
+    if (!self.replyService) {
+        self.replyService = [FLYReplyService getMyReplies];
+    }
+    
+    self.state = FLYViewControllerStateLoading;
     @weakify(self)
     FLYGetMyRepliesSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
         @strongify(self)
@@ -189,6 +195,9 @@
         [self.repliesTableView.infiniteScrollingView stopAnimating];
 
         NSArray *repliesArray = responseObj;
+        if (repliesArray || [repliesArray count] == 0) {
+            self.state = FLYViewControllerStateError;
+        }
         
         self.state = FLYViewControllerStateReady;
         if (first) {
