@@ -65,9 +65,6 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        NSString *audioDir = [FLYFileManager audioCacheDirectory];
-        [[FLYFileManager sharedInstance] debugPrintFilesAndSizeForDirectory:audioDir];
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_hideRecordButton) name:kHideRecordIconNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_showRecordButton) name:kShowRecordIconNotification object:nil];
     }

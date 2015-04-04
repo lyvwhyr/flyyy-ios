@@ -275,7 +275,6 @@
     }
 }
 
-//curl -X POST -i -d "topic_title=abc" -d "media_id=418819451816822124" "localhost:3000/v1/topics?token=secret123&media_id=not_valid&group_id=12345&audio_duration=10&extension=m4a"
 #pragma mark - Service
 - (void)_serviceCreateTopicWithParams:(NSDictionary *)dict
 {
@@ -286,7 +285,7 @@
                              @"group_id":self.selectedGroup.groupId,
                              @"audio_duration":@(self.audioDuration)
                              };
-    NSString *baseURL =  [NSString stringWithFormat:@"topics?token=secret123&&media_id=not_valid&user_id=%@", userId];
+    NSString *baseURL =  [NSString stringWithFormat:@"topics?&media_id=not_valid&user_id=%@", userId];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:baseURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         FLYTopic *post = [[FLYTopic alloc] initWithDictory:responseObject];

@@ -96,8 +96,6 @@
     [fromVC presentViewController:nav animated:NO completion:nil];
     
     [Dialog simpleToast:LOC(@"FLYSuccessfullyLoggedOut")];
-    
-    // TODO:clean up cache data
 }
 
 @end

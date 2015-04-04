@@ -19,8 +19,7 @@
 
 + (void)getGroupListService:(GroupListServiceResponseBlock)responseBlock
 {
-    NSString *baseURL = @"groups?token=secret123";
-//        NSString *baseURL = @"http://localhost:3001/v1/groups?token=secret123";
+    NSString *baseURL = @"groups";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:baseURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         responseBlock(responseObject);
@@ -29,7 +28,6 @@
     }];
 }
 
-//curl -X POST -F "media=@/Users/xingxingxu/Desktop/11223632430542967739.m4a" -i "http://localhost:3000/v1/media/upload?token=secret123&user_id=1349703091376390371"
 + (void)uploadAudioFileServiceWithUserId:(NSString *)userId successBlock:(mediaUploadSuccessBlock)successBlock failureBlock:(mediaUploadFailureBlock)fail
 {
     [FLYAppStateManager sharedInstance].mediaId = nil;

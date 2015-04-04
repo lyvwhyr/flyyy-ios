@@ -41,6 +41,8 @@ static const NSInteger kCachMaxSize = 256 * 1024 * 1024;  //256M
         
         _cleanupFileManager = [[NSFileManager alloc] init];
         [self _cleanCache];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_cleanupDataOnLogout) name:kNotificationLogout object:nil];
     }
     return self;
 }
@@ -53,7 +55,7 @@ static const NSInteger kCachMaxSize = 256 * 1024 * 1024;  //256M
 - (void)_cleanCache
 {
     float currentAudioCacheSize = [self currentAudioCacheSize];
-    UALog(@"cache size: %.2f", currentAudioCacheSize/1024/1024);
+    UALog(@"cache size: %.2fm", currentAudioCacheSize/1024/1024);
     dispatch_async(_cacheCleanupQueue, ^{
         [self _cleanupCacheHelper];
     });
@@ -67,7 +69,7 @@ static const NSInteger kCachMaxSize = 256 * 1024 * 1024;  //256M
         NSDictionary *attributes = [_cleanupFileManager attributesOfItemAtPath:filePath error:nil];
         NSInteger fileSize = [attributes[NSFileSize] integerValue];
         NSString *fileName = [[filePath componentsSeparatedByString:@"/"] lastObject];
-        //UALog(@"File name: %@, size %.2fk", fileName, fileSize/1024.0);
+        UALog(@"File name: %@, size %.2fk", fileName, fileSize/1024.0);
     }
 }
 
@@ -125,7 +127,7 @@ static const NSInteger kCachMaxSize = 256 * 1024 * 1024;  //256M
     }
     for (NSString *file in files) {
         NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[audioDirectoryPath stringByAppendingPathComponent:file] error:nil];
-        if ([attributes[NSFileType] isEqualToString:NSFileTypeRegular] && ([[file pathExtension] isEqualToString:@"mp3"] || [[file pathExtension] isEqualToString:@"part"])) {
+        if ([attributes[NSFileType] isEqualToString:NSFileTypeRegular] && ([[file pathExtension] isEqualToString:@"m4a"] || [[file pathExtension] isEqualToString:@"part"])) {
             size += [attributes[NSFileSize] integerValue];
         }
     }
@@ -158,6 +160,19 @@ static const NSInteger kCachMaxSize = 256 * 1024 * 1024;  //256M
         return YES;
     }
     return NO;
+}
+
+- (void)_cleanupDataOnLogout
+{
+    NSString *cacheDir = [FLYFileManager audioCacheDirectory];
+    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:cacheDir error:nil];
+    for (NSString *file in files) {
+        NSError *error;
+        [[NSFileManager defaultManager] removeItemAtPath:[cacheDir stringByAppendingPathComponent:file] error:&error];
+        if (error) {
+            UALog(@"Error deleting file at path: %@", [cacheDir stringByAppendingPathComponent:file]);
+        }
+    }
 }
 
 @end
