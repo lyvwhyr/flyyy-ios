@@ -50,7 +50,7 @@
         _liked = [dict fly_boolForKey:@"liked" defaultValue:0];
         
         NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:[_createdAt longLongValue]/1000];
-        NSString *ago = [date timeAgo];
+        NSString *ago = [date timeAgoSimple];
         _displayableCreateAt = ago;
     }
     return self;
