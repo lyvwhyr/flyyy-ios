@@ -15,6 +15,7 @@
 #import "FLYReply.h"
 #import "FLYTopic.h"
 #import "FLYMyRepliesCell.h"
+#import "FLYTopicDetailViewController.h"
 
 @interface FLYMyRepliesViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -96,6 +97,15 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 80;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    FLYTopic *topic = [[self.entries objectAtIndex:indexPath.row] objectForKey:@"topic"];
+    FLYTopicDetailViewController *viewController = [[FLYTopicDetailViewController alloc] initWithTopic:topic];
+    viewController.isBackFullScreen = YES;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 
