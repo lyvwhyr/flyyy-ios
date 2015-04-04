@@ -37,12 +37,14 @@
     FLYNavigationController *navigationVC = [[FLYNavigationController alloc] initWithRootViewController:mainVC];
     self.window.rootViewController = navigationVC;
     
+    NSURLCache *urlCache = [[NSURLCache alloc] initWithMemoryCapacity:1024*1024*10 diskCapacity:1024*1024*100 diskPath:nil];
+    [NSURLCache setSharedURLCache:urlCache];
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [FLYAppStateManager sharedInstance];
         [FLYFileManager sharedInstance];
         [FLYGroupManager sharedInstance];
         [FLYRequestManager sharedInstance];
-//        [FLYAudioManager sharedInstance];
     });
     
     [self _setupThirdLibraries];
@@ -78,7 +80,7 @@
         token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
         [FLYAppStateManager sharedInstance].deviceToken = token;
         
-        NSDictionary *params = @{@"device_token":token};
+//        NSDictionary *params = @{@"device_token":token};
 //        [EPRequest epSetDeviceInfo:params];
     }
 }

@@ -91,6 +91,7 @@
         }
     } else {
         //tap on a different cell
+        [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateLoading;
         if ([FLYAudioManager sharedInstance].currentPlayItem.audioDuration < kStreamingMinimialLen) {
             [[FLYDownloadManager sharedInstance] loadAudioByURLString:audioURLStr audioType:FLYDownloadableTopic];
         } else {
