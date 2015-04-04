@@ -456,12 +456,7 @@
 #pragma mark - FLYFeedTopicTableViewCellDelegate
 - (void)commentButtonTapped:(FLYFeedTopicTableViewCell *)cell
 {
-     self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
-    [self.view layoutIfNeeded];
-    [self.view bringSubviewToFront:_inlineReplyView];
-    [self _moveInlineReplyViewOnScreen];
-    [self.view needsUpdateConstraints];
-    [self.view layoutIfNeeded];
+    [self tableView:self.feedTableView didSelectRowAtIndexPath:cell.indexPath];
 }
 
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)tappedCell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath

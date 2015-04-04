@@ -114,7 +114,7 @@
         [self.contentView addSubview:_likeButton];
         
         _commentButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyInlineAction] icon:@"icon_homefeed_comment_light" isIconLeft:YES];
-        _commentButton.userInteractionEnabled = NO;
+        [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_commentButton sizeToFit];
         [self.contentView addSubview:_commentButton];
@@ -384,6 +384,11 @@
     [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"" component:self.topic.topicId element:@"like_button" action:@"click"];
     
     [self.topic like];
+}
+
+- (void)_commentButtonTapped
+{
+    [self.delegate commentButtonTapped:self];
 }
 
 - (void)_shareButtonTapped
