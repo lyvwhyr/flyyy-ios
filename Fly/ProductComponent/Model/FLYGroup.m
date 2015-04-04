@@ -15,7 +15,6 @@
 {
     if (self = [super init]) {
         if (dict == nil) {
-            UALog(@"User dictionary is empty");
             return self;
         }
         _groupId = [[dict fly_objectOrNilForKey:@"group_id"] stringValue];
