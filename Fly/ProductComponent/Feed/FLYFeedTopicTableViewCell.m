@@ -93,12 +93,15 @@
         _userNameLabel.textColor = [UIColor flyGrey];
         _userNameLabel.font = [UIFont fontWithName:@"Avenir-Book" size:8];
         _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _userNameLabel.adjustsFontSizeToFitWidth = YES;
+        _userNameLabel.minimumScaleFactor = 0.5;
         [self.contentView addSubview:_userNameLabel];
         
         _groupNameButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _groupNameButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_groupNameButton addTarget:self action:@selector(_groupNameTapped) forControlEvents:UIControlEventTouchUpInside];
         _groupNameButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:13];
+        _groupNameButton.titleLabel.adjustsFontSizeToFitWidth = YES;
         [_groupNameButton setTitleColor:[UIColor flyHomefeedBlue] forState:UIControlStateNormal];
         _groupNameButton.titleEdgeInsets = UIEdgeInsetsZero;
         [_groupNameButton sizeToFit];
@@ -212,10 +215,11 @@
             make.width.lessThanOrEqualTo(self.contentView).offset(-leftPadding-rightPadding);
         };
         
+        
         void (^userNameLabelBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
             make.top.equalTo(self.topicTitle.mas_bottom).offset(10);
             make.leading.equalTo(self.topicTitle);
-//            make.width.lessThanOrEqualTo(self.topicContentView).offset(kUsernameOffset);
+            make.trailing.lessThanOrEqualTo(self.topicTitle.mas_centerX).offset(-25);
         };
 
         void (^likeButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
@@ -231,6 +235,8 @@
         void (^groupNameButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.userNameLabel);
             make.leading.equalTo(self.userNameLabel.mas_trailing).offset(kGroupLeftPadding);
+            make.trailing.lessThanOrEqualTo(self.topicTitle.mas_trailing);
+            make.width.lessThanOrEqualTo(@(CGRectGetWidth(self.bounds)/4));
         };
         
         [self.playButton mas_makeConstraints:playButtonBlock];

@@ -190,7 +190,8 @@
 
 - (UIColor*)preferredStatusBarColor
 {
-    return [UIColor colorWithPatternImage: [UIImage imageNamed:@"icon_login_background"]];
+    return [UIColor clearColor];
+//    return [UIColor colorWithPatternImage: [UIImage imageNamed:@"icon_login_background"]];
 }
 
 @end

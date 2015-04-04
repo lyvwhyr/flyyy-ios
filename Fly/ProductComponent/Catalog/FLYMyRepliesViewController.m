@@ -221,6 +221,7 @@
     };
     FLYGetMyRepliesErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error){
         @strongify(self)
+        self.state = FLYViewControllerStateError;
         [self.repliesTableView.pullToRefreshView stopAnimating];
         [self.repliesTableView.infiniteScrollingView stopAnimating];
     };
