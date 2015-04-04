@@ -150,7 +150,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[FLYAudioManager sharedInstance].audioPlayer stop];
+    [self _clearAllPlaying];
     [self.flyNavigationController.interactivePopGestureRecognizer removeTarget:self action:nil];
 }
 
@@ -739,6 +739,36 @@
         [FLYAudioManager sharedInstance].previousPlayItem.playState = FLYPlayStateNotSet;
         [previousPlayingCell updatePlayState:FLYPlayStateNotSet];
     }
+}
+
+- (void)_clearAllPlaying
+{
+    FLYAudioItem *previousItem = [FLYAudioManager sharedInstance].previousPlayItem;
+    FLYAudioItem *currentItem = [FLYAudioManager sharedInstance].currentPlayItem;
+    if (previousItem) {
+        if (previousItem.itemType == FLYPlayableItemDetailTopic) {
+            FLYFeedTopicTableViewCell *previousPlayingCell = (FLYFeedTopicTableViewCell *)([self.topicTableView cellForRowAtIndexPath:previousItem.indexPath]);
+            [previousPlayingCell updatePlayState:FLYPlayStateNotSet];
+            [FLYAudioManager sharedInstance].previousPlayItem = nil;
+        } else if (previousItem.itemType == FLYPlayableItemDetailReply) {
+            FLYTopicDetailReplyCell *previousPlayingCell = (FLYTopicDetailReplyCell *)([self.topicTableView cellForRowAtIndexPath:previousItem.indexPath]);
+            [previousPlayingCell updatePlayState:FLYPlayStateNotSet];
+            [FLYAudioManager sharedInstance].previousPlayItem = nil;
+        }
+    }
+    
+    if (currentItem) {
+        if (currentItem.itemType == FLYPlayableItemDetailTopic) {
+            FLYTopicDetailReplyCell *currentCell = (FLYTopicDetailReplyCell *)([self.topicTableView cellForRowAtIndexPath:currentItem.indexPath]);
+            [currentCell updatePlayState:FLYPlayStateNotSet];
+            [FLYAudioManager sharedInstance].currentPlayItem = nil;
+        } else if (currentItem.itemType == FLYPlayableItemDetailReply) {
+            FLYTopicDetailReplyCell *currentCell = (FLYTopicDetailReplyCell *)([self.topicTableView cellForRowAtIndexPath:currentItem.indexPath]);
+            [currentCell updatePlayState:FLYPlayStateNotSet];
+            [FLYAudioManager sharedInstance].currentPlayItem = nil;
+        }
+    }
+    [[FLYAudioManager sharedInstance].audioPlayer stop];
 }
 
 #pragma mark - Navigation bar and status bar
