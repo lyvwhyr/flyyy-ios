@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "FLYDownloadableAudio.h"
 
-#define kDownloadCompleteNotification @"kDownloadCompleteNotification"
-
 @interface FLYDownloadManager : NSObject {
     dispatch_queue_t _startDownloadQueue;
 }

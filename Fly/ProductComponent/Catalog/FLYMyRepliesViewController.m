@@ -16,8 +16,10 @@
 #import "FLYTopic.h"
 #import "FLYMyRepliesCell.h"
 #import "FLYTopicDetailViewController.h"
+#import "FLYAudioItem.h"
+#import "FLYAudioManager.h"
 
-@interface FLYMyRepliesViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface FLYMyRepliesViewController ()<UITableViewDataSource, UITableViewDelegate, FLYMyRepliesCellDelegate>
 
 @property (nonatomic) UITableView *repliesTableView;
 
@@ -37,6 +39,20 @@
 {
     if (self = [super init]) {
         _entries = [NSMutableArray new];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_downloadComplete:)
+                                                     name:kDownloadCompleteNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_audioPlayStateChanged:)
+                                                     name:kNotificationAudioPlayStateChanged
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_audioFinishedPlaying:)
+                                                     name:kNotificationDidFinishPlaying object:nil];
     }
     return self;
 }
@@ -56,6 +72,12 @@
     [self _addViewConstraints];
     
     [self _initService];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self _clearAllPlaying];
 }
 
 - (void)_addViewConstraints
@@ -86,7 +108,9 @@
     
     FLYTopic *topic = [[self.entries objectAtIndex:indexPath.row] objectForKey:@"topic"];
     FLYReply *reply = [[self.entries objectAtIndex:indexPath.row] objectForKey:@"reply"];
+    cell.indexPath = indexPath;
     [cell setupCellWithTopic:topic reply:reply];
+    cell.delegate = self;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell setNeedsUpdateConstraints];
@@ -106,6 +130,35 @@
     FLYTopicDetailViewController *viewController = [[FLYTopicDetailViewController alloc] initWithTopic:topic];
     viewController.isBackFullScreen = YES;
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // stop previous. same cell.
+    if (![[FLYAudioManager sharedInstance].previousPlayItem isEqual:[FLYAudioManager sharedInstance].currentPlayItem] && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemMyRepliesReply && indexPath == [FLYAudioManager sharedInstance].previousPlayItem.indexPath) {
+        [self _clearPreviousPlayingItem];
+    }
+    
+    if (indexPath != [FLYAudioManager sharedInstance].currentPlayItem.indexPath) {
+        FLYMyRepliesCell *displayedCell = (FLYMyRepliesCell *)cell;
+        [displayedCell updatePlayState:FLYPlayStateNotSet];
+    }
+    
+    
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 
@@ -145,6 +198,10 @@
         for(int i = 0; i < repliesArray.count; i++) {
             FLYReply *reply = [[FLYReply alloc] initWithDictionary:repliesArray[i]];
             FLYTopic *topic = [[FLYTopic alloc] initWithDictory:[repliesArray[i] objectForKey:@"topic"]];
+            // If topic is empty, it means the topic has been removed. The reply shouldn't be displayed in this case.
+            if (!topic.topicId) {
+                continue;
+            }
             NSDictionary *dict = @{@"topic":topic, @"reply":reply};
             [self.entries addObject:dict];
         }
@@ -159,6 +216,130 @@
         [self.repliesTableView.infiniteScrollingView stopAnimating];
     };
     [self.replyService nextPage:before firstPage:first successBlock:successBlock errorBlock:errorBlock];
+}
+
+#pragma mark - FLYMyRepliesCellDelegate
+
+- (void)playButtonTapped:(FLYMyRepliesCell *)cell withIndexPath:(NSIndexPath *)indexPath
+{
+    // clear the reset of the cells
+    NSArray *visibleCells = [self.repliesTableView visibleCells];
+    for (int i = 0; i < visibleCells.count; i++) {
+        FLYMyRepliesCell *visibleCell = (FLYMyRepliesCell *)(visibleCells[i]);
+        if (visibleCell.indexPath != cell.indexPath) {
+            [visibleCell updatePlayState:FLYPlayStateNotSet];
+        }
+    }
+    
+    FLYReply *reply = cell.reply;
+    FLYAudioItem *newItem = [[FLYAudioItem alloc] initWithUrl:[NSURL URLWithString:reply.mediaURL] andCount:0 indexPath:indexPath itemType:FLYPlayableItemMyRepliesReply playState:FLYPlayStateNotSet audioDuration:reply.audioDuration];
+    
+    if ([newItem isEqual:[FLYAudioManager sharedInstance].currentPlayItem]) {
+        newItem = [FLYAudioManager sharedInstance].currentPlayItem;
+    }
+    
+    [[FLYAudioManager sharedInstance] updateAudioState:newItem];
+}
+
+
+#pragma mark - Audio related methods
+- (void)_clearAllPlaying
+{
+    if ([FLYAudioManager sharedInstance].previousPlayItem) {
+        FLYMyRepliesCell *previousPlayingCell = (FLYMyRepliesCell *)([self.repliesTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].previousPlayItem.indexPath]);
+        [previousPlayingCell updatePlayState:FLYPlayStateNotSet];
+        [FLYAudioManager sharedInstance].previousPlayItem = nil;
+    }
+    
+    if ([FLYAudioManager sharedInstance].currentPlayItem) {
+        FLYMyRepliesCell *currentCell = (FLYMyRepliesCell *)([self.repliesTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
+        [currentCell updatePlayState:FLYPlayStateNotSet];
+        [FLYAudioManager sharedInstance].currentPlayItem = nil;
+    }
+    [[FLYAudioManager sharedInstance].audioPlayer stop];
+}
+
+- (void)_clearPreviousPlayingItem
+{
+    if (![FLYAudioManager sharedInstance].previousPlayItem) {
+        return;
+    }
+    
+    FLYMyRepliesCell *previousPlayingCell = (FLYMyRepliesCell *)([self.repliesTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].previousPlayItem.indexPath]);
+    [FLYAudioManager sharedInstance].previousPlayItem.playState = FLYPlayStateNotSet;
+    [previousPlayingCell updatePlayState:FLYPlayStateNotSet];
+}
+
+- (void)_downloadComplete:(NSNotification *)notificaiton
+{
+    NSString *localPath = [notificaiton.userInfo objectForKey:kDownloadAudioLocalPathkey];
+    if([FLYAudioManager sharedInstance].currentPlayItem.itemType != FLYPlayableItemMyRepliesReply) {
+        return;
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStatePlaying;
+        NSURL* url = [NSURL fileURLWithPath:localPath];
+        STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
+        [[FLYAudioManager sharedInstance].audioPlayer setDataSource:dataSource withQueueItemId:[FLYAudioManager sharedInstance].currentPlayItem];
+    });
+}
+
+- (void)_audioPlayStateChanged:(NSNotification *)notif
+{
+    FLYAudioItem *currentItem = [FLYAudioManager sharedInstance].currentPlayItem;
+    if (currentItem.itemType != FLYPlayableItemMyRepliesReply) {
+        return;
+    }
+    
+    FLYMyRepliesCell *currentCell = (FLYMyRepliesCell *) [self.repliesTableView cellForRowAtIndexPath:currentItem.indexPath];
+    if (!currentCell) {
+        return;
+    }
+    switch (currentItem.playState) {
+        case FLYPlayStateLoading:{
+            [currentCell updatePlayState:FLYPlayStateLoading];
+            break;
+        }
+        case FLYPlayStatePlaying:{
+            [currentCell updatePlayState:FLYPlayStatePlaying];
+            break;
+        }
+        case FLYPlayStatePaused:{
+            [currentCell updatePlayState:FLYPlayStatePaused];
+            break;
+        }
+        case FLYPlayStateResume:{
+            [currentCell updatePlayState:FLYPlayStateResume];
+            break;
+        }
+        case FLYPlayStateFinished:{
+            [currentCell updatePlayState:FLYPlayStateFinished];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void)_audioFinishedPlaying:(NSNotification *)notif
+{
+    NSInteger stopReason = [[notif.userInfo objectForKey:kAudioStopReasonKey] integerValue];
+    FLYAudioItem *queueItemId = [notif.userInfo objectForKey:kAudioItemkey];
+    
+    
+    if (stopReason == STKAudioPlayerStopReasonEof) {
+        // stop current
+        if([FLYAudioManager sharedInstance].currentPlayItem && [FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemMyRepliesReply && [FLYAudioManager sharedInstance].currentPlayItem.indexPath == queueItemId.indexPath) {
+            FLYMyRepliesCell *currentCell = (FLYMyRepliesCell *)([self.repliesTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
+            [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateNotSet;
+            [currentCell updatePlayState:FLYPlayStateNotSet];
+        }
+    }
+    
+    // stop previous
+    if ([FLYAudioManager sharedInstance].previousPlayItem && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemMyRepliesReply) {
+        [self _clearPreviousPlayingItem];
+    }
 }
 
 #pragma mark - Navigation bar and status bar

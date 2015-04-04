@@ -32,6 +32,7 @@
 #define kNotificationDidFinishPlaying @"kNotificationDidFinishPlaying"
 #define kAudioStopReasonKey @"kAudioStopReasonKey"
 #define kAudioItemkey @"kAudioItemkey"
+#define kDownloadCompleteNotification @"kDownloadCompleteNotification"
 
 // logout
 #define kNotificationLogout @"kNotificationLogout"

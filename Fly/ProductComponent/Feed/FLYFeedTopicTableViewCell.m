@@ -269,6 +269,10 @@
 #pragma mark - assign values to cell
 - (void)setupTopic:(FLYTopic *)topic needUpdateConstraints:(BOOL)needUpdateConstraints
 {
+    if (topic.topicTitle.length == 0) {
+        return;
+    }
+    
     self.topic = topic;
     self.userNameLabel.text = [NSString stringWithFormat:@"by %@", topic.user.userName];
     
@@ -391,6 +395,10 @@
 #pragma mark - Height of the cell
 + (CGFloat)heightForTopic:(FLYTopic *)topic
 {
+    if (topic.topicTitle.length == 0) {
+        return 0;
+    }
+    
     CGFloat leftPadding = kPlaybuttonLeftPadding + kPlayButtonSize + kTopicTitleLeftPadding;
     CGFloat rightPadding = kInlineActionRightPadding + kMaxInlineActionWidth + kTopicTitleRightPadding;
     CGFloat height = 0;

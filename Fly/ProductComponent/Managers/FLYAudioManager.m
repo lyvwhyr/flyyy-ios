@@ -159,8 +159,12 @@
 -(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishPlayingQueueItemId:(FLYAudioItem *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
 {
     
-    NSDictionary *dict = @{kAudioStopReasonKey:@(stopReason), kAudioItemkey:queueItemId};
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidFinishPlaying object:self userInfo:dict];
+    if (queueItemId) {
+        NSDictionary *dict = @{kAudioStopReasonKey:@(stopReason), kAudioItemkey:queueItemId};
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationDidFinishPlaying object:self userInfo:dict];
+    } else {
+        UALog(@"queueItemid is nil");
+    }
 }
 
 @end
