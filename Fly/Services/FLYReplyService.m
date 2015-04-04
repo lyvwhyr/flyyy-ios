@@ -17,6 +17,12 @@
     return [[FLYReplyService alloc] initWithEndpoint:endpoint];
 }
 
++ (instancetype)getMyReplies
+{
+    NSString *endpoint = @"replies/me";
+    return [[FLYReplyService alloc] initWithEndpoint:endpoint];
+}
+
 - (void)nextPage:(NSString *)before firstPage:(BOOL)first successBlock:(FLYReplyServiceGetRepliesSuccessBlock)successBlock errorBlock:(FLYReplyServiceGetRepliesErrorBlock)errorBlock
 {
     NSString *requestEndpoint;

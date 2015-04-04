@@ -48,6 +48,8 @@
 		A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18681A1EE70900D188B5 /* FLYAppStateManager.m */; };
 		A61D18761A1F27E900D188B5 /* FLYPrePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */; };
 		A6227D0A1ACF23700039083D /* FLYMyTopicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6227D091ACF23700039083D /* FLYMyTopicsViewController.m */; };
+		A6227D0D1ACF55890039083D /* FLYMyRepliesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6227D0C1ACF55890039083D /* FLYMyRepliesViewController.m */; };
+		A6227D101ACF57900039083D /* FLYMyRepliesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6227D0F1ACF57900039083D /* FLYMyRepliesCell.m */; };
 		A6263E921A187E1200C4C3BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263E911A187E1200C4C3BA /* main.m */; };
 		A6263E951A187E1200C4C3BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263E941A187E1200C4C3BA /* AppDelegate.m */; };
 		A6263E9B1A187E1200C4C3BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6263E991A187E1200C4C3BA /* Main.storyboard */; };
@@ -527,6 +529,10 @@
 		A61D18741A1F27E900D188B5 /* FLYPrePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPrePostViewController.m; sourceTree = "<group>"; };
 		A6227D081ACF23700039083D /* FLYMyTopicsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYMyTopicsViewController.h; sourceTree = "<group>"; };
 		A6227D091ACF23700039083D /* FLYMyTopicsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYMyTopicsViewController.m; sourceTree = "<group>"; };
+		A6227D0B1ACF55890039083D /* FLYMyRepliesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYMyRepliesViewController.h; sourceTree = "<group>"; };
+		A6227D0C1ACF55890039083D /* FLYMyRepliesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYMyRepliesViewController.m; sourceTree = "<group>"; };
+		A6227D0E1ACF57900039083D /* FLYMyRepliesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYMyRepliesCell.h; sourceTree = "<group>"; };
+		A6227D0F1ACF57900039083D /* FLYMyRepliesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYMyRepliesCell.m; sourceTree = "<group>"; };
 		A6263E8C1A187E1200C4C3BA /* Flyy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flyy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6263E901A187E1200C4C3BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6263E911A187E1200C4C3BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1898,6 +1904,10 @@
 				A647008D1ACE6C720074F990 /* FLYMeViewController.m */,
 				A6227D081ACF23700039083D /* FLYMyTopicsViewController.h */,
 				A6227D091ACF23700039083D /* FLYMyTopicsViewController.m */,
+				A6227D0B1ACF55890039083D /* FLYMyRepliesViewController.h */,
+				A6227D0C1ACF55890039083D /* FLYMyRepliesViewController.m */,
+				A6227D0E1ACF57900039083D /* FLYMyRepliesCell.h */,
+				A6227D0F1ACF57900039083D /* FLYMyRepliesCell.m */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -3066,6 +3076,7 @@
 				A6048AD81A8603EF00C67480 /* README.md in Sources */,
 				A6A0E4B61A1E76110036116E /* FLEXObjectExplorerViewController.m in Sources */,
 				A6A0E4941A1E76110036116E /* FLEXArgumentInputNumberView.m in Sources */,
+				A6227D0D1ACF55890039083D /* FLYMyRepliesViewController.m in Sources */,
 				A6A8DFFB1AC4D92500BF77BB /* FLYPasswordResetPhoneNumberViewController.m in Sources */,
 				A6263ED01A18A10E00C4C3BA /* UIImage+FLYAddition.m in Sources */,
 				A6A0E4B31A1E76110036116E /* FLEXGlobalsTableViewControllerEntry.m in Sources */,
@@ -3084,6 +3095,7 @@
 				A6048AD51A8603EF00C67480 /* AFURLResponseSerialization.m in Sources */,
 				A6A0E49A1A1E76110036116E /* FLEXArgumentInputViewFactory.m in Sources */,
 				A6799C7F1AABDE3D003DAE5B /* EAFWrite.mm in Sources */,
+				A6227D101ACF57900039083D /* FLYMyRepliesCell.m in Sources */,
 				A6A57AA91A34345600610785 /* FLYTopicDetailViewController.m in Sources */,
 				A6BAD40C1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m in Sources */,
 				A643AEEE1AA9539E00BF4E0F /* NIInMemoryCache.m in Sources */,

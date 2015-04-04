@@ -104,8 +104,6 @@
 {
     [super viewDidLoad];
     
-    UIFont *titleFont = [UIFont fontWithName:@"Avenir-Roman" size:16];
-    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
     self.title = LOC(@"FLYTopicDetailTitle");
     
     self.automaticallyAdjustsScrollViewInsets = NO;

@@ -17,6 +17,7 @@
 #import "FLYNavigationBar.h"
 #import "FLYFeedViewController.h"
 #import "FLYMyTopicsViewController.h"
+#import "FLYMyRepliesViewController.h"
 
 #define kNumberOfItems 3
 
@@ -59,11 +60,6 @@
 {
     [super viewWillDisappear:animated];
     [self.flyNavigationController.interactivePopGestureRecognizer removeTarget:self action:nil];
-    
-}
-
-- (void)dealloc
-{
     
 }
 
@@ -126,6 +122,8 @@
             break;
         }
         case FLYEverythingElseCellTypeReplies: {
+            FLYMyRepliesViewController *myRepliesVC = [FLYMyRepliesViewController new];
+            [self.flyNavigationController pushViewController:myRepliesVC animated:YES];
             break;
         }
         case FLYEverythingElseCellTypeSettings: {

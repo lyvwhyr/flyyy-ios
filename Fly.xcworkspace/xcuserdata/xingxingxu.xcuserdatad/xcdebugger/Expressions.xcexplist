@@ -11,10 +11,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[FLYMyRepliesViewController tableView:numberOfRowsInSection:]:FLYMyRepliesViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.entries">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__41-[FLYFeedTopicTableViewCell progressView]_block_invoke:FLYFeedTopicTableViewCell.m">
          <PersistentStrings>
             <PersistentString
                value = "self.paused">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FLYAudioManager updateAudioState:]:FLYAudioManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[FLYAudioManager sharedInstance].previousPlayItem">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -46,14 +62,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[FLYFeedViewController playButtonTapped:withPost:withIndexPath:]:FLYFeedViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[FLYAudioManager sharedInstance].currentPlayItem">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "__37-[FLYRecordViewController _loadWaver]_block_invoke:FLYRecordViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -81,10 +89,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[FLYAudioManager updateAudioState:]:FLYAudioManager.m">
+         contextName = "-[FLYFeedViewController playButtonTapped:withPost:withIndexPath:]:FLYFeedViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "[FLYAudioManager sharedInstance].previousPlayItem">
+               value = "[FLYAudioManager sharedInstance].currentPlayItem">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -95,6 +103,9 @@
                value = "currentItem">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__43-[FLYMyRepliesViewController _load:before:]_block_invoke:FLYMyRepliesViewController.m">
       </ContextState>
       <ContextState
          contextName = "-[FLYMainViewController viewWillAppear:]:FLYMainViewController.m">

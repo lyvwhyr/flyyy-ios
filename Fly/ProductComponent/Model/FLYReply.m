@@ -36,7 +36,7 @@
         _audioDuration = [dict fly_integerForKey:@"audio_duration"];
         _createdAt = [[dict fly_objectOrNilForKey:@"created_at"] stringValue];        
         NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:[_createdAt longLongValue]/1000];
-        NSString *ago = [date timeAgo];
+        NSString *ago = [date timeAgoSimple];
         _displayableCreateAt = ago;
         _liked = [dict fly_boolForKey:@"liked" defaultValue:NO];
     }
