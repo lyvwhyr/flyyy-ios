@@ -73,9 +73,11 @@
         }];
     }
     
+    [self.playButton sizeToFit];
     if (!self.didSetupConstraints) {
         [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self);
+            make.width.equalTo(@(CGRectGetWidth(self.playButton.bounds)));
             make.leading.equalTo(self).offset(kPlayButtonLeftPadding);
         }];
         
