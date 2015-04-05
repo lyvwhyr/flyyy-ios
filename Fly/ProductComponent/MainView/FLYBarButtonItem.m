@@ -8,6 +8,7 @@
 
 #import "FLYBarButtonItem.h"
 #import "UIView+FLYAddition.h"
+#import "UIButton+TouchAreaInsets.h"
 
 
 @implementation FLYBarButtonItem
@@ -55,9 +56,12 @@
     //12 * 21
     //Make it (8, 6), (31,30)
     UIImage *image = [UIImage imageNamed:@"icon_back_record"];
-    CGFloat x = (left ? -1 : 1) * 15;
-    backButton.frame = CGRectMake(x, 0, 50, 40);
+    CGFloat x = (left ? -1 : 1) * 16;
+    backButton.frame = CGRectMake(x, 0, 52, kNavBarHeight);
     [backButton setImage:image forState:UIControlStateNormal];
+    
+    backButton.touchAreaInsets = UIEdgeInsetsMake(0, 40, 15, 60);
+    
     self = [super initWithButton:backButton actionBlock:nil];
     return self;
 }
