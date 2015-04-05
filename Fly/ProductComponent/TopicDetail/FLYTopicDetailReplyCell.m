@@ -64,6 +64,9 @@
         [_likeButton addTarget:self action:@selector(_likeButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_likeButton];
         
+        // increase the like button touch area
+        _likeButton.touchAreaInsets = UIEdgeInsetsMake(10, 40, 10, 10);
+        
         _playButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _playButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_playButton setImage:[UIImage imageNamed:@"icon_reply_play_play"] forState:UIControlStateNormal];
@@ -88,6 +91,8 @@
         [_commentButton setImage:[UIImage imageNamed:@"icon_homefeed_comment_light"] forState:UIControlStateNormal];
         [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_commentButton];
+        // increase comment button touch area
+        _commentButton.touchAreaInsets = UIEdgeInsetsMake(10, 40, 10, 10);
         
         [self _addObservers];
     }

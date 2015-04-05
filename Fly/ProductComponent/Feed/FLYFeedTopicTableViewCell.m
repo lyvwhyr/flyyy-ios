@@ -22,6 +22,7 @@
 #import "FLYReply.h"
 #import "UAProgressView.h"
 #import "UIButton+TouchAreaInsets.h"
+#import "UIButton+TouchAreaInsets.h"
 
 @interface FLYFeedTopicTableViewCell()
 
@@ -116,11 +117,15 @@
         _likeButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_likeButton];
         
+        // increase like touch area
+        _likeButton.touchAreaInsets = UIEdgeInsetsMake(10, 40, 10, 10);
+        
         _commentButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyInlineAction] icon:@"icon_homefeed_comment_light" isIconLeft:YES];
         [_commentButton addTarget:self action:@selector(_commentButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _commentButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_commentButton sizeToFit];
         [self.contentView addSubview:_commentButton];
+        _commentButton.touchAreaInsets = UIEdgeInsetsMake(10, 40, 10, 10);
         
         
         //when it enters background, _arclayer is nil so this doesn't work
