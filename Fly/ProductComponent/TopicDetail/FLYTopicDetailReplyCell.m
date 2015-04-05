@@ -16,6 +16,7 @@
 #import "UIView+FLYAddition.h"
 #import "UIImage+FLYAddition.h"
 #import "UAProgressView.h"
+#import "UIButton+TouchAreaInsets.h"
 
 #define kUpdateProgressInterval 0.05
 
@@ -67,6 +68,7 @@
         _playButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_playButton setImage:[UIImage imageNamed:@"icon_reply_play_play"] forState:UIControlStateNormal];
         [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        _playButton.touchAreaInsets = UIEdgeInsetsMake(15, kPlayButtonLeftPadding, 15, 15);
         [self.contentView addSubview:_playButton];
         
         _bodyLabel = [UILabel new];

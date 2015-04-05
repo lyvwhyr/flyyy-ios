@@ -21,6 +21,7 @@
 #import "UIView+FLYAddition.h"
 #import "FLYReply.h"
 #import "UAProgressView.h"
+#import "UIButton+TouchAreaInsets.h"
 
 @interface FLYFeedTopicTableViewCell()
 
@@ -79,6 +80,8 @@
         [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [_playButton setImage:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] forState:UIControlStateNormal];
         [_playButton sizeToFit];
+        
+        _playButton.touchAreaInsets = UIEdgeInsetsMake(kTopicTitleTopPadding - 2, kPlaybuttonLeftPadding, 15, kTopicTitleLeftPadding);
         [self.contentView insertSubview:self.playButton aboveSubview:self.contentView];
         
         _topicTitle = [UILabel new];

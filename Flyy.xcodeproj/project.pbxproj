@@ -50,6 +50,7 @@
 		A6227D0A1ACF23700039083D /* FLYMyTopicsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6227D091ACF23700039083D /* FLYMyTopicsViewController.m */; };
 		A6227D0D1ACF55890039083D /* FLYMyRepliesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6227D0C1ACF55890039083D /* FLYMyRepliesViewController.m */; };
 		A6227D101ACF57900039083D /* FLYMyRepliesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6227D0F1ACF57900039083D /* FLYMyRepliesCell.m */; };
+		A6227D131AD0BD5D0039083D /* UIButton+TouchAreaInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = A6227D121AD0BD5D0039083D /* UIButton+TouchAreaInsets.m */; };
 		A6263E921A187E1200C4C3BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263E911A187E1200C4C3BA /* main.m */; };
 		A6263E951A187E1200C4C3BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263E941A187E1200C4C3BA /* AppDelegate.m */; };
 		A6263E9B1A187E1200C4C3BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6263E991A187E1200C4C3BA /* Main.storyboard */; };
@@ -532,6 +533,8 @@
 		A6227D0C1ACF55890039083D /* FLYMyRepliesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYMyRepliesViewController.m; sourceTree = "<group>"; };
 		A6227D0E1ACF57900039083D /* FLYMyRepliesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYMyRepliesCell.h; sourceTree = "<group>"; };
 		A6227D0F1ACF57900039083D /* FLYMyRepliesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYMyRepliesCell.m; sourceTree = "<group>"; };
+		A6227D111AD0BD5D0039083D /* UIButton+TouchAreaInsets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+TouchAreaInsets.h"; sourceTree = "<group>"; };
+		A6227D121AD0BD5D0039083D /* UIButton+TouchAreaInsets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+TouchAreaInsets.m"; sourceTree = "<group>"; };
 		A6263E8C1A187E1200C4C3BA /* Flyy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flyy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6263E901A187E1200C4C3BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6263E911A187E1200C4C3BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1453,6 +1456,8 @@
 		A6263EBE1A1887DB00C4C3BA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				A6227D111AD0BD5D0039083D /* UIButton+TouchAreaInsets.h */,
+				A6227D121AD0BD5D0039083D /* UIButton+TouchAreaInsets.m */,
 				A66E96531AA0457F000B0E83 /* CALayer+MBAnimationPersistence.h */,
 				A66E96541AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m */,
 				A6D949F71A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.h */,
@@ -2910,6 +2915,7 @@
 				A6A0E4AB1A1E76110036116E /* FLEXLibrariesTableViewController.m in Sources */,
 				A638D8331AC9FF2D00E67ED3 /* FLYEverythingElseCell.m in Sources */,
 				A64BDACB1A7B647600B46F18 /* FLYURLConstants.h in Sources */,
+				A6227D131AD0BD5D0039083D /* UIButton+TouchAreaInsets.m in Sources */,
 				A6048A3F1A85E63100C67480 /* EXTRuntimeExtensions.m in Sources */,
 				A643AEE61AA9539E00BF4E0F /* NIButtonUtilities.m in Sources */,
 				A6799C8E1AABEB3D003DAE5B /* FLYVoiceEffectView.m in Sources */,
