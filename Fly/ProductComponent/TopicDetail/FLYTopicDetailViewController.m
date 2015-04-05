@@ -37,6 +37,23 @@
 #import "FLYGroupViewController.h"
 #import "UIFont+FLYAddition.h"
 
+typedef NS_ENUM(NSInteger, FLYPostAuthorActions) {
+    FLYPostAuthorActionsDelete = 0
+};
+
+typedef NS_ENUM(NSInteger, FLYPostNonAuthorActions) {
+    FLYPostNonAuthorActionsReport = 0
+};
+
+typedef NS_ENUM(NSInteger, FLYReplyAuthorActions) {
+    FLYReplyAuthorActionsDelete = 0
+};
+
+typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
+    FLYReplyNonAuthorActionsReport = 0
+};
+
+
 #define kReplyHeaderHeight 32
 
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYTopicDetailTabbarDelegate, FLYFeedTopicTableViewCellDelegate>
@@ -553,16 +570,31 @@
     }
     
     NSMutableArray *otherButtons = [NSMutableArray new];
-    [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetReport")];
     if (isAuthor) {
         [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetDeletePost")];
+    } else {
+        [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetReport")];
     }
     IBActionSheet *actionSheet = [[IBActionSheet alloc] initWithTitle:nil callback:^(IBActionSheet *actionSheet, NSInteger buttonIndex) {
         if (actionSheet.cancelButtonIndex != buttonIndex) {
-            if (buttonIndex == 0) {
-                [self _reportPost];
-            } else if (buttonIndex == 1) {
-                [self _deletePost];
+            if (isAuthor) {
+                switch (buttonIndex) {
+                    case FLYPostAuthorActionsDelete: {
+                        [self _deletePost];
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            } else {
+                switch (buttonIndex) {
+                    case FLYPostNonAuthorActionsReport:{
+                        [self _reportPost];
+                        break;
+                    }
+                    default:
+                        break;
+                }
             }
         }
     } cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitlesArray:otherButtons];
@@ -644,16 +676,31 @@
     }
     
     NSMutableArray *otherButtons = [NSMutableArray new];
-    [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetReportReply")];
     if (isAuthor) {
         [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetDeleteReply")];
+    } else {
+        [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetReportReply")];
     }
     IBActionSheet *actionSheet = [[IBActionSheet alloc] initWithTitle:nil callback:^(IBActionSheet *actionSheet, NSInteger buttonIndex) {
         if (actionSheet.cancelButtonIndex != buttonIndex) {
-            if (buttonIndex == 0) {
-                [self _reportReply:reply];
-            } else if (buttonIndex == 1) {
-                [self _deleteReply:reply];
+            if (isAuthor) {
+                switch (buttonIndex) {
+                    case FLYReplyAuthorActionsDelete: {
+                        [self _deleteReply:reply];
+                        break;
+                    }
+                    default:
+                        break;
+                }
+            } else {
+                switch (buttonIndex) {
+                    case FLYPostNonAuthorActionsReport:{
+                        [self _reportReply:reply];
+                        break;
+                    }
+                    default:
+                        break;
+                }
             }
         }
     } cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitlesArray:otherButtons];
