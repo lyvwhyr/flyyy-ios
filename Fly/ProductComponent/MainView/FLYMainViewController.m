@@ -92,42 +92,7 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
- 
-    
-//    BOOL hasCreatedUser = [[NSUserDefaults standardUserDefaults] boolForKey:@"kHasCreatedUser"];
-//    if (!hasCreatedUser) {
-//        [self _testCreateUser];
-//    } else {
-//        FLYUser *user = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"kUserObj"];
-//        [FLYAppStateManager sharedInstance].currentUser = user;
-//    }
-}
-
-- (void)_testCreateUser
-{
-    SCLAlertView *alert = [[SCLAlertView alloc] init];
-    UITextField *textField = [alert addTextField:@"Choose a username"];
-    [alert addButton:@"Choose" actionBlock:^(void) {
-        JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        HUD.textLabel.text = @"Done";
-        HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-        [HUD showInView:self.view];
-        [HUD dismissAfterDelay:2.0];
-        NSString *username = textField.text;
-        NSString *deviceId = [FLYAppStateManager sharedInstance].deviceId;
-        [FLYEndpointRequest createUserWithUsername:username deviceId:deviceId successBlock:^(id response){
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"kHasCreatedUser"];
-            FLYUser *user = [[FLYUser alloc] initWithDictionary:response];
-            [FLYAppStateManager sharedInstance].currentUser = user;
-            [[NSUserDefaults standardUserDefaults] rm_setCustomObject:user forKey:@"kUserObj"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-        }];
-    }];
-    [alert showCustom:self image:[UIImage imageNamed:@"icon_feed_play"] color:[UIColor flyBlue] title:@"Username" subTitle:@"Choose a username." closeButtonTitle:nil duration:0.0f];
-    
 }
 
 - (void)_addNavigationBar
@@ -146,7 +111,6 @@
     [self.view addSubview:self.tabBarView];
     
     self.homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_home" recordTab:NO];
-//    self.groupsTab = [[FLYTabView alloc] initWithTitle:@"Groups" image:@"icon_homefeed_tags_grey" recordTab:NO];
     self.groupsTab = [[FLYTabView alloc] initWithTitle:LOC(@"FLYTags") image:@"icon_homefeed_tag_blue_notselected" recordTab:NO];
     
     NSArray *tabs = @[self.homeTab, self.groupsTab];
@@ -279,8 +243,7 @@
 
 - (void)_recordButtonTapped
 {
-    if (![FLYAppStateManager sharedInstance].currentUser) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kRequireSignupNotification object:self userInfo:@{kFromViewControllerKey:self}];
+    if ([FLYUtilities goToLogin]) {
         return;
     }
     

@@ -289,7 +289,6 @@
 		A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E20481A2EBDAE004235F5 /* RDVTabBarItem.m */; };
 		A66E204E1A2EBDAE004235F5 /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E204A1A2EBDAE004235F5 /* RDVTabBar.m */; };
 		A66E204F1A2EBDAE004235F5 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E204C1A2EBDAE004235F5 /* RDVTabBarController.m */; };
-		A66E20551A2EE90F004235F5 /* FLYFeedDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E20541A2EE90F004235F5 /* FLYFeedDelegate.m */; };
 		A66E96521AA01874000B0E83 /* FLYLoaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E96511AA01874000B0E83 /* FLYLoaderView.m */; };
 		A66E96551AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E96541AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m */; };
 		A67208201A35689600B2C5B5 /* icon_seconds@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A672081F1A35689600B2C5B5 /* icon_seconds@3x.png */; };
@@ -893,8 +892,6 @@
 		A66E204A1A2EBDAE004235F5 /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
 		A66E204B1A2EBDAE004235F5 /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarController.h; sourceTree = "<group>"; };
 		A66E204C1A2EBDAE004235F5 /* RDVTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarController.m; sourceTree = "<group>"; };
-		A66E20531A2EE90F004235F5 /* FLYFeedDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFeedDelegate.h; sourceTree = "<group>"; };
-		A66E20541A2EE90F004235F5 /* FLYFeedDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFeedDelegate.m; sourceTree = "<group>"; };
 		A66E96501AA01874000B0E83 /* FLYLoaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYLoaderView.h; sourceTree = "<group>"; };
 		A66E96511AA01874000B0E83 /* FLYLoaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoaderView.m; sourceTree = "<group>"; };
 		A66E96531AA0457F000B0E83 /* CALayer+MBAnimationPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+MBAnimationPersistence.h"; sourceTree = "<group>"; };
@@ -2214,8 +2211,6 @@
 				A69C4BE31A284B6F00CAD443 /* FLYFeedViewController.m */,
 				A69C4BE71A2851FD00CAD443 /* FLYFeedTopicTableViewCell.h */,
 				A69C4BE81A2851FD00CAD443 /* FLYFeedTopicTableViewCell.m */,
-				A66E20531A2EE90F004235F5 /* FLYFeedDelegate.h */,
-				A66E20541A2EE90F004235F5 /* FLYFeedDelegate.m */,
 				A67CC61A1A7DDE100092E500 /* fixture */,
 			);
 			path = Feed;
@@ -3099,7 +3094,6 @@
 				A6A57AA91A34345600610785 /* FLYTopicDetailViewController.m in Sources */,
 				A6BAD40C1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m in Sources */,
 				A643AEEE1AA9539E00BF4E0F /* NIInMemoryCache.m in Sources */,
-				A66E20551A2EE90F004235F5 /* FLYFeedDelegate.m in Sources */,
 				A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */,
 				A6A0E4B81A1E76110036116E /* FLEXViewControllerExplorerViewController.m in Sources */,
 				A6450B151A998A08009EF0A3 /* AFSoundPlayback.m in Sources */,

@@ -381,7 +381,9 @@
 
 - (void)_likeButtonTapped
 {
-    [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"" component:self.topic.topicId element:@"like_button" action:@"click"];
+    if ([FLYUtilities goToLogin]) {
+        return;
+    }
     
     [self.topic like];
 }

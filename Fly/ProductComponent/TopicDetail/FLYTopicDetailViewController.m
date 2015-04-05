@@ -379,6 +379,10 @@
 
 - (void)_commentButtonTapped:(FLYReply *)reply
 {
+    if ([FLYUtilities goToLogin]) {
+        return;
+    }
+    
     FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForReply];
     if (reply) {
         if (![reply.user.userId isEqualToString:[FLYAppStateManager sharedInstance].currentUser.userId]) {

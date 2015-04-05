@@ -33,6 +33,15 @@
     [FLYUtilities performSelector:@selector(_wrapperForLoggingConstraints) withObject:nil afterDelay:.3];
 }
 
++ (BOOL)goToLogin
+{
+    if ([FLYAppStateManager sharedInstance].currentUser) {
+        return NO;
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRequireSignupNotification object:self];
+    return YES;
+}
+
 + (void)_wrapperForLoggingConstraints
 {
 #ifdef DEBUG

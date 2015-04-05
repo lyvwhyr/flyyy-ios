@@ -71,7 +71,7 @@
 
 - (void)_requireSignupOrLogin:(NSNotification *)notification
 {
-    UIViewController *fromVC = [notification.userInfo objectForKey:kFromViewControllerKey];
+    UIViewController *fromVC = [[UIApplication sharedApplication] keyWindow].rootViewController;
     FLYLoginSignupViewController *vc = [FLYLoginSignupViewController new];
     vc.canGoBack = YES;
     UINavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];

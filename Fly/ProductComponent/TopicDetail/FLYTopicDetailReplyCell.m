@@ -267,11 +267,19 @@
 
 - (void)_likeButtonTapped
 {
+    if ([FLYUtilities goToLogin]) {
+        return;
+    }
+    
     [self.reply like];
 }
 
 - (void)_commentButtonTapped
 {
+    if ([FLYUtilities goToLogin]) {
+        return;
+    }
+    
     [[FLYScribe sharedInstance] logEvent:@"topic_detail" section:@"reply_cell" component:self.reply.replyId element:@"like_button" action:@"click"];
     [self.delegate replyToReplyButtonTapped:self.reply];
 }
