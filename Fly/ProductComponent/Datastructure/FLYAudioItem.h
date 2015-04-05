@@ -12,7 +12,8 @@ typedef NS_ENUM(NSInteger, FLYPlayableItemType) {
     FLYPlayableItemDetailTopic,
     FLYPlayableItemDetailReply,
     FLYPlayableItemRecording,
-    FLYPlayableItemMyRepliesReply
+    FLYPlayableItemMyRepliesReply,
+    FLYPlayableItemGroupTopic
 };
 
 typedef NS_ENUM(NSInteger, FLYPlayState) {

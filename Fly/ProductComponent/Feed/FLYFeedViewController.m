@@ -190,7 +190,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self clearAllPlaying];
+    [self _clearAllPlaying];
 }
 
 - (void)_addInlineReplyBar
@@ -230,6 +230,15 @@
         self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
     } else {
         self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
+    }
+    
+    // This is a hack. When you go to home feed, tap on group name and go to group page. Tap on play and quickly navigate back
+    // to home feed, the play button on home feed is in the wrong state. It is because GroupViewController extends from
+    // FeedViewController and the audio item is the same.
+    NSArray *visibleCells = [self.feedTableView visibleCells];
+    for (int i = 0; i < visibleCells.count; i++) {
+        FLYFeedTopicTableViewCell *visibleCell = (FLYFeedTopicTableViewCell *)(visibleCells[i]);
+        [visibleCell updatePlayState:FLYPlayStateNotSet];
     }
 }
 
@@ -277,7 +286,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d_%d", @"feedPostCellIdentifier", (int)indexPath.section, (int)indexPath.row];
+    NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d_%d_%@", @"feedPostCellIdentifier", (int)indexPath.section, (int)indexPath.row, NSStringFromClass([self class])];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     BOOL needUpdateConstraints = YES;
     if (cell == nil) {
@@ -498,7 +507,7 @@
     [previousPlayingCell updatePlayState:FLYPlayStateNotSet];
 }
 
-- (void)clearAllPlaying
+- (void)_clearAllPlaying
 {
     if ([FLYAudioManager sharedInstance].previousPlayItem) {
         FLYFeedTopicTableViewCell *previousPlayingCell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].previousPlayItem.indexPath]);
@@ -511,6 +520,14 @@
         [currentCell updatePlayState:FLYPlayStateNotSet];
         [FLYAudioManager sharedInstance].currentPlayItem = nil;
     }
+    
+    // clear the reset of the cells
+    NSArray *visibleCells = [self.feedTableView visibleCells];
+    for (int i = 0; i < visibleCells.count; i++) {
+        FLYFeedTopicTableViewCell *visibleCell = (FLYFeedTopicTableViewCell *)(visibleCells[i]);
+        [visibleCell updatePlayState:FLYPlayStateNotSet];
+    }
+    
     [[FLYAudioManager sharedInstance].audioPlayer stop];
 }
 
