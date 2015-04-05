@@ -18,6 +18,7 @@
 #import "FLYGroupManager.h"
 #import "FLYAudioManager.h"
 #import "FLYRequestManager.h"
+#import "iRate.h"
 
 #define MIXPANEL_TOKEN @"4ce141a1dcd56132894230aff97b282b"
 
@@ -90,6 +91,14 @@
 {
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     
+    // set up iRate
+    [iRate sharedInstance].appStoreID = [kFlyyAppID integerValue];
+    [iRate sharedInstance].promptAtLaunch = NO;
+    [iRate sharedInstance].promptForNewVersionIfUserRated = NO;
+    [iRate sharedInstance].daysUntilPrompt = 0;
+    [iRate sharedInstance].usesUntilPrompt = 0;
+    [iRate sharedInstance].eventsUntilPrompt = 10; // After a user listens to the 10th post, show the prompt.
+    [iRate sharedInstance].remindPeriod = 7;
     
     //Fabric should the the last one
     [Fabric with:@[CrashlyticsKit]];

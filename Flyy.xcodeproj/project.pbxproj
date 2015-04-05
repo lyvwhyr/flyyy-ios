@@ -51,6 +51,8 @@
 		A6227D0D1ACF55890039083D /* FLYMyRepliesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6227D0C1ACF55890039083D /* FLYMyRepliesViewController.m */; };
 		A6227D101ACF57900039083D /* FLYMyRepliesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6227D0F1ACF57900039083D /* FLYMyRepliesCell.m */; };
 		A6227D131AD0BD5D0039083D /* UIButton+TouchAreaInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = A6227D121AD0BD5D0039083D /* UIButton+TouchAreaInsets.m */; };
+		A6227D181AD109FA0039083D /* iRate.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6227D151AD109FA0039083D /* iRate.bundle */; };
+		A6227D191AD109FA0039083D /* iRate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6227D171AD109FA0039083D /* iRate.m */; };
 		A6263E921A187E1200C4C3BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263E911A187E1200C4C3BA /* main.m */; };
 		A6263E951A187E1200C4C3BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263E941A187E1200C4C3BA /* AppDelegate.m */; };
 		A6263E9B1A187E1200C4C3BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6263E991A187E1200C4C3BA /* Main.storyboard */; };
@@ -535,6 +537,9 @@
 		A6227D0F1ACF57900039083D /* FLYMyRepliesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYMyRepliesCell.m; sourceTree = "<group>"; };
 		A6227D111AD0BD5D0039083D /* UIButton+TouchAreaInsets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+TouchAreaInsets.h"; sourceTree = "<group>"; };
 		A6227D121AD0BD5D0039083D /* UIButton+TouchAreaInsets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+TouchAreaInsets.m"; sourceTree = "<group>"; };
+		A6227D151AD109FA0039083D /* iRate.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iRate.bundle; sourceTree = "<group>"; };
+		A6227D161AD109FA0039083D /* iRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iRate.h; sourceTree = "<group>"; };
+		A6227D171AD109FA0039083D /* iRate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iRate.m; sourceTree = "<group>"; };
 		A6263E8C1A187E1200C4C3BA /* Flyy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flyy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6263E901A187E1200C4C3BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6263E911A187E1200C4C3BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1333,6 +1338,16 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		A6227D141AD109FA0039083D /* iRate */ = {
+			isa = PBXGroup;
+			children = (
+				A6227D151AD109FA0039083D /* iRate.bundle */,
+				A6227D161AD109FA0039083D /* iRate.h */,
+				A6227D171AD109FA0039083D /* iRate.m */,
+			);
+			path = iRate;
+			sourceTree = "<group>";
+		};
 		A6263E831A187E1200C4C3BA = {
 			isa = PBXGroup;
 			children = (
@@ -1806,6 +1821,7 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A6227D141AD109FA0039083D /* iRate */,
 				A657BAE61AC9410500886C0F /* HMSegmentedControl */,
 				A669FB2A1ABFD8B800A96D24 /* SVWebViewController */,
 				A66499531ABBB2B500C4FF08 /* IBActionSheet */,
@@ -2741,6 +2757,7 @@
 				A652D25C1A7F3ADD00765D45 /* icon_unchecked@2x.png in Resources */,
 				A62E53B51A227E0B00125DBC /* icon_voice_filter@3x.png in Resources */,
 				A652D21F1A7F3ADD00765D45 /* icon_group_checkmark@2x.png in Resources */,
+				A6227D181AD109FA0039083D /* iRate.bundle in Resources */,
 				A64D157F1A29985600369D62 /* icon_feed_play@3x.png in Resources */,
 				A652D2161A7F3ADD00765D45 /* icon_feed_group.png in Resources */,
 				A652D2861A7F3ADD00765D45 /* record_animate_13@3x.png in Resources */,
@@ -3006,6 +3023,7 @@
 				A669FB611ABFD99B00A96D24 /* SVWebViewControllerActivitySafari.m in Sources */,
 				A648C0E61A19AD4A00FF1744 /* MASLayoutConstraint.m in Sources */,
 				A6BCBBFD1A848D16001F8AB0 /* FLYEndpointRequest.m in Sources */,
+				A6227D191AD109FA0039083D /* iRate.m in Sources */,
 				A6A0E4991A1E76110036116E /* FLEXArgumentInputView.m in Sources */,
 				A6A0E4AE1A1E76110036116E /* FLEXArrayExplorerViewController.m in Sources */,
 				A64BDAC61A7B518400B46F18 /* FLYUser.m in Sources */,

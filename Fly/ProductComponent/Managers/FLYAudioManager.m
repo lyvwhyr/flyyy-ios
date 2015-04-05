@@ -14,6 +14,7 @@
 #import "FLYFeedTopicTableViewCell.h"
 #import "FLYAudioItem.h"
 #import "FLYDownloadManager.h"
+#import "iRate.h"
 
 @interface FLYAudioManager()<STKAudioPlayerDelegate>
 
@@ -166,6 +167,7 @@
     } else {
         UALog(@"queueItemid is nil");
     }
+    [[iRate sharedInstance] logEvent:NO];
 }
 
 @end
