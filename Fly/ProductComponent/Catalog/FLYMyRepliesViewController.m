@@ -62,6 +62,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = LOC(@"FLYEverythingElseMyReplies");
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.repliesTableView = [UITableView new];
     self.repliesTableView.delegate = self;

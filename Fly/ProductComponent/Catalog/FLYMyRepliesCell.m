@@ -12,6 +12,7 @@
 #import "UIColor+FLYAddition.h"
 #import "UIFont+FLYAddition.h"
 #import "UAProgressView.h"
+#import "UIButton+TouchAreaInsets.h"
 
 #define kPlayButtonLeftPadding 16.5
 #define kTopicTitleLeftPadding 15
@@ -47,6 +48,8 @@
         [_playButton setImage:[UIImage imageNamed:@"icon_reply_play_play"] forState:UIControlStateNormal];
         [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:_playButton];
+        // increase comment button touch area
+        _playButton.touchAreaInsets = UIEdgeInsetsMake(10, 40, 10, 10);
         
         _topicTitle = [UILabel new];
         _topicTitle.lineBreakMode = NSLineBreakByTruncatingTail;
