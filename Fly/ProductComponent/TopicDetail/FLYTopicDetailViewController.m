@@ -72,6 +72,9 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 //services
 @property (nonatomic) FLYReplyService *replyService;
 
+// current playing audio indexPath
+@property (nonatomic) NSIndexPath *currentPlayingIndexPath;
+
 @end
 
 @implementation FLYTopicDetailViewController

@@ -114,4 +114,9 @@
     return CGSizeMake(intrinsicWidth, intrinsicHeight);
 }
 
+- (void)setIsSelected:(BOOL)isSelected
+{
+    _isSelected = !isSelected;
+}
+
 @end

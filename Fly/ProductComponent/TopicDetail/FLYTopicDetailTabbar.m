@@ -99,6 +99,15 @@
 
 - (void)_playAllButtonTapped
 {
+    self.playAllButton.isSelected = !self.playAllButton.isSelected;
+    if (self.playAllButton.isSelected) {
+        [self.playAllButton setLabelText:LOC(@"FLYTopicDetailTabbarPause")];
+        [self.playAllButton setIconImage:[UIImage imageNamed:@"icon_detail_pause"]];
+    } else {
+        [self.playAllButton setLabelText:LOC(@"FLYTopicDetailTabbarPlayAll")];
+        [self.playAllButton setIconImage:[UIImage imageNamed:@"icon_tabbar_detail_playall"]];
+    }
+    
     [self.delegate playAllButtonOnTabbarTapped:self.playAllButton];
 }
 

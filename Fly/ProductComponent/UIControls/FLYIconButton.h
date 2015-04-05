@@ -12,6 +12,8 @@
 
 @property (nonatomic) CGFloat overrideIconRightPadding;
 
+@property (nonatomic) BOOL isSelected;
+
 - (instancetype)initWithText:(NSString *)text textFont:(UIFont *)font textColor:(UIColor *)color icon:(NSString *)iconName isIconLeft:(BOOL)isIconLeft;
 - (void)setLabelText:(NSString *)text;
 - (void)setLabelTextColor:(UIColor *)color;
