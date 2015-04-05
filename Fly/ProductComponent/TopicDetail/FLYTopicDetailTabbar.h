@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Fly. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "FLYIconButton.h"
 
 @protocol FLYTopicDetailTabbarDelegate <NSObject>
 
@@ -18,6 +18,8 @@
 
 @interface FLYTopicDetailTabbar : UIView
 
+
+@property (nonatomic) FLYIconButton *playAllButton;
 @property (nonatomic) id<FLYTopicDetailTabbarDelegate>delegate;
 
 @end

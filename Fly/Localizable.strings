@@ -77,6 +77,9 @@
 //Topic detail
 "FLYTopicDetailTabbarComment" = "Comment";
 "FLYTopicDetailTabbarPlayAll" = "Play all";
+"FLYTopicDetailsPlayAllNoReplies" = "There is no reply to play";
+"FLYTopicDetailsPlayAllDisabled" = "You have successfully disabled auto playing replies.";
+"FLYTopicDetailPlayAllAutoPlayNext" = "The next reply will be automatically played.";
 "FLYTopicDetailTabbarPause" = "Pause";
 "FLYTopicDetailTitle" = "Details";
 "FLYTopicDetailActionsheetReport" = "Report post";

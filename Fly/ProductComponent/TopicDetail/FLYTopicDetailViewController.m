@@ -36,6 +36,7 @@
 #import "FLYReplyService.h"
 #import "FLYGroupViewController.h"
 #import "UIFont+FLYAddition.h"
+#import "FLYIconButton.h"
 
 typedef NS_ENUM(NSInteger, FLYPostAuthorActions) {
     FLYPostAuthorActionsDelete = 0
@@ -74,6 +75,10 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 
 // current playing audio indexPath
 @property (nonatomic) NSIndexPath *currentPlayingIndexPath;
+
+// play all enabled
+@property (nonatomic) BOOL isPlayAllRepliesEnabled;
+@property (nonatomic) FLYIconButton *playAllButton;
 
 @end
 
@@ -389,9 +394,20 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     [self _commentButtonTapped:nil];
 }
 
-- (void)playAllButtonOnTabbarTapped:(id)sender
+- (void)playAllButtonOnTabbarTapped:(FLYIconButton *)playAllButton
 {
-    
+    if ([self.replies count] == 0) {
+        [Dialog simpleToast:LOC(@"FLYTopicDetailsPlayAllNoReplies")];
+        return;
+    }
+    _playAllButton = playAllButton;
+    self.isPlayAllRepliesEnabled = !self.isPlayAllRepliesEnabled;
+    if (self.isPlayAllRepliesEnabled) {
+        self.currentPlayingIndexPath = [NSIndexPath indexPathForRow:0 inSection:FlyReplyCellSectionIndex];
+        FLYReply *reply = [self.replies objectAtIndex:0];
+        FLYTopicDetailReplyCell *tappedCell = (FLYTopicDetailReplyCell *)[self.topicTableView cellForRowAtIndexPath:self.currentPlayingIndexPath];
+        [self playButtonTapped:tappedCell withReply:reply withIndexPath:self.currentPlayingIndexPath];
+    }
 }
 
 - (void)_commentButtonTapped:(FLYReply *)reply
@@ -445,6 +461,8 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     }
     
     [[FLYAudioManager sharedInstance] updateAudioState:newItem];
+    
+    self.currentPlayingIndexPath = indexPath;
 }
 
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath
@@ -516,6 +534,21 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
                 FLYTopicDetailReplyCell *currentCell = (FLYTopicDetailReplyCell *)([self.topicTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
                 [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateNotSet;
                 [currentCell updatePlayState:FLYPlayStateNotSet];
+                
+                // Auto play all the replies
+                if (self.isPlayAllRepliesEnabled && self.currentPlayingIndexPath) {
+                    NSInteger nextRow = self.currentPlayingIndexPath.row + 1;
+                    // no more replies to auto play
+                    if (nextRow >= [self.replies count]) {
+                        self.isPlayAllRepliesEnabled = NO;
+                        return;
+                    }
+                    
+                    self.currentPlayingIndexPath = [NSIndexPath indexPathForRow:nextRow inSection:FlyReplyCellSectionIndex];
+                    FLYReply *reply = [self.replies objectAtIndex:nextRow];
+                    FLYTopicDetailReplyCell *tappedCell = (FLYTopicDetailReplyCell *)[self.topicTableView cellForRowAtIndexPath:self.currentPlayingIndexPath];
+                    [self playButtonTapped:tappedCell withReply:reply withIndexPath:self.currentPlayingIndexPath];
+                }
             }
         }
     }
@@ -820,6 +853,22 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         }
     }
     [[FLYAudioManager sharedInstance].audioPlayer stop];
+}
+
+- (void)setIsPlayAllRepliesEnabled:(BOOL)isPlayAllRepliesEnabled
+{
+    if (_isPlayAllRepliesEnabled == isPlayAllRepliesEnabled) {
+        return;
+    }
+    
+    _isPlayAllRepliesEnabled = isPlayAllRepliesEnabled;
+    if (_isPlayAllRepliesEnabled) {
+        [_playAllButton setLabelText:LOC(@"FLYTopicDetailTabbarPause")];
+        [_playAllButton setIconImage:[UIImage imageNamed:@"icon_detail_playall_circle_pause"]];
+    } else {
+        [_playAllButton setLabelText:LOC(@"FLYTopicDetailTabbarPlayAll")];
+        [_playAllButton setIconImage:[UIImage imageNamed:@"icon_tabbar_detail_playall"]];
+    }
 }
 
 #pragma mark - Navigation bar and status bar

@@ -114,9 +114,9 @@
     return CGSizeMake(intrinsicWidth, intrinsicHeight);
 }
 
-- (void)setIsSelected:(BOOL)isSelected
+- (void)setisPressed:(BOOL)isPressed
 {
-    _isSelected = !isSelected;
+    _isPressed = !isPressed;
 }
 
 @end
