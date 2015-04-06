@@ -98,4 +98,12 @@
     [Dialog simpleToast:LOC(@"FLYSuccessfullyLoggedOut")];
 }
 
+- (void)clearSignedMedia
+{
+    self.signedURLString = nil;
+    self.mediaId = nil;
+    self.mineType = nil;
+    self.mediaAlreadyUploaded = NO;
+}
+
 @end

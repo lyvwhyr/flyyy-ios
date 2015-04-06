@@ -20,6 +20,7 @@
         _userId = [[dict fly_objectOrNilForKey:@"user_id"] stringValue];
         _userName = [dict fly_stringForKey:@"user_name"];
         _createdAt = [[dict fly_objectOrNilForKey:@"created_at"] stringValue];
+        _suspended = [dict fly_boolForKey:@"suspended" defaultValue:NO];
     }
     return self;
 }

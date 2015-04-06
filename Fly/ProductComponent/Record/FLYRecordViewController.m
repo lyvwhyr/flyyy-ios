@@ -38,6 +38,7 @@
 #import "FLYVoiceEffectView.h"
 #import "SDiPhoneVersion.h"
 #import "FLYTopic.h"
+#import "FLYMediaService.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -234,9 +235,16 @@
     
     [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"recording_page" component:nil element:@"next_button" action:@"click"];
     
-    NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
     if (self.recordingType == RecordingForTopic) {
-        [FLYEndpointRequest uploadAudioFileServiceWithUserId:userId successBlock:nil failureBlock:nil];
+        FLYUploadToS3SuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+            
+        };
+        
+        FLYUploadToS3ErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        };
+        [FLYMediaService getSignedUrlAndUploadWithSuccessBlock:successBlock errorBlock:errorBlock];
+        
         [self _setupCompleteViewState];
         FLYPrePostViewController *prePostVC = [FLYPrePostViewController new];
         prePostVC.audioDuration = self.audioLength;
@@ -260,9 +268,9 @@
             [self.progressHUD showInView:self.view];
             
             @weakify(self)
-            [FLYEndpointRequest uploadAudioFileServiceWithUserId:userId successBlock:^(NSString *mediaId) {
+            FLYUploadToS3SuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
                 @strongify(self)
-                self.replyMediaId = mediaId;
+                self.replyMediaId = [FLYAppStateManager sharedInstance].mediaId;
                 NSDictionary *dict = @{@"topic_id":self.topic.topicId,
                                        @"media_id":self.replyMediaId,
                                        @"audio_duration":@(self.audioLength)};
@@ -271,12 +279,15 @@
                     [mutableDict setObject:self.parentReplyId forKey:@"parent_reply_id"];
                 }
                 [self _postReplyServiceWithParams:mutableDict];
-            } failureBlock:^{
+            };
+            
+            FLYUploadToS3ErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {
                 [self _enableUserInteractionsAfterAnimation];
                 
                 [self.progressHUD dismiss];
                 [Dialog simpleToast:LOC(@"FLYGenericError")];
-            }];
+            };
+            [FLYMediaService getSignedUrlAndUploadWithSuccessBlock:successBlock errorBlock:errorBlock];
         }
     }
 }

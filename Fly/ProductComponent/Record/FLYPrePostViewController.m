@@ -26,6 +26,7 @@
 #import "FLYFeedViewController.h"
 #import "FLYEndpointRequest.h"
 #import "FLYUser.h"
+#import "FLYMediaService.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -248,11 +249,11 @@
         return;
     }
     
-    NSString *mediaId = [FLYAppStateManager sharedInstance].mediaId;
+    BOOL mediaAlreadyUploaded = [FLYAppStateManager sharedInstance].mediaAlreadyUploaded;
     NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
     
     self.postButton.userInteractionEnabled = NO;
-    if (mediaId) {
+    if (mediaAlreadyUploaded) {
         [self _serviceCreateTopicWithParams:@{@"user_id":userId}];
     } else {
         //If media id is still empty at this point, try to upload the media again.
@@ -263,15 +264,18 @@
         [HUD showInView:self.view];
         
         @weakify(self)
-        [FLYEndpointRequest uploadAudioFileServiceWithUserId:userId successBlock:^(NSString *mediaId) {
+        FLYUploadToS3SuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
             @strongify(self);
             [HUD dismiss];
             [self _serviceCreateTopicWithParams:@{@"user_id":userId}];
-        } failureBlock:^{
+        };
+        
+        FLYUploadToS3ErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {
             self.postButton.userInteractionEnabled = YES;
             [HUD dismiss];
             [Dialog simpleToast:LOC(@"FLYGenericError")];
-        }];
+        };
+        [FLYMediaService getSignedUrlAndUploadWithSuccessBlock:successBlock errorBlock:errorBlock];
     }
 }
 

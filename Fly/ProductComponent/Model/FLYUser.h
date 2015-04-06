@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *userName;
 @property (nonatomic, copy) NSString *createdAt;
+@property (nonatomic) BOOL suspended;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 

@@ -11,7 +11,6 @@
 @interface FLYAppStateManager : NSObject
 
 @property (nonatomic) BOOL isAutoPlayEnabled;
-@property (nonatomic, copy) NSString *mediaId;
 @property (nonatomic) NSArray *groupList;
 @property (nonatomic, copy) NSString *deviceToken;
 @property (nonatomic, copy) NSString *deviceId;
@@ -37,6 +36,14 @@
 // need reset navigation stack after login. After logout and relogin, we cannnot just dimiss the login view because it will not end in home page.
 @property (nonatomic) BOOL needRestartNavigationStackAfterLogin;
 
+// signed url for upload
+@property (nonatomic, copy) NSString *signedURLString;
+@property (nonatomic, copy) NSString *mineType;
+@property (nonatomic, copy) NSString *mediaId;
+@property (nonatomic) BOOL mediaAlreadyUploaded;
+
 + (instancetype)sharedInstance;
+
+- (void)clearSignedMedia;
 
 @end

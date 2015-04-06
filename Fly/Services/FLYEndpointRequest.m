@@ -28,28 +28,6 @@
     }];
 }
 
-+ (void)uploadAudioFileServiceWithUserId:(NSString *)userId successBlock:(mediaUploadSuccessBlock)successBlock failureBlock:(mediaUploadFailureBlock)fail
-{
-    [FLYAppStateManager sharedInstance].mediaId = nil;
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *urlStr = [NSString stringWithFormat:@"media/upload?user_id=%@", userId];
-    [manager POST:urlStr parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        NSData *audioData=[NSData dataWithContentsOfFile:[FLYAppStateManager sharedInstance].recordingFilePathSelected];
-        [formData appendPartWithFileData:audioData name: kMultiPartName fileName: kMultiPartFileName mimeType:kMimeType];
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [FLYAppStateManager sharedInstance].mediaId = [[responseObject fly_objectOrNilForKey:@"media_id"] stringValue];
-        if (successBlock) {
-            successBlock([FLYAppStateManager sharedInstance].mediaId);
-        }
-        UALog(@"Post audio file response: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (fail) {
-            fail();
-        }
-        NSLog(@"Error: %@", error);
-    }];
-}
-
 + (void)createUserWithUsername:(NSString *)username deviceId:(NSString *)deviceId successBlock:(userCreationSuccessBlock)success
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
