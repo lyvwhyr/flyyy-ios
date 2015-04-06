@@ -12,6 +12,7 @@
 #import "NSDate+TimeAgo.h"
 #import "FLYDownloadableAudio.h"
 #import "FLYReplyService.h"
+#import "FLYServerConfig.h"
 
 
 @interface FLYReply()<FLYDownloadableAudio>
@@ -31,7 +32,7 @@
         }
         _user = [[FLYUser alloc] initWithDictionary:[dict fly_dictionaryForKey:@"user"]];
         NSString *mediaPath = [dict fly_stringForKey:@"media_path"];
-        _mediaURL = [NSString stringWithFormat:@"%@/%@", URL_ASSET_STAGING_BASE, mediaPath];
+        _mediaURL = [NSString stringWithFormat:@"%@/%@", [FLYServerConfig getAssetURL], mediaPath];
         _likeCount = [dict fly_integerForKey:@"like_count"];
         _audioDuration = [dict fly_integerForKey:@"audio_duration"];
         _createdAt = [[dict fly_objectOrNilForKey:@"created_at"] stringValue];        

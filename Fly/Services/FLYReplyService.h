@@ -27,7 +27,7 @@ typedef void(^FLYDeleteReplyErrorBlock)(id responseObj, NSError *error);
 
 @interface FLYReplyService : FLYServiceBase
 
-- (void)nextPage:(NSString *)before firstPage:(BOOL)first successBlock:(FLYReplyServiceGetRepliesSuccessBlock)successBlock errorBlock:(FLYReplyServiceGetRepliesErrorBlock)errorBlock;
+- (void)nextPageWithBefore:(NSString *)before after:(NSString *)after firstPage:(BOOL)first successBlock:(FLYReplyServiceGetRepliesSuccessBlock)successBlock errorBlock:(FLYReplyServiceGetRepliesErrorBlock)errorBlock;
 
 
 + (instancetype)replyServiceWithTopicId:(NSString *)topicId;

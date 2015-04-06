@@ -226,7 +226,7 @@
         [self.repliesTableView.pullToRefreshView stopAnimating];
         [self.repliesTableView.infiniteScrollingView stopAnimating];
     };
-    [self.replyService nextPage:before firstPage:first successBlock:successBlock errorBlock:errorBlock];
+    [self.replyService nextPageWithBefore:before after:nil firstPage:first successBlock:successBlock errorBlock:errorBlock];
 }
 
 #pragma mark - FLYMyRepliesCellDelegate

@@ -23,13 +23,17 @@
     return [[FLYReplyService alloc] initWithEndpoint:endpoint];
 }
 
-- (void)nextPage:(NSString *)before firstPage:(BOOL)first successBlock:(FLYReplyServiceGetRepliesSuccessBlock)successBlock errorBlock:(FLYReplyServiceGetRepliesErrorBlock)errorBlock
+- (void)nextPageWithBefore:(NSString *)before after:(NSString *)after firstPage:(BOOL)first successBlock:(FLYReplyServiceGetRepliesSuccessBlock)successBlock errorBlock:(FLYReplyServiceGetRepliesErrorBlock)errorBlock
 {
     NSString *requestEndpoint;
     if (first) {
         requestEndpoint = [NSString stringWithFormat: @"%@?limit=%d", self.endpoint, KReplyPaginationCount];
-    } else {
+    } else if ([before length] > 0){
         requestEndpoint = [NSString stringWithFormat: @"%@?limit=%d&before=%@", self.endpoint, KReplyPaginationCount, before];
+    } else if ([after length] > 0) {
+        requestEndpoint = [NSString stringWithFormat: @"%@?limit=%d&after=%@", self.endpoint, KReplyPaginationCount, after];
+    } else {
+        requestEndpoint = [NSString stringWithFormat: @"%@?limit=%d", self.endpoint, KReplyPaginationCount];
     }
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:requestEndpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {

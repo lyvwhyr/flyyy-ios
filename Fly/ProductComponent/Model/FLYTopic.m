@@ -14,21 +14,11 @@
 #import "FLYURLConstants.h"
 #import "NSDate+TimeAgo.h"
 #import "FLYTopicService.h"
+#import "FLYServerConfig.h"
 
 @interface FLYTopic() <FLYDownloadableAudio>
 
 @end
-
-//@property (nonatomic, copy) NSString *topicId;
-//@property (nonatomic, copy) NSString *topicTitle;
-//@property (nonatomic) NSInteger likeCount;
-//@property (nonatomic) NSInteger replyCount;
-//@property (nonatomic) NSInteger audioDuration;
-//@property (nonatomic, copy) NSString *createdAt;
-//@property (nonatomic, copy) NSString *updatedAt;
-//@property (nonatomic, copy) NSString *mediaURL;
-//@property (nonatomic) FLYUser *user;
-//@property (nonatomic) FLYGroup *group;
 
 
 @implementation FLYTopic
@@ -39,7 +29,7 @@
         _topicId = [[dict fly_objectOrNilForKey:@"topic_id"] stringValue];
         _topicTitle = [dict fly_stringForKey:@"topic_title"];
         NSString *mediaPath = [dict fly_stringForKey:@"media_path"];
-        _mediaURL = [NSString stringWithFormat:@"%@/%@", URL_ASSET_STAGING_BASE, mediaPath];
+        _mediaURL = [NSString stringWithFormat:@"%@/%@", [FLYServerConfig getAssetURL], mediaPath];
         _likeCount = [dict fly_integerForKey:@"like_count"];
         _replyCount = [dict fly_integerForKey:@"reply_count"];
         _audioDuration = [dict fly_integerForKey:@"audio_duration"];

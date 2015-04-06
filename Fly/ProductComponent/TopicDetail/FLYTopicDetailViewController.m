@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 @property (nonatomic) BOOL setLayoutConstraints;
 
 //used for reply pagination
-@property (nonatomic) NSString *beforeTimestamp;
+@property (nonatomic) NSString *afterTimestamp;
 
 //services
 @property (nonatomic) FLYReplyService *replyService;
@@ -324,15 +324,15 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 - (void)_initService
 {
     self.replyService = [FLYReplyService replyServiceWithTopicId:self.topic.topicId];
-    [self _load:YES before:nil];
+    [self _load:YES after:nil];
     @weakify(self)
     [self.topicTableView addInfiniteScrollingWithActionHandler:^{
         @strongify(self)
-        [self _load:NO before:self.beforeTimestamp];
+        [self _load:NO after:self.afterTimestamp];
     }];
 }
 
-- (void)_load:(BOOL)first before:(NSString *)before
+- (void)_load:(BOOL)first after:(NSString *)after
 {
     @weakify(self)
     FLYReplyServiceGetRepliesSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
@@ -352,14 +352,14 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         }
         //Set up before id for load more
         FLYReply *lastReply = [self.replies lastObject];
-        self.beforeTimestamp = lastReply.createdAt;
+        self.afterTimestamp = lastReply.createdAt;
         [self.topicTableView reloadData];
     };
     FLYReplyServiceGetRepliesErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error){
         @strongify(self)
         [self.topicTableView.infiniteScrollingView stopAnimating];
     };
-    [self.replyService nextPage:before firstPage:first successBlock:successBlock errorBlock:errorBlock];
+    [self.replyService nextPageWithBefore:nil after:after firstPage:first successBlock:successBlock errorBlock:errorBlock];
 }
 
 #pragma mark - FLYTopicDetailTopicCellDelegate
@@ -407,6 +407,9 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         FLYReply *reply = [self.replies objectAtIndex:0];
         FLYTopicDetailReplyCell *tappedCell = (FLYTopicDetailReplyCell *)[self.topicTableView cellForRowAtIndexPath:self.currentPlayingIndexPath];
         [self playButtonTapped:tappedCell withReply:reply withIndexPath:self.currentPlayingIndexPath];
+        
+        // scroll to position
+        [self.topicTableView scrollToRowAtIndexPath:self.currentPlayingIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
 }
 
@@ -499,9 +502,9 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 - (void)_newReplyReceived:(NSNotification *)notif
 {
     FLYReply *reply = [notif.userInfo objectForKey:kNewReplyKey];
-    [self.replies insertObject:reply atIndex:0];
+    [self.replies addObject:reply];
     [self.topicTableView reloadData];
-    [self _scrollToTop];
+    [self _scrollToBottom];
 }
 
 - (void)_downloadComplete:(NSNotification *)notificaiton
@@ -548,6 +551,9 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
                     FLYReply *reply = [self.replies objectAtIndex:nextRow];
                     FLYTopicDetailReplyCell *tappedCell = (FLYTopicDetailReplyCell *)[self.topicTableView cellForRowAtIndexPath:self.currentPlayingIndexPath];
                     [self playButtonTapped:tappedCell withReply:reply withIndexPath:self.currentPlayingIndexPath];
+                    
+                    // scroll to position
+                    [self.topicTableView scrollToRowAtIndexPath:self.currentPlayingIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
                 }
             }
         }
@@ -559,10 +565,10 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     }
 }
 
-- (void)_scrollToTop
+- (void)_scrollToBottom
 {
-    NSIndexPath* top = [NSIndexPath indexPathForRow:NSNotFound inSection:0];
-    [self.topicTableView scrollToRowAtIndexPath:top atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    NSIndexPath* bottom = [NSIndexPath indexPathForRow:(self.replies.count - 1) inSection:FlyReplyCellSectionIndex];
+    [self.topicTableView scrollToRowAtIndexPath:bottom atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
 
