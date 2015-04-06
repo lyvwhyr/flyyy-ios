@@ -244,11 +244,6 @@
         return;
     }
     
-    if (!self.selectedGroup) {
-        [Dialog simpleToast:LOC(@"FLYPrePostGroupEmpty")];
-        return;
-    }
-    
     BOOL mediaAlreadyUploaded = [FLYAppStateManager sharedInstance].mediaAlreadyUploaded;
     NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
     
@@ -283,13 +278,16 @@
 - (void)_serviceCreateTopicWithParams:(NSDictionary *)dict
 {
     NSString *userId = [dict objectForKey:@"user_id"];
-    NSDictionary *params = @{@"topic_title":self.topicTitle,
+    NSMutableDictionary *params = (NSMutableDictionary *)@{@"topic_title":self.topicTitle,
                              @"media_id":[FLYAppStateManager sharedInstance].mediaId,
                              @"extension":@"m4a",
-                             @"group_id":self.selectedGroup.groupId,
                              @"audio_duration":@(self.audioDuration)
                              };
-    NSString *baseURL =  [NSString stringWithFormat:@"topics?&media_id=not_valid&user_id=%@", userId];
+    if (self.selectedGroup) {
+        [params setObject:self.selectedGroup.groupId forKey:@"group_id"];
+    }
+    
+    NSString *baseURL =  [NSString stringWithFormat:@"topics?user_id=%@", userId];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager POST:baseURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         FLYTopic *post = [[FLYTopic alloc] initWithDictory:responseObject];
@@ -304,7 +302,7 @@
     }];
 }
 
-#pragma mark - Navigation bar and status bar
+#pragma mark - Navigation bar and status barhow
 - (UIColor *)preferredNavigationBarColor
 {
     return [UIColor flyBlue];

@@ -314,8 +314,6 @@ forHTTPHeaderField:(NSString *)field
     NSParameterAssert(URLString);
 
     NSURL *url = [NSURL URLWithString:URLString];
-
-    UALog(@"%@", URLString);
     
     NSParameterAssert(url);
 
@@ -482,6 +480,7 @@ forHTTPHeaderField:(NSString *)field
 
         if ([self.HTTPMethodsEncodingParametersInURI containsObject:[[request HTTPMethod] uppercaseString]]) {
             mutableRequest.URL = [NSURL URLWithString:[[mutableRequest.URL absoluteString] stringByAppendingFormat:mutableRequest.URL.query ? @"&%@" : @"?%@", query]];
+            
         } else {
             if (![mutableRequest valueForHTTPHeaderField:@"Content-Type"]) {
                 [mutableRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -489,7 +488,8 @@ forHTTPHeaderField:(NSString *)field
             [mutableRequest setHTTPBody:[query dataUsingEncoding:self.stringEncoding]];
         }
     }
-
+    UALog(@"%@", mutableRequest.URL);
+    
     return mutableRequest;
 }
 
