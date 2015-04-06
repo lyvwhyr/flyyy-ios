@@ -44,7 +44,6 @@
 
 @property (nonatomic) NSMutableArray *posts;
 @property (nonatomic) BOOL didSetConstraints;
-@property (nonatomic) enum RequestType requestType;
 
 @end
 

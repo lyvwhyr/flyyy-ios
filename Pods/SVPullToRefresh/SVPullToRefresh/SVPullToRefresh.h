@@ -14,7 +14,7 @@
 #import "UIScrollView+SVPullToRefresh.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
 
-NS_ENUM(NSInteger, RequestType)
+typedef NS_ENUM(NSInteger, RequestType)
 {
     RequestTypeNormal = 0,
     RequestTypeLoadMore
