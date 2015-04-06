@@ -9,6 +9,8 @@
 #import "FLYUtilities.h"
 #import "UIWindow+FLYAddition.h"
 #import "FLYCountryListDatasource.h"
+#import "FLYUser.h"
+#import "PXAlertView.h"
 
 @implementation FLYUtilities
 
@@ -33,14 +35,22 @@
     [FLYUtilities performSelector:@selector(_wrapperForLoggingConstraints) withObject:nil afterDelay:.3];
 }
 
-+ (BOOL)goToLogin
++ (BOOL)isInvalidUser
 {
-    if ([FLYAppStateManager sharedInstance].currentUser) {
-        return NO;
+    if (![FLYAppStateManager sharedInstance].currentUser) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRequireSignupNotification object:self];
+        return YES;
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRequireSignupNotification object:self];
-    return YES;
+    
+    // user is suspended
+    if ([FLYAppStateManager sharedInstance].currentUser.suspended) {
+        [PXAlertView showAlertWithTitle:LOC(@"FLYAccountSuspendedMessage")];
+        return YES;
+    }
+    
+    return NO;
 }
+
 
 + (void)_wrapperForLoggingConstraints
 {

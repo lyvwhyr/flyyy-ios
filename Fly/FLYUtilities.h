@@ -3,7 +3,7 @@
 + (CGFloat) FLYMainScreenScale;
 + (CGFloat)hairlineHeight;
 + (void)printAutolayoutTrace;
-+ (BOOL)goToLogin;
++ (BOOL)isInvalidUser;
 + (NSString *)getCountryDialCode;
 + (void)gotoReviews;
 + (NSString *)appVersion;

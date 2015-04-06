@@ -412,7 +412,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 
 - (void)_commentButtonTapped:(FLYReply *)reply
 {
-    if ([FLYUtilities goToLogin]) {
+    if ([FLYUtilities isInvalidUser]) {
         return;
     }
     

@@ -274,7 +274,7 @@
 
 - (void)_likeButtonTapped
 {
-    if ([FLYUtilities goToLogin]) {
+    if ([FLYUtilities isInvalidUser]) {
         return;
     }
     
@@ -283,7 +283,7 @@
 
 - (void)_commentButtonTapped
 {
-    if ([FLYUtilities goToLogin]) {
+    if ([FLYUtilities isInvalidUser]) {
         return;
     }
     

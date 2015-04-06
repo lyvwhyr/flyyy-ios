@@ -243,7 +243,7 @@
 
 - (void)_recordButtonTapped
 {
-    if ([FLYUtilities goToLogin]) {
+    if ([FLYUtilities isInvalidUser]) {
         return;
     }
     
