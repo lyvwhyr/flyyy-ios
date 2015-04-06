@@ -217,7 +217,6 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    [FLYUtilities printAutolayoutTrace];
 }
 
 - (void)_countrySelectorSelected

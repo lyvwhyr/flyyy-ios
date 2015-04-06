@@ -9,6 +9,7 @@
 #import "FLYUniversalViewController.h"
 
 @class FLYTopic;
+@class FLYGroup;
 
 typedef NS_ENUM(NSInteger, FLYRecordState)
 {
@@ -32,6 +33,9 @@ typedef NS_ENUM(NSInteger, FLYRecordingType)
 //reply recording
 @property (nonatomic) FLYTopic *topic;
 @property (nonatomic) NSString *parentReplyId;
+
+// default selected group
+@property (nonatomic) FLYGroup *defaultGroup;
 
 - (instancetype)initWithRecordType:(FLYRecordingType)recordingType;
 

@@ -37,7 +37,6 @@
 //        [self _addViewConstraints];
 //        _didSetConstraints = YES;
 //    }
-//    [FLYUtilities printAutolayoutTrace];
 //}
 //
 //- (void)_addViewConstraints

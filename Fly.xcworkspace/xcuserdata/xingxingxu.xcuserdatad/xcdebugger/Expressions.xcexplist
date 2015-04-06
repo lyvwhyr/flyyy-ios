@@ -27,14 +27,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[FLYAudioManager updateAudioState:]:FLYAudioManager.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[FLYAudioManager sharedInstance].previousPlayItem">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "-[FLYFeedViewController updateViewConstraints]:FLYFeedViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -51,13 +43,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[FLYFeedViewController playButtonTapped:withPost:withIndexPath:]:FLYFeedViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[FLYAudioManager sharedInstance].currentPlayItem">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[FLYUser initWithDictory:]:FLYUser.m">
       </ContextState>
       <ContextState
-         contextName = "-[FLYTopicDetailViewController playReplyWithReply:indexPath:]:FLYTopicDetailViewController.m">
+         contextName = "-[FLYAudioManager updateAudioState:]:FLYAudioManager.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.audioController">
+               value = "[FLYAudioManager sharedInstance].previousPlayItem">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -70,10 +70,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[FLYGroupListViewController updateViewConstraints]:FLYGroupListViewController.m">
+         contextName = "-[FLYTopicDetailViewController playReplyWithReply:indexPath:]:FLYTopicDetailViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.view">
+               value = "self.audioController">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -89,10 +89,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[FLYFeedViewController playButtonTapped:withPost:withIndexPath:]:FLYFeedViewController.m">
+         contextName = "-[FLYGroupListViewController updateViewConstraints]:FLYGroupListViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "[FLYAudioManager sharedInstance].currentPlayItem">
+               value = "self.view">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -106,6 +106,14 @@
       </ContextState>
       <ContextState
          contextName = "__43-[FLYMyRepliesViewController _load:before:]_block_invoke:FLYMyRepliesViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[FLYFeedTopicTableViewCell setupTopic:needUpdateConstraints:]:FLYFeedTopicTableViewCell.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "topic.topicTitle">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[FLYMainViewController viewWillAppear:]:FLYMainViewController.m">

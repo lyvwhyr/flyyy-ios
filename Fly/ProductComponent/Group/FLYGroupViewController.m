@@ -51,6 +51,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [FLYAppStateManager sharedInstance].currentlyInGroup = self.group;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [FLYAppStateManager sharedInstance].currentlyInGroup = nil;
 }
 
 #pragma mark - Navigation bar

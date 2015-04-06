@@ -19,6 +19,7 @@
 #import "NSDictionary+FLYAddition.h"
 #import "Dialog.h"
 #import "FLYLogoutService.h"
+#import "FLYGroup.h"
 
 @interface FLYAppStateManager()
 

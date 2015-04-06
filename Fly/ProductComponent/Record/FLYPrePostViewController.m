@@ -88,6 +88,10 @@
     [_postButton addGestureRecognizer:tap];
     [self.view addSubview:_postButton];
     
+    if (self.defaultGroup) {
+        [self _setDefaultSelectedIndex:self.defaultGroup];
+    }
+    
     [self updateViewConstraints];
     
     [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:nil element:nil action:@"impression"];
@@ -97,11 +101,6 @@
 {
     [super viewWillAppear:animated];
     [_tableView reloadData];
-}
-
-- (void)dealloc
-{
-    
 }
 
 - (void)updateViewConstraints
@@ -274,15 +273,31 @@
     }
 }
 
+- (void)_setDefaultSelectedIndex:(FLYGroup *)defaultGroup
+{
+    NSInteger defaultRow;
+    for (int i = 0; i < [self.groups count]; i++) {
+        FLYGroup *groupInList = self.groups[i];
+        if ([groupInList.groupId isEqualToString:defaultGroup.groupId]) {
+            defaultRow = i;
+            self.selectedIndex = [NSIndexPath indexPathForRow:i inSection:0];
+            self.selectedGroup = defaultGroup;
+            return;
+        }
+    }
+}
+
 #pragma mark - Service
 - (void)_serviceCreateTopicWithParams:(NSDictionary *)dict
 {
     NSString *userId = [dict objectForKey:@"user_id"];
-    NSMutableDictionary *params = (NSMutableDictionary *)@{@"topic_title":self.topicTitle,
+    NSDictionary *initialParams = @{@"topic_title":self.topicTitle,
                              @"media_id":[FLYAppStateManager sharedInstance].mediaId,
                              @"extension":@"m4a",
                              @"audio_duration":@(self.audioDuration)
                              };
+    
+    NSMutableDictionary *params = [initialParams mutableCopy];
     if (self.selectedGroup) {
         [params setObject:self.selectedGroup.groupId forKey:@"group_id"];
     }
@@ -316,7 +331,6 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    [FLYUtilities printAutolayoutTrace];
 }
 
 @end

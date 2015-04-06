@@ -7,6 +7,7 @@
 //
 
 @class FLYUser;
+@class FLYGroup;
 
 @interface FLYAppStateManager : NSObject
 
@@ -41,6 +42,9 @@
 @property (nonatomic, copy) NSString *mineType;
 @property (nonatomic, copy) NSString *mediaId;
 @property (nonatomic) BOOL mediaAlreadyUploaded;
+
+// currently in group. This property is set in groupViewController
+@property (nonatomic) FLYGroup *currentlyInGroup;
 
 + (instancetype)sharedInstance;
 

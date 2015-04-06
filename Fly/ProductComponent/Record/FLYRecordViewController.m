@@ -39,6 +39,7 @@
 #import "SDiPhoneVersion.h"
 #import "FLYTopic.h"
 #import "FLYMediaService.h"
+#import "FLYGroup.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -248,6 +249,9 @@
         [self _setupCompleteViewState];
         FLYPrePostViewController *prePostVC = [FLYPrePostViewController new];
         prePostVC.audioDuration = self.audioLength;
+        if (self.defaultGroup) {
+            prePostVC.defaultGroup = self.defaultGroup;
+        }
         [self.navigationController pushViewController:prePostVC animated:YES];
     } else {
         [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:@"reply" element:@"post_button" action:@"click"];
@@ -715,7 +719,6 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-//    [FLYUtilities printAutolayoutTrace];
 }
 
 #pragma mark - FLYRecordBottomBarDelegate
