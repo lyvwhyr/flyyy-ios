@@ -10,8 +10,6 @@
 
 @interface FLYVoiceFilterManager : NSObject
 
-+ (instancetype)sharedInstance;
-
 - (void)applyFiltering;
 
 @end

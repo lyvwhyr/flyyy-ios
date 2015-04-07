@@ -29,16 +29,6 @@ double gExecTimeTotal = 0.;
 
 @implementation FLYVoiceFilterManager
 
-//+ (instancetype)sharedInstance
-//{
-//    static FLYVoiceFilterManager *instance;
-//    static dispatch_once_t once;
-//    dispatch_once(&once, ^{
-//        instance = [[FLYVoiceFilterManager alloc] init];
-//    });
-//    return instance;
-//}
-
 - (instancetype)init
 {
     if (self = [super init]) {
