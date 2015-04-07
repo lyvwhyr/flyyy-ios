@@ -114,6 +114,10 @@
     [cell setupCellWithTopic:topic reply:reply];
     cell.delegate = self;
     
+    if (([FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemMyRepliesReply) && [[FLYAudioManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
+        [cell updatePlayState:[FLYAudioManager sharedInstance].currentPlayItem.playState];
+    }
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell setNeedsUpdateConstraints];
     [cell updateConstraints];
@@ -136,17 +140,6 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // stop previous. same cell.
-    if (![[FLYAudioManager sharedInstance].previousPlayItem isEqual:[FLYAudioManager sharedInstance].currentPlayItem] && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemMyRepliesReply && [indexPath isEqual:[FLYAudioManager sharedInstance].previousPlayItem.indexPath]) {
-        [self _clearPreviousPlayingItem];
-    }
-    
-    if (indexPath != [FLYAudioManager sharedInstance].currentPlayItem.indexPath) {
-        FLYMyRepliesCell *displayedCell = (FLYMyRepliesCell *)cell;
-        [displayedCell updatePlayState:FLYPlayStateNotSet];
-    }
-    
-    
     // Remove seperator inset
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
         [cell setSeparatorInset:UIEdgeInsetsZero];

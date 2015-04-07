@@ -342,7 +342,7 @@
             [self clearPreviousPlayingItem];
     }
     
-    if (indexPath != [FLYAudioManager sharedInstance].currentPlayItem.indexPath) {
+    if (![indexPath isEqual:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]) {
         FLYFeedTopicTableViewCell *displayedCell = (FLYFeedTopicTableViewCell *)cell;
         [displayedCell updatePlayState:FLYPlayStateNotSet];
     }

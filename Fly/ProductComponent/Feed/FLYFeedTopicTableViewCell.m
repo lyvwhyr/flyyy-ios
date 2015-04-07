@@ -23,6 +23,7 @@
 #import "UAProgressView.h"
 #import "UIButton+TouchAreaInsets.h"
 #import "UIButton+TouchAreaInsets.h"
+#import "SDiPhoneVersion.h"
 
 @interface FLYFeedTopicTableViewCell()
 

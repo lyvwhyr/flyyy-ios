@@ -225,7 +225,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 {
     UITableViewCell *cell;
     if (indexPath.section == FlyTopicCellSectionIndex) {
-        static NSString *cellIdentifier = kFlyTopicDetailViewControllerTopicCellIdentifier;
+        NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d_%d", @"FLYTopicDetailViewCell", indexPath.section, indexPath.row];
         cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         BOOL needUpdateConstraints = YES;
         if (cell == nil) {
@@ -234,14 +234,9 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         }
         
         FLYFeedTopicTableViewCell *topicCell = (FLYFeedTopicTableViewCell *)cell;
-//        if (NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)
-//        {
-//            topicCell.contentView.frame = cell.bounds;
-//            topicCell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
-//        }
         topicCell.backgroundColor = [UIColor clearColor];
         //set cell state
-//        [topicCell updatePlayState:FLYPlayStateNotSet];
+        
         if ([[FLYAudioManager sharedInstance].currentPlayItem.indexPath isEqual:indexPath]) {
             [topicCell updatePlayState:[FLYAudioManager sharedInstance].currentPlayItem.playState];
         }
@@ -318,6 +313,51 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         return 0;
     }
     return kReplyHeaderHeight;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // stop previous. same cell.
+    if (![[FLYAudioManager sharedInstance].previousPlayItem isEqual:[FLYAudioManager sharedInstance].currentPlayItem] && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemFeedTopic && [indexPath isEqual:[FLYAudioManager sharedInstance].previousPlayItem.indexPath]) {
+        [self _clearPreviousPlayingItem];
+    }
+    
+    FLYAudioItem *currentItem = [FLYAudioManager sharedInstance].currentPlayItem;
+    if (![indexPath isEqual: currentItem.indexPath]) {
+        if (currentItem.indexPath.section == 0) {
+            FLYFeedTopicTableViewCell *displayedCell = (FLYFeedTopicTableViewCell *)cell;
+            [displayedCell updatePlayState:FLYPlayStateNotSet];
+        } else {
+             FLYTopicDetailReplyCell *displayedCell = (FLYTopicDetailReplyCell *)cell;
+            [displayedCell updatePlayState:FLYPlayStateNotSet];
+        }
+    }
+    
+    
+    if ([currentItem.indexPath isEqual:indexPath]) {
+        if (currentItem.indexPath.section == 0) {
+            FLYFeedTopicTableViewCell *displayedCell = (FLYFeedTopicTableViewCell *)cell;
+            [displayedCell updatePlayState:currentItem.playState];
+        } else {
+            FLYTopicDetailReplyCell *displayedCell = (FLYTopicDetailReplyCell *)cell;
+            [displayedCell updatePlayState:currentItem.playState];
+        }
+    }
+    
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 
