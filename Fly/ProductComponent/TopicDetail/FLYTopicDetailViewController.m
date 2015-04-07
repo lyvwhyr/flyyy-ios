@@ -145,6 +145,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     [self.view addSubview:self.topicTableView];
     
     self.tabbar = [FLYTopicDetailTabbar new];
+    self.tabbar.translatesAutoresizingMaskIntoConstraints = NO;
     self.tabbar.delegate = self;
     [self.view addSubview:self.tabbar];
     
@@ -233,11 +234,11 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         }
         
         FLYFeedTopicTableViewCell *topicCell = (FLYFeedTopicTableViewCell *)cell;
-        if (NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)
-        {
-            topicCell.contentView.frame = cell.bounds;
-            topicCell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
-        }
+//        if (NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)
+//        {
+//            topicCell.contentView.frame = cell.bounds;
+//            topicCell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+//        }
         topicCell.backgroundColor = [UIColor clearColor];
         //set cell state
 //        [topicCell updatePlayState:FLYPlayStateNotSet];
