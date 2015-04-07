@@ -529,11 +529,11 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     if (stopReason == STKAudioPlayerStopReasonEof) {
         // stop current
         if([FLYAudioManager sharedInstance].currentPlayItem) {
-            if ([FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemDetailTopic && [FLYAudioManager sharedInstance].currentPlayItem.indexPath == queueItemId.indexPath) {
+            if ([FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemDetailTopic && [[FLYAudioManager sharedInstance].currentPlayItem.indexPath isEqual: queueItemId.indexPath]) {
                 FLYFeedTopicTableViewCell *currentCell = (FLYFeedTopicTableViewCell *)([self.topicTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
                 [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateNotSet;
                 [currentCell updatePlayState:FLYPlayStateNotSet];
-            } else if ([FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemDetailReply && [FLYAudioManager sharedInstance].currentPlayItem.indexPath == queueItemId.indexPath){
+            } else if ([FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemDetailReply && [[FLYAudioManager sharedInstance].currentPlayItem.indexPath isEqual:queueItemId.indexPath]){
                 FLYTopicDetailReplyCell *currentCell = (FLYTopicDetailReplyCell *)([self.topicTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
                 [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateNotSet;
                 [currentCell updatePlayState:FLYPlayStateNotSet];

@@ -137,7 +137,7 @@
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // stop previous. same cell.
-    if (![[FLYAudioManager sharedInstance].previousPlayItem isEqual:[FLYAudioManager sharedInstance].currentPlayItem] && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemMyRepliesReply && indexPath == [FLYAudioManager sharedInstance].previousPlayItem.indexPath) {
+    if (![[FLYAudioManager sharedInstance].previousPlayItem isEqual:[FLYAudioManager sharedInstance].currentPlayItem] && [FLYAudioManager sharedInstance].previousPlayItem.itemType == FLYPlayableItemMyRepliesReply && [indexPath isEqual:[FLYAudioManager sharedInstance].previousPlayItem.indexPath]) {
         [self _clearPreviousPlayingItem];
     }
     
@@ -340,7 +340,7 @@
     
     if (stopReason == STKAudioPlayerStopReasonEof) {
         // stop current
-        if([FLYAudioManager sharedInstance].currentPlayItem && [FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemMyRepliesReply && [FLYAudioManager sharedInstance].currentPlayItem.indexPath == queueItemId.indexPath) {
+        if([FLYAudioManager sharedInstance].currentPlayItem && [FLYAudioManager sharedInstance].currentPlayItem.itemType == FLYPlayableItemMyRepliesReply && [[FLYAudioManager sharedInstance].currentPlayItem.indexPath isEqual: queueItemId.indexPath]) {
             FLYMyRepliesCell *currentCell = (FLYMyRepliesCell *)([self.repliesTableView cellForRowAtIndexPath:[FLYAudioManager sharedInstance].currentPlayItem.indexPath]);
             [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateNotSet;
             [currentCell updatePlayState:FLYPlayStateNotSet];

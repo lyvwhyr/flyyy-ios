@@ -163,7 +163,7 @@
     cell.backgroundColor = [UIColor clearColor];
     
     //Set the button state
-    if (self.selectedIndex == indexPath) {
+    if ([self.selectedIndex isEqual:indexPath]) {
         [chooseGroupCell selectCell];
     }
     
@@ -179,7 +179,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FLYPrePostChooseGroupTableViewCell *cell = (FLYPrePostChooseGroupTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    if (self.selectedIndex == indexPath) {
+    if ([self.selectedIndex isEqual:indexPath]) {
         //unselect
         self.selectedIndex = nil;
         self.selectedGroup = nil;

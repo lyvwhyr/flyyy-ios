@@ -248,13 +248,15 @@
     }
     
     FLYRecordingPermissionGrantedSuccessBlock successBlock = ^{
-        FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForTopic];
-        if ([FLYAppStateManager sharedInstance].currentlyInGroup) {
-            recordViewController.defaultGroup = [FLYAppStateManager sharedInstance].currentlyInGroup;
-        }
-        
-        UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
-        [self presentViewController:navigationController animated:NO completion:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForTopic];
+            if ([FLYAppStateManager sharedInstance].currentlyInGroup) {
+                recordViewController.defaultGroup = [FLYAppStateManager sharedInstance].currentlyInGroup;
+            }
+            
+            UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
+            [self presentViewController:navigationController animated:NO completion:nil];
+        });
     };
     [[FLYAudioManager sharedInstance] checkRecordingPermissionWithSuccessBlock:successBlock];
     

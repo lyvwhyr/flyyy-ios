@@ -69,7 +69,7 @@
     
     NSString *audioURLStr = [tappedAudioItem.url absoluteString];
     //tap on the same cell
-    if (samePage && [FLYAudioManager sharedInstance].previousPlayItem.indexPath == tappedCellIndexPath) {
+    if (samePage && [[FLYAudioManager sharedInstance].previousPlayItem.indexPath isEqual:tappedCellIndexPath]) {
         if ([FLYAudioManager sharedInstance].previousPlayItem.playState == FLYPlayStateNotSet) {
             [FLYAudioManager sharedInstance].currentPlayItem.playState = FLYPlayStateLoading;
             if ([FLYAudioManager sharedInstance].currentPlayItem.audioDuration < kStreamingMinimialLen) {
