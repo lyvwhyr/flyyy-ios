@@ -20,6 +20,6 @@
 
 
 @property (nonatomic) FLYIconButton *playAllButton;
-@property (nonatomic) id<FLYTopicDetailTabbarDelegate>delegate;
+@property (nonatomic, weak) id<FLYTopicDetailTabbarDelegate>delegate;
 
 @end

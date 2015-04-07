@@ -225,7 +225,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 {
     UITableViewCell *cell;
     if (indexPath.section == FlyTopicCellSectionIndex) {
-        NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d_%d", @"FLYTopicDetailViewCell", indexPath.section, indexPath.row];
+        NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d_%d", @"FLYTopicDetailViewCell", (int)indexPath.section, (int)indexPath.row];
         cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         BOOL needUpdateConstraints = YES;
         if (cell == nil) {
@@ -659,7 +659,9 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     } else {
         [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetReport")];
     }
+    @weakify(self)
     IBActionSheet *actionSheet = [[IBActionSheet alloc] initWithTitle:nil callback:^(IBActionSheet *actionSheet, NSInteger buttonIndex) {
+        @strongify(self)
         if (actionSheet.cancelButtonIndex != buttonIndex) {
             if (isAuthor) {
                 switch (buttonIndex) {
@@ -716,11 +718,13 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 
 - (void)_deletePost
 {
+    @weakify(self)
     [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailDeletePostAlertTitle")
                             message:LOC(@"FLYTopicDetailDeletePostAlertMessage")
                         cancelTitle:@"No"
                          otherTitle:@"Yes"
                          completion:^(BOOL cancelled, NSInteger buttonIndex) {
+                             @strongify(self)
                              if (!cancelled && buttonIndex != 0) {
 
                                  [FLYTopicService deleteTopicWithId:self.topic.topicId successBlock:nil errorBlock:nil];
@@ -736,11 +740,13 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 
 - (void)_deleteReply:(FLYReply *)reply
 {
+    @weakify(self)
     [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailActionsheetDeleteReply")
                             message:LOC(@"FLYTopicDetailDeleteReplyMessage")
                         cancelTitle:@"No"
                          otherTitle:@"Yes"
                          completion:^(BOOL cancelled, NSInteger buttonIndex) {
+                             @strongify(self)
                              if (!cancelled && buttonIndex != 0) {
                                  [FLYReplyService deleteReplyWithId:reply.replyId successBlock:nil errorBlock:nil];
                                  [self.replies removeObject:reply];
@@ -765,7 +771,9 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     } else {
         [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetReportReply")];
     }
+    @weakify(self)
     IBActionSheet *actionSheet = [[IBActionSheet alloc] initWithTitle:nil callback:^(IBActionSheet *actionSheet, NSInteger buttonIndex) {
+        @strongify(self)
         if (actionSheet.cancelButtonIndex != buttonIndex) {
             if (isAuthor) {
                 switch (buttonIndex) {

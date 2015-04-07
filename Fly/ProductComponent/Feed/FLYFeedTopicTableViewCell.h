@@ -34,7 +34,7 @@ typedef NS_OPTIONS(NSUInteger, FLYTopicCellOptions) {
 @property (nonatomic) FLYTopic *topic;
 @property (nonatomic) NSIndexPath *indexPath;
 @property (nonatomic) FLYTopicCellOptions options;
-@property id<FLYFeedTopicTableViewCellDelegate>delegate;
+@property (nonatomic, weak) id<FLYFeedTopicTableViewCellDelegate>delegate;
 
 - (void)setupTopic:(FLYTopic *)topic needUpdateConstraints:(BOOL)needUpdateConstraints;
 - (void)updatePlayState:(FLYPlayState)state;
