@@ -333,7 +333,6 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         }
     }
     
-    
     if ([currentItem.indexPath isEqual:indexPath]) {
         if (currentItem.indexPath.section == 0) {
             FLYFeedTopicTableViewCell *displayedCell = (FLYFeedTopicTableViewCell *)cell;

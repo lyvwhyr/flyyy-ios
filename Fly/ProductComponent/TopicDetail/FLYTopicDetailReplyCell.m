@@ -182,6 +182,14 @@
 {
     if (liked) {
         if (animated) {
+            if(NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1) {
+                CGFloat likeX = self.likeButton.frame.origin.x;
+                [self.commentButton mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.bottom.equalTo(self).offset(-kCommentBottomPadding);
+                    make.leading.equalTo(@(likeX));
+                }];
+            }
+            
             [self.likeButton enlargeAnimation];
         }
         

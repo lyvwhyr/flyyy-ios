@@ -238,7 +238,7 @@
         
         void (^commentButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
             make.bottom.equalTo(self.contentView).offset(-kInlineActionTopPadding);
-            make.trailing.equalTo(self.likeButton);
+            make.trailing.equalTo(self.contentView).offset(-kInlineActionRightPadding);
         };
         
         void (^groupNameButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
