@@ -219,9 +219,6 @@
     }
 }
 
-
-
-
 #pragma mark - navigation bar actions
 
 - (void)_backButtonTapped
@@ -504,7 +501,7 @@
     }
     
     self.audioLength++;
-    _recordedTimeLabel.text = [NSString stringWithFormat:@":%ld", kMaxRecordTime - self.audioLength];
+    _recordedTimeLabel.text = [NSString stringWithFormat:@":%d", kMaxRecordTime - self.audioLength];
     [self.view setNeedsLayout];
 }
 
@@ -526,7 +523,7 @@
     }
     
     self.remainingAudioLength--;
-    self.remainingTimeLabel.text = [NSString stringWithFormat:@":%ld", self.remainingAudioLength];
+    self.remainingTimeLabel.text = [NSString stringWithFormat:@":%ld", (long)self.remainingAudioLength];
     [self.view setNeedsLayout];
 }
 
@@ -623,13 +620,6 @@
         case FLYRecordRecordingState:
         {
             [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"recording_page" component:nil element:@"recording_button" action:@"click"];
-            
-//            if (self.recordingType == RecordingForTopic && self.audioLength <= kMinimalRecordingLength) {
-//                [Dialog simpleToast:[NSString stringWithFormat:LOC(@"FLYLessThanMinimalRecordingLength"), kMinimalRecordingLength] withDuration:1.0f];
-//                [self _setupInitialViewState];
-//                return;
-//            }
-            
             _currentState = FLYRecordCompleteState;
             [self _setupCompleteViewState];
             break;
@@ -714,11 +704,6 @@
     
 //    self.state = FLYRecordCompleteState;
 //    [self _updateUserState];
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
 }
 
 #pragma mark - FLYRecordBottomBarDelegate

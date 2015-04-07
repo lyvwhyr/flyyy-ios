@@ -17,10 +17,14 @@
 #import "UIFont+FLYAddition.h"
 
 #define kTitleTopPadding   18
+#define kExitButtonOriginX 20
+#define kExitButtonOriginY 32
 
 @interface FLYLoginSignupViewController ()
 
 @property (nonatomic) UIImageView *backgroundImageView;
+
+@property (nonatomic) UIButton *exitButton;
 
 @property (nonatomic) UIView *logoView;
 @property (nonatomic) UIImageView *logoImageView;
@@ -45,6 +49,11 @@
     self.backgroundImageView = [UIImageView new];
     self.backgroundImageView.image = [UIImage imageNamed:@"icon_login_background"];
     [self.view addSubview:self.backgroundImageView];
+    
+    self.exitButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.exitButton setImage:[UIImage imageNamed:@"icon_sign_in_exit_white"] forState:UIControlStateNormal];
+    [self.exitButton addTarget:self action:@selector(_exitButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.exitButton];
     
     self.logoView = [UIView new];
     [self.view addSubview:self.logoView];
@@ -90,29 +99,20 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-//    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 #pragma mark - Navigation bar
 
+// Don't show left bar button
 - (void)loadLeftBarButton
 {
-    if (self.canGoBack) {
-        FLYBackBarButtonItem *barItem = [FLYBackBarButtonItem barButtonItem:YES];
-        @weakify(self)
-        barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
-            @strongify(self)
-            [self _backButtonTapped];
-        };
-        self.navigationItem.leftBarButtonItem = barItem;
-    }
+
 }
 
 - (void)_backButtonTapped
@@ -122,6 +122,11 @@
 
 - (void)_addViewConstraints
 {
+    [self.exitButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view).offset(kExitButtonOriginX);
+        make.top.equalTo(self.view).offset(kExitButtonOriginY);
+    }];
+    
     [self.logoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(85));
         make.height.equalTo(@(35));
@@ -182,6 +187,11 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)_exitButtonTapped
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor
 {
@@ -191,7 +201,6 @@
 - (UIColor*)preferredStatusBarColor
 {
     return [UIColor clearColor];
-//    return [UIColor colorWithPatternImage: [UIImage imageNamed:@"icon_login_background"]];
 }
 
 @end

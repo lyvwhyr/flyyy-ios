@@ -138,7 +138,6 @@
     NSRange linkRange = [_agreeTermsOfServiceLabel.text rangeOfString:LOC(@"FLYSignupTermsOfServiceLinkText")];
     NSRange linkRange2 = [_agreeTermsOfServiceLabel.text rangeOfString:LOC(@"FLYSignupPrivacyPolicyLinkText")];
     
-    //TODO:add right terms of service and privacy policy link
     [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:kTermsOfServiceURL]
                                  range:linkRange];
     [self.agreeTermsOfServiceLabel addLink:[NSURL URLWithString:kPrivacyPolicyURL]
