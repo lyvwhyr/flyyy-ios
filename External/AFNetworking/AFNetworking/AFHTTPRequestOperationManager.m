@@ -24,6 +24,7 @@
 
 #import "AFHTTPRequestOperationManager.h"
 #import "AFHTTPRequestOperation.h"
+#import "NSTimer+BlocksKit.h"
 
 #import <Availability.h>
 #import <Security/Security.h>
@@ -33,10 +34,15 @@
 #import <UIKit/UIKit.h>
 #endif
 
+#define kMaxRetryTimes 3
 
 @interface AFHTTPRequestOperationManager ()
 
 @property (readwrite, nonatomic, strong) NSURL *baseURL;
+@property (nonatomic) NSInteger tries;
+@property (nonatomic) NSDate *requestTimestamp;
+@property (nonatomic) NSDate *responseTimestamp;
+@property (nonatomic) NSTimeInterval lastResponseInterval;
 
 @end
 
@@ -101,13 +107,37 @@
                                                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+    self.requestTimestamp = [NSDate date];
+    
+    self.tries++;
+    void (^retryBlock)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.responseTimestamp = [NSDate date];
+        self.lastResponseInterval = [self.responseTimestamp timeIntervalSinceDate:self.requestTimestamp];
+        if (error.userInfo &&
+            ([[error.userInfo objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode] >= 500)) {
+            if (self.tries <= kMaxRetryTimes) {
+                AFHTTPRequestOperation *retryOperation = [self HTTPRequestOperationWithRequest:request
+                                                                                       success:success
+                                                                                       failure:failure];
+                void (^addRetryOperation)() = ^{
+                    [self.operationQueue addOperation:retryOperation];
+                };
+                [NSTimer bk_scheduledTimerWithTimeInterval:[self _getNextRetry] block:addRetryOperation repeats:NO];
+            } else {
+                failure(operation, error);
+            }
+        } else {
+            failure(operation, error);
+        }
+    };
+    
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     operation.responseSerializer = self.responseSerializer;
     operation.shouldUseCredentialStorage = self.shouldUseCredentialStorage;
     operation.credential = self.credential;
     operation.securityPolicy = self.securityPolicy;
 
-    [operation setCompletionBlockWithSuccess:success failure:failure];
+    [operation setCompletionBlockWithSuccess:success failure:retryBlock];
     operation.completionQueue = self.completionQueue;
     operation.completionGroup = self.completionGroup;
 
@@ -253,6 +283,11 @@
     HTTPClient.responseSerializer = [self.responseSerializer copyWithZone:zone];
     
     return HTTPClient;
+}
+
+- (NSTimeInterval)_getNextRetry
+{
+    return MAX((self.tries - 1) * self.lastResponseInterval, 0);
 }
 
 @end

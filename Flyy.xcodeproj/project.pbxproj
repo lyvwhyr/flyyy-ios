@@ -152,6 +152,7 @@
 		A651BD951A4985F20081A1E0 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A651BD8F1A4985F20081A1E0 /* SVProgressHUD.m */; };
 		A651BD981A4986400081A1E0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A651BD971A4986400081A1E0 /* MBProgressHUD.m */; };
 		A651BD9C1A4986730081A1E0 /* UALogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A651BD9B1A4986730081A1E0 /* UALogger.m */; };
+		A6525FBB1AD3744500F01759 /* NSTimer+BlocksKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A6525FBA1AD3744500F01759 /* NSTimer+BlocksKit.m */; };
 		A652D20C1A7F3ADD00765D45 /* Default-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = A652D17F1A7F3ADC00765D45 /* Default-568h.png */; };
 		A652D20D1A7F3ADD00765D45 /* Default-568h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A652D1801A7F3ADC00765D45 /* Default-568h@3x.png */; };
 		A652D20E1A7F3ADD00765D45 /* icon_audio_wave.png in Resources */ = {isa = PBXBuildFile; fileRef = A652D1811A7F3ADC00765D45 /* icon_audio_wave.png */; };
@@ -733,6 +734,8 @@
 		A651BD971A4986400081A1E0 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A651BD9A1A4986730081A1E0 /* UALogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UALogger.h; sourceTree = "<group>"; };
 		A651BD9B1A4986730081A1E0 /* UALogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UALogger.m; sourceTree = "<group>"; };
+		A6525FB91AD3744500F01759 /* NSTimer+BlocksKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+BlocksKit.h"; sourceTree = "<group>"; };
+		A6525FBA1AD3744500F01759 /* NSTimer+BlocksKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+BlocksKit.m"; sourceTree = "<group>"; };
 		A652D17F1A7F3ADC00765D45 /* Default-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h.png"; sourceTree = "<group>"; };
 		A652D1801A7F3ADC00765D45 /* Default-568h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@3x.png"; sourceTree = "<group>"; };
 		A652D1811A7F3ADC00765D45 /* icon_audio_wave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_audio_wave.png; sourceTree = "<group>"; };
@@ -1492,6 +1495,8 @@
 				A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */,
 				A648C0EF1A19B18B00FF1744 /* UIFont+FLYAddition.h */,
 				A648C0F01A19B18B00FF1744 /* UIFont+FLYAddition.m */,
+				A6525FB91AD3744500F01759 /* NSTimer+BlocksKit.h */,
+				A6525FBA1AD3744500F01759 /* NSTimer+BlocksKit.m */,
 				A6A0E4C11A1E7EFA0036116E /* UIWindow+FLYAddition.h */,
 				A6A0E4C21A1E7EFA0036116E /* UIWindow+FLYAddition.m */,
 				A69C4BD61A2840E700CAD443 /* NSDictionary+FLYAddition.h */,
@@ -3079,6 +3084,7 @@
 				A6A57AAD1A34555400610785 /* FLYTopicDetailReplyCell.m in Sources */,
 				A6A0E4BB1A1E76110036116E /* FLEXResources.m in Sources */,
 				A69C4BCF1A280D8800CAD443 /* GBFlatSelectableButton.m in Sources */,
+				A6525FBB1AD3744500F01759 /* NSTimer+BlocksKit.m in Sources */,
 				A6A0E4951A1E76110036116E /* FLEXArgumentInputStringView.m in Sources */,
 				A665FC2E1AA2D96000490A18 /* FLYLoginViewController.m in Sources */,
 				A651BD9C1A4986730081A1E0 /* UALogger.m in Sources */,
