@@ -258,7 +258,7 @@
 
 - (void)_backButtonTapped
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)_nextButtonTapped
