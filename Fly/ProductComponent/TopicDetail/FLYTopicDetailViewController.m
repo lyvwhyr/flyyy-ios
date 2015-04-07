@@ -426,9 +426,11 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         }
     }
     FLYRecordingPermissionGrantedSuccessBlock successBlock = ^{
-        recordViewController.topic = self.topic;
-        UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
-        [self presentViewController:navigationController animated:NO completion:nil];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    recordViewController.topic = self.topic;
+                    UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:recordViewController];
+                    [self presentViewController:navigationController animated:NO completion:nil];
+        });
     };
     
     [[FLYAudioManager sharedInstance] checkRecordingPermissionWithSuccessBlock:successBlock];
