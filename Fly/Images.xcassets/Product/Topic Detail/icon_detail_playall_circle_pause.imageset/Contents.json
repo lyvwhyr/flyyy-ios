@@ -2,11 +2,13 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "icon_detail_playall_circle_pause_.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "icon_detail_playall_circle_pause_@2x.png"
     },
     {
       "idiom" : "universal",

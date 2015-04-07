@@ -128,7 +128,7 @@
         return;
     }
     
-    if ([username containsString:@" "]) {
+    if ([username rangeOfString:@" "].length != 0) {
         [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUsernameIncludeSpaceError")];
         return;
     }
