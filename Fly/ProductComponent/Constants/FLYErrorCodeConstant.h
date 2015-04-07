@@ -3,3 +3,4 @@
 #define kPhoneNumberAlreadyClaimed 1010
 #define kInvalidPassword 2003
 #define kLoginPhoneNotFound 4006
+#define kInternalServerError 9000

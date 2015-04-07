@@ -181,6 +181,7 @@
     if (first || before) {
         [self.topicService nextPageBefore:before firstPage:first successBlock:successBlock errorBlock:errorBlock];
     } else {
+        [self.topicService nextPageBefore:before firstPage:YES successBlock:successBlock errorBlock:errorBlock];
         [self.feedTableView.pullToRefreshView stopAnimating];
         [self.feedTableView.infiniteScrollingView stopAnimating];
     }

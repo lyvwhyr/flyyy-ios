@@ -110,11 +110,10 @@
     self.requestTimestamp = [NSDate date];
     
     self.tries++;
-    void (^retryBlock)(AFHTTPRequestOperation *, NSError *) = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    void (^retryBlock)(AFHTTPRequestOperation *, NSError *) = ^(id responseObj, NSError *error) {
         self.responseTimestamp = [NSDate date];
         self.lastResponseInterval = [self.responseTimestamp timeIntervalSinceDate:self.requestTimestamp];
-        if (error.userInfo &&
-            ([[error.userInfo objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode] >= 500)) {
+        if (responseObj && [[responseObj objectForKey:@"code"] integerValue] >= kInternalServerError) {
             if (self.tries <= kMaxRetryTimes) {
                 AFHTTPRequestOperation *retryOperation = [self HTTPRequestOperationWithRequest:request
                                                                                        success:success
@@ -124,10 +123,10 @@
                 };
                 [NSTimer bk_scheduledTimerWithTimeInterval:[self _getNextRetry] block:addRetryOperation repeats:NO];
             } else {
-                failure(operation, error);
+                failure(responseObj, error);
             }
         } else {
-            failure(operation, error);
+            failure(responseObj, error);
         }
     };
     
