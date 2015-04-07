@@ -6,13 +6,12 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #import "FLYRecordViewController.h"
 #import "FLYCircleView.h"
 #import "UIColor+FLYAddition.h"
 #import "SVPulsingAnnotationView.h"
-#import "PulsingHaloLayer.h"
 #import "MultiplePulsingHaloLayer.h"
-#import "AEAudioController.h"
 #import "FLYPrePostViewController.h"
 #import "GBFlatButton.h"
 #import "DKCircleButton.h"
@@ -33,13 +32,13 @@
 #import "AFSoundRecord.h"
 #import "FLYFileManager.h"
 #import "STKAudioPlayer.h"
-#import "FLYAudioManager.h"
 #import "FLYVoiceFilterManager.h"
 #import "FLYVoiceEffectView.h"
 #import "SDiPhoneVersion.h"
 #import "FLYTopic.h"
 #import "FLYMediaService.h"
 #import "FLYGroup.h"
+#import "FLYAudioItem.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -47,10 +46,9 @@
 #define kFilterModalHeight 80
 #define kMaxRetry 3
 #define kTimeLabelTopPadding 30
-//#define kMinimalRecordingLength 5
 #define kMaxRecordTime 60
 
-@interface FLYRecordViewController ()<FLYRecordBottomBarDelegate, JGProgressHUDDelegate, FLYAudioManagerDelegate, FLYVoiceEffectViewDelegate>
+@interface FLYRecordViewController ()<FLYRecordBottomBarDelegate, JGProgressHUDDelegate, STKAudioPlayerDelegate, FLYVoiceEffectViewDelegate>
 
 @property (nonatomic) UIBarButtonItem *rightNavigationButton;
 
@@ -59,7 +57,6 @@
 @property (nonatomic) UILabel *recordedTimeLabel;
 @property (nonatomic) UILabel *remainingTimeLabel;
 @property (nonatomic) SVPulsingAnnotationView *pulsingView;
-@property (nonatomic, weak) PulsingHaloLayer *halo;
 
 //Record complete state
 @property (nonatomic) UIButton *trashButton;
@@ -70,7 +67,6 @@
 @property (nonatomic) FLYRecordState currentState;
 @property (nonatomic) NSTimer *recordTimer;
 @property (nonatomic) NSTimer *playbackTimer;
-@property (nonatomic) PulsingHaloLayer *pulsingHaloLayer;
 
 //Post reply progress hud
 @property (nonatomic) JGProgressHUD *progressHUD;
@@ -95,8 +91,6 @@
 @property (nonatomic) NSString *replyMediaId;
 @property (nonatomic) NSInteger retryCount;
 
-@property (nonatomic) FLYAudioManager *audioManager;
-
 @end
 
 @implementation FLYRecordViewController
@@ -107,8 +101,16 @@
         _recordingType = recordingType;
         _filterEffect = FLYVoiceEffectMe;
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_vioceFilterApplied) name:kVoiceFilterApplied object:nil];
+        NSError *error;
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
+        [[AVAudioSession sharedInstance] setActive:YES error:&error];
         
+        _audioPlayer = [[STKAudioPlayer alloc] initWithOptions:(STKAudioPlayerOptions){ .flushQueueOnSeek = YES, .enableVolumeMixer = NO, .equalizerBandFrequencies = {50, 100, 200, 400, 800, 1600, 2600, 16000} }];
+        _audioPlayer.meteringEnabled = YES;
+        _audioPlayer.volume = 1;
+        _audioPlayer.delegate = self;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_vioceFilterApplied) name:kVoiceFilterApplied object:nil];
     }
     return self;
 }
@@ -128,10 +130,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     _audioLength = 0;
-    
-    
-    self.audioManager = [FLYAudioManager sharedInstance];
-    self.audioManager.delegate = self;
     
     [self _setupInitialViewState];
     [self updateViewConstraints];
@@ -169,6 +167,8 @@
     [self _cleanupTimer];
     [self.waver removeFromSuperview];
     self.waver = nil;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) _cleanupTimer
@@ -337,7 +337,7 @@
     [self.levelsTimer invalidate];
     self.levelsTimer = nil;
     
-    [[FLYAudioManager sharedInstance].audioPlayer stop];
+    [self.audioPlayer stop];
     
     [_trashButton removeFromSuperview];
     _trashButton = nil;
@@ -459,13 +459,13 @@
 
 - (void)_setupPauseViewState
 {
-    [[FLYAudioManager sharedInstance].audioPlayer pause];
+    [self.audioPlayer pause];
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_play"]];
 }
 
 - (void)_setupResumeViewState
 {
-    [[FLYAudioManager sharedInstance].audioPlayer resume];
+    [self.audioPlayer resume];
     [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_pause"]];
     [self _addPlaybackTimer];
     [self updateViewConstraints];
@@ -628,7 +628,11 @@
         {
             self.currentState = FLYRecordPlayingState;
             
-            [[FLYAudioManager sharedInstance] playAudioWithURLStr:[FLYAppStateManager sharedInstance].recordingFilePathSelected itemType:FLYPlayableItemRecording];
+            NSURL *url = [NSURL fileURLWithPath:[FLYAppStateManager sharedInstance].recordingFilePathSelected];
+            STKDataSource* dataSource = [STKAudioPlayer dataSourceFromURL:url];
+            [self.audioPlayer setDataSource:dataSource withQueueItemId:[[FLYAudioItem alloc] initWithUrl:url andCount:0 indexPath:nil itemType:FLYPlayableItemRecording playState:FLYPlayStateNotSet audioDuration:self.audioLength]];
+            
+            
             [self _setupPlayingViewState];
             break;
         }
@@ -652,9 +656,9 @@
 
 }
 
-#pragma mark - FLYAudioManagerDelegate
+#pragma mark - STKAudioPlayerDelegate
 
-- (void)didFinishPlayingWithQueueItemId:(FLYAudioItem *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
+- (void)audioPlayer:(STKAudioPlayer *)audioPlayer didFinishPlayingQueueItemId:(FLYAudioItem *)queueItemId withReason:(STKAudioPlayerStopReason)stopReason andProgress:(double)progress andDuration:(double)duration
 {
     if (queueItemId.itemType != FLYPlayableItemRecording || stopReason == STKAudioPlayerStopReasonUserAction) {
         return;
@@ -664,10 +668,27 @@
     [self _updateUserState];
 }
 
-- (void)stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer stateChanged:(STKAudioPlayerState)state previousState:(STKAudioPlayerState)previousState
 {
     
 }
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer unexpectedError:(STKAudioPlayerErrorCode)errorCode
+{
+    
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didStartPlayingQueueItemId:(NSObject*)queueItemId
+{
+    
+}
+
+-(void) audioPlayer:(STKAudioPlayer*)audioPlayer didFinishBufferingSourceWithQueueItemId:(NSObject*)queueItemId
+{
+    
+}
+
 
 #pragma mark - FLYVoiceEffectViewDelegate
 
