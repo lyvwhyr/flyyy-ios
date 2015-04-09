@@ -7,12 +7,19 @@
 //
 
 @class FLYFeedTopicTableViewCell;
+@class FLYFeedOnBoardingView;
+
+@protocol FLYFeedOnBoardingDelegate <NSObject>
+
+- (void)onboardingViewTapped:(FLYFeedOnBoardingView *)onboardingView;
+
+@end
 
 @interface FLYFeedOnBoardingView : UIView
 
 @property (nonatomic) FLYFeedTopicTableViewCell *cellToExplain;
 @property (nonatomic) UIView *showInView;
-
+@property (nonatomic, weak) id<FLYFeedOnBoardingDelegate> delegate;
 
 + (UIView *)showFeedOnBoardViewInView:(UIView *)inView cellToExplain:(FLYFeedTopicTableViewCell *)cell;
 

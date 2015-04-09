@@ -162,5 +162,13 @@
 // suspend
 "FLYAccountSuspendedMessage" = "Your account has been suspended because you have either violated Flyy's Terms of Service or broken our community rules. If you feel that your account has been wrongly suspended, please contact us at support@flyyapp.com";
 
+// feed on boarding
+"FLYFeedOnboardingPlayPost" = "play post";
+"FLYFeedOnboardingTitle" = "title";
+"FLYFeedOnboardingComments" = "comments";
+"FLYFeedOnboardingUsername" = "user";
+"FLYFeedOnboardingGroupName" = "tag";
+"FLYFeedOnboardingVotes" = "votes";
+
 
 
