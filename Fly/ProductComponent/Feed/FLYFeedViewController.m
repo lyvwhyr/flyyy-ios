@@ -136,7 +136,11 @@
     [super viewDidAppear:animated];
     
     // load feed onboarding view
-    _checkOnboardingCellLoadedTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(_checkCellAvailability) userInfo:nil repeats:YES];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL hasSeenFeedOnboarding = [defaults objectForKey:kFeedOnboardingKey];
+    if (!hasSeenFeedOnboarding) {
+        _checkOnboardingCellLoadedTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(_checkCellAvailability) userInfo:nil repeats:YES];
+    }
 }
 
 #pragma mark - service
@@ -401,6 +405,10 @@
     
     FLYFeedTopicTableViewCell *cell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:indexPathToOnboarding]);
     if (cell) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:@(YES) forKey:kFeedOnboardingKey];
+        [defaults synchronize];
+        
         FLYMainViewController *mainVC = nil;
         if (self.parentViewController && [self.parentViewController.parentViewController isKindOfClass:[FLYMainViewController class]]) {
             mainVC = (FLYMainViewController *)self.parentViewController.parentViewController;
