@@ -107,18 +107,18 @@
         [self addSubview:_usernameArrow];
         
         //group name
-        if ([_cellToExplain.groupNameButton.titleLabel.text length] != 0) {
+//        if ([_cellToExplain.groupNameButton.titleLabel.text length] != 0) {
             _groupNameLabel = [UILabel new];
             _groupNameLabel.textColor = [UIColor whiteColor];
             _groupNameLabel.font = font;
             _groupNameLabel.text = LOC(@"FLYFeedOnboardingGroupName");
             _groupNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
             [self addSubview:_groupNameLabel];
-        }
-        
-        _groupNameArrow = [UIImageView new];
-        _groupNameArrow.image = [UIImage imageNamed:@"icon_up_arrow"];
-        [self addSubview:_groupNameArrow];
+            
+            _groupNameArrow = [UIImageView new];
+            _groupNameArrow.image = [UIImage imageNamed:@"icon_up_arrow"];
+            [self addSubview:_groupNameArrow];
+//        }
         
         // comments
         _commentsLabel = [UILabel new];
@@ -215,18 +215,18 @@
     }];
     
     // group name
-    if ([_cellToExplain.groupNameButton.titleLabel.text length] != 0) {
+//    if ([_cellToExplain.groupNameButton.titleLabel.text length] != 0) {
         [self.groupNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.cellToExplain.groupNameButton);
-            make.top.equalTo(self.bottomBackgroundView.mas_top).offset(-7);
+            make.top.equalTo(self.bottomBackgroundView.mas_top).offset(7);
         }];
         
         [self.groupNameArrow mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.cellToExplain.groupNameButton);
-            make.top.equalTo(self.cellToExplain.groupNameButton.mas_bottom).offset(kLabelTitleSpacing);
+            make.height.equalTo(@(18));
             make.bottom.equalTo(self.groupNameLabel.mas_top).offset(-kLabelTitleSpacing);
         }];
-    }
+//    }
     
     // comment
     [self.commentsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
