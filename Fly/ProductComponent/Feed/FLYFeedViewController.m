@@ -33,6 +33,8 @@
 #import "FLYMeViewController.h"
 #import "FLYFeedOnBoardingView.h"
 
+#define kMaxWaitForTableLoad 3
+
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
 @property (nonatomic) UIView *backgroundView;
@@ -45,6 +47,10 @@
 
 @property (nonatomic) NSMutableArray *posts;
 @property (nonatomic) BOOL didSetConstraints;
+
+// check if a tableview is full loaded for so we can launch on boarding
+@property (nonatomic) CGFloat elapsedTimeSinceLastCellSeen;
+@property (nonatomic) NSTimer *checkOnboardingCellLoadedTimer;
 
 @end
 
@@ -126,8 +132,9 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    FLYFeedTopicTableViewCell *cell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]);
-    [FLYFeedOnBoardingView showFeedOnBoardViewInView:self.view cellToExplain:cell];
+    
+    // load feed onboarding view
+    _checkOnboardingCellLoadedTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(_checkCellAvailability) userInfo:nil repeats:YES];
 }
 
 #pragma mark - service
@@ -372,11 +379,29 @@
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
     
-    
-    // load feed onboarding view
-    if([indexPath row] == ((NSIndexPath*)[[tableView indexPathsForVisibleRows] lastObject]).row){
-        
+}
+
+
+#pragma mark - Onboarding
+- (void)_checkCellAvailability
+{
+    _elapsedTimeSinceLastCellSeen += 0.05;
+    if (_elapsedTimeSinceLastCellSeen >= kMaxWaitForTableLoad) {
+        [self _cleanupOnBoardingTimer];
     }
+    
+    FLYFeedTopicTableViewCell *cell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]);
+    if (cell) {
+        [FLYFeedOnBoardingView showFeedOnBoardViewInView:self.view cellToExplain:cell];
+        [self _cleanupOnBoardingTimer];
+    }
+}
+
+- (void)_cleanupOnBoardingTimer
+{
+    [_checkOnboardingCellLoadedTimer invalidate];
+    _checkOnboardingCellLoadedTimer = nil;
+    _elapsedTimeSinceLastCellSeen = 0;
 }
 
 

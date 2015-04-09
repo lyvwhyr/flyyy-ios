@@ -41,9 +41,11 @@
 
 @implementation FLYFeedOnBoardingView
 
-- (instancetype)init
+- (instancetype)initWithCell:(FLYFeedTopicTableViewCell *)onboardingCell
 {
     if(self = [super init]) {
+        _cellToExplain = onboardingCell;
+        
         _gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedOnView:)];
         [self addGestureRecognizer:_gestureRecognizer];
         
@@ -107,7 +109,7 @@
         [self addSubview:_usernameArrow];
         
         //group name
-//        if ([_cellToExplain.groupNameButton.titleLabel.text length] != 0) {
+        if ([_cellToExplain.groupNameButton.titleLabel.text length] != 0) {
             _groupNameLabel = [UILabel new];
             _groupNameLabel.textColor = [UIColor whiteColor];
             _groupNameLabel.font = font;
@@ -118,7 +120,7 @@
             _groupNameArrow = [UIImageView new];
             _groupNameArrow.image = [UIImage imageNamed:@"icon_up_arrow"];
             [self addSubview:_groupNameArrow];
-//        }
+        }
         
         // comments
         _commentsLabel = [UILabel new];
@@ -139,10 +141,9 @@
 + (UIView *)showFeedOnBoardViewInView:(UIView *)inView cellToExplain:(FLYFeedTopicTableViewCell *)cell
 {
     
-    FLYFeedOnBoardingView *onboardingView = [FLYFeedOnBoardingView new];
+    FLYFeedOnBoardingView *onboardingView = [[FLYFeedOnBoardingView alloc] initWithCell:cell];
     onboardingView.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
     onboardingView.showInView = [[UIApplication sharedApplication] keyWindow];
-    onboardingView.cellToExplain = cell;
     [onboardingView.showInView addSubview:onboardingView];
     return onboardingView;
 }
@@ -154,7 +155,6 @@
         make.leading.equalTo(self);
         make.trailing.equalTo(self);
         
-        // TODO: make sure cellToExplain is not empty
         make.bottom.equalTo(self.cellToExplain.mas_top);
     }];
     
@@ -215,7 +215,7 @@
     }];
     
     // group name
-//    if ([_cellToExplain.groupNameButton.titleLabel.text length] != 0) {
+    if ([_cellToExplain.groupNameButton.titleLabel.text length] != 0) {
         [self.groupNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.cellToExplain.groupNameButton);
             make.top.equalTo(self.bottomBackgroundView.mas_top).offset(7);
@@ -226,7 +226,7 @@
             make.height.equalTo(@(18));
             make.bottom.equalTo(self.groupNameLabel.mas_top).offset(-kLabelTitleSpacing);
         }];
-//    }
+    }
     
     // comment
     [self.commentsLabel mas_makeConstraints:^(MASConstraintMaker *make) {

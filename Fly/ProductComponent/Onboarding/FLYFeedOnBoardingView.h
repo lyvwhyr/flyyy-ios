@@ -21,6 +21,7 @@
 @property (nonatomic) UIView *showInView;
 @property (nonatomic, weak) id<FLYFeedOnBoardingDelegate> delegate;
 
+- (instancetype)initWithCell:(FLYFeedTopicTableViewCell *)onboardingCell;
 + (UIView *)showFeedOnBoardViewInView:(UIView *)inView cellToExplain:(FLYFeedTopicTableViewCell *)cell;
 
 @end
