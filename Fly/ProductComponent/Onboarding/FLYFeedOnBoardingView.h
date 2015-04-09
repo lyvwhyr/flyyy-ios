@@ -8,6 +8,7 @@
 
 @class FLYFeedTopicTableViewCell;
 @class FLYFeedOnBoardingView;
+@class FLYMainViewController;
 
 @protocol FLYFeedOnBoardingDelegate <NSObject>
 
@@ -20,8 +21,9 @@
 @property (nonatomic) FLYFeedTopicTableViewCell *cellToExplain;
 @property (nonatomic) UIView *showInView;
 @property (nonatomic, weak) id<FLYFeedOnBoardingDelegate> delegate;
+@property (nonatomic) FLYMainViewController *mainViewController;
 
 - (instancetype)initWithCell:(FLYFeedTopicTableViewCell *)onboardingCell;
-+ (UIView *)showFeedOnBoardViewWithCellToExplain:(FLYFeedTopicTableViewCell *)cell;
++ (UIView *)showFeedOnBoardViewWithCellToExplain:(FLYFeedTopicTableViewCell *)cell mainVC:(FLYMainViewController *)mainVC;
 
 @end

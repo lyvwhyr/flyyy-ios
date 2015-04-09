@@ -10,6 +10,7 @@
 
 @class FLYNavigationController;
 @class FLYTabBarView;
+@class FLYTabView;
 
 typedef NS_ENUM(NSInteger, TabBarItemIndex) {
     TABBAR_HOME = 0,
@@ -18,6 +19,9 @@ typedef NS_ENUM(NSInteger, TabBarItemIndex) {
 
 @interface FLYMainViewController : FLYUniversalViewController
 
+@property (nonatomic) FLYTabBarView *tabBarView;
+@property (nonatomic) FLYTabView *homeTab;
+@property (nonatomic) FLYTabView *groupsTab;
 @property (nonatomic) UIButton *recordButton;
 
 - (FLYNavigationController *)flyNavigationController;

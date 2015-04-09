@@ -33,6 +33,7 @@
 #import "FLYMeViewController.h"
 #import "FLYFeedOnBoardingView.h"
 #import "SDiPhoneVersion.h"
+#import "FLYMainViewController.h"
 
 #define kMaxWaitForTableLoad 3
 
@@ -400,7 +401,12 @@
     
     FLYFeedTopicTableViewCell *cell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:indexPathToOnboarding]);
     if (cell) {
-        [FLYFeedOnBoardingView showFeedOnBoardViewWithCellToExplain:cell];
+        FLYMainViewController *mainVC = nil;
+        if (self.parentViewController && [self.parentViewController.parentViewController isKindOfClass:[FLYMainViewController class]]) {
+            mainVC = (FLYMainViewController *)self.parentViewController.parentViewController;
+        }
+        
+        [FLYFeedOnBoardingView showFeedOnBoardViewWithCellToExplain:cell mainVC:mainVC];
         [self _cleanupOnBoardingTimer];
     }
 }

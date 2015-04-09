@@ -42,12 +42,7 @@
 
 @interface FLYMainViewController() <FLYTabBarViewDelegate, UIViewControllerTransitioningDelegate>
 
-@property (nonatomic) FLYTabBarView *tabBarView;
-@property (nonatomic) FLYTabView *homeTab;
-@property (nonatomic) FLYTabView *groupsTab;
-
 @property (nonatomic) FLYFeedViewController *feedViewController;
-//@property (nonatomic) FLYRecordViewController *recordViewController;
 @property (nonatomic) FLYGroupListViewController *groupsListViewController;
 @property (nonatomic) UIViewController *currentViewController;
 

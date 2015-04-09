@@ -10,8 +10,11 @@
 #import "FLYFeedTopicTableViewCell.h"
 #import "FLYIconButton.h"
 #import "UIFont+FLYAddition.h"
+#import "FLYMainViewController.h"
+#import "FLYTabbarOnboardingView.h"
 
 #define kLabelTitleSpacing 2
+#define kBackgroundAlpha 0.75
 
 @interface FLYFeedOnBoardingView()
 
@@ -36,6 +39,9 @@
 
 @property (nonatomic) UIButton *tapContinueButton;
 
+// bottom tabbar onboarding view
+@property (nonatomic) FLYTabbarOnboardingView *tabbarOnboardingView;
+
 // tap gesture recognizer
 @property (nonatomic) UITapGestureRecognizer *gestureRecognizer;
 
@@ -54,12 +60,12 @@
         
         _topBackgroundView = [UIView new];
         _topBackgroundView.backgroundColor = [UIColor blackColor];
-        _topBackgroundView.alpha = 0.65;
+        _topBackgroundView.alpha = kBackgroundAlpha;
         [self addSubview:_topBackgroundView];
         
         _bottomBackgroundView = [UIView new];
         _bottomBackgroundView.backgroundColor = [UIColor blackColor];
-        _bottomBackgroundView.alpha = 0.75;
+        _bottomBackgroundView.alpha = kBackgroundAlpha;
         [self addSubview:_bottomBackgroundView];
         
         // play post
@@ -138,6 +144,7 @@
         [self addSubview:_commentsArrow];
         
         _tapContinueButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _tapContinueButton.userInteractionEnabled = NO;
         [_tapContinueButton setBackgroundImage:[UIImage imageNamed:@"icon_tap_continue"] forState:UIControlStateNormal];
         [_tapContinueButton setTitle:LOC(@"FLYFeedOnboardingTapContinue") forState:UIControlStateNormal];
         _tapContinueButton.titleLabel.textColor = [UIColor whiteColor];
@@ -147,11 +154,12 @@
     return self;
 }
 
-+ (UIView *)showFeedOnBoardViewWithCellToExplain:(FLYFeedTopicTableViewCell *)cell
++ (UIView *)showFeedOnBoardViewWithCellToExplain:(FLYFeedTopicTableViewCell *)cell mainVC:(FLYMainViewController *)mainVC
 {
     
     FLYFeedOnBoardingView *onboardingView = [[FLYFeedOnBoardingView alloc] initWithCell:cell];
     onboardingView.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+    onboardingView.mainViewController = mainVC;
     onboardingView.showInView = [[UIApplication sharedApplication] keyWindow];
     [onboardingView.showInView addSubview:onboardingView];
     
@@ -270,6 +278,13 @@
 - (void)tappedOnView:(UITapGestureRecognizer *)gr
 {
     [self removeFromSuperview];
+    
+    if (self.mainViewController) {
+        _tabbarOnboardingView = [FLYTabbarOnboardingView new];
+        _tabbarOnboardingView.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+        _tabbarOnboardingView.mainViewController = self.mainViewController;
+        [self.showInView addSubview:_tabbarOnboardingView];
+    }
 }
 
 - (void)layoutSubviews

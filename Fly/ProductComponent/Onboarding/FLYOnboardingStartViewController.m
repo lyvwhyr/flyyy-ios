@@ -8,7 +8,7 @@
 
 #import "FLYOnboardingStartViewController.h"
 #import "UIColor+FLYAddition.h"
-#import "FLYMainViewController.h";
+#import "FLYMainViewController.h"
 
 @interface FLYOnboardingStartViewController ()
 
