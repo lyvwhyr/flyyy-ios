@@ -137,7 +137,7 @@
     
     // load feed onboarding view
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL hasSeenFeedOnboarding = [defaults objectForKey:kFeedOnboardingKey];
+    BOOL hasSeenFeedOnboarding = [[defaults objectForKey:kFeedOnboardingKey] boolValue];
     if (!hasSeenFeedOnboarding) {
         _checkOnboardingCellLoadedTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(_checkCellAvailability) userInfo:nil repeats:YES];
     }

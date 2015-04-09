@@ -36,7 +36,7 @@
     [self.window makeKeyAndVisible];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL hasSeenFeedOnboarding = [defaults objectForKey:kFeedOnboardingKey];
+    BOOL hasSeenFeedOnboarding = [[defaults objectForKey:kFeedOnboardingKey] boolValue];
     FLYUniversalViewController *mainVC;
     if (hasSeenFeedOnboarding) {
         mainVC = [FLYMainViewController new];
