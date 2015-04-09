@@ -31,6 +31,7 @@
 #import "FLYCatalogViewController.h"
 #import "FLYAudioManager.h"
 #import "FLYMeViewController.h"
+#import "FLYFeedOnBoardingView.h"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -120,6 +121,13 @@
     [self _initService];
     
     [[FLYScribe sharedInstance] logEvent:@"home_page" section:nil component:nil element:nil action:@"impression"];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    FLYFeedTopicTableViewCell *cell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]);
+    [FLYFeedOnBoardingView showFeedOnBoardViewInView:self.view cellToExplain:cell];
 }
 
 #pragma mark - service

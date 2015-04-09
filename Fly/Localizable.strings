@@ -6,6 +6,11 @@
 "FLYTapToStartRecordingLabelText" = "Tap to start recording";
 "FLYTapWhenDoneLabelText" = "Tap when you are done";
 
+// recording
+"FLYAdjustPitchLow" = "Low";
+"FLYAdjustPitchHigh" = "High";
+
+
 //Home feed
 "FLYHomeTitle" = "Home";
 "FLYAutoPlayEnabledHudText" = "Auto play enabled";
@@ -70,7 +75,7 @@
 "FLYSignupPhoneNumberAlreadyExist" = "The phone number is already registered by another user";
 
 //Recording
-"FLYRecordingVoiceEffect" = "Voice effect";
+"FLYRecordingVoiceEffect" = "Adjust pitch";
 "FLYRecordingMe" = "Me";
 "FLYRecordingDisguise" = "Disguise";
 

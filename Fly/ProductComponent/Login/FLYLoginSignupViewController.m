@@ -50,10 +50,13 @@
     self.backgroundImageView.image = [UIImage imageNamed:@"icon_login_background"];
     [self.view addSubview:self.backgroundImageView];
     
-    self.exitButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.exitButton setImage:[UIImage imageNamed:@"icon_sign_in_exit_white"] forState:UIControlStateNormal];
-    [self.exitButton addTarget:self action:@selector(_exitButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.exitButton];
+    
+    if (self.canGoBack) {
+        self.exitButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.exitButton setImage:[UIImage imageNamed:@"icon_sign_in_exit_white"] forState:UIControlStateNormal];
+        [self.exitButton addTarget:self action:@selector(_exitButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.exitButton];
+    }
     
     self.logoView = [UIView new];
     [self.view addSubview:self.logoView];
@@ -122,10 +125,12 @@
 
 - (void)_addViewConstraints
 {
-    [self.exitButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.view).offset(kExitButtonOriginX);
-        make.top.equalTo(self.view).offset(kExitButtonOriginY);
-    }];
+    if (self.canGoBack) {
+        [self.exitButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.view).offset(kExitButtonOriginX);
+            make.top.equalTo(self.view).offset(kExitButtonOriginY);
+        }];
+    }
     
     [self.logoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@(85));

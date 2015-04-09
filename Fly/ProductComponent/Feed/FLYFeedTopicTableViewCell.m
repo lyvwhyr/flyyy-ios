@@ -27,17 +27,9 @@
 
 @interface FLYFeedTopicTableViewCell()
 
-//timeline and play button
-@property (nonatomic) UIButton *playButton;
 @property (nonatomic) UIActivityIndicatorView *loadingIndicatorView;
 
-//topic content view
-@property (nonatomic) UILabel *userNameLabel;
 @property (nonatomic) UIButton *shareButton;
-@property (nonatomic) UILabel *topicTitle;
-@property (nonatomic) FLYIconButton *likeButton;
-@property (nonatomic) UIButton *groupNameButton;
-@property (nonatomic) FLYIconButton *commentButton;
 
 // play progress view
 @property (nonatomic) UAProgressView *progressView;

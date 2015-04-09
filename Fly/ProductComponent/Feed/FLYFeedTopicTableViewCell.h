@@ -9,6 +9,7 @@
 @class FLYFeedTopicTableViewCell;
 @class FLYTopic;
 @class FLYGroup;
+@class FLYIconButton;
 
 #import "FLYTopic.h"
 #import "FLYAudioItem.h"
@@ -30,6 +31,15 @@ typedef NS_OPTIONS(NSUInteger, FLYTopicCellOptions) {
 @end
 
 @interface FLYFeedTopicTableViewCell : UITableViewCell
+
+//play button
+@property (nonatomic) UIButton *playButton;
+@property (nonatomic) UILabel *topicTitle;
+@property (nonatomic) UILabel *userNameLabel;
+@property (nonatomic) UIButton *groupNameButton;
+@property (nonatomic) FLYIconButton *likeButton;
+@property (nonatomic) FLYIconButton *commentButton;
+
 
 @property (nonatomic) FLYTopic *topic;
 @property (nonatomic) NSIndexPath *indexPath;

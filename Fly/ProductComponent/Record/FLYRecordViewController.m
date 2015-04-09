@@ -147,6 +147,11 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+}
+
 - (void)dealloc
 {
     [self _cleanupData];
@@ -229,7 +234,6 @@
 
 - (void)_nextBarButtonTapped
 {
-    [self _disableUserInteractionsOnAnimation];
     
     [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"recording_page" component:nil element:@"next_button" action:@"click"];
     
@@ -251,6 +255,7 @@
         }
         [self.navigationController pushViewController:prePostVC animated:YES];
     } else {
+        [self _disableUserInteractionsOnAnimation];
         [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:@"reply" element:@"post_button" action:@"click"];
         
         if (self.replyMediaId) {
@@ -579,7 +584,7 @@
                 make.top.equalTo(self.userActionImageView.mas_bottom).offset(filterViewTopOffset);
                 make.leading.equalTo(self.view);
                 make.width.equalTo(@(CGRectGetWidth(self.view.bounds)));
-                make.bottom.equalTo(self.recordBottomBar.mas_top);
+                make.height.equalTo(@(120));
             }];
             
             if (_loadingView) {

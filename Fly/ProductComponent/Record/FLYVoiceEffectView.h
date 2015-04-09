@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, FLYVoiceFilterEffect) {
 
 @end
 
-@interface FLYVoiceEffectView : UIView
+@interface FLYVoiceEffectView:UIView
 
 @property (nonatomic) id<FLYVoiceEffectViewDelegate>delegate;
 

@@ -82,6 +82,8 @@
 		A638D8381ACA0D9100E67ED3 /* FLYSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A638D8371ACA0D9100E67ED3 /* FLYSettingsViewController.m */; };
 		A638D83B1ACA17C100E67ED3 /* FLYSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A638D83A1ACA17C100E67ED3 /* FLYSettingsCell.m */; };
 		A63B78351AC272B100E770C9 /* FLYConfigService.m in Sources */ = {isa = PBXBuildFile; fileRef = A63B78341AC272B100E770C9 /* FLYConfigService.m */; };
+		A64062471AD5D65C00278ED6 /* FLYOnboardingStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A64062461AD5D65C00278ED6 /* FLYOnboardingStartViewController.m */; };
+		A640624A1AD5DF5000278ED6 /* FLYFeedOnBoardingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A64062491AD5DF5000278ED6 /* FLYFeedOnBoardingView.m */; };
 		A640BC3B1A3815B700DC59A7 /* icon_flag_post@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */; };
 		A640BC3D1A381AE900DC59A7 /* icon_navigation_catalog@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A640BC3C1A381AE900DC59A7 /* icon_navigation_catalog@3x.png */; };
 		A643AE3F1AA9336D00BF4E0F /* FLYUsersService.m in Sources */ = {isa = PBXBuildFile; fileRef = A643AE3E1AA9336D00BF4E0F /* FLYUsersService.m */; };
@@ -595,6 +597,10 @@
 		A638D83A1ACA17C100E67ED3 /* FLYSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSettingsCell.m; sourceTree = "<group>"; };
 		A63B78331AC272B100E770C9 /* FLYConfigService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYConfigService.h; sourceTree = "<group>"; };
 		A63B78341AC272B100E770C9 /* FLYConfigService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYConfigService.m; sourceTree = "<group>"; };
+		A64062451AD5D65C00278ED6 /* FLYOnboardingStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYOnboardingStartViewController.h; sourceTree = "<group>"; };
+		A64062461AD5D65C00278ED6 /* FLYOnboardingStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYOnboardingStartViewController.m; sourceTree = "<group>"; };
+		A64062481AD5DF5000278ED6 /* FLYFeedOnBoardingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFeedOnBoardingView.h; sourceTree = "<group>"; };
+		A64062491AD5DF5000278ED6 /* FLYFeedOnBoardingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFeedOnBoardingView.m; sourceTree = "<group>"; };
 		A640BC3A1A3815B700DC59A7 /* icon_flag_post@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_flag_post@3x.png"; sourceTree = "<group>"; };
 		A640BC3C1A381AE900DC59A7 /* icon_navigation_catalog@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_navigation_catalog@3x.png"; sourceTree = "<group>"; };
 		A643AE3D1AA9336D00BF4E0F /* FLYUsersService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUsersService.h; sourceTree = "<group>"; };
@@ -1422,6 +1428,7 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A64062441AD5D60C00278ED6 /* Onboarding */,
 				A657BAE11AC925CB00886C0F /* Catalog */,
 				A6A8DFF21AC4C06400BF77BB /* PasswordReset */,
 				A665FC2B1AA2D94A00490A18 /* Signup */,
@@ -1542,6 +1549,17 @@
 				A638D83A1ACA17C100E67ED3 /* FLYSettingsCell.m */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		A64062441AD5D60C00278ED6 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				A64062451AD5D65C00278ED6 /* FLYOnboardingStartViewController.h */,
+				A64062461AD5D65C00278ED6 /* FLYOnboardingStartViewController.m */,
+				A64062481AD5DF5000278ED6 /* FLYFeedOnBoardingView.h */,
+				A64062491AD5DF5000278ED6 /* FLYFeedOnBoardingView.m */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		A643AE9F1AA9539E00BF4E0F /* Nimbus */ = {
@@ -2958,6 +2976,7 @@
 				A665FC3C1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.m in Sources */,
 				A6799C881AABDFB7003DAE5B /* FLYVoiceFilterManager.mm in Sources */,
 				A6BAD4091AA57C4D00DB10F7 /* FLYPhoneService.m in Sources */,
+				A64062471AD5D65C00278ED6 /* FLYOnboardingStartViewController.m in Sources */,
 				A638D8381ACA0D9100E67ED3 /* FLYSettingsViewController.m in Sources */,
 				A643AEFA1AA9539E00BF4E0F /* UIResponder+NimbusCore.m in Sources */,
 				A6048ADE1A8603EF00C67480 /* UIProgressView+AFNetworking.m in Sources */,
@@ -3064,6 +3083,7 @@
 				A6A0E4A71A1E76110036116E /* FLEXFileBrowserSearchOperation.m in Sources */,
 				A665FC1F1AA263A900490A18 /* FLYServiceBase.m in Sources */,
 				A6A0E4971A1E76110036116E /* FLEXArgumentInputSwitchView.m in Sources */,
+				A640624A1AD5DF5000278ED6 /* FLYFeedOnBoardingView.m in Sources */,
 				A6A0E4C01A1E76110036116E /* FLEXImagePreviewViewController.m in Sources */,
 				A6A57A981A33D92700610785 /* FLYInlineReplyView.m in Sources */,
 				A643AEE11AA9539E00BF4E0F /* NIAttributedLabel.m in Sources */,

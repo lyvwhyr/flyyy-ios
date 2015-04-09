@@ -19,6 +19,7 @@
 #import "FLYAudioManager.h"
 #import "FLYRequestManager.h"
 #import "iRate.h"
+#import "FLYOnboardingStartViewController.h"
 
 #define MIXPANEL_TOKEN @"4ce141a1dcd56132894230aff97b282b"
 
@@ -34,7 +35,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
     
-    FLYMainViewController *mainVC = [FLYMainViewController new];
+    FLYOnboardingStartViewController *mainVC = [FLYOnboardingStartViewController new];
     FLYNavigationController *navigationVC = [[FLYNavigationController alloc] initWithRootViewController:mainVC];
     self.window.rootViewController = navigationVC;
     
