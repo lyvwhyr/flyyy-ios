@@ -9,6 +9,7 @@
 #import "FLYFeedOnBoardingView.h"
 #import "FLYFeedTopicTableViewCell.h"
 #import "FLYIconButton.h"
+#import "UIFont+FLYAddition.h"
 
 #define kLabelTitleSpacing 2
 
@@ -33,6 +34,8 @@
 @property (nonatomic) UILabel *commentsLabel;
 @property (nonatomic) UIImageView *commentsArrow;
 
+@property (nonatomic) UIButton *tapContinueButton;
+
 // tap gesture recognizer
 @property (nonatomic) UITapGestureRecognizer *gestureRecognizer;
 
@@ -56,7 +59,7 @@
         
         _bottomBackgroundView = [UIView new];
         _bottomBackgroundView.backgroundColor = [UIColor blackColor];
-        _bottomBackgroundView.alpha = 0.65;
+        _bottomBackgroundView.alpha = 0.75;
         [self addSubview:_bottomBackgroundView];
         
         // play post
@@ -134,18 +137,34 @@
         _commentsArrow.image = [UIImage imageNamed:@"icon_up_arrow"];
         [self addSubview:_commentsArrow];
         
+        _tapContinueButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_tapContinueButton setBackgroundImage:[UIImage imageNamed:@"icon_tap_continue"] forState:UIControlStateNormal];
+        [_tapContinueButton setTitle:LOC(@"FLYFeedOnboardingTapContinue") forState:UIControlStateNormal];
+        _tapContinueButton.titleLabel.textColor = [UIColor whiteColor];
+        _tapContinueButton.titleLabel.font = [UIFont flyFontWithSize:18];
+        [self addSubview:_tapContinueButton];
     }
     return self;
 }
 
-+ (UIView *)showFeedOnBoardViewInView:(UIView *)inView cellToExplain:(FLYFeedTopicTableViewCell *)cell
++ (UIView *)showFeedOnBoardViewWithCellToExplain:(FLYFeedTopicTableViewCell *)cell
 {
     
     FLYFeedOnBoardingView *onboardingView = [[FLYFeedOnBoardingView alloc] initWithCell:cell];
     onboardingView.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
     onboardingView.showInView = [[UIApplication sharedApplication] keyWindow];
     [onboardingView.showInView addSubview:onboardingView];
+    
+    [onboardingView _show];
     return onboardingView;
+}
+
+- (void)_show
+{
+    self.alpha = 0;
+    [UIView animateWithDuration:0.5 animations:^{
+        self.alpha = 1;
+    }];
 }
 
 - (void)updateConstraints
@@ -238,6 +257,11 @@
         make.centerX.equalTo(self.cellToExplain.commentButton);
         make.top.equalTo(self.cellToExplain.commentButton.mas_bottom).offset(kLabelTitleSpacing);
         make.bottom.equalTo(self.commentsLabel.mas_top).offset(-kLabelTitleSpacing);
+    }];
+    
+    [self.tapContinueButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.bottomBackgroundView);
+        make.centerY.equalTo(self.bottomBackgroundView);
     }];
     
     [super updateConstraints];

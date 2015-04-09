@@ -32,6 +32,7 @@
 #import "FLYAudioManager.h"
 #import "FLYMeViewController.h"
 #import "FLYFeedOnBoardingView.h"
+#import "SDiPhoneVersion.h"
 
 #define kMaxWaitForTableLoad 3
 
@@ -390,9 +391,16 @@
         [self _cleanupOnBoardingTimer];
     }
     
-    FLYFeedTopicTableViewCell *cell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]);
+    NSIndexPath *indexPathToOnboarding;
+    if ([SDiPhoneVersion deviceSize] == iPhone35inch) {
+        indexPathToOnboarding = [NSIndexPath indexPathForRow:1 inSection:0];
+    } else {
+        indexPathToOnboarding = [NSIndexPath indexPathForRow:2 inSection:0];
+    }
+    
+    FLYFeedTopicTableViewCell *cell = (FLYFeedTopicTableViewCell *)([self.feedTableView cellForRowAtIndexPath:indexPathToOnboarding]);
     if (cell) {
-        [FLYFeedOnBoardingView showFeedOnBoardViewInView:self.view cellToExplain:cell];
+        [FLYFeedOnBoardingView showFeedOnBoardViewWithCellToExplain:cell];
         [self _cleanupOnBoardingTimer];
     }
 }
