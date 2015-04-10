@@ -7,6 +7,7 @@
 //
 
 @class FLYTopic;
+@class FLYTopicDetailTabbar;
 
 #import "FLYUniversalViewController.h"
 
@@ -17,6 +18,7 @@ typedef NS_ENUM(NSInteger, FlyTopicDetailCellType) {
 
 @interface FLYTopicDetailViewController : FLYUniversalViewController
 
+@property (nonatomic) FLYTopicDetailTabbar *tabbar;
 @property (nonatomic) BOOL isBackFullScreen;
 
 - (instancetype)initWithTopicId:(NSString *)topicId;

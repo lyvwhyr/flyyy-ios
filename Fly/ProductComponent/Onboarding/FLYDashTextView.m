@@ -91,7 +91,7 @@
         make.centerX.equalTo(self);
         make.top.equalTo(self).offset(self.edgeInsets.top);
         make.width.equalTo(@(self.maxWidth));
-        make.height.equalTo(@(textHeight));
+        make.height.equalTo(@(textHeight + 2));
     }];
     
     [self.dashBox mas_makeConstraints:^(MASConstraintMaker *make) {

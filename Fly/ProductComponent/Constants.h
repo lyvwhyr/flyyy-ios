@@ -57,9 +57,10 @@
 #define kLoggedInUserDefaultKey @"kLoggedInUserDefaultKey"
 #define kLoggedInUserNsUserDefaultKey @"kLoggedInUserNsUserDefaultKey"
 
-// feed onboarding
+// onboarding
 #define kFeedOnboardingKey @"kFeedOnboardingKey"
 #define kRecordingOnboardingKey @"kRecordingOnboardingKey"
+#define kTopicDetailOnboardingKey @"kTopicDetailOnboardingKey"
 
 #define kPrivacyPolicyURL   @"https://www.flyyapp.com/privacy.html"
 #define kTermsOfServiceURL  @"https://www.flyyapp.com/terms.html"

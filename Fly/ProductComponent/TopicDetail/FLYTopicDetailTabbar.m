@@ -12,7 +12,6 @@
 
 @interface FLYTopicDetailTabbar()
 
-@property (nonatomic) FLYIconButton *commentButton;
 @property (nonatomic) UIView *separatorView;
 
 @property (nonatomic) UIView *invisibleLeftView;

@@ -37,6 +37,7 @@
 #import "FLYGroupViewController.h"
 #import "UIFont+FLYAddition.h"
 #import "FLYIconButton.h"
+#import "FLYTopicDetailOnboardingView.h"
 
 typedef NS_ENUM(NSInteger, FLYPostAuthorActions) {
     FLYPostAuthorActionsDelete = 0
@@ -60,7 +61,6 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 @interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYTopicDetailTabbarDelegate, FLYFeedTopicTableViewCellDelegate>
 
 @property (nonatomic) UITableView *topicTableView;
-@property (nonatomic) FLYTopicDetailTabbar *tabbar;
 
 @property (nonatomic) FLYTopic *topic;
 @property (nonatomic) NSMutableArray *replies;
@@ -165,6 +165,27 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     // During swipe back, we pop the view directly so the bottom navigation bar will show immediately to avoid recording button and the other two buttons show at different time.
     [self.flyNavigationController.interactivePopGestureRecognizer addTarget:self
                                                                      action:@selector(_interactivePopGesture:)];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL hasSeenOnboarding = [[defaults objectForKey:kTopicDetailOnboardingKey] boolValue];
+    if (!hasSeenOnboarding) {
+        [self _loadTopicDetailOnboarding];
+    }
+}
+
+#pragma mark - onboarding
+- (void)_loadTopicDetailOnboarding
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@(YES) forKey:kTopicDetailOnboardingKey];
+    [defaults synchronize];
+    
+    [FLYTopicDetailOnboardingView showOnboardingWithFromViewController:self];
 }
 
 - (void)viewDidLayoutSubviews

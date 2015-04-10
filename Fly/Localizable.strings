@@ -101,6 +101,13 @@
 "FLYTopicDetailDeletedHUD" = "Deleted";
 "FLYTopicDetailReplySectionHeaderText" = "Replies:";
 
+// topic detail onboarding
+"FLYTopicDetailOnboardingHintText" = "Tap play all to hear all responses or comment to leave your own.";
+"FLYTopicDetailOnboardingHintHighlightPlayAll" = "play all";
+"FLYTopicDetailOnboardingHintHighlightComment" = "comment";
+"FLYTopicDetailOnboardingCommentButton" = "comment";
+"FLYTopicDetailOnboardingPlayallButton" = "play all responses";
+
 "FLYTopicDetailActionsheetReportReply" = "Report comment";
 "FLYTopicDetailActionsheetDeleteReply" = "Delete comment";
 "FLYTopicDetailReportReplyTitle" = "Report comment";
