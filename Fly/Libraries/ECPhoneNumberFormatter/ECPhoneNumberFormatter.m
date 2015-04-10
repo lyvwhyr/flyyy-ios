@@ -48,14 +48,8 @@
     NSString *unformatted = [[(NSString *)anObject componentsSeparatedByCharactersInSet: doNotWant] componentsJoinedByString: @""];
     if (unformatted.length == 0) return nil;
 
-    NSString *firstNumber = [unformatted substringToIndex:1],
-    *output;
-
-    if ([firstNumber isEqualToString:@"1"]) {
-        output = [self parseStringStartingWithOne:unformatted];
-    } else {
-        output = [self parseString:unformatted];
-    }
+    NSString *output;
+    output = [self parseString:unformatted];
     return output;
 }
 
