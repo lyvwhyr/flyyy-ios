@@ -64,3 +64,7 @@
 
 #define kPrivacyPolicyURL   @"https://www.flyyapp.com/privacy.html"
 #define kTermsOfServiceURL  @"https://www.flyyapp.com/terms.html"
+
+#ifdef NDEBUG
+    #define NSLog(...) /* suppress NSLog when in release mode */
+#endif
