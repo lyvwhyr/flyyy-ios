@@ -438,6 +438,7 @@
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
+		A6E5CF151AD745AC0058C081 /* FLYDashTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E5CF141AD745AC0058C081 /* FLYDashTextView.m */; };
 		A6F27CAB1A2085D6000EC0B3 /* icon_audio_wave@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */; };
 /* End PBXBuildFile section */
 
@@ -1169,6 +1170,8 @@
 		A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PulsingHaloLayer.m; sourceTree = "<group>"; };
 		A6E171FA1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplePulsingHaloLayer.h; sourceTree = "<group>"; };
 		A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplePulsingHaloLayer.m; sourceTree = "<group>"; };
+		A6E5CF131AD745AC0058C081 /* FLYDashTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYDashTextView.h; sourceTree = "<group>"; };
+		A6E5CF141AD745AC0058C081 /* FLYDashTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDashTextView.m; sourceTree = "<group>"; };
 		A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_audio_wave@3x.png"; sourceTree = "<group>"; };
 		DEF027D145FDC2CC1553A7A5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F4DA38F875E9D2C76E94F1F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1563,6 +1566,8 @@
 				A64062491AD5DF5000278ED6 /* FLYFeedOnBoardingView.m */,
 				A6CA54F91AD7148D007FB6FA /* FLYTabbarOnboardingView.h */,
 				A6CA54FA1AD7148D007FB6FA /* FLYTabbarOnboardingView.m */,
+				A6E5CF131AD745AC0058C081 /* FLYDashTextView.h */,
+				A6E5CF141AD745AC0058C081 /* FLYDashTextView.m */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -2984,6 +2989,7 @@
 				A64062471AD5D65C00278ED6 /* FLYOnboardingStartViewController.m in Sources */,
 				A638D8381ACA0D9100E67ED3 /* FLYSettingsViewController.m in Sources */,
 				A643AEFA1AA9539E00BF4E0F /* UIResponder+NimbusCore.m in Sources */,
+				A6E5CF151AD745AC0058C081 /* FLYDashTextView.m in Sources */,
 				A6048ADE1A8603EF00C67480 /* UIProgressView+AFNetworking.m in Sources */,
 				A6450B171A998A08009EF0A3 /* AFSoundRecord.m in Sources */,
 				A69C4BB41A27D61000CAD443 /* FLYFilterSelectorGroupTableViewCell.m in Sources */,

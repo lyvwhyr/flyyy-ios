@@ -59,6 +59,7 @@
 
 // feed onboarding
 #define kFeedOnboardingKey @"kFeedOnboardingKey"
+#define kRecordingOnboardingKey @"kRecordingOnboardingKey"
 
 #define kPrivacyPolicyURL   @"https://www.flyyapp.com/privacy.html"
 #define kTermsOfServiceURL  @"https://www.flyyapp.com/terms.html"

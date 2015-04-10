@@ -79,6 +79,10 @@
 "FLYRecordingMe" = "Me";
 "FLYRecordingDisguise" = "Disguise";
 
+// Recording onboarding
+"FLYOnboardingFirstTimeHint" = "Tap the button and leave the world a message";
+"FLYOnboardingFirstTimeHintHighlight" = "button";
+
 //Topic detail
 "FLYTopicDetailTabbarComment" = "Comment";
 "FLYTopicDetailTabbarPlayAll" = "Play all";

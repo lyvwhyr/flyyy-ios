@@ -39,6 +39,8 @@
 #import "FLYMediaService.h"
 #import "FLYGroup.h"
 #import "FLYAudioItem.h"
+#import "FLYDashTextView.h"
+#import "UIFont+FLYAddition.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -47,6 +49,8 @@
 #define kMaxRetry 3
 #define kTimeLabelTopPadding 30
 #define kMaxRecordTime 60
+#define kOnboardingMaxWidth 245
+#define kOnBoardingArrowSpacing 2
 
 @interface FLYRecordViewController ()<FLYRecordBottomBarDelegate, JGProgressHUDDelegate, STKAudioPlayerDelegate, FLYVoiceEffectViewDelegate>
 
@@ -79,6 +83,10 @@
 // Voice filter
 @property (nonatomic) FLYVoiceFilterEffect filterEffect;
 @property (nonatomic) UIActivityIndicatorView *loadingView;
+
+// Onboarding
+@property (nonatomic) FLYDashTextView *onboardingTextView;
+@property (nonatomic) UIImageView *dashTextViewArrow;
 
 @property (nonatomic, readonly) UITapGestureRecognizer *userActionTapGestureRecognizer;
 @property (nonatomic, readonly) UITapGestureRecognizer *deleteRecordingTapGestureRecognizer;
@@ -365,6 +373,11 @@
     _userActionImageView.userInteractionEnabled = YES;
     [self.view addSubview:_userActionImageView];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL hasSeenRecordingOnboarding = [[defaults objectForKey:kRecordingOnboardingKey] boolValue];
+    if(!hasSeenRecordingOnboarding) {
+        [self _setupOnboardingView];
+    }
     
     [self.glowView removeFromSuperview];
     self.glowView  = nil;
@@ -488,6 +501,33 @@
     [self _setupPlaybackTimer];
 }
 
+#pragma mark - Onboarding view
+- (void)_setupOnboardingView
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@(YES) forKey:kRecordingOnboardingKey];
+    [defaults synchronize];
+    
+    UIFont *font = [UIFont flyFontWithSize:18];
+    UIFont *highlightFont = [UIFont fontWithName:@"Avenir-black" size:18];
+    UIEdgeInsets insets = UIEdgeInsetsMake(20, 20, 20, 20);
+    _onboardingTextView = [[FLYDashTextView alloc] initWithText:LOC(@"FLYOnboardingFirstTimeHint") font:font color:[UIColor flyBlue] hightlightItems:@[LOC(@"FLYOnboardingFirstTimeHintHighlight")] highlightFont:highlightFont edgeInsets:insets dashColor:FLYDashTextBlue maxLabelWidth:kOnboardingMaxWidth];
+    [self.view addSubview:_onboardingTextView];
+    
+    _dashTextViewArrow = [UIImageView new];
+    _dashTextViewArrow.image = [UIImage imageNamed:@"icon_up_arrow"];
+    [self.view addSubview:_dashTextViewArrow];
+}
+
+- (void)_hideOnboardingView
+{
+    [self.onboardingTextView removeFromSuperview];
+    _onboardingTextView = nil;
+    
+    [self.dashTextViewArrow removeFromSuperview];
+    _dashTextViewArrow = nil;
+}
+
 #pragma mark - Recording state methods
 - (void)_setupRecordTimer
 {
@@ -506,7 +546,7 @@
     }
     
     self.audioLength++;
-    _recordedTimeLabel.text = [NSString stringWithFormat:@":%d", kMaxRecordTime - self.audioLength];
+    _recordedTimeLabel.text = [NSString stringWithFormat:@":%d", (int)(kMaxRecordTime - self.audioLength)];
     [self.view setNeedsLayout];
 }
 
@@ -550,6 +590,24 @@
     if (self.glowView) {
         [self.glowView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self.userActionImageView);
+        }];
+    }
+    
+    if (self.onboardingTextView) {
+        UIEdgeInsets insets = UIEdgeInsetsMake(20, 20, 20, 20);
+        CGFloat textHeight = [FLYDashTextView geLabelHeightWithText:LOC(@"FLYOnboardingFirstTimeHint") font:[UIFont flyFontWithSize:18] hightlightItems:@[LOC(@"FLYOnboardingFirstTimeHintHighlight")] highlightFont:[UIFont fontWithName:@"Avenir-black" size:18] maxLabelWidth:kOnboardingMaxWidth];
+        [self.onboardingTextView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.userActionImageView.mas_bottom).offset(50);
+            make.leading.equalTo(self.view).offset(20);
+            make.trailing.equalTo(self.view).offset(-20);
+            // add extra 2 points to give text enough height
+            make.height.equalTo(@(textHeight + insets.top * 2));
+        }];
+        
+        [self.dashTextViewArrow mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.userActionImageView.mas_bottom).offset(kOnBoardingArrowSpacing);
+            make.bottom.equalTo(self.onboardingTextView.mas_top).offset(-kOnBoardingArrowSpacing);
+            make.centerX.equalTo(self.onboardingTextView);
         }];
     }
     
@@ -612,6 +670,8 @@
 {
     [self.waver removeFromSuperview];
     self.waver = nil;
+    
+    [self _hideOnboardingView];
     
     [self _cleanupTimer];
     
