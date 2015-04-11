@@ -260,6 +260,7 @@
 		A657BAE41AC93B0300886C0F /* FLYCatalogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A657BAE31AC93B0300886C0F /* FLYCatalogViewController.m */; };
 		A657BAEA1AC9410500886C0F /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A657BAE81AC9410500886C0F /* HMSegmentedControl.m */; };
 		A657BAEB1AC9410500886C0F /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A657BAE91AC9410500886C0F /* Launch Screen.xib */; };
+		A659E4281AD8B99C0089EFB7 /* libZtx_iOS-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A659E4261AD8B99C0089EFB7 /* libZtx_iOS-fat.a */; };
 		A65ED97F1A91523600E10D5C /* FLYTopicDetailTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED97E1A91523600E10D5C /* FLYTopicDetailTopicCell.m */; };
 		A65ED9821A915FAE00E10D5C /* FLYPlayTimelineView.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED9811A915FAE00E10D5C /* FLYPlayTimelineView.m */; };
 		A65ED98C1A91B4F600E10D5C /* FLYReply.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED98B1A91B4F600E10D5C /* FLYReply.m */; };
@@ -303,7 +304,6 @@
 		A67208251A356CAE00B2C5B5 /* icon_play_reply@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67208241A356CAE00B2C5B5 /* icon_play_reply@3x.png */; };
 		A6799C7E1AABDE3D003DAE5B /* EAFRead.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6799C7B1AABDE3D003DAE5B /* EAFRead.mm */; };
 		A6799C7F1AABDE3D003DAE5B /* EAFWrite.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6799C7D1AABDE3D003DAE5B /* EAFWrite.mm */; };
-		A6799C821AABDE47003DAE5B /* libZtx_iOS-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6799C811AABDE47003DAE5B /* libZtx_iOS-fat.a */; };
 		A6799C881AABDFB7003DAE5B /* FLYVoiceFilterManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6799C871AABDFB7003DAE5B /* FLYVoiceFilterManager.mm */; };
 		A6799C8B1AABE048003DAE5B /* Utilities.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6799C8A1AABE048003DAE5B /* Utilities.mm */; };
 		A6799C8E1AABEB3D003DAE5B /* FLYVoiceEffectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6799C8D1AABEB3D003DAE5B /* FLYVoiceEffectView.m */; };
@@ -855,6 +855,8 @@
 		A657BAE71AC9410500886C0F /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		A657BAE81AC9410500886C0F /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		A657BAE91AC9410500886C0F /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		A659E4261AD8B99C0089EFB7 /* libZtx_iOS-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libZtx_iOS-fat.a"; sourceTree = "<group>"; };
+		A659E4271AD8B99C0089EFB7 /* ZTX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTX.h; sourceTree = "<group>"; };
 		A65ED97D1A91523600E10D5C /* FLYTopicDetailTopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTopicDetailTopicCell.h; sourceTree = "<group>"; };
 		A65ED97E1A91523600E10D5C /* FLYTopicDetailTopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTopicDetailTopicCell.m; sourceTree = "<group>"; };
 		A65ED9801A915FAE00E10D5C /* FLYPlayTimelineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPlayTimelineView.h; sourceTree = "<group>"; };
@@ -927,8 +929,6 @@
 		A6799C7B1AABDE3D003DAE5B /* EAFRead.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAFRead.mm; sourceTree = "<group>"; };
 		A6799C7C1AABDE3D003DAE5B /* EAFWrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAFWrite.h; sourceTree = "<group>"; };
 		A6799C7D1AABDE3D003DAE5B /* EAFWrite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAFWrite.mm; sourceTree = "<group>"; };
-		A6799C801AABDE47003DAE5B /* ZTX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTX.h; path = External/ZTX.h; sourceTree = SOURCE_ROOT; };
-		A6799C811AABDE47003DAE5B /* libZtx_iOS-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libZtx_iOS-fat.a"; path = "../libZtx_iOS-fat.a"; sourceTree = "<group>"; };
 		A6799C861AABDFB7003DAE5B /* FLYVoiceFilterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYVoiceFilterManager.h; sourceTree = "<group>"; };
 		A6799C871AABDFB7003DAE5B /* FLYVoiceFilterManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FLYVoiceFilterManager.mm; sourceTree = "<group>"; };
 		A6799C891AABE048003DAE5B /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
@@ -1195,7 +1195,7 @@
 				A6D949EB1A9079AC003D4265 /* Fabric.framework in Frameworks */,
 				A60A44F41A8DD42B00BED63A /* Foundation.framework in Frameworks */,
 				A6A30D711A1B1EEE001AE1FE /* QuartzCore.framework in Frameworks */,
-				A6799C821AABDE47003DAE5B /* libZtx_iOS-fat.a in Frameworks */,
+				A659E4281AD8B99C0089EFB7 /* libZtx_iOS-fat.a in Frameworks */,
 				A60A44F21A8DD41200BED63A /* UIKit.framework in Frameworks */,
 				A6A30D731A1B1EFA001AE1FE /* CoreGraphics.framework in Frameworks */,
 				A6D949EA1A9079AC003D4265 /* Crashlytics.framework in Frameworks */,
@@ -2117,9 +2117,9 @@
 			isa = PBXGroup;
 			children = (
 				A6799C891AABE048003DAE5B /* Utilities.h */,
+				A659E4261AD8B99C0089EFB7 /* libZtx_iOS-fat.a */,
+				A659E4271AD8B99C0089EFB7 /* ZTX.h */,
 				A6799C8A1AABE048003DAE5B /* Utilities.mm */,
-				A6799C801AABDE47003DAE5B /* ZTX.h */,
-				A6799C811AABDE47003DAE5B /* libZtx_iOS-fat.a */,
 				A6799C7A1AABDE3D003DAE5B /* EAFRead.h */,
 				A6799C7B1AABDE3D003DAE5B /* EAFRead.mm */,
 				A6799C7C1AABDE3D003DAE5B /* EAFWrite.h */,
@@ -3376,6 +3376,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/External",
+					"$(PROJECT_DIR)/External/ZTX",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Flyy;
@@ -3418,6 +3419,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/External",
+					"$(PROJECT_DIR)/External/ZTX",
 				);
 				PRODUCT_NAME = Flyy;
 				PROVISIONING_PROFILE = "";

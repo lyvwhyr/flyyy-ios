@@ -760,8 +760,8 @@
 - (void)voiceEffectTapped:(FLYVoiceFilterEffect)effect
 {
     self.filterEffect = effect;
-    FLYVoiceFilterManager *filterManager = [FLYVoiceFilterManager new];
-    if (effect == FLYVoiceEffectDisguise) {
+    FLYVoiceFilterManager *filterManager = [[FLYVoiceFilterManager alloc] initWithEffect:effect];
+    if (effect != FLYVoiceEffectMe) {
         //Loading view
         [self.view addSubview:self.loadingView];
         [self updateViewConstraints];
@@ -769,9 +769,8 @@
         [self.view bringSubviewToFront:self.loadingView];
         [self.loadingView startAnimating];
         
-        
-        [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileNameAfterFilter];
-        [filterManager applyFiltering];
+        [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d%@", kRecordingAudioFileNameAfterFilter, (int)effect, kAudioFileExt]];
+        [filterManager applyFiltering:effect];
     } else {
         [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
 //        self.state = FLYRecordCompleteState;

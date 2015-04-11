@@ -6,10 +6,13 @@
 //  Copyright (c) 2015 Fly. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "FLYVoiceEffectView.h"
 
 @interface FLYVoiceFilterManager : NSObject
 
-- (void)applyFiltering;
+@property (nonatomic) FLYVoiceFilterEffect effect;
+
+- (instancetype)initWithEffect:(FLYVoiceFilterEffect)effect;
+- (void)applyFiltering:(FLYVoiceFilterEffect)voiceFilter;
 
 @end

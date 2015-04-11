@@ -29,11 +29,12 @@ double gExecTimeTotal = 0.;
 
 @implementation FLYVoiceFilterManager
 
-- (instancetype)init
+- (instancetype)initWithEffect:(FLYVoiceFilterEffect)effect
 {
     if (self = [super init]) {
+        _effect = effect;
         NSString *inputSound = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
-        NSString *outputSound = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileNameAfterFilter];
+        NSString *outputSound = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d%@", kRecordingAudioFileNameAfterFilter, (int)_effect, kAudioFileExt]];
         _inUrl = [NSURL fileURLWithPath:inputSound];
         _outUrl = [NSURL fileURLWithPath:outputSound];
         _reader = [[EAFRead alloc] init];
@@ -42,14 +43,20 @@ double gExecTimeTotal = 0.;
     return self;
 }
 
-- (void)applyFiltering
+- (void)applyFiltering:(FLYVoiceFilterEffect)filter
 {
-    [NSThread detachNewThreadSelector:@selector(_processThread) toTarget:self withObject:nil];
+    [NSThread detachNewThreadSelector:@selector(_processThread:) toTarget:self withObject:@(filter)];
 }
 
-- (void)_processThread
+- (void)_processThread:(NSNumber *)filterValue
 {
     
+    NSInteger value = [filterValue integerValue];
+    NSDictionary *pitchParams = [self _pitchParams:value];
+    if (!pitchParams) {
+        NSLog(@"pitch params are nil");
+        return;
+    }
     
     int numChannels = (int)ZtxValidateNumChannels(2);		// ZtxLE allows mono only
     float sampleRate = 44100.;
@@ -62,8 +69,8 @@ double gExecTimeTotal = 0.;
     
     // ZTX parameters
     // Here we set our time an pitch manipulation values
-    float time      = 1.15;                 // 115% length
-    float pitch     = pow(2., -2/12.);     // pitch shift (0 semitones)
+    float time      = [[pitchParams objectForKey:@"time"] floatValue];                 // 115% length
+    float pitch     = pow(2., [[pitchParams objectForKey:@"pitch"] floatValue]/12.);     // pitch shift (0 semitones)
     float formant   = pow(2., 0/12.);    // formant shift (0 semitones). Note formants are reciprocal to pitch in natural transposing
     
     // First we set up ZTX to process numChannels of audio at 44.1kHz
@@ -199,7 +206,41 @@ long myReadData(float **chdata, long numFrames, void *userData)
     ZtxStartClock();								// ............................. start timer ..........................................
     
     return err;
-    
+}
+
+- (NSDictionary *)_pitchParams:(NSInteger)value
+{
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    switch (value) {
+        case FLYVoiceEffectLow1:{
+            [dict setObject:@(1.15) forKey:@"time"];
+            [dict setObject:@(2) forKey:@"pitch"];
+            [dict setObject:@(0) forKey:@"formant"];
+            break;
+        }
+        case FLYVoiceEffectLow2: {
+            [dict setObject:@(1) forKey:@"time"];
+            [dict setObject:@(3) forKey:@"pitch"];
+            [dict setObject:@(0) forKey:@"formant"];
+            break;
+        }
+        case FLYVoiceEffectHigh1: {
+            [dict setObject:@(1) forKey:@"time"];
+            [dict setObject:@(-1) forKey:@"pitch"];
+            [dict setObject:@(0) forKey:@"formant"];
+            break;
+        }
+        case FLYVoiceEffectHigh2: {
+            [dict setObject:@(1) forKey:@"time"];
+            [dict setObject:@(-2) forKey:@"pitch"];
+            [dict setObject:@(0) forKey:@"formant"];
+            break;
+        }
+            
+        default:
+            break;
+    }
+    return  dict;
 }
 
 - (void)dealloc

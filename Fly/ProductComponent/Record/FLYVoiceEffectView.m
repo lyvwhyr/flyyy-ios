@@ -9,6 +9,7 @@
 #import "FLYVoiceEffectView.h"
 #import "UIColor+FLYAddition.h"
 #import "UIFont+FLYAddition.h"
+#import "FLYFileManager.h"
 
 @interface FLYVoiceEffectView()
 
@@ -23,6 +24,10 @@
 @property (nonatomic) UISlider *slider;
 @property (nonatomic) UILabel *lowLabel;
 @property (nonatomic) UILabel *highLabel;
+
+@property (nonatomic) FLYVoiceFilterEffect currentlyProcessingEffect;
+@property (nonatomic) NSMutableArray *alreadyProcessedEffects;
+
 
 @end
 
@@ -69,7 +74,9 @@
         _slider.value = 2;
         [self addSubview:_slider];
         
-        _selectedEffect = FLYVoiceEffectMe;
+        _currentlyProcessingEffect = FLYVoiceEffectMe;
+        _alreadyProcessedEffects = [NSMutableArray new];
+        [_alreadyProcessedEffects addObject:@(FLYVoiceEffectMe)];
     }
     return self;
 }
@@ -78,6 +85,28 @@
     // round the slider position to the nearest index of the numbers array
     NSUInteger index = (NSUInteger)(_slider.value + 0.5);
     [_slider setValue:index animated:NO];
+    if (_currentlyProcessingEffect != index && ![self _isAlreadyProcessed:index]) {
+        _currentlyProcessingEffect = index;
+        [self.delegate voiceEffectTapped:index];
+        [self.alreadyProcessedEffects addObject:@(index)];
+    }
+    
+    if (index != FLYVoiceEffectMe) {
+        [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d%@", kRecordingAudioFileNameAfterFilter, (int)index, kAudioFileExt]];
+    } else {
+        [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
+    }
+    
+}
+
+- (BOOL)_isAlreadyProcessed:(NSInteger)value
+{
+    for (int i = 0; i < [self.alreadyProcessedEffects count]; i++) {
+        if (value == [self.alreadyProcessedEffects[i] integerValue]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 - (void)updateConstraints
@@ -132,20 +161,20 @@
 
 - (void)_disguseButtonTapped
 {
-    if (self.selectedEffect == FLYVoiceEffectDisguise) {
-        return;
-    }
+//    if (self.selectedEffect == FLYVoiceEffectDisguise) {
+//        return;
+//    }
     
     // deselect disguseButton
     [self.meButton setImage:[UIImage imageNamed:@"icon_record_unselect"] forState:UIControlStateNormal];
     self.meLabel.textColor = [UIColor flyBlue];
     
     // select me
-    self.selectedEffect = FLYVoiceEffectDisguise;
+//    self.selectedEffect = FLYVoiceEffectDisguise;
     [self.disguseButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateNormal];
     self.disguseLabel.textColor = [UIColor flyGreen];
     
-    [self.delegate voiceEffectTapped:FLYVoiceEffectDisguise];
+//    [self.delegate voiceEffectTapped:FLYVoiceEffectDisguise];
 }
 
 

@@ -27,7 +27,8 @@
 
 #define kAudioCacheFolder   @"flyyapp.com.audios"
 #define kRecordingAudioFileName  @"kRecordingAudioFileName.m4a"
-#define kRecordingAudioFileNameAfterFilter @"kRecordingAudioFileNameAfterFilter.m4a"
+#define kRecordingAudioFileNameAfterFilter @"kRecordingAudioFileNameAfterFilter"
+#define kAudioFileExt  @".m4a"
 
 //sign up and login
 #define kFromViewControllerKey  @"kFromViewControllerKey"

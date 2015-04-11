@@ -6,11 +6,13 @@
 //  Copyright (c) 2015 Fly. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, FLYVoiceFilterEffect) {
-    FLYVoiceEffectMe = 0,
-    FLYVoiceEffectDisguise
+    FLYVoiceEffectLow1 = 0,
+    FLYVoiceEffectLow2,
+    FLYVoiceEffectMe,
+    FLYVoiceEffectHigh1,
+    FLYVoiceEffectHigh2
 };
 
 @protocol FLYVoiceEffectViewDelegate <NSObject>
