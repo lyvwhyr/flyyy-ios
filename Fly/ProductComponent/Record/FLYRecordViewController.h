@@ -17,7 +17,8 @@ typedef NS_ENUM(NSInteger, FLYRecordState)
     FLYRecordRecordingState,
     FLYRecordCompleteState,
     FLYRecordPlayingState,
-    FLYRecordPauseState
+    FLYRecordPauseState,
+    FLYRecordReadyToPlay
 };
 
 typedef NS_ENUM(NSInteger, FLYRecordingType)

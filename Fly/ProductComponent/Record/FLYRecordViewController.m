@@ -99,6 +99,8 @@
 @property (nonatomic) NSString *replyMediaId;
 @property (nonatomic) NSInteger retryCount;
 
+@property (nonatomic) NSMutableArray *alreadyProcessedEffects;
+
 @end
 
 @implementation FLYRecordViewController
@@ -118,7 +120,10 @@
         _audioPlayer.volume = 1;
         _audioPlayer.delegate = self;
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_vioceFilterApplied) name:kVoiceFilterApplied object:nil];
+        _alreadyProcessedEffects = [NSMutableArray new];
+        [_alreadyProcessedEffects addObject:@(FLYVoiceEffectMe)];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_vioceFilterApplied:) name:kVoiceFilterApplied object:nil];
     }
     return self;
 }
@@ -158,10 +163,12 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self.audioPlayer stop];
 }
 
 - (void)dealloc
 {
+    NSLog(@"RecordViewController dealloc called");
     [self _cleanupData];
 }
 
@@ -242,9 +249,15 @@
 
 - (void)_nextBarButtonTapped
 {
+    if (![self _isAlreadyProcessed:self.filterEffect]) {
+        [Dialog simpleToast:LOC(@"FLYRecordingStillProcessing")];
+        return;
+    }
     
-    [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"recording_page" component:nil element:@"next_button" action:@"click"];
-    
+    self.currentState = FLYRecordReadyToPlay;
+    [self _updateUserState];    
+    self.currentState = FLYRecordCompleteState;
+
     if (self.recordingType == RecordingForTopic) {
         FLYUploadToS3SuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
             
@@ -255,7 +268,6 @@
         };
         [FLYMediaService getSignedUrlAndUploadWithSuccessBlock:successBlock errorBlock:errorBlock];
         
-        [self _setupCompleteViewState];
         FLYPrePostViewController *prePostVC = [FLYPrePostViewController new];
         prePostVC.audioDuration = self.audioLength;
         if (self.defaultGroup) {
@@ -354,6 +366,8 @@
     
     [_trashButton removeFromSuperview];
     _trashButton = nil;
+    
+    [self.alreadyProcessedEffects removeAllObjects];
     
     [self.recordBottomBar removeFromSuperview];
     self.recordBottomBar = nil;
@@ -466,6 +480,13 @@
     self.recordBottomBar.delegate = self;
     [self loadRightBarButton];
     [self updateViewConstraints];
+}
+
+- (void)_setupReadyToPlay
+{
+    [self.audioPlayer stop];
+    [_userActionImageView setImage:[UIImage imageNamed:@"icon_record_play"]];
+    self.remainingAudioLength = self.audioLength;
 }
 
 - (void)_setupPlayingViewState
@@ -684,7 +705,6 @@
         }
         case FLYRecordRecordingState:
         {
-            [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"recording_page" component:nil element:@"recording_button" action:@"click"];
             _currentState = FLYRecordCompleteState;
             [self _setupCompleteViewState];
             break;
@@ -714,6 +734,10 @@
             _currentState = FLYRecordPlayingState;
             [self _setupResumeViewState];
             break;
+        }
+        case FLYRecordReadyToPlay:
+        {
+            [self _setupReadyToPlay];
         }
         default:
             break;
@@ -760,8 +784,18 @@
 - (void)voiceEffectTapped:(FLYVoiceFilterEffect)effect
 {
     self.filterEffect = effect;
-    FLYVoiceFilterManager *filterManager = [[FLYVoiceFilterManager alloc] initWithEffect:effect];
-    if (effect != FLYVoiceEffectMe) {
+    
+    // set to ready to play state
+    self.currentState = FLYRecordReadyToPlay;
+    [self _updateUserState];
+    self.currentState = FLYRecordCompleteState;
+
+    if (effect == FLYVoiceEffectMe) {
+        [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
+    } else if ([self _isAlreadyProcessed:effect]) {
+        [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d%@", kRecordingAudioFileNameAfterFilter, (int)effect, kAudioFileExt]];
+    } else {
+        FLYVoiceFilterManager *filterManager = [[FLYVoiceFilterManager alloc] initWithEffect:effect];
         //Loading view
         [self.view addSubview:self.loadingView];
         [self updateViewConstraints];
@@ -771,24 +805,34 @@
         
         [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%d%@", kRecordingAudioFileNameAfterFilter, (int)effect, kAudioFileExt]];
         [filterManager applyFiltering:effect];
-    } else {
-        [FLYAppStateManager sharedInstance].recordingFilePathSelected = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
-//        self.state = FLYRecordCompleteState;
-//        [self _updateUserState];
     }
+}
+
+- (BOOL)_isAlreadyProcessed:(NSInteger)value
+{
+    if (value == FLYVoiceEffectMe) {
+        return YES;
+    }
+    
+    for (int i = 0; i < [self.alreadyProcessedEffects count]; i++) {
+        if (value == [self.alreadyProcessedEffects[i] integerValue]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 # pragma mark - Notificaiton
 
-- (void)_vioceFilterApplied
+- (void)_vioceFilterApplied:(NSNotification *)notification
 {
+    FLYVoiceFilterEffect effect = [[notification.userInfo objectForKey:@"filter_effect"] integerValue];
+    [self.alreadyProcessedEffects addObject:@(effect)];
+    
     self.userActionImageView.userInteractionEnabled = YES;
     [_loadingView stopAnimating];
     [_loadingView removeFromSuperview];
     _loadingView = nil;
-    
-//    self.state = FLYRecordCompleteState;
-//    [self _updateUserState];
 }
 
 #pragma mark - FLYRecordBottomBarDelegate

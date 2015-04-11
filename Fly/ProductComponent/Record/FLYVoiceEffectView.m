@@ -85,10 +85,9 @@
     // round the slider position to the nearest index of the numbers array
     NSUInteger index = (NSUInteger)(_slider.value + 0.5);
     [_slider setValue:index animated:NO];
-    if (_currentlyProcessingEffect != index && ![self _isAlreadyProcessed:index]) {
+    if (_currentlyProcessingEffect != index) {
         _currentlyProcessingEffect = index;
         [self.delegate voiceEffectTapped:index];
-        [self.alreadyProcessedEffects addObject:@(index)];
     }
     
     if (index != FLYVoiceEffectMe) {

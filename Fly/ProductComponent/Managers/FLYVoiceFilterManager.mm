@@ -170,8 +170,7 @@ double gExecTimeTotal = 0.;
     _reader = nil;
     _writer = nil; // important - flushes data to file
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kVoiceFilterApplied object:self];
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kVoiceFilterApplied object:self userInfo:@{@"filter_effect":@(self.effect)}];
     // start playback on main thread
 //    [self performSelectorOnMainThread:@selector(_playOnMainThread) withObject:self waitUntilDone:NO];
 }

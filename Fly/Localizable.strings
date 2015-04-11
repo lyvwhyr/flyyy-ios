@@ -9,6 +9,7 @@
 // recording
 "FLYAdjustPitchLow" = "Low";
 "FLYAdjustPitchHigh" = "High";
+"FLYRecordingStillProcessing" = "Still processing the audio, please try to submit your recording later.";
 
 
 //Home feed
