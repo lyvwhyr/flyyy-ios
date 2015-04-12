@@ -137,7 +137,11 @@
     self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
     //Set up title
-    self.title = @"Record";
+    if (self.recordingType == RecordingForReply) {
+        self.title = LOC(@"FLYRecordingCommentTitle");
+    } else {
+        self.title = LOC(@"FLYRecordingRecordTitle");
+    }
     UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
     self.view.backgroundColor = [UIColor whiteColor];

@@ -78,7 +78,8 @@
 //Recording
 "FLYRecordingVoiceEffect" = "Adjust pitch";
 "FLYRecordingMe" = "Me";
-"FLYRecordingDisguise" = "Disguise";
+"FLYRecordingCommentTitle" = "Comment";
+"FLYRecordingRecordTitle" = "Record";
 
 // Recording onboarding
 "FLYOnboardingFirstTimeHint" = "Tap the button and leave the world a message";

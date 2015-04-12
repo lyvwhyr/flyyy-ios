@@ -150,8 +150,6 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     [self.view addSubview:self.tabbar];
     
     [self _initService];
-    
-    [[FLYScribe sharedInstance] logEvent:@"topic_detail" section:nil component:nil element:nil action:@"impression"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -409,6 +407,9 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         
         for(int i = 0; i < repliesArray.count; i++) {
             FLYReply *reply = [[FLYReply alloc] initWithDictionary:repliesArray[i]];
+            if([self _doesReplyAlreadyExist:reply]) {
+                continue;
+            }
             [self.replies addObject:reply];
         }
         //Set up before id for load more
@@ -421,6 +422,20 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         [self.topicTableView.infiniteScrollingView stopAnimating];
     };
     [self.replyService nextPageWithBefore:nil after:after firstPage:first successBlock:successBlock errorBlock:errorBlock];
+}
+
+- (BOOL)_doesReplyAlreadyExist:(FLYReply *)reply
+{
+    if ([self.replies count] == 0) {
+        return NO;
+    }
+    for (int i = 0; i < [self.replies count]; i++) {
+        FLYReply *replyInArr = self.replies[i];
+        if ([replyInArr.replyId isEqualToString:reply.replyId]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 #pragma mark - FLYTopicDetailTopicCellDelegate
