@@ -40,19 +40,21 @@
 #import "FLYTopicDetailOnboardingView.h"
 
 typedef NS_ENUM(NSInteger, FLYPostAuthorActions) {
-    FLYPostAuthorActionsDelete = 0
+    FLYPostAuthorActionsDelete = 0,
 };
 
 typedef NS_ENUM(NSInteger, FLYPostNonAuthorActions) {
-    FLYPostNonAuthorActionsReport = 0
+    FLYPostNonAuthorActionsReport = 0,
 };
 
 typedef NS_ENUM(NSInteger, FLYReplyAuthorActions) {
-    FLYReplyAuthorActionsDelete = 0
+    FLYReplyAuthorActionsComment = 0,
+    FLYReplyAuthorActionsDelete,
 };
 
 typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
-    FLYReplyNonAuthorActionsReport = 0
+    FLYReplyNonAuthorActionsComment = 0,
+    FLYReplyNonAuthorActionsReport
 };
 
 
@@ -813,8 +815,10 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     
     NSMutableArray *otherButtons = [NSMutableArray new];
     if (isAuthor) {
+        [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetAddReply")];
         [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetDeleteReply")];
     } else {
+        [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetAddReply")];
         [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetReportReply")];
     }
     @weakify(self)
@@ -823,6 +827,10 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         if (actionSheet.cancelButtonIndex != buttonIndex) {
             if (isAuthor) {
                 switch (buttonIndex) {
+                    case FLYReplyAuthorActionsComment: {
+                        [self _commentButtonTapped:reply];
+                        break;
+                    }
                     case FLYReplyAuthorActionsDelete: {
                         [self _deleteReply:reply];
                         break;
@@ -832,7 +840,11 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
                 }
             } else {
                 switch (buttonIndex) {
-                    case FLYPostNonAuthorActionsReport:{
+                    case FLYReplyNonAuthorActionsComment: {
+                        [self _commentButtonTapped:reply];
+                        break;
+                    }
+                    case FLYReplyNonAuthorActionsReport:{
                         [self _reportReply:reply];
                         break;
                     }
