@@ -213,7 +213,8 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
 
 - (void)_viewRules
 {
-    
+    SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:kRulesURL];
+    [self.navigationController pushViewController:webViewController animated:YES];
 }
 
 - (void)_viewTerms

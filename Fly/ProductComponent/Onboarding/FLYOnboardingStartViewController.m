@@ -53,12 +53,12 @@
 #pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor
 {
-    return [UIColor flyBlue];
+    return [UIColor clearColor];
 }
 
 - (UIColor*)preferredStatusBarColor
 {
-    return [UIColor flyBlue];
+    return [UIColor clearColor];
 }
 
 @end

@@ -108,7 +108,7 @@
 "FLYTopicDetailOnboardingHintHighlightPlayAll" = "play all";
 "FLYTopicDetailOnboardingHintHighlightComment" = "comment";
 "FLYTopicDetailOnboardingCommentButton" = "comment";
-"FLYTopicDetailOnboardingPlayallButton" = "play all responses";
+"FLYTopicDetailOnboardingPlayallButton" = "play all comments";
 
 "FLYTopicDetailActionsheetReportReply" = "Report comment";
 "FLYTopicDetailActionsheetDeleteReply" = "Delete comment";
