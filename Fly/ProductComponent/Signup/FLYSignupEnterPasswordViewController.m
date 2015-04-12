@@ -169,7 +169,6 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     };
     
-    //TODO:error handling
     FLYCreateuserErrorBlock errorBlock = ^(id responseObj, NSError *error) {
         if ([[responseObj objectForKey:@"code"] integerValue] == kUserNameAlreadyExist) {
             [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUserNameAlreadyExist")];

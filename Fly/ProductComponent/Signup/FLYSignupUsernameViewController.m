@@ -153,7 +153,7 @@
         BOOL valid = [responseObj fly_boolForKey:@"valid" defaultValue:NO];
         if (valid) {
             FLYSignupEnterPasswordViewController *vc = [[FLYSignupEnterPasswordViewController alloc] initWithUsername:username];
-            [self.navigationController pushViewController:vc animated:YES];
+            [self.navigationController pushViewController:vc animated:NO];
         } else {
             [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUsernameInuse")];
         }

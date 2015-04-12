@@ -17,7 +17,7 @@
 #import "FLYNavigationBar.h"
 #import "FLYNavigationController.h"
 
-#define kTitleTopPadding 5
+#define kTitleTopPadding 20
 
 @interface FLYSignupConfirmCodeViewController ()<UITextFieldDelegate>
 
@@ -136,7 +136,7 @@
             if (valid) {
                 [FLYAppStateManager sharedInstance].confirmationCode = confirmCode;
                 FLYSignupUsernameViewController *vc = [FLYSignupUsernameViewController new];
-                [self.navigationController pushViewController:vc animated:YES];
+                [self.navigationController pushViewController:vc animated:NO];
             } else {
                 [PXAlertView showAlertWithTitle:LOC(@"FLYInvalidVerificationCode")];
             }

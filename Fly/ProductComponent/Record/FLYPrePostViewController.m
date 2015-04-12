@@ -238,7 +238,8 @@
 {
     [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:@"post" element:@"post_button" action:@"click"];
     
-    if (!self.topicTitle) {
+    NSString *defaultStr = LOC(@"FLYPrePostDefaultText");
+    if (!self.topicTitle || [self.topicTitle isEqualToString:defaultStr]) {
         [Dialog simpleToast:LOC(@"FLYPrePostDefaultText")];
         return;
     }

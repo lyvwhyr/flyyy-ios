@@ -27,7 +27,7 @@
 
 #define kTitleTopPadding 10
 #define kSubtitleTopPadding 50
-#define kPhoneBackgroundImageViewTopPadding 10
+#define kPhoneBackgroundImageViewTopPadding 20
 #define kHintLabelPadding 10
 #define kCountryCodeLabelWidth 44
 #define kCountryCodeLabelHeight 22
@@ -325,7 +325,7 @@
     if (url) {
         NSString *urlString = [url absoluteString];
         SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:urlString];
-        [self.navigationController pushViewController:webViewController animated:YES];
+        [self.navigationController pushViewController:webViewController animated:NO];
     }
 }
 
