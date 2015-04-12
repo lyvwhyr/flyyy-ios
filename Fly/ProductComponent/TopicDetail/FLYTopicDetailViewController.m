@@ -476,16 +476,26 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         [Dialog simpleToast:LOC(@"FLYTopicDetailsPlayAllNoReplies")];
         return;
     }
+    
     _playAllButton = playAllButton;
     self.isPlayAllRepliesEnabled = !self.isPlayAllRepliesEnabled;
     if (self.isPlayAllRepliesEnabled) {
         self.currentPlayingIndexPath = [NSIndexPath indexPathForRow:0 inSection:FlyReplyCellSectionIndex];
         FLYReply *reply = [self.replies objectAtIndex:0];
         FLYTopicDetailReplyCell *tappedCell = (FLYTopicDetailReplyCell *)[self.topicTableView cellForRowAtIndexPath:self.currentPlayingIndexPath];
+        [tappedCell updatePlayState:FLYPlayStateNotSet];
         [self playButtonTapped:tappedCell withReply:reply withIndexPath:self.currentPlayingIndexPath];
         
         // scroll to position
         [self.topicTableView scrollToRowAtIndexPath:self.currentPlayingIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    } else {
+        FLYTopicDetailReplyCell *tappedCell = (FLYTopicDetailReplyCell *)[self.topicTableView cellForRowAtIndexPath:self.currentPlayingIndexPath];
+        FLYReply *reply = [self.replies objectAtIndex:0];
+        FLYAudioItem *currentItem = [FLYAudioManager sharedInstance].currentPlayItem;
+        if (self.currentPlayingIndexPath.row == 0 && self.currentPlayingIndexPath.section == 1 && currentItem.playState == FLYPlayStatePlaying) {
+            [tappedCell updatePlayState:FLYPlayStateNotSet];
+            [self playButtonTapped:tappedCell withReply:reply withIndexPath:self.currentPlayingIndexPath];
+        }
     }
 }
 
