@@ -129,18 +129,6 @@ static dispatch_group_t http_request_operation_completion_group() {
                 id responseObject = self.responseObject;
                 if (self.error) {
                     if (failure) {
-                        if ([responseObject isKindOfClass:[NSDictionary class]]) {
-                            /*
-                             {
-                             code = 4001;
-                             context = "";
-                             error = UserNotFound;
-                             message = "User \"1\" not found";
-                             }
-                            */
-                            [[FLYScribe sharedInstance] logEvent:@"client_error" section:[responseObject objectForKey:@"code"] component:[responseObject objectForKey:@"context"] element:[responseObject objectForKey:@"error"] action:[responseObject objectForKey:@"message"]];
-                        }
-                        
                         @weakify(self)
                         dispatch_group_async(self.completionGroup ?: http_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
                             @strongify(self)
