@@ -212,14 +212,14 @@ long myReadData(float **chdata, long numFrames, void *userData)
     NSMutableDictionary *dict = [NSMutableDictionary new];
     switch (value) {
         case FLYVoiceEffectLow1:{
-            [dict setObject:@(1.15) forKey:@"time"];
+            [dict setObject:@(1) forKey:@"time"];
             [dict setObject:@(2) forKey:@"pitch"];
             [dict setObject:@(0) forKey:@"formant"];
             break;
         }
         case FLYVoiceEffectLow2: {
             [dict setObject:@(1) forKey:@"time"];
-            [dict setObject:@(3) forKey:@"pitch"];
+            [dict setObject:@(1.5) forKey:@"pitch"];
             [dict setObject:@(0) forKey:@"formant"];
             break;
         }
