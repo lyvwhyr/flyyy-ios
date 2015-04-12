@@ -595,7 +595,7 @@
 
 -(void)updateViewConstraints
 {
-    CGFloat userActionOffset = -50;
+    CGFloat userActionOffset = -60;
     CGFloat filterViewTopOffset = 20;
     
     if ([SDiPhoneVersion deviceVersion] == iPhone6Plus) {

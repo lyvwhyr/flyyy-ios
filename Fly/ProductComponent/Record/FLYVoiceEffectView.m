@@ -11,16 +11,16 @@
 #import "UIFont+FLYAddition.h"
 #import "FLYFileManager.h"
 
+#define kMeTopPadding 12
+
 @interface FLYVoiceEffectView()
 
 @property (nonatomic) UILabel *voiceEffectTitleLabel;
-@property (nonatomic) UIButton *meButton;
 @property (nonatomic) UILabel *meLabel;
-@property (nonatomic) UIButton *disguseButton;
-@property (nonatomic) UILabel *disguseLabel;
 
 @property (nonatomic) FLYVoiceFilterEffect selectedEffect;
 
+@property (nonatomic) UIImageView *sliderBackgroundView;
 @property (nonatomic) UISlider *slider;
 @property (nonatomic) UILabel *lowLabel;
 @property (nonatomic) UILabel *highLabel;
@@ -44,6 +44,13 @@
         _voiceEffectTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_voiceEffectTitleLabel];
         
+        _meLabel = [UILabel new];
+        _meLabel.font = [UIFont flyFontWithSize:11];
+        _meLabel.textColor = [UIColor flyBlue];
+        _meLabel.text = LOC(@"FLYRecordingMe");
+        _meLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_meLabel];
+        
         _lowLabel = [UILabel new];
         _lowLabel.font = [UIFont flyFontWithSize:13];
         _lowLabel.textColor = [UIColor flyBlue];
@@ -61,8 +68,8 @@
         _slider= [UISlider new];
         _slider.translatesAutoresizingMaskIntoConstraints = NO;
         
-        UIImage *minImage = [UIImage imageNamed:@"icon_slider_line"];
-        UIImage *maxImage = [UIImage imageNamed:@"icon_slider_line"];
+        UIImage *minImage = [UIImage imageNamed:@"icon_record_slider"];
+        UIImage *maxImage = [UIImage imageNamed:@"icon_record_slider"];
         UIImage *tumbImage= [UIImage imageNamed:@"icon_slider_touch_selected"];
         [_slider setMinimumTrackImage:minImage forState:UIControlStateNormal];
         [_slider setMaximumTrackImage:maxImage forState:UIControlStateNormal];
@@ -73,6 +80,10 @@
         _slider.minimumValue = 0;
         _slider.value = 2;
         [self addSubview:_slider];
+        
+        _sliderBackgroundView = [UIImageView new];
+        _sliderBackgroundView.image = [UIImage imageNamed:@"slider_template"];
+        [self insertSubview:_sliderBackgroundView belowSubview:self.slider];
         
         _currentlyProcessingEffect = FLYVoiceEffectMe;
         _alreadyProcessedEffects = [NSMutableArray new];
@@ -115,10 +126,15 @@
         make.centerX.equalTo(self);
     }];
     
+    [self.meLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.voiceEffectTitleLabel);
+        make.top.equalTo(self.voiceEffectTitleLabel.mas_bottom).offset(kMeTopPadding);
+    }];
+    
     [self.lowLabel sizeToFit];
     [self.lowLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self).offset(10);
-        make.top.equalTo(self.voiceEffectTitleLabel.mas_bottom).offset(40);
+        make.top.equalTo(self.meLabel.mas_bottom).offset(20);
         make.width.equalTo(@(CGRectGetWidth(self.lowLabel.bounds)));
     }];
     
@@ -129,51 +145,19 @@
         make.width.equalTo(@(CGRectGetWidth(self.highLabel.bounds)));
     }];
     
-    [self.slider mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.sliderBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.lowLabel);
-        make.leading.equalTo(self.lowLabel.mas_trailing).offset(5);
-        make.trailing.equalTo(self.highLabel.mas_leading).offset(-5);
+        make.leading.equalTo(self.lowLabel.mas_trailing).offset(10);
+        make.trailing.equalTo(self.highLabel.mas_leading).offset(-10);
+    }];
+    
+    [self.slider mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.sliderBackgroundView);
+        make.leading.equalTo(self.sliderBackgroundView.mas_leading).offset(5);
+        make.trailing.equalTo(self.sliderBackgroundView.mas_trailing).offset(-5);
     }];
     
     [super updateConstraints];
-}
-
-#pragma mark - button tap
-
-- (void)_meButtonTapped
-{
-    if (self.selectedEffect == FLYVoiceEffectMe) {
-        return;
-    }
-
-    // deselect disguseButton
-    [self.disguseButton setImage:[UIImage imageNamed:@"icon_record_unselect"] forState:UIControlStateNormal];
-    self.disguseLabel.textColor = [UIColor flyBlue];
-
-    // select me
-    self.selectedEffect = FLYVoiceEffectMe;
-    [self.meButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateNormal];
-    self.meLabel.textColor = [UIColor flyGreen];
-    
-    [self.delegate voiceEffectTapped:FLYVoiceEffectMe];
-}
-
-- (void)_disguseButtonTapped
-{
-//    if (self.selectedEffect == FLYVoiceEffectDisguise) {
-//        return;
-//    }
-    
-    // deselect disguseButton
-    [self.meButton setImage:[UIImage imageNamed:@"icon_record_unselect"] forState:UIControlStateNormal];
-    self.meLabel.textColor = [UIColor flyBlue];
-    
-    // select me
-//    self.selectedEffect = FLYVoiceEffectDisguise;
-    [self.disguseButton setImage:[UIImage imageNamed:@"icon_record_selected"] forState:UIControlStateNormal];
-    self.disguseLabel.textColor = [UIColor flyGreen];
-    
-//    [self.delegate voiceEffectTapped:FLYVoiceEffectDisguise];
 }
 
 

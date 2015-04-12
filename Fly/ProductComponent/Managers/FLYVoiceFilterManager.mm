@@ -225,13 +225,13 @@ long myReadData(float **chdata, long numFrames, void *userData)
         }
         case FLYVoiceEffectHigh1: {
             [dict setObject:@(1) forKey:@"time"];
-            [dict setObject:@(-1) forKey:@"pitch"];
+            [dict setObject:@(-2) forKey:@"pitch"];
             [dict setObject:@(0) forKey:@"formant"];
             break;
         }
         case FLYVoiceEffectHigh2: {
             [dict setObject:@(1) forKey:@"time"];
-            [dict setObject:@(-2) forKey:@"pitch"];
+            [dict setObject:@(-1) forKey:@"pitch"];
             [dict setObject:@(0) forKey:@"formant"];
             break;
         }

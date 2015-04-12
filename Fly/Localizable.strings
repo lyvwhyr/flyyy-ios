@@ -100,7 +100,7 @@
 "FLYTopicDetailDeletePostAlertTitle" = "Delete post";
 "FLYTopicDetailDeletePostAlertMessage" = "Are you sure you want to delete this post?";
 "FLYTopicDetailDeletedHUD" = "Deleted";
-"FLYTopicDetailReplySectionHeaderText" = "Replies:";
+"FLYTopicDetailReplySectionHeaderText" = "Comments:";
 
 // topic detail onboarding
 "FLYTopicDetailOnboardingHintText" = "Tap play all to hear all responses or comment to leave your own.";

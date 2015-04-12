@@ -299,6 +299,7 @@
     
     if (topic.group.groupName) {
         [self.groupNameButton setTitle:[NSString stringWithFormat:@"#%@", topic.group.groupName] forState:UIControlStateNormal];
+        self.groupNameButton.userInteractionEnabled = YES;
     } else {
         [self.groupNameButton setTitle:@"" forState:UIControlStateNormal];
         self.groupNameButton.userInteractionEnabled = NO;
