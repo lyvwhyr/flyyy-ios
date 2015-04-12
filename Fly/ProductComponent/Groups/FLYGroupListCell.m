@@ -51,7 +51,11 @@
 
 - (void)setGroupName:(NSString *)groupName
 {
-    self.groupNameLabel.text = [NSString stringWithFormat:@"#%@", groupName];
+    if (self.isFirst) {
+        self.groupNameLabel.text = groupName;
+    } else {
+        self.groupNameLabel.text = [NSString stringWithFormat:@"#%@", groupName];
+    }
 }
 
 - (void)updateConstraints

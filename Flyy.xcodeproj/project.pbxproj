@@ -401,7 +401,6 @@
 		A6A4EFB31A2BE71000FD4066 /* FLYGroupListSuggestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFB21A2BE71000FD4066 /* FLYGroupListSuggestTableViewCell.m */; };
 		A6A4EFB51A2BE99300FD4066 /* icon_suggest_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A4EFB41A2BE99300FD4066 /* icon_suggest_group@3x.png */; };
 		A6A4EFBE1A2C22EF00FD4066 /* FLYGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFBD1A2C22EF00FD4066 /* FLYGroupViewController.m */; };
-		A6A4EFC21A2C634900FD4066 /* FLYSingleGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFC01A2C634900FD4066 /* FLYSingleGroupViewController.m */; };
 		A6A57A901A33B91700610785 /* UIView+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57A8F1A33B91700610785 /* UIView+FLYAddition.m */; };
 		A6A57A921A33C1E100610785 /* icon_join_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A57A911A33C1E100610785 /* icon_join_group@3x.png */; };
 		A6A57A941A33C6DE00610785 /* icon_group_checkmark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A57A931A33C6DE00610785 /* icon_group_checkmark@3x.png */; };
@@ -1106,8 +1105,6 @@
 		A6A4EFB41A2BE99300FD4066 /* icon_suggest_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_suggest_group@3x.png"; sourceTree = "<group>"; };
 		A6A4EFBC1A2C22EF00FD4066 /* FLYGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupViewController.h; sourceTree = "<group>"; };
 		A6A4EFBD1A2C22EF00FD4066 /* FLYGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupViewController.m; sourceTree = "<group>"; };
-		A6A4EFBF1A2C634900FD4066 /* FLYSingleGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSingleGroupViewController.h; sourceTree = "<group>"; };
-		A6A4EFC01A2C634900FD4066 /* FLYSingleGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSingleGroupViewController.m; sourceTree = "<group>"; };
 		A6A57A8E1A33B91700610785 /* UIView+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FLYAddition.h"; sourceTree = "<group>"; };
 		A6A57A8F1A33B91700610785 /* UIView+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FLYAddition.m"; sourceTree = "<group>"; };
 		A6A57A911A33C1E100610785 /* icon_join_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_join_group@3x.png"; sourceTree = "<group>"; };
@@ -2533,8 +2530,6 @@
 			children = (
 				A6A4EFBC1A2C22EF00FD4066 /* FLYGroupViewController.h */,
 				A6A4EFBD1A2C22EF00FD4066 /* FLYGroupViewController.m */,
-				A6A4EFBF1A2C634900FD4066 /* FLYSingleGroupViewController.h */,
-				A6A4EFC01A2C634900FD4066 /* FLYSingleGroupViewController.m */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -3091,7 +3086,6 @@
 				A643AEE91AA9539E00BF4E0F /* NIDebuggingTools.m in Sources */,
 				A669FB661ABFE5B600A96D24 /* FLYUsernameService.m in Sources */,
 				A6048AD21A8603EF00C67480 /* AFSecurityPolicy.m in Sources */,
-				A6A4EFC21A2C634900FD4066 /* FLYSingleGroupViewController.m in Sources */,
 				A6048ADC1A8603EF00C67480 /* UIButton+AFNetworking.m in Sources */,
 				A648C0E31A19AD4A00FF1744 /* MASCompositeConstraint.m in Sources */,
 				A643AEF81AA9539E00BF4E0F /* NIState.m in Sources */,

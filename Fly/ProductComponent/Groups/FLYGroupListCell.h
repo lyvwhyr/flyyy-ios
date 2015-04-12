@@ -15,6 +15,7 @@
 @property (nonatomic) UILabel *groupNameLabel;
 @property (nonatomic) UIButton *checkButton;
 @property (nonatomic) UIView *separator;
+@property (nonatomic) BOOL isFirst;
 
 - (void)selectCell;
 

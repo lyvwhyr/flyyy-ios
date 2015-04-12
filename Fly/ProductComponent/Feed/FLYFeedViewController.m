@@ -10,7 +10,6 @@
 #import "FLYFeedViewController.h"
 #import "FLYFeedTopicTableViewCell.h"
 #import "FLYFilterHomeFeedSelectorViewController.h"
-#import "FLYSingleGroupViewController.h"
 #import "FLYInlineReplyView.h"
 #import "FLYTopicDetailViewController.h"
 #import "FLYBarButtonItem.h"

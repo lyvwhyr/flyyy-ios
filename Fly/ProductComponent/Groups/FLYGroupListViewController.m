@@ -13,7 +13,6 @@
 #import "UIColor+FLYAddition.h"
 #import "JGProgressHUD.h"
 #import "JGProgressHUDSuccessIndicatorView.h"
-#import "FLYSingleGroupViewController.h"
 #import "FLYMainViewController.h"
 #import "FLYFeedViewController.h"
 #import "FLYGroupViewController.h"
@@ -114,6 +113,7 @@
         cell = [[FLYGroupListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         FLYGroupListCell *chooseGroupCell = (FLYGroupListCell *)cell;
         [chooseGroupCell.checkButton setImage:[UIImage imageNamed:@"icon_suggest_group"] forState:UIControlStateNormal];
+        chooseGroupCell.isFirst = YES;
         chooseGroupCell.groupName = LOC(@"FLYSuggestATag");
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
