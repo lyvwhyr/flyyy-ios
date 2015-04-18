@@ -113,7 +113,7 @@
     void (^retryBlock)(AFHTTPRequestOperation *, NSError *) = ^(id responseObj, NSError *error) {
         self.responseTimestamp = [NSDate date];
         self.lastResponseInterval = [self.responseTimestamp timeIntervalSinceDate:self.requestTimestamp];
-        if (responseObj && [[responseObj objectForKey:@"code"] integerValue] >= kInternalServerError) {
+        if (responseObj && [responseObj respondsToSelector:@selector(objectForKey:)] && [[responseObj objectForKey:@"code"] integerValue] >= kInternalServerError) {
             if (self.tries <= kMaxRetryTimes) {
                 AFHTTPRequestOperation *retryOperation = [self HTTPRequestOperationWithRequest:request
                                                                                        success:success
