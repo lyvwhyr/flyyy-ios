@@ -45,6 +45,7 @@
         _actionBlock(self);
     }
 }
+
 @end
 
 
@@ -56,7 +57,7 @@
     //12 * 21
     //Make it (8, 6), (31,30)
     UIImage *image = [UIImage imageNamed:@"icon_back_record"];
-    CGFloat x = (left ? -1 : 1) * 16;
+    CGFloat x = (left ? -1 : 1) * 20;
     backButton.frame = CGRectMake(x, 0, 52, kNavBarHeight);
     [backButton setImage:image forState:UIControlStateNormal];
     
