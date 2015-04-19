@@ -229,6 +229,8 @@
 {
     FLYCatalogBarButtonItem *leftBarItem = [FLYCatalogBarButtonItem barButtonItem:YES];
     leftBarItem.actionBlock = ^(FLYBarButtonItem *item) {
+        [[FLYScribe sharedInstance] logEvent:@"nav_catelog" section:@"feed" component:nil element:nil action:@"click"];
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:kHideRecordIconNotification object:self];
         self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
         FLYMeViewController *vc = [FLYMeViewController new];

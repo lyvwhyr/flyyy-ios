@@ -79,6 +79,7 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == FLYSettingsLoveFlyy) {
+        [[FLYScribe sharedInstance] logEvent:@"rate_us" section:nil component:nil element:nil action:@"impression"];
         [FLYUtilities gotoReviews];
     } else if (indexPath.section == FLYSettingsSupport) {
         if (indexPath.row == 0) {
@@ -100,6 +101,7 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
                             contentView:nil
                              completion:^(BOOL cancelled, NSInteger buttonIndex) {
                                  if (buttonIndex == 1) {
+                                     [[FLYScribe sharedInstance] logEvent:@"log_out" section:nil component:nil element:nil action:@"success"];
                                      [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationLogout object:self userInfo:@{kFromViewControllerKey:self}];
                                  }
                              }];
@@ -200,6 +202,7 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
 - (void)_sendFeedback
 {
     if ([MFMailComposeViewController canSendMail]) {
+        [[FLYScribe sharedInstance] logEvent:@"send_feedback" section:nil component:nil element:nil action:@"impression"];
         MFMailComposeViewController *vc = [MFMailComposeViewController new];
         [vc setToRecipients:@[@"support@flyyapp.com"]];
         [vc setSubject:LOC(@"FLYFeedbackMailTitle")];
@@ -207,24 +210,28 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
         vc.mailComposeDelegate = self;
         [self presentViewController:vc animated:YES completion:nil];
     } else {
+        [[FLYScribe sharedInstance] logEvent:@"send_feedback" section:nil component:nil element:nil action:@"not_available"];
         [PXAlertView showAlertWithTitle:LOC(@"FLYFeedbackMailNotSetup")];
     }
 }
 
 - (void)_viewRules
 {
+    [[FLYScribe sharedInstance] logEvent:@"view_rule" section:nil component:nil element:nil action:@"impression"];
     SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:kRulesURL];
     [self.navigationController pushViewController:webViewController animated:YES];
 }
 
 - (void)_viewTerms
 {
+    [[FLYScribe sharedInstance] logEvent:@"view_term" section:nil component:nil element:nil action:@"impression"];
     SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:kTermsOfServiceURL];
     [self.navigationController pushViewController:webViewController animated:YES];
 }
 
 - (void)_viewPrivacyPolicy
 {
+    [[FLYScribe sharedInstance] logEvent:@"view_privacy" section:nil component:nil element:nil action:@"impression"];
     SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:kPrivacyPolicyURL];
     [self.navigationController pushViewController:webViewController animated:YES];
 }

@@ -9,6 +9,7 @@
 #import "FLYScribe.h"
 #import "NSMutableDictionary+FLYAddition.h"
 #import "FLYUser.h"
+#import "NSDictionary+FLYAddition.h"
 
 @interface FLYScribe()
 
@@ -36,6 +37,11 @@
 
 - (void)logEvent:(NSString *)event section:(NSString *)section component:(NSString *)component element:(NSString *)element action:(NSString *)action
 {
+    NSInteger sample_rate = [[FLYAppStateManager sharedInstance].configs fly_integerForKey:@"sample_rate" defaultValue:10];
+    if ((arc4random_uniform((int)sample_rate) != 0)) {
+        return;
+    }
+    
     NSMutableDictionary *properties = [NSMutableDictionary new];
     [properties setObjectOrEmptyStr:section forKey:@"section"];
     [properties setObjectOrEmptyStr:component forKey:@"component"];

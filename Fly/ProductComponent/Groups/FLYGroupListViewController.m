@@ -136,16 +136,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSString *groupName = ((FLYGroup *)[self.groups objectAtIndex:indexPath.row]).groupName;
+    [[FLYScribe sharedInstance] logEvent:@"group_list" section:groupName  component:nil element:nil action:@"click"];
+    
     if (kSuggestGroupRow == indexPath.row) {
         SCLAlertView *alert = [[SCLAlertView alloc] init];
         
         UITextField *textField = [alert addTextField:LOC(@"FLYEnterTagNamePopupHintText")];
         
         [alert addButton:@"Suggest" actionBlock:^(void) {
-            NSDictionary *properties = @{kSuggestTagName:textField.text};
-            [[Mixpanel sharedInstance]  track:kTrackingEventClientSuggestTag properties:properties];
-            
-            
             JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
             HUD.textLabel.text = @"Thank you";
             HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];

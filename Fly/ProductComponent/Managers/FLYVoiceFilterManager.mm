@@ -58,7 +58,7 @@ double gExecTimeTotal = 0.;
         return;
     }
     
-    int numChannels = (int)ZtxValidateNumChannels(2);		// ZtxLE allows mono only
+    int numChannels = (int)ZtxValidateNumChannels(1);		// ZtxLE allows mono only
     float sampleRate = 44100.;
     
     // open input file

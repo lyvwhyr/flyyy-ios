@@ -276,7 +276,6 @@
 #pragma mark - User interactions
 - (void)_playButtonTapped
 {
-    [[FLYScribe sharedInstance] logEvent:@"topic_detail" section:@"reply_cell" component:self.reply.replyId element:@"play_button" action:@"click"];
         [self.delegate playButtonTapped:self withReply:self.reply withIndexPath:self.indexPath];
 }
 
@@ -285,6 +284,8 @@
     if ([FLYUtilities isInvalidUser]) {
         return;
     }
+    
+    [[FLYScribe sharedInstance] logEvent:@"like" section:@"reply" component:nil element:nil action:nil];
     
     [self.reply like];
 }
@@ -315,19 +316,23 @@
             break;
         }
         case FLYPlayStatePlaying: {
+            [[FLYScribe sharedInstance] logEvent:@"play" section:@"reply" component:nil element:nil action:nil];
             [self.playButton setImage:[UIImage imageNamed:@"icon_reply_play_pause"] forState:UIControlStateNormal];
             [self progressView];
             break;
         }
         case FLYPlayStatePaused: {
+            [[FLYScribe sharedInstance] logEvent:@"pause" section:@"reply" component:nil element:nil action:nil];
             [self.playButton setImage:[UIImage imageNamed:@"icon_reply_play_play"] forState:UIControlStateNormal];
             break;
         }
         case FLYPlayStateResume: {
+            [[FLYScribe sharedInstance] logEvent:@"resume" section:@"reply" component:nil element:nil action:nil];
             [self.playButton setImage:[UIImage imageNamed:@"icon_reply_play_pause"] forState:UIControlStateNormal];
             break;
         }
         case FLYPlayStateFinished: {
+            [[FLYScribe sharedInstance] logEvent:@"finished_listening" section:@"reply" component:nil element:nil action:nil];
             [self.playButton setImage:[UIImage imageNamed:@"icon_reply_play_play"] forState:UIControlStateNormal];
             break;
         }

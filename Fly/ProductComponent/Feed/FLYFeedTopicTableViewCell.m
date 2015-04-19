@@ -352,19 +352,23 @@
             break;
         }
         case FLYPlayStatePlaying: {
+            [[FLYScribe sharedInstance] logEvent:@"play" section:@"topic" component:nil element:nil action:nil];
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_pause"] forState:UIControlStateNormal];
             [self progressView];
             break;
         }
         case FLYPlayStatePaused: {
+            [[FLYScribe sharedInstance] logEvent:@"pause" section:@"topic" component:nil element:nil action:nil];
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] forState:UIControlStateNormal];
             break;
         }
         case FLYPlayStateResume: {
+            [[FLYScribe sharedInstance] logEvent:@"resume" section:@"topic" component:nil element:nil action:nil];
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_pause"] forState:UIControlStateNormal];
             break;
         }
         case FLYPlayStateFinished: {
+            [[FLYScribe sharedInstance] logEvent:@"finish_listening" section:@"topic" component:nil element:nil action:nil];
             [self.playButton setImage:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] forState:UIControlStateNormal];
             break;
         }
@@ -388,6 +392,8 @@
         return;
     }
     
+    [[FLYScribe sharedInstance] logEvent:@"like" section:@"topic" component:nil element:nil action:nil];
+    
     [self.topic like];
 }
 
@@ -404,6 +410,7 @@
 
 - (void)_groupNameTapped
 {
+    [[FLYScribe sharedInstance] logEvent:@"feed" section:@"group_name" component:nil element:nil action:@"click"];
     [self.delegate groupNameTapped:self indexPath:self.indexPath];
 }
 

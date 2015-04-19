@@ -46,6 +46,8 @@
     UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
     self.title = [NSString stringWithFormat:@"#%@", self.group.groupName];
+    
+    [[FLYScribe sharedInstance] logEvent:@"group_page" section:nil component:nil element:nil action:@"impression"];
 }
 
 - (void)viewWillAppear:(BOOL)animated

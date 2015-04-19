@@ -151,6 +151,8 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     self.tabbar.delegate = self;
     [self.view addSubview:self.tabbar];
     
+    [[FLYScribe sharedInstance] logEvent:@"topic_detail" section:nil component:nil element:nil action:@"impression"];
+    
     [self _initService];
 }
 
@@ -737,6 +739,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 
 - (void)_reportReply:(FLYReply *)reply
 {
+    [[FLYScribe sharedInstance] logEvent:@"report" section:@"reply" component:nil element:nil action:nil];
     [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailReportReplyTitle")
                             message:LOC(@"FLYTopicDetailReportReplyMessage")
                         cancelTitle:@"No"
@@ -751,6 +754,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 
 - (void)_reportPost
 {
+    [[FLYScribe sharedInstance] logEvent:@"report" section:@"post" component:nil element:nil action:nil];
     [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailReportPostTitle")
                             message:LOC(@"FLYTopicDetailReportPostMessage")
                         cancelTitle:@"No"
@@ -766,6 +770,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 
 - (void)_deletePost
 {
+    [[FLYScribe sharedInstance] logEvent:@"delete" section:@"post" component:nil element:nil action:nil];
     @weakify(self)
     [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailDeletePostAlertTitle")
                             message:LOC(@"FLYTopicDetailDeletePostAlertMessage")
@@ -788,6 +793,8 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 
 - (void)_deleteReply:(FLYReply *)reply
 {
+    [[FLYScribe sharedInstance] logEvent:@"delete" section:@"reply" component:nil element:nil action:nil];
+    
     @weakify(self)
     [PXAlertView showAlertWithTitle:LOC(@"FLYTopicDetailActionsheetDeleteReply")
                             message:LOC(@"FLYTopicDetailDeleteReplyMessage")

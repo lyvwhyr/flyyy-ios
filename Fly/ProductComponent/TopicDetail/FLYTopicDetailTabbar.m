@@ -91,11 +91,13 @@
 
 - (void)_commentButtonTapped
 {
+    [[FLYScribe sharedInstance] logEvent:@"comment" section:@"topic_detail" component:nil element:nil action:@"click"];
     [self.delegate commentButtonOnTabbarTapped:self.commentButton];
 }
 
 - (void)_playAllButtonTapped
 {
+    [[FLYScribe sharedInstance] logEvent:@"playall" section:@"topic_detail" component:nil element:nil action:@"click"];
     [self.delegate playAllButtonOnTabbarTapped:self.playAllButton];
 }
 

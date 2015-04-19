@@ -113,10 +113,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    [[FLYScribe sharedInstance] logEvent:@"me_page" section:[NSString stringWithFormat:@"%li", (long)indexPath.row] component:nil element:nil action:@"click"];
+    
     switch (indexPath.row) {
         case FLYEverythingElseCellTypePosts: {
             FLYMyTopicsViewController *myPostsVC = [FLYMyTopicsViewController new];
-            
             self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
             [self.flyNavigationController pushViewController:myPostsVC animated:YES];
             break;
