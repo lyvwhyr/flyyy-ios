@@ -85,6 +85,8 @@
     
     NSString *phoneNumber = [FLYAppStateManager sharedInstance].phoneNumber;
     self.phoneService = [FLYPhoneService phoneServiceWithPhoneNumber:phoneNumber];
+    
+    [[FLYScribe sharedInstance] logEvent:@"signup" section:@"enter_confirmation" component:nil element:nil action:nil];
 }
 
 - (void)_addConstraints

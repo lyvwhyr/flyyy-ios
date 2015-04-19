@@ -110,12 +110,11 @@ static id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingO
 {
     BOOL responseIsValid = YES;
     NSError *validationError = nil;
-
-    NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-    
     if (response && [response isKindOfClass:[NSHTTPURLResponse class]]) {
         if (self.acceptableContentTypes && ![self.acceptableContentTypes containsObject:[response MIMEType]]) {
             NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            UALog(@"invalid content type %@", dataStr);
+            
             NSDictionary *properties = @{kTrackingPropertyStatusCode:@(response.statusCode),  kTrackingPropertyErrorMessage:[NSString stringWithFormat:@"unacceptable content-type %@", [response MIMEType]], kTrackingPropertyServerResponseBody:dataStr};
             [[Mixpanel sharedInstance]  track:kTrackingEventClientError properties:properties];
             

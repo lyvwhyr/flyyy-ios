@@ -79,6 +79,8 @@
     [self _addConstraints];
     
     self.usernameService = [FLYUsernameService usernameService];
+    
+    [[FLYScribe sharedInstance] logEvent:@"signup" section:@"pick_username" component:nil element:nil action:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated

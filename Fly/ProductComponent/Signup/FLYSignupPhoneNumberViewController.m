@@ -145,6 +145,8 @@
     [self.view addSubview:self.agreeTermsOfServiceLabel];
     
     [self _addConstranits];
+    
+    [[FLYScribe sharedInstance] logEvent:@"signup" section:@"enter_phone" component:nil element:nil action:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -221,6 +221,8 @@
 
 - (void)_forgetPasswordButtonTapped
 {
+    [[FLYScribe sharedInstance] logEvent:@"login_page" section:@"forget_password" component:nil element:nil action:@"click"];
+    
     FLYPasswordResetPhoneNumberViewController *vc = [FLYPasswordResetPhoneNumberViewController new];
     [self.navigationController pushViewController:vc animated:NO];
     
@@ -245,6 +247,8 @@
 
 - (void)_loginButtonTapped
 {
+    [[FLYScribe sharedInstance] logEvent:@"login_page" section:@"login" component:nil element:nil action:@"click"];
+    
     [self.loginButton setTitle:@"Logging In" forState:UIControlStateDisabled];
     self.loginButton.enabled = NO;
     self.loginButton.loading = YES;

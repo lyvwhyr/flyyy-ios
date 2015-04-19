@@ -96,6 +96,8 @@
     [self.signupButton setTitle:LOC(@"FLYSignupButtonText") forState:UIControlStateNormal];
     [self.view addSubview:self.signupButton];
     
+    [[FLYScribe sharedInstance] logEvent:@"login_signup_page" section:nil component:nil element:nil action:@"impression"];
+    
     [self _addViewConstraints];
 }
 

@@ -99,8 +99,7 @@
     
     [self _addConstraints];
     
-    
-
+    [[FLYScribe sharedInstance] logEvent:@"signup" section:@"pick_password" component:nil element:nil action:nil];
 }
 
 - (void)_addConstraints
@@ -149,6 +148,8 @@
 - (void)_createUserService
 {
     FLYCreateUserSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        [[FLYScribe sharedInstance] logEvent:@"signup" section:@"success" component:nil element:nil action:nil];
+        
         UALog(@"success");
         if (!responseObj) {
             UALog(@"responseObj is empty");
