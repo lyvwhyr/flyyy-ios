@@ -182,7 +182,7 @@
 "FLYFeedOnboardingComments" = "comments";
 "FLYFeedOnboardingUsername" = "user";
 "FLYFeedOnboardingGroupName" = "tag";
-"FLYFeedOnboardingVotes" = "votes";
+"FLYFeedOnboardingVotes" = "likes";
 "FLYFeedOnboardingTapContinue" = "Tap anywhere to continue";
 
 // tabbar onboarding

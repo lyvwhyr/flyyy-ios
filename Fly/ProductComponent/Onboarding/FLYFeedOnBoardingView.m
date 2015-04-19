@@ -194,12 +194,12 @@
     
     // play post button
     [self.playPostLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.cellToExplain.playButton).offset(10);
+        make.centerX.equalTo(self.cellToExplain.playButton).offset(15);
         make.bottom.equalTo(self.topBackgroundView.mas_bottom).offset(-12);
     }];
     
     [self.playPostArrow mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.cellToExplain.playButton);
+        make.centerX.equalTo(self.cellToExplain.playButton).offset(4);
         make.top.equalTo(self.playPostLabel.mas_bottom).offset(kLabelTitleSpacing);
         make.bottom.equalTo(self.cellToExplain.playButton.mas_top).offset(-kLabelTitleSpacing);
     }];
@@ -219,7 +219,7 @@
     
     // vote
     [self.votesLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.cellToExplain.likeButton);
+        make.centerX.equalTo(self.cellToExplain.likeButton).offset(-6);
         make.bottom.equalTo(self.topBackgroundView.mas_bottom).offset(-12);
     }];
     
@@ -231,12 +231,12 @@
     
     // user name
     [self.usernameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.cellToExplain.userNameLabel);
+        make.leading.equalTo(self.cellToExplain.userNameLabel).offset(2);
         make.top.equalTo(self.bottomBackgroundView.mas_top).offset(19);
     }];
     
     [self.usernameArrow mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.cellToExplain.userNameLabel);
+        make.centerX.equalTo(self.usernameLabel);
         make.top.equalTo(self.cellToExplain.userNameLabel.mas_bottom).offset(kLabelTitleSpacing);
         make.bottom.equalTo(self.usernameLabel.mas_top).offset(-kLabelTitleSpacing);
     }];
@@ -245,19 +245,19 @@
     if ([_cellToExplain.groupNameButton.titleLabel.text length] != 0) {
         [self.groupNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.cellToExplain.groupNameButton);
-            make.top.equalTo(self.bottomBackgroundView.mas_top).offset(7);
+            make.top.equalTo(self.bottomBackgroundView.mas_top).offset(40);
         }];
         
         [self.groupNameArrow mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.cellToExplain.groupNameButton);
-            make.height.equalTo(@(18));
+            make.height.equalTo(@(50));
             make.bottom.equalTo(self.groupNameLabel.mas_top).offset(-kLabelTitleSpacing);
         }];
     }
     
     // comment
     [self.commentsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.cellToExplain.commentButton).offset(-20);
+        make.centerX.equalTo(self.cellToExplain.commentButton).offset(-26);
         make.top.equalTo(self.bottomBackgroundView.mas_top).offset(19);
     }];
     
