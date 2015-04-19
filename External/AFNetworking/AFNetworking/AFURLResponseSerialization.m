@@ -115,7 +115,8 @@ static id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingO
             NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
             UALog(@"invalid content type %@", dataStr);
             
-            NSDictionary *properties = @{kTrackingPropertyStatusCode:@(response.statusCode),  kTrackingPropertyErrorMessage:[NSString stringWithFormat:@"unacceptable content-type %@", [response MIMEType]], kTrackingPropertyServerResponseBody:dataStr};
+            NSDictionary *properties = @{kTrackingPropertyStatusCode:@(response.statusCode),  kTrackingPropertyErrorMessage:[NSString stringWithFormat:@"unacceptable content-type %@ url: %@", [response MIMEType], [[response URL] absoluteString]],
+             kTrackingPropertyServerResponseBody:dataStr};
             [[Mixpanel sharedInstance]  track:kTrackingEventClientError properties:properties];
             
             if ([data length] > 0 && [response URL]) {
