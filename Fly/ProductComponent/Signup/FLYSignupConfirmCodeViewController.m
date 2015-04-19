@@ -111,7 +111,7 @@
     }];
     
     [self.verificationCodeField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.lockImageView.mas_trailing).offset(5);
+        make.leading.equalTo(self.lockImageView.mas_trailing).offset(10);
         make.trailing.equalTo(self.inputPhoneView);
         make.centerY.equalTo(self.inputPhoneView);
     }];

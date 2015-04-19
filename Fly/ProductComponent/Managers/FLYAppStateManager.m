@@ -89,6 +89,7 @@
     self.needRestartNavigationStackAfterLogin = YES;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults removeObjectForKey:kLoggedInUserNsUserDefaultKey];
+    [UICKeyChainStore removeItemForKey:kAuthTokenKey];
     
     UIViewController *fromVC = [notification.userInfo objectForKey:kFromViewControllerKey];
     FLYLoginSignupViewController *vc = [FLYLoginSignupViewController new];
