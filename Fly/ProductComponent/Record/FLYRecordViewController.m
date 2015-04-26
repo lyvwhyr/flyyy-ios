@@ -124,6 +124,7 @@
         [_alreadyProcessedEffects addObject:@(FLYVoiceEffectMe)];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_vioceFilterApplied:) name:kVoiceFilterApplied object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_applyVoiceFilterFailed:) name:kApplyVoiceFilterFailed object:nil];
     }
     return self;
 }
@@ -846,6 +847,13 @@
     [_loadingView stopAnimating];
     [_loadingView removeFromSuperview];
     _loadingView = nil;
+}
+
+- (void)_applyVoiceFilterFailed:(NSNotification *)notification
+{
+    NSString *path = [[FLYFileManager audioCacheDirectory] stringByAppendingPathComponent:kRecordingAudioFileName];
+    [FLYAppStateManager sharedInstance].recordingFilePath = path;
+    [FLYAppStateManager sharedInstance].recordingFilePathSelected = path;
 }
 
 #pragma mark - FLYRecordBottomBarDelegate

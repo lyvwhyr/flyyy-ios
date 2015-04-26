@@ -20,6 +20,7 @@
 
 // Apply voice filter
 #define kVoiceFilterApplied @"kVoiceFilterApplied"
+#define kApplyVoiceFilterFailed @"kApplyVoiceFilterFailed"
 
 #define kNotificationTopicLikeChanged @"kNotificationTopicLikeChanged"
 #define kNotificationReplyLikeChanged @"kNotificationReplyLikeChanged"

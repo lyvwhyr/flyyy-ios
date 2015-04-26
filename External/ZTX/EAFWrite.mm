@@ -278,6 +278,8 @@ AudioBufferList *AllocateAudioBufferList(UInt32 numChannels, UInt32 size)
 	
 	if(err != noErr)
 	{
+        [[NSNotificationCenter defaultCenter] postNotificationName:kApplyVoiceFilterFailed object:self userInfo:nil];
+        
 		char formatID[5];
 		*(UInt32 *)formatID = CFSwapInt32HostToBig(err);
 		formatID[4] = '\0';
@@ -321,6 +323,8 @@ AudioBufferList *AllocateAudioBufferList(UInt32 numChannels, UInt32 size)
 	
 	if(err != noErr)
 	{
+        [[NSNotificationCenter defaultCenter] postNotificationName:kApplyVoiceFilterFailed object:self userInfo:nil];
+        
 		char formatID[5];
 		*(UInt32 *)formatID = CFSwapInt32HostToBig(err);
 		formatID[4] = '\0';
