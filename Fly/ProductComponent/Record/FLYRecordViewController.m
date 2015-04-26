@@ -473,7 +473,7 @@
     self.recordBottomBar = [FLYRecordBottomBar new];
     [self.view addSubview:self.recordBottomBar];
     
-    if (iOSVersionGreaterThanOrEqualTo(@"8") && !self.filterView) {
+    if ([self _isVoiceFilterSupported] && iOSVersionGreaterThanOrEqualTo(@"8") && !self.filterView) {
         [self.filterView removeFromSuperview];
         self.filterView = nil;
         self.filterView = [FLYVoiceEffectView new];
@@ -484,6 +484,15 @@
     self.recordBottomBar.delegate = self;
     [self loadRightBarButton];
     [self updateViewConstraints];
+}
+
+- (BOOL)_isVoiceFilterSupported
+{
+    DeviceVersion deviceVersion = [SDiPhoneVersion deviceVersion];
+    if (deviceVersion == iPhone5S || deviceVersion == iPhone6 || deviceVersion == iPhone6Plus) {
+        return YES;
+    }
+    return NO;
 }
 
 - (void)_setupReadyToPlay
