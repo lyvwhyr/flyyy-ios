@@ -9,6 +9,7 @@
 #import "FLYOnboardingStartViewController.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYMainViewController.h"
+#import "SDiPhoneVersion.h"
 
 @interface FLYOnboardingStartViewController ()
 
@@ -27,7 +28,12 @@
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     
     self.imageView = [UIImageView new];
-    self.imageView.image = [UIImage imageNamed:@"icon_tutorial_start"];
+    
+    if ([SDiPhoneVersion deviceSize] == iPhone35inch) {
+        self.imageView.image = [UIImage imageNamed:@"icon_tutorial_start_iphone4"];
+    } else {
+         self.imageView.image = [UIImage imageNamed:@"icon_tutorial_start"];
+    }
     self.imageView.userInteractionEnabled = YES;
     
     [self.view addSubview:self.imageView];
