@@ -12,7 +12,7 @@
 
 + (instancetype)phoneServiceWithPhoneNumber:(NSString *)phoneNumber
 {
-    return [[FLYPhoneService alloc] initWithEndpoint:@"phones"];
+    return [[FLYPhoneService alloc] initWithEndpoint:EP_PHONE];
 }
 
 - (void)serviceSendCodeWithPhone:(NSString *)number isPasswordReset:(BOOL)isPasswordReset success:(FLYSendCodeSuccessBlock)successBlock error:(FLYSendCodeErrorBlock)errorBlock
@@ -29,7 +29,7 @@
 - (void)serviceVerifyCode:(NSString *)code phonehash:(NSString *)phoneHash phoneNumber:(NSString *)phoneNumber success:(FLYVerifyCodeSuccessBlock)successBlock error:(FLYVerifyCodeErrorBlock)errorBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *endpoint = [NSString stringWithFormat:@"%@/%@/verify", self.endpoint, phoneHash];
+    NSString *endpoint = [NSString stringWithFormat:EP_PHONE_VERIFY, phoneHash];
     NSDictionary *params = @{@"device_id":[FLYAppStateManager sharedInstance].deviceId, @"phone":phoneNumber, @"code":code};
     [manager GET:endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         successBlock(operation, responseObject);
@@ -37,8 +37,5 @@
         errorBlock(responseObj, error);
     }];
 }
-
-//curl -i -X GET -d "device_id=1234567" -d "phone=4153093144" "http://api-staging.flyyapp.com/v1/users/phones/2USV6T2f7GqD7b3L4-cYT8MSnwzjjr1MyoSSD9tFjpw=?device_id=1234567&code=793979"
-
 
 @end

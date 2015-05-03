@@ -16,7 +16,7 @@
     [[FLYAppStateManager sharedInstance] clearSignedMedia];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"media/sign" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObj) {
+    [manager GET:EP_MEDIA_SIGN parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObj) {
         if (successBlock) {
             if (responseObj) {
                 [FLYAppStateManager sharedInstance].signedURLString = [responseObj fly_stringForKey:@"url"];

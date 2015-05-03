@@ -12,7 +12,7 @@
 
 + (instancetype)configService
 {
-    return [[FLYConfigService alloc] initWithEndpoint:@"configs"];
+    return [[FLYConfigService alloc] initWithEndpoint:EP_CONFIG];
 }
 
 - (void)getConfigsWithSuccess:(FLYGetConfigsSuccessBlock)successBlock error:(FLYGetConfigsErrorBlock)errorBlock

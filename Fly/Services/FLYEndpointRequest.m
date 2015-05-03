@@ -19,12 +19,11 @@
 
 + (void)getGroupListService:(GroupListServiceResponseBlock)responseBlock
 {
-    NSString *baseURL = @"groups";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:baseURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:EP_GROUPS parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         responseBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        UALog(@"Post error %@", error);
+        UALog(@"Failed to get group list. error %@", error);
     }];
 }
 
@@ -32,7 +31,7 @@
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"device_id":deviceId, @"user_name":username};
-    [manager POST:@"users" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:EP_USERS parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         UALog(@"Post error %@", error);

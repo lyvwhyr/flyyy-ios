@@ -41,6 +41,7 @@
 #import "FLYAudioItem.h"
 #import "FLYDashTextView.h"
 #import "UIFont+FLYAddition.h"
+#import "FLYReplyService.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -337,28 +338,31 @@
 
 - (void)_postReplyServiceWithParams:(NSDictionary *)dict
 {
-    NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
-    NSString *baseURL =  [NSString stringWithFormat:@"replies?user_id=%@", userId];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:baseURL parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    FLYPostReplySuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
         if (self.progressHUD && self.progressHUD.visible) {
             [self.progressHUD dismiss];
         }
         
-        FLYReply *reply = [[FLYReply alloc] initWithDictionary:responseObject];
+        FLYReply *reply = [[FLYReply alloc] initWithDictionary:responseObj];
         NSDictionary *dict = @{kNewReplyKey:reply, kTopicOfNewReplyKey:self.topic};
         [self.topic incrementReplyCount:dict];
         
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         
         [self _enableUserInteractionsAfterAnimation];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+    };
+    
+    FLYPostReplyErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {
         [self _enableUserInteractionsAfterAnimation];
-        
-        [self.progressHUD dismiss];
+        if (self.progressHUD && self.progressHUD.visible) {
+            [self.progressHUD dismiss];
+        }
         [Dialog simpleToast:LOC(@"FLYGenericError")];
         UALog(@"Post error %@", error);
-    }];
+    };
+    
+    [FLYReplyService postReply:dict successBlock:successBlock errorBlock:errorBlock];
 }
 
 

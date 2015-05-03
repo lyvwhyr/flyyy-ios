@@ -8,19 +8,33 @@
 
 #import "FLYReplyService.h"
 #import "FLYReply.h"
+#import "FLYUser.h"
 
 @implementation FLYReplyService
 
 + (instancetype)replyServiceWithTopicId:(NSString *)topicId
 {
-    NSString *endpoint = [NSString stringWithFormat: @"topics/%@", topicId];
+    NSString *endpoint = [NSString stringWithFormat: EP_REPLY_WITH_TOPIC_ID, topicId];
     return [[FLYReplyService alloc] initWithEndpoint:endpoint];
 }
 
 + (instancetype)getMyReplies
 {
-    NSString *endpoint = @"replies/me";
+    NSString *endpoint = EP_REPLY_ME;
     return [[FLYReplyService alloc] initWithEndpoint:endpoint];
+}
+
++ (void)postReply:(NSDictionary *)params successBlock:(FLYPostReplySuccessBlock)successBlock errorBlock:(FLYPostReplyErrorBlock)errorBlock
+{
+    
+    NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *endpoint = [NSString stringWithFormat:EP_REPLY_POST, userId];
+    [manager POST:endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        successBlock(operation, responseObject);
+    } failure:^(id responseObj, NSError *error) {
+        errorBlock(responseObj, error);
+    }];
 }
 
 - (void)nextPageWithBefore:(NSString *)before after:(NSString *)after firstPage:(BOOL)first successBlock:(FLYReplyServiceGetRepliesSuccessBlock)successBlock errorBlock:(FLYReplyServiceGetRepliesErrorBlock)errorBlock
@@ -50,7 +64,7 @@
 + (void)likeReplyWithId:(NSString *)replyId liked:(BOOL)liked successBlock:(FLYReplyLikeSuccessBlock)successBlock errorBlock:(FLYReplyLikeErrorBlock)errorBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *endpoint = [NSString stringWithFormat:@"replies/%@/like", replyId];
+    NSString *endpoint = [NSString stringWithFormat:EP_REPLY_LIKE, replyId];
     
     if (!liked) {
         [manager PUT:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -74,7 +88,7 @@
 + (void)deleteReplyWithId:(NSString *)replyId successBlock:(FLYDeleteReplySuccessBlock)successBlock errorBlock:(FLYDeleteReplyErrorBlock)errorBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *endpoint = [NSString stringWithFormat:@"replies/%@", replyId];
+    NSString *endpoint = [NSString stringWithFormat:EP_REPLY_WITH_ID, replyId];
     [manager DELETE:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (successBlock) {
             successBlock(operation, responseObject);
@@ -89,7 +103,7 @@
 + (void)reportReplyWithId:(NSString *)replyId
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *endpoint = [NSString stringWithFormat:@"replies/%@/flag", replyId];
+    NSString *endpoint = [NSString stringWithFormat:EP_REPLY_FLAG, replyId];
     [manager POST:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
     } failure:^(id responseObj, NSError *error) {

@@ -12,7 +12,7 @@
 
 + (instancetype)usersService
 {
-    return [[FLYUsersService alloc] initWithEndpoint:@"users"];
+    return [[FLYUsersService alloc] initWithEndpoint:EP_USER];
 }
 
 - (void)createUserWithPhoneHash:(NSString *)phoneHash code:(NSString *)code userName:(NSString *)userName password:(NSString *)password success:(FLYCreateUserSuccessBlock)successBlock error:(FLYCreateuserErrorBlock)errorBlock
@@ -40,7 +40,7 @@
                              @"code":code,
                              @"password":password
                              };
-    [manager POST:@"users/reset" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:EP_USER_RESET parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         successBlock(operation, responseObject);
     } failure:^(id responseObj, NSError *error) {
         errorBlock(responseObj, error);
@@ -50,8 +50,7 @@
 - (void)getMeWithsuccessBlock:(FLYGetMeSuccessBlock)successBlock error:(FLYGetMeErrorBlock)errorBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *endpoint = [NSString stringWithFormat:@"%@/%@", self.endpoint, @"me"];
-    [manager GET:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:EP_USER_ME parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         successBlock(operation, responseObject);
     } failure:^(id responseObj, NSError *error) {
         errorBlock(responseObj, error);

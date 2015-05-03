@@ -12,7 +12,7 @@
 
 + (instancetype)loginService
 {
-    return [[FLYLoginService alloc] initWithEndpoint:@"login"];
+    return [[FLYLoginService alloc] initWithEndpoint:EP_LOGIN];
 }
 
 - (void)loginWithPhoneNumber:(NSString *)phoneNumber password:(NSString *)password success:(FLYLoginUserSuccessBlock)successBlock error:(FLYLoginUserErrorBlock)errorBlock

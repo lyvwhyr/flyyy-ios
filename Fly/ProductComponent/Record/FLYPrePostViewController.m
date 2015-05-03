@@ -27,6 +27,7 @@
 #import "FLYEndpointRequest.h"
 #import "FLYUser.h"
 #import "FLYMediaService.h"
+#import "FLYTopicService.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -291,7 +292,6 @@
 #pragma mark - Service
 - (void)_serviceCreateTopicWithParams:(NSDictionary *)dict
 {
-    NSString *userId = [dict objectForKey:@"user_id"];
     NSDictionary *initialParams = @{@"topic_title":self.topicTitle,
                              @"media_id":[FLYAppStateManager sharedInstance].mediaId,
                              @"extension":@"m4a",
@@ -303,19 +303,22 @@
         [params setObject:self.selectedGroup.groupId forKey:@"group_id"];
     }
     
-    NSString *baseURL =  [NSString stringWithFormat:@"topics?user_id=%@", userId];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:baseURL parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        FLYTopic *post = [[FLYTopic alloc] initWithDictory:responseObject];
+    FLYPostTopicSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        FLYTopic *post = [[FLYTopic alloc] initWithDictory:responseObj];
         NSDictionary *dict = @{kNewPostKey:post};
         [Dialog simpleToast:@"Posted"];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNewPostReceivedNotification object:self userInfo:dict];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         self.postButton.userInteractionEnabled = YES;
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    };
+    
+    FLYPostTopicErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {
         self.postButton.userInteractionEnabled = YES;
         UALog(@"Post error %@", error);
-    }];
+    };
+    
+    [FLYTopicService postTopic:params successBlock:successBlock errorBlock:errorBlock];
 }
 
 #pragma mark - Navigation bar and status barhow

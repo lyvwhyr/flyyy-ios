@@ -13,7 +13,7 @@
 + (void)logoutWithSuccess:(FLYLogoutSuccessBlock)successBlock error:(FLYLogoutErrorBlock)errorBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"logout" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager POST:EP_LOGOUT parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (successBlock) {
             successBlock(operation, responseObject);
         }

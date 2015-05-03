@@ -36,6 +36,7 @@
 "FLYLoginForgetPasswordText" = "Forgot password?";
 "FLYLoginWrongPassword" = "Incorrect phone number or password.";
 "FLYLoginPhoneNumberNotFound" = "The phone number you entered doesn't belong to any account";
+"FLYLoginInvalidToken" = "Invalid token";
 
 
 //sign up

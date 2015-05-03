@@ -14,8 +14,15 @@
 
 typedef void(^FLYReplyServiceGetRepliesSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
 typedef void(^FLYReplyServiceGetRepliesErrorBlock)(AFHTTPRequestOperation *operation, NSError *error);
+
+// like a reply
 typedef void(^FLYReplyLikeSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
 typedef void(^FLYReplyLikeErrorBlock)(id responseObj, NSError *error);
+
+
+// post reply
+typedef void(^FLYPostReplySuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
+typedef void(^FLYPostReplyErrorBlock)(id responseObj, NSError *error);
 
 // get my replies
 typedef void(^FLYGetMyRepliesSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
@@ -30,6 +37,7 @@ typedef void(^FLYDeleteReplyErrorBlock)(id responseObj, NSError *error);
 - (void)nextPageWithBefore:(NSString *)before after:(NSString *)after firstPage:(BOOL)first successBlock:(FLYReplyServiceGetRepliesSuccessBlock)successBlock errorBlock:(FLYReplyServiceGetRepliesErrorBlock)errorBlock;
 
 
++ (void)postReply:(NSDictionary *)params successBlock:(FLYPostReplySuccessBlock)successBlock errorBlock:(FLYPostReplyErrorBlock)errorBlock;
 + (instancetype)replyServiceWithTopicId:(NSString *)topicId;
 + (instancetype)getMyReplies;
 + (void)likeReplyWithId:(NSString *)replyId liked:(BOOL)liked successBlock:(FLYReplyLikeSuccessBlock)successBlock errorBlock:(FLYReplyLikeErrorBlock)errorBlock;

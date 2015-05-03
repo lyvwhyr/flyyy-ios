@@ -311,6 +311,8 @@
             [PXAlertView showAlertWithTitle:LOC(@"FLYLoginWrongPassword")];
         } else if (code == kLoginPhoneNotFound) {
             [PXAlertView showAlertWithTitle:LOC(@"FLYLoginPhoneNumberNotFound")];
+        } else if (code == kInvalidToken) {
+            [PXAlertView showAlertWithTitle:LOC(@"FLYLoginInvalidToken")];
         }
     };
     

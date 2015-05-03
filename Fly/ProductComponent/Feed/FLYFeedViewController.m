@@ -163,7 +163,7 @@
 {
     self.state = FLYViewControllerStateLoading;
     if (self.topicService == nil) {
-        self.topicService = [[FLYTopicService alloc] initWithEndpoint:@"topics"];
+        self.topicService = [[FLYTopicService alloc] initWithEndpoint:EP_TOPIC];
     }
     
     @weakify(self)
