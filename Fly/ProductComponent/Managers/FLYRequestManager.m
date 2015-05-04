@@ -73,6 +73,10 @@
     FLYGetConfigsSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
         if (responseObj && [responseObj isKindOfClass:[NSDictionary class]]) {
             [FLYAppStateManager sharedInstance].configs = responseObj;
+            
+            // store configs in cache
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:responseObj forKey:kConfigsUserDefaultKey];
         }
     };
     

@@ -9,7 +9,7 @@
 #define kStatusBarHeight    20
 #define kNavBarHeight       44
 #define kTabBarViewHeight   44
-#define kTopicPaginationCount 15
+#define kTopicPaginationCount 50
 #define KReplyPaginationCount 20
 #define kStreamingMinimialLen 5
 #define kUsernameMaxLen 20
@@ -64,6 +64,9 @@
 #define kFeedOnboardingKey @"kFeedOnboardingKey"
 #define kRecordingOnboardingKey @"kRecordingOnboardingKey"
 #define kTopicDetailOnboardingKey @"kTopicDetailOnboardingKey"
+
+// user default
+#define kConfigsUserDefaultKey @"kConfigsUserDefaultKey"
 
 #define kPrivacyPolicyURL   @"https://www.flyyapp.com/privacy.html"
 #define kTermsOfServiceURL  @"https://www.flyyapp.com/terms.html"

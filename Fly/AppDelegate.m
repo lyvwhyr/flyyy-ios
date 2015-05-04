@@ -32,6 +32,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Load configs from cache
+    NSUserDefaults *defalut = [NSUserDefaults standardUserDefaults];
+    if ([defalut objectForKey:kConfigsUserDefaultKey]) {
+        [FLYAppStateManager sharedInstance].configs = [defalut objectForKey:kConfigsUserDefaultKey];
+    }
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
     
