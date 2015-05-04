@@ -33,6 +33,7 @@
 #import "FLYFeedOnBoardingView.h"
 #import "SDiPhoneVersion.h"
 #import "FLYMainViewController.h"
+#import "NSDictionary+FLYAddition.h"
 
 #define kMaxWaitForTableLoad 3
 
@@ -45,6 +46,7 @@
 //used for pagination load more
 @property (nonatomic) NSString *beforeTimestamp;
 @property (nonatomic) NSInteger loadMoreCount;
+@property (nonatomic) NSString *cursor;
 
 @property (nonatomic) NSMutableArray *posts;
 @property (nonatomic) BOOL didSetConstraints;
@@ -146,32 +148,64 @@
 
 - (void)_initService
 {
+    if (self.topicService == nil) {
+        self.topicService = [[FLYTopicService alloc] initWithEndpoint:EP_TOPIC_V2];
+    }
+    
+    FLYServiceVersion version = [self.topicService serviceVersion:self.topicService.endpoint];
+    
     @weakify(self)
     [_feedTableView addPullToRefreshWithActionHandler:^{
         @strongify(self)
-        [self _load:YES before:nil];
+        if (version == FLYServiceVersionOne) {
+            [self _load:YES before:nil cursor:NO];
+        } else {
+            [self _load:YES before:nil cursor:YES];
+        }
     }];
     
     [self.feedTableView addInfiniteScrollingWithActionHandler:^{
         @strongify(self)
-        [self _load:NO before:self.beforeTimestamp];
+        if (version == FLYServiceVersionOne) {
+            [self _load:NO before:self.beforeTimestamp cursor:NO];
+        } else {
+            [self _load:NO before:self.cursor cursor:YES];
+        }
     }];
-    [self _load:YES before:nil];
+    
+    if (version == FLYServiceVersionOne) {
+        [self _load:YES before:nil cursor:NO];
+    } else {
+        [self _load:YES before:self.cursor cursor:YES];
+    }
 }
 
-- (void)_load:(BOOL)first before:(NSString *)before
+- (void)_load:(BOOL)first before:(NSString *)before cursor:(BOOL)useCursor
 {
-    self.state = FLYViewControllerStateLoading;
-    if (self.topicService == nil) {
-        self.topicService = [[FLYTopicService alloc] initWithEndpoint:EP_TOPIC];
+    // No more to fetch
+    if (!first && useCursor && !before) {
+        [self.feedTableView.pullToRefreshView stopAnimating];
+        [self.feedTableView.infiniteScrollingView stopAnimating];
+        return;
     }
     
+    self.state = FLYViewControllerStateLoading;
     @weakify(self)
-    FlYGetTopicsSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+    FLYGetTopicsSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
         @strongify(self)
         [self.feedTableView.pullToRefreshView stopAnimating];
         [self.feedTableView.infiniteScrollingView stopAnimating];
-        NSArray *topicsArray = responseObj;
+        
+        NSArray *topicsArray;
+        if (!useCursor) {
+            topicsArray = responseObj;
+        } else {
+            topicsArray = [responseObj fly_arrayForKey:@"topics"];
+            self.cursor = [responseObj fly_stringForKey:@"cursor"];
+            if (!self.cursor || [self.cursor isEqualToString:@""]) {
+                self.cursor = nil;
+            }
+        }
         
         if (topicsArray == nil ||  topicsArray.count == 0) {
             self.state = FLYViewControllerStateError;
@@ -199,9 +233,9 @@
         [self.feedTableView.infiniteScrollingView stopAnimating];
     };
     if (first || before) {
-        [self.topicService nextPageBefore:before firstPage:first successBlock:successBlock errorBlock:errorBlock];
+        [self.topicService nextPageBefore:before firstPage:first cursor:useCursor successBlock:successBlock errorBlock:errorBlock];
     } else {
-        [self.topicService nextPageBefore:before firstPage:YES successBlock:successBlock errorBlock:errorBlock];
+        [self.topicService nextPageBefore:before firstPage:YES cursor:useCursor successBlock:successBlock errorBlock:errorBlock];
         [self.feedTableView.pullToRefreshView stopAnimating];
         [self.feedTableView.infiniteScrollingView stopAnimating];
     }

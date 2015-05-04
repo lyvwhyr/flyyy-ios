@@ -8,7 +8,7 @@
 
 #import "FLYServiceBase.h"
 
-typedef void(^FlYGetTopicsSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
+typedef void(^FLYGetTopicsSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
 typedef void(^FLYGetTopicsErrorBlock)(id responseObj, NSError *error);
 typedef void(^FLYLikeSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
 typedef void(^FLYLikeErrorBlock)(id responseObj, NSError *error);
@@ -23,7 +23,6 @@ typedef void(^FLYPostTopicErrorBlock)(id responseObj, NSError *error);
 
 @interface FLYTopicService : FLYServiceBase
 
-+ (instancetype)topicService;
 + (instancetype)topicsServiceWithGroupIds:(NSString *)groupIds;
 + (instancetype)myTopics;
 
@@ -32,6 +31,6 @@ typedef void(^FLYPostTopicErrorBlock)(id responseObj, NSError *error);
 + (void)deleteTopicWithId:(NSString *)topicId successBlock:(FLYDeleteTopicSuccessBlock)successBlock errorBlock:(FLYDeleteTopicErrorBlock)errorBlock;
 + (void)reportTopicWithId:(NSString *)topicId;
 
-- (void)nextPageBefore:(NSString *)before firstPage:(BOOL)first successBlock:(FlYGetTopicsSuccessBlock)successBlock errorBlock:(FLYGetTopicsErrorBlock)errorBlock;
+- (void)nextPageBefore:(NSString *)before firstPage:(BOOL)first cursor:(BOOL)useCursor successBlock:(FLYGetTopicsSuccessBlock)successBlock errorBlock:(FLYGetTopicsErrorBlock)errorBlock;
 
 @end

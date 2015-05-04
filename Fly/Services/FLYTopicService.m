@@ -12,14 +12,9 @@
 
 @implementation FLYTopicService
 
-+ (instancetype)topicService
-{
-    return [[FLYTopicService alloc] initWithEndpoint:EP_TOPIC];
-}
-
 + (instancetype)topicsServiceWithGroupIds:(NSString *)groupIds
 {
-    return [FLYTopicService serviceWithEndpoint:[NSString stringWithFormat:EP_TOPIC_WITH_GROUP_ID, groupIds]];
+    return [FLYTopicService serviceWithEndpoint:[NSString stringWithFormat:EP_TOPIC_WITH_GROUP_ID_V2, groupIds]];
 }
 
 + (instancetype)myTopics
@@ -86,7 +81,7 @@
     }];
 }
 
-- (void)nextPageBefore:(NSString *)before firstPage:(BOOL)first successBlock:(FlYGetTopicsSuccessBlock)successBlock errorBlock:(FLYGetTopicsErrorBlock)errorBlock
+- (void)nextPageBefore:(NSString *)before firstPage:(BOOL)first cursor:(BOOL)useCursor successBlock:(FLYGetTopicsSuccessBlock)successBlock errorBlock:(FLYGetTopicsErrorBlock)errorBlock
 {
     NSInteger topicsPerPage = [[FLYAppStateManager sharedInstance].configs fly_integerForKey:@"topicsPerPage" defaultValue:kTopicPaginationCount];
     
@@ -94,7 +89,11 @@
     if (first) {
         params = @{@"limit":@(topicsPerPage)};
     } else {
-        params = @{@"limit":@(topicsPerPage), @"before":before};
+        if (useCursor) {
+            params = @{@"limit":@(topicsPerPage), @"cursor":before};
+        } else {
+            params = @{@"limit":@(topicsPerPage), @"before":before};
+        }
     }
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:self.endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {

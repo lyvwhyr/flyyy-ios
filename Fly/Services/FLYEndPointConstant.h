@@ -23,6 +23,10 @@
 #define EP_TOPIC_FLAG                               @"v1/topics/%@/flag"
 #define EP_TOPIC_POST                               @"v1/topics?user_id=%@"
 
+// topics v2 API
+#define EP_TOPIC_V2                                 @"v2/topics"
+#define EP_TOPIC_WITH_GROUP_ID_V2                   @"v2/topics?tag_id=%@"
+
 // reply
 #define EP_REPLY_WITH_TOPIC_ID                      @"v1/topics/%@"
 #define EP_REPLY_ME                                 @"v1/replies/me"

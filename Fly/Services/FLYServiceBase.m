@@ -23,4 +23,13 @@
     return self;
 }
 
+- (FLYServiceVersion)serviceVersion:(NSString *)endpoint
+{
+    if ([endpoint rangeOfString:@"v2"].location != NSNotFound) {
+        return FLYServiceVersionTwo;
+    } else {
+        return FLYServiceVersionOne;
+    }
+}
+
 @end
