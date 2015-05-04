@@ -23,6 +23,7 @@
 #import "AFHTTPRequestOperation.h"
 #import "NSDictionary+FLYAddition.h"
 #import "PXAlertView.h"
+#import "UICKeyChainStore.h"
 
 static dispatch_queue_t http_request_operation_processing_queue() {
     static dispatch_queue_t af_http_request_operation_processing_queue;
@@ -134,7 +135,7 @@ static dispatch_group_t http_request_operation_completion_group() {
                             @strongify(self)
                             //error handling
                             if (responseObject) {
-//                                [self _handleErrorWithResponseObject:responseObject];
+                                [self _handleErrorWithResponseObject:responseObject];
                             }
                             failure(responseObject, self.error);
                         });
@@ -211,16 +212,15 @@ static dispatch_group_t http_request_operation_completion_group() {
     return operation;
 }
 
-//- (void)_handleErrorWithResponseObject:(id)responseObj
-//{
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        NSInteger code = [responseObj fly_integerForKey:@"code"];
-//        if (code == kInvalidPassword) {
-//            [PXAlertView showAlertWithTitle:LOC(@"FLYLoginWrongPassword")];
-//        } else if (code == kLoginPhoneNotFound) {
-//            [PXAlertView showAlertWithTitle:LOC(@"FLYLoginPhoneNumberNotFound")];
-//        }
-//    });
-//}
+- (void)_handleErrorWithResponseObject:(id)responseObj
+{
+    NSInteger code = [responseObj fly_integerForKey:@"code"];
+    if (code == kInvalidToken) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults removeObjectForKey:kLoggedInUserNsUserDefaultKey];
+        [UICKeyChainStore removeItemForKey:kAuthTokenKey];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRequireSignupNotification object:self];
+    }
+}
 
 @end
