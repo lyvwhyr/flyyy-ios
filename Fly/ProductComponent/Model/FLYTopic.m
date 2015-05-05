@@ -106,5 +106,22 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kNewReplyPostedNotification object:self userInfo:dict];
 }
 
+#pragma mark - isEqual + hash
+- (BOOL)isEqual:(FLYTopic *)object
+{
+    if (![object isKindOfClass:[FLYTopic class]]) {
+        return NO;
+    }
+    if ([self.topicId isEqualToString:object.topicId]) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSUInteger)hash
+{
+    return 37 + self.topicId.hash;
+}
+
 
 @end

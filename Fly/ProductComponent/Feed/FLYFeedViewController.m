@@ -219,6 +219,10 @@
         
         for(int i = 0; i < topicsArray.count; i++) {
             FLYTopic *topic = [[FLYTopic alloc] initWithDictory:topicsArray[i]];
+            // ignore duplicate
+            if ([self _isPostInArray:topic]) {
+                continue;
+            }
             [self.posts addObject:topic];
         }
         //Set up before id for load more
@@ -696,6 +700,21 @@
 - (BOOL)isFullScreen
 {
     return _isFullScreen;
+}
+
+#pragma mark - Helper method to test if a post is already in posts array or not
+- (BOOL)_isPostInArray:(FLYTopic *)topic
+{
+    if ([self.posts count] == 0) {
+        return NO;
+    }
+    for (int i = 0; i < self.posts.count; i++) {
+        FLYTopic *postInArray = self.posts[i];
+        if ([topic isEqual:postInArray]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 @end
