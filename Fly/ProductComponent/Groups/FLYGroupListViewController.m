@@ -136,8 +136,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *groupName = ((FLYGroup *)[self.groups objectAtIndex:indexPath.row]).groupName;
-    [[FLYScribe sharedInstance] logEvent:@"group_list" section:groupName  component:nil element:nil action:@"click"];
+    if (indexPath.row > 1) {
+        NSString *groupName = ((FLYGroup *)[self.groups objectAtIndex:indexPath.row - 1]).groupName;
+        [[FLYScribe sharedInstance] logEvent:@"group_list" section:groupName  component:nil element:nil action:@"click"];
+    }
     
     if (kSuggestGroupRow == indexPath.row) {
         SCLAlertView *alert = [[SCLAlertView alloc] init];

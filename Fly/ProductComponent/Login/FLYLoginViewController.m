@@ -306,13 +306,17 @@
         self.loginButton.loading = NO;
         [self.loginButton setTitle:@"Login" forState:UIControlStateDisabled];
         
-        NSInteger code = [responseObj fly_integerForKey:@"code"];
-        if (code == kInvalidPassword) {
-            [PXAlertView showAlertWithTitle:LOC(@"FLYLoginWrongPassword")];
-        } else if (code == kLoginPhoneNotFound) {
-            [PXAlertView showAlertWithTitle:LOC(@"FLYLoginPhoneNumberNotFound")];
-        } else if (code == kInvalidToken) {
-            [PXAlertView showAlertWithTitle:LOC(@"FLYLoginInvalidToken")];
+        if (responseObj && [responseObj isKindOfClass:[NSDictionary class]]) {
+            NSInteger code = [responseObj fly_integerForKey:@"code"];
+            if (code == kInvalidPassword) {
+                [PXAlertView showAlertWithTitle:LOC(@"FLYLoginWrongPassword")];
+            } else if (code == kLoginPhoneNotFound) {
+                [PXAlertView showAlertWithTitle:LOC(@"FLYLoginPhoneNumberNotFound")];
+            } else if (code == kInvalidToken) {
+                [PXAlertView showAlertWithTitle:LOC(@"FLYLoginInvalidToken")];
+            }
+        } else {
+            UALog(@"Login failed");
         }
     };
     
