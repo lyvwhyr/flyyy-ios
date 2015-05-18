@@ -57,7 +57,9 @@
         [FLYAppStateManager sharedInstance].currentUser = user;
         
         // set device token
-        [FLYPushNotificationManager setDeviceToken:user];
+        if ([FLYAppStateManager sharedInstance].deviceToken) {
+            [FLYPushNotificationManager setDeviceToken:user];
+        }
         
         //save user id to NSUserDefault
         NSUserDefaults *defalut = [NSUserDefaults standardUserDefaults];

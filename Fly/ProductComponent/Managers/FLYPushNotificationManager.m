@@ -18,15 +18,15 @@
 + (void)registerPushNotification
 {
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-#ifdef __IPHONE_8_0
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge
-                                                                                             |UIRemoteNotificationTypeSound
-                                                                                             |UIRemoteNotificationTypeAlert) categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-#endif
+
+        if ([UIDevice version] >= 8) {
+            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge
+                                                                                                 |UIRemoteNotificationTypeSound
+                                                                                                 |UIRemoteNotificationTypeAlert) categories:nil];
+            [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        }
     } else {
-        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound)];
     }
 }
 

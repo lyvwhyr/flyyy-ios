@@ -53,8 +53,11 @@
     FLYNavigationController *navigationVC = [[FLYNavigationController alloc] initWithRootViewController:mainVC];
     self.window.rootViewController = navigationVC;
     
-    NSURLCache *urlCache = [[NSURLCache alloc] initWithMemoryCapacity:1024*1024*10 diskCapacity:1024*1024*100 diskPath:nil];
-    [NSURLCache setSharedURLCache:urlCache];
+    // It crashes in iOS 7
+    if ([UIDevice version] >= 8) {
+        NSURLCache *urlCache = [[NSURLCache alloc] initWithMemoryCapacity:1024*1024*10 diskCapacity:1024*1024*100 diskPath:nil];
+        [NSURLCache setSharedURLCache:urlCache];
+    }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [FLYAppStateManager sharedInstance];
