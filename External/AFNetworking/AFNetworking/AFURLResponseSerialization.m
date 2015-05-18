@@ -111,7 +111,7 @@ static id AFJSONObjectByRemovingKeysWithNullValues(id JSONObject, NSJSONReadingO
     BOOL responseIsValid = YES;
     NSError *validationError = nil;
     if (response && [response isKindOfClass:[NSHTTPURLResponse class]]) {
-        if (response.statusCode != 204 && self.acceptableContentTypes && ![self.acceptableContentTypes containsObject:[response MIMEType]]) {
+        if (response.statusCode != 204 && response.statusCode != 200 && self.acceptableContentTypes && ![self.acceptableContentTypes containsObject:[response MIMEType]]) {
             NSString* dataStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
             UALog(@"invalid content type %@", dataStr);
             

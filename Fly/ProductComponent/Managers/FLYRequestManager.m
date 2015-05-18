@@ -12,6 +12,8 @@
 #import "UICKeyChainStore.h"
 #import "FLYUser.h"
 #import "FLYConfigService.h"
+#import "FLYDeviceTokenService.h"
+#import "FLYPushNotificationManager.h"
 
 @interface FLYRequestManager()
 
@@ -54,13 +56,16 @@
         FLYUser *user = [[FLYUser alloc] initWithDictionary:userDict];
         [FLYAppStateManager sharedInstance].currentUser = user;
         
+        // set device token
+        [FLYPushNotificationManager setDeviceToken:user];
+        
         //save user id to NSUserDefault
         NSUserDefaults *defalut = [NSUserDefaults standardUserDefaults];
         [defalut setObject:user.userId forKey:kLoggedInUserNsUserDefaultKey];
         [defalut synchronize];
     };
     FLYGetMeErrorBlock errorBlock = ^(id responseObj, NSError *error) {
-        UALog(@"%@", responseObj);
+        
     };
     
     _usersService = [FLYUsersService usersService];

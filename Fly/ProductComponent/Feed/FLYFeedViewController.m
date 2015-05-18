@@ -34,6 +34,7 @@
 #import "SDiPhoneVersion.h"
 #import "FLYMainViewController.h"
 #import "NSDictionary+FLYAddition.h"
+#import "FLYPushNotificationManager.h"
 
 #define kMaxWaitForTableLoad 3
 
@@ -281,6 +282,12 @@
 {
     [super viewWillAppear:animated];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL hasShownPNDialog = [defaults boolForKey:kHasShownEnablePushNotificationDialog];
+    if (hasShownPNDialog) {
+        [FLYPushNotificationManager registerPushNotification];
+    }
+    
      [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     if (![self isFullScreen]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kShowRecordIconNotification object:self];
@@ -488,6 +495,14 @@
     [self.posts insertObject:topic atIndex:0];
     [self.feedTableView reloadData];
     [self _scrollToTop];
+    
+    // enable push notification dialog
+    [self performSelector:@selector(_showEnablePushNotifDialog) withObject:self afterDelay:2.2];
+}
+
+- (void)_showEnablePushNotifDialog
+{
+    [FLYPushNotificationManager showEnablePushNotificationDialog:self];
 }
 
 - (void)_topicDeleted:(NSNotification *)notif

@@ -20,6 +20,7 @@
 #import "Dialog.h"
 #import "FLYLogoutService.h"
 #import "FLYGroup.h"
+#import "FLYDeviceTokenService.h"
 
 @interface FLYAppStateManager()
 
@@ -81,13 +82,20 @@
 
 - (void)_logout:(NSNotification *)notification
 {
+    // remove device token
+    if ([FLYAppStateManager sharedInstance].deviceToken) {
+        [FLYDeviceTokenService deviceToken:[FLYAppStateManager sharedInstance].deviceToken isSet:NO successBlock:nil errorBlock:nil];
+    }
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:kDeviceTokenUserDefaultKey];
+    
+    
     [FLYLogoutService logoutWithSuccess:nil error:nil];
     
     self.currentUser = nil;
     self.authToken = nil;
     self.userDefaultUserId = nil;
     self.needRestartNavigationStackAfterLogin = YES;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults removeObjectForKey:kLoggedInUserNsUserDefaultKey];
     [UICKeyChainStore removeItemForKey:kAuthTokenKey];
     

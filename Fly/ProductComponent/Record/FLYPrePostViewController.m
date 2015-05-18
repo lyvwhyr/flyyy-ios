@@ -28,6 +28,7 @@
 #import "FLYUser.h"
 #import "FLYMediaService.h"
 #import "FLYTopicService.h"
+#import "FLYPushNotificationManager.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -303,7 +304,9 @@
         [params setObject:self.selectedGroup.groupId forKey:@"group_id"];
     }
     
+    @weakify(self)
     FLYPostTopicSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        @strongify(self)
         FLYTopic *post = [[FLYTopic alloc] initWithDictory:responseObj];
         NSDictionary *dict = @{kNewPostKey:post};
         [Dialog simpleToast:@"Posted"];
@@ -314,6 +317,7 @@
     };
     
     FLYPostTopicErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        @strongify(self)
         self.postButton.userInteractionEnabled = YES;
         UALog(@"Post error %@", error);
     };

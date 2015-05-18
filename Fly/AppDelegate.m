@@ -20,6 +20,7 @@
 #import "FLYRequestManager.h"
 #import "iRate.h"
 #import "FLYOnboardingStartViewController.h"
+#import "FLYPushNotificationManager.h"
 
 #define MIXPANEL_TOKEN @"4ce141a1dcd56132894230aff97b282b"
 
@@ -89,16 +90,32 @@
 }
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
-    UALog(@"DELEGATE: Device Token is: %@", deviceToken);
     if (deviceToken) {
         NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
         token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
         [FLYAppStateManager sharedInstance].deviceToken = token;
         
-//        NSDictionary *params = @{@"device_token":token};
-//        [EPRequest epSetDeviceInfo:params];
+        FLYUser *user = [FLYAppStateManager sharedInstance].currentUser;
+        [FLYPushNotificationManager setDeviceToken:user];
     }
 }
+
+#ifdef __IPHONE_8_0
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    //register to receive notifications
+    [application registerForRemoteNotifications];
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
+{
+    //handle the actions
+    if ([identifier isEqualToString:@"declineAction"]){
+    }
+    else if ([identifier isEqualToString:@"answerAction"]){
+    }
+}
+#endif
 
 #pragma mark - setup third party libraries
 - (void)_setupThirdLibraries

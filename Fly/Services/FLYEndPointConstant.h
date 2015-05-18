@@ -57,3 +57,7 @@
 
 // media
 #define EP_MEDIA_SIGN                               @"v1/media/sign"
+
+// device token
+#define EP_SET_DEVICE_TOKEN                         @"v1/tokens/%@"
+#define EP_DELETE_DEVICE_TOKEN                      @"v1/tokens/%@"

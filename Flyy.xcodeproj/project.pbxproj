@@ -65,6 +65,7 @@
 		A6263EC41A18910B00C4C3BA /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263EC31A18910B00C4C3BA /* UIViewController+StatusBar.m */; };
 		A6263ECB1A1897CE00C4C3BA /* UIColor+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263ECA1A1897CE00C4C3BA /* UIColor+FLYAddition.m */; };
 		A6263ED01A18A10E00C4C3BA /* UIImage+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */; };
+		A62A9A8D1B00756800B89233 /* FLYPushNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A62A9A8C1B00756800B89233 /* FLYPushNotificationManager.m */; };
 		A62B25571A8FECFF007E11C3 /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = A62B25561A8FECFF007E11C3 /* UIView+Glow.m */; };
 		A62CBE7C1A32E695007F459C /* FLYBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A62CBE7B1A32E695007F459C /* FLYBarButtonItem.m */; };
 		A62E53B51A227E0B00125DBC /* icon_voice_filter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A62E53B41A227E0B00125DBC /* icon_voice_filter@3x.png */; };
@@ -414,6 +415,7 @@
 		A6A8DFF91AC4D92500BF77BB /* FLYPasswordResetConfirmCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8DFF41AC4D92500BF77BB /* FLYPasswordResetConfirmCodeViewController.m */; };
 		A6A8DFFA1AC4D92500BF77BB /* FLYPasswordResetEnterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8DFF61AC4D92500BF77BB /* FLYPasswordResetEnterPasswordViewController.m */; };
 		A6A8DFFB1AC4D92500BF77BB /* FLYPasswordResetPhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8DFF81AC4D92500BF77BB /* FLYPasswordResetPhoneNumberViewController.m */; };
+		A6AC35231B09457100D5C985 /* FLYDeviceTokenService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AC35221B09457100D5C985 /* FLYDeviceTokenService.m */; };
 		A6BAD4091AA57C4D00DB10F7 /* FLYPhoneService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BAD4081AA57C4D00DB10F7 /* FLYPhoneService.m */; };
 		A6BAD40C1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BAD40B1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m */; };
 		A6BCBBFD1A848D16001F8AB0 /* FLYEndpointRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BCBBFC1A848D16001F8AB0 /* FLYEndpointRequest.m */; };
@@ -571,6 +573,8 @@
 		A6263ECA1A1897CE00C4C3BA /* UIColor+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FLYAddition.m"; sourceTree = "<group>"; };
 		A6263ECE1A18A10E00C4C3BA /* UIImage+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FLYAddition.h"; sourceTree = "<group>"; };
 		A6263ECF1A18A10E00C4C3BA /* UIImage+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FLYAddition.m"; sourceTree = "<group>"; };
+		A62A9A8B1B00756800B89233 /* FLYPushNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPushNotificationManager.h; sourceTree = "<group>"; };
+		A62A9A8C1B00756800B89233 /* FLYPushNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPushNotificationManager.m; sourceTree = "<group>"; };
 		A62B25551A8FECFF007E11C3 /* UIView+Glow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Glow.h"; sourceTree = "<group>"; };
 		A62B25561A8FECFF007E11C3 /* UIView+Glow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Glow.m"; sourceTree = "<group>"; };
 		A62CBE7A1A32E695007F459C /* FLYBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYBarButtonItem.h; sourceTree = "<group>"; };
@@ -1128,6 +1132,8 @@
 		A6A8DFF61AC4D92500BF77BB /* FLYPasswordResetEnterPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPasswordResetEnterPasswordViewController.m; sourceTree = "<group>"; };
 		A6A8DFF71AC4D92500BF77BB /* FLYPasswordResetPhoneNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPasswordResetPhoneNumberViewController.h; sourceTree = "<group>"; };
 		A6A8DFF81AC4D92500BF77BB /* FLYPasswordResetPhoneNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPasswordResetPhoneNumberViewController.m; sourceTree = "<group>"; };
+		A6AC35211B09457100D5C985 /* FLYDeviceTokenService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYDeviceTokenService.h; sourceTree = "<group>"; };
+		A6AC35221B09457100D5C985 /* FLYDeviceTokenService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDeviceTokenService.m; sourceTree = "<group>"; };
 		A6BAD4071AA57C4D00DB10F7 /* FLYPhoneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPhoneService.h; sourceTree = "<group>"; };
 		A6BAD4081AA57C4D00DB10F7 /* FLYPhoneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPhoneService.m; sourceTree = "<group>"; };
 		A6BAD40A1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSignupConfirmCodeViewController.h; sourceTree = "<group>"; };
@@ -1352,6 +1358,8 @@
 				A61B6D441AAAF3A000A5B696 /* FLYRequestManager.m */,
 				A6799C861AABDFB7003DAE5B /* FLYVoiceFilterManager.h */,
 				A6799C871AABDFB7003DAE5B /* FLYVoiceFilterManager.mm */,
+				A62A9A8B1B00756800B89233 /* FLYPushNotificationManager.h */,
+				A62A9A8C1B00756800B89233 /* FLYPushNotificationManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -2173,6 +2181,8 @@
 				A647008A1ACE68070074F990 /* FLYLogoutService.m */,
 				A655EF681AD1F81B002648CB /* FLYMediaService.h */,
 				A655EF691AD1F81B002648CB /* FLYMediaService.m */,
+				A6AC35211B09457100D5C985 /* FLYDeviceTokenService.h */,
+				A6AC35221B09457100D5C985 /* FLYDeviceTokenService.m */,
 			);
 			name = Services;
 			path = ../Services;
@@ -3130,6 +3140,7 @@
 				A6A0E4AF1A1E76110036116E /* FLEXClassExplorerViewController.m in Sources */,
 				A6048A431A85E63100C67480 /* NSInvocation+EXT.m in Sources */,
 				A66E96521AA01874000B0E83 /* FLYLoaderView.m in Sources */,
+				A6AC35231B09457100D5C985 /* FLYDeviceTokenService.m in Sources */,
 				A6A70CD71AA4010D0000F784 /* FLYSignupPhoneNumberViewController.m in Sources */,
 				A6A0E4B41A1E76110036116E /* FLEXImageExplorerViewController.m in Sources */,
 				A66E96551AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m in Sources */,
@@ -3210,6 +3221,7 @@
 				A636FC381A9AA73E0084DE6A /* FLYScribe.m in Sources */,
 				A651BD981A4986400081A1E0 /* MBProgressHUD.m in Sources */,
 				A6A0E49F1A1E76110036116E /* FLEXMethodCallingViewController.m in Sources */,
+				A62A9A8D1B00756800B89233 /* FLYPushNotificationManager.m in Sources */,
 				A643AEE81AA9539E00BF4E0F /* NIDataStructures.m in Sources */,
 				A6263ECB1A1897CE00C4C3BA /* UIColor+FLYAddition.m in Sources */,
 				A643AEF11AA9539E00BF4E0F /* NINonEmptyCollectionTesting.m in Sources */,

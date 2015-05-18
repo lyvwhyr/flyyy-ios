@@ -67,6 +67,11 @@
 
 // user default
 #define kConfigsUserDefaultKey @"kConfigsUserDefaultKey"
+#define kDeviceTokenUserDefaultKey @"kDeviceTokenUserDefaultKey"
+
+// One time keys
+#define kHasShownEnablePushNotificationDialog @"kHasShownEnablePushNotificationDialog"
+
 
 #define kPrivacyPolicyURL   @"https://www.flyyapp.com/privacy.html"
 #define kTermsOfServiceURL  @"https://www.flyyapp.com/terms.html"

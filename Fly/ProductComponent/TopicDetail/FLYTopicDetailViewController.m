@@ -38,6 +38,7 @@
 #import "UIFont+FLYAddition.h"
 #import "FLYIconButton.h"
 #import "FLYTopicDetailOnboardingView.h"
+#import "FLYPushNotificationManager.h"
 
 typedef NS_ENUM(NSInteger, FLYPostAuthorActions) {
     FLYPostAuthorActionsDelete = 0,

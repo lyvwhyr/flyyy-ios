@@ -77,21 +77,12 @@
 
 -(void)_addViewConstraints
 {
-//    [self.view removeConstraints:[self.view constraints]];
-//    [self.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.parentViewController.view);
-//        make.leading.equalTo(self.parentViewController.view);
-//        make.width.equalTo(@(CGRectGetWidth(self.parentViewController.view.bounds)));
-//        make.height.equalTo(@(CGRectGetHeight(self.parentViewController.view.bounds) - kTabBarViewHeight));
-//    }];
-    
     [_groupsTabelView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view);
         make.leading.mas_equalTo(self.view);
         make.width.mas_equalTo(self.view);
         make.height.mas_equalTo(self.view);
     }];
-//    [super updateViewConstraints];
 }
 
 #pragma mark - tableView datasource
@@ -145,8 +136,10 @@
         SCLAlertView *alert = [[SCLAlertView alloc] init];
         
         UITextField *textField = [alert addTextField:LOC(@"FLYEnterTagNamePopupHintText")];
-        
         [alert addButton:@"Suggest" actionBlock:^(void) {
+            NSDictionary *properties = @{kSuggestTagName:textField.text};
+            [[Mixpanel sharedInstance]  track:kTrackingEventClientSuggestTag properties:properties];
+            
             JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
             HUD.textLabel.text = @"Thank you";
             HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];

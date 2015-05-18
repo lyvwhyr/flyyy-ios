@@ -191,4 +191,10 @@
 "FLYTabbarOnboardingRecordButton" = "record a post";
 "FLYTabbarOnboardingTags" = "tags";
 
+// enable push notification dialog title
+"FLYEnablePushNotificationDialogTitle" = "Enable Notifications";
+"FLYEnablePushNotificationDialogButtonText" = "Enable Notifications";
+"FLYEnablePushNotificationDialogButtonCancel" = "Cancel";
+"FLYEnablePushNotificationDialogText" = "Enable notifications so you don't miss replies from other people.";
+
 
