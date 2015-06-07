@@ -21,6 +21,7 @@
 #import "iRate.h"
 #import "FLYOnboardingStartViewController.h"
 #import "FLYPushNotificationManager.h"
+#import "FLYPushNotificationRouter.h"
 
 #define MIXPANEL_TOKEN @"4ce141a1dcd56132894230aff97b282b"
 
@@ -119,6 +120,16 @@
     }
 }
 #endif
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    UIApplicationState state = [application applicationState];
+    if (state == UIApplicationStateInactive || state == UIApplicationStateBackground) {
+        [[FLYPushNotificationRouter sharedInstance] routePushPayloadDict:userInfo];
+    } else {
+        
+    }
+}
 
 #pragma mark - setup third party libraries
 - (void)_setupThirdLibraries
