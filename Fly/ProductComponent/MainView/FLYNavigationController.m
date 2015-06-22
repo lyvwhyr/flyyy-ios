@@ -54,6 +54,15 @@
     return nil;
 }
 
+- (UIViewController *)visibleViewController
+{
+    UIViewController *viewController = [super visibleViewController];
+    if ([viewController respondsToSelector:@selector(visibleViewController)]) {
+        return [viewController performSelector:@selector(visibleViewController)];
+    }
+    return viewController;
+}
+
 #pragma mark - UINavigationController
 
 - (void)setDelegate:(id<UINavigationControllerDelegate>)delegate

@@ -66,6 +66,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 @property (nonatomic) UITableView *topicTableView;
 
 @property (nonatomic) FLYTopic *topic;
+@property (nonatomic) NSString *topicId;
 @property (nonatomic) NSMutableArray *replies;
 
 @property (nonatomic) BOOL setLayoutConstraints;
@@ -94,33 +95,40 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 {
     if (self = [super init]) {
         _topic = topic;
-        _replies = [NSMutableArray new];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(_newReplyReceived:)
-                                                     name:kNewReplyPostedNotification
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(_downloadComplete:)
-                                                     name:kDownloadCompleteNotification
-                                                   object:nil];
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(_audioPlayStateChanged:)
-                                                     name:kNotificationAudioPlayStateChanged
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(_audioFinishedPlaying:)
-                                                     name:kNotificationDidFinishPlaying object:nil];
+        [self _sharedInit];
     }
     return self;
 }
 
 - (instancetype)initWithTopicId:(NSString *)topicId
 {
+    _topicId = topicId;
+    [self _sharedInit];
     return self;
+}
+
+- (void)_sharedInit
+{
+    _replies = [NSMutableArray new];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_newReplyReceived:)
+                                                 name:kNewReplyPostedNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_downloadComplete:)
+                                                 name:kDownloadCompleteNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_audioPlayStateChanged:)
+                                                 name:kNotificationAudioPlayStateChanged
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_audioFinishedPlaying:)
+                                                 name:kNotificationDidFinishPlaying object:nil];
 }
 
 - (void)dealloc
@@ -210,7 +218,11 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         _setLayoutConstraints = YES;
         CGFloat tableViewHeight = CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight;
         [_topicTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
+            if (self.viewFrameStartBelowNavBar) {
+                make.top.equalTo(self.view);
+            } else {
+                make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
+            }
             make.leading.equalTo(self.view);
             make.width.equalTo(self.view);
             make.height.equalTo(@(tableViewHeight));
@@ -387,7 +399,14 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 #pragma mark - services
 - (void)_initService
 {
-    self.replyService = [FLYReplyService replyServiceWithTopicId:self.topic.topicId];
+    NSString *topicId;
+    if (self.topic) {
+        topicId = self.topic.topicId;
+    } else {
+        topicId = self.topicId;
+    }
+    
+    self.replyService = [FLYReplyService replyServiceWithTopicId:topicId];
     [self _load:YES after:nil];
     @weakify(self)
     [self.topicTableView addInfiniteScrollingWithActionHandler:^{
@@ -407,6 +426,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         
         self.state = FLYViewControllerStateReady;
         if (first) {
+            self.topic = [[FLYTopic alloc] initWithDictory:results];
             [self.replies removeAllObjects];
         }
         

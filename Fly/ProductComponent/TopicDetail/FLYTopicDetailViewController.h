@@ -21,6 +21,8 @@ typedef NS_ENUM(NSInteger, FlyTopicDetailCellType) {
 @property (nonatomic) FLYTopicDetailTabbar *tabbar;
 @property (nonatomic) BOOL isBackFullScreen;
 
+@property (nonatomic) BOOL viewFrameStartBelowNavBar;
+
 - (instancetype)initWithTopicId:(NSString *)topicId;
 - (instancetype)initWithTopic:(FLYTopic *)topic;
 

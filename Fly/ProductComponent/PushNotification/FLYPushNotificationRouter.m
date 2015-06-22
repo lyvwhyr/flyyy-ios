@@ -11,6 +11,10 @@
 #import "FLYReplyPayload.h"
 #import "FLYMentionPayload.h"
 #import "FLYPayload.h"
+#import "FLYTopicDetailViewController.h"
+#import "FLYMainViewController.h"
+#import "FLYNavigationManager.h"
+#import "NSTimer+BlocksKit.h"
 
 @implementation FLYPushNotificationRouter
 
@@ -26,7 +30,7 @@
 
 + (id)payloadWithDictionary:(NSDictionary *)dict
 {
-    NSString *type = [dict fly_stringForKey:@"T"];
+    NSString *type = [dict fly_stringForKey:@"type"];
     if ([type isEqualToString:@"reply"]) {
         return [[FLYReplyPayload alloc] initWithDictionary:dict];
     } else if ([type isEqualToString:@"mention"]) {
@@ -52,12 +56,31 @@
 #pragma mark - Handle push notification payload
 - (void)_handleReplyPayload:(FLYReplyPayload *)payload
 {
-    
+    FLYNavigationManager *manager = [FLYNavigationManager sharedInstance];
+ 
+    // Put a delay here so the MainViewController is initialized
+    void (^pushViewController)() = ^{
+        FLYTopicDetailViewController *viewController = [[FLYTopicDetailViewController alloc] initWithTopicId:payload.topicId];
+        viewController.isBackFullScreen = NO;
+        viewController.viewFrameStartBelowNavBar = YES;
+        [manager navigateToViewController:viewController animated:YES tabIndex:TABBAR_HOME isRoot:NO];
+    };
+    [NSTimer bk_scheduledTimerWithTimeInterval:0.1 block:pushViewController repeats:NO];
 }
 
 - (void)_handleMentionPayload:(FLYMentionPayload *)payload
 {
+    FLYNavigationManager *manager = [FLYNavigationManager sharedInstance];
     
+    // Put a delay here so the MainViewController is initialized
+    void (^pushViewController)() = ^{
+        FLYTopicDetailViewController *viewController = [[FLYTopicDetailViewController alloc] initWithTopicId:payload.topicId];
+        viewController.isBackFullScreen = NO;
+        viewController.viewFrameStartBelowNavBar = YES;
+        [manager navigateToViewController:viewController animated:YES tabIndex:TABBAR_HOME isRoot:NO];
+    };
+    [NSTimer bk_scheduledTimerWithTimeInterval:0.1 block:pushViewController repeats:NO];
 }
+
 
 @end

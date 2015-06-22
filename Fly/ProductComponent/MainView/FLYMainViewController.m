@@ -42,11 +42,7 @@
 
 @interface FLYMainViewController() <FLYTabBarViewDelegate, UIViewControllerTransitioningDelegate>
 
-@property (nonatomic) FLYFeedViewController *feedViewController;
-@property (nonatomic) FLYGroupListViewController *groupsListViewController;
-@property (nonatomic) UIViewController *currentViewController;
 
-@property (nonatomic) FLYNavigationController *feedViewNavigationController;
 @property (nonatomic) FLYNavigationController *groupsListViewNavigationController;
 
 @property (nonatomic) BOOL didSetConstraints;
@@ -90,16 +86,6 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
-- (void)_addNavigationBar
-{
-//    PaperButton *button = [PaperButton button];
-//    button.tintColor = [UIColor flyBlue];
-//    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-//    self.navigationItem.rightBarButtonItem = barButton;
-    
-//    self.navigationController.navigationBar.barStyle = UIStatusBarStyleDefault;
-}
-
 - (void)_addTabBar
 {
     self.tabBarView = [FLYTabBarView new];
@@ -139,6 +125,11 @@
         make.centerX.equalTo(self.tabBarView);
         make.bottom.equalTo(self.tabBarView);
     }];
+}
+
+- (void)setTabIndex:(NSUInteger)index
+{
+    [self tabItemClicked:index];
 }
 
 #pragma mark - FLYTabBarViewDelegate

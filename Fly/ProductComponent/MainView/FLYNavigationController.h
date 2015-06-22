@@ -12,6 +12,7 @@
 
 
 - (FLYNavigationBar *)flyNavigationBar;
+- (UIViewController *)visibleViewController;
 - (void)pushViewController:(UIViewController *)viewController
                   animated:(BOOL)animated __attribute__((objc_requires_super));
 
