@@ -50,15 +50,17 @@
     [self navigateToTabBarIndex:tabIndex isRoot:isRoot animated:YES];
     if (viewController) {
         UINavigationController *navViewController = [self rootViewController].feedViewNavigationController;
-        [navViewController popToRootViewControllerAnimated:animated];
+        [navViewController popToRootViewControllerAnimated:NO];
         
         void (^pushViewController)() = ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:kHideRecordIconNotification object:self];
-            navViewController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
-            [[self rootViewController].feedViewController.view layoutIfNeeded];
-            [navViewController pushViewController:viewController animated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHideRecordIconNotification object:self];
+                navViewController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+                [[self rootViewController].feedViewController.view layoutIfNeeded];
+                [navViewController pushViewController:viewController animated:YES];
+            });
         };
-        [NSTimer bk_scheduledTimerWithTimeInterval:0.1 block:pushViewController repeats:NO];
+        [NSTimer bk_scheduledTimerWithTimeInterval:0.5 block:pushViewController repeats:NO];
         
     }
 }
