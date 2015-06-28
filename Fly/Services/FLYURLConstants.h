@@ -7,7 +7,7 @@
 //
 
 //Base URL
-#define DEV_BASE_URL               @"http://localhost:3001"
+#define DEV_BASE_URL               @"http://localhost:3000"
 #define STAGING_BASE_URL           @"https://api-staging.flyyapp.com"
 #define PROD_BASE_URL              @"https://api.flyyapp.com"
 
