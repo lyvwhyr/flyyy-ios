@@ -48,6 +48,15 @@
 - (void)navigateToViewController:(UIViewController *)viewController animated:(BOOL)animated tabIndex:(NSUInteger)tabIndex isRoot:(BOOL)isRoot
 {
     [self navigateToTabBarIndex:tabIndex isRoot:isRoot animated:YES];
+    
+    UIViewController *visibleVewController = [self rootNavController].visibleViewController;
+    if (visibleVewController.presentingViewController != nil) {
+        [visibleVewController dismissViewControllerAnimated:NO completion:^{
+            [self navigateToViewController:viewController animated:NO tabIndex:tabIndex isRoot:isRoot];
+        }];
+        return;
+    }
+    
     if (viewController) {
         UINavigationController *navViewController = [self rootViewController].feedViewNavigationController;
         [navViewController popToRootViewControllerAnimated:NO];
