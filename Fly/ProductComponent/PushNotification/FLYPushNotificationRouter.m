@@ -60,12 +60,14 @@
  
     // Put a delay here so the MainViewController is initialized
     void (^pushViewController)() = ^{
+        //1452445032827079888
         FLYTopicDetailViewController *viewController = [[FLYTopicDetailViewController alloc] initWithTopicId:payload.topicId];
+        viewController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
         viewController.isBackFullScreen = NO;
         viewController.viewFrameStartBelowNavBar = YES;
         [manager navigateToViewController:viewController animated:YES tabIndex:TABBAR_HOME isRoot:NO];
     };
-    [NSTimer bk_scheduledTimerWithTimeInterval:0.1 block:pushViewController repeats:NO];
+    [NSTimer bk_scheduledTimerWithTimeInterval:0.5 block:pushViewController repeats:NO];
 }
 
 - (void)_handleMentionPayload:(FLYMentionPayload *)payload

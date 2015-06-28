@@ -8,6 +8,7 @@
 
 #import "FLYNavigationManager.h"
 #import "FLYFeedViewController.h"
+#import "NSTimer+BlocksKit.h"
 
 @implementation FLYNavigationManager
 
@@ -48,15 +49,19 @@
 {
     [self navigateToTabBarIndex:tabIndex isRoot:isRoot animated:YES];
     if (viewController) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kHideRecordIconNotification object:self];
-        
         UINavigationController *navViewController = [self rootViewController].feedViewNavigationController;
         [navViewController popToRootViewControllerAnimated:animated];
-        navViewController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
-        [[self rootViewController].feedViewController.view layoutIfNeeded];
-        [navViewController pushViewController:viewController animated:YES];
+        
+        void (^pushViewController)() = ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:kHideRecordIconNotification object:self];
+            navViewController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+            [[self rootViewController].feedViewController.view layoutIfNeeded];
+            [navViewController pushViewController:viewController animated:YES];
+        };
+        [NSTimer bk_scheduledTimerWithTimeInterval:0.1 block:pushViewController repeats:NO];
+        
     }
-}    
+}
 
 - (void)navigateToTabBarIndex:(NSUInteger)tabBarIndex isRoot:(BOOL)isRoot animated:(BOOL)animated
 {
