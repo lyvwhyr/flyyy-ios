@@ -35,8 +35,12 @@
 #import "FLYMainViewController.h"
 #import "NSDictionary+FLYAddition.h"
 #import "FLYPushNotificationManager.h"
+#import "FLYUser.h"
 
 #define kMaxWaitForTableLoad 3
+
+#define kPopPushNotificationDialogSessionCount 3
+#define kHomeTimelineViewCountAfterLoginKey @"kHomeTimelineViewCountAfterLoginKey"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
@@ -250,6 +254,23 @@
 {
     [super viewWillDisappear:animated];
     [self _clearAllPlaying];
+    
+
+}
+
+- (void)_popPushNotificationDialogIfNecessary
+{
+    // pop enable push notification dialog on 3rd session
+    if ([FLYAppStateManager sharedInstance].currentUser) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSInteger timelineViewCount = [defaults integerForKey:kHomeTimelineViewCountAfterLoginKey];
+        if (timelineViewCount >= kPopPushNotificationDialogSessionCount) {
+            // enable push notification dialog
+            [self performSelector:@selector(_showEnablePushNotifDialog) withObject:self afterDelay:0.5];
+        }
+        timelineViewCount += 1;
+        [defaults setInteger:timelineViewCount forKey:kHomeTimelineViewCountAfterLoginKey];
+    }
 }
 
 - (void)_addInlineReplyBar
@@ -307,6 +328,8 @@
         FLYFeedTopicTableViewCell *visibleCell = (FLYFeedTopicTableViewCell *)(visibleCells[i]);
         [visibleCell updatePlayState:FLYPlayStateNotSet];
     }
+    
+    [self _popPushNotificationDialogIfNecessary];
 }
 
 - (void)updateViewConstraints
@@ -497,7 +520,7 @@
     [self _scrollToTop];
     
     // enable push notification dialog
-    [self performSelector:@selector(_showEnablePushNotifDialog) withObject:self afterDelay:2.2];
+    [self performSelector:@selector(_showEnablePushNotifDialog) withObject:self afterDelay:0.5];
 }
 
 - (void)_showEnablePushNotifDialog
