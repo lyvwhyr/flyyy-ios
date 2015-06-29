@@ -22,6 +22,7 @@
 #import "FLYOnboardingStartViewController.h"
 #import "FLYPushNotificationManager.h"
 #import "FLYPushNotificationRouter.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 #define MIXPANEL_TOKEN @"4ce141a1dcd56132894230aff97b282b"
 
@@ -67,7 +68,7 @@
         [FLYRequestManager sharedInstance];
     });
     
-    [self _setupThirdLibraries];
+    [self _setupThirdLibrariesWithApplication:application didFinishLaunchingWithOptions:launchOptions];
     return YES;
 }
 
@@ -88,6 +89,8 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    [FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -143,8 +146,16 @@
 
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
+}
+
 #pragma mark - setup third party libraries
-- (void)_setupThirdLibraries
+- (void)_setupThirdLibrariesWithApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     
@@ -156,6 +167,10 @@
     [iRate sharedInstance].usesUntilPrompt = 0;
     [iRate sharedInstance].eventsUntilPrompt = 10; // After a user listens to the 10th post, show the prompt.
     [iRate sharedInstance].remindPeriod = 7;
+    
+    // Facebook install sdk
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
     
     //Fabric should the the last one
     [Fabric with:@[CrashlyticsKit]];

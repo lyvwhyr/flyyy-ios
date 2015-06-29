@@ -437,6 +437,12 @@
 		A6D949F41A9089FD003D4265 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D949F21A9089FC003D4265 /* UICKeyChainStore.m */; };
 		A6D949F61A9090BD003D4265 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D949F51A9090BD003D4265 /* Security.framework */; };
 		A6D949F91A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D949F81A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m */; };
+		A6DAF96F1B40E3AC004CABEF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DAF96C1B40E3AC004CABEF /* FBSDKCoreKit.framework */; };
+		A6DAF9701B40E3AD004CABEF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DAF96D1B40E3AC004CABEF /* FBSDKLoginKit.framework */; };
+		A6DAF9711B40E3AD004CABEF /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DAF96E1B40E3AC004CABEF /* FBSDKShareKit.framework */; };
+		A6DAF9751B40E3E2004CABEF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DAF9721B40E3E2004CABEF /* FBSDKCoreKit.framework */; };
+		A6DAF9761B40E3E2004CABEF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DAF9731B40E3E2004CABEF /* FBSDKLoginKit.framework */; };
+		A6DAF9771B40E3E2004CABEF /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DAF9741B40E3E2004CABEF /* FBSDKShareKit.framework */; };
 		A6DFD1311AA80670008520F5 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DFD1301AA80670008520F5 /* CoreTelephony.framework */; };
 		A6DFD1341AA8291B008520F5 /* FLYLoginSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DFD1331AA8291B008520F5 /* FLYLoginSignupViewController.m */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
@@ -1176,6 +1182,12 @@
 		A6D949F51A9090BD003D4265 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A6D949F71A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+RMSaveCustomObject.h"; sourceTree = "<group>"; };
 		A6D949F81A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+RMSaveCustomObject.m"; sourceTree = "<group>"; };
+		A6DAF96C1B40E3AC004CABEF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		A6DAF96D1B40E3AC004CABEF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		A6DAF96E1B40E3AC004CABEF /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		A6DAF9721B40E3E2004CABEF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = External/Facebook/FBSDKCoreKit.framework; sourceTree = SOURCE_ROOT; };
+		A6DAF9731B40E3E2004CABEF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = External/Facebook/FBSDKLoginKit.framework; sourceTree = SOURCE_ROOT; };
+		A6DAF9741B40E3E2004CABEF /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = External/Facebook/FBSDKShareKit.framework; sourceTree = SOURCE_ROOT; };
 		A6DFD1301AA80670008520F5 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A6DFD1321AA8291B008520F5 /* FLYLoginSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYLoginSignupViewController.h; sourceTree = "<group>"; };
 		A6DFD1331AA8291B008520F5 /* FLYLoginSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoginSignupViewController.m; sourceTree = "<group>"; };
@@ -1203,19 +1215,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6DAF9701B40E3AD004CABEF /* FBSDKLoginKit.framework in Frameworks */,
 				A6DFD1311AA80670008520F5 /* CoreTelephony.framework in Frameworks */,
+				A6DAF9761B40E3E2004CABEF /* FBSDKLoginKit.framework in Frameworks */,
 				A63189241A92B3C70042E12A /* libxml2.dylib in Frameworks */,
 				A63188EB1A92B1890042E12A /* MediaPlayer.framework in Frameworks */,
 				A63188E91A92B1810042E12A /* AVFoundation.framework in Frameworks */,
 				A63188E71A92B17A0042E12A /* AudioToolbox.framework in Frameworks */,
 				A63188E51A92B1720042E12A /* CFNetwork.framework in Frameworks */,
 				A6D949F61A9090BD003D4265 /* Security.framework in Frameworks */,
+				A6DAF9751B40E3E2004CABEF /* FBSDKCoreKit.framework in Frameworks */,
 				A6D949EB1A9079AC003D4265 /* Fabric.framework in Frameworks */,
 				A60A44F41A8DD42B00BED63A /* Foundation.framework in Frameworks */,
 				A6A30D711A1B1EEE001AE1FE /* QuartzCore.framework in Frameworks */,
 				A659E4281AD8B99C0089EFB7 /* libZtx_iOS-fat.a in Frameworks */,
 				A60A44F21A8DD41200BED63A /* UIKit.framework in Frameworks */,
 				A6A30D731A1B1EFA001AE1FE /* CoreGraphics.framework in Frameworks */,
+				A6DAF9711B40E3AD004CABEF /* FBSDKShareKit.framework in Frameworks */,
+				A6DAF9771B40E3E2004CABEF /* FBSDKShareKit.framework in Frameworks */,
+				A6DAF96F1B40E3AC004CABEF /* FBSDKCoreKit.framework in Frameworks */,
 				A6D949EA1A9079AC003D4265 /* Crashlytics.framework in Frameworks */,
 				7D4B72EB34192CBBF4792073 /* libPods.a in Frameworks */,
 			);
@@ -1243,6 +1261,7 @@
 		A60489FC1A85E63100C67480 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A6DAF96B1B40E3A6004CABEF /* Facebook */,
 				A6799C791AABDE14003DAE5B /* ZTX */,
 				A6048AA51A8603EF00C67480 /* AFNetworking */,
 				A6048A001A85E63100C67480 /* extobjc */,
@@ -2527,6 +2546,9 @@
 		A6A30D741A1B1F33001AE1FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6DAF9721B40E3E2004CABEF /* FBSDKCoreKit.framework */,
+				A6DAF9731B40E3E2004CABEF /* FBSDKLoginKit.framework */,
+				A6DAF9741B40E3E2004CABEF /* FBSDKShareKit.framework */,
 				A6DFD1301AA80670008520F5 /* CoreTelephony.framework */,
 				A63189231A92B3C70042E12A /* libxml2.dylib */,
 				A63188EA1A92B1890042E12A /* MediaPlayer.framework */,
@@ -2658,6 +2680,16 @@
 				A6D949F21A9089FC003D4265 /* UICKeyChainStore.m */,
 			);
 			path = UICKeyChainStore;
+			sourceTree = "<group>";
+		};
+		A6DAF96B1B40E3A6004CABEF /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				A6DAF96C1B40E3AC004CABEF /* FBSDKCoreKit.framework */,
+				A6DAF96D1B40E3AC004CABEF /* FBSDKLoginKit.framework */,
+				A6DAF96E1B40E3AC004CABEF /* FBSDKShareKit.framework */,
+			);
+			path = Facebook;
 			sourceTree = "<group>";
 		};
 		A6E171F31A1C5F1A00F2B4BF /* SVPulsingAnnotationView */ = {
@@ -3399,6 +3431,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/External",
 					"$(PROJECT_DIR)",
+					/Users/xingxingxu/Documents/FacebookSDK,
+					/Users/xingxingxu/Desktop/fb,
+					"$(PROJECT_DIR)/External/Facebook",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Fly/fly-Prefix.pch";
@@ -3443,6 +3478,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/External",
 					"$(PROJECT_DIR)",
+					/Users/xingxingxu/Documents/FacebookSDK,
+					/Users/xingxingxu/Desktop/fb,
+					"$(PROJECT_DIR)/External/Facebook",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Fly/fly-Prefix.pch";
