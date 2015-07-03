@@ -706,9 +706,32 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     @weakify(self)
     barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
         @strongify(self)
-        [self _optionTapped];
+//        [self _optionTapped];
+        
+        NSString * message = @"Why LA sucks #Flyy";
+//        UIImage * image = [UIImage imageNamed:@"default_share"];
+        NSURL *link = [NSURL URLWithString:@"https://www-staging.flyyapp.com/share/1452431678592703634"];
+        NSArray * shareItems = @[message, link];
+        
+        UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
+        [self presentViewController:avc animated:YES completion:nil];
     };
     self.navigationItem.rightBarButtonItem = barItem;
+    
+//    UIImage *shareButtonImage = [UIImage imageNamed:@"icon_share"];
+//    _shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [_shareButton setImage:shareButtonImage forState:UIControlStateNormal];
+//    [_shareButton addTarget:self action:@selector(_shareButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+//    [_shareButton setFrame:CGRectMake(0, 0, 25, 20)];
+//    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithCustomView:_shareButton];
+//    
+//    UIImage *flagButtonImage = [UIImage imageNamed:@"icon_flag_solid"];
+//    _flagButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [_flagButton setImage:flagButtonImage forState:UIControlStateNormal];
+//    [_flagButton addTarget:self action:@selector(_flagButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+//    [_flagButton setFrame:CGRectMake(0, 0, 20, 20)];
+//    UIBarButtonItem *flagItem = [[UIBarButtonItem alloc] initWithCustomView:_flagButton];
+//    self.navigationItem.rightBarButtonItems = @[flagItem, shareItem];
 }
 
 - (void)_backButtonTapped
