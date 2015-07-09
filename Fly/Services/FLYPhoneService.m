@@ -20,9 +20,13 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *params = @{@"device_id":[FLYAppStateManager sharedInstance].deviceId, @"phone":number, @"reset":@(isPasswordReset)};
     [manager POST:self.endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        successBlock(operation, responseObject);
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
     } failure:^(id responseObj, NSError *error) {
-        errorBlock(responseObj, error);
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
     }];
 }
 
@@ -32,9 +36,13 @@
     NSString *endpoint = [NSString stringWithFormat:EP_PHONE_VERIFY, phoneHash];
     NSDictionary *params = @{@"device_id":[FLYAppStateManager sharedInstance].deviceId, @"phone":phoneNumber, @"code":code};
     [manager GET:endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        successBlock(operation, responseObject);
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
     } failure:^(id responseObj, NSError *error) {
-        errorBlock(responseObj, error);
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
     }];
 }
 

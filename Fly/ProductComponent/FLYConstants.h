@@ -51,6 +51,8 @@
 #define kTrackingPropertyStatusCode                             @"status_code"
 #define kTrackingPropertyErrorMessage                           @"error_message"
 #define kTrackingPropertyServerResponseBody                     @"server_response_body"
+#define kTrackingPropertyEndpointName                           @"endpoint_name"
+#define kTrackingPropertyServerResponse                         @"server_response"
 
 #define kSuggestTagName @"tag_name"
 

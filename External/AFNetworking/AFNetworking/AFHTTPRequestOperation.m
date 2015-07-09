@@ -123,7 +123,7 @@ static dispatch_group_t http_request_operation_completion_group() {
             if (self.error) {
                 if (failure) {
                     dispatch_group_async(self.completionGroup ?: http_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
-                        failure(self, self.error);
+                        failure(self.responseObject, self.error);
                     });
                 }
             } else {

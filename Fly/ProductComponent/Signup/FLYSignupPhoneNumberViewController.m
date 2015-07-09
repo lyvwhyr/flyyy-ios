@@ -308,11 +308,17 @@
                                                               }
                                                               
                                                           } error:^(id responseObj, NSError *error) {
-                                                              NSInteger code = [responseObj fly_integerForKey:@"code"];
-                                                              if (code == kPhoneNumberAlreadyClaimed) {
-                                                                  [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPhoneNumberAlreadyExist")];
-                                                              } else if(code == kNotValidPhoneNumber) {
-                                                                  [PXAlertView showAlertWithTitle:LOC(@"FLYSignupNotValidPhoneNumber")];
+                                                              if (responseObj && [responseObj isKindOfClass:[NSDictionary class]]) {
+                                                                  NSInteger code = [responseObj fly_integerForKey:@"code"];
+                                                                  if (code == kPhoneNumberAlreadyClaimed) {
+                                                                      [PXAlertView showAlertWithTitle:LOC(@"FLYSignupPhoneNumberAlreadyExist")];
+                                                                  } else if(code == kNotValidPhoneNumber) {
+                                                                      [PXAlertView showAlertWithTitle:LOC(@"FLYSignupNotValidPhoneNumber")];
+                                                                  } else {
+                                                                      [[Mixpanel sharedInstance]  track:kTrackingEventClientError properties:@{kTrackingPropertyEndpointName:EP_PHONE,kTrackingPropertyServerResponse:responseObj}];
+                                                                  }
+                                                              } else {
+                                                                  [[Mixpanel sharedInstance]  track:kTrackingEventClientError properties:@{kTrackingPropertyEndpointName:EP_PHONE, kTrackingPropertyServerResponse:@"empty response obj or not NSDictionary"}];
                                                               }
                                                           }];
                                                       }
