@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger, ENV_TYPE) {
 @interface FLYServerConfig : NSObject
 
 
++ (ENV_TYPE)getEnv;
 + (NSString *)getServerURL;
 + (NSString *)getAssetURL;
 

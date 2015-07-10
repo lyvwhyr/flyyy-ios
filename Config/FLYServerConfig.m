@@ -13,7 +13,7 @@
 + (ENV_TYPE)getEnv
 {
     ENV_TYPE type = ENV_STAGING;
-//        ENV_TYPE type = ENV_DEV;
+//    ENV_TYPE type = ENV_DEV;
 //    ENV_TYPE type = ENV_PROD;
     return type;
 }
@@ -24,11 +24,11 @@
     
     NSString *serverURL;
     if (type == ENV_DEV) {
-        serverURL = DEV_BASE_URL;
+        serverURL = DEV_API_BASE_URL;
     } else if (type == ENV_STAGING) {
-        serverURL = STAGING_BASE_URL;
+        serverURL = STAGING_API_BASE_URL;
     } else {
-        serverURL = PROD_BASE_URL;
+        serverURL = PROD_API_BASE_URL;
     }
     return serverURL;
 }
