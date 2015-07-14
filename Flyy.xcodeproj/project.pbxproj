@@ -315,6 +315,7 @@
 		A67CC61C1A7DDE360092E500 /* topics.json in Resources */ = {isa = PBXBuildFile; fileRef = A67CC61B1A7DDE360092E500 /* topics.json */; };
 		A67CC61F1A7DF1730092E500 /* CoreGraphics+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A67CC61E1A7DF1730092E500 /* CoreGraphics+FLYAddition.m */; };
 		A6852B821A875EE70093C75C /* FLYRecordBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6852B811A875EE70093C75C /* FLYRecordBottomBar.m */; };
+		A690C0841B54CC47002B71CA /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A690C0831B54CC47002B71CA /* AdSupport.framework */; };
 		A690F2821AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A690F2811AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m */; };
 		A690F2851AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A690F2841AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m */; };
 		A6949B6E1B3781AA008C2529 /* FLYNavigationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6949B6D1B3781AA008C2529 /* FLYNavigationManager.m */; };
@@ -963,6 +964,7 @@
 		A67CC61E1A7DF1730092E500 /* CoreGraphics+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CoreGraphics+FLYAddition.m"; sourceTree = "<group>"; };
 		A6852B801A875EE70093C75C /* FLYRecordBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYRecordBottomBar.h; sourceTree = "<group>"; };
 		A6852B811A875EE70093C75C /* FLYRecordBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYRecordBottomBar.m; sourceTree = "<group>"; };
+		A690C0831B54CC47002B71CA /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		A690F2801AA6D64100B0D3E8 /* FLYSignupUsernameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSignupUsernameViewController.h; sourceTree = "<group>"; };
 		A690F2811AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSignupUsernameViewController.m; sourceTree = "<group>"; };
 		A690F2831AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSignupEnterPasswordViewController.h; sourceTree = "<group>"; };
@@ -1215,6 +1217,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A690C0841B54CC47002B71CA /* AdSupport.framework in Frameworks */,
 				A6DAF9701B40E3AD004CABEF /* FBSDKLoginKit.framework in Frameworks */,
 				A6DFD1311AA80670008520F5 /* CoreTelephony.framework in Frameworks */,
 				A6DAF9761B40E3E2004CABEF /* FBSDKLoginKit.framework in Frameworks */,
@@ -2546,6 +2549,7 @@
 		A6A30D741A1B1F33001AE1FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A690C0831B54CC47002B71CA /* AdSupport.framework */,
 				A6DAF9721B40E3E2004CABEF /* FBSDKCoreKit.framework */,
 				A6DAF9731B40E3E2004CABEF /* FBSDKLoginKit.framework */,
 				A6DAF9741B40E3E2004CABEF /* FBSDKShareKit.framework */,
