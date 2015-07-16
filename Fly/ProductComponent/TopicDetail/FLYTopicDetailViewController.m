@@ -14,7 +14,6 @@
 #import "UIColor+FLYAddition.h"
 #import "FLYTopic.h"
 #import "FLYTopicDetailReplyCell.h"
-#import "FLYTopicDetailTopicCell.h"
 #import "FLYRecordViewController.h"
 #import "FLYNavigationController.h"
 #import "AFHTTPRequestOperationManager.h"
@@ -62,7 +61,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 
 #define kReplyHeaderHeight 32
 
-@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailTopicCellDelegate, FLYTopicDetailReplyCellDelegate, FLYTopicDetailTabbarDelegate, FLYFeedTopicTableViewCellDelegate>
+@interface FLYTopicDetailViewController ()<UITableViewDataSource, UITableViewDelegate, FLYTopicDetailReplyCellDelegate, FLYTopicDetailTabbarDelegate, FLYFeedTopicTableViewCellDelegate>
 
 @property (nonatomic) UITableView *topicTableView;
 
@@ -465,7 +464,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 }
 
 #pragma mark - FLYTopicDetailTopicCellDelegate
-- (void)commentButtonTapped:(FLYTopicDetailTopicCell *)cell
+- (void)commentButtonTapped:(FLYFeedTopicTableViewCell *)cell
 {
     [self _commentButtonTapped:nil];
 }

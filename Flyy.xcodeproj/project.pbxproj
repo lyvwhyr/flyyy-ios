@@ -264,7 +264,6 @@
 		A657BAEA1AC9410500886C0F /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A657BAE81AC9410500886C0F /* HMSegmentedControl.m */; };
 		A657BAEB1AC9410500886C0F /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A657BAE91AC9410500886C0F /* Launch Screen.xib */; };
 		A659E4281AD8B99C0089EFB7 /* libZtx_iOS-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A659E4261AD8B99C0089EFB7 /* libZtx_iOS-fat.a */; };
-		A65ED97F1A91523600E10D5C /* FLYTopicDetailTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED97E1A91523600E10D5C /* FLYTopicDetailTopicCell.m */; };
 		A65ED9821A915FAE00E10D5C /* FLYPlayTimelineView.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED9811A915FAE00E10D5C /* FLYPlayTimelineView.m */; };
 		A65ED98C1A91B4F600E10D5C /* FLYReply.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED98B1A91B4F600E10D5C /* FLYReply.m */; };
 		A662A5BC1A9AF6F0002CE4CC /* FLYGroupListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A662A5BB1A9AF6F0002CE4CC /* FLYGroupListCell.m */; };
@@ -880,8 +879,6 @@
 		A657BAE91AC9410500886C0F /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		A659E4261AD8B99C0089EFB7 /* libZtx_iOS-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libZtx_iOS-fat.a"; sourceTree = "<group>"; };
 		A659E4271AD8B99C0089EFB7 /* ZTX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTX.h; sourceTree = "<group>"; };
-		A65ED97D1A91523600E10D5C /* FLYTopicDetailTopicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTopicDetailTopicCell.h; sourceTree = "<group>"; };
-		A65ED97E1A91523600E10D5C /* FLYTopicDetailTopicCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTopicDetailTopicCell.m; sourceTree = "<group>"; };
 		A65ED9801A915FAE00E10D5C /* FLYPlayTimelineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPlayTimelineView.h; sourceTree = "<group>"; };
 		A65ED9811A915FAE00E10D5C /* FLYPlayTimelineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPlayTimelineView.m; sourceTree = "<group>"; };
 		A65ED9871A91A88900E10D5C /* FLYNotificationConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYNotificationConstant.h; sourceTree = "<group>"; };
@@ -2656,8 +2653,6 @@
 				A6A57AAB1A34555400610785 /* FLYTopicDetailReplyCell.m */,
 				A67208211A3569C600B2C5B5 /* FLYReplyPlayView.h */,
 				A67208221A3569C600B2C5B5 /* FLYReplyPlayView.m */,
-				A65ED97D1A91523600E10D5C /* FLYTopicDetailTopicCell.h */,
-				A65ED97E1A91523600E10D5C /* FLYTopicDetailTopicCell.m */,
 				A65ED9801A915FAE00E10D5C /* FLYPlayTimelineView.h */,
 				A65ED9811A915FAE00E10D5C /* FLYPlayTimelineView.m */,
 				A6D7038C1AAEBC2A002C8D89 /* FLYTopicDetailTabbar.h */,
@@ -3325,7 +3320,6 @@
 				A698F5251B577B3F00953B4D /* TwitterTextEntity.m in Sources */,
 				A67CC61F1A7DF1730092E500 /* CoreGraphics+FLYAddition.m in Sources */,
 				A6A0E4A81A1E76110036116E /* FLEXFileBrowserTableViewController.m in Sources */,
-				A65ED97F1A91523600E10D5C /* FLYTopicDetailTopicCell.m in Sources */,
 				A6263E921A187E1200C4C3BA /* main.m in Sources */,
 				A6DFD1341AA8291B008520F5 /* FLYLoginSignupViewController.m in Sources */,
 				A643AEF01AA9539E00BF4E0F /* NINetworkActivity.m in Sources */,
