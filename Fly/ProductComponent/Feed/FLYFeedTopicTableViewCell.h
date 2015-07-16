@@ -13,6 +13,7 @@
 
 #import "FLYTopic.h"
 #import "FLYAudioItem.h"
+#import "TTTAttributedLabel.h"
 
 typedef NS_OPTIONS(NSUInteger, FLYTopicCellOptions) {
     FLYTopicCellOptionGroupName = 1 << 0,
@@ -34,9 +35,8 @@ typedef NS_OPTIONS(NSUInteger, FLYTopicCellOptions) {
 
 //play button
 @property (nonatomic) UIButton *playButton;
-@property (nonatomic) UILabel *topicTitle;
+@property (nonatomic) TTTAttributedLabel *topicTitleLabel;
 @property (nonatomic) UILabel *userNameLabel;
-@property (nonatomic) UIButton *groupNameButton;
 @property (nonatomic) FLYIconButton *likeButton;
 @property (nonatomic) FLYIconButton *commentButton;
 

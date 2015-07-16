@@ -37,6 +37,7 @@
 + (UIColor *)flyInlineAction;
 + (UIColor *)flyHomefeedBlue;
 + (UIColor *)flyButtonGreen;
++ (UIColor *)flyTopicTitleColor;
 
 + (UIColor *)customGrayColor;
 + (UIColor *)customRedColor;

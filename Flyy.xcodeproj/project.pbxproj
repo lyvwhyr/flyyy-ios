@@ -319,6 +319,9 @@
 		A690F2821AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A690F2811AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m */; };
 		A690F2851AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A690F2841AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m */; };
 		A6949B6E1B3781AA008C2529 /* FLYNavigationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6949B6D1B3781AA008C2529 /* FLYNavigationManager.m */; };
+		A698F51E1B577A3A00953B4D /* SDWTwitterLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A698F51D1B577A3A00953B4D /* SDWTwitterLabel.m */; };
+		A698F5241B577B3F00953B4D /* TwitterText.m in Sources */ = {isa = PBXBuildFile; fileRef = A698F5211B577B3F00953B4D /* TwitterText.m */; };
+		A698F5251B577B3F00953B4D /* TwitterTextEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A698F5231B577B3F00953B4D /* TwitterTextEntity.m */; };
 		A69C4B941A27094B00CAD443 /* icon_tabbar_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */; };
 		A69C4B981A270E1400CAD443 /* PaperButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4B971A270E1400CAD443 /* PaperButton.m */; };
 		A69C4B9A1A27111700CAD443 /* icon_filter_feed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B991A27111700CAD443 /* icon_filter_feed@3x.png */; };
@@ -454,6 +457,7 @@
 		A6F27CAB1A2085D6000EC0B3 /* icon_audio_wave@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */; };
 		A6F422371B1ABFDB007F4C79 /* FLYReplyPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F422361B1ABFDB007F4C79 /* FLYReplyPayload.m */; };
 		A6F4223A1B1ABFEE007F4C79 /* FLYMentionPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F422391B1ABFEE007F4C79 /* FLYMentionPayload.m */; };
+		A6F8619A1B5856B8004753C7 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F861991B5856B8004753C7 /* TTTAttributedLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -971,6 +975,12 @@
 		A690F2841AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSignupEnterPasswordViewController.m; sourceTree = "<group>"; };
 		A6949B6C1B3781AA008C2529 /* FLYNavigationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYNavigationManager.h; sourceTree = "<group>"; };
 		A6949B6D1B3781AA008C2529 /* FLYNavigationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYNavigationManager.m; sourceTree = "<group>"; };
+		A698F51C1B577A3A00953B4D /* SDWTwitterLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWTwitterLabel.h; sourceTree = "<group>"; };
+		A698F51D1B577A3A00953B4D /* SDWTwitterLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWTwitterLabel.m; sourceTree = "<group>"; };
+		A698F5201B577B3F00953B4D /* TwitterText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterText.h; sourceTree = "<group>"; };
+		A698F5211B577B3F00953B4D /* TwitterText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterText.m; sourceTree = "<group>"; };
+		A698F5221B577B3F00953B4D /* TwitterTextEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterTextEntity.h; sourceTree = "<group>"; };
+		A698F5231B577B3F00953B4D /* TwitterTextEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterTextEntity.m; sourceTree = "<group>"; };
 		A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_group@3x.png"; sourceTree = "<group>"; };
 		A69C4B961A270E1400CAD443 /* PaperButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperButton.h; sourceTree = "<group>"; };
 		A69C4B971A270E1400CAD443 /* PaperButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperButton.m; sourceTree = "<group>"; };
@@ -1208,6 +1218,8 @@
 		A6F422361B1ABFDB007F4C79 /* FLYReplyPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYReplyPayload.m; sourceTree = "<group>"; };
 		A6F422381B1ABFEE007F4C79 /* FLYMentionPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYMentionPayload.h; sourceTree = "<group>"; };
 		A6F422391B1ABFEE007F4C79 /* FLYMentionPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYMentionPayload.m; sourceTree = "<group>"; };
+		A6F861981B5856B8004753C7 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		A6F861991B5856B8004753C7 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		DEF027D145FDC2CC1553A7A5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F4DA38F875E9D2C76E94F1F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1922,6 +1934,9 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A6F861971B5856B8004753C7 /* TTTAttributedLabel */,
+				A698F51F1B577AF400953B4D /* twitter-text */,
+				A698F51B1B577A3000953B4D /* fast-twitter-label */,
 				A6227D141AD109FA0039083D /* iRate */,
 				A657BAE61AC9410500886C0F /* HMSegmentedControl */,
 				A669FB2A1ABFD8B800A96D24 /* SVWebViewController */,
@@ -2249,6 +2264,26 @@
 				A67CC61B1A7DDE360092E500 /* topics.json */,
 			);
 			path = fixture;
+			sourceTree = "<group>";
+		};
+		A698F51B1B577A3000953B4D /* fast-twitter-label */ = {
+			isa = PBXGroup;
+			children = (
+				A698F51C1B577A3A00953B4D /* SDWTwitterLabel.h */,
+				A698F51D1B577A3A00953B4D /* SDWTwitterLabel.m */,
+			);
+			path = "fast-twitter-label";
+			sourceTree = "<group>";
+		};
+		A698F51F1B577AF400953B4D /* twitter-text */ = {
+			isa = PBXGroup;
+			children = (
+				A698F5201B577B3F00953B4D /* TwitterText.h */,
+				A698F5211B577B3F00953B4D /* TwitterText.m */,
+				A698F5221B577B3F00953B4D /* TwitterTextEntity.h */,
+				A698F5231B577B3F00953B4D /* TwitterTextEntity.m */,
+			);
+			path = "twitter-text";
 			sourceTree = "<group>";
 		};
 		A69C4B951A270E0200CAD443 /* UIControls */ = {
@@ -2716,6 +2751,15 @@
 			path = PulsingHalo;
 			sourceTree = "<group>";
 		};
+		A6F861971B5856B8004753C7 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				A6F861981B5856B8004753C7 /* TTTAttributedLabel.h */,
+				A6F861991B5856B8004753C7 /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3052,6 +3096,7 @@
 				A6227D131AD0BD5D0039083D /* UIButton+TouchAreaInsets.m in Sources */,
 				A6048A3F1A85E63100C67480 /* EXTRuntimeExtensions.m in Sources */,
 				A643AEE61AA9539E00BF4E0F /* NIButtonUtilities.m in Sources */,
+				A698F51E1B577A3A00953B4D /* SDWTwitterLabel.m in Sources */,
 				A6799C8E1AABEB3D003DAE5B /* FLYVoiceEffectView.m in Sources */,
 				A6A0E4BD1A1E76110036116E /* FLEXUtility.m in Sources */,
 				A67A5E851A70CBA60098DA23 /* FLYServerConfig.m in Sources */,
@@ -3071,6 +3116,7 @@
 				A638D8381ACA0D9100E67ED3 /* FLYSettingsViewController.m in Sources */,
 				A643AEFA1AA9539E00BF4E0F /* UIResponder+NimbusCore.m in Sources */,
 				A6E5CF151AD745AC0058C081 /* FLYDashTextView.m in Sources */,
+				A6F8619A1B5856B8004753C7 /* TTTAttributedLabel.m in Sources */,
 				A6048ADE1A8603EF00C67480 /* UIProgressView+AFNetworking.m in Sources */,
 				A6450B171A998A08009EF0A3 /* AFSoundRecord.m in Sources */,
 				A69C4BB41A27D61000CAD443 /* FLYFilterSelectorGroupTableViewCell.m in Sources */,
@@ -3174,6 +3220,7 @@
 				A669FB321ABFD8C200A96D24 /* SVModalWebViewController.m in Sources */,
 				A6A0E4A71A1E76110036116E /* FLEXFileBrowserSearchOperation.m in Sources */,
 				A665FC1F1AA263A900490A18 /* FLYServiceBase.m in Sources */,
+				A698F5241B577B3F00953B4D /* TwitterText.m in Sources */,
 				A6A0E4971A1E76110036116E /* FLEXArgumentInputSwitchView.m in Sources */,
 				A640624A1AD5DF5000278ED6 /* FLYFeedOnBoardingView.m in Sources */,
 				A6A0E4C01A1E76110036116E /* FLEXImagePreviewViewController.m in Sources */,
@@ -3275,6 +3322,7 @@
 				A66E204F1A2EBDAE004235F5 /* RDVTabBarController.m in Sources */,
 				A6CD56EE1A48079D003486DD /* FLYFileManager.m in Sources */,
 				A6A0E4BC1A1E76110036116E /* FLEXRuntimeUtility.m in Sources */,
+				A698F5251B577B3F00953B4D /* TwitterTextEntity.m in Sources */,
 				A67CC61F1A7DF1730092E500 /* CoreGraphics+FLYAddition.m in Sources */,
 				A6A0E4A81A1E76110036116E /* FLEXFileBrowserTableViewController.m in Sources */,
 				A65ED97F1A91523600E10D5C /* FLYTopicDetailTopicCell.m in Sources */,

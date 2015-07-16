@@ -117,19 +117,6 @@
         _usernameArrow.image = [UIImage imageNamed:@"icon_up_arrow"];
         [self addSubview:_usernameArrow];
         
-        //group name
-        if ([_cellToExplain.groupNameButton.titleLabel.text length] != 0) {
-            _groupNameLabel = [UILabel new];
-            _groupNameLabel.textColor = [UIColor whiteColor];
-            _groupNameLabel.font = font;
-            _groupNameLabel.text = LOC(@"FLYFeedOnboardingGroupName");
-            _groupNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
-            [self addSubview:_groupNameLabel];
-            
-            _groupNameArrow = [UIImageView new];
-            _groupNameArrow.image = [UIImage imageNamed:@"icon_up_arrow"];
-            [self addSubview:_groupNameArrow];
-        }
         
         // comments
         _commentsLabel = [UILabel new];
@@ -206,14 +193,14 @@
     
     // topic title
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(_cellToExplain.topicTitle);
+        make.centerX.equalTo(_cellToExplain.topicTitleLabel);
         make.bottom.equalTo(self.topBackgroundView.mas_bottom).offset(-37);
     }];
     
     [self.titleArrow mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.cellToExplain.topicTitle);
+        make.centerX.equalTo(self.cellToExplain.topicTitleLabel);
         make.top.equalTo(self.titleLabel.mas_bottom).offset(kLabelTitleSpacing);
-        make.bottom.equalTo(self.cellToExplain.topicTitle.mas_top).offset(-kLabelTitleSpacing);
+        make.bottom.equalTo(self.cellToExplain.topicTitleLabel.mas_top).offset(-kLabelTitleSpacing);
     }];
     
     
@@ -240,20 +227,6 @@
         make.top.equalTo(self.cellToExplain.userNameLabel.mas_bottom).offset(kLabelTitleSpacing);
         make.bottom.equalTo(self.usernameLabel.mas_top).offset(-kLabelTitleSpacing);
     }];
-    
-    // group name
-    if ([_cellToExplain.groupNameButton.titleLabel.text length] != 0) {
-        [self.groupNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.cellToExplain.groupNameButton);
-            make.top.equalTo(self.bottomBackgroundView.mas_top).offset(40);
-        }];
-        
-        [self.groupNameArrow mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.cellToExplain.groupNameButton);
-            make.height.equalTo(@(50));
-            make.bottom.equalTo(self.groupNameLabel.mas_top).offset(-kLabelTitleSpacing);
-        }];
-    }
     
     // comment
     [self.commentsLabel mas_makeConstraints:^(MASConstraintMaker *make) {

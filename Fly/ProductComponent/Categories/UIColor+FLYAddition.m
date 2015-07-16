@@ -35,6 +35,7 @@
 #define kColorFlyInlineAction                           @"#B5CBD6"
 #define kColorFlyHomefeedBlue                           @"#79B4D2"
 #define kColorFlyButtonGreen                            @"#5FD08F"
+#define kColorFlyTopicTitle                                @"#676666"
 
 @implementation UIColor (FLYAddition)
 
@@ -175,6 +176,11 @@
 + (UIColor *)flyButtonGreen
 {
     return [self colorWithHexString:kColorFlyButtonGreen];
+}
+
++ (UIColor *)flyTopicTitleColor
+{
+    return [self colorWithHexString:kColorFlyTopicTitle];
 }
 
 

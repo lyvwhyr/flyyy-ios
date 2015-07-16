@@ -25,7 +25,7 @@
 #import "UIButton+TouchAreaInsets.h"
 #import "SDiPhoneVersion.h"
 
-@interface FLYFeedTopicTableViewCell()
+@interface FLYFeedTopicTableViewCell() <TTTAttributedLabelDelegate>
 
 @property (nonatomic) UIActivityIndicatorView *loadingIndicatorView;
 
@@ -78,13 +78,12 @@
         _playButton.touchAreaInsets = UIEdgeInsetsMake(kTopicTitleTopPadding - 2, kPlaybuttonLeftPadding, 15, kTopicTitleLeftPadding);
         [self.contentView insertSubview:self.playButton aboveSubview:self.contentView];
         
-        _topicTitle = [UILabel new];
-        _topicTitle.numberOfLines = 0;
-        _topicTitle.adjustsFontSizeToFitWidth = NO;
-        _topicTitle.textColor = [UIColor colorWithHexString:@"#676666"];
-        _topicTitle.font = [UIFont fontWithName:@"Avenir-Roman" size:16];
-        _topicTitle.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.contentView addSubview:_topicTitle];
+        _topicTitleLabel = [TTTAttributedLabel new];
+        _topicTitleLabel.delegate = self;
+        _topicTitleLabel.numberOfLines = 0;
+        _topicTitleLabel.adjustsFontSizeToFitWidth = NO;
+        _topicTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.contentView addSubview:_topicTitleLabel];
         
         _userNameLabel = [UILabel new];
         _userNameLabel.textColor = [UIColor flyGrey];
@@ -93,16 +92,6 @@
         _userNameLabel.adjustsFontSizeToFitWidth = YES;
         _userNameLabel.minimumScaleFactor = 0.5;
         [self.contentView addSubview:_userNameLabel];
-        
-        _groupNameButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _groupNameButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [_groupNameButton addTarget:self action:@selector(_groupNameTapped) forControlEvents:UIControlEventTouchUpInside];
-        _groupNameButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:13];
-        _groupNameButton.titleLabel.adjustsFontSizeToFitWidth = YES;
-        [_groupNameButton setTitleColor:[UIColor flyHomefeedBlue] forState:UIControlStateNormal];
-        _groupNameButton.titleEdgeInsets = UIEdgeInsetsZero;
-        [_groupNameButton sizeToFit];
-        [self.contentView addSubview:_groupNameButton];
         
         UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
         _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyInlineAction]  icon:@"icon_homefeed_like" isIconLeft:YES]  ;
@@ -218,9 +207,9 @@
         
         
         void (^userNameLabelBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
-            make.top.equalTo(self.topicTitle.mas_bottom).offset(10);
-            make.leading.equalTo(self.topicTitle);
-            make.trailing.lessThanOrEqualTo(self.topicTitle.mas_centerX).offset(-25);
+            make.top.equalTo(self.topicTitleLabel.mas_bottom).offset(10);
+            make.leading.equalTo(self.topicTitleLabel);
+            make.trailing.lessThanOrEqualTo(self.topicTitleLabel.mas_centerX).offset(-25);
         };
 
         void (^likeButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
@@ -233,18 +222,8 @@
             make.trailing.equalTo(self.contentView).offset(-kInlineActionRightPadding);
         };
         
-        void (^groupNameButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
-            make.centerY.equalTo(self.userNameLabel);
-            make.leading.equalTo(self.userNameLabel.mas_trailing).offset(kGroupLeftPadding);
-            make.trailing.lessThanOrEqualTo(self.topicTitle.mas_trailing);
-            make.width.lessThanOrEqualTo(@(CGRectGetWidth(self.bounds)/4));
-        };
-        
         [self.playButton mas_makeConstraints:playButtonBlock];
-        [self.topicTitle mas_makeConstraints:topicTitleBlock];
-        if (self.groupNameButton) {
-            [self.groupNameButton mas_makeConstraints:groupNameButtonBlock];
-        }
+        [self.topicTitleLabel mas_makeConstraints:topicTitleBlock];
         [self.userNameLabel mas_makeConstraints:userNameLabelBlock];
         [self.likeButton mas_makeConstraints:likeButtonBlock];
         [self.commentButton mas_makeConstraints:commentButtonBlock];
@@ -282,14 +261,27 @@
     
     self.topic = topic;
     self.userNameLabel.text = [NSString stringWithFormat:@"by %@", topic.user.userName];
+
     
-    self.topicTitle.text = topic.topicTitle;
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:topic.topicTitle];
+    self.topicTitleLabel.linkAttributes = @{NSForegroundColorAttributeName:[UIColor flyHomefeedBlue]};
+    self.topicTitleLabel.text = [FLYFeedTopicTableViewCell _getDisplayTitleString:topic];
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[FLYFeedTopicTableViewCell _getDisplayTitleString:topic]];
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineSpacing = 2;
-    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, _topicTitleString.length)];
-    self.topicTitle.attributedText = attrStr;
-    [self.topicTitle sizeToFit];
+    
+    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [FLYFeedTopicTableViewCell _getDisplayTitleString:topic].length)];
+    [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, [FLYFeedTopicTableViewCell _getDisplayTitleString:topic].length)];
+    [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor flyTopicTitleColor] range:NSMakeRange(0, [FLYFeedTopicTableViewCell _getDisplayTitleString:topic].length)];
+    
+    self.topicTitleLabel.attributedText = attrStr;
+    
+    // add hashTags
+    if ([self.topic.group.groupName length] > 0) {
+        NSRange range = [self.topicTitleLabel.text rangeOfString:[NSString stringWithFormat:@"#%@",self.topic.group.groupName] options:NSBackwardsSearch];
+        [self.topicTitleLabel addLinkToURL:[NSURL URLWithString:@"flyyapp://hashtag"] withRange:range];
+    }
+    
+    [self.topicTitleLabel sizeToFit];
     
     if (self.topic.liked) {
         [self setLiked:YES animated:NO];
@@ -297,19 +289,7 @@
         [self setLiked:NO animated:NO];
     }
     
-    if (topic.group.groupName) {
-        [self.groupNameButton setTitle:[NSString stringWithFormat:@"#%@", topic.group.groupName] forState:UIControlStateNormal];
-        self.groupNameButton.userInteractionEnabled = YES;
-    } else {
-        [self.groupNameButton setTitle:@"" forState:UIControlStateNormal];
-        self.groupNameButton.userInteractionEnabled = NO;
-    }
     [self.commentButton setLabelText:[NSString stringWithFormat:@"%d", (int)topic.replyCount]];
-    
-    if (self.options & FLYTopicCellOptionGroupName) {
-        [self.groupNameButton removeFromSuperview];
-        self.groupNameButton = nil;
-    }
 }
 
 - (void)setLiked:(BOOL)liked animated:(BOOL)animated
@@ -408,29 +388,23 @@
 }
 
 
-- (void)_groupNameTapped
-{
-    [[FLYScribe sharedInstance] logEvent:@"feed" section:@"group_name" component:nil element:nil action:@"click"];
-    [self.delegate groupNameTapped:self indexPath:self.indexPath];
-}
-
-
 #pragma mark - Height of the cell
 + (CGFloat)heightForTopic:(FLYTopic *)topic
 {
     if (topic.topicTitle.length == 0) {
         return 0;
     }
+    NSString *topicTitleDisplayStr = [FLYFeedTopicTableViewCell _getDisplayTitleString:topic];
     
     CGFloat leftPadding = kPlaybuttonLeftPadding + kPlayButtonSize + kTopicTitleLeftPadding;
     CGFloat rightPadding = kInlineActionRightPadding + kMaxInlineActionWidth + kTopicTitleRightPadding;
     CGFloat height = 0;
     UILabel *dummyLabel = [UILabel new];
     dummyLabel.font = [UIFont fontWithName:@"Avenir-Roman" size:16];
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:topic.topicTitle];
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:topicTitleDisplayStr];
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, topic.topicTitle.length)];
-    [attrStr addAttribute:NSFontAttributeName value:dummyLabel.font range:NSMakeRange(0, topic.topicTitle.length)];
+    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, topicTitleDisplayStr.length)];
+    [attrStr addAttribute:NSFontAttributeName value:dummyLabel.font range:NSMakeRange(0, topicTitleDisplayStr.length)];
     dummyLabel.attributedText = attrStr;
     CGFloat maxWidth = CGRectGetWidth([[UIScreen mainScreen] bounds]) - rightPadding - leftPadding;
     
@@ -440,6 +414,13 @@
     height += rect.size.height + 20 + 40;
     
     return height;
+}
+
+#pragma mark - TTTAttributedLabelDelegate
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
+{
+    [[FLYScribe sharedInstance] logEvent:@"feed" section:@"group_name" component:nil element:nil action:@"click"];
+    [self.delegate groupNameTapped:self indexPath:self.indexPath];
 }
 
 #pragma mark - notification
@@ -459,6 +440,17 @@
         return;
     }
     [self _updateReplyCount:topic.replyCount];
+}
+
++ (NSString *)_getDisplayTitleString:(FLYTopic *)topic
+{
+    NSString *topicTitleDisplayStr;
+    if ([topic.group.groupName length] > 0) {
+        topicTitleDisplayStr = [NSString stringWithFormat:@"%@ %@", topic.topicTitle, [NSString stringWithFormat:@"#%@", topic.group.groupName]];
+    } else {
+        topicTitleDisplayStr = topic.topicTitle;
+    }
+    return topicTitleDisplayStr;
 }
 
 @end
