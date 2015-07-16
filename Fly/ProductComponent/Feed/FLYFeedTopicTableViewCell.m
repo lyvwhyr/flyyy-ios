@@ -264,6 +264,7 @@
 
     
     self.topicTitleLabel.linkAttributes = @{NSForegroundColorAttributeName:[UIColor flyHomefeedBlue]};
+    self.topicTitleLabel.activeLinkAttributes = @{NSForegroundColorAttributeName:[UIColor flyHomefeedBlue]};
     self.topicTitleLabel.text = [FLYFeedTopicTableViewCell _getDisplayTitleString:topic];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[FLYFeedTopicTableViewCell _getDisplayTitleString:topic]];
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
@@ -278,7 +279,7 @@
     // add hashTags
     if ([self.topic.group.groupName length] > 0) {
         NSRange range = [self.topicTitleLabel.text rangeOfString:[NSString stringWithFormat:@"#%@",self.topic.group.groupName] options:NSBackwardsSearch];
-        [self.topicTitleLabel addLinkToURL:[NSURL URLWithString:@"flyyapp://hashtag"] withRange:range];
+        [self.topicTitleLabel addLinkToURL:[NSURL URLWithString:@"flyy://tag"] withRange:range];
     }
     
     [self.topicTitleLabel sizeToFit];

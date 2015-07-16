@@ -21,8 +21,13 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.flyyapp</string>
+		</dict>
+		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>flyy</string>
 				<string>fb1605785256348348</string>
 			</array>
 		</dict>
