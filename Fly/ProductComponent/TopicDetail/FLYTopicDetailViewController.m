@@ -39,6 +39,7 @@
 #import "FLYTopicDetailOnboardingView.h"
 #import "FLYPushNotificationManager.h"
 #import "FLYServerConfig.h"
+#import "FLYShareManager.h"
 
 typedef NS_ENUM(NSInteger, FLYPostAuthorActions) {
     FLYPostAuthorActionsDelete = 0,
@@ -702,20 +703,13 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 #pragma mark - Navigation bar
 - (void)loadRightBarButton
 {
-    UIImage *shareButtonImage = [UIImage imageNamed:@"icon_share"];
-    UIButton *shareButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [shareButton setImage:shareButtonImage forState:UIControlStateNormal];
-    [shareButton addTarget:self action:@selector(_shareButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [shareButton setFrame:CGRectMake(0, 0, 25, 20)];
-    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
-    
-    UIImage *optionButtonImage = [UIImage imageNamed:@"icon_detail_option"];
-    UIButton *optionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [optionButton setImage:optionButtonImage forState:UIControlStateNormal];
-    [optionButton addTarget:self action:@selector(_optionTapped) forControlEvents:UIControlEventTouchUpInside];
-    [optionButton setFrame:CGRectMake(0, 0, 20, 20)];
-    UIBarButtonItem *optionItem = [[UIBarButtonItem alloc] initWithCustomView:optionButton];
-    self.navigationItem.rightBarButtonItems = @[optionItem, shareItem];
+    FLYOptionBarButtonItem *barItem = [FLYOptionBarButtonItem barButtonItem:NO];
+    @weakify(self)
+    barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+        @strongify(self)
+        [self _optionTapped];
+    };
+    self.navigationItem.rightBarButtonItem = barItem;
 }
 
 - (void)_backButtonTapped
@@ -763,26 +757,6 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         }
     } cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitlesArray:otherButtons];
     [actionSheet showInView:self.view];
-}
-
-- (void)_shareButtonTapped
-{
-    NSString *message = [NSString stringWithFormat:@"%@ %@", self.topic.topicTitle, @"#Flyy"];
-    NSURL *link;
-    ENV_TYPE type = [FLYServerConfig getEnv];
-    
-    NSString *webBaseURL;
-    if (type == ENV_DEV) {
-        webBaseURL = DEV_WEB_BASE_URL;
-    } else if (type == ENV_STAGING) {
-        webBaseURL = STAGING_WEB_BASE_URL;
-    } else {
-        webBaseURL = PROD_WEB_BASE_URL;
-    }
-    link = [NSURL URLWithString:[NSString stringWithFormat:@"%@/share/%@", webBaseURL, self.topic.topicId]];
-    NSArray * shareItems = @[message, link];
-    UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
-    [self presentViewController:avc animated:YES completion:nil];
 }
 
 - (void)_reportReply:(FLYReply *)reply

@@ -457,6 +457,8 @@
 		A6F422371B1ABFDB007F4C79 /* FLYReplyPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F422361B1ABFDB007F4C79 /* FLYReplyPayload.m */; };
 		A6F4223A1B1ABFEE007F4C79 /* FLYMentionPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F422391B1ABFEE007F4C79 /* FLYMentionPayload.m */; };
 		A6F8619A1B5856B8004753C7 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F861991B5856B8004753C7 /* TTTAttributedLabel.m */; };
+		A6F861A01B58820B004753C7 /* UITableViewCell+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F8619F1B58820B004753C7 /* UITableViewCell+FLYAddition.m */; };
+		A6F861A41B588302004753C7 /* FLYShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F861A31B588302004753C7 /* FLYShareManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1217,6 +1219,10 @@
 		A6F422391B1ABFEE007F4C79 /* FLYMentionPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYMentionPayload.m; sourceTree = "<group>"; };
 		A6F861981B5856B8004753C7 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
 		A6F861991B5856B8004753C7 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		A6F8619E1B58820B004753C7 /* UITableViewCell+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+FLYAddition.h"; sourceTree = "<group>"; };
+		A6F8619F1B58820B004753C7 /* UITableViewCell+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+FLYAddition.m"; sourceTree = "<group>"; };
+		A6F861A21B588302004753C7 /* FLYShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYShareManager.h; sourceTree = "<group>"; };
+		A6F861A31B588302004753C7 /* FLYShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYShareManager.m; sourceTree = "<group>"; };
 		DEF027D145FDC2CC1553A7A5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F4DA38F875E9D2C76E94F1F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1503,6 +1509,7 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A6F861A11B5882EF004753C7 /* Share */,
 				A61629BC1B13D48500DC0CCF /* PushNotification */,
 				A64062441AD5D60C00278ED6 /* Onboarding */,
 				A657BAE11AC925CB00886C0F /* Catalog */,
@@ -1596,6 +1603,8 @@
 				A6D949ED1A9086FA003D4265 /* UIDevice+FLYAddition.m */,
 				A636FC391A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.h */,
 				A636FC3A1A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.m */,
+				A6F8619E1B58820B004753C7 /* UITableViewCell+FLYAddition.h */,
+				A6F8619F1B58820B004753C7 /* UITableViewCell+FLYAddition.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -2755,6 +2764,15 @@
 			path = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
+		A6F861A11B5882EF004753C7 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				A6F861A21B588302004753C7 /* FLYShareManager.h */,
+				A6F861A31B588302004753C7 /* FLYShareManager.m */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3235,6 +3253,7 @@
 				A69C4BE51A284B6F00CAD443 /* FLYFeedViewController.m in Sources */,
 				A6048AE01A8603EF00C67480 /* UIWebView+AFNetworking.m in Sources */,
 				A669FB631ABFD99B00A96D24 /* SVWebViewControllerActivity.m in Sources */,
+				A6F861A01B58820B004753C7 /* UITableViewCell+FLYAddition.m in Sources */,
 				A69C4B981A270E1400CAD443 /* PaperButton.m in Sources */,
 				A6A57AAD1A34555400610785 /* FLYTopicDetailReplyCell.m in Sources */,
 				A6A0E4BB1A1E76110036116E /* FLEXResources.m in Sources */,
@@ -3246,6 +3265,7 @@
 				A643AEF41AA9539E00BF4E0F /* NIPaths.m in Sources */,
 				A6A30D6C1A1B0586001AE1FE /* FLYRecordViewController.m in Sources */,
 				A648C0E81A19AD4A00FF1744 /* MASViewConstraint.m in Sources */,
+				A6F861A41B588302004753C7 /* FLYShareManager.m in Sources */,
 				A6A0E4A51A1E76110036116E /* FLEXWindow.m in Sources */,
 				A6A8DFFA1AC4D92500BF77BB /* FLYPasswordResetEnterPasswordViewController.m in Sources */,
 				A6048A421A85E63100C67480 /* EXTSelectorChecking.m in Sources */,

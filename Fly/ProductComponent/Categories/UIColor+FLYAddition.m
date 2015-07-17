@@ -35,7 +35,10 @@
 #define kColorFlyInlineAction                           @"#B5CBD6"
 #define kColorFlyHomefeedBlue                           @"#79B4D2"
 #define kColorFlyButtonGreen                            @"#5FD08F"
-#define kColorFlyTopicTitle                                @"#676666"
+#define kColorFlyTopicTitle                             @"#676666"
+#define kColorFlyShareTextYellow                        @"#EEB17D"
+#define kColorFlyShareTextBlue                          @"#4CA8D3"
+#define kColorFlyShareTextGrey                          @"#9B9B9B"
 
 @implementation UIColor (FLYAddition)
 
@@ -183,6 +186,20 @@
     return [self colorWithHexString:kColorFlyTopicTitle];
 }
 
++ (UIColor *)flyShareTextYellow
+{
+    return [self colorWithHexString:kColorFlyShareTextYellow];
+}
+
++ (UIColor *)flyShareTextBlue
+{
+    return [self colorWithHexString:kColorFlyShareTextBlue];
+}
+
++ (UIColor *)flyShareTextGrey
+{
+    return [self colorWithHexString:kColorFlyShareTextGrey];
+}
 
 #pragma mark - from external libraries
 + (UIColor *)customGrayColor

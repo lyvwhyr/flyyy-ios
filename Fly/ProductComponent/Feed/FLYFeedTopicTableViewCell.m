@@ -24,12 +24,14 @@
 #import "UIButton+TouchAreaInsets.h"
 #import "UIButton+TouchAreaInsets.h"
 #import "SDiPhoneVersion.h"
+#import "UITableViewCell+FLYAddition.h"
+#import "FLYShareManager.h"
 
 @interface FLYFeedTopicTableViewCell() <TTTAttributedLabelDelegate>
 
 @property (nonatomic) UIActivityIndicatorView *loadingIndicatorView;
 
-@property (nonatomic) UIButton *shareButton;
+@property (nonatomic) FLYIconButton *shareButton;
 
 // play progress view
 @property (nonatomic) UAProgressView *progressView;
@@ -92,6 +94,13 @@
         _userNameLabel.adjustsFontSizeToFitWidth = YES;
         _userNameLabel.minimumScaleFactor = 0.5;
         [self.contentView addSubview:_userNameLabel];
+        
+        UIFont *shareFont = [UIFont fontWithName:@"Avenir-Book" size:10];
+        _shareButton = [[FLYIconButton alloc] initWithText:@"share" textFont:shareFont textColor:[UIColor flyShareTextYellow]  icon:@"icon_home_timeline_post_share" isIconLeft:YES]  ;
+        [_shareButton addTarget:self action:@selector(_shareButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        _shareButton.translatesAutoresizingMaskIntoConstraints = NO;
+        _shareButton.touchAreaInsets = UIEdgeInsetsMake(15, 15, 15, 15);
+        [self.contentView addSubview:_shareButton];
         
         UIFont *inlineActionFont = [UIFont fontWithName:@"Avenir-Book" size:13];
         _likeButton = [[FLYIconButton alloc] initWithText:@"0" textFont:inlineActionFont textColor:[UIColor flyInlineAction]  icon:@"icon_homefeed_like" isIconLeft:YES]  ;
@@ -222,11 +231,19 @@
             make.trailing.equalTo(self.contentView).offset(-kInlineActionRightPadding);
         };
         
+        void (^shareButtonBlock)(MASConstraintMaker *make) = ^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.userNameLabel);
+            make.leading.equalTo(self.userNameLabel.mas_trailing).offset(kGroupLeftPadding);
+            make.trailing.lessThanOrEqualTo(self.topicTitleLabel.mas_trailing);
+            make.width.lessThanOrEqualTo(@(CGRectGetWidth(self.bounds)/4));
+        };
+        
         [self.playButton mas_makeConstraints:playButtonBlock];
         [self.topicTitleLabel mas_makeConstraints:topicTitleBlock];
         [self.userNameLabel mas_makeConstraints:userNameLabelBlock];
         [self.likeButton mas_makeConstraints:likeButtonBlock];
         [self.commentButton mas_makeConstraints:commentButtonBlock];
+        [self.shareButton mas_makeConstraints:shareButtonBlock];
         
         self.didSetupConstraints = YES;
     }
@@ -385,7 +402,8 @@
 
 - (void)_shareButtonTapped
 {
-    [Dialog simpleToast:LOC(@"FLYWorkingInProgressHUD")];
+    UIViewController *fromViewController = self.tableViewController;
+    [FLYShareManager shareTopicWithTopic:self.topic fromViewController:fromViewController];
 }
 
 

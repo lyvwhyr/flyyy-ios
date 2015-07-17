@@ -38,6 +38,10 @@
 + (UIColor *)flyHomefeedBlue;
 + (UIColor *)flyButtonGreen;
 + (UIColor *)flyTopicTitleColor;
++ (UIColor *)flyShareTextYellow;
++ (UIColor *)flyShareTextBlue;
++ (UIColor *)flyShareTextGrey;
+
 
 + (UIColor *)customGrayColor;
 + (UIColor *)customRedColor;
