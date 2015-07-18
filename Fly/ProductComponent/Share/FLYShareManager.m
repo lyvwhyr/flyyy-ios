@@ -14,7 +14,7 @@
 
 + (void)shareTopicWithTopic:(FLYTopic *)topic fromViewController:(UIViewController *)fromVC
 {
-    NSString *message = [NSString stringWithFormat:@"%@ %@", topic.topicTitle, @"#Flyy"];
+    NSString *message = [NSString stringWithFormat:@"Listen to \"%@\" %@", topic.topicTitle, @"#Flyy"];
     NSURL *link;
     ENV_TYPE type = [FLYServerConfig getEnv];
     
