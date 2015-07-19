@@ -48,21 +48,14 @@
 
 + (void)setDeviceToken:(FLYUser *)loggedInUser
 {
-    // Send set device token server call only when
-    // Device token stored in NSUserDefault is empty or they are different.
     NSUserDefaults *defalut = [NSUserDefaults standardUserDefaults];
     NSString *currentDeviceToken = [FLYAppStateManager sharedInstance].deviceToken;
-    NSString *deviceTokenInUserDefault = [defalut stringForKey:kDeviceTokenUserDefaultKey];
-    BOOL deviceTokenRequirementSatisfied = ((!deviceTokenInUserDefault && currentDeviceToken) || ![currentDeviceToken isEqualToString:deviceTokenInUserDefault]);
     
     
-    NSString *userIdInUserDefault = [defalut stringForKey:kLoggedInUserNsUserDefaultKey];
     NSString *loggedInUserId;
     if (loggedInUser) {
         loggedInUserId = loggedInUser.userId;
     }
-    BOOL userIdRequirementSatisfied = (loggedInUserId) && ![loggedInUserId isEqualToString:userIdInUserDefault];
-    
     FLYDeviceTokenSuccessBlock success = ^(AFHTTPRequestOperation *operation, id responseObj) {
         if (currentDeviceToken) {
             [defalut setObject:currentDeviceToken forKey:kDeviceTokenUserDefaultKey];
@@ -82,9 +75,7 @@
         UALog(@"Failed to set device token, %@", responseObj);
     };
     
-    if (deviceTokenRequirementSatisfied || userIdRequirementSatisfied) {
-        [FLYDeviceTokenService deviceToken:currentDeviceToken isSet:YES successBlock:success errorBlock:error];
-    }
+    [FLYDeviceTokenService deviceToken:currentDeviceToken isSet:YES successBlock:success errorBlock:error];
 }
 
 @end

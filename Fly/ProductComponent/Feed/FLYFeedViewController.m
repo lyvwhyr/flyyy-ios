@@ -44,7 +44,7 @@
 
 #define kMaxWaitForTableLoad 3
 
-#define kPopPushNotificationDialogSessionCount 3
+#define kPopPushNotificationDialogSessionCount 2
 #define kHomeTimelineViewCountAfterLoginKey @"kHomeTimelineViewCountAfterLoginKey"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
@@ -277,17 +277,15 @@
 
 - (void)_popPushNotificationDialogIfNecessary
 {
-    // pop enable push notification dialog on 3rd session
-    if ([FLYAppStateManager sharedInstance].currentUser) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSInteger timelineViewCount = [defaults integerForKey:kHomeTimelineViewCountAfterLoginKey];
-        if (timelineViewCount >= kPopPushNotificationDialogSessionCount) {
-            // enable push notification dialog
-            [self performSelector:@selector(_showEnablePushNotifDialog) withObject:self afterDelay:0.5];
-        }
-        timelineViewCount += 1;
-        [defaults setInteger:timelineViewCount forKey:kHomeTimelineViewCountAfterLoginKey];
+    // pop enable push notification dialog on 2rd session
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger timelineViewCount = [defaults integerForKey:kHomeTimelineViewCountAfterLoginKey];
+    if (timelineViewCount >= kPopPushNotificationDialogSessionCount) {
+        // enable push notification dialog
+        [self performSelector:@selector(_showEnablePushNotifDialog) withObject:self afterDelay:0.5];
     }
+    timelineViewCount += 1;
+    [defaults setInteger:timelineViewCount forKey:kHomeTimelineViewCountAfterLoginKey];
 }
 
 - (void)_addInlineReplyBar
