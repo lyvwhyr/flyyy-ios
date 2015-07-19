@@ -30,9 +30,9 @@
     self.imageView = [UIImageView new];
     
     if ([SDiPhoneVersion deviceSize] == iPhone35inch) {
-        self.imageView.image = [UIImage imageNamed:@"icon_tutorial_start_iphone4"];
+        self.imageView.image = [UIImage imageNamed:@"icon_tutorial_start_iphone4_personal"];
     } else {
-         self.imageView.image = [UIImage imageNamed:@"icon_tutorial_start"];
+         self.imageView.image = [UIImage imageNamed:@"icon_tutorial_start_personal"];
     }
     self.imageView.userInteractionEnabled = YES;
     
