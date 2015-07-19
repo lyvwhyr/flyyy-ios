@@ -769,6 +769,7 @@
 
 - (void)_shareTapped
 {
+    
     SCLAlertView *alert = [[SCLAlertView alloc] init];
     
     [alert addButton:LOC(@"FLYInviteFriendsInviteButtonText") actionBlock:^(void) {

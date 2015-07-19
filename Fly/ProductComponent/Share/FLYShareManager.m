@@ -14,6 +14,8 @@
 
 + (void)shareTopicWithTopic:(FLYTopic *)topic fromViewController:(UIViewController *)fromVC
 {
+    [[FLYScribe sharedInstance] logEvent:@"share" section:@"share_topic" component:@"start" element:nil action:nil];
+    
     NSString *message = [NSString stringWithFormat:@"Listen to \"%@\" %@", topic.topicTitle, @"#Flyy"];
     NSURL *link;
     ENV_TYPE type = [FLYServerConfig getEnv];
@@ -29,14 +31,26 @@
     link = [NSURL URLWithString:[NSString stringWithFormat:@"%@/share/%@", webBaseURL, topic.topicId]];
     NSArray * shareItems = @[message, link];
     UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
+    [avc setCompletionHandler:^(NSString *activityType, BOOL completed) {
+        if (completed) {
+            [[FLYScribe sharedInstance] logEvent:@"share" section:@"share_topic" component:@"complete" element:activityType action:nil];
+        }
+    }];
     [fromVC presentViewController:avc animated:YES completion:nil];
 }
 
 + (void)inviteFriends:(UIViewController *)fromVC
 {
+    [[FLYScribe sharedInstance] logEvent:@"share" section:@"invite_friends" component:@"start" element:nil action:nil];
+    
     NSString *message = [NSString stringWithFormat:LOC(@"FLYInviteFriendsShareText"), URL_SHORT_APPLE_STORE_URL];
     NSArray * shareItems = @[message];
     UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
+    [avc setCompletionHandler:^(NSString *activityType, BOOL completed) {
+        if (completed) {
+            [[FLYScribe sharedInstance] logEvent:@"share" section:@"invite_friends" component:@"complete" element:activityType action:nil];
+        }
+    }];
     [fromVC presentViewController:avc animated:YES completion:nil];
 }
 
