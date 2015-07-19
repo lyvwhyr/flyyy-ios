@@ -32,4 +32,12 @@
     [fromVC presentViewController:avc animated:YES completion:nil];
 }
 
++ (void)inviteFriends:(UIViewController *)fromVC
+{
+    NSString *message = [NSString stringWithFormat:LOC(@"FLYInviteFriendsShareText"), URL_SHORT_APPLE_STORE_URL];
+    NSArray * shareItems = @[message];
+    UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
+    [fromVC presentViewController:avc animated:YES completion:nil];
+}
+
 @end

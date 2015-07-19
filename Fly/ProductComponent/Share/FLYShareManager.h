@@ -13,5 +13,6 @@
 @interface FLYShareManager : NSObject
 
 + (void)shareTopicWithTopic:(FLYTopic *)topic fromViewController:(UIViewController *)fromVC;
++ (void)inviteFriends:(UIViewController *)fromVC;
 
 @end

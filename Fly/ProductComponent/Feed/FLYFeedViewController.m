@@ -36,6 +36,11 @@
 #import "NSDictionary+FLYAddition.h"
 #import "FLYPushNotificationManager.h"
 #import "FLYUser.h"
+#import "SCLAlertView.h"
+#import "UIColor+FLYAddition.h"
+#import "JGProgressHUD.h"
+#import "JGProgressHUDSuccessIndicatorView.h"
+#import "FLYShareManager.h"
 
 #define kMaxWaitForTableLoad 3
 
@@ -135,6 +140,18 @@
     [self _initService];
     
     [[FLYScribe sharedInstance] logEvent:@"home_page" section:nil component:nil element:nil action:@"impression"];
+}
+
+#pragma mark - Navigation bar
+- (void)loadRightBarButton
+{
+    FLYInviteFriendBarButtonItem *barItem = [FLYInviteFriendBarButtonItem barButtonItem:NO];
+    @weakify(self)
+    barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+        @strongify(self)
+        [self _shareTapped];
+    };
+    self.navigationItem.rightBarButtonItem = barItem;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -753,6 +770,17 @@
         }
     }
     return NO;
+}
+
+- (void)_shareTapped
+{
+    SCLAlertView *alert = [[SCLAlertView alloc] init];
+    
+    [alert addButton:LOC(@"FLYInviteFriendsInviteButtonText") actionBlock:^(void) {
+        [FLYShareManager inviteFriends:self];
+    }];
+    
+    [alert showCustom:self image:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] color:[UIColor flyBlue] title:LOC(@"FLYInviteFriendsTitleText") subTitle:LOC(@"FLYInviteFriendsSubTitleText") closeButtonTitle:LOC(@"FLYButtonCancelText") duration:0.0f];
 }
 
 @end

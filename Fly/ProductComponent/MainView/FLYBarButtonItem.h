@@ -38,13 +38,18 @@ typedef void(^FLYBarButtonItemActionBlock)(FLYBarButtonItem *barButtonItem);
 
 @end
 
+@interface FLYOptionBarButtonItem : FLYBarButtonItem
+
+@end
+
 @interface FLYJoinedGroupBarButtonItem : FLYBarButtonItem
 
 @end
 
-@interface FLYOptionBarButtonItem : FLYBarButtonItem
+@interface FLYInviteFriendBarButtonItem : FLYBarButtonItem
 
 @end
+
 
 @interface FLYCatalogBarButtonItem : FLYBarButtonItem
 

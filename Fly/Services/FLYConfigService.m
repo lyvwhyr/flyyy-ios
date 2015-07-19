@@ -19,9 +19,13 @@
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:self.endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        successBlock(operation, responseObject);
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
     } failure:^(id responseObj, NSError *error) {
-        errorBlock(responseObj, error);
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
     }];
 }
 

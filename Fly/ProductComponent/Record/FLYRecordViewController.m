@@ -49,7 +49,6 @@
 #define kFilterModalHeight 80
 #define kMaxRetry 3
 #define kTimeLabelTopPadding 30
-#define kMaxRecordTime 60
 #define kOnboardingMaxWidth 245
 #define kOnBoardingArrowSpacing 2
 
@@ -426,7 +425,8 @@
     _recordedTimeLabel.font = [UIFont fontWithName:@"Avenir-Book" size:21];
     _recordedTimeLabel.translatesAutoresizingMaskIntoConstraints = NO;
     _recordedTimeLabel.textColor = [UIColor flyColorRecordingTimer];
-    _recordedTimeLabel.text = [NSString stringWithFormat:@":%d", kMaxRecordTime];
+    NSInteger maxRecordingLen = [[FLYAppStateManager sharedInstance].configs fly_integerForKey:@"recordingMaxLen" defaultValue:kDefaultMaxRecordingLen];
+    _recordedTimeLabel.text = [NSString stringWithFormat:@":%ld", maxRecordingLen];
     
     [self.view addSubview:_recordedTimeLabel];
     [self updateViewConstraints];
@@ -577,7 +577,8 @@
 
 - (void)_updateRecordingState
 {
-    if (self.audioLength >= kMaxRecordTime) {
+    NSInteger maxRecordingLen = [[FLYAppStateManager sharedInstance].configs fly_integerForKey:@"recordingMaxLen" defaultValue:kDefaultMaxRecordingLen];
+    if (self.audioLength >= maxRecordingLen) {
         [self.recordTimer invalidate];
         self.recordTimer = nil;
         [self _updateUserState];
@@ -585,7 +586,7 @@
     }
     
     self.audioLength++;
-    _recordedTimeLabel.text = [NSString stringWithFormat:@":%d", (int)(kMaxRecordTime - self.audioLength)];
+    _recordedTimeLabel.text = [NSString stringWithFormat:@":%d", (int)(maxRecordingLen - self.audioLength)];
     [self.view setNeedsLayout];
 }
 

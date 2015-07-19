@@ -19,3 +19,6 @@
 #define URL_ASSET_STAGING_BASE      @"https://media-staging.flyyapp.com"
 #define URL_ASSET_PRODUCTION_BASE   @"https://media.flyyapp.com"
 
+
+#define URL_SHORT_APPLE_STORE_URL   @"http://apple.co/1Bj6cZS"
+
