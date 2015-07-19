@@ -446,6 +446,7 @@
 		A6DAF9751B40E3E2004CABEF /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DAF9721B40E3E2004CABEF /* FBSDKCoreKit.framework */; };
 		A6DAF9761B40E3E2004CABEF /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DAF9731B40E3E2004CABEF /* FBSDKLoginKit.framework */; };
 		A6DAF9771B40E3E2004CABEF /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DAF9741B40E3E2004CABEF /* FBSDKShareKit.framework */; };
+		A6DCA7741B5C19F60076C9C8 /* FLYRecordOnboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCA7731B5C19F60076C9C8 /* FLYRecordOnboardViewController.m */; };
 		A6DFD1311AA80670008520F5 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DFD1301AA80670008520F5 /* CoreTelephony.framework */; };
 		A6DFD1341AA8291B008520F5 /* FLYLoginSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DFD1331AA8291B008520F5 /* FLYLoginSignupViewController.m */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
@@ -1199,6 +1200,8 @@
 		A6DAF9721B40E3E2004CABEF /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = External/Facebook/FBSDKCoreKit.framework; sourceTree = SOURCE_ROOT; };
 		A6DAF9731B40E3E2004CABEF /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = External/Facebook/FBSDKLoginKit.framework; sourceTree = SOURCE_ROOT; };
 		A6DAF9741B40E3E2004CABEF /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = External/Facebook/FBSDKShareKit.framework; sourceTree = SOURCE_ROOT; };
+		A6DCA7721B5C19F60076C9C8 /* FLYRecordOnboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYRecordOnboardViewController.h; sourceTree = "<group>"; };
+		A6DCA7731B5C19F60076C9C8 /* FLYRecordOnboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYRecordOnboardViewController.m; sourceTree = "<group>"; };
 		A6DFD1301AA80670008520F5 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A6DFD1321AA8291B008520F5 /* FLYLoginSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYLoginSignupViewController.h; sourceTree = "<group>"; };
 		A6DFD1331AA8291B008520F5 /* FLYLoginSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoginSignupViewController.m; sourceTree = "<group>"; };
@@ -2574,6 +2577,8 @@
 				A66D98551A883B5A00C3D75A /* FLYPrePostHeaderView.m */,
 				A6799C8C1AABEB3D003DAE5B /* FLYVoiceEffectView.h */,
 				A6799C8D1AABEB3D003DAE5B /* FLYVoiceEffectView.m */,
+				A6DCA7721B5C19F60076C9C8 /* FLYRecordOnboardViewController.h */,
+				A6DCA7731B5C19F60076C9C8 /* FLYRecordOnboardViewController.m */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -3322,6 +3327,7 @@
 				A6A70CDB1AA4597A0000F784 /* ECPhoneNumberFormatter.m in Sources */,
 				A669FB341ABFD8C200A96D24 /* SVWebViewController.m in Sources */,
 				A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */,
+				A6DCA7741B5C19F60076C9C8 /* FLYRecordOnboardViewController.m in Sources */,
 				A6D949F91A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				A6A0E4BE1A1E76110036116E /* FLEXHierarchyTableViewCell.m in Sources */,
 				A6048A3E1A85E63100C67480 /* EXTNil.m in Sources */,

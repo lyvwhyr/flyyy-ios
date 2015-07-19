@@ -9,6 +9,9 @@
 #define kShowRecordIconNotification @"kShowRecordIconNotification"
 #define kHideRecordIconNotification @"kHideRecordIconNotification"
 
+// When a user clicks agree to the rules, pop recording page
+#define kAgreedRecordRuleNotification @"kAgreedRecordRuleNotification"
+
 //reply related
 #define kNewReplyPostedNotification @"kNewReplyPostedNotification"
 #define kNewReplyDeletedNotification @"kNewReplyDeletedNotification"

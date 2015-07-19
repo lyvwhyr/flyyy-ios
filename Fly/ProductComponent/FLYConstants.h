@@ -32,6 +32,8 @@
 #define kRecordingAudioFileName  @"kRecordingAudioFileName.m4a"
 #define kRecordingAudioFileNameAfterFilter @"kRecordingAudioFileNameAfterFilter"
 #define kAudioFileExt  @".m4a"
+#define kRecordingAgreeRulesKey @"kRecordingAgreeRulesKey"
+
 
 //sign up and login
 #define kFromViewControllerKey  @"kFromViewControllerKey"

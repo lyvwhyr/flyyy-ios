@@ -33,6 +33,7 @@
 #import "FLYLoginSignupViewController.h"
 #import "FLYAudioManager.h"
 #import <AVFoundation/AVFoundation.h>
+#import "FLYRecordOnboardViewController.h"
 
 #if DEBUG
 #import "FLEXManager.h"
@@ -58,6 +59,7 @@
     if (self = [super init]) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_hideRecordButton) name:kHideRecordIconNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_showRecordButton) name:kShowRecordIconNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_popRecordingPage) name:kAgreedRecordRuleNotification object:nil];
     }
     
     return self;
@@ -233,6 +235,20 @@
         return;
     }
     
+    // agree rules before posting
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL hasAgreedRecordingRules = [[defaults objectForKey:kRecordingAgreeRulesKey] boolValue];
+    if (hasAgreedRecordingRules) {
+         [self _popRecordingPage];
+    } else {
+        FLYRecordOnboardViewController *onboardVC = [FLYRecordOnboardViewController new];
+        UINavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:onboardVC];
+        [self presentViewController:navigationController animated:YES completion:nil];
+    }
+}
+
+- (void)_popRecordingPage
+{
     FLYRecordingPermissionGrantedSuccessBlock successBlock = ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             FLYRecordViewController *recordViewController = [[FLYRecordViewController alloc] initWithRecordType:RecordingForTopic];
@@ -245,7 +261,6 @@
         });
     };
     [[FLYAudioManager sharedInstance] checkRecordingPermissionWithSuccessBlock:successBlock];
-    
 }
 
 #pragma mark - notification

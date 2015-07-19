@@ -374,11 +374,6 @@
     [super updateViewConstraints];
 }
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-}
-
 
 - (void)_filterButtonTapped
 {
