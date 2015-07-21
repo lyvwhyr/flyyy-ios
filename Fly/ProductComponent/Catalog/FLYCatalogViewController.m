@@ -15,6 +15,11 @@
 #import "FLYSettingsViewController.h"
 #import "FLYBarButtonItem.h"
 #import "FLYFeedViewController.h"
+#import "FLYAppStateManager.h"
+#import "FLYUser.h"
+#import "FLYMyRepliesViewController.h"
+#import "FLYMyTopicsViewController.h"
+#import "FLYNavigationController.h"
 
 #define kSegmentedControlHeight 44
 
@@ -33,6 +38,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if ([FLYAppStateManager sharedInstance].currentUser) {
+        self.title = [NSString stringWithFormat:@"@%@", [FLYAppStateManager sharedInstance].currentUser.userName];
+    }
+    
     self.view.backgroundColor = [UIColor whiteColor];
     CGFloat scrollViewWidth = CGRectGetWidth(self.view.bounds);
     CGFloat scrollViewHeight = CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight - kSegmentedControlHeight;
@@ -138,7 +148,11 @@
         FLYSettingsViewController *vc = [FLYSettingsViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (type == FLYEverythingElseCellTypePosts) {
-        FLYFeedViewController *vc = [FLYFeedViewController new];
+        FLYMyTopicsViewController *myPostsVC = [FLYMyTopicsViewController new];
+        self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+        [self.flyNavigationController pushViewController:myPostsVC animated:YES];
+    } else if (type == FLYEverythingElseCellTypeReplies) {
+        FLYMyRepliesViewController *vc = [FLYMyRepliesViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

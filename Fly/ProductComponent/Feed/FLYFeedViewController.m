@@ -307,9 +307,11 @@
         [[FLYScribe sharedInstance] logEvent:@"nav_catelog" section:@"feed" component:nil element:nil action:@"click"];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kHideRecordIconNotification object:self];
-        self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
-        FLYMeViewController *vc = [FLYMeViewController new];
-        [self.flyNavigationController pushViewController:vc animated:YES];
+        
+        self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+        [self.view layoutIfNeeded];
+        FLYCatalogViewController *vc = [FLYCatalogViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
     };
     self.navigationItem.leftBarButtonItem = leftBarItem;
 }

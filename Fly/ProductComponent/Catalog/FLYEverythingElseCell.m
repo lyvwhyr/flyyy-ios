@@ -25,7 +25,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _containerView = [UIView new];
-//        _containerView.backgroundColor = [UIColor colorWithHexString:@"#EBEFF1"];
         [self.contentView addSubview:_containerView];
         
         _backgroundImageView = [UIImageView new];
