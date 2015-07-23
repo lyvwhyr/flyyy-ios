@@ -20,6 +20,7 @@
 #import "FLYMyRepliesViewController.h"
 #import "FLYMyTopicsViewController.h"
 #import "FLYNavigationController.h"
+#import "JSBadgeView.h"
 
 #define kSegmentedControlHeight 44
 

@@ -60,9 +60,7 @@
     CGFloat x = (left ? -1 : 1) * 20;
     backButton.frame = CGRectMake(x, 0, 52, kNavBarHeight);
     [backButton setImage:image forState:UIControlStateNormal];
-    
     backButton.touchAreaInsets = UIEdgeInsetsMake(0, 40, 15, 60);
-    
     self = [super initWithButton:backButton actionBlock:nil];
     return self;
 }
@@ -178,8 +176,8 @@
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //12 * 21
     UIImage *image = [UIImage imageNamed:@"icon_navigation_catalog"];
-    CGFloat x = (left ? -1 : 1) * 10;
-    backButton.frame = CGRectMake(x, 0, 52, 44);
+//    CGFloat x = (left ? -1 : 1) * 15;
+    backButton.frame = CGRectMake(0, 0, 32, 32);
     [backButton setImage:image forState:UIControlStateNormal];
     self = [super initWithButton:backButton actionBlock:nil];
     return self;

@@ -41,6 +41,7 @@
 #import "JGProgressHUD.h"
 #import "JGProgressHUDSuccessIndicatorView.h"
 #import "FLYShareManager.h"
+#import "UIBarButtonItem+Badge.h"
 
 #define kMaxWaitForTableLoad 3
 
@@ -303,6 +304,7 @@
 - (void)_loadLeftBarItem
 {
     FLYCatalogBarButtonItem *leftBarItem = [FLYCatalogBarButtonItem barButtonItem:YES];
+    leftBarItem.badgeValue = @"4";
     leftBarItem.actionBlock = ^(FLYBarButtonItem *item) {
         [[FLYScribe sharedInstance] logEvent:@"nav_catelog" section:@"feed" component:nil element:nil action:@"click"];
         
