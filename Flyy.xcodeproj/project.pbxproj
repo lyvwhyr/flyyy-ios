@@ -428,6 +428,8 @@
 		A6BAD4091AA57C4D00DB10F7 /* FLYPhoneService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BAD4081AA57C4D00DB10F7 /* FLYPhoneService.m */; };
 		A6BAD40C1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BAD40B1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m */; };
 		A6BCBBFD1A848D16001F8AB0 /* FLYEndpointRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BCBBFC1A848D16001F8AB0 /* FLYEndpointRequest.m */; };
+		A6C521641B6C274100C1085D /* FLYActivityService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C521631B6C274100C1085D /* FLYActivityService.m */; };
+		A6C521671B6C79CE00C1085D /* FLYLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C521661B6C79CE00C1085D /* FLYLoginManager.m */; };
 		A6CA54FB1AD7148D007FB6FA /* FLYTabbarOnboardingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CA54FA1AD7148D007FB6FA /* FLYTabbarOnboardingView.m */; };
 		A6CD56E41A47D891003486DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6CD56E31A47D891003486DD /* Localizable.strings */; };
 		A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */; };
@@ -1178,6 +1180,10 @@
 		A6BAD40B1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSignupConfirmCodeViewController.m; sourceTree = "<group>"; };
 		A6BCBBFB1A848D16001F8AB0 /* FLYEndpointRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYEndpointRequest.h; sourceTree = "<group>"; };
 		A6BCBBFC1A848D16001F8AB0 /* FLYEndpointRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYEndpointRequest.m; sourceTree = "<group>"; };
+		A6C521621B6C274100C1085D /* FLYActivityService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYActivityService.h; sourceTree = "<group>"; };
+		A6C521631B6C274100C1085D /* FLYActivityService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYActivityService.m; sourceTree = "<group>"; };
+		A6C521651B6C79CE00C1085D /* FLYLoginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYLoginManager.h; sourceTree = "<group>"; };
+		A6C521661B6C79CE00C1085D /* FLYLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoginManager.m; sourceTree = "<group>"; };
 		A6CA54F91AD7148D007FB6FA /* FLYTabbarOnboardingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTabbarOnboardingView.h; sourceTree = "<group>"; };
 		A6CA54FA1AD7148D007FB6FA /* FLYTabbarOnboardingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTabbarOnboardingView.m; sourceTree = "<group>"; };
 		A6CD56E31A47D891003486DD /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -1439,6 +1445,8 @@
 				A6799C871AABDFB7003DAE5B /* FLYVoiceFilterManager.mm */,
 				A62A9A8B1B00756800B89233 /* FLYPushNotificationManager.h */,
 				A62A9A8C1B00756800B89233 /* FLYPushNotificationManager.m */,
+				A6C521651B6C79CE00C1085D /* FLYLoginManager.h */,
+				A6C521661B6C79CE00C1085D /* FLYLoginManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -2276,6 +2284,8 @@
 				A655EF691AD1F81B002648CB /* FLYMediaService.m */,
 				A6AC35211B09457100D5C985 /* FLYDeviceTokenService.h */,
 				A6AC35221B09457100D5C985 /* FLYDeviceTokenService.m */,
+				A6C521621B6C274100C1085D /* FLYActivityService.h */,
+				A6C521631B6C274100C1085D /* FLYActivityService.m */,
 			);
 			name = Services;
 			path = ../Services;
@@ -3122,6 +3132,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6C521671B6C79CE00C1085D /* FLYLoginManager.m in Sources */,
 				A6A0E4931A1E76110036116E /* FLEXArgumentInputNotSupportedView.m in Sources */,
 				A6D949EE1A9086FA003D4265 /* UIDevice+FLYAddition.m in Sources */,
 				A648C0F11A19B18B00FF1744 /* UIFont+FLYAddition.m in Sources */,
@@ -3296,6 +3307,7 @@
 				A6A30D6C1A1B0586001AE1FE /* FLYRecordViewController.m in Sources */,
 				A648C0E81A19AD4A00FF1744 /* MASViewConstraint.m in Sources */,
 				A6F861A41B588302004753C7 /* FLYShareManager.m in Sources */,
+				A6C521641B6C274100C1085D /* FLYActivityService.m in Sources */,
 				A6A0E4A51A1E76110036116E /* FLEXWindow.m in Sources */,
 				A6A8DFFA1AC4D92500BF77BB /* FLYPasswordResetEnterPasswordViewController.m in Sources */,
 				A6048A421A85E63100C67480 /* EXTSelectorChecking.m in Sources */,
