@@ -7,5 +7,6 @@
 + (NSString *)getCountryDialCode;
 + (void)gotoReviews;
 + (NSString *)appVersion;
++ (UIColor *)colorWithHexString:(NSString *)hexString;
 
 @end

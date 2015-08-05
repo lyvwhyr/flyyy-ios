@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
+#import "FLYUtilities.h"
 #import "UIColor+FLYAddition.h"
 
 
@@ -53,152 +54,152 @@
 
 +(UIColor *)flyBlue
 {
-    return [self colorWithHexString:kColorFlyBlue];
+    return [FLYUtilities colorWithHexString:kColorFlyBlue];
 }
 
 + (UIColor *)flyLightGreen
 {
-    return [self colorWithHexString:kColorFlyLightGreen];
+    return [FLYUtilities colorWithHexString:kColorFlyLightGreen];
 }
 
 + (UIColor *)flyContentBackgroundGrey
 {
-    return [self colorWithHexString:kColorFlyContentBackgroundGrey];
+    return [FLYUtilities colorWithHexString:kColorFlyContentBackgroundGrey];
 }
 
 +(UIColor *)flyTabBarBackground
 {
-    return [self colorWithHexString:kColorFlyTabBarBackground];
+    return [FLYUtilities colorWithHexString:kColorFlyTabBarBackground];
 }
 
 +(UIColor *)flyTabBarSeparator
 {
-    return [self colorWithHexString:kColorFlyTabBarSeparator];
+    return [FLYUtilities colorWithHexString:kColorFlyTabBarSeparator];
 }
 
 +(UIColor *)flyTabBarGreyText
 {
-    return [self colorWithHexString:kColorFlyTabBarGreyText];
+    return [FLYUtilities colorWithHexString:kColorFlyTabBarGreyText];
 }
 
 + (UIColor *)flyFeedGrey
 {
-    return [self colorWithHexString:kColorFlyFeedGrey];
+    return [FLYUtilities colorWithHexString:kColorFlyFeedGrey];
 }
 
 + (UIColor *)flyInlineActionGrey
 {
-    return [self colorWithHexString:kColorFlyInlineActionGrey];
+    return [FLYUtilities colorWithHexString:kColorFlyInlineActionGrey];
 }
 
 + (UIColor *)flyBackgroundColorBlue
 {
-    return [self colorWithHexString:kColorFlyBackgroundColorBlue];
+    return [FLYUtilities colorWithHexString:kColorFlyBackgroundColorBlue];
 }
 
 + (UIColor *)tableHeaderGrey
 {
-    return [self colorWithHexString:kColorFlyTableHeaderGrey];
+    return [FLYUtilities colorWithHexString:kColorFlyTableHeaderGrey];
 }
 
 + (UIColor *) tableHeaderTextGrey
 {
-    return [self colorWithHexString:kColorFlyTableHeaderTextGrey];
+    return [FLYUtilities colorWithHexString:kColorFlyTableHeaderTextGrey];
 }
 
 + (UIColor *) flyColorPlayAnimation
 {
-    return [self colorWithHexString:kColorFlyPlayAnimation];
+    return [FLYUtilities colorWithHexString:kColorFlyPlayAnimation];
 }
 
 + (UIColor *)flyColorRecordingTimer
 {
-    return [self colorWithHexString:kColorRecordingTimer];
+    return [FLYUtilities colorWithHexString:kColorRecordingTimer];
 }
 
 + (UIColor *)flyGreen
 {
-    return [self colorWithHexString:kColorGreen];
+    return [FLYUtilities colorWithHexString:kColorGreen];
 }
 
 + (UIColor *)flyColorFlyGroupNameGrey
 {
-    return [self colorWithHexString:kColorFlyGroupNameGrey];
+    return [FLYUtilities colorWithHexString:kColorFlyGroupNameGrey];
 }
 
 + (UIColor *)flyGrey
 {
-    return [self colorWithHexString:kColorFlyGrey];
+    return [FLYUtilities colorWithHexString:kColorFlyGrey];
 }
 
 + (UIColor *)flyColorFlyRecordingWave
 {
-    return [self colorWithHexString:kColorFlyRecordingWave];
+    return [FLYUtilities colorWithHexString:kColorFlyRecordingWave];
 }
 
 + (UIColor *)flyColorFlyReplyBodyTextGrey
 {
-    return [self colorWithHexString:kColorFlyReplyBodyTextGrey];
+    return [FLYUtilities colorWithHexString:kColorFlyReplyBodyTextGrey];
 }
 
 + (UIColor *)flyColorFlyReplyPostAtGrey
 {
-    return [self colorWithHexString:kColorFlyReplyPostAtGrey];
+    return [FLYUtilities colorWithHexString:kColorFlyReplyPostAtGrey];
 }
 
 + (UIColor *)flyColorFlyCountrySelectorBGColor
 {
-    return [self colorWithHexString:kColorFlyCountrySelectorBGColor];
+    return [FLYUtilities colorWithHexString:kColorFlyCountrySelectorBGColor];
 }
 
 + (UIColor *)flyColorFlyCountrySelectorCountryCodeColor
 {
-    return [self colorWithHexString:kColorFlyCountrySelectorCountryCodeColor];
+    return [FLYUtilities colorWithHexString:kColorFlyCountrySelectorCountryCodeColor];
 }
 
 + (UIColor *)flyColorFlySignupGrey
 {
-    return [self colorWithHexString:kColorFlySignupGrey];
+    return [FLYUtilities colorWithHexString:kColorFlySignupGrey];
 }
 
 + (UIColor *)flyColorPlayAllControlPanelBackground
 {
-    return [self colorWithHexString:kColorFlyPlayAllControlPanelBackground];
+    return [FLYUtilities colorWithHexString:kColorFlyPlayAllControlPanelBackground];
 }
 
 + (UIColor *)flyInlineAction
 {
-    return [self colorWithHexString:kColorFlyInlineAction];
+    return [FLYUtilities colorWithHexString:kColorFlyInlineAction];
 }
 
 + (UIColor *)flyHomefeedBlue
 {
-    return [self colorWithHexString:kColorFlyHomefeedBlue];
+    return [FLYUtilities colorWithHexString:kColorFlyHomefeedBlue];
 }
 
 + (UIColor *)flyButtonGreen
 {
-    return [self colorWithHexString:kColorFlyButtonGreen];
+    return [FLYUtilities colorWithHexString:kColorFlyButtonGreen];
 }
 
 + (UIColor *)flyTopicTitleColor
 {
-    return [self colorWithHexString:kColorFlyTopicTitle];
+    return [FLYUtilities colorWithHexString:kColorFlyTopicTitle];
 }
 
 + (UIColor *)flyShareTextYellow
 {
-    return [self colorWithHexString:kColorFlyShareTextYellow];
+    return [FLYUtilities colorWithHexString:kColorFlyShareTextYellow];
 }
 
 + (UIColor *)flyShareTextBlue
 {
-    return [self colorWithHexString:kColorFlyShareTextBlue];
+    return [FLYUtilities colorWithHexString:kColorFlyShareTextBlue];
 }
 
 + (UIColor *)flyShareTextGrey
 {
-    return [self colorWithHexString:kColorFlyShareTextGrey];
+    return [FLYUtilities colorWithHexString:kColorFlyShareTextGrey];
 }
 
 #pragma mark - from external libraries
