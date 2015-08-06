@@ -281,6 +281,9 @@
 		A665FC391AA2DDA400490A18 /* FLYCountryListDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = A665FC381AA2DDA400490A18 /* FLYCountryListDatasource.m */; };
 		A665FC3C1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A665FC3B1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.m */; };
 		A665FC3E1AA2E2AD00490A18 /* all_countries.json in Resources */ = {isa = PBXBuildFile; fileRef = A665FC3D1AA2E2AD00490A18 /* all_countries.json */; };
+		A669DAF51B72FEE400A556EE /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A669DAF31B72FEE400A556EE /* TapjoyResources.bundle */; };
+		A669DAF61B72FEE400A556EE /* Tapjoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A669DAF41B72FEE400A556EE /* Tapjoy.framework */; };
+		A669DAF81B7301F700A556EE /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A669DAF71B7301F700A556EE /* libz.dylib */; };
 		A669FB311ABFD8C200A96D24 /* SVWebViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = A669FB2B1ABFD8C200A96D24 /* SVWebViewController.strings */; };
 		A669FB321ABFD8C200A96D24 /* SVModalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A669FB2D1ABFD8C200A96D24 /* SVModalWebViewController.m */; };
 		A669FB331ABFD8C200A96D24 /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A669FB2E1ABFD8C200A96D24 /* SVWebViewController.bundle */; };
@@ -454,6 +457,21 @@
 		A6DCA7741B5C19F60076C9C8 /* FLYRecordOnboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCA7731B5C19F60076C9C8 /* FLYRecordOnboardViewController.m */; };
 		A6DFD1311AA80670008520F5 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DFD1301AA80670008520F5 /* CoreTelephony.framework */; };
 		A6DFD1341AA8291B008520F5 /* FLYLoginSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DFD1331AA8291B008520F5 /* FLYLoginSignupViewController.m */; };
+		A6E06E551B71FD8C003D5A30 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E541B71FD8C003D5A30 /* CoreData.framework */; };
+		A6E06E571B71FD9B003D5A30 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E561B71FD9B003D5A30 /* CoreLocation.framework */; };
+		A6E06E591B71FDA2003D5A30 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E581B71FDA2003D5A30 /* CoreMotion.framework */; };
+		A6E06E5B1B71FDB0003D5A30 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E5A1B71FDB0003D5A30 /* EventKit.framework */; };
+		A6E06E5D1B71FDBD003D5A30 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E5C1B71FDBD003D5A30 /* MessageUI.framework */; };
+		A6E06E5F1B71FDC8003D5A30 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E5E1B71FDC8003D5A30 /* Social.framework */; };
+		A6E06E611B71FDCE003D5A30 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E601B71FDCE003D5A30 /* StoreKit.framework */; };
+		A6E06E631B71FDD4003D5A30 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E621B71FDD4003D5A30 /* SystemConfiguration.framework */; };
+		A6E06E651B71FDE0003D5A30 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E641B71FDE0003D5A30 /* libc++.dylib */; };
+		A6E06E671B7200E7003D5A30 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E661B7200E7003D5A30 /* PassKit.framework */; };
+		A6E06E691B7200FA003D5A30 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E681B7200FA003D5A30 /* EventKitUI.framework */; };
+		A6E06E6B1B720103003D5A30 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E6A1B720103003D5A30 /* libsqlite3.0.dylib */; };
+		A6E06E6D1B72010F003D5A30 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E6C1B72010F003D5A30 /* MapKit.framework */; };
+		A6E06E6F1B720114003D5A30 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E6E1B720114003D5A30 /* MobileCoreServices.framework */; };
+		A6E06E711B720123003D5A30 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E701B720123003D5A30 /* Twitter.framework */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
@@ -917,6 +935,9 @@
 		A665FC3A1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYCountrySelectorTableViewCell.h; sourceTree = "<group>"; };
 		A665FC3B1AA2DFDD00490A18 /* FLYCountrySelectorTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYCountrySelectorTableViewCell.m; sourceTree = "<group>"; };
 		A665FC3D1AA2E2AD00490A18 /* all_countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = all_countries.json; sourceTree = "<group>"; };
+		A669DAF31B72FEE400A556EE /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
+		A669DAF41B72FEE400A556EE /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tapjoy.framework; sourceTree = "<group>"; };
+		A669DAF71B7301F700A556EE /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A669FB2B1ABFD8C200A96D24 /* SVWebViewController.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = SVWebViewController.strings; sourceTree = "<group>"; };
 		A669FB2C1ABFD8C200A96D24 /* SVModalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVModalWebViewController.h; sourceTree = "<group>"; };
 		A669FB2D1ABFD8C200A96D24 /* SVModalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVModalWebViewController.m; sourceTree = "<group>"; };
@@ -1220,6 +1241,21 @@
 		A6DFD1301AA80670008520F5 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A6DFD1321AA8291B008520F5 /* FLYLoginSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYLoginSignupViewController.h; sourceTree = "<group>"; };
 		A6DFD1331AA8291B008520F5 /* FLYLoginSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoginSignupViewController.m; sourceTree = "<group>"; };
+		A6E06E541B71FD8C003D5A30 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A6E06E561B71FD9B003D5A30 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A6E06E581B71FDA2003D5A30 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		A6E06E5A1B71FDB0003D5A30 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		A6E06E5C1B71FDBD003D5A30 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		A6E06E5E1B71FDC8003D5A30 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		A6E06E601B71FDCE003D5A30 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		A6E06E621B71FDD4003D5A30 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A6E06E641B71FDE0003D5A30 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		A6E06E661B7200E7003D5A30 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+		A6E06E681B7200FA003D5A30 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		A6E06E6A1B720103003D5A30 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		A6E06E6C1B72010F003D5A30 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		A6E06E6E1B720114003D5A30 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		A6E06E701B720123003D5A30 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
@@ -1250,23 +1286,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A669DAF81B7301F700A556EE /* libz.dylib in Frameworks */,
+				A6E06E711B720123003D5A30 /* Twitter.framework in Frameworks */,
+				A6A30D711A1B1EEE001AE1FE /* QuartzCore.framework in Frameworks */,
+				A6E06E6F1B720114003D5A30 /* MobileCoreServices.framework in Frameworks */,
+				A669DAF61B72FEE400A556EE /* Tapjoy.framework in Frameworks */,
+				A6E06E6D1B72010F003D5A30 /* MapKit.framework in Frameworks */,
+				A63189241A92B3C70042E12A /* libxml2.dylib in Frameworks */,
+				A6E06E6B1B720103003D5A30 /* libsqlite3.0.dylib in Frameworks */,
+				A6E06E691B7200FA003D5A30 /* EventKitUI.framework in Frameworks */,
+				A63188E51A92B1720042E12A /* CFNetwork.framework in Frameworks */,
+				A6E06E671B7200E7003D5A30 /* PassKit.framework in Frameworks */,
+				A6E06E651B71FDE0003D5A30 /* libc++.dylib in Frameworks */,
+				A60A44F21A8DD41200BED63A /* UIKit.framework in Frameworks */,
+				A6E06E631B71FDD4003D5A30 /* SystemConfiguration.framework in Frameworks */,
+				A6E06E611B71FDCE003D5A30 /* StoreKit.framework in Frameworks */,
+				A6E06E5F1B71FDC8003D5A30 /* Social.framework in Frameworks */,
+				A6D949F61A9090BD003D4265 /* Security.framework in Frameworks */,
+				A6E06E5D1B71FDBD003D5A30 /* MessageUI.framework in Frameworks */,
+				A63188EB1A92B1890042E12A /* MediaPlayer.framework in Frameworks */,
+				A6E06E5B1B71FDB0003D5A30 /* EventKit.framework in Frameworks */,
+				A6DFD1311AA80670008520F5 /* CoreTelephony.framework in Frameworks */,
+				A6E06E591B71FDA2003D5A30 /* CoreMotion.framework in Frameworks */,
+				A6E06E571B71FD9B003D5A30 /* CoreLocation.framework in Frameworks */,
+				A6A30D731A1B1EFA001AE1FE /* CoreGraphics.framework in Frameworks */,
+				A6E06E551B71FD8C003D5A30 /* CoreData.framework in Frameworks */,
 				A690C0841B54CC47002B71CA /* AdSupport.framework in Frameworks */,
 				A6DAF9701B40E3AD004CABEF /* FBSDKLoginKit.framework in Frameworks */,
-				A6DFD1311AA80670008520F5 /* CoreTelephony.framework in Frameworks */,
 				A6DAF9761B40E3E2004CABEF /* FBSDKLoginKit.framework in Frameworks */,
-				A63189241A92B3C70042E12A /* libxml2.dylib in Frameworks */,
-				A63188EB1A92B1890042E12A /* MediaPlayer.framework in Frameworks */,
 				A63188E91A92B1810042E12A /* AVFoundation.framework in Frameworks */,
 				A63188E71A92B17A0042E12A /* AudioToolbox.framework in Frameworks */,
-				A63188E51A92B1720042E12A /* CFNetwork.framework in Frameworks */,
-				A6D949F61A9090BD003D4265 /* Security.framework in Frameworks */,
 				A6DAF9751B40E3E2004CABEF /* FBSDKCoreKit.framework in Frameworks */,
 				A6D949EB1A9079AC003D4265 /* Fabric.framework in Frameworks */,
 				A60A44F41A8DD42B00BED63A /* Foundation.framework in Frameworks */,
-				A6A30D711A1B1EEE001AE1FE /* QuartzCore.framework in Frameworks */,
 				A659E4281AD8B99C0089EFB7 /* libZtx_iOS-fat.a in Frameworks */,
-				A60A44F21A8DD41200BED63A /* UIKit.framework in Frameworks */,
-				A6A30D731A1B1EFA001AE1FE /* CoreGraphics.framework in Frameworks */,
 				A6DAF9711B40E3AD004CABEF /* FBSDKShareKit.framework in Frameworks */,
 				A6DAF9771B40E3E2004CABEF /* FBSDKShareKit.framework in Frameworks */,
 				A6DAF96F1B40E3AC004CABEF /* FBSDKCoreKit.framework in Frameworks */,
@@ -1964,6 +2017,7 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A669DAF11B72FEE400A556EE /* Tapjoy.embeddedframework */,
 				A693AA9A1B5F3A6000517402 /* JSBadgeView */,
 				A6F861971B5856B8004753C7 /* TTTAttributedLabel */,
 				A698F51F1B577AF400953B4D /* twitter-text */,
@@ -2157,6 +2211,23 @@
 				A665FC351AA2DBCB00490A18 /* popular_countries.json */,
 			);
 			path = Fixture;
+			sourceTree = "<group>";
+		};
+		A669DAF11B72FEE400A556EE /* Tapjoy.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				A669DAF21B72FEE400A556EE /* Resources */,
+				A669DAF41B72FEE400A556EE /* Tapjoy.framework */,
+			);
+			path = Tapjoy.embeddedframework;
+			sourceTree = "<group>";
+		};
+		A669DAF21B72FEE400A556EE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A669DAF31B72FEE400A556EE /* TapjoyResources.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		A669FB2A1ABFD8B800A96D24 /* SVWebViewController */ = {
@@ -2628,6 +2699,22 @@
 		A6A30D741A1B1F33001AE1FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A669DAF71B7301F700A556EE /* libz.dylib */,
+				A6E06E701B720123003D5A30 /* Twitter.framework */,
+				A6E06E6E1B720114003D5A30 /* MobileCoreServices.framework */,
+				A6E06E6C1B72010F003D5A30 /* MapKit.framework */,
+				A6E06E6A1B720103003D5A30 /* libsqlite3.0.dylib */,
+				A6E06E681B7200FA003D5A30 /* EventKitUI.framework */,
+				A6E06E661B7200E7003D5A30 /* PassKit.framework */,
+				A6E06E641B71FDE0003D5A30 /* libc++.dylib */,
+				A6E06E621B71FDD4003D5A30 /* SystemConfiguration.framework */,
+				A6E06E601B71FDCE003D5A30 /* StoreKit.framework */,
+				A6E06E5E1B71FDC8003D5A30 /* Social.framework */,
+				A6E06E5C1B71FDBD003D5A30 /* MessageUI.framework */,
+				A6E06E5A1B71FDB0003D5A30 /* EventKit.framework */,
+				A6E06E581B71FDA2003D5A30 /* CoreMotion.framework */,
+				A6E06E561B71FD9B003D5A30 /* CoreLocation.framework */,
+				A6E06E541B71FD8C003D5A30 /* CoreData.framework */,
 				A690C0831B54CC47002B71CA /* AdSupport.framework */,
 				A6DAF9721B40E3E2004CABEF /* FBSDKCoreKit.framework */,
 				A6DAF9731B40E3E2004CABEF /* FBSDKLoginKit.framework */,
@@ -3014,6 +3101,7 @@
 				A6D949F31A9089FC003D4265 /* Info.plist in Resources */,
 				A6263E9D1A187E1200C4C3BA /* Images.xcassets in Resources */,
 				A69C4B9C1A27186300CAD443 /* icon_nav_filter@3x.png in Resources */,
+				A669DAF51B72FEE400A556EE /* TapjoyResources.bundle in Resources */,
 				A652D24E1A7F3ADD00765D45 /* icon_reply_record.png in Resources */,
 				A652D2811A7F3ADD00765D45 /* record_animate_12.png in Resources */,
 				A669FB5C1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome-iPad@2x.png in Resources */,
@@ -3532,6 +3620,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DEF027D145FDC2CC1553A7A5 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3544,6 +3633,8 @@
 					/Users/xingxingxu/Documents/FacebookSDK,
 					/Users/xingxingxu/Desktop/fb,
 					"$(PROJECT_DIR)/External/Facebook",
+					"$(PROJECT_DIR)/External/Tapjoy.embeddedframework",
+					"$(PROJECT_DIR)/Fly/Libraries/Tapjoy.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Fly/fly-Prefix.pch";
@@ -3591,6 +3682,8 @@
 					/Users/xingxingxu/Documents/FacebookSDK,
 					/Users/xingxingxu/Desktop/fb,
 					"$(PROJECT_DIR)/External/Facebook",
+					"$(PROJECT_DIR)/External/Tapjoy.embeddedframework",
+					"$(PROJECT_DIR)/Fly/Libraries/Tapjoy.embeddedframework",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Fly/fly-Prefix.pch";

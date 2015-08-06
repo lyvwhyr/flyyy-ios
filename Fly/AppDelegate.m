@@ -23,6 +23,7 @@
 #import "FLYPushNotificationManager.h"
 #import "FLYPushNotificationRouter.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <Tapjoy/Tapjoy.h>
 
 #define MIXPANEL_TOKEN @"4ce141a1dcd56132894230aff97b282b"
 
@@ -172,8 +173,19 @@
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     
+    [self _setupTapjoy];
+    
     //Fabric should the the last one
     [Fabric with:@[CrashlyticsKit]];
+}
+
+- (void)_setupTapjoy
+{
+//    [Tapjoy requestTapjoyConnect:@"9bb82a52-0bef-4e27-8b0f-264e7f560a10" secretKey:@"m7gqUgvvTieLDyZOf1YKEAEBjlh4fiJ1RoWFd59etU1GEoNoM-sBi3li-Cs9" options:@{ TJC_OPTION_ENABLE_LOGGING : @(YES) } ];
+    
+    [Tapjoy setDebugEnabled:YES]; //Do not set this for any version of the game released to an app store!
+    //The Tapjoy connect call
+    [Tapjoy connect:@"m7gqUgvvTieLDyZOf1YKEAEBjlh4fiJ1RoWFd59etU1GEoNoM-sBi3li-Cs9"];
 }
 
 @end
