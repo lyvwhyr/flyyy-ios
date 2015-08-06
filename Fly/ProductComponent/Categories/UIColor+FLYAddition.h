@@ -10,7 +10,6 @@
 
 @interface UIColor (FLYAddition)
 
-+ (UIColor *)colorWithHexString:(NSString *)hexString;
 + (UIColor *)flyBlue;
 + (UIColor *)flyLightGreen;
 + (UIColor *)flyTabBarBackground;

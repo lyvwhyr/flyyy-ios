@@ -325,7 +325,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), kReplyHeaderHeight)];
-    customView.backgroundColor = [UIColor colorWithHexString:@"#F9F8F8"];
+    customView.backgroundColor = [FLYUtilities colorWithHexString:@"#F9F8F8"];
     UILabel * sectionHeader = [UILabel new];
     [customView addSubview:sectionHeader];
     

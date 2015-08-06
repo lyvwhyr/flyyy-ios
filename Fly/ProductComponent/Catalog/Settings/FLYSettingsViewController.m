@@ -166,7 +166,7 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), kTableCellHeaderHeight)];
-    customView.backgroundColor = [UIColor colorWithHexString:@"#F2EFEF"];
+    customView.backgroundColor = [FLYUtilities colorWithHexString:@"#F2EFEF"];
     UILabel * sectionHeader = [UILabel new];
     [customView addSubview:sectionHeader];
     

@@ -430,6 +430,9 @@
 		A6AC35231B09457100D5C985 /* FLYDeviceTokenService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AC35221B09457100D5C985 /* FLYDeviceTokenService.m */; };
 		A6BAD4091AA57C4D00DB10F7 /* FLYPhoneService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BAD4081AA57C4D00DB10F7 /* FLYPhoneService.m */; };
 		A6BAD40C1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BAD40B1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m */; };
+		A6BC6F3D1B7333E8009FDF10 /* FLYNotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BC6F3C1B7333E8009FDF10 /* FLYNotificationTableViewCell.m */; };
+		A6BC6F401B733945009FDF10 /* FLYNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BC6F3F1B733945009FDF10 /* FLYNotification.m */; };
+		A6BC6F431B733BA9009FDF10 /* FLYNotificationActor.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BC6F421B733BA9009FDF10 /* FLYNotificationActor.m */; };
 		A6BCBBFD1A848D16001F8AB0 /* FLYEndpointRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BCBBFC1A848D16001F8AB0 /* FLYEndpointRequest.m */; };
 		A6C521641B6C274100C1085D /* FLYActivityService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C521631B6C274100C1085D /* FLYActivityService.m */; };
 		A6C521671B6C79CE00C1085D /* FLYLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C521661B6C79CE00C1085D /* FLYLoginManager.m */; };
@@ -1199,6 +1202,12 @@
 		A6BAD4081AA57C4D00DB10F7 /* FLYPhoneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPhoneService.m; sourceTree = "<group>"; };
 		A6BAD40A1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSignupConfirmCodeViewController.h; sourceTree = "<group>"; };
 		A6BAD40B1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSignupConfirmCodeViewController.m; sourceTree = "<group>"; };
+		A6BC6F3B1B7333E8009FDF10 /* FLYNotificationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYNotificationTableViewCell.h; sourceTree = "<group>"; };
+		A6BC6F3C1B7333E8009FDF10 /* FLYNotificationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYNotificationTableViewCell.m; sourceTree = "<group>"; };
+		A6BC6F3E1B733945009FDF10 /* FLYNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYNotification.h; sourceTree = "<group>"; };
+		A6BC6F3F1B733945009FDF10 /* FLYNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYNotification.m; sourceTree = "<group>"; };
+		A6BC6F411B733BA9009FDF10 /* FLYNotificationActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYNotificationActor.h; sourceTree = "<group>"; };
+		A6BC6F421B733BA9009FDF10 /* FLYNotificationActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYNotificationActor.m; sourceTree = "<group>"; };
 		A6BCBBFB1A848D16001F8AB0 /* FLYEndpointRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYEndpointRequest.h; sourceTree = "<group>"; };
 		A6BCBBFC1A848D16001F8AB0 /* FLYEndpointRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYEndpointRequest.m; sourceTree = "<group>"; };
 		A6C521621B6C274100C1085D /* FLYActivityService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYActivityService.h; sourceTree = "<group>"; };
@@ -2136,6 +2145,8 @@
 			children = (
 				A638D82B1AC9C73000E67ED3 /* FLYNotificationViewController.h */,
 				A638D82C1AC9C73000E67ED3 /* FLYNotificationViewController.m */,
+				A6BC6F3B1B7333E8009FDF10 /* FLYNotificationTableViewCell.h */,
+				A6BC6F3C1B7333E8009FDF10 /* FLYNotificationTableViewCell.m */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -2474,6 +2485,10 @@
 				A64BDAC81A7B519400B46F18 /* FLYGroup.m */,
 				A65ED98A1A91B4F600E10D5C /* FLYReply.h */,
 				A65ED98B1A91B4F600E10D5C /* FLYReply.m */,
+				A6BC6F3E1B733945009FDF10 /* FLYNotification.h */,
+				A6BC6F3F1B733945009FDF10 /* FLYNotification.m */,
+				A6BC6F411B733BA9009FDF10 /* FLYNotificationActor.h */,
+				A6BC6F421B733BA9009FDF10 /* FLYNotificationActor.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3374,6 +3389,7 @@
 				A6048ACE1A8603EF00C67480 /* AFHTTPRequestOperation.m in Sources */,
 				A6048ADD1A8603EF00C67480 /* UIImageView+AFNetworking.m in Sources */,
 				A6A0E4B91A1E76110036116E /* FLEXViewExplorerViewController.m in Sources */,
+				A6BC6F3D1B7333E8009FDF10 /* FLYNotificationTableViewCell.m in Sources */,
 				A65ED9821A915FAE00E10D5C /* FLYPlayTimelineView.m in Sources */,
 				A6CD56EB1A4802C3003486DD /* FLYDownloadManager.m in Sources */,
 				A6263EBD1A18817A00C4C3BA /* FLYUniversalViewController.m in Sources */,
@@ -3412,6 +3428,7 @@
 				A66E96551AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m in Sources */,
 				A6E5CF181AD76AFD0058C081 /* FLYTopicDetailOnboardingView.m in Sources */,
 				A64D15981A29B47D00369D62 /* FLYIconButton.m in Sources */,
+				A6BC6F401B733945009FDF10 /* FLYNotification.m in Sources */,
 				A6A0E4B01A1E76110036116E /* FLEXDefaultsExplorerViewController.m in Sources */,
 				A6048AD81A8603EF00C67480 /* README.md in Sources */,
 				A6A0E4B61A1E76110036116E /* FLEXObjectExplorerViewController.m in Sources */,
@@ -3488,6 +3505,7 @@
 				A6048ACF1A8603EF00C67480 /* AFHTTPRequestOperationManager.m in Sources */,
 				A636FC381A9AA73E0084DE6A /* FLYScribe.m in Sources */,
 				A651BD981A4986400081A1E0 /* MBProgressHUD.m in Sources */,
+				A6BC6F431B733BA9009FDF10 /* FLYNotificationActor.m in Sources */,
 				A6A0E49F1A1E76110036116E /* FLEXMethodCallingViewController.m in Sources */,
 				A62A9A8D1B00756800B89233 /* FLYPushNotificationManager.m in Sources */,
 				A643AEE81AA9539E00BF4E0F /* NIDataStructures.m in Sources */,

@@ -38,9 +38,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    #if DEBUG
-//    [[FLEXManager sharedManager] showExplorer];
-//    #endif
+    #if DEBUG
+    [[FLEXManager sharedManager] showExplorer];
+    #endif
     
     UIFont *titleFont = [UIFont fontWithName:@"Avenir-Roman" size:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};

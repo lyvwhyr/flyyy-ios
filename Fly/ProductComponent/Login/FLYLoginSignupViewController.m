@@ -92,7 +92,7 @@
     
     self.signupButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.signupButton addTarget:self action:@selector(_signupButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    self.signupButton.backgroundColor = [UIColor colorWithHexString:@"#88D5A8"];
+    self.signupButton.backgroundColor = [FLYUtilities colorWithHexString:@"#88D5A8"];
     [self.signupButton setTitle:LOC(@"FLYSignupButtonText") forState:UIControlStateNormal];
     [self.view addSubview:self.signupButton];
     

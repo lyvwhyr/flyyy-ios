@@ -55,7 +55,7 @@
         _topicTitle.lineBreakMode = NSLineBreakByTruncatingTail;
         _topicTitle.numberOfLines = 1;
         _topicTitle.adjustsFontSizeToFitWidth = NO;
-        _topicTitle.textColor = [UIColor colorWithHexString:@"#676666"];
+        _topicTitle.textColor = [FLYUtilities colorWithHexString:@"#676666"];
         _topicTitle.font = [UIFont fontWithName:@"Avenir-Roman" size:16];
         [self.contentView addSubview:_topicTitle];
         
