@@ -9,6 +9,7 @@
 #import "FLYNotification.h"
 #import "NSDictionary+FLYAddition.h"
 #import "FLYNotificationActor.h"
+#import "FLYTopic.h"
 
 /*
  "activities": [
@@ -78,15 +79,15 @@
 {
     if (self = [super init]) {
         _action = [dict fly_stringForKey:@"action"];
-        
+        _topic = [[FLYTopic alloc] initWithDictory:[dict fly_dictionaryForKey:@"topic"]];
     }
     return self;
 }
 
 
-- (NSString *)getNotificationString
+- (NSString *)notificationString
 {
-    return @"";
+    return @"This is a notification string. This is a notification string This is a notification string This is a notification string N";
 }
 
 @end

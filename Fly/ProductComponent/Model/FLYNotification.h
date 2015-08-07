@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class FLYTopic;
+
 @interface FLYNotification : NSObject
 
-- (NSString *)getNotificationString;
+@property (nonatomic) FLYTopic *topic;
+@property (nonatomic, copy) NSString *notificationString;
+
 
 @end

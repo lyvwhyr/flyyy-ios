@@ -14,6 +14,7 @@
 #import "FLYConfigService.h"
 #import "FLYDeviceTokenService.h"
 #import "FLYPushNotificationManager.h"
+#import "FLYLoginManager.h"
 
 @interface FLYRequestManager()
 
@@ -65,6 +66,11 @@
         NSUserDefaults *defalut = [NSUserDefaults standardUserDefaults];
         [defalut setObject:user.userId forKey:kLoggedInUserNsUserDefaultKey];
         [defalut synchronize];
+        
+        
+        // common init
+        [[FLYLoginManager sharedInstance] initAfterLogin];
+        
     };
     FLYGetMeErrorBlock errorBlock = ^(id responseObj, NSError *error) {
         

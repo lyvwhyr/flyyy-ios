@@ -7,6 +7,8 @@
 //
 
 #import "FLYLoginManager.h"
+#import "FLYActivityService.h"
+#import "NSDictionary+FLYAddition.h"
 
 @implementation FLYLoginManager
 
@@ -20,6 +22,17 @@
     return manager;
 }
 
+// This method is called after a user successfully logged in either through login, sign up or auth/me
+- (void)initAfterLogin
+{
+    [FLYActivityService getUnreadCount:^(AFHTTPRequestOperation *operation, id responseObj) {
+        if (responseObj && [responseObj isKindOfClass:[NSDictionary class]]) {
+            [FLYAppStateManager sharedInstance].unreadActivityCount = [responseObj fly_integerForKey:@"undrea_count"];
+        }
+    } errorBlock:^(id responseObj, NSError *error) {
+        
+    }];
+}
 
 
 @end

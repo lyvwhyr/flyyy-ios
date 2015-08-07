@@ -291,6 +291,9 @@
         [defalut setObject:user.userId forKey:kLoggedInUserNsUserDefaultKey];
         [defalut synchronize];
         
+        
+        
+        
         if ([FLYAppStateManager sharedInstance].needRestartNavigationStackAfterLogin) {
             [FLYAppStateManager sharedInstance].needRestartNavigationStackAfterLogin = NO;
             FLYMainViewController *mainVC = [FLYMainViewController new];

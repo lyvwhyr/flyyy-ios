@@ -43,6 +43,9 @@
 @property (nonatomic, copy) NSString *mediaId;
 @property (nonatomic) BOOL mediaAlreadyUploaded;
 
+// unread activity count
+@property (nonatomic) NSUInteger unreadActivityCount;
+
 // currently in group. This property is set in groupViewController
 @property (nonatomic) FLYGroup *currentlyInGroup;
 

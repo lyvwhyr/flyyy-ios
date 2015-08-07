@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class FLYNotification;
+
 @interface FLYNotificationTableViewCell : UITableViewCell
+
+- (void)setupCell:(FLYNotification *)notification;
++ (CGFloat)heightForNotification:(FLYNotification *)notification;
 
 @end
