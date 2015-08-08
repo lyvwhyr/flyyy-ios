@@ -24,4 +24,28 @@
     }];
 }
 
+- (void)nextPageWithBefore:(NSString *)before after:(NSString *)after firstPage:(BOOL)first successBlock:(FLYActivityGetSuccessBlock)successBlock errorBlock:(FLYActivityGetErrorBlock)errorBlock
+{
+    NSString *requestEndpoint;
+    if (first) {
+        requestEndpoint = [NSString stringWithFormat: @"%@?limit=%d", EP_ACTIVITIES_GET, kActivityPaginationCount];
+    } else if ([before length] > 0){
+        requestEndpoint = [NSString stringWithFormat: @"%@?limit=%d&before=%@", EP_ACTIVITIES_GET, kActivityPaginationCount, before];
+    } else if ([after length] > 0) {
+        requestEndpoint = [NSString stringWithFormat: @"%@?limit=%d&after=%@", EP_ACTIVITIES_GET, kActivityPaginationCount, after];
+    } else {
+        requestEndpoint = [NSString stringWithFormat: @"%@?limit=%d", EP_ACTIVITIES_GET, kActivityPaginationCount];
+    }
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:requestEndpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (errorBlock) {
+            errorBlock(operation, error);
+        }
+    }];
+}
+
 @end

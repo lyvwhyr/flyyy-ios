@@ -38,5 +38,7 @@
 #define kAudioItemkey @"kAudioItemkey"
 #define kDownloadCompleteNotification @"kDownloadCompleteNotification"
 
+#define kActivityCountUpdatedNotification @"kActivityCountUpdatedNotification"
+
 // logout
 #define kNotificationLogout @"kNotificationLogout"

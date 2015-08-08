@@ -10,6 +10,8 @@
 #import "FLYActivityService.h"
 #import "NSDictionary+FLYAddition.h"
 
+#define kUnreadActivityKey @"unread_count"
+
 @implementation FLYLoginManager
 
 + (instancetype)sharedInstance
@@ -27,7 +29,10 @@
 {
     [FLYActivityService getUnreadCount:^(AFHTTPRequestOperation *operation, id responseObj) {
         if (responseObj && [responseObj isKindOfClass:[NSDictionary class]]) {
-            [FLYAppStateManager sharedInstance].unreadActivityCount = [responseObj fly_integerForKey:@"undrea_count"];
+            if ([responseObj fly_integerForKey:kUnreadActivityKey] > 0) {
+                [FLYAppStateManager sharedInstance].unreadActivityCount = [responseObj fly_integerForKey:kUnreadActivityKey];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kActivityCountUpdatedNotification object:self];
+            }
         }
     } errorBlock:^(id responseObj, NSError *error) {
         

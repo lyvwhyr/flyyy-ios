@@ -54,6 +54,8 @@
 @property (nonatomic) FLYInlineReplyView *inlineReplyView;
 @property (nonatomic) UITableView *feedTableView;
 
+@property (nonatomic) FLYCatalogBarButtonItem *leftBarItem;
+
 //used for pagination load more
 @property (nonatomic) NSString *beforeTimestamp;
 @property (nonatomic) NSInteger loadMoreCount;
@@ -93,6 +95,10 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(_audioFinishedPlaying:)
                                                      name:kNotificationDidFinishPlaying object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_badgeCountUpdated)
+                                                     name:kActivityCountUpdatedNotification object:nil];
         
         _loadMoreCount = 0;
         _feedType = FLYFeedTypeHome;
@@ -303,9 +309,10 @@
 
 - (void)_loadLeftBarItem
 {
-    FLYCatalogBarButtonItem *leftBarItem = [FLYCatalogBarButtonItem barButtonItem:YES];
-    leftBarItem.badgeValue = @"4";
-    leftBarItem.actionBlock = ^(FLYBarButtonItem *item) {
+    _leftBarItem = [FLYCatalogBarButtonItem barButtonItem:YES];
+    @weakify(self);
+    _leftBarItem.actionBlock = ^(FLYBarButtonItem *item) {
+        @strongify(self);
         [[FLYScribe sharedInstance] logEvent:@"nav_catelog" section:@"feed" component:nil element:nil action:@"click"];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kHideRecordIconNotification object:self];
@@ -315,7 +322,7 @@
         FLYCatalogViewController *vc = [FLYCatalogViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     };
-    self.navigationItem.leftBarButtonItem = leftBarItem;
+    self.navigationItem.leftBarButtonItem = _leftBarItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -547,6 +554,11 @@
     FLYTopic *topic = [notif.userInfo objectForKey:@"topic"];
     [self.posts removeObject:topic];
     [self.feedTableView reloadData];
+}
+
+- (void)_badgeCountUpdated
+{
+    self.leftBarItem.badgeValue = [@([FLYAppStateManager sharedInstance].unreadActivityCount) stringValue];
 }
 
 - (void)_audioPlayStateChanged:(NSNotification *)notif

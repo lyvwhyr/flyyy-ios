@@ -10,12 +10,18 @@
 #import "FLYNotificationViewController.h"
 #import "FLYNotificationTableViewCell.h"
 #import "FLYNotification.h"
+#import "SVPullToRefresh.h"
+#import "FLYActivityService.h"
 
 @interface FLYNotificationViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) UITableView *notificationTableView;
 
 @property (nonatomic) NSMutableArray *entries;
+@property (nonatomic) FLYActivityService *activityService;
+
+// used for page pagination
+@property (nonatomic) NSString *afterTimestamp;
 
 @end
 
@@ -43,6 +49,53 @@
     self.notificationTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.notificationTableView];
     [self _addViewConstraints];
+    
+    [self _initService];
+}
+
+- (void)_initService
+{
+    self.activityService = [FLYActivityService new];
+    [self _load:YES after:nil];
+    @weakify(self)
+    [self.notificationTableView addInfiniteScrollingWithActionHandler:^{
+        @strongify(self)
+        [self _load:NO after:self.afterTimestamp];
+    }];
+}
+
+- (void)_load:(BOOL)first after:(NSString *)after
+{
+    @weakify(self)
+    FLYActivityGetSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        @strongify(self)
+        [self.notificationTableView.infiniteScrollingView stopAnimating];
+        NSDictionary *results = responseObj;
+//        NSArray *repliesArray = [results objectForKey:@"replies"];
+//        
+//        self.state = FLYViewControllerStateReady;
+//        if (first) {
+//            self.topic = [[FLYTopic alloc] initWithDictory:results];
+//            [self.replies removeAllObjects];
+//        }
+//        
+//        for(int i = 0; i < repliesArray.count; i++) {
+//            FLYReply *reply = [[FLYReply alloc] initWithDictionary:repliesArray[i]];
+//            if([self _doesReplyAlreadyExist:reply]) {
+//                continue;
+//            }
+//            [self.replies addObject:reply];
+//        }
+//        //Set up before id for load more
+//        FLYReply *lastReply = [self.replies lastObject];
+//        self.afterTimestamp = lastReply.createdAt;
+//        [self.topicTableView reloadData];
+    };
+    FLYActivityGetErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error){
+        @strongify(self)
+        [self.notificationTableView.infiniteScrollingView stopAnimating];
+    };
+    [self.activityService nextPageWithBefore:nil after:after firstPage:first successBlock:successBlock errorBlock:errorBlock];
 }
 
 - (void)_addViewConstraints
