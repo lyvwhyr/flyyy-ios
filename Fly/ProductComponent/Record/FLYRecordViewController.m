@@ -281,7 +281,8 @@
         [self.navigationController pushViewController:prePostVC animated:YES];
     } else {
         [self _disableUserInteractionsOnAnimation];
-        [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:@"reply" element:@"post_button" action:@"click"];
+        NSDictionary *properties = @{kTrackingSection: @"post_page", kTrackingComponent:@"reply",  kTrackingElement:@"post_button", kTrackingAction:@"click"};
+        [[Mixpanel sharedInstance]  track:@"recording_flow" properties:properties];
         
         if (self.replyMediaId) {
             NSDictionary *dict = @{@"topic_id":self.topic.topicId,

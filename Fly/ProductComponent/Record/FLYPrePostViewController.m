@@ -238,7 +238,8 @@
 
 - (void)_postButtonTapped
 {
-    [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:@"post" element:@"post_button" action:@"click"];
+    NSDictionary *properties = @{kTrackingSection: @"post_page", kTrackingComponent:@"post",  kTrackingElement:@"post_button", kTrackingAction:@"click"};
+    [[Mixpanel sharedInstance]  track:@"recording_flow" properties:properties];
     
     NSString *defaultStr = LOC(@"FLYPrePostDefaultText");
     if (!self.topicTitle || [self.topicTitle isEqualToString:defaultStr]) {

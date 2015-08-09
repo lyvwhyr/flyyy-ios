@@ -148,7 +148,8 @@
 - (void)_createUserService
 {
     FLYCreateUserSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
-        [[FLYScribe sharedInstance] logEvent:@"signup" section:@"success" component:nil element:nil action:nil];
+        NSDictionary *properties = @{kTrackingSection: @"signup", kTrackingSection:@"success"};
+        [[Mixpanel sharedInstance]  track:@"signup" properties:properties];
         
         UALog(@"success");
         if (!responseObj) {

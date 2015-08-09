@@ -43,10 +43,10 @@
     }
     
     NSMutableDictionary *properties = [NSMutableDictionary new];
-    [properties setObjectOrEmptyStr:section forKey:@"section"];
-    [properties setObjectOrEmptyStr:component forKey:@"component"];
-    [properties setObjectOrEmptyStr:element forKey:@"element"];
-    [properties setObjectOrEmptyStr:action forKey:@"action"];
+    [properties setObjectOrEmptyStr:section forKey:kTrackingSection];
+    [properties setObjectOrEmptyStr:component forKey:kTrackingComponent];
+    [properties setObjectOrEmptyStr:element forKey:kTrackingElement];
+    [properties setObjectOrEmptyStr:action forKey:kTrackingAction];
     [properties setObjectOrEmptyStr:[FLYAppStateManager sharedInstance].currentUser.userId forKey:@"user_id"];
     
     [[Mixpanel sharedInstance] track:event properties:properties];

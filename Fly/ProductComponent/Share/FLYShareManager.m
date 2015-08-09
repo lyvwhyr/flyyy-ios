@@ -33,7 +33,8 @@
     UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
     [avc setCompletionHandler:^(NSString *activityType, BOOL completed) {
         if (completed) {
-            [[FLYScribe sharedInstance] logEvent:@"share" section:@"share_topic" component:@"complete" element:activityType action:nil];
+            NSDictionary *properties = @{kTrackingSection: @"share_topic", kTrackingComponent:@"complete"};
+            [[Mixpanel sharedInstance]  track:@"share" properties:properties];
         }
     }];
     [fromVC presentViewController:avc animated:YES completion:nil];
@@ -48,7 +49,8 @@
     UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
     [avc setCompletionHandler:^(NSString *activityType, BOOL completed) {
         if (completed) {
-            [[FLYScribe sharedInstance] logEvent:@"share" section:@"invite_friends" component:@"complete" element:activityType action:nil];
+            NSDictionary *properties = @{kTrackingSection: @"invite_friends", kTrackingComponent:@"complete"};
+            [[Mixpanel sharedInstance]  track:@"share" properties:properties];
         }
     }];
     [fromVC presentViewController:avc animated:YES completion:nil];

@@ -146,7 +146,8 @@
     
     [self _initService];
     
-    [[FLYScribe sharedInstance] logEvent:@"home_page" section:nil component:nil element:nil action:@"impression"];
+    NSDictionary *properties = @{kTrackingSection: @"post_page", kTrackingComponent:@"post",  kTrackingElement:@"post_button", kTrackingAction:@"click"};
+    [[Mixpanel sharedInstance]  track:@"home_page" properties:properties];
 }
 
 #pragma mark - Navigation bar
