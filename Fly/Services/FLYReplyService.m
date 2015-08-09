@@ -27,9 +27,8 @@
 + (void)postReply:(NSDictionary *)params successBlock:(FLYPostReplySuccessBlock)successBlock errorBlock:(FLYPostReplyErrorBlock)errorBlock
 {
     
-    NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSString *endpoint = [NSString stringWithFormat:EP_REPLY_POST, userId];
+    NSString *endpoint = EP_REPLY_POST;
     [manager POST:endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         successBlock(operation, responseObject);
     } failure:^(id responseObj, NSError *error) {

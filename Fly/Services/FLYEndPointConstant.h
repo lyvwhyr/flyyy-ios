@@ -21,7 +21,7 @@
 #define EP_TOPIC_LIKE                               @"v1/topics/%@/like"
 #define EP_TOPIC_WITH_ID                            @"v1/topics/%@"
 #define EP_TOPIC_FLAG                               @"v1/topics/%@/flag"
-#define EP_TOPIC_POST                               @"v1/topics?user_id=%@"
+#define EP_TOPIC_POST                               @"v1/topics"
 
 // topics v2 API
 #define EP_TOPIC_V2                                 @"v2/topics"
@@ -33,7 +33,7 @@
 #define EP_REPLY_LIKE                               @"v1/replies/%@/like"
 #define EP_REPLY_WITH_ID                            @"v1/replies/%@"
 #define EP_REPLY_FLAG                               @"v1/replies/%@/flag"
-#define EP_REPLY_POST                               @"v1/replies?user_id=%@"
+#define EP_REPLY_POST                               @"v1/replies"
 
 // phone service
 #define EP_PHONE                                    @"v1/phones"
