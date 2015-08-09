@@ -48,7 +48,7 @@
     NSInteger len = [self.activityLabel.text length];
     [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, len)];
     [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, len)];
-    [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor flyTopicTitleColor] range:NSMakeRange(0, len)];
+    [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor flyBlue] range:NSMakeRange(0, len)];
     
     self.activityLabel.attributedText = attrStr;
     [self.activityLabel sizeToFit];

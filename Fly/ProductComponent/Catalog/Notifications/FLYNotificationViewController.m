@@ -12,9 +12,11 @@
 #import "FLYNotification.h"
 #import "SVPullToRefresh.h"
 #import "FLYActivityService.h"
+#import "UIColor+FLYAddition.h"
 
 @interface FLYNotificationViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic) UIButton *markAllAsRead;
 @property (nonatomic) UITableView *notificationTableView;
 
 @property (nonatomic) NSMutableArray *entries;
@@ -40,6 +42,12 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.markAllAsRead = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.markAllAsRead.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon_clear_all_bg"]];
+    [self.markAllAsRead setTitle:LOC(@"FLYMarkAllAsRead") forState:UIControlStateNormal];
+    [self.markAllAsRead addTarget:self action:@selector(_markAllAsReadTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.markAllAsRead];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.notificationTableView = [UITableView new];
@@ -71,25 +79,17 @@
         @strongify(self)
         [self.notificationTableView.infiniteScrollingView stopAnimating];
         NSDictionary *results = responseObj;
-//        NSArray *repliesArray = [results objectForKey:@"replies"];
-//        
-//        self.state = FLYViewControllerStateReady;
-//        if (first) {
-//            self.topic = [[FLYTopic alloc] initWithDictory:results];
-//            [self.replies removeAllObjects];
-//        }
-//        
-//        for(int i = 0; i < repliesArray.count; i++) {
-//            FLYReply *reply = [[FLYReply alloc] initWithDictionary:repliesArray[i]];
-//            if([self _doesReplyAlreadyExist:reply]) {
-//                continue;
-//            }
-//            [self.replies addObject:reply];
-//        }
-//        //Set up before id for load more
-//        FLYReply *lastReply = [self.replies lastObject];
-//        self.afterTimestamp = lastReply.createdAt;
-//        [self.topicTableView reloadData];
+        NSArray *activitiesArray = [results objectForKey:@"activities"];
+        self.state = FLYViewControllerStateReady;
+        if (first) {
+            [self.entries removeAllObjects];
+        }
+        for(int i = 0; i < activitiesArray.count; i++) {
+            FLYNotification *notification = [[FLYNotification alloc] initWithDictionary:activitiesArray[i]];
+            [self.entries addObject:notification];
+        }
+        
+        [self.notificationTableView reloadData];
     };
     FLYActivityGetErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error){
         @strongify(self)
@@ -100,9 +100,16 @@
 
 - (void)_addViewConstraints
 {
+    [self.markAllAsRead mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(11);
+        make.leading.equalTo(self.view);
+        make.height.equalTo(@(37));
+        make.trailing.equalTo(self.view);
+    }];
+    
     CGFloat tableViewHeight = CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight;
     [self.notificationTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view);
+        make.top.equalTo(self.markAllAsRead.mas_bottom);
         make.leading.equalTo(self.view);
         make.width.equalTo(self.view);
         make.height.equalTo(@(tableViewHeight));
@@ -117,8 +124,7 @@
     FLYNotificationTableViewCell *cell = [self.notificationTableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
         cell = [[FLYNotificationTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-//        FLYNotification *notification = self.entries[indexPath.row - 1];
-        FLYNotification *notification = [FLYNotification new];
+        FLYNotification *notification = self.entries[indexPath.row];
         [cell setupCell:notification];
     }
     [cell setNeedsUpdateConstraints];
@@ -146,17 +152,18 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    FLYNotification *notification = [FLYNotification new];
-//    FLYNotificationTableViewCell *cell = (FLYNotificationTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    FLYNotification *notification = self.entries[indexPath.row];
     return [FLYNotificationTableViewCell heightForNotification:notification];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
-    //return [self.entries count];
+    return [self.entries count];
 }
 
-
+- (void)_markAllAsReadTapped
+{
+    
+}
 
 @end

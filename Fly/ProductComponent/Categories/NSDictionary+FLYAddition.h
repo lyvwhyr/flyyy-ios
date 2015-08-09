@@ -14,6 +14,7 @@
 - (NSString *)fly_stringForKey:(id)key defaultValue:(NSString *)defaultVal;
 - (NSArray *)fly_arrayForKey:(id)key;
 - (NSDictionary *)fly_dictionaryForKey:(id)key;
+- (BOOL)fly_boolForKey:(id)key;
 - (BOOL)fly_boolForKey:(id)key defaultValue:(BOOL)defaultVal;
 - (NSInteger)fly_integerForKey:(id)key defaultValue:(NSInteger)defaultVal;
 - (NSInteger)fly_integerForKey:(id)key;

@@ -55,6 +55,11 @@
     return nil;
 }
 
+- (BOOL)fly_boolForKey:(id)key
+{
+    return [self fly_boolForKey:key defaultValue:NO];
+}
+
 - (BOOL)fly_boolForKey:(id)key defaultValue:(BOOL)defaultVal
 {
     id obj = [self objectForKey:key];

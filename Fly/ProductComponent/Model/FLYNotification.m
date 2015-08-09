@@ -10,6 +10,7 @@
 #import "NSDictionary+FLYAddition.h"
 #import "FLYNotificationActor.h"
 #import "FLYTopic.h"
+#import "FLYUser.h"
 
 /*
  "activities": [
@@ -68,7 +69,6 @@
 
 @interface FLYNotification()
 
-@property (nonatomic, copy) NSString *action;
 @property (nonatomic) NSMutableArray *actors;
 
 @end
@@ -80,6 +80,8 @@
     if (self = [super init]) {
         _action = [dict fly_stringForKey:@"action"];
         _topic = [[FLYTopic alloc] initWithDictory:[dict fly_dictionaryForKey:@"topic"]];
+        _actors = [[dict fly_arrayForKey:@"actors"] mutableCopy];
+        _isRead = [dict fly_boolForKey:@"read"];
     }
     return self;
 }
@@ -87,7 +89,30 @@
 
 - (NSString *)notificationString
 {
-    return @"This is a notification string. This is a notification string This is a notification string This is a notification string N";
+    NSString *result;
+    if ([self.action isEqualToString:@"replied"]) {
+        if ([self.actors count] == 1) {
+            NSString *username = [self.actors[0] fly_stringForKey:@"user_name"];
+            result = [NSString stringWithFormat:LOC(@"FLYSinglePersonRepliedActivity"), username, self.topic.topicTitle];
+        } else if ([self.actors count] == 2) {
+            NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
+            NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
+            result = [NSString stringWithFormat:LOC(@"FLYTwoPersonRepliedActivity"), username1, username2, self.topic.topicTitle];
+        } else if ([self.actors count] == 3) {
+            NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
+            NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
+            NSString *username3 = [self.actors[2] fly_stringForKey:@"user_name"];
+            result = [NSString stringWithFormat:LOC(@"FLYThreePersonRepliedActivity"), username1, username2, username3, self.topic.topicTitle];
+        } else {
+            NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
+            NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
+            NSInteger otherCount = self.actors.count - 2;
+            result = [NSString stringWithFormat:LOC(@"FLYMoreThanThreePeopleRepliedActivity"), username1, username2, otherCount, self.topic.topicTitle];
+        }
+    } else {
+        
+    }
+    return result;
 }
 
 @end

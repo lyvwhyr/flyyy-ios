@@ -13,7 +13,10 @@
 @interface FLYNotification : NSObject
 
 @property (nonatomic) FLYTopic *topic;
+@property (nonatomic, copy) NSString *action;
+@property (nonatomic) BOOL isRead;
 @property (nonatomic, copy) NSString *notificationString;
 
+- (instancetype)initWithDictionary:(NSDictionary *)dict;
 
 @end
