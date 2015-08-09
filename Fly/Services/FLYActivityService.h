@@ -16,10 +16,15 @@ typedef void(^FLYActivityUnreadCountErrorBlock)(id responseObj, NSError *error);
 typedef void(^FLYActivityGetSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
 typedef void(^FLYActivityGetErrorBlock)(id responseObj, NSError *error);
 
+//mark all read
+typedef void(^FLYActivityMarkAllReadSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
+typedef void(^FLYActivityMarkAllReadErrorBlock)(id responseObj, NSError *error);
+
 @interface FLYActivityService : FLYServiceBase
 
 - (void)nextPageWithBefore:(NSString *)before after:(NSString *)after firstPage:(BOOL)first successBlock:(FLYActivityGetSuccessBlock)successBlock errorBlock:(FLYActivityGetErrorBlock)errorBlock;
 
++ (void)markAllRead:(FLYActivityMarkAllReadSuccessBlock)successBlock errorBlock:(FLYActivityMarkAllReadErrorBlock)errorBlock;
 + (void)getUnreadCount:(FLYActivityUnreadCountSuccessBlock)successBlock errorBlock:(FLYActivityUnreadCountErrorBlock)errorBlock;
 
 @end

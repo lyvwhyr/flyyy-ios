@@ -55,6 +55,8 @@
     
     if (!notification.isRead) {
         self.backgroundColor = [FLYUtilities colorWithHexString:@"#F3F3F3"];
+    } else {
+        self.backgroundColor = [UIColor clearColor];
     }
     
     [self.activityLabel sizeToFit];

@@ -52,5 +52,6 @@
 + (instancetype)sharedInstance;
 
 - (void)clearSignedMedia;
+- (void)updateActivityCount;
 
 @end

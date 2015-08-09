@@ -21,6 +21,9 @@
 #import "FLYLogoutService.h"
 #import "FLYGroup.h"
 #import "FLYDeviceTokenService.h"
+#import "FLYActivityService.h"
+
+#define kUnreadActivityKey @"unread_count"
 
 @interface FLYAppStateManager()
 
@@ -106,6 +109,20 @@
     [fromVC presentViewController:nav animated:NO completion:nil];
     
     [Dialog simpleToast:LOC(@"FLYSuccessfullyLoggedOut")];
+}
+
+- (void)updateActivityCount
+{
+    [FLYActivityService getUnreadCount:^(AFHTTPRequestOperation *operation, id responseObj) {
+        if (responseObj && [responseObj isKindOfClass:[NSDictionary class]]) {
+            if ([responseObj fly_integerForKey:kUnreadActivityKey] > 0) {
+                [FLYAppStateManager sharedInstance].unreadActivityCount = [responseObj fly_integerForKey:kUnreadActivityKey];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kActivityCountUpdatedNotification object:self];
+            }
+        }
+    } errorBlock:^(id responseObj, NSError *error) {
+        
+    }];
 }
 
 - (void)clearSignedMedia

@@ -125,9 +125,9 @@
     FLYNotificationTableViewCell *cell = [self.notificationTableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
         cell = [[FLYNotificationTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        FLYNotification *notification = self.entries[indexPath.row];
-        [cell setupCell:notification];
     }
+    FLYNotification *notification = self.entries[indexPath.row];
+    [cell setupCell:notification];
     [cell setNeedsUpdateConstraints];
     [cell updateConstraints];
     return cell;
@@ -178,7 +178,21 @@
 
 - (void)_markAllAsReadTapped
 {
-    
+    @weakify(self)
+    [FLYActivityService markAllRead:^(AFHTTPRequestOperation *operation, id responseObj) {
+        @strongify(self)
+        [FLYAppStateManager sharedInstance].unreadActivityCount = 0;
+        [[NSNotificationCenter defaultCenter] postNotificationName:kActivityCountUpdatedNotification object:self];
+        
+        for (int i = 0; i < self.entries.count; i++) {
+            FLYNotification *notification = self.entries[i];
+            notification.isRead = YES;
+        }
+        [self.notificationTableView reloadData];
+        
+    } errorBlock:^(id responseObj, NSError *error) {
+        UALog(@"Mark all read API failed");
+    }];
 }
 
 @end

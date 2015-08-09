@@ -89,6 +89,14 @@
     [self _addViewConstraints];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if ([FLYAppStateManager sharedInstance].currentUser) {
+        [[FLYAppStateManager sharedInstance] updateActivityCount];
+    }
+}
+
 #pragma mark - Navigation bar
 - (void)loadLeftBarButton
 {

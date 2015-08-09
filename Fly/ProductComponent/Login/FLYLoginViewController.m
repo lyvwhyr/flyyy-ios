@@ -22,6 +22,7 @@
 #import "PXAlertView.h"
 #import "FLYPasswordResetPhoneNumberViewController.h"
 #import "FLYMainViewController.h"
+#import "FLYLoginManager.h"
 
 #define kTitleTopPadding 20
 #define kLeftIconWidth 50
@@ -291,8 +292,8 @@
         [defalut setObject:user.userId forKey:kLoggedInUserNsUserDefaultKey];
         [defalut synchronize];
         
-        
-        
+        // common init
+        [[FLYLoginManager sharedInstance] initAfterLogin];
         
         if ([FLYAppStateManager sharedInstance].needRestartNavigationStackAfterLogin) {
             [FLYAppStateManager sharedInstance].needRestartNavigationStackAfterLogin = NO;
