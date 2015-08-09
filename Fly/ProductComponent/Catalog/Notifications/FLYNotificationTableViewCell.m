@@ -19,6 +19,7 @@
 @interface FLYNotificationTableViewCell()
 
 @property (nonatomic) TTTAttributedLabel *activityLabel;
+@property (nonatomic) FLYNotification *notification;
 
 @end
 
@@ -40,6 +41,7 @@
 - (void)setupCell:(FLYNotification *)notification
 {
     self.activityLabel.text = notification.notificationString;
+    self.notification = notification;
     
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:self.activityLabel.text];
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
@@ -49,9 +51,20 @@
     [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, len)];
     [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, len)];
     [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor flyBlue] range:NSMakeRange(0, len)];
-    
     self.activityLabel.attributedText = attrStr;
+    
+    if (!notification.isRead) {
+        self.backgroundColor = [FLYUtilities colorWithHexString:@"#F3F3F3"];
+    }
+    
     [self.activityLabel sizeToFit];
+}
+
+- (void)clearReadState
+{
+    self.notification.isRead = YES;
+    self.backgroundColor = [UIColor whiteColor];
+    [self needsUpdateConstraints];
 }
 
 + (CGFloat)heightForNotification:(FLYNotification *)notification
@@ -86,7 +99,6 @@
         make.top.equalTo(self).offset(kTopMargin);
         make.trailing.lessThanOrEqualTo(self).offset(-kRightMargin);
     }];
-    
     [super updateConstraints];
 }
 

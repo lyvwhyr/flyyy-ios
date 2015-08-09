@@ -8,6 +8,16 @@
 
 #import "FLYUniversalViewController.h"
 
+@class FLYTopic;
+
+@protocol FLYNotificationViewControllerDelegate <NSObject>
+
+- (void)visitTopicDetail:(FLYTopic *)topic;
+
+@end
+
 @interface FLYNotificationViewController : FLYUniversalViewController
+
+@property (nonatomic, weak) id<FLYNotificationViewControllerDelegate> delegate;
 
 @end

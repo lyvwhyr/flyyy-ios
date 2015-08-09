@@ -21,10 +21,11 @@
 #import "FLYMyTopicsViewController.h"
 #import "FLYNavigationController.h"
 #import "JSBadgeView.h"
+#import "FLYTopicDetailViewController.h"
 
 #define kSegmentedControlHeight 44
 
-@interface FLYCatalogViewController ()<UIScrollViewDelegate, FLYEverythingElseViewControllerDelegate>
+@interface FLYCatalogViewController ()<UIScrollViewDelegate, FLYEverythingElseViewControllerDelegate, FLYNotificationViewControllerDelegate>
 
 @property (nonatomic) HMSegmentedControl *segmentedControl;
 @property (nonatomic) UIScrollView *scrollView;
@@ -78,6 +79,7 @@
     
     self.notificationVC = [FLYNotificationViewController new];
     [self.scrollView addSubview:self.notificationVC.view];
+    self.notificationVC.delegate = self;
     
     self.everythingElseVC = [FLYEverythingElseViewController new];
     [self.scrollView addSubview:self.everythingElseVC.view];
@@ -156,6 +158,14 @@
         FLYMyRepliesViewController *vc = [FLYMyRepliesViewController new];
         [self.navigationController pushViewController:vc animated:YES];
     }
+}
+
+#pragma mark - FLYNotificationControllerDelegate
+- (void)visitTopicDetail:(FLYTopic *)topic
+{
+    FLYTopicDetailViewController *viewController = [[FLYTopicDetailViewController alloc] initWithTopic:topic];
+    viewController.isBackFullScreen = YES;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 #pragma mark - Navigation bar and status bar

@@ -13,6 +13,7 @@
 @interface FLYNotificationTableViewCell : UITableViewCell
 
 - (void)setupCell:(FLYNotification *)notification;
+- (void)clearReadState;
 + (CGFloat)heightForNotification:(FLYNotification *)notification;
 
 @end

@@ -13,6 +13,7 @@
 #import "SVPullToRefresh.h"
 #import "FLYActivityService.h"
 #import "UIColor+FLYAddition.h"
+#import "FLYTopicDetailViewController.h"
 
 @interface FLYNotificationViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -131,6 +132,20 @@
     [cell updateConstraints];
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    FLYNotificationTableViewCell *cell = (FLYNotificationTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell clearReadState];
+    
+    FLYTopic *topic = ((FLYNotification *)self.entries[indexPath.row]).topic;
+    [self.delegate visitTopicDetail:topic];
+}
+
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
