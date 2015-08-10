@@ -14,6 +14,8 @@
 #import "FLYActivityService.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYTopicDetailViewController.h"
+#import "Dialog.h"
+#import "NSDictionary+FLYAddition.h"
 
 @interface FLYNotificationViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -25,6 +27,7 @@
 
 // used for page pagination
 @property (nonatomic) NSString *afterTimestamp;
+@property (nonatomic) NSString *cursor;
 
 @end
 
@@ -47,6 +50,7 @@
     self.markAllAsRead = [UIButton buttonWithType:UIButtonTypeCustom];
     self.markAllAsRead.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon_clear_all_bg"]];
     [self.markAllAsRead setTitle:LOC(@"FLYMarkAllAsRead") forState:UIControlStateNormal];
+    [self.markAllAsRead setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.markAllAsRead addTarget:self action:@selector(_markAllAsReadTapped) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.markAllAsRead];
     
@@ -65,15 +69,15 @@
 - (void)_initService
 {
     self.activityService = [FLYActivityService new];
-    [self _load:YES after:nil];
+    [self _load:YES];
     @weakify(self)
     [self.notificationTableView addInfiniteScrollingWithActionHandler:^{
         @strongify(self)
-        [self _load:NO after:self.afterTimestamp];
+        [self _load:NO];
     }];
 }
 
-- (void)_load:(BOOL)first after:(NSString *)after
+- (void)_load:(BOOL)first
 {
     @weakify(self)
     FLYActivityGetSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
@@ -81,6 +85,14 @@
         [self.notificationTableView.infiniteScrollingView stopAnimating];
         NSDictionary *results = responseObj;
         NSArray *activitiesArray = [results objectForKey:@"activities"];
+        if ([activitiesArray count] == 0) {
+            return;
+        }
+        self.cursor = [responseObj fly_stringForKey:@"cursor"];
+        if (!self.cursor || [self.cursor isEqualToString:@""]) {
+            self.cursor = nil;
+        }
+        
         self.state = FLYViewControllerStateReady;
         if (first) {
             [self.entries removeAllObjects];
@@ -89,14 +101,13 @@
             FLYNotification *notification = [[FLYNotification alloc] initWithDictionary:activitiesArray[i]];
             [self.entries addObject:notification];
         }
-        
         [self.notificationTableView reloadData];
     };
     FLYActivityGetErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error){
         @strongify(self)
         [self.notificationTableView.infiniteScrollingView stopAnimating];
     };
-    [self.activityService nextPageWithBefore:nil after:after firstPage:first successBlock:successBlock errorBlock:errorBlock];
+    [self.activityService nextPageWithCursor:self.cursor firstPage:first successBlock:successBlock errorBlock:errorBlock];
 }
 
 - (void)_addViewConstraints
@@ -189,6 +200,8 @@
             notification.isRead = YES;
         }
         [self.notificationTableView reloadData];
+        
+        [Dialog simpleToast:LOC(@"FLYAllNotificationsRead")];
         
     } errorBlock:^(id responseObj, NSError *error) {
         UALog(@"Mark all read API failed");

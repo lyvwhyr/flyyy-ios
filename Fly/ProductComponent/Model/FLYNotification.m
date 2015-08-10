@@ -110,7 +110,24 @@
             result = [NSString stringWithFormat:LOC(@"FLYMoreThanThreePeopleRepliedActivity"), username1, username2, otherCount, self.topic.topicTitle];
         }
     } else {
-        
+        if ([self.actors count] == 1) {
+            NSString *username = [self.actors[0] fly_stringForKey:@"user_name"];
+            result = [NSString stringWithFormat:LOC(@"FLYSinglePersonMentionActivity"), username, self.topic.topicTitle];
+        } else if ([self.actors count] == 2) {
+            NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
+            NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
+            result = [NSString stringWithFormat:LOC(@"FLYTwoPersonMentionActivity"), username1, username2, self.topic.topicTitle];
+        } else if ([self.actors count] == 3) {
+            NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
+            NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
+            NSString *username3 = [self.actors[2] fly_stringForKey:@"user_name"];
+            result = [NSString stringWithFormat:LOC(@"FLYThreePersonMentionActivity"), username1, username2, username3, self.topic.topicTitle];
+        } else {
+            NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
+            NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
+            NSInteger otherCount = self.actors.count - 2;
+            result = [NSString stringWithFormat:LOC(@"FLYMoreThanThreePeopleMentionActivity"), username1, username2, otherCount, self.topic.topicTitle];
+        }
     }
     return result;
 }

@@ -22,7 +22,7 @@ typedef void(^FLYActivityMarkAllReadErrorBlock)(id responseObj, NSError *error);
 
 @interface FLYActivityService : FLYServiceBase
 
-- (void)nextPageWithBefore:(NSString *)before after:(NSString *)after firstPage:(BOOL)first successBlock:(FLYActivityGetSuccessBlock)successBlock errorBlock:(FLYActivityGetErrorBlock)errorBlock;
+- (void)nextPageWithCursor:(NSString *)cursor firstPage:(BOOL)first successBlock:(FLYActivityGetSuccessBlock)successBlock errorBlock:(FLYActivityGetErrorBlock)errorBlock;
 
 + (void)markAllRead:(FLYActivityMarkAllReadSuccessBlock)successBlock errorBlock:(FLYActivityMarkAllReadErrorBlock)errorBlock;
 + (void)getUnreadCount:(FLYActivityUnreadCountSuccessBlock)successBlock errorBlock:(FLYActivityUnreadCountErrorBlock)errorBlock;

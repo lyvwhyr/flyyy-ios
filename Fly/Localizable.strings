@@ -221,3 +221,5 @@
 "FLYTwoPersonMentionActivity" =  "%@ and %@ replied to you in post: %@";
 "FLYThreePersonMentionActivity" = "%@, %@ and %@ replied to you in post: %@";
 "FLYMoreThanThreePeopleMentionActivity" = "%@, %@ and %ld replied to you in post: %@";
+
+"FLYAllNotificationsRead" = "All Notifications Read";
