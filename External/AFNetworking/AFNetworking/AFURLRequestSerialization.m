@@ -457,6 +457,14 @@ forHTTPHeaderField:(NSString *)field
     
     [mutableRequest setValue:[FLYUtilities appVersion] forHTTPHeaderField:@"X-Flyy-Version"];
     
+    NSLocale *locale = [NSLocale currentLocale];
+    if (locale && [locale objectForKey:NSLocaleCountryCode]) {
+        NSString *countryCode = [locale objectForKey:NSLocaleCountryCode];
+        NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
+        [mutableRequest setValue:countryCode forHTTPHeaderField:@"X-Flyy-CountryCode"];
+        [mutableRequest setValue:languageCode forHTTPHeaderField:@"X-Flyy-LanguageCode"];
+    }
+    
     if (parameters) {
         NSString *query = nil;
         if (self.queryStringSerialization) {

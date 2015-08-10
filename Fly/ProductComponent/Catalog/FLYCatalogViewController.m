@@ -49,7 +49,7 @@
     CGFloat scrollViewWidth = CGRectGetWidth(self.view.bounds);
     CGFloat scrollViewHeight = CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight - kSegmentedControlHeight;
     
-    self.segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"Notifications", @"Everything else"]];
+    self.segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"Notifications", @"Everything Else"]];
     self.segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 20, 0, 20);
     self.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
