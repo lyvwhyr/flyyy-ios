@@ -47,16 +47,14 @@
 
 - (void)setupCell:(FLYNotification *)notification
 {
-    self.activityLabel.text = notification.notificationString;
     self.notification = notification;
     
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:self.activityLabel.text];
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithAttributedString:notification.notificationString];
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineSpacing = 2;
     
-    NSInteger len = [self.activityLabel.text length];
+    NSInteger len = [notification.notificationString.string length];
     [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, len)];
-    [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, len)];
     [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor flyBlue] range:NSMakeRange(0, len)];
     self.activityLabel.attributedText = attrStr;
     
@@ -80,7 +78,7 @@
 
 + (CGFloat)heightForNotification:(FLYNotification *)notification
 {
-    if (notification.notificationString == 0) {
+    if (notification.notificationString == nil) {
         return 0;
     }
     
@@ -88,7 +86,7 @@
     UILabel *dummyLabel = [UILabel new];
     dummyLabel.lineBreakMode = NSLineBreakByWordWrapping;
     dummyLabel.font = [UIFont fontWithName:@"Avenir-Roman" size:16];
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:notification.notificationString];
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithAttributedString:notification.notificationString];
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineSpacing = 2;
     [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, notification.notificationString.length)];

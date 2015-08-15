@@ -12,6 +12,7 @@
 #import "FLYTopic.h"
 #import "FLYUser.h"
 #import "NSDate+TimeAgo.h"
+#import "UIFont+FLYAddition.h"
 
 /*
  "activities": [
@@ -93,13 +94,16 @@
 }
 
 
-- (NSString *)notificationString
+- (NSMutableAttributedString *)notificationString
 {
     NSString *result;
+    NSMutableAttributedString *attrStr;
     if ([self.action isEqualToString:@"replied"]) {
         if ([self.actors count] == 1) {
             NSString *username = [self.actors[0] fly_stringForKey:@"user_name"];
             result = [NSString stringWithFormat:LOC(@"FLYSinglePersonRepliedActivity"), username, self.topic.topicTitle];
+            attrStr = [[NSMutableAttributedString alloc] initWithString:result];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Black" size:16] range:[result rangeOfString:username]];
         } else if ([self.actors count] == 2) {
             NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
             NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
@@ -119,6 +123,9 @@
         if ([self.actors count] == 1) {
             NSString *username = [self.actors[0] fly_stringForKey:@"user_name"];
             result = [NSString stringWithFormat:LOC(@"FLYSinglePersonMentionActivity"), username, self.topic.topicTitle];
+            attrStr = [[NSMutableAttributedString alloc] initWithString:result];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username]];
         } else if ([self.actors count] == 2) {
             NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
             NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
@@ -135,7 +142,7 @@
             result = [NSString stringWithFormat:LOC(@"FLYMoreThanThreePeopleMentionActivity"), username1, username2, otherCount, self.topic.topicTitle];
         }
     }
-    return result;
+    return attrStr;
 }
 
 @end
