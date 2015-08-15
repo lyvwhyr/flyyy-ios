@@ -428,6 +428,7 @@
 		A6A8DFFA1AC4D92500BF77BB /* FLYPasswordResetEnterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8DFF61AC4D92500BF77BB /* FLYPasswordResetEnterPasswordViewController.m */; };
 		A6A8DFFB1AC4D92500BF77BB /* FLYPasswordResetPhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8DFF81AC4D92500BF77BB /* FLYPasswordResetPhoneNumberViewController.m */; };
 		A6AC35231B09457100D5C985 /* FLYDeviceTokenService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AC35221B09457100D5C985 /* FLYDeviceTokenService.m */; };
+		A6AD869B1B7FC07C0082D818 /* FLYUsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AD869A1B7FC07C0082D818 /* FLYUsernameViewController.m */; };
 		A6BAD4091AA57C4D00DB10F7 /* FLYPhoneService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BAD4081AA57C4D00DB10F7 /* FLYPhoneService.m */; };
 		A6BAD40C1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BAD40B1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m */; };
 		A6BC6F3D1B7333E8009FDF10 /* FLYNotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BC6F3C1B7333E8009FDF10 /* FLYNotificationTableViewCell.m */; };
@@ -1198,6 +1199,8 @@
 		A6A8DFF81AC4D92500BF77BB /* FLYPasswordResetPhoneNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPasswordResetPhoneNumberViewController.m; sourceTree = "<group>"; };
 		A6AC35211B09457100D5C985 /* FLYDeviceTokenService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYDeviceTokenService.h; sourceTree = "<group>"; };
 		A6AC35221B09457100D5C985 /* FLYDeviceTokenService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDeviceTokenService.m; sourceTree = "<group>"; };
+		A6AD86991B7FC07C0082D818 /* FLYUsernameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUsernameViewController.h; sourceTree = "<group>"; };
+		A6AD869A1B7FC07C0082D818 /* FLYUsernameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUsernameViewController.m; sourceTree = "<group>"; };
 		A6BAD4071AA57C4D00DB10F7 /* FLYPhoneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPhoneService.h; sourceTree = "<group>"; };
 		A6BAD4081AA57C4D00DB10F7 /* FLYPhoneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPhoneService.m; sourceTree = "<group>"; };
 		A6BAD40A1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSignupConfirmCodeViewController.h; sourceTree = "<group>"; };
@@ -1720,6 +1723,8 @@
 				A638D8371ACA0D9100E67ED3 /* FLYSettingsViewController.m */,
 				A638D8391ACA17C100E67ED3 /* FLYSettingsCell.h */,
 				A638D83A1ACA17C100E67ED3 /* FLYSettingsCell.m */,
+				A6AD86991B7FC07C0082D818 /* FLYUsernameViewController.h */,
+				A6AD869A1B7FC07C0082D818 /* FLYUsernameViewController.m */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -3294,6 +3299,7 @@
 				A6D692241A92F61A00F8EEDE /* FLYAudioItem.m in Sources */,
 				A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */,
 				A66E204E1A2EBDAE004235F5 /* RDVTabBar.m in Sources */,
+				A6AD869B1B7FC07C0082D818 /* FLYUsernameViewController.m in Sources */,
 				A665FC311AA2DB0600490A18 /* FLYCountrySelectorViewController.m in Sources */,
 				A6048AD31A8603EF00C67480 /* AFURLConnectionOperation.m in Sources */,
 				A6A0E4961A1E76110036116E /* FLEXArgumentInputStructView.m in Sources */,

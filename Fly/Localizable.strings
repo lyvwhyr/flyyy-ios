@@ -168,6 +168,8 @@
 "FLYSettingTermsOfSerivce" = "Terms of Service";
 "FLYSettingPrivacyPolicy" = "Privacy Policy";
 "FLYSettingLogout" = "Logout";
+"FLYSettingsUsername" = "Username: %@";
+"FLYSettingSaveUsernameButton" = "Save";
 
 //Logout
 "FLYLogout" = "Logout";

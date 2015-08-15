@@ -16,6 +16,9 @@
 #import "FLYUtilities.h"
 #import <MessageUI/MessageUI.h>
 #import "SVWebViewController.h"
+#import "FLYUser.h"
+#import "Dialog.h"
+#import "FLYUsernameViewController.h"
 
 #define kTableCellHeaderHeight 40
 
@@ -23,6 +26,15 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
     FLYSettingsLoveFlyy = 0,
     FLYSettingsSupport,
     FLYSettingsLogout
+};
+
+typedef NS_ENUM(NSInteger, FLYSupportRowType) {
+    FLYSupportRowTypeUsername = 0,
+    FLYSupportRowTypeFeedback,
+    FLYSupportRowTypeRules,
+    FLYSupportRowTypeTerms,
+    FLYSupportRowTypePrivacy,
+    FLYSupportRowNum
 };
 
 @interface FLYSettingsViewController ()<UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate>
@@ -59,13 +71,20 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
     if (indexPath.section == FLYSettingsLoveFlyy) {
         [cell configCellWithTitle:LOC(@"FLYSettingRateUs") hideRightArrow:YES];
     } else if (indexPath.section == FLYSettingsSupport) {
-        if (indexPath.row == 0) {
+        if (indexPath.row == FLYSupportRowTypeUsername) {
+            NSString *username = @"Not logged in";
+            if ([FLYAppStateManager sharedInstance].currentUser) {
+                username = [FLYAppStateManager sharedInstance].currentUser.userName;
+            }
+            NSString *displayStr = [NSString stringWithFormat:LOC(@"FLYSettingsUsername"), username];
+            [cell configCellWithTitle:displayStr hideRightArrow:NO];
+        } else if(indexPath.row == FLYSupportRowTypeFeedback) {
             [cell configCellWithTitle:LOC(@"FLYSettingSendFeedback") hideRightArrow:NO];
-        } else if (indexPath.row == 1) {
+        } else if (indexPath.row == FLYSupportRowTypeRules) {
             [cell configCellWithTitle:LOC(@"FLYSettingRules") hideRightArrow:NO];
-        } else if (indexPath.row == 2) {
+        } else if (indexPath.row == FLYSupportRowTypeTerms) {
             [cell configCellWithTitle:LOC(@"FLYSettingTermsOfSerivce") hideRightArrow:NO];
-        } else if (indexPath.row == 3) {
+        } else if (indexPath.row == FLYSupportRowTypePrivacy) {
             [cell configCellWithTitle:LOC(@"FLYSettingPrivacyPolicy") hideRightArrow:NO];
         }
         
@@ -82,13 +101,15 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
         [[FLYScribe sharedInstance] logEvent:@"rate_us" section:nil component:nil element:nil action:@"impression"];
         [FLYUtilities gotoReviews];
     } else if (indexPath.section == FLYSettingsSupport) {
-        if (indexPath.row == 0) {
+        if (indexPath.row == FLYSupportRowTypeUsername) {
+            [self _changeUsername];
+        } else if (indexPath.row == FLYSupportRowTypeFeedback) {
             [self _sendFeedback];
-        } else if (indexPath.row == 1) {
+        } else if (indexPath.row == FLYSupportRowTypeRules) {
             [self _viewRules];
-        } else if (indexPath.row == 2) {
+        } else if (indexPath.row == FLYSupportRowTypeTerms) {
             [self _viewTerms];
-        } else if (indexPath.row == 3) {
+        } else if (indexPath.row == FLYSupportRowTypeTerms) {
             [self _viewPrivacyPolicy];
         }
         
@@ -138,7 +159,7 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
     if (section == FLYSettingsLoveFlyy) {
         return 1;
     } else if (section == FLYSettingsSupport) {
-        return 4;
+        return FLYSupportRowNum;
     } else if (section == FLYSettingsLogout) {
         return 1;
     }
@@ -198,6 +219,16 @@ typedef NS_ENUM(NSInteger, FLYSettingsSectionType) {
 
 
 #pragma mark - Cell click
+
+- (void)_changeUsername
+{
+    if (![FLYAppStateManager sharedInstance].currentUser) {
+        [Dialog simpleToast:LOC(@"FLYNeedLogin")];
+        return;
+    }
+    FLYUsernameViewController *vc = [FLYUsernameViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (void)_sendFeedback
 {
