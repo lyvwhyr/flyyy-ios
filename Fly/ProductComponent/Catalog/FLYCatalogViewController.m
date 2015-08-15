@@ -37,6 +37,19 @@
 
 @implementation FLYCatalogViewController
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_usernameUpdated) name:kUsernameUpdatedNotification object:nil];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -185,6 +198,13 @@
 - (UIColor*)preferredStatusBarColor
 {
     return [UIColor flyBlue];
+}
+
+-(void)_usernameUpdated
+{
+    if ([FLYAppStateManager sharedInstance].currentUser) {
+        self.title = [NSString stringWithFormat:@"@%@", [FLYAppStateManager sharedInstance].currentUser.userName];
+    }
 }
 
 - (void)_backButtonTapped

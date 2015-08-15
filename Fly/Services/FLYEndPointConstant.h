@@ -44,6 +44,7 @@
 // reset password
 #define EP_USER_RESET                               @"v1/users/reset"
 #define EP_USER_ME                                  @"v1/users/me"
+#define EP_USER_RENAME                              @"v1/users/rename"
 
 // login
 #define EP_LOGIN                                    @"v1/login"

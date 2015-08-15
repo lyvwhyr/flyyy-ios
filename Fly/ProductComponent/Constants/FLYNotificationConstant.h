@@ -40,5 +40,7 @@
 
 #define kActivityCountUpdatedNotification @"kActivityCountUpdatedNotification"
 
+#define kUsernameUpdatedNotification @"kUsernameUpdatedNotification"
+
 // logout
 #define kNotificationLogout @"kNotificationLogout"

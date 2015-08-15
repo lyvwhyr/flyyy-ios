@@ -10,6 +10,10 @@
 #import "UIColor+FLYAddition.h"
 #import "FLYUser.h"
 #import "UIFont+FLYAddition.h"
+#import "FLYUsersService.h"
+#import "Dialog.h"
+#import "NSDictionary+FLYAddition.h"
+#import "PXAlertView.h"
 
 @interface FLYUsernameViewController () <UITextFieldDelegate>
 
@@ -61,7 +65,49 @@
 
 - (void)_saveButtonTapped
 {
+    NSString *newUsername = self.usernameField.text;
+    if ([newUsername isEqualToString:[FLYAppStateManager sharedInstance].currentUser.userName]) {
+        [Dialog simpleToast:@"Saved"];
+        return;
+    }
     
+    if ([newUsername length] == 0 || newUsername.length > kUsernameMaxLen) {
+        [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUsernameLenError")];
+        return;
+    }
+    
+    if ([newUsername rangeOfString:@" "].length != 0) {
+        [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUsernameIncludeSpaceError")];
+        return;
+    }
+    
+    NSString *myRegex = @"[A-Z0-9a-z_]*";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", myRegex];
+    BOOL valid = [predicate evaluateWithObject:newUsername];
+    if (!valid) {
+        [PXAlertView showAlertWithTitle:LOC(@"FLYSignupUsernameAlhpanumeric")];
+        return;
+    }
+    
+    FLYRenameSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        [FLYAppStateManager sharedInstance].currentUser.userName = newUsername;
+        [Dialog simpleToast:@"Saved"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kUsernameUpdatedNotification object:self];
+    };
+    
+    FLYRenameErrorBlock errorBlock = ^(id responseObj, NSError *error) {
+        if (responseObj) {
+            NSInteger code = [responseObj fly_integerForKey:@"code"];
+            if (code == kUserNameAlreadyExist) {
+                [Dialog simpleToast:LOC(@"FLYSignupUserNameAlreadyExist")];
+            } else {
+                [Dialog simpleToast:[responseObj objectForKey:@"message"]];
+            }
+        } else {
+            [Dialog simpleToast:@"FLYGenericError"];
+        }
+    };
+    [FLYUsersService renameUserWithNewUsername:newUsername successBlock:successBlock error:errorBlock];
 }
 
 

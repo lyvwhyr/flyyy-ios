@@ -45,6 +45,19 @@ typedef NS_ENUM(NSInteger, FLYSupportRowType) {
 
 @implementation FLYSettingsViewController
 
+- (instancetype)init
+{
+    if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_usernameUpdated) name:kUsernameUpdatedNotification object:nil];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -265,6 +278,11 @@ typedef NS_ENUM(NSInteger, FLYSupportRowType) {
     [[FLYScribe sharedInstance] logEvent:@"view_privacy" section:nil component:nil element:nil action:@"impression"];
     SVWebViewController *webViewController = [[SVWebViewController alloc] initWithAddress:kPrivacyPolicyURL];
     [self.navigationController pushViewController:webViewController animated:YES];
+}
+
+- (void)_usernameUpdated
+{
+    [self.settingsTableView reloadData];
 }
 
 #pragma mark - MFMessageComposeViewControllerDelegate

@@ -57,5 +57,19 @@
     }];
 }
 
++ (void)renameUserWithNewUsername:(NSString *)newUsername successBlock:(FLYRenameSuccessBlock)successBlock error:(FLYRenameErrorBlock)errorBlock
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"new_user_name":newUsername};
+    [manager POST:EP_USER_RENAME parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
+    } failure:^(id responseObj, NSError *error) {
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
+    }];
+}
 
 @end
