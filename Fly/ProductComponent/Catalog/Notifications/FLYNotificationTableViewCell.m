@@ -83,14 +83,12 @@
     }
     
     CGFloat height = 0;
-    UILabel *dummyLabel = [UILabel new];
+    TTTAttributedLabel *dummyLabel = [TTTAttributedLabel new];
     dummyLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    dummyLabel.font = [UIFont fontWithName:@"Avenir-Roman" size:16];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithAttributedString:notification.notificationString];
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineSpacing = 2;
     [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, notification.notificationString.length)];
-    [attrStr addAttribute:NSFontAttributeName value:dummyLabel.font range:NSMakeRange(0, notification.notificationString.length)];
     dummyLabel.attributedText = attrStr;
     CGFloat maxWidth = CGRectGetWidth([[UIScreen mainScreen] bounds]) - kLeftMargin - kRightMargin;
     

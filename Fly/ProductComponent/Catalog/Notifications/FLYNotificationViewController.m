@@ -119,7 +119,7 @@
         make.trailing.equalTo(self.view);
     }];
     
-    CGFloat tableViewHeight = CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight;
+    CGFloat tableViewHeight = CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight - 37;
     [self.notificationTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.markAllAsRead.mas_bottom);
         make.leading.equalTo(self.view);
@@ -189,6 +189,11 @@
 
 - (void)_markAllAsReadTapped
 {
+    if (![FLYAppStateManager sharedInstance].currentUser) {
+        [Dialog simpleToast:LOC(@"FLYNeedLogin")];
+        return;
+    }
+    
     @weakify(self)
     [FLYActivityService markAllRead:^(AFHTTPRequestOperation *operation, id responseObj) {
         @strongify(self)

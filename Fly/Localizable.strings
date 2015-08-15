@@ -223,3 +223,5 @@
 "FLYMoreThanThreePeopleMentionActivity" = "%@, %@ and %ld others replied to you in post: %@";
 
 "FLYAllNotificationsRead" = "All Notifications Read";
+
+"FLYNeedLogin" = "Please login first";
