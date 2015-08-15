@@ -117,8 +117,11 @@
         if (responseObj && [responseObj isKindOfClass:[NSDictionary class]]) {
             if ([responseObj fly_integerForKey:kUnreadActivityKey] > 0) {
                 [FLYAppStateManager sharedInstance].unreadActivityCount = [responseObj fly_integerForKey:kUnreadActivityKey];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kActivityCountUpdatedNotification object:self];
+            } else {
+                [FLYAppStateManager sharedInstance].unreadActivityCount = 0;
             }
+            // Also call this so the notification count will be updated. The notification needs to be called outside the if statement to cover non-zero unread count to 0 read count case
+            [[NSNotificationCenter defaultCenter] postNotificationName:kActivityCountUpdatedNotification object:self];
         }
     } errorBlock:^(id responseObj, NSError *error) {
         

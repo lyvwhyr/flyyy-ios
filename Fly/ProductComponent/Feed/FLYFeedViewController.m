@@ -559,7 +559,13 @@
 
 - (void)_badgeCountUpdated
 {
-    self.leftBarItem.badgeValue = [@([FLYAppStateManager sharedInstance].unreadActivityCount) stringValue];
+    NSString *badgeValue;
+    if ([FLYAppStateManager sharedInstance].unreadActivityCount > 9) {
+        badgeValue = @"9+";
+    } else {
+        badgeValue = [@([FLYAppStateManager sharedInstance].unreadActivityCount) stringValue];
+    }
+    self.leftBarItem.badgeValue = badgeValue;
 }
 
 - (void)_audioPlayStateChanged:(NSNotification *)notif

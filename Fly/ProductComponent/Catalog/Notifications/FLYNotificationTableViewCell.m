@@ -14,11 +14,13 @@
 #define kTopMargin   10
 #define kBottomMargin 10
 #define kLeftMargin 20
-#define kRightMargin 20
+#define kRightMargin 30
 
 @interface FLYNotificationTableViewCell()
 
 @property (nonatomic) TTTAttributedLabel *activityLabel;
+@property (nonatomic) UILabel *createdAt;
+
 @property (nonatomic) FLYNotification *notification;
 
 @end
@@ -34,6 +36,11 @@
         _activityLabel.numberOfLines = 0;
         _activityLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_activityLabel];
+        
+        _createdAt = [UILabel new];
+        _createdAt.font = [UIFont fontWithName:@"Avenir-Book" size:9];
+        _createdAt.textColor = [UIColor flyColorFlyReplyPostAtGrey];
+        [self.contentView addSubview:_createdAt];
     }
     return self;
 }
@@ -58,6 +65,8 @@
     } else {
         self.backgroundColor = [UIColor clearColor];
     }
+    
+    [self.createdAt setText:self.notification.displayableCreateAt];
     
     [self.activityLabel sizeToFit];
 }
@@ -101,6 +110,12 @@
         make.top.equalTo(self).offset(kTopMargin);
         make.trailing.lessThanOrEqualTo(self).offset(-kRightMargin);
     }];
+    
+    [self.createdAt mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.trailing.equalTo(self.contentView).offset(-5);
+        make.bottom.equalTo(self.contentView).offset(-8);
+    }];
+    
     [super updateConstraints];
 }
 

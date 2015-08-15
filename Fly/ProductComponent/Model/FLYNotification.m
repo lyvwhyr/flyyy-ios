@@ -11,6 +11,7 @@
 #import "FLYNotificationActor.h"
 #import "FLYTopic.h"
 #import "FLYUser.h"
+#import "NSDate+TimeAgo.h"
 
 /*
  "activities": [
@@ -82,6 +83,11 @@
         _topic = [[FLYTopic alloc] initWithDictory:[dict fly_dictionaryForKey:@"topic"]];
         _actors = [[dict fly_arrayForKey:@"actors"] mutableCopy];
         _isRead = [dict fly_boolForKey:@"read"];
+        
+        _createdAt = [[dict fly_objectOrNilForKey:@"updated_at"] stringValue];
+        NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:[_createdAt longLongValue]/1000];
+        NSString *ago = [date timeAgoSimple];
+        _displayableCreateAt = ago;
     }
     return self;
 }

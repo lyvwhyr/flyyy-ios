@@ -16,6 +16,8 @@
 @property (nonatomic, copy) NSString *action;
 @property (nonatomic) BOOL isRead;
 @property (nonatomic, copy) NSString *notificationString;
+@property (nonatomic, copy) NSString *createdAt;
+@property (nonatomic, copy) NSString *displayableCreateAt;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 
