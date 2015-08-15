@@ -98,49 +98,60 @@
 {
     NSString *result;
     NSMutableAttributedString *attrStr;
-    if ([self.action isEqualToString:@"replied"]) {
-        if ([self.actors count] == 1) {
-            NSString *username = [self.actors[0] fly_stringForKey:@"user_name"];
-            result = [NSString stringWithFormat:LOC(@"FLYSinglePersonRepliedActivity"), username, self.topic.topicTitle];
-            attrStr = [[NSMutableAttributedString alloc] initWithString:result];
-            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Black" size:16] range:[result rangeOfString:username]];
-        } else if ([self.actors count] == 2) {
-            NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
-            NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
-            result = [NSString stringWithFormat:LOC(@"FLYTwoPersonRepliedActivity"), username1, username2, self.topic.topicTitle];
-        } else if ([self.actors count] == 3) {
-            NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
-            NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
-            NSString *username3 = [self.actors[2] fly_stringForKey:@"user_name"];
-            result = [NSString stringWithFormat:LOC(@"FLYThreePersonRepliedActivity"), username1, username2, username3, self.topic.topicTitle];
+    NSString *tempStr;
+    if ([self.actors count] == 1) {
+        NSString *username = [self.actors[0] fly_stringForKey:@"user_name"];
+        if ([self.action isEqualToString:@"replied"]) {
+            tempStr = LOC(@"FLYSinglePersonRepliedActivity");
         } else {
-            NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
-            NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
-            NSInteger otherCount = self.actors.count - 2;
-            result = [NSString stringWithFormat:LOC(@"FLYMoreThanThreePeopleRepliedActivity"), username1, username2, otherCount, self.topic.topicTitle];
+            tempStr = LOC(@"FLYSinglePersonMentionActivity");
         }
+        result = [NSString stringWithFormat:tempStr, username, self.topic.topicTitle];
+        attrStr = [[NSMutableAttributedString alloc] initWithString:result];
+        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
+        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username]];
+    } else if ([self.actors count] == 2) {
+        NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
+        NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
+        if ([self.action isEqualToString:@"replied"]) {
+            tempStr = LOC(@"FLYTwoPersonRepliedActivity");
+        } else {
+            tempStr = LOC(@"FLYTwoPersonMentionActivity");
+        }
+        result = [NSString stringWithFormat:tempStr, username1, username2, self.topic.topicTitle];
+        attrStr = [[NSMutableAttributedString alloc] initWithString:result];
+        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
+        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username1]];
+        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username2]];
+    } else if ([self.actors count] == 3) {
+        NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
+        NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
+        NSString *username3 = [self.actors[2] fly_stringForKey:@"user_name"];
+        if ([self.action isEqualToString:@"replied"]) {
+            tempStr = LOC(@"FLYThreePersonRepliedActivity");
+        } else {
+            tempStr = LOC(@"FLYThreePersonMentionActivity");
+        }
+        result = [NSString stringWithFormat:tempStr, username1, username2, username3, self.topic.topicTitle];
+        attrStr = [[NSMutableAttributedString alloc] initWithString:result];
+        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
+        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username1]];
+        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username2]];
+        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username3]];
     } else {
-        if ([self.actors count] == 1) {
-            NSString *username = [self.actors[0] fly_stringForKey:@"user_name"];
-            result = [NSString stringWithFormat:LOC(@"FLYSinglePersonMentionActivity"), username, self.topic.topicTitle];
-            attrStr = [[NSMutableAttributedString alloc] initWithString:result];
-            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
-            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username]];
-        } else if ([self.actors count] == 2) {
-            NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
-            NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
-            result = [NSString stringWithFormat:LOC(@"FLYTwoPersonMentionActivity"), username1, username2, self.topic.topicTitle];
-        } else if ([self.actors count] == 3) {
-            NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
-            NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
-            NSString *username3 = [self.actors[2] fly_stringForKey:@"user_name"];
-            result = [NSString stringWithFormat:LOC(@"FLYThreePersonMentionActivity"), username1, username2, username3, self.topic.topicTitle];
+        NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
+        NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
+        NSInteger otherCount = self.actors.count - 2;
+        if ([self.action isEqualToString:@"replied"]) {
+            tempStr = LOC(@"FLYMoreThanThreePeopleRepliedActivity");
         } else {
-            NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
-            NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
-            NSInteger otherCount = self.actors.count - 2;
-            result = [NSString stringWithFormat:LOC(@"FLYMoreThanThreePeopleMentionActivity"), username1, username2, otherCount, self.topic.topicTitle];
+            tempStr = LOC(@"FLYMoreThanThreePeopleMentionActivity");
         }
+        result = [NSString stringWithFormat:tempStr, username1, username2, otherCount, self.topic.topicTitle];
+        attrStr = [[NSMutableAttributedString alloc] initWithString:result];
+        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
+        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username1]];
+        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username2]];
     }
     return attrStr;
 }
