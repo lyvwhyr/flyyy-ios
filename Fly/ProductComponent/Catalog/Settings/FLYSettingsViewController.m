@@ -122,7 +122,7 @@ typedef NS_ENUM(NSInteger, FLYSupportRowType) {
             [self _viewRules];
         } else if (indexPath.row == FLYSupportRowTypeTerms) {
             [self _viewTerms];
-        } else if (indexPath.row == FLYSupportRowTypeTerms) {
+        } else if (indexPath.row == FLYSupportRowTypePrivacy) {
             [self _viewPrivacyPolicy];
         }
         
