@@ -40,6 +40,7 @@
 #define kColorFlyShareTextYellow                        @"#EEB17D"
 #define kColorFlyShareTextBlue                          @"#4CA8D3"
 #define kColorFlyShareTextGrey                          @"#9B9B9B"
+#define kColorFlySettingBackgroundColor                 @"#F8F8F8"
 
 @implementation UIColor (FLYAddition)
 
@@ -191,6 +192,11 @@
 + (UIColor *)flyShareTextGrey
 {
     return [FLYUtilities colorWithHexString:kColorFlyShareTextGrey];
+}
+
++ (UIColor *)flySettingBackgroundColor
+{
+    return [FLYUtilities colorWithHexString:kColorFlySettingBackgroundColor];
 }
 
 #pragma mark - from external libraries

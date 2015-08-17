@@ -13,11 +13,12 @@
 
 #define kTopMargin   10
 #define kBottomMargin 10
-#define kLeftMargin 20
+#define kLeftMargin 40
 #define kRightMargin 30
 
 @interface FLYNotificationTableViewCell()
 
+@property (nonatomic) UIImageView *dotView;
 @property (nonatomic) TTTAttributedLabel *activityLabel;
 @property (nonatomic) UILabel *createdAt;
 
@@ -31,6 +32,11 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        _dotView = [UIImageView new];
+        _dotView.image = [UIImage imageNamed:@"icon_dot"];
+        _dotView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.contentView addSubview:_dotView];
+        
         _activityLabel = [TTTAttributedLabel new];
         _activityLabel.textColor = [UIColor flyBlue];
         _activityLabel.numberOfLines = 0;
@@ -59,9 +65,11 @@
     self.activityLabel.attributedText = attrStr;
     
     if (!notification.isRead) {
+        self.dotView.hidden = NO;
         self.backgroundColor = [FLYUtilities colorWithHexString:@"#F3F3F3"];
     } else {
-        self.backgroundColor = [UIColor clearColor];
+        self.dotView.hidden = YES;
+        self.backgroundColor = [UIColor flySettingBackgroundColor];
     }
     
     [self.createdAt setText:self.notification.displayableCreateAt];
@@ -72,8 +80,9 @@
 - (void)clearReadState
 {
     self.notification.isRead = YES;
-    self.backgroundColor = [UIColor whiteColor];
-    [self needsUpdateConstraints];
+    self.dotView.hidden = YES;
+    self.backgroundColor = [UIColor flySettingBackgroundColor];
+    [self setNeedsDisplay];
 }
 
 + (CGFloat)heightForNotification:(FLYNotification *)notification
@@ -101,6 +110,13 @@
 
 - (void)updateConstraints
 {
+    if (!self.dotView.hidden) {
+        [self.dotView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self).offset(17);
+            make.centerY.equalTo(self);
+        }];
+    }
+    
     [self.activityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.leading.equalTo(self).offset(kLeftMargin);
         make.top.equalTo(self).offset(kTopMargin);

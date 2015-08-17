@@ -11,6 +11,7 @@
 #import "FLYSettingsViewController.h"
 #import "FLYNavigationController.h"
 #import "FLYFeedViewController.h"
+#import "UIColor+FLYAddition.h"
 
 #define kNumberOfItems 3
 
@@ -25,9 +26,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor flySettingBackgroundColor];
     
     self.tableView = [UITableView new];
+    self.tableView.backgroundColor = [UIColor flySettingBackgroundColor];
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];

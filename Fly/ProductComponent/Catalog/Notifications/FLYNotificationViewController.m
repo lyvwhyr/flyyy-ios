@@ -16,10 +16,14 @@
 #import "FLYTopicDetailViewController.h"
 #import "Dialog.h"
 #import "NSDictionary+FLYAddition.h"
+#import "FLYIconButton.h"
+#import "UIFont+FLYAddition.h"
 
 @interface FLYNotificationViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic) UIButton *markAllAsRead;
+@property (nonatomic) UIButton *markAllReadContainerView;
+@property (nonatomic) FLYIconButton *markAllAsRead;
+
 @property (nonatomic) UITableView *notificationTableView;
 
 @property (nonatomic) NSMutableArray *entries;
@@ -45,17 +49,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor flySettingBackgroundColor];
     
-    self.markAllAsRead = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.markAllAsRead.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"icon_clear_all_bg"]];
-    [self.markAllAsRead setTitle:LOC(@"FLYMarkAllAsRead") forState:UIControlStateNormal];
-    [self.markAllAsRead setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.markAllReadContainerView = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.markAllReadContainerView.backgroundColor = [UIColor colorWithRed:68.0/255 green:209.0/255 blue:79.0/255 alpha:0.73];    [self.markAllReadContainerView setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.markAllReadContainerView addTarget:self action:@selector(_markAllAsReadTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.markAllReadContainerView];
+    
+    self.markAllAsRead = [[FLYIconButton alloc] initWithText:LOC(@"FLYMarkAllAsRead") textFont:[UIFont flyFontWithSize:15] textColor:[UIColor whiteColor] icon:@"icon_checkmark" isIconLeft:NO];
     [self.markAllAsRead addTarget:self action:@selector(_markAllAsReadTapped) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.markAllAsRead];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.notificationTableView = [UITableView new];
+    self.notificationTableView.backgroundColor = [UIColor flySettingBackgroundColor];
     self.notificationTableView.scrollsToTop = YES;
     self.notificationTableView.delegate = self;
     self.notificationTableView.dataSource = self;
@@ -112,16 +119,21 @@
 
 - (void)_addViewConstraints
 {
-    [self.markAllAsRead mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.markAllReadContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).offset(11);
         make.leading.equalTo(self.view);
         make.height.equalTo(@(37));
         make.trailing.equalTo(self.view);
     }];
     
+    [self.markAllAsRead mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.markAllReadContainerView);
+        make.centerY.equalTo(self.markAllReadContainerView);
+    }];
+    
     CGFloat tableViewHeight = CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight - 37;
     [self.notificationTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.markAllAsRead.mas_bottom);
+        make.top.equalTo(self.markAllReadContainerView.mas_bottom);
         make.leading.equalTo(self.view);
         make.width.equalTo(self.view);
         make.height.equalTo(@(tableViewHeight));

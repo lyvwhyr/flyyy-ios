@@ -213,7 +213,7 @@
 "FLYButtonCancelText" = "Cancel";
 
 // Activity page
-"FLYMarkAllAsRead" = "Mark all as read";
+"FLYMarkAllAsRead" = "Mark All Read";
 "FLYSinglePersonRepliedActivity" = "%@ replied your post: %@";
 "FLYTwoPersonRepliedActivity" =  "%@ and %@ replied your post: %@";
 "FLYThreePersonRepliedActivity" = "%@, %@ and %@ replied your post: %@";

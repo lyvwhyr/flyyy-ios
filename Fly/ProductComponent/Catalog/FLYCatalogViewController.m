@@ -58,11 +58,12 @@
         self.title = [NSString stringWithFormat:@"@%@", [FLYAppStateManager sharedInstance].currentUser.userName];
     }
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor flySettingBackgroundColor];
     CGFloat scrollViewWidth = CGRectGetWidth(self.view.bounds);
     CGFloat scrollViewHeight = CGRectGetHeight(self.view.bounds) - kStatusBarHeight - kNavBarHeight - kSegmentedControlHeight;
     
     self.segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"Notifications", @"Everything Else"]];
+    self.segmentedControl.backgroundColor = [UIColor flySettingBackgroundColor];
     self.segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 20, 0, 20);
     self.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
     self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
@@ -81,7 +82,7 @@
     
     //add scroll view
     self.scrollView = [UIScrollView new];
-    self.scrollView.backgroundColor = [UIColor whiteColor];
+    self.scrollView.backgroundColor = [UIColor flySettingBackgroundColor];
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.contentSize = CGSizeMake(scrollViewWidth * 2, scrollViewHeight);

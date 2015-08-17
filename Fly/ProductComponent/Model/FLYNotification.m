@@ -153,6 +153,7 @@
         [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username1]];
         [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username2]];
     }
+       [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16] range:[result rangeOfString:self.topic.topicTitle]];
     return attrStr;
 }
 

@@ -40,6 +40,7 @@
 + (UIColor *)flyShareTextYellow;
 + (UIColor *)flyShareTextBlue;
 + (UIColor *)flyShareTextGrey;
++ (UIColor *)flySettingBackgroundColor;
 
 
 + (UIColor *)customGrayColor;
