@@ -22,16 +22,17 @@
 #import "FLYGroupManager.h"
 #import "FLYGroup.h"
 #import "Dialog.h"
+#import "PPiFlatSegmentedControl.h"
+#import "UIFont+FLYAddition.h"
 
 #define kSuggestGroupRow 0
 
 @interface FLYGroupListViewController () <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic) PPiFlatSegmentedControl *segmentedControl;
 @property (nonatomic) UITableView *groupsTabelView;
 
 @property (nonatomic) NSArray *groups;
-
-
 
 @end
 
@@ -41,6 +42,8 @@
 {
     [super viewDidLoad];
     self.title = LOC(@"FLYTags");
+    
+    [self _setupSegmentedControl];
     
     _groupsTabelView = [UITableView new];
     _groupsTabelView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -53,6 +56,27 @@
     _groups = [NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList];
     
     [self _addViewConstraints];
+}
+
+- (void)_setupSegmentedControl
+{
+    self.segmentedControl = [[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 183, 28)
+                                                               items:@[[[PPiFlatSegmentItem alloc] initWithTitle:NSLocalizedString(@"mine", nil) andIcon:nil], [[PPiFlatSegmentItem alloc] initWithTitle:NSLocalizedString(@"global", nil) andIcon:nil]]
+                                                        iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
+                                                            // code here
+                                                        }
+                                                      iconSeparation:0];
+    self.segmentedControl.layer.cornerRadius = 4;
+    self.segmentedControl.color = [UIColor clearColor];
+    self.segmentedControl.borderWidth=.5;
+    self.segmentedControl.borderColor = [UIColor whiteColor];
+    self.segmentedControl.selectedColor=  [UIColor whiteColor];
+    self.segmentedControl.textAttributes=@{NSFontAttributeName:[UIFont flyFontWithSize:16],
+                                    NSForegroundColorAttributeName:[UIColor whiteColor]};
+    self.segmentedControl.selectedTextAttributes=@{NSFontAttributeName:[UIFont flyFontWithSize:16],
+                                            NSForegroundColorAttributeName:[UIColor flyBlue]};
+
+    self.navigationItem.titleView = self.segmentedControl;
 }
 
 - (void)viewWillAppear:(BOOL)animated

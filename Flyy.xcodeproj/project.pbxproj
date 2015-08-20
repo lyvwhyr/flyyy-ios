@@ -479,6 +479,22 @@
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
+		A6E1B47D1B86471B001B0E04 /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B44D1B86471B001B0E04 /* FAImageView.m */; };
+		A6E1B47E1B86471B001B0E04 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B44F1B86471B001B0E04 /* NSString+FontAwesome.m */; };
+		A6E1B47F1B86471B001B0E04 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B4501B86471B001B0E04 /* README.md */; };
+		A6E1B4801B86471B001B0E04 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6E1B4521B86471B001B0E04 /* FontAwesome.ttf */; };
+		A6E1B4811B86471B001B0E04 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B4541B86471B001B0E04 /* UIFont+FontAwesome.m */; };
+		A6E1B4821B86471B001B0E04 /* UIImage+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B4561B86471B001B0E04 /* UIImage+FontAwesome.m */; };
+		A6E1B4831B86471B001B0E04 /* UIAwesomeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B45A1B86471B001B0E04 /* UIAwesomeButton.m */; };
+		A6E1B4841B86471B001B0E04 /* UIButton+PPiAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B45C1B86471B001B0E04 /* UIButton+PPiAwesome.m */; };
+		A6E1B4851B86471B001B0E04 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A6E1B45D1B86471B001B0E04 /* LICENSE */; };
+		A6E1B4861B86471B001B0E04 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B45E1B86471B001B0E04 /* README.md */; };
+		A6E1B4961B86471B001B0E04 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A6E1B4781B86471B001B0E04 /* LICENSE */; };
+		A6E1B4971B86471B001B0E04 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B4791B86471B001B0E04 /* README.md */; };
+		A6E1B4981B86471B001B0E04 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B47C1B86471B001B0E04 /* UIView+AutoLayout.m */; };
+		A6E1B49F1B864771001B0E04 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A6E1B49A1B864771001B0E04 /* fontawesome-webfont.ttf */; };
+		A6E1B4A01B864771001B0E04 /* PPiFlatSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B49C1B864771001B0E04 /* PPiFlatSegmentedControl.m */; };
+		A6E1B4A11B864771001B0E04 /* PPiFlatSegmentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B49E1B864771001B0E04 /* PPiFlatSegmentItem.m */; };
 		A6E5CF151AD745AC0058C081 /* FLYDashTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E5CF141AD745AC0058C081 /* FLYDashTextView.m */; };
 		A6E5CF181AD76AFD0058C081 /* FLYTopicDetailOnboardingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E5CF171AD76AFD0058C081 /* FLYTopicDetailOnboardingView.m */; };
 		A6F27CAB1A2085D6000EC0B3 /* icon_audio_wave@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */; };
@@ -1274,6 +1290,31 @@
 		A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PulsingHaloLayer.m; sourceTree = "<group>"; };
 		A6E171FA1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplePulsingHaloLayer.h; sourceTree = "<group>"; };
 		A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiplePulsingHaloLayer.m; sourceTree = "<group>"; };
+		A6E1B44C1B86471B001B0E04 /* FAImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAImageView.h; sourceTree = "<group>"; };
+		A6E1B44D1B86471B001B0E04 /* FAImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAImageView.m; sourceTree = "<group>"; };
+		A6E1B44E1B86471B001B0E04 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		A6E1B44F1B86471B001B0E04 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		A6E1B4501B86471B001B0E04 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A6E1B4521B86471B001B0E04 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		A6E1B4531B86471B001B0E04 /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FontAwesome.h"; sourceTree = "<group>"; };
+		A6E1B4541B86471B001B0E04 /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FontAwesome.m"; sourceTree = "<group>"; };
+		A6E1B4551B86471B001B0E04 /* UIImage+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FontAwesome.h"; sourceTree = "<group>"; };
+		A6E1B4561B86471B001B0E04 /* UIImage+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FontAwesome.m"; sourceTree = "<group>"; };
+		A6E1B4591B86471B001B0E04 /* UIAwesomeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAwesomeButton.h; sourceTree = "<group>"; };
+		A6E1B45A1B86471B001B0E04 /* UIAwesomeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAwesomeButton.m; sourceTree = "<group>"; };
+		A6E1B45B1B86471B001B0E04 /* UIButton+PPiAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+PPiAwesome.h"; sourceTree = "<group>"; };
+		A6E1B45C1B86471B001B0E04 /* UIButton+PPiAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+PPiAwesome.m"; sourceTree = "<group>"; };
+		A6E1B45D1B86471B001B0E04 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A6E1B45E1B86471B001B0E04 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A6E1B4781B86471B001B0E04 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		A6E1B4791B86471B001B0E04 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A6E1B47B1B86471B001B0E04 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		A6E1B47C1B86471B001B0E04 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		A6E1B49A1B864771001B0E04 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		A6E1B49B1B864771001B0E04 /* PPiFlatSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPiFlatSegmentedControl.h; sourceTree = "<group>"; };
+		A6E1B49C1B864771001B0E04 /* PPiFlatSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPiFlatSegmentedControl.m; sourceTree = "<group>"; };
+		A6E1B49D1B864771001B0E04 /* PPiFlatSegmentItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPiFlatSegmentItem.h; sourceTree = "<group>"; };
+		A6E1B49E1B864771001B0E04 /* PPiFlatSegmentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPiFlatSegmentItem.m; sourceTree = "<group>"; };
 		A6E5CF131AD745AC0058C081 /* FLYDashTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYDashTextView.h; sourceTree = "<group>"; };
 		A6E5CF141AD745AC0058C081 /* FLYDashTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDashTextView.m; sourceTree = "<group>"; };
 		A6E5CF161AD76AFD0058C081 /* FLYTopicDetailOnboardingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTopicDetailOnboardingView.h; sourceTree = "<group>"; };
@@ -2031,6 +2072,10 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A6E1B4991B86475F001B0E04 /* PPiFlatSegmentedControl */,
+				A6E1B44B1B86471B001B0E04 /* FontAwesome+iOS */,
+				A6E1B4571B86471B001B0E04 /* PPiAwesomeButton */,
+				A6E1B4771B86471B001B0E04 /* UIView+AutoLayout */,
 				A669DAF11B72FEE400A556EE /* Tapjoy.embeddedframework */,
 				A693AA9A1B5F3A6000517402 /* JSBadgeView */,
 				A6F861971B5856B8004753C7 /* TTTAttributedLabel */,
@@ -2900,6 +2945,83 @@
 			path = PulsingHalo;
 			sourceTree = "<group>";
 		};
+		A6E1B44B1B86471B001B0E04 /* FontAwesome+iOS */ = {
+			isa = PBXGroup;
+			children = (
+				A6E1B44C1B86471B001B0E04 /* FAImageView.h */,
+				A6E1B44D1B86471B001B0E04 /* FAImageView.m */,
+				A6E1B44E1B86471B001B0E04 /* NSString+FontAwesome.h */,
+				A6E1B44F1B86471B001B0E04 /* NSString+FontAwesome.m */,
+				A6E1B4501B86471B001B0E04 /* README.md */,
+				A6E1B4511B86471B001B0E04 /* Resources */,
+				A6E1B4531B86471B001B0E04 /* UIFont+FontAwesome.h */,
+				A6E1B4541B86471B001B0E04 /* UIFont+FontAwesome.m */,
+				A6E1B4551B86471B001B0E04 /* UIImage+FontAwesome.h */,
+				A6E1B4561B86471B001B0E04 /* UIImage+FontAwesome.m */,
+			);
+			path = "FontAwesome+iOS";
+			sourceTree = "<group>";
+		};
+		A6E1B4511B86471B001B0E04 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A6E1B4521B86471B001B0E04 /* FontAwesome.ttf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A6E1B4571B86471B001B0E04 /* PPiAwesomeButton */ = {
+			isa = PBXGroup;
+			children = (
+				A6E1B4581B86471B001B0E04 /* Control */,
+				A6E1B45D1B86471B001B0E04 /* LICENSE */,
+				A6E1B45E1B86471B001B0E04 /* README.md */,
+			);
+			path = PPiAwesomeButton;
+			sourceTree = "<group>";
+		};
+		A6E1B4581B86471B001B0E04 /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				A6E1B4591B86471B001B0E04 /* UIAwesomeButton.h */,
+				A6E1B45A1B86471B001B0E04 /* UIAwesomeButton.m */,
+				A6E1B45B1B86471B001B0E04 /* UIButton+PPiAwesome.h */,
+				A6E1B45C1B86471B001B0E04 /* UIButton+PPiAwesome.m */,
+			);
+			path = Control;
+			sourceTree = "<group>";
+		};
+		A6E1B4771B86471B001B0E04 /* UIView+AutoLayout */ = {
+			isa = PBXGroup;
+			children = (
+				A6E1B4781B86471B001B0E04 /* LICENSE */,
+				A6E1B4791B86471B001B0E04 /* README.md */,
+				A6E1B47A1B86471B001B0E04 /* Source */,
+			);
+			path = "UIView+AutoLayout";
+			sourceTree = "<group>";
+		};
+		A6E1B47A1B86471B001B0E04 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				A6E1B47B1B86471B001B0E04 /* UIView+AutoLayout.h */,
+				A6E1B47C1B86471B001B0E04 /* UIView+AutoLayout.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		A6E1B4991B86475F001B0E04 /* PPiFlatSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				A6E1B49A1B864771001B0E04 /* fontawesome-webfont.ttf */,
+				A6E1B49B1B864771001B0E04 /* PPiFlatSegmentedControl.h */,
+				A6E1B49C1B864771001B0E04 /* PPiFlatSegmentedControl.m */,
+				A6E1B49D1B864771001B0E04 /* PPiFlatSegmentItem.h */,
+				A6E1B49E1B864771001B0E04 /* PPiFlatSegmentItem.m */,
+			);
+			path = PPiFlatSegmentedControl;
+			sourceTree = "<group>";
+		};
 		A6F861971B5856B8004753C7 /* TTTAttributedLabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -3080,6 +3202,8 @@
 				A64D157F1A29985600369D62 /* icon_feed_play@3x.png in Resources */,
 				A652D2161A7F3ADD00765D45 /* icon_feed_group.png in Resources */,
 				A652D2861A7F3ADD00765D45 /* record_animate_13@3x.png in Resources */,
+				A6E1B4801B86471B001B0E04 /* FontAwesome.ttf in Resources */,
+				A6E1B4851B86471B001B0E04 /* LICENSE in Resources */,
 				A648C0F61A19D1FF00FF1744 /* icon_tabbar_voice@2x.png in Resources */,
 				A6263E9B1A187E1200C4C3BA /* Main.storyboard in Resources */,
 				A669FB5F1ABFD99B00A96D24 /* SVWebViewControllerActivitySafari-iPad.png in Resources */,
@@ -3114,6 +3238,7 @@
 				A652D2471A7F3ADD00765D45 /* icon_play_reply@2x.png in Resources */,
 				A652D2191A7F3ADD00765D45 /* icon_feed_play@2x.png in Resources */,
 				A6263EA01A187E1200C4C3BA /* LaunchScreen.xib in Resources */,
+				A6E1B4961B86471B001B0E04 /* LICENSE in Resources */,
 				A652D26F1A7F3ADD00765D45 /* record_animate_06.png in Resources */,
 				A652D2111A7F3ADD00765D45 /* icon_back@2x.png in Resources */,
 				A652D2671A7F3ADD00765D45 /* record_animate_03@2x.png in Resources */,
@@ -3132,6 +3257,7 @@
 				A652D25E1A7F3ADD00765D45 /* icon_voice_filter@2x.png in Resources */,
 				A652D2841A7F3ADD00765D45 /* record_animate_13.png in Resources */,
 				A652D27E1A7F3ADD00765D45 /* record_animate_11.png in Resources */,
+				A6E1B49F1B864771001B0E04 /* fontawesome-webfont.ttf in Resources */,
 				A652D2121A7F3ADD00765D45 /* icon_checked.png in Resources */,
 				A652D2101A7F3ADD00765D45 /* icon_back.png in Resources */,
 				A648C0F41A19C7A100FF1744 /* icon_tabbar_voice@3x.png in Resources */,
@@ -3249,6 +3375,7 @@
 				A69C4BA71A271AC200CAD443 /* FLYFilterHomeFeedSelectorViewController.m in Sources */,
 				A6162C721A318F1100A3B277 /* FLYNavigationBar.m in Sources */,
 				A6D949F41A9089FD003D4265 /* UICKeyChainStore.m in Sources */,
+				A6E1B4841B86471B001B0E04 /* UIButton+PPiAwesome.m in Sources */,
 				A6048AD91A8603EF00C67480 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				A6A0E4AB1A1E76110036116E /* FLEXLibrariesTableViewController.m in Sources */,
 				A638D8331AC9FF2D00E67ED3 /* FLYEverythingElseCell.m in Sources */,
@@ -3256,6 +3383,7 @@
 				A6227D131AD0BD5D0039083D /* UIButton+TouchAreaInsets.m in Sources */,
 				A6048A3F1A85E63100C67480 /* EXTRuntimeExtensions.m in Sources */,
 				A643AEE61AA9539E00BF4E0F /* NIButtonUtilities.m in Sources */,
+				A6E1B4A01B864771001B0E04 /* PPiFlatSegmentedControl.m in Sources */,
 				A698F51E1B577A3A00953B4D /* SDWTwitterLabel.m in Sources */,
 				A6799C8E1AABEB3D003DAE5B /* FLYVoiceEffectView.m in Sources */,
 				A6A0E4BD1A1E76110036116E /* FLEXUtility.m in Sources */,
@@ -3309,6 +3437,7 @@
 				A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */,
 				A65ED98C1A91B4F600E10D5C /* FLYReply.m in Sources */,
 				A6A0E49B1A1E76110036116E /* FLEXDefaultEditorViewController.m in Sources */,
+				A6E1B47E1B86471B001B0E04 /* NSString+FontAwesome.m in Sources */,
 				A648C0F21A19C65B00FF1744 /* FLYTabBarView.m in Sources */,
 				A61B6D421AAAE3DD00A5B696 /* RNLoadingButton.m in Sources */,
 				A648C0EA1A19AD4A00FF1744 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
@@ -3317,6 +3446,8 @@
 				A67208231A3569C600B2C5B5 /* FLYReplyPlayView.m in Sources */,
 				A6A0E4A41A1E76110036116E /* FLEXToolbarItem.m in Sources */,
 				A690F2851AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m in Sources */,
+				A6E1B47D1B86471B001B0E04 /* FAImageView.m in Sources */,
+				A6E1B4861B86471B001B0E04 /* README.md in Sources */,
 				A65578411A3ADCC3003102CD /* FLYPostButtonView.m in Sources */,
 				A638D83B1ACA17C100E67ED3 /* FLYSettingsCell.m in Sources */,
 				A612753F1A2EFB72004D25D3 /* DKCircleButton.m in Sources */,
@@ -3345,6 +3476,7 @@
 				A6799C921AAC1071003DAE5B /* SDiPhoneVersion.m in Sources */,
 				A6A30D6F1A1B1DF8001AE1FE /* FLYCircleView.m in Sources */,
 				A6048AD11A8603EF00C67480 /* AFNetworkReachabilityManager.m in Sources */,
+				A6E1B4A11B864771001B0E04 /* PPiFlatSegmentItem.m in Sources */,
 				A648C0E71A19AD4A00FF1744 /* MASViewAttribute.m in Sources */,
 				A643AEF21AA9539E00BF4E0F /* NINonRetainingCollections.m in Sources */,
 				A643AE3F1AA9336D00BF4E0F /* FLYUsersService.m in Sources */,
@@ -3374,6 +3506,7 @@
 				A651BD871A4985D40081A1E0 /* Dialog.m in Sources */,
 				A6A0E4AC1A1E76110036116E /* FLEXLiveObjectsTableViewController.m in Sources */,
 				A643AEE91AA9539E00BF4E0F /* NIDebuggingTools.m in Sources */,
+				A6E1B4971B86471B001B0E04 /* README.md in Sources */,
 				A669FB661ABFE5B600A96D24 /* FLYUsernameService.m in Sources */,
 				A6048AD21A8603EF00C67480 /* AFSecurityPolicy.m in Sources */,
 				A6048ADC1A8603EF00C67480 /* UIButton+AFNetworking.m in Sources */,
@@ -3453,12 +3586,14 @@
 				A665FC251AA2830E00490A18 /* FLYTopicService.m in Sources */,
 				A6048ADF1A8603EF00C67480 /* UIRefreshControl+AFNetworking.m in Sources */,
 				A6A0E4BA1A1E76110036116E /* FLEXHeapEnumerator.m in Sources */,
+				A6E1B4831B86471B001B0E04 /* UIAwesomeButton.m in Sources */,
 				A6048ADB1A8603EF00C67480 /* UIAlertView+AFNetworking.m in Sources */,
 				A6048ADA1A8603EF00C67480 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				A6048AD51A8603EF00C67480 /* AFURLResponseSerialization.m in Sources */,
 				A6A0E49A1A1E76110036116E /* FLEXArgumentInputViewFactory.m in Sources */,
 				A6799C7F1AABDE3D003DAE5B /* EAFWrite.mm in Sources */,
 				A6227D101ACF57900039083D /* FLYMyRepliesCell.m in Sources */,
+				A6E1B4981B86471B001B0E04 /* UIView+AutoLayout.m in Sources */,
 				A6A57AA91A34345600610785 /* FLYTopicDetailViewController.m in Sources */,
 				A6BAD40C1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m in Sources */,
 				A643AEEE1AA9539E00BF4E0F /* NIInMemoryCache.m in Sources */,
@@ -3470,6 +3605,7 @@
 				A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */,
 				A60489961A85DAFD00C67480 /* FLYGroupManager.m in Sources */,
 				A6A4EFB01A2BD4D500FD4066 /* FLYGroupListTableViewCell.m in Sources */,
+				A6E1B4821B86471B001B0E04 /* UIImage+FontAwesome.m in Sources */,
 				A669FB5D1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome.m in Sources */,
 				A643AEEC1AA9539E00BF4E0F /* NIFoundationMethods.m in Sources */,
 				A6A70CDB1AA4597A0000F784 /* ECPhoneNumberFormatter.m in Sources */,
@@ -3484,6 +3620,7 @@
 				A657BAEA1AC9410500886C0F /* HMSegmentedControl.m in Sources */,
 				A6450B1B1A99C27F009EF0A3 /* FLYAudioManager.m in Sources */,
 				A6A0E4B71A1E76110036116E /* FLEXSetExplorerViewController.m in Sources */,
+				A6E1B47F1B86471B001B0E04 /* README.md in Sources */,
 				A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */,
 				A6A57A901A33B91700610785 /* UIView+FLYAddition.m in Sources */,
 				A665FC391AA2DDA400490A18 /* FLYCountryListDatasource.m in Sources */,
@@ -3493,6 +3630,7 @@
 				A6CD56EE1A48079D003486DD /* FLYFileManager.m in Sources */,
 				A6A0E4BC1A1E76110036116E /* FLEXRuntimeUtility.m in Sources */,
 				A698F5251B577B3F00953B4D /* TwitterTextEntity.m in Sources */,
+				A6E1B4811B86471B001B0E04 /* UIFont+FontAwesome.m in Sources */,
 				A67CC61F1A7DF1730092E500 /* CoreGraphics+FLYAddition.m in Sources */,
 				A6A0E4A81A1E76110036116E /* FLEXFileBrowserTableViewController.m in Sources */,
 				A6263E921A187E1200C4C3BA /* main.m in Sources */,
