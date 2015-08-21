@@ -227,3 +227,6 @@
 "FLYAllNotificationsRead" = "All Notifications Read";
 
 "FLYNeedLogin" = "Please login first";
+
+"FLYTagListGlobalTab" = "global";
+"FLYTagListMineTab" = "mine";

@@ -40,6 +40,7 @@
 		A60A44F21A8DD41200BED63A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60A44F11A8DD41200BED63A /* UIKit.framework */; };
 		A60A44F41A8DD42B00BED63A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60A44F31A8DD42B00BED63A /* Foundation.framework */; };
 		A612753F1A2EFB72004D25D3 /* DKCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A612753E1A2EFB72004D25D3 /* DKCircleButton.m */; };
+		A613CB8C1B86EABE00BBC4F4 /* FLYGroupListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A613CB8B1B86EABE00BBC4F4 /* FLYGroupListViewController.m */; };
 		A61629BF1B13D4A700DC0CCF /* FLYPushNotificationRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A61629BE1B13D4A700DC0CCF /* FLYPushNotificationRouter.m */; };
 		A61629C21B14096500DC0CCF /* FLYPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A61629C11B14096500DC0CCF /* FLYPayload.m */; };
 		A6162C721A318F1100A3B277 /* FLYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6162C711A318F1100A3B277 /* FLYNavigationBar.m */; };
@@ -587,6 +588,8 @@
 		A60A44F31A8DD42B00BED63A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A612753D1A2EFB72004D25D3 /* DKCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKCircleButton.h; sourceTree = "<group>"; };
 		A612753E1A2EFB72004D25D3 /* DKCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKCircleButton.m; sourceTree = "<group>"; };
+		A613CB8A1B86EABE00BBC4F4 /* FLYGroupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupListViewController.h; sourceTree = "<group>"; };
+		A613CB8B1B86EABE00BBC4F4 /* FLYGroupListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupListViewController.m; sourceTree = "<group>"; };
 		A61629BD1B13D4A700DC0CCF /* FLYPushNotificationRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPushNotificationRouter.h; sourceTree = "<group>"; };
 		A61629BE1B13D4A700DC0CCF /* FLYPushNotificationRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPushNotificationRouter.m; sourceTree = "<group>"; };
 		A61629C01B14096500DC0CCF /* FLYPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPayload.h; sourceTree = "<group>"; };
@@ -2830,6 +2833,8 @@
 				A6E1B4A31B86B82E001B0E04 /* FLYSearchBar.m */,
 				A6E1B4A51B86E0E0001B0E04 /* FLYGroupListMineViewController.h */,
 				A6E1B4A61B86E0E0001B0E04 /* FLYGroupListMineViewController.m */,
+				A613CB8A1B86EABE00BBC4F4 /* FLYGroupListViewController.h */,
+				A613CB8B1B86EABE00BBC4F4 /* FLYGroupListViewController.m */,
 			);
 			name = GroupList;
 			path = Groups;
@@ -3446,6 +3451,7 @@
 				A647008B1ACE68070074F990 /* FLYLogoutService.m in Sources */,
 				A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */,
 				A65ED98C1A91B4F600E10D5C /* FLYReply.m in Sources */,
+				A613CB8C1B86EABE00BBC4F4 /* FLYGroupListViewController.m in Sources */,
 				A6A0E49B1A1E76110036116E /* FLEXDefaultEditorViewController.m in Sources */,
 				A6E1B47E1B86471B001B0E04 /* NSString+FontAwesome.m in Sources */,
 				A648C0F21A19C65B00FF1744 /* FLYTabBarView.m in Sources */,

@@ -45,7 +45,7 @@
     [super viewDidLoad];
     self.title = LOC(@"FLYTags");
     
-    [self _setupSegmentedControl];
+//    [self _setupSegmentedControl];
     
     // search bar
     self.searchBar = [FLYSearchBar new];
