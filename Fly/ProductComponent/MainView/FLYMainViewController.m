@@ -17,7 +17,7 @@
 #import "FLYFeedViewController.h"
 #import "FLYRecordViewController.h"
 #import "FLYProfileViewController.h"
-#import "FLYGroupListViewController.h"
+#import "FLYGroupListGlobalViewController.h"
 #import "PresentingAnimator.h"
 #import "DismissingAnimator.h"
 #import "FLYFilterHomeFeedSelectorViewController.h"
@@ -106,7 +106,7 @@
     _feedViewController = [FLYFeedViewController new];
     _feedViewNavigationController= [[FLYNavigationController alloc] initWithRootViewController:_feedViewController];
     
-    _groupsListViewController = [FLYGroupListViewController new];
+    _groupsListViewController = [FLYGroupListGlobalViewController new];
     _groupsListViewNavigationController = [[FLYNavigationController alloc] initWithRootViewController:_groupsListViewController];
     
     _currentViewController = _feedViewNavigationController;

@@ -8,6 +8,6 @@
 
 #import "FLYUniversalViewController.h"
 
-@interface FLYGroupListViewController : FLYUniversalViewController
+@interface FLYGroupListGlobalViewController : FLYUniversalViewController
 
 @end

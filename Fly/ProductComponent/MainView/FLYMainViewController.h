@@ -11,7 +11,7 @@
 @class FLYNavigationController;
 @class FLYTabBarView;
 @class FLYTabView;
-@class FLYGroupListViewController;
+@class FLYGroupListGlobalViewController;
 @class FLYFeedViewController;
 
 typedef NS_ENUM(NSInteger, TabBarItemIndex) {
@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, TabBarItemIndex) {
 @property (nonatomic) UIButton *recordButton;
 
 @property (nonatomic) FLYFeedViewController *feedViewController;
-@property (nonatomic) FLYGroupListViewController *groupsListViewController;
+@property (nonatomic) FLYGroupListGlobalViewController *groupsListViewController;
 @property (nonatomic) UIViewController *currentViewController;
 
 @property (nonatomic) FLYNavigationController *feedViewNavigationController;

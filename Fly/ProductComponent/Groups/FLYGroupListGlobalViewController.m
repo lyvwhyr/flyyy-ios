@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-#import "FLYGroupListViewController.h"
+#import "FLYGroupListGlobalViewController.h"
 #import "FLYGroupListTableViewCell.h"
 #import "FLYGroupListSuggestTableViewCell.h"
 #import "SCLAlertView.h"
@@ -28,7 +28,7 @@
 
 #define kSuggestGroupRow 0
 
-@interface FLYGroupListViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface FLYGroupListGlobalViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) PPiFlatSegmentedControl *segmentedControl;
 @property (nonatomic) FLYSearchBar *searchBar;
@@ -38,7 +38,7 @@
 
 @end
 
-@implementation FLYGroupListViewController
+@implementation FLYGroupListGlobalViewController
 
 - (void)viewDidLoad
 {
