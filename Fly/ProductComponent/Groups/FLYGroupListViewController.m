@@ -24,12 +24,14 @@
 #import "Dialog.h"
 #import "PPiFlatSegmentedControl.h"
 #import "UIFont+FLYAddition.h"
+#import "FLYSearchBar.h"
 
 #define kSuggestGroupRow 0
 
 @interface FLYGroupListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) PPiFlatSegmentedControl *segmentedControl;
+@property (nonatomic) FLYSearchBar *searchBar;
 @property (nonatomic) UITableView *groupsTabelView;
 
 @property (nonatomic) NSArray *groups;
@@ -45,15 +47,19 @@
     
     [self _setupSegmentedControl];
     
-    _groupsTabelView = [UITableView new];
-    _groupsTabelView.translatesAutoresizingMaskIntoConstraints = NO;
-    _groupsTabelView.backgroundColor = [UIColor clearColor];
-    _groupsTabelView.delegate = self;
-    _groupsTabelView.dataSource = self;
-    _groupsTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_groupsTabelView];
+    // search bar
+    self.searchBar = [FLYSearchBar new];
+    [self.view addSubview:self.searchBar];
     
-    _groups = [NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList];
+    self.groupsTabelView = [UITableView new];
+    self.groupsTabelView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.groupsTabelView.backgroundColor = [UIColor clearColor];
+    self.groupsTabelView.delegate = self;
+    self.groupsTabelView.dataSource = self;
+    self.groupsTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:self.groupsTabelView];
+    
+    self.groups = [NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList];
     
     [self _addViewConstraints];
 }
@@ -63,7 +69,7 @@
     self.segmentedControl = [[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 183, 28)
                                                                items:@[[[PPiFlatSegmentItem alloc] initWithTitle:NSLocalizedString(@"mine", nil) andIcon:nil], [[PPiFlatSegmentItem alloc] initWithTitle:NSLocalizedString(@"global", nil) andIcon:nil]]
                                                         iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
-                                                            // code here
+                                                            
                                                         }
                                                       iconSeparation:0];
     self.segmentedControl.layer.cornerRadius = 4;
@@ -101,8 +107,15 @@
 
 -(void)_addViewConstraints
 {
+    [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight + 8);
+        make.leading.equalTo(self.view);
+        make.trailing.equalTo(self.view);
+        make.height.equalTo(@(31));
+    }];
+    
     [_groupsTabelView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view);
+        make.top.equalTo(self.searchBar.mas_bottom).offset(15);
         make.leading.mas_equalTo(self.view);
         make.width.mas_equalTo(self.view);
         make.height.mas_equalTo(self.view);
