@@ -32,6 +32,7 @@
 - (void)_setupSegmentedControl
 {
     self.globalVC = [FLYGroupListGlobalViewController new];
+    self.globalVC.controller = self;
     self.mineVC = [FLYGroupListMineViewController new];
     [self.view addSubview:self.globalVC.view];
     [self.view addSubview:self.mineVC.view];

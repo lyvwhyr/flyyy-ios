@@ -25,6 +25,7 @@
 #import "PPiFlatSegmentedControl.h"
 #import "UIFont+FLYAddition.h"
 #import "FLYSearchBar.h"
+#import "FLYGroupListViewController.h"
 
 #define kSuggestGroupRow 0
 
@@ -189,7 +190,7 @@
         //Because the first cell is "Suggest a tag", we need to use indexPath.row - 1
         FLYGroup *group = self.groups[indexPath.row - 1];
         FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.controller.navigationController pushViewController:vc animated:YES];
     }
 }
 
