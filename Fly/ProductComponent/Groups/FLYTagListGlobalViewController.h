@@ -8,10 +8,10 @@
 
 #import "FLYUniversalViewController.h"
 
-@class FLYGroupListViewController;
+@class FLYTagListViewController;
 
-@interface FLYGroupListGlobalViewController : FLYUniversalViewController
+@interface FLYTagListGlobalViewController : FLYUniversalViewController
 
-@property (nonatomic) FLYGroupListViewController *controller;
+@property (nonatomic) FLYTagListViewController *controller;
 
 @end

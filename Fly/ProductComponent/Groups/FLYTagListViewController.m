@@ -6,22 +6,22 @@
 //  Copyright (c) 2015 Fly. All rights reserved.
 //
 
-#import "FLYGroupListViewController.h"
-#import "FLYGroupListGlobalViewController.h"
-#import "FLYGroupListMineViewController.h"
+#import "FLYTagListViewController.h"
+#import "FLYTagListGlobalViewController.h"
+#import "FLYTagListMineViewController.h"
 #import "PPiFlatSegmentedControl.h"
 #import "UIFont+FLYAddition.h"
 #import "UIColor+FLYAddition.h"
 
-@interface FLYGroupListViewController ()
+@interface FLYTagListViewController ()
 
 @property (nonatomic) PPiFlatSegmentedControl *segmentedControl;
-@property (nonatomic) FLYGroupListGlobalViewController *globalVC;
-@property (nonatomic) FLYGroupListMineViewController *mineVC;
+@property (nonatomic) FLYTagListGlobalViewController *globalVC;
+@property (nonatomic) FLYTagListMineViewController *mineVC;
 
 @end
 
-@implementation FLYGroupListViewController
+@implementation FLYTagListViewController
 
 - (void)viewDidLoad
 {
@@ -31,9 +31,9 @@
 
 - (void)_setupSegmentedControl
 {
-    self.globalVC = [FLYGroupListGlobalViewController new];
+    self.globalVC = [FLYTagListGlobalViewController new];
     self.globalVC.controller = self;
-    self.mineVC = [FLYGroupListMineViewController new];
+    self.mineVC = [FLYTagListMineViewController new];
     [self.view addSubview:self.globalVC.view];
     [self.view addSubview:self.mineVC.view];
     [self.view bringSubviewToFront:self.globalVC.view];

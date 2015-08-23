@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Fly. All rights reserved.
 //
 
-#import "FLYGroupListMineViewController.h"
+#import "FLYTagListMineViewController.h"
 
-@interface FLYGroupListMineViewController ()
+@interface FLYTagListMineViewController ()
 
 @end
 
-@implementation FLYGroupListMineViewController
+@implementation FLYTagListMineViewController
 
 - (void)viewDidLoad
 {

@@ -6,16 +6,16 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-#import "FLYGroupListSuggestTableViewCell.h"
+#import "FLYTagListSuggestTableViewCell.h"
 
-@interface FLYGroupListSuggestTableViewCell()
+@interface FLYTagListSuggestTableViewCell()
 
 @property (nonatomic) UIImageView *suggestImageView;
 @property (nonatomic) UILabel *suggestTextLabel;
 
 @end
 
-@implementation FLYGroupListSuggestTableViewCell
+@implementation FLYTagListSuggestTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

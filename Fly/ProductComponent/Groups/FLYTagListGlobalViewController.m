@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-#import "FLYGroupListGlobalViewController.h"
-#import "FLYGroupListTableViewCell.h"
-#import "FLYGroupListSuggestTableViewCell.h"
+#import "FLYTagListGlobalViewController.h"
+#import "FLYTagListTableViewCell.h"
+#import "FLYTagListSuggestTableViewCell.h"
 #import "SCLAlertView.h"
 #import "UIColor+FLYAddition.h"
 #import "JGProgressHUD.h"
@@ -18,20 +18,20 @@
 #import "FLYGroupViewController.h"
 #import "FLYNavigationController.h"
 #import "FLYNavigationBar.h"
-#import "FLYGroupListCell.h"
+#import "FLYTagListCell.h"
 #import "FLYGroupManager.h"
 #import "FLYGroup.h"
 #import "Dialog.h"
 #import "PPiFlatSegmentedControl.h"
 #import "UIFont+FLYAddition.h"
 #import "FLYSearchBar.h"
-#import "FLYGroupListViewController.h"
+#import "FLYTagListViewController.h"
 #import "FLYHintView.h"
 
 
 #define kSuggestGroupRow 0
 
-@interface FLYGroupListGlobalViewController () <UITableViewDataSource, UITableViewDelegate, FLYSearchBarDelegate>
+@interface FLYTagListGlobalViewController () <UITableViewDataSource, UITableViewDelegate, FLYSearchBarDelegate>
 
 @property (nonatomic) PPiFlatSegmentedControl *segmentedControl;
 @property (nonatomic) FLYSearchBar *searchBar;
@@ -43,7 +43,7 @@
 
 @end
 
-@implementation FLYGroupListGlobalViewController
+@implementation FLYTagListGlobalViewController
 
 - (void)viewDidLoad
 {
@@ -153,9 +153,9 @@
 {
     UITableViewCell *cell;
     NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d%d", @"identifier", (int)indexPath.section, (int)indexPath.row];
-    cell = [[FLYGroupListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    cell = [[FLYTagListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     
-    FLYGroupListCell *chooseGroupCell = (FLYGroupListCell *)cell;
+    FLYTagListCell *chooseGroupCell = (FLYTagListCell *)cell;
     FLYGroup *group = [_groups objectAtIndex:(indexPath.row)];
     chooseGroupCell.groupName = group.groupName;
     cell = chooseGroupCell;

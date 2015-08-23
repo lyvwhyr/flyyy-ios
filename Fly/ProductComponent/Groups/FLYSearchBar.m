@@ -37,7 +37,7 @@
         
         _searchField = [UITextField new];
         _searchField.placeholder = @"Search";
-        _searchField.font = [UIFont flyFontWithSize:16];
+        _searchField.font = [UIFont flyFontWithSize:15];
         _searchField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _searchField.returnKeyType = UIReturnKeySearch;
         _searchField.delegate = self;

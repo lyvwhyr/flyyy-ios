@@ -1,5 +1,5 @@
 //
-//  FLYGroupListSuggestTableViewCell.h
+//  FLYGroupTableViewCell.h
 //  Fly
 //
 //  Created by Xingxing Xu on 11/30/14.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FLYGroupListSuggestTableViewCell : UITableViewCell
+@interface FLYTagListTableViewCell : UITableViewCell
+
+@property (nonatomic, copy) NSString *groupName;
 
 @end

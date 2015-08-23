@@ -13,6 +13,6 @@ typedef NS_ENUM(NSInteger, FLYSegmentedControlState) {
     FLYSegmentedControlStateMine
 };
 
-@interface FLYGroupListViewController : FLYUniversalViewController
+@interface FLYTagListViewController : FLYUniversalViewController
 
 @end

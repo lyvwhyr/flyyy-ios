@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-#import "FLYGroupListCell.h"
+#import "FLYTagListCell.h"
 #import "UIColor+FLYAddition.h"
 
-@implementation FLYGroupListCell
+@implementation FLYTagListCell
 
 #define kLeftPadding 20
 #define kRightPadding 20

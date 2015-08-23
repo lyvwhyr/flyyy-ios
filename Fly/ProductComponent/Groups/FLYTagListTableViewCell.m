@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 Fly. All rights reserved.
 //
 
-#import "FLYGroupListTableViewCell.h"
+#import "FLYTagListTableViewCell.h"
 
-@interface FLYGroupListTableViewCell()
+@interface FLYTagListTableViewCell()
 
 @property (nonatomic) UILabel *groupNameLabel;
 
 @end
 
-@implementation FLYGroupListTableViewCell
+@implementation FLYTagListTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

@@ -40,7 +40,7 @@
 		A60A44F21A8DD41200BED63A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60A44F11A8DD41200BED63A /* UIKit.framework */; };
 		A60A44F41A8DD42B00BED63A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A60A44F31A8DD42B00BED63A /* Foundation.framework */; };
 		A612753F1A2EFB72004D25D3 /* DKCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A612753E1A2EFB72004D25D3 /* DKCircleButton.m */; };
-		A613CB8C1B86EABE00BBC4F4 /* FLYGroupListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A613CB8B1B86EABE00BBC4F4 /* FLYGroupListViewController.m */; };
+		A613CB8C1B86EABE00BBC4F4 /* FLYTagListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A613CB8B1B86EABE00BBC4F4 /* FLYTagListViewController.m */; };
 		A61629BF1B13D4A700DC0CCF /* FLYPushNotificationRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = A61629BE1B13D4A700DC0CCF /* FLYPushNotificationRouter.m */; };
 		A61629C21B14096500DC0CCF /* FLYPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A61629C11B14096500DC0CCF /* FLYPayload.m */; };
 		A6162C721A318F1100A3B277 /* FLYNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6162C711A318F1100A3B277 /* FLYNavigationBar.m */; };
@@ -267,7 +267,7 @@
 		A659E4281AD8B99C0089EFB7 /* libZtx_iOS-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A659E4261AD8B99C0089EFB7 /* libZtx_iOS-fat.a */; };
 		A65ED9821A915FAE00E10D5C /* FLYPlayTimelineView.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED9811A915FAE00E10D5C /* FLYPlayTimelineView.m */; };
 		A65ED98C1A91B4F600E10D5C /* FLYReply.m in Sources */ = {isa = PBXBuildFile; fileRef = A65ED98B1A91B4F600E10D5C /* FLYReply.m */; };
-		A662A5BC1A9AF6F0002CE4CC /* FLYGroupListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A662A5BB1A9AF6F0002CE4CC /* FLYGroupListCell.m */; };
+		A662A5BC1A9AF6F0002CE4CC /* FLYTagListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A662A5BB1A9AF6F0002CE4CC /* FLYTagListCell.m */; };
 		A66499561ABBB2BD00C4FF08 /* IBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = A66499551ABBB2BD00C4FF08 /* IBActionSheet.m */; };
 		A6655B551A19DEF000440AAB /* icon_tabbar_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */; };
 		A6655B581A19E3A700440AAB /* icon_tabbar_me@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6655B571A19E3A700440AAB /* icon_tabbar_me@3x.png */; };
@@ -411,9 +411,9 @@
 		A6A30D761A1B2700001AE1FE /* icon_voice_record@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A30D751A1B2700001AE1FE /* icon_voice_record@3x.png */; };
 		A6A4EFA31A2A76FC00FD4066 /* icon_feed_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A4EFA21A2A76FC00FD4066 /* icon_feed_group@3x.png */; };
 		A6A4EFA51A2A7CF600FD4066 /* icon_down_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A4EFA41A2A7CF600FD4066 /* icon_down_arrow@3x.png */; };
-		A6A4EFAD1A2B05C700FD4066 /* FLYGroupListGlobalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFAC1A2B05C700FD4066 /* FLYGroupListGlobalViewController.m */; };
-		A6A4EFB01A2BD4D500FD4066 /* FLYGroupListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFAF1A2BD4D500FD4066 /* FLYGroupListTableViewCell.m */; };
-		A6A4EFB31A2BE71000FD4066 /* FLYGroupListSuggestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFB21A2BE71000FD4066 /* FLYGroupListSuggestTableViewCell.m */; };
+		A6A4EFAD1A2B05C700FD4066 /* FLYTagListGlobalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFAC1A2B05C700FD4066 /* FLYTagListGlobalViewController.m */; };
+		A6A4EFB01A2BD4D500FD4066 /* FLYTagListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFAF1A2BD4D500FD4066 /* FLYTagListTableViewCell.m */; };
+		A6A4EFB31A2BE71000FD4066 /* FLYTagListSuggestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFB21A2BE71000FD4066 /* FLYTagListSuggestTableViewCell.m */; };
 		A6A4EFB51A2BE99300FD4066 /* icon_suggest_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A4EFB41A2BE99300FD4066 /* icon_suggest_group@3x.png */; };
 		A6A4EFBE1A2C22EF00FD4066 /* FLYGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A4EFBD1A2C22EF00FD4066 /* FLYGroupViewController.m */; };
 		A6A57A901A33B91700610785 /* UIView+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57A8F1A33B91700610785 /* UIView+FLYAddition.m */; };
@@ -429,6 +429,7 @@
 		A6A8DFF91AC4D92500BF77BB /* FLYPasswordResetConfirmCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8DFF41AC4D92500BF77BB /* FLYPasswordResetConfirmCodeViewController.m */; };
 		A6A8DFFA1AC4D92500BF77BB /* FLYPasswordResetEnterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8DFF61AC4D92500BF77BB /* FLYPasswordResetEnterPasswordViewController.m */; };
 		A6A8DFFB1AC4D92500BF77BB /* FLYPasswordResetPhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A8DFF81AC4D92500BF77BB /* FLYPasswordResetPhoneNumberViewController.m */; };
+		A6A91BDD1B8A585900866AC3 /* FLYTagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A91BDC1B8A585900866AC3 /* FLYTagSearchViewController.m */; };
 		A6AC35231B09457100D5C985 /* FLYDeviceTokenService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AC35221B09457100D5C985 /* FLYDeviceTokenService.m */; };
 		A6AD869B1B7FC07C0082D818 /* FLYUsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AD869A1B7FC07C0082D818 /* FLYUsernameViewController.m */; };
 		A6BAD4091AA57C4D00DB10F7 /* FLYPhoneService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BAD4081AA57C4D00DB10F7 /* FLYPhoneService.m */; };
@@ -498,7 +499,7 @@
 		A6E1B4A01B864771001B0E04 /* PPiFlatSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B49C1B864771001B0E04 /* PPiFlatSegmentedControl.m */; };
 		A6E1B4A11B864771001B0E04 /* PPiFlatSegmentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B49E1B864771001B0E04 /* PPiFlatSegmentItem.m */; };
 		A6E1B4A41B86B82E001B0E04 /* FLYSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B4A31B86B82E001B0E04 /* FLYSearchBar.m */; };
-		A6E1B4A71B86E0E0001B0E04 /* FLYGroupListMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B4A61B86E0E0001B0E04 /* FLYGroupListMineViewController.m */; };
+		A6E1B4A71B86E0E0001B0E04 /* FLYTagListMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B4A61B86E0E0001B0E04 /* FLYTagListMineViewController.m */; };
 		A6E5CF151AD745AC0058C081 /* FLYDashTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E5CF141AD745AC0058C081 /* FLYDashTextView.m */; };
 		A6E5CF181AD76AFD0058C081 /* FLYTopicDetailOnboardingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E5CF171AD76AFD0058C081 /* FLYTopicDetailOnboardingView.m */; };
 		A6F27CAB1A2085D6000EC0B3 /* icon_audio_wave@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */; };
@@ -589,8 +590,8 @@
 		A60A44F31A8DD42B00BED63A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A612753D1A2EFB72004D25D3 /* DKCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DKCircleButton.h; sourceTree = "<group>"; };
 		A612753E1A2EFB72004D25D3 /* DKCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DKCircleButton.m; sourceTree = "<group>"; };
-		A613CB8A1B86EABE00BBC4F4 /* FLYGroupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupListViewController.h; sourceTree = "<group>"; };
-		A613CB8B1B86EABE00BBC4F4 /* FLYGroupListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupListViewController.m; sourceTree = "<group>"; };
+		A613CB8A1B86EABE00BBC4F4 /* FLYTagListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTagListViewController.h; sourceTree = "<group>"; };
+		A613CB8B1B86EABE00BBC4F4 /* FLYTagListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTagListViewController.m; sourceTree = "<group>"; };
 		A61629BD1B13D4A700DC0CCF /* FLYPushNotificationRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPushNotificationRouter.h; sourceTree = "<group>"; };
 		A61629BE1B13D4A700DC0CCF /* FLYPushNotificationRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPushNotificationRouter.m; sourceTree = "<group>"; };
 		A61629C01B14096500DC0CCF /* FLYPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPayload.h; sourceTree = "<group>"; };
@@ -936,8 +937,8 @@
 		A65ED9871A91A88900E10D5C /* FLYNotificationConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYNotificationConstant.h; sourceTree = "<group>"; };
 		A65ED98A1A91B4F600E10D5C /* FLYReply.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYReply.h; sourceTree = "<group>"; };
 		A65ED98B1A91B4F600E10D5C /* FLYReply.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYReply.m; sourceTree = "<group>"; };
-		A662A5BA1A9AF6F0002CE4CC /* FLYGroupListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupListCell.h; sourceTree = "<group>"; };
-		A662A5BB1A9AF6F0002CE4CC /* FLYGroupListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupListCell.m; sourceTree = "<group>"; };
+		A662A5BA1A9AF6F0002CE4CC /* FLYTagListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTagListCell.h; sourceTree = "<group>"; };
+		A662A5BB1A9AF6F0002CE4CC /* FLYTagListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTagListCell.m; sourceTree = "<group>"; };
 		A66499541ABBB2BD00C4FF08 /* IBActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBActionSheet.h; sourceTree = "<group>"; };
 		A66499551ABBB2BD00C4FF08 /* IBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBActionSheet.m; sourceTree = "<group>"; };
 		A6655B531A19DEF000440AAB /* icon_tabbar_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_home@3x.png"; sourceTree = "<group>"; };
@@ -1189,12 +1190,12 @@
 		A6A30D751A1B2700001AE1FE /* icon_voice_record@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_voice_record@3x.png"; sourceTree = "<group>"; };
 		A6A4EFA21A2A76FC00FD4066 /* icon_feed_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_feed_group@3x.png"; sourceTree = "<group>"; };
 		A6A4EFA41A2A7CF600FD4066 /* icon_down_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_down_arrow@3x.png"; sourceTree = "<group>"; };
-		A6A4EFAB1A2B05C700FD4066 /* FLYGroupListGlobalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupListGlobalViewController.h; sourceTree = "<group>"; };
-		A6A4EFAC1A2B05C700FD4066 /* FLYGroupListGlobalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupListGlobalViewController.m; sourceTree = "<group>"; };
-		A6A4EFAE1A2BD4D500FD4066 /* FLYGroupListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupListTableViewCell.h; sourceTree = "<group>"; };
-		A6A4EFAF1A2BD4D500FD4066 /* FLYGroupListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupListTableViewCell.m; sourceTree = "<group>"; };
-		A6A4EFB11A2BE71000FD4066 /* FLYGroupListSuggestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupListSuggestTableViewCell.h; sourceTree = "<group>"; };
-		A6A4EFB21A2BE71000FD4066 /* FLYGroupListSuggestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupListSuggestTableViewCell.m; sourceTree = "<group>"; };
+		A6A4EFAB1A2B05C700FD4066 /* FLYTagListGlobalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTagListGlobalViewController.h; sourceTree = "<group>"; };
+		A6A4EFAC1A2B05C700FD4066 /* FLYTagListGlobalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTagListGlobalViewController.m; sourceTree = "<group>"; };
+		A6A4EFAE1A2BD4D500FD4066 /* FLYTagListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTagListTableViewCell.h; sourceTree = "<group>"; };
+		A6A4EFAF1A2BD4D500FD4066 /* FLYTagListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTagListTableViewCell.m; sourceTree = "<group>"; };
+		A6A4EFB11A2BE71000FD4066 /* FLYTagListSuggestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTagListSuggestTableViewCell.h; sourceTree = "<group>"; };
+		A6A4EFB21A2BE71000FD4066 /* FLYTagListSuggestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTagListSuggestTableViewCell.m; sourceTree = "<group>"; };
 		A6A4EFB41A2BE99300FD4066 /* icon_suggest_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_suggest_group@3x.png"; sourceTree = "<group>"; };
 		A6A4EFBC1A2C22EF00FD4066 /* FLYGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupViewController.h; sourceTree = "<group>"; };
 		A6A4EFBD1A2C22EF00FD4066 /* FLYGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupViewController.m; sourceTree = "<group>"; };
@@ -1221,6 +1222,8 @@
 		A6A8DFF61AC4D92500BF77BB /* FLYPasswordResetEnterPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPasswordResetEnterPasswordViewController.m; sourceTree = "<group>"; };
 		A6A8DFF71AC4D92500BF77BB /* FLYPasswordResetPhoneNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPasswordResetPhoneNumberViewController.h; sourceTree = "<group>"; };
 		A6A8DFF81AC4D92500BF77BB /* FLYPasswordResetPhoneNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYPasswordResetPhoneNumberViewController.m; sourceTree = "<group>"; };
+		A6A91BDB1B8A585900866AC3 /* FLYTagSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTagSearchViewController.h; sourceTree = "<group>"; };
+		A6A91BDC1B8A585900866AC3 /* FLYTagSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTagSearchViewController.m; sourceTree = "<group>"; };
 		A6AC35211B09457100D5C985 /* FLYDeviceTokenService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYDeviceTokenService.h; sourceTree = "<group>"; };
 		A6AC35221B09457100D5C985 /* FLYDeviceTokenService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDeviceTokenService.m; sourceTree = "<group>"; };
 		A6AD86991B7FC07C0082D818 /* FLYUsernameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUsernameViewController.h; sourceTree = "<group>"; };
@@ -1325,8 +1328,8 @@
 		A6E1B49E1B864771001B0E04 /* PPiFlatSegmentItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPiFlatSegmentItem.m; sourceTree = "<group>"; };
 		A6E1B4A21B86B82E001B0E04 /* FLYSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSearchBar.h; sourceTree = "<group>"; };
 		A6E1B4A31B86B82E001B0E04 /* FLYSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSearchBar.m; sourceTree = "<group>"; };
-		A6E1B4A51B86E0E0001B0E04 /* FLYGroupListMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupListMineViewController.h; sourceTree = "<group>"; };
-		A6E1B4A61B86E0E0001B0E04 /* FLYGroupListMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupListMineViewController.m; sourceTree = "<group>"; };
+		A6E1B4A51B86E0E0001B0E04 /* FLYTagListMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTagListMineViewController.h; sourceTree = "<group>"; };
+		A6E1B4A61B86E0E0001B0E04 /* FLYTagListMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTagListMineViewController.m; sourceTree = "<group>"; };
 		A6E5CF131AD745AC0058C081 /* FLYDashTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYDashTextView.h; sourceTree = "<group>"; };
 		A6E5CF141AD745AC0058C081 /* FLYDashTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDashTextView.m; sourceTree = "<group>"; };
 		A6E5CF161AD76AFD0058C081 /* FLYTopicDetailOnboardingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTopicDetailOnboardingView.h; sourceTree = "<group>"; };
@@ -2824,22 +2827,24 @@
 		A6A4EFAA1A2B056C00FD4066 /* GroupList */ = {
 			isa = PBXGroup;
 			children = (
-				A662A5BA1A9AF6F0002CE4CC /* FLYGroupListCell.h */,
-				A662A5BB1A9AF6F0002CE4CC /* FLYGroupListCell.m */,
-				A6A4EFAB1A2B05C700FD4066 /* FLYGroupListGlobalViewController.h */,
-				A6A4EFAC1A2B05C700FD4066 /* FLYGroupListGlobalViewController.m */,
-				A6A4EFAE1A2BD4D500FD4066 /* FLYGroupListTableViewCell.h */,
-				A6A4EFAF1A2BD4D500FD4066 /* FLYGroupListTableViewCell.m */,
-				A6A4EFB11A2BE71000FD4066 /* FLYGroupListSuggestTableViewCell.h */,
-				A6A4EFB21A2BE71000FD4066 /* FLYGroupListSuggestTableViewCell.m */,
+				A662A5BA1A9AF6F0002CE4CC /* FLYTagListCell.h */,
+				A662A5BB1A9AF6F0002CE4CC /* FLYTagListCell.m */,
+				A6A4EFAB1A2B05C700FD4066 /* FLYTagListGlobalViewController.h */,
+				A6A4EFAC1A2B05C700FD4066 /* FLYTagListGlobalViewController.m */,
+				A6A4EFAE1A2BD4D500FD4066 /* FLYTagListTableViewCell.h */,
+				A6A4EFAF1A2BD4D500FD4066 /* FLYTagListTableViewCell.m */,
+				A6A4EFB11A2BE71000FD4066 /* FLYTagListSuggestTableViewCell.h */,
+				A6A4EFB21A2BE71000FD4066 /* FLYTagListSuggestTableViewCell.m */,
 				A6E1B4A21B86B82E001B0E04 /* FLYSearchBar.h */,
 				A6E1B4A31B86B82E001B0E04 /* FLYSearchBar.m */,
-				A6E1B4A51B86E0E0001B0E04 /* FLYGroupListMineViewController.h */,
-				A6E1B4A61B86E0E0001B0E04 /* FLYGroupListMineViewController.m */,
-				A613CB8A1B86EABE00BBC4F4 /* FLYGroupListViewController.h */,
-				A613CB8B1B86EABE00BBC4F4 /* FLYGroupListViewController.m */,
+				A6E1B4A51B86E0E0001B0E04 /* FLYTagListMineViewController.h */,
+				A6E1B4A61B86E0E0001B0E04 /* FLYTagListMineViewController.m */,
+				A613CB8A1B86EABE00BBC4F4 /* FLYTagListViewController.h */,
+				A613CB8B1B86EABE00BBC4F4 /* FLYTagListViewController.m */,
 				A671EA561B8990CB005804C4 /* FLYHintView.h */,
 				A671EA571B8990CB005804C4 /* FLYHintView.m */,
+				A6A91BDB1B8A585900866AC3 /* FLYTagSearchViewController.h */,
+				A6A91BDC1B8A585900866AC3 /* FLYTagSearchViewController.m */,
 			);
 			name = GroupList;
 			path = Groups;
@@ -3441,7 +3446,7 @@
 				A6799C8B1AABE048003DAE5B /* Utilities.mm in Sources */,
 				A6048A3C1A85E63100C67480 /* EXTADT.m in Sources */,
 				A6F4223A1B1ABFEE007F4C79 /* FLYMentionPayload.m in Sources */,
-				A6A4EFB31A2BE71000FD4066 /* FLYGroupListSuggestTableViewCell.m in Sources */,
+				A6A4EFB31A2BE71000FD4066 /* FLYTagListSuggestTableViewCell.m in Sources */,
 				A6A0E4A91A1E76110036116E /* FLEXGlobalsTableViewController.m in Sources */,
 				A69C4BD81A2840E700CAD443 /* NSDictionary+FLYAddition.m in Sources */,
 				A6D692241A92F61A00F8EEDE /* FLYAudioItem.m in Sources */,
@@ -3456,7 +3461,7 @@
 				A647008B1ACE68070074F990 /* FLYLogoutService.m in Sources */,
 				A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */,
 				A65ED98C1A91B4F600E10D5C /* FLYReply.m in Sources */,
-				A613CB8C1B86EABE00BBC4F4 /* FLYGroupListViewController.m in Sources */,
+				A613CB8C1B86EABE00BBC4F4 /* FLYTagListViewController.m in Sources */,
 				A6A0E49B1A1E76110036116E /* FLEXDefaultEditorViewController.m in Sources */,
 				A6E1B47E1B86471B001B0E04 /* NSString+FontAwesome.m in Sources */,
 				A648C0F21A19C65B00FF1744 /* FLYTabBarView.m in Sources */,
@@ -3491,14 +3496,14 @@
 				A6048A401A85E63100C67480 /* EXTSafeCategory.m in Sources */,
 				A61B6D3B1AAAD7EA00A5B696 /* FLYLoginService.m in Sources */,
 				A6A0E4A01A1E76110036116E /* FLEXPropertyEditorViewController.m in Sources */,
-				A6A4EFAD1A2B05C700FD4066 /* FLYGroupListGlobalViewController.m in Sources */,
+				A6A4EFAD1A2B05C700FD4066 /* FLYTagListGlobalViewController.m in Sources */,
 				A643AEF91AA9539E00BF4E0F /* NIViewRecycler.m in Sources */,
 				A6227D0A1ACF23700039083D /* FLYMyTopicsViewController.m in Sources */,
 				A643AEF51AA9539E00BF4E0F /* NIRuntimeClassModifications.m in Sources */,
 				A6799C921AAC1071003DAE5B /* SDiPhoneVersion.m in Sources */,
 				A6A30D6F1A1B1DF8001AE1FE /* FLYCircleView.m in Sources */,
 				A6048AD11A8603EF00C67480 /* AFNetworkReachabilityManager.m in Sources */,
-				A6E1B4A71B86E0E0001B0E04 /* FLYGroupListMineViewController.m in Sources */,
+				A6E1B4A71B86E0E0001B0E04 /* FLYTagListMineViewController.m in Sources */,
 				A6E1B4A11B864771001B0E04 /* PPiFlatSegmentItem.m in Sources */,
 				A648C0E71A19AD4A00FF1744 /* MASViewAttribute.m in Sources */,
 				A643AEF21AA9539E00BF4E0F /* NINonRetainingCollections.m in Sources */,
@@ -3606,7 +3611,7 @@
 				A655783E1A3AD514003102CD /* FLYPrePostChooseGroupTableViewCell.m in Sources */,
 				A6A0E4C31A1E7EFA0036116E /* UIWindow+FLYAddition.m in Sources */,
 				A6048A441A85E63100C67480 /* NSMethodSignature+EXT.m in Sources */,
-				A662A5BC1A9AF6F0002CE4CC /* FLYGroupListCell.m in Sources */,
+				A662A5BC1A9AF6F0002CE4CC /* FLYTagListCell.m in Sources */,
 				A665FC251AA2830E00490A18 /* FLYTopicService.m in Sources */,
 				A6048ADF1A8603EF00C67480 /* UIRefreshControl+AFNetworking.m in Sources */,
 				A6A0E4BA1A1E76110036116E /* FLEXHeapEnumerator.m in Sources */,
@@ -3628,7 +3633,8 @@
 				A638D82D1AC9C73000E67ED3 /* FLYNotificationViewController.m in Sources */,
 				A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */,
 				A60489961A85DAFD00C67480 /* FLYGroupManager.m in Sources */,
-				A6A4EFB01A2BD4D500FD4066 /* FLYGroupListTableViewCell.m in Sources */,
+				A6A4EFB01A2BD4D500FD4066 /* FLYTagListTableViewCell.m in Sources */,
+				A6A91BDD1B8A585900866AC3 /* FLYTagSearchViewController.m in Sources */,
 				A6E1B4821B86471B001B0E04 /* UIImage+FontAwesome.m in Sources */,
 				A669FB5D1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome.m in Sources */,
 				A643AEEC1AA9539E00BF4E0F /* NIFoundationMethods.m in Sources */,

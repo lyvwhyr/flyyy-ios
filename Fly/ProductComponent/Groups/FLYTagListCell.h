@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FLYGroupListCell : UITableViewCell
+@interface FLYTagListCell : UITableViewCell
 
 @property (nonatomic, copy) NSString *groupName;
 
