@@ -33,7 +33,7 @@
         
         _countryCodeLabel = [UILabel new];
         _countryCodeLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        _countryCodeLabel.textColor = [UIColor flyColorFlyCountrySelectorCountryCodeColor];
+        _countryCodeLabel.textColor = [UIColor flyColorFlyGreyText];
         _countryCodeLabel.font = [UIFont fontWithName:@"Avenir-Book" size:15];
         [self.contentView addSubview:_countryCodeLabel];
     }

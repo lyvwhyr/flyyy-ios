@@ -305,6 +305,7 @@
 		A66E204F1A2EBDAE004235F5 /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E204C1A2EBDAE004235F5 /* RDVTabBarController.m */; };
 		A66E96521AA01874000B0E83 /* FLYLoaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E96511AA01874000B0E83 /* FLYLoaderView.m */; };
 		A66E96551AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = A66E96541AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m */; };
+		A671EA581B8990CB005804C4 /* FLYHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = A671EA571B8990CB005804C4 /* FLYHintView.m */; };
 		A67208201A35689600B2C5B5 /* icon_seconds@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A672081F1A35689600B2C5B5 /* icon_seconds@3x.png */; };
 		A67208231A3569C600B2C5B5 /* FLYReplyPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = A67208221A3569C600B2C5B5 /* FLYReplyPlayView.m */; };
 		A67208251A356CAE00B2C5B5 /* icon_play_reply@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67208241A356CAE00B2C5B5 /* icon_play_reply@3x.png */; };
@@ -995,6 +996,8 @@
 		A66E96511AA01874000B0E83 /* FLYLoaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoaderView.m; sourceTree = "<group>"; };
 		A66E96531AA0457F000B0E83 /* CALayer+MBAnimationPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+MBAnimationPersistence.h"; sourceTree = "<group>"; };
 		A66E96541AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+MBAnimationPersistence.m"; sourceTree = "<group>"; };
+		A671EA561B8990CB005804C4 /* FLYHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYHintView.h; sourceTree = "<group>"; };
+		A671EA571B8990CB005804C4 /* FLYHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYHintView.m; sourceTree = "<group>"; };
 		A672081F1A35689600B2C5B5 /* icon_seconds@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_seconds@3x.png"; sourceTree = "<group>"; };
 		A67208211A3569C600B2C5B5 /* FLYReplyPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYReplyPlayView.h; sourceTree = "<group>"; };
 		A67208221A3569C600B2C5B5 /* FLYReplyPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYReplyPlayView.m; sourceTree = "<group>"; };
@@ -2835,6 +2838,8 @@
 				A6E1B4A61B86E0E0001B0E04 /* FLYGroupListMineViewController.m */,
 				A613CB8A1B86EABE00BBC4F4 /* FLYGroupListViewController.h */,
 				A613CB8B1B86EABE00BBC4F4 /* FLYGroupListViewController.m */,
+				A671EA561B8990CB005804C4 /* FLYHintView.h */,
+				A671EA571B8990CB005804C4 /* FLYHintView.m */,
 			);
 			name = GroupList;
 			path = Groups;
@@ -3475,6 +3480,7 @@
 				A63189221A92B34E0042E12A /* Reachability.m in Sources */,
 				A6263EC11A1888D800C4C3BA /* FLYNavigationController.m in Sources */,
 				A6450B141A998A08009EF0A3 /* AFSoundItem.m in Sources */,
+				A671EA581B8990CB005804C4 /* FLYHintView.m in Sources */,
 				A66D98561A883B5A00C3D75A /* FLYPrePostHeaderView.m in Sources */,
 				A6263EBA1A18815000C4C3BA /* FLYMainViewController.m in Sources */,
 				A6A8DFF91AC4D92500BF77BB /* FLYPasswordResetConfirmCodeViewController.m in Sources */,

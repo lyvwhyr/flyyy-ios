@@ -26,13 +26,17 @@
 #import "UIFont+FLYAddition.h"
 #import "FLYSearchBar.h"
 #import "FLYGroupListViewController.h"
+#import "FLYHintView.h"
+
 
 #define kSuggestGroupRow 0
 
-@interface FLYGroupListGlobalViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface FLYGroupListGlobalViewController () <UITableViewDataSource, UITableViewDelegate, FLYSearchBarDelegate>
 
 @property (nonatomic) PPiFlatSegmentedControl *segmentedControl;
 @property (nonatomic) FLYSearchBar *searchBar;
+@property (nonatomic) BOOL searching;
+@property (nonatomic) FLYHintView *hintView;
 @property (nonatomic) UITableView *groupsTabelView;
 
 @property (nonatomic) NSArray *groups;
@@ -50,6 +54,7 @@
     
     // search bar
     self.searchBar = [FLYSearchBar new];
+    self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
     
     self.groupsTabelView = [UITableView new];
@@ -62,7 +67,7 @@
     
     self.groups = [NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList];
     
-    [self _addViewConstraints];
+    [self updateViewConstraints];
 }
 
 - (void)_setupSegmentedControl
@@ -106,21 +111,30 @@
     [super viewDidLayoutSubviews];
 }
 
--(void)_addViewConstraints
+-(void)updateViewConstraints
 {
-    [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.searchBar mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight + 8);
         make.leading.equalTo(self.view);
         make.trailing.equalTo(self.view);
         make.height.equalTo(@(31));
     }];
     
-    [_groupsTabelView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.searchBar.mas_bottom).offset(15);
+    [_groupsTabelView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.searchBar.mas_bottom).offset(3);
         make.leading.mas_equalTo(self.view);
         make.width.mas_equalTo(self.view);
         make.height.mas_equalTo(self.view);
     }];
+    
+    if (self.hintView && self.hintView.hidden == NO) {
+        [_hintView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.view);
+            make.top.equalTo(self.searchBar.mas_bottom).offset(120);
+        }];
+    }
+    
+    [super updateViewConstraints];
 }
 
 #pragma mark - tableView datasource
@@ -131,31 +145,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _groups.count + 1;
+//    return _groups.count + 1;
+    return _groups.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-        UITableViewCell *cell;
-        NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d%d", @"identifier", (int)indexPath.section, (int)indexPath.row];
-        cell = [[FLYGroupListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        FLYGroupListCell *chooseGroupCell = (FLYGroupListCell *)cell;
-        [chooseGroupCell.checkButton setImage:[UIImage imageNamed:@"icon_suggest_group"] forState:UIControlStateNormal];
-        chooseGroupCell.isFirst = YES;
-        chooseGroupCell.groupName = LOC(@"FLYSuggestATag");
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor clearColor];
-        return cell;
-    }
-    
-    
     UITableViewCell *cell;
     NSString *cellIdentifier = [NSString stringWithFormat:@"%@_%d%d", @"identifier", (int)indexPath.section, (int)indexPath.row];
     cell = [[FLYGroupListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     
     FLYGroupListCell *chooseGroupCell = (FLYGroupListCell *)cell;
-    FLYGroup *group = [_groups objectAtIndex:(indexPath.row - 1)];
+    FLYGroup *group = [_groups objectAtIndex:(indexPath.row)];
     chooseGroupCell.groupName = group.groupName;
     cell = chooseGroupCell;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -165,38 +166,72 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row > 1) {
-        NSString *groupName = ((FLYGroup *)[self.groups objectAtIndex:indexPath.row - 1]).groupName;
-        [[FLYScribe sharedInstance] logEvent:@"group_list" section:groupName  component:nil element:nil action:@"click"];
-    }
+    NSString *groupName = ((FLYGroup *)[self.groups objectAtIndex:indexPath.row]).groupName;
+    [[FLYScribe sharedInstance] logEvent:@"group_list" section:groupName  component:nil element:nil action:@"click"];
     
-    if (kSuggestGroupRow == indexPath.row) {
-        SCLAlertView *alert = [[SCLAlertView alloc] init];
-        
-        UITextField *textField = [alert addTextField:LOC(@"FLYEnterTagNamePopupHintText")];
-        [alert addButton:@"Suggest" actionBlock:^(void) {
-            NSDictionary *properties = @{kSuggestTagName:textField.text};
-            [[Mixpanel sharedInstance]  track:kTrackingEventClientSuggestTag properties:properties];
-            
-            JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-            HUD.textLabel.text = @"Thank you";
-            HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-            [HUD showInView:self.view];
-            [HUD dismissAfterDelay:1.0];
-        }];
-        
-        [alert showCustom:self image:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] color:[UIColor flyBlue] title:@"Suggest" subTitle:@"Do you want to suggest a new tag? We are open to new ideas." closeButtonTitle:@"Cancel" duration:0.0f];
-    } else {
+//    if (kSuggestGroupRow == indexPath.row) {
+//        SCLAlertView *alert = [[SCLAlertView alloc] init];
+//        
+//        UITextField *textField = [alert addTextField:LOC(@"FLYEnterTagNamePopupHintText")];
+//        [alert addButton:@"Suggest" actionBlock:^(void) {
+//            NSDictionary *properties = @{kSuggestTagName:textField.text};
+//            [[Mixpanel sharedInstance]  track:kTrackingEventClientSuggestTag properties:properties];
+//            
+//            JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+//            HUD.textLabel.text = @"Thank you";
+//            HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
+//            [HUD showInView:self.view];
+//            [HUD dismissAfterDelay:1.0];
+//        }];
+//        
+//        [alert showCustom:self image:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] color:[UIColor flyBlue] title:@"Suggest" subTitle:@"Do you want to suggest a new tag? We are open to new ideas." closeButtonTitle:@"Cancel" duration:0.0f];
+//    } else {
         //Because the first cell is "Suggest a tag", we need to use indexPath.row - 1
-        FLYGroup *group = self.groups[indexPath.row - 1];
+        FLYGroup *group = self.groups[indexPath.row];
         FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
         [self.controller.navigationController pushViewController:vc animated:YES];
-    }
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 44.0f;
+}
+
+#pragma mark - FLYSearchBarDelegate
+- (void)searchBarDidBeginEditing:(FLYSearchBar *)searchBar
+{
+    [self hintView];
+    self.groupsTabelView.hidden = YES;
+    self.hintView.hidden = NO;
+    [self updateViewConstraints];
+}
+
+- (void)searchBarCancelButtonClicked:(FLYSearchBar *)searchBar
+{
+    self.hintView.hidden = YES;
+    self.groupsTabelView.hidden = NO;
+}
+
+- (void)searchBar:(FLYSearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if (searchText.length <= 2) {
+        self.groupsTabelView.hidden = YES;
+        self.hintView.hidden = NO;
+    } else {
+        self.hintView.hidden = YES;
+    }
+}
+
+- (FLYHintView *)hintView
+{
+    if (!_hintView) {
+        _hintView = [[FLYHintView alloc] initWithText:LOC(@"FLYTagListSearchAtLeastTwoChars") image:nil];
+        _hintView.translatesAutoresizingMaskIntoConstraints = NO;
+        _hintView.hidden = YES;
+        [self.view addSubview:_hintView];
+    }
+    return _hintView;
 }
 
 #pragma mark - Navigation bar and status bar

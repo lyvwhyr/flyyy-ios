@@ -230,3 +230,4 @@
 
 "FLYTagListGlobalTab" = "global";
 "FLYTagListMineTab" = "mine";
+"FLYTagListSearchAtLeastTwoChars" = "Type at least 2 characters to start your search";

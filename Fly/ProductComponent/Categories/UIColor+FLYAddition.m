@@ -30,7 +30,7 @@
 #define kColorFlyReplyBodyTextGrey                      @"#747474"
 #define kColorFlyReplyPostAtGrey                        @"#B2B2B2"
 #define kColorFlyCountrySelectorBGColor                 @"#f7f7f7"
-#define kColorFlyCountrySelectorCountryCodeColor        @"#8e8e93"
+#define kColorFlyGreyText                               @"#8e8e93"
 #define kColorFlySignupGrey                             @"#B7B5B5"
 #define kColorFlyPlayAllControlPanelBackground          @"#949494"
 #define kColorFlyInlineAction                           @"#B5CBD6"
@@ -144,9 +144,9 @@
     return [FLYUtilities colorWithHexString:kColorFlyCountrySelectorBGColor];
 }
 
-+ (UIColor *)flyColorFlyCountrySelectorCountryCodeColor
++ (UIColor *)flyColorFlyGreyText
 {
-    return [FLYUtilities colorWithHexString:kColorFlyCountrySelectorCountryCodeColor];
+    return [FLYUtilities colorWithHexString:kColorFlyGreyText];
 }
 
 + (UIColor *)flyColorFlySignupGrey
