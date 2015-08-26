@@ -8,9 +8,10 @@
 
 #import "FLYPrePostHeaderView.h"
 #import "Dialog.h"
+#import "UIColor+FLYAddition.h"
 
 #define kTopPadding 10
-#define kDescriptionTextTopPadding  3
+#define kDescriptionTextTopPadding  13
 #define kDescpritonHeight   60
 #define kMaxCharLengh 120
 
@@ -18,7 +19,6 @@
 
 @property (nonatomic) UILabel *captionLabel;
 @property (nonatomic) UITextView *descriptionTextView;
-@property (nonatomic) UILabel *charLimitLabel;
 @property (nonatomic) UILabel *selectGroupLabel;
 
 @end
@@ -32,7 +32,7 @@
         _captionLabel = [UILabel new];
         [_captionLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:16]];
         _captionLabel.text = @"Caption:";
-        _captionLabel.textColor = [UIColor whiteColor];
+        _captionLabel.textColor = [UIColor flyBlue];
         _captionLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_captionLabel];
         
@@ -43,19 +43,14 @@
         [_descriptionTextView setText:LOC(@"FLYPrePostDefaultText")];
         [_descriptionTextView setFont:[UIFont fontWithName:@"Avenir-Book" size:16]];
         [_descriptionTextView setTextColor:[UIColor lightGrayColor]];
-        [self addSubview:_descriptionTextView];
+        _descriptionTextView.backgroundColor = [UIColor flySettingBackgroundColor];
         
-        _charLimitLabel = [UILabel new];
-        [_charLimitLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:8]];
-        _charLimitLabel.text = @"char limit: 120";
-        _charLimitLabel.textColor = [UIColor whiteColor];
-        _charLimitLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_charLimitLabel];
+        [self addSubview:_descriptionTextView];
         
         _selectGroupLabel = [UILabel new];
         [_selectGroupLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:16]];
-        _selectGroupLabel.text = @"Select a Group:";
-        _selectGroupLabel.textColor = [UIColor whiteColor];
+        _selectGroupLabel.text = @"Popular Tags:";
+        _selectGroupLabel.textColor = [UIColor flyBlue];
         _selectGroupLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_selectGroupLabel];
         
@@ -79,15 +74,8 @@
         make.height.equalTo(@kDescpritonHeight);
     }];
     
-    [self.charLimitLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.descriptionTextView.mas_bottom).offset(kDescriptionTextTopPadding);
-        make.leading.equalTo(self);
-        make.right.equalTo(self);
-    }];
-    
-    
     [self.selectGroupLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.charLimitLabel.mas_bottom).offset(kDescriptionTextTopPadding);
+        make.top.equalTo(self.descriptionTextView.mas_bottom).offset(kDescriptionTextTopPadding);
         make.leading.equalTo(self);
         make.right.equalTo(self);
     }];

@@ -29,6 +29,7 @@
 #import "FLYMediaService.h"
 #import "FLYTopicService.h"
 #import "FLYPushNotificationManager.h"
+#import "UIFont+FLYAddition.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -36,16 +37,20 @@
 #define kFlyPostButtonHeight 44
 #define kTitleTextCellHeight 105
 #define kLeftPadding    15
+#define kTagButtonHorizontalSpacing 19
+#define kTagButtonVerticalSpacing 12
 
 @interface FLYPrePostViewController () <UITableViewDataSource, UITableViewDelegate, FLYPrePostHeaderViewDelegate, JGProgressHUDDelegate>
 
+@property (nonatomic) UIImageView *backgroundImageView;
 @property (nonatomic) FLYPrePostHeaderView *headerView;
-@property (nonatomic) UITableView *tableView;
 @property (nonatomic) FLYPostButtonView *postButton;
 @property (nonatomic) UIView *overlayView;
 
 @property (nonatomic) NSArray *groups;
 @property (nonatomic, copy) NSString *topicTitle;
+@property (nonatomic) NSMutableArray *tagButtonArray;
+@property (nonatomic) CGRect lastTagFrame;
 
 @property (nonatomic) NSIndexPath *selectedIndex;
 @property (nonatomic) FLYGroup *selectedGroup;
@@ -66,30 +71,41 @@
     
     _groups = [NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList];
     
-    self.view.backgroundColor = [UIColor flyBlue];
-    
     self.title = @"Post";
-    UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
-    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
+    
+    self.backgroundImageView = [UIImageView new];
+    self.backgroundImageView.image = [UIImage imageNamed:@"bg_post_tag"];
+    [self.view addSubview:self.backgroundImageView];
     
     self.headerView = [FLYPrePostHeaderView new];
     self.headerView.delegate = self;
     [self.view addSubview:self.headerView];
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    _tableView = [UITableView new];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.backgroundColor = [UIColor whiteColor];
-    _tableView.separatorColor = [UIColor clearColor];
-    [self.view addSubview:_tableView];
-    [_tableView registerClass:[FLYPrePostChooseGroupTableViewCell class] forCellReuseIdentifier:kFlyPrePostChooseGroupCellIdentifier];
     
     _postButton = [FLYPostButtonView new];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_postButtonTapped)];
     [_postButton addGestureRecognizer:tap];
     [self.view addSubview:_postButton];
     
+    // Initialize tags
+    _tagButtonArray = [NSMutableArray new];
+    [self.groups enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        FLYGroup *group = (FLYGroup *)obj;
+        UIButton *tagButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        tagButton.layer.cornerRadius = 4.0f;
+        tagButton.layer.borderColor = [UIColor flyShareTextGrey].CGColor;
+        tagButton.layer.borderWidth = 1.0f;
+        tagButton.tag = idx;
+        tagButton.contentEdgeInsets = UIEdgeInsetsMake(5, 15, 5, 15);
+        tagButton.titleLabel.font = [UIFont flyFontWithSize:14.0f];
+        [tagButton setTitleColor:[FLYUtilities colorWithHexString:@"#737373"] forState:UIControlStateNormal];
+        [tagButton addTarget:self action:@selector(_tagSelected:) forControlEvents:UIControlEventTouchUpInside];
+        [tagButton setTitle:group.groupName forState:UIControlStateNormal];
+        [tagButton sizeToFit];
+        [self.view addSubview:tagButton];
+        [self.tagButtonArray addObject:tagButton];
+    }];
+    
+    // post from tag page
     if (self.defaultGroup) {
         [self _setDefaultSelectedIndex:self.defaultGroup];
     }
@@ -99,14 +115,17 @@
     [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:nil element:nil action:@"impression"];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)_tagSelected:(UIButton *)target
 {
-    [super viewWillAppear:animated];
-    [_tableView reloadData];
+    UALog(@"hello");
 }
 
 - (void)updateViewConstraints
 {
+    [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
     [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight + 15);
         make.leading.equalTo(self.view).offset(kLeftPadding);
@@ -114,18 +133,41 @@
         make.height.equalTo(@150);
     }];
     
+    // tag buttons
+    UIButton *previousButton;
+    CGFloat currentWidth = 0.0;
+    CGFloat MAX_ROW_WIDTH = CGRectGetWidth(self.view.bounds) - 2 * kLeftPadding;
+    for (UIButton *currentButton in self.tagButtonArray) {
+        CGFloat buttonWidth = CGRectGetWidth(currentButton.bounds);
+        if ((buttonWidth + currentWidth) < MAX_ROW_WIDTH) {
+            if (previousButton == nil) {
+                [currentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.equalTo(self.headerView.mas_bottom);
+                    make.leading.equalTo(self.headerView);
+                }];
+            } else {
+                [currentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.equalTo(previousButton);
+                    make.leading.equalTo(previousButton.mas_trailing).offset(kTagButtonHorizontalSpacing);
+                }];
+            }
+        } else {
+            // new line
+            currentWidth = 0.0f;
+            [currentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.leading.equalTo(self.headerView);
+                make.top.equalTo(previousButton.mas_bottom).offset(kTagButtonVerticalSpacing);
+            }];
+        }
+                           currentWidth += buttonWidth + kTagButtonHorizontalSpacing;
+        previousButton = currentButton;
+    }
+    
     [_postButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(self.view);
         make.bottom.equalTo(self.view);
         make.width.equalTo(self.view);
         make.height.equalTo(@(kFlyPostButtonHeight));
-    }];
-    
-    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight + 150);
-        make.leading.equalTo(self.view).offset(kLeftPadding);
-        make.trailing.equalTo(self.view).offset(-kLeftPadding);
-        make.bottom.equalTo(self.view).offset(-kFlyPostButtonHeight);
     }];
     
     if (_overlayView) {

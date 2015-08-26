@@ -21,7 +21,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.backgroundColor = [UIColor flyGreen];
+        self.backgroundColor = [FLYUtilities colorWithHexString:@"#279CD3"];
         
         _textLabel = [UILabel new];
         _textLabel.text = @"Post";
