@@ -51,6 +51,7 @@
 @property (nonatomic, copy) NSString *topicTitle;
 @property (nonatomic) NSMutableArray *tagButtonArray;
 @property (nonatomic) CGRect lastTagFrame;
+@property (nonatomic) BOOL alreadyLayouted;
 
 @property (nonatomic) NSIndexPath *selectedIndex;
 @property (nonatomic) FLYGroup *selectedGroup;
@@ -137,29 +138,47 @@
     UIButton *previousButton;
     CGFloat currentWidth = 0.0;
     CGFloat MAX_ROW_WIDTH = CGRectGetWidth(self.view.bounds) - 2 * kLeftPadding;
+    NSMutableArray *buttonsInRow = [NSMutableArray new];
     for (UIButton *currentButton in self.tagButtonArray) {
         CGFloat buttonWidth = CGRectGetWidth(currentButton.bounds);
         if ((buttonWidth + currentWidth) < MAX_ROW_WIDTH) {
             if (previousButton == nil) {
-                [currentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                [currentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.top.equalTo(self.headerView.mas_bottom);
                     make.leading.equalTo(self.headerView);
                 }];
             } else {
-                [currentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+                [currentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.top.equalTo(previousButton);
                     make.leading.equalTo(previousButton.mas_trailing).offset(kTagButtonHorizontalSpacing);
                 }];
             }
+            [buttonsInRow addObject:currentButton];
         } else {
+            if (!self.alreadyLayouted) {
+                NSInteger buttonCountInRow = [buttonsInRow count];
+                CGFloat bWidth = 0.0f;
+                for (UIButton *button in buttonsInRow) {
+                    bWidth += CGRectGetWidth(button.bounds);
+                }
+                CGFloat hSpacing = (MAX_ROW_WIDTH - bWidth - kTagButtonHorizontalSpacing * (buttonCountInRow - 1))/buttonCountInRow/2.0f - 1;
+                for (int i = 0; i < buttonsInRow.count; i++) {
+                    UIButton *btn = buttonsInRow[i];
+                    btn.contentEdgeInsets = UIEdgeInsetsMake(5, 15 + hSpacing, 5, 15 + hSpacing);
+                    [btn sizeToFit];
+                }
+                [buttonsInRow removeAllObjects];
+                
+                [buttonsInRow addObject:currentButton];
+            }
             // new line
             currentWidth = 0.0f;
-            [currentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            [currentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.leading.equalTo(self.headerView);
                 make.top.equalTo(previousButton.mas_bottom).offset(kTagButtonVerticalSpacing);
             }];
         }
-                           currentWidth += buttonWidth + kTagButtonHorizontalSpacing;
+        currentWidth += buttonWidth + kTagButtonHorizontalSpacing;
         previousButton = currentButton;
     }
     
@@ -179,6 +198,7 @@
         }];
     }
     
+    self.alreadyLayouted = YES;
     [super updateViewConstraints];
     
 }
