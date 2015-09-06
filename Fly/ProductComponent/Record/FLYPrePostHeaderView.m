@@ -9,26 +9,27 @@
 #import "FLYPrePostHeaderView.h"
 #import "Dialog.h"
 #import "UIColor+FLYAddition.h"
+#import "MJAutoCompleteManager.h"
 
 #define kTopPadding 10
 #define kDescriptionTextTopPadding  13
 #define kDescpritonHeight   60
 #define kMaxCharLengh 120
 
-@interface FLYPrePostHeaderView()<UITextViewDelegate>
+@interface FLYPrePostHeaderView()<UITextViewDelegate, MJAutoCompleteManagerDataSource, MJAutoCompleteManagerDelegate>
 
 @property (nonatomic) UILabel *captionLabel;
 @property (nonatomic) UITextView *descriptionTextView;
 @property (nonatomic) UILabel *selectGroupLabel;
 
-@property (nonatomic, strong) NSArray *tagsArray;
+@property (nonatomic) MJAutoCompleteManager *autoCompleteMgr;
 
 @end
 
 
 @implementation FLYPrePostHeaderView
 
-- (instancetype)init
+- (instancetype)initWithSearchView:(UIView *)searchView
 {
     if (self = [super init]) {
         _captionLabel = [UILabel new];
@@ -46,13 +47,6 @@
         [_descriptionTextView setFont:[UIFont fontWithName:@"Avenir-Book" size:16]];
         [_descriptionTextView setTextColor:[UIColor lightGrayColor]];
         _descriptionTextView.backgroundColor = [UIColor flySettingBackgroundColor];
-        
-        //Set up the first text view with the default table view
-//        self.tagsArray = @[@"tag1", @"instagram", @"anothertag", @"hmm", @"tag3", @"tag4", @"tag5", @"tag6", @"tag7"];
-//        self.descriptionTextView.delegate = self;
-//        self.descriptionTextView.hashTagsDelegate = self;
-//        self.descriptionTextView.hashTagsTableViewHeight = 120;
-        
         [self addSubview:_descriptionTextView];
         
         _selectGroupLabel = [UILabel new];
@@ -61,6 +55,19 @@
         _selectGroupLabel.textColor = [UIColor flyBlue];
         _selectGroupLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_selectGroupLabel];
+        
+        self.autoCompleteMgr = [[MJAutoCompleteManager alloc] init];
+        self.autoCompleteMgr.dataSource = self;
+        self.autoCompleteMgr.delegate = self;
+        
+        NSArray *names = @[@"i1", @"i2", @"i3", @"i4", @"i5", @"i6", @"hello"];
+
+        NSArray *items = [MJAutoCompleteItem autoCompleteCellModelFromObjects:names];
+        MJAutoCompleteTrigger *hashTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"#"
+                                                                            autoCompleteItems:items];
+        [self.autoCompleteMgr addAutoCompleteTrigger:hashTrigger];
+        
+        self.autoCompleteMgr.container = searchView;
         
         [self updateConstraintsIfNeeded];
     }
@@ -119,13 +126,15 @@
     return YES;
 }
 
--(void) textViewDidChange:(UITextView *)textView
+-(void)textViewDidChange:(UITextView *)textView
 {
     if(textView.text.length == 0){
         textView.textColor = [UIColor lightGrayColor];
         textView.text = LOC(@"FLYPrePostDefaultText");
         [textView resignFirstResponder];
     }
+    
+    [self.autoCompleteMgr processString:textView.text];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -148,15 +157,37 @@
     return result;
 }
 
-- (NSArray *)tagsForQuery:(NSString *)query{
-    //Provide the list of tags, you wish to display to the user:
-    
-    //For example, return the tags, which start with the query string from the predefined array:
-    NSPredicate *bPredicate =
-    [NSPredicate predicateWithFormat:@"SELF beginswith[c] %@", query];
-    NSArray *array = [self.tagsArray filteredArrayUsingPredicate:bPredicate];
-    
-    return array;
+#pragma mark - MJAutoCompleteMgr DataSource Methods
+
+- (void)autoCompleteManager:(MJAutoCompleteManager *)acManager
+         itemListForTrigger:(MJAutoCompleteTrigger *)trigger
+                 withString:(NSString *)string
+                   callback:(MJAutoCompleteListCallback)callback
+{
+    /* Since we implemented this method, we are stuck and must handle ALL triggers */
+    // the # trigger is trivial:
+    static int i = 0;
+    i++;
+    if ([trigger.delimiter isEqual:@"#"])
+    {
+        [self.autoCompleteMgr removeAllAutoCompleteTriggers];
+        NSMutableArray *names =  [NSMutableArray arrayWithArray: @[@"ai1", @"ai2", @"ai3", @"ai4", @"ai5", @"ai6", [NSString stringWithFormat:@"aii%d", i]]];
+        
+        NSArray *items = [MJAutoCompleteItem autoCompleteCellModelFromObjects:names];
+        MJAutoCompleteTrigger *hashTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"#"
+                                                                            autoCompleteItems:items];
+        [self.autoCompleteMgr addAutoCompleteTrigger:hashTrigger];
+        
+        
+        // we already provided the list
+        callback(trigger.autoCompleteItemList);
+    }
+}
+
+#pragma mark - MJAutoCompleteMgr Delegate methods
+- (void)autoCompleteManager:(MJAutoCompleteManager *)acManager shouldUpdateToText:(NSString *)newText
+{
+    self.descriptionTextView.text = newText;
 }
 
 #pragma mark - UIResponder

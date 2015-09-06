@@ -502,6 +502,11 @@
 		A6E1B4A71B86E0E0001B0E04 /* FLYTagListMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E1B4A61B86E0E0001B0E04 /* FLYTagListMineViewController.m */; };
 		A6E5CF151AD745AC0058C081 /* FLYDashTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E5CF141AD745AC0058C081 /* FLYDashTextView.m */; };
 		A6E5CF181AD76AFD0058C081 /* FLYTopicDetailOnboardingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E5CF171AD76AFD0058C081 /* FLYTopicDetailOnboardingView.m */; };
+		A6F01BDA1B9CB82D00258CC7 /* MJAutoCompleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F01BD11B9CB82C00258CC7 /* MJAutoCompleteCell.m */; };
+		A6F01BDB1B9CB82D00258CC7 /* MJAutoCompleteItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F01BD31B9CB82C00258CC7 /* MJAutoCompleteItem.m */; };
+		A6F01BDC1B9CB82D00258CC7 /* MJAutoCompleteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F01BD51B9CB82D00258CC7 /* MJAutoCompleteManager.m */; };
+		A6F01BDD1B9CB82D00258CC7 /* MJAutoCompleteTC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F01BD71B9CB82D00258CC7 /* MJAutoCompleteTC.m */; };
+		A6F01BDE1B9CB82D00258CC7 /* MJAutoCompleteTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F01BD91B9CB82D00258CC7 /* MJAutoCompleteTrigger.m */; };
 		A6F27CAB1A2085D6000EC0B3 /* icon_audio_wave@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */; };
 		A6F422371B1ABFDB007F4C79 /* FLYReplyPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F422361B1ABFDB007F4C79 /* FLYReplyPayload.m */; };
 		A6F4223A1B1ABFEE007F4C79 /* FLYMentionPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F422391B1ABFEE007F4C79 /* FLYMentionPayload.m */; };
@@ -1334,6 +1339,16 @@
 		A6E5CF141AD745AC0058C081 /* FLYDashTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDashTextView.m; sourceTree = "<group>"; };
 		A6E5CF161AD76AFD0058C081 /* FLYTopicDetailOnboardingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTopicDetailOnboardingView.h; sourceTree = "<group>"; };
 		A6E5CF171AD76AFD0058C081 /* FLYTopicDetailOnboardingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTopicDetailOnboardingView.m; sourceTree = "<group>"; };
+		A6F01BD01B9CB82C00258CC7 /* MJAutoCompleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJAutoCompleteCell.h; path = Fly/Libraries/MJAutoCompleteCell.h; sourceTree = SOURCE_ROOT; };
+		A6F01BD11B9CB82C00258CC7 /* MJAutoCompleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJAutoCompleteCell.m; path = Fly/Libraries/MJAutoCompleteCell.m; sourceTree = SOURCE_ROOT; };
+		A6F01BD21B9CB82C00258CC7 /* MJAutoCompleteItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJAutoCompleteItem.h; path = Fly/Libraries/MJAutoCompleteItem.h; sourceTree = SOURCE_ROOT; };
+		A6F01BD31B9CB82C00258CC7 /* MJAutoCompleteItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJAutoCompleteItem.m; path = Fly/Libraries/MJAutoCompleteItem.m; sourceTree = SOURCE_ROOT; };
+		A6F01BD41B9CB82D00258CC7 /* MJAutoCompleteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJAutoCompleteManager.h; path = Fly/Libraries/MJAutoCompleteManager.h; sourceTree = SOURCE_ROOT; };
+		A6F01BD51B9CB82D00258CC7 /* MJAutoCompleteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJAutoCompleteManager.m; path = Fly/Libraries/MJAutoCompleteManager.m; sourceTree = SOURCE_ROOT; };
+		A6F01BD61B9CB82D00258CC7 /* MJAutoCompleteTC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJAutoCompleteTC.h; path = Fly/Libraries/MJAutoCompleteTC.h; sourceTree = SOURCE_ROOT; };
+		A6F01BD71B9CB82D00258CC7 /* MJAutoCompleteTC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJAutoCompleteTC.m; path = Fly/Libraries/MJAutoCompleteTC.m; sourceTree = SOURCE_ROOT; };
+		A6F01BD81B9CB82D00258CC7 /* MJAutoCompleteTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJAutoCompleteTrigger.h; path = Fly/Libraries/MJAutoCompleteTrigger.h; sourceTree = SOURCE_ROOT; };
+		A6F01BD91B9CB82D00258CC7 /* MJAutoCompleteTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJAutoCompleteTrigger.m; path = Fly/Libraries/MJAutoCompleteTrigger.m; sourceTree = SOURCE_ROOT; };
 		A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_audio_wave@3x.png"; sourceTree = "<group>"; };
 		A6F422351B1ABFDB007F4C79 /* FLYReplyPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYReplyPayload.h; sourceTree = "<group>"; };
 		A6F422361B1ABFDB007F4C79 /* FLYReplyPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYReplyPayload.m; sourceTree = "<group>"; };
@@ -2087,6 +2102,7 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A6F01BCF1B9CB78300258CC7 /* MJAutoComplete */,
 				A6E1B4991B86475F001B0E04 /* PPiFlatSegmentedControl */,
 				A6E1B44B1B86471B001B0E04 /* FontAwesome+iOS */,
 				A6E1B4571B86471B001B0E04 /* PPiAwesomeButton */,
@@ -3047,6 +3063,23 @@
 			path = PPiFlatSegmentedControl;
 			sourceTree = "<group>";
 		};
+		A6F01BCF1B9CB78300258CC7 /* MJAutoComplete */ = {
+			isa = PBXGroup;
+			children = (
+				A6F01BD01B9CB82C00258CC7 /* MJAutoCompleteCell.h */,
+				A6F01BD11B9CB82C00258CC7 /* MJAutoCompleteCell.m */,
+				A6F01BD21B9CB82C00258CC7 /* MJAutoCompleteItem.h */,
+				A6F01BD31B9CB82C00258CC7 /* MJAutoCompleteItem.m */,
+				A6F01BD41B9CB82D00258CC7 /* MJAutoCompleteManager.h */,
+				A6F01BD51B9CB82D00258CC7 /* MJAutoCompleteManager.m */,
+				A6F01BD61B9CB82D00258CC7 /* MJAutoCompleteTC.h */,
+				A6F01BD71B9CB82D00258CC7 /* MJAutoCompleteTC.m */,
+				A6F01BD81B9CB82D00258CC7 /* MJAutoCompleteTrigger.h */,
+				A6F01BD91B9CB82D00258CC7 /* MJAutoCompleteTrigger.m */,
+			);
+			path = MJAutoComplete;
+			sourceTree = "<group>";
+		};
 		A6F861971B5856B8004753C7 /* TTTAttributedLabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -3453,6 +3486,7 @@
 				A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */,
 				A66E204E1A2EBDAE004235F5 /* RDVTabBar.m in Sources */,
 				A6AD869B1B7FC07C0082D818 /* FLYUsernameViewController.m in Sources */,
+				A6F01BDA1B9CB82D00258CC7 /* MJAutoCompleteCell.m in Sources */,
 				A665FC311AA2DB0600490A18 /* FLYCountrySelectorViewController.m in Sources */,
 				A6048AD31A8603EF00C67480 /* AFURLConnectionOperation.m in Sources */,
 				A6A0E4961A1E76110036116E /* FLEXArgumentInputStructView.m in Sources */,
@@ -3462,6 +3496,7 @@
 				A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */,
 				A65ED98C1A91B4F600E10D5C /* FLYReply.m in Sources */,
 				A613CB8C1B86EABE00BBC4F4 /* FLYTagListViewController.m in Sources */,
+				A6F01BDE1B9CB82D00258CC7 /* MJAutoCompleteTrigger.m in Sources */,
 				A6A0E49B1A1E76110036116E /* FLEXDefaultEditorViewController.m in Sources */,
 				A6E1B47E1B86471B001B0E04 /* NSString+FontAwesome.m in Sources */,
 				A648C0F21A19C65B00FF1744 /* FLYTabBarView.m in Sources */,
@@ -3472,6 +3507,7 @@
 				A67208231A3569C600B2C5B5 /* FLYReplyPlayView.m in Sources */,
 				A6A0E4A41A1E76110036116E /* FLEXToolbarItem.m in Sources */,
 				A690F2851AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m in Sources */,
+				A6F01BDC1B9CB82D00258CC7 /* MJAutoCompleteManager.m in Sources */,
 				A6E1B47D1B86471B001B0E04 /* FAImageView.m in Sources */,
 				A6E1B4861B86471B001B0E04 /* README.md in Sources */,
 				A65578411A3ADCC3003102CD /* FLYPostButtonView.m in Sources */,
@@ -3534,6 +3570,7 @@
 				A651BD871A4985D40081A1E0 /* Dialog.m in Sources */,
 				A6A0E4AC1A1E76110036116E /* FLEXLiveObjectsTableViewController.m in Sources */,
 				A643AEE91AA9539E00BF4E0F /* NIDebuggingTools.m in Sources */,
+				A6F01BDD1B9CB82D00258CC7 /* MJAutoCompleteTC.m in Sources */,
 				A6E1B4971B86471B001B0E04 /* README.md in Sources */,
 				A669FB661ABFE5B600A96D24 /* FLYUsernameService.m in Sources */,
 				A6048AD21A8603EF00C67480 /* AFSecurityPolicy.m in Sources */,
@@ -3687,6 +3724,7 @@
 				A643AEF11AA9539E00BF4E0F /* NINonEmptyCollectionTesting.m in Sources */,
 				A6A0E4921A1E76110036116E /* FLEXArgumentInputJSONObjectView.m in Sources */,
 				A648C0EB1A19AD4A00FF1744 /* View+MASAdditions.m in Sources */,
+				A6F01BDB1B9CB82D00258CC7 /* MJAutoCompleteItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

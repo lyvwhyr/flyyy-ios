@@ -46,6 +46,7 @@
 @property (nonatomic) FLYPrePostHeaderView *headerView;
 @property (nonatomic) FLYPostButtonView *postButton;
 @property (nonatomic) UIView *overlayView;
+@property (nonatomic) UIView *searchContainerView;
 
 @property (nonatomic) NSArray *groups;
 @property (nonatomic, copy) NSString *topicTitle;
@@ -78,10 +79,6 @@
     self.backgroundImageView.image = [UIImage imageNamed:@"bg_post_tag"];
     [self.view addSubview:self.backgroundImageView];
     
-    self.headerView = [FLYPrePostHeaderView new];
-    self.headerView.delegate = self;
-    [self.view addSubview:self.headerView];
-    
     _postButton = [FLYPostButtonView new];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_postButtonTapped)];
     [_postButton addGestureRecognizer:tap];
@@ -110,6 +107,14 @@
     if (self.defaultGroup) {
         [self _setDefaultSelectedIndex:self.defaultGroup];
     }
+    
+    // search view
+    _searchContainerView = [UIView new];
+    [self.view addSubview:_searchContainerView];
+    
+    self.headerView = [[FLYPrePostHeaderView alloc] initWithSearchView:self.searchContainerView];
+    self.headerView.delegate = self;
+    [self.view addSubview:self.headerView];
     
     [self updateViewConstraints];
     
@@ -197,6 +202,13 @@
             make.bottom.equalTo(self.view);
         }];
     }
+    
+    [self.searchContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight + 150);
+        make.leading.equalTo(self.view).offset(kLeftPadding);
+        make.trailing.equalTo(self.view).offset(-kLeftPadding);
+        make.bottom.equalTo(self.view).offset(-kFlyPostButtonHeight);
+    }];
     
     self.alreadyLayouted = YES;
     [super updateViewConstraints];

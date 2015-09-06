@@ -19,6 +19,7 @@
 
 @property (nonatomic, weak) id<FLYPrePostHeaderViewDelegate> delegate;
 
+- (instancetype)initWithSearchView:(UIView *)searchView;
 - (void)becomeFirstResponder;
 - (void)resignFirstResponder;
 
