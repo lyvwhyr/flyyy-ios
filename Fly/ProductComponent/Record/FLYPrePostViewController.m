@@ -131,7 +131,7 @@
         make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight + 15);
         make.leading.equalTo(self.view).offset(kLeftPadding);
         make.trailing.equalTo(self.view).offset(-kLeftPadding);
-        make.height.equalTo(@150);
+        make.height.equalTo(@140);
     }];
     
     // tag buttons
@@ -263,7 +263,7 @@
 #pragma mark - FLYPrePostTitleTableViewCellDelegate
 - (BOOL)titleTextViewShouldBeginEditing:(UITextView *)textView
 {
-    [self.view addSubview:self.overlayView];
+//    [self.view addSubview:self.overlayView];
     [self updateViewConstraints];
     return YES;
 }
@@ -304,10 +304,10 @@
     [[Mixpanel sharedInstance]  track:@"recording_flow" properties:properties];
     
     NSString *defaultStr = LOC(@"FLYPrePostDefaultText");
-    if (!self.topicTitle || [self.topicTitle isEqualToString:defaultStr]) {
-        [Dialog simpleToast:LOC(@"FLYPrePostDefaultText")];
-        return;
-    }
+//    if (!self.topicTitle || [self.topicTitle isEqualToString:defaultStr]) {
+//        [Dialog simpleToast:LOC(@"FLYPrePostDefaultText")];
+//        return;
+//    }
     
     BOOL mediaAlreadyUploaded = [FLYAppStateManager sharedInstance].mediaAlreadyUploaded;
     NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
@@ -356,7 +356,7 @@
 #pragma mark - Service
 - (void)_serviceCreateTopicWithParams:(NSDictionary *)dict
 {
-    NSDictionary *initialParams = @{@"topic_title":self.topicTitle,
+    NSDictionary *initialParams = @{@"topic_title":@"hihi ",
                              @"media_id":[FLYAppStateManager sharedInstance].mediaId,
                              @"extension":@"m4a",
                              @"audio_duration":@(self.audioDuration)
@@ -366,6 +366,7 @@
     if (self.selectedGroup) {
         [params setObject:self.selectedGroup.groupId forKey:@"group_id"];
     }
+    params[@"tag_names"] = @[@"tag1", @"tag2", @"tag3"];
     
     @weakify(self)
     FLYPostTopicSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
