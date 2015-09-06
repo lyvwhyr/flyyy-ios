@@ -128,12 +128,6 @@
 
 -(void)textViewDidChange:(UITextView *)textView
 {
-    if(textView.text.length == 0){
-        textView.textColor = [UIColor lightGrayColor];
-        textView.text = LOC(@"FLYPrePostDefaultText");
-        [textView resignFirstResponder];
-    }
-    
     [self.autoCompleteMgr processString:textView.text];
 }
 

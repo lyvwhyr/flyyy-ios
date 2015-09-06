@@ -12,6 +12,7 @@
 #import "PPiFlatSegmentedControl.h"
 #import "UIFont+FLYAddition.h"
 #import "UIColor+FLYAddition.h"
+#import "FLYTagListBaseViewController.h"
 
 @interface FLYTagListViewController ()
 
@@ -31,11 +32,14 @@
 
 - (void)_setupSegmentedControl
 {
+    
     self.globalVC = [FLYTagListGlobalViewController new];
     self.globalVC.controller = self;
-    self.mineVC = [FLYTagListMineViewController new];
     [self.view addSubview:self.globalVC.view];
+    
+    self.mineVC = [FLYTagListMineViewController new];
     [self.view addSubview:self.mineVC.view];
+    
     [self.view bringSubviewToFront:self.globalVC.view];
     
     @weakify(self);
@@ -44,9 +48,13 @@
                                                               iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
                                                                   @strongify(self)
                                                                   if (segmentIndex == FLYSegmentedControlStateGlobal) {
+                                                                      [self.mineVC.view removeFromSuperview];
+                                                                      [self.view addSubview:self.globalVC.view];
                                                                       [self.view bringSubviewToFront:self.globalVC.view];
                                                                   } else {
+                                                                      [self.globalVC.view removeFromSuperview];
                                                                       [self.view addSubview:self.mineVC.view];
+                                                                      [self.view bringSubviewToFront:self.mineVC.view];
                                                                   }
                                                               }
                                                             iconSeparation:0];

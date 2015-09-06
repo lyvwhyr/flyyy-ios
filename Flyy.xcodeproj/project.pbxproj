@@ -507,6 +507,7 @@
 		A6F01BDC1B9CB82D00258CC7 /* MJAutoCompleteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F01BD51B9CB82D00258CC7 /* MJAutoCompleteManager.m */; };
 		A6F01BDD1B9CB82D00258CC7 /* MJAutoCompleteTC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F01BD71B9CB82D00258CC7 /* MJAutoCompleteTC.m */; };
 		A6F01BDE1B9CB82D00258CC7 /* MJAutoCompleteTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F01BD91B9CB82D00258CC7 /* MJAutoCompleteTrigger.m */; };
+		A6F01BE11B9CF6EB00258CC7 /* FLYTagListBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F01BE01B9CF6EB00258CC7 /* FLYTagListBaseViewController.m */; };
 		A6F27CAB1A2085D6000EC0B3 /* icon_audio_wave@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */; };
 		A6F422371B1ABFDB007F4C79 /* FLYReplyPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F422361B1ABFDB007F4C79 /* FLYReplyPayload.m */; };
 		A6F4223A1B1ABFEE007F4C79 /* FLYMentionPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F422391B1ABFEE007F4C79 /* FLYMentionPayload.m */; };
@@ -1349,6 +1350,8 @@
 		A6F01BD71B9CB82D00258CC7 /* MJAutoCompleteTC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJAutoCompleteTC.m; path = Fly/Libraries/MJAutoCompleteTC.m; sourceTree = SOURCE_ROOT; };
 		A6F01BD81B9CB82D00258CC7 /* MJAutoCompleteTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJAutoCompleteTrigger.h; path = Fly/Libraries/MJAutoCompleteTrigger.h; sourceTree = SOURCE_ROOT; };
 		A6F01BD91B9CB82D00258CC7 /* MJAutoCompleteTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJAutoCompleteTrigger.m; path = Fly/Libraries/MJAutoCompleteTrigger.m; sourceTree = SOURCE_ROOT; };
+		A6F01BDF1B9CF6EB00258CC7 /* FLYTagListBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTagListBaseViewController.h; sourceTree = "<group>"; };
+		A6F01BE01B9CF6EB00258CC7 /* FLYTagListBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTagListBaseViewController.m; sourceTree = "<group>"; };
 		A6F27CAA1A2085D6000EC0B3 /* icon_audio_wave@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_audio_wave@3x.png"; sourceTree = "<group>"; };
 		A6F422351B1ABFDB007F4C79 /* FLYReplyPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYReplyPayload.h; sourceTree = "<group>"; };
 		A6F422361B1ABFDB007F4C79 /* FLYReplyPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYReplyPayload.m; sourceTree = "<group>"; };
@@ -2861,6 +2864,8 @@
 				A671EA571B8990CB005804C4 /* FLYHintView.m */,
 				A6A91BDB1B8A585900866AC3 /* FLYTagSearchViewController.h */,
 				A6A91BDC1B8A585900866AC3 /* FLYTagSearchViewController.m */,
+				A6F01BDF1B9CF6EB00258CC7 /* FLYTagListBaseViewController.h */,
+				A6F01BE01B9CF6EB00258CC7 /* FLYTagListBaseViewController.m */,
 			);
 			name = GroupList;
 			path = Groups;
@@ -3548,6 +3553,7 @@
 				A6048A411A85E63100C67480 /* EXTScope.m in Sources */,
 				A690F2821AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m in Sources */,
 				A669FB611ABFD99B00A96D24 /* SVWebViewControllerActivitySafari.m in Sources */,
+				A6F01BE11B9CF6EB00258CC7 /* FLYTagListBaseViewController.m in Sources */,
 				A648C0E61A19AD4A00FF1744 /* MASLayoutConstraint.m in Sources */,
 				A6BCBBFD1A848D16001F8AB0 /* FLYEndpointRequest.m in Sources */,
 				A6227D191AD109FA0039083D /* iRate.m in Sources */,

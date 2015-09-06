@@ -1,11 +1,12 @@
 //
-//  FLYGroupsViewController.m
-//  Fly
+//  FLYTagListBaseViewController.m
+//  Flyy
 //
-//  Created by Xingxing Xu on 11/29/14.
-//  Copyright (c) 2014 Fly. All rights reserved.
+//  Created by Xingxing Xu on 9/6/15.
+//  Copyright (c) 2015 Fly. All rights reserved.
 //
 
+#import "FLYTagListBaseViewController.h"
 #import "FLYTagListGlobalViewController.h"
 #import "FLYTagListTableViewCell.h"
 #import "FLYTagListSuggestTableViewCell.h"
@@ -31,7 +32,7 @@
 
 #define kSuggestGroupRow 0
 
-@interface FLYTagListGlobalViewController () <UITableViewDataSource, UITableViewDelegate, FLYSearchBarDelegate>
+@interface FLYTagListBaseViewController () <UITableViewDataSource, UITableViewDelegate, FLYSearchBarDelegate>
 
 @property (nonatomic) PPiFlatSegmentedControl *segmentedControl;
 @property (nonatomic) FLYSearchBar *searchBar;
@@ -43,7 +44,7 @@
 
 @end
 
-@implementation FLYTagListGlobalViewController
+@implementation FLYTagListBaseViewController
 
 - (void)viewDidLoad
 {
@@ -122,7 +123,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    return _groups.count + 1;
+    //    return _groups.count + 1;
     return _groups.count;
 }
 
@@ -145,9 +146,9 @@
 {
     NSString *groupName = ((FLYGroup *)[self.groups objectAtIndex:indexPath.row]).groupName;
     [[FLYScribe sharedInstance] logEvent:@"group_list" section:groupName  component:nil element:nil action:@"click"];
-        FLYGroup *group = self.groups[indexPath.row];
-        FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
-        [self.controller.navigationController pushViewController:vc animated:YES];
+    FLYGroup *group = self.groups[indexPath.row];
+    FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
+    [self.controller.navigationController pushViewController:vc animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -10,4 +10,6 @@
 
 @interface FLYTagListMineViewController : FLYUniversalViewController
 
+@property (nonatomic) UIView *containerView;
+
 @end
