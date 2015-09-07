@@ -31,11 +31,13 @@
         [self addSubview:_searchBackgroundView];
         
         _searchIconImageView = [UIImageView new];
+        _searchBackgroundView.translatesAutoresizingMaskIntoConstraints = NO;
         _searchIconImageView.image = [UIImage imageNamed:@"icon_search"];
         [_searchIconImageView sizeToFit];
         [self addSubview:_searchIconImageView];
         
         _searchField = [UITextField new];
+        _searchField.translatesAutoresizingMaskIntoConstraints = NO;
         _searchField.placeholder = @"Search";
         _searchField.font = [UIFont flyFontWithSize:15];
         _searchField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -44,6 +46,7 @@
         [self addSubview:_searchField];
         
         _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
         [_cancelButton addTarget:self action:@selector(_cancelButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         [_cancelButton setTitle:LOC(@"FLYButtonCancelText") forState:UIControlStateNormal];
         [_cancelButton setTitleColor:[UIColor flyColorFlyGreyText] forState:UIControlStateNormal];
@@ -142,11 +145,11 @@
     
 }
 
-- (void)layoutSubviews
-{
-    [self setNeedsUpdateConstraints];
-    [self updateConstraintsIfNeeded];
-    [super layoutSubviews];
-}
+//- (void)layoutSubviews
+//{
+//    [self setNeedsUpdateConstraints];
+//    [self updateConstraintsIfNeeded];
+//    [super layoutSubviews];
+//}
 
 @end

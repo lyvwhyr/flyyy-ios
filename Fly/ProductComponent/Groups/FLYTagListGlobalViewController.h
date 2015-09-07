@@ -13,5 +13,6 @@
 @interface FLYTagListGlobalViewController : FLYUniversalViewController
 
 @property (nonatomic) FLYTagListViewController *controller;
+@property (nonatomic) UIView *containerView;
 
 @end

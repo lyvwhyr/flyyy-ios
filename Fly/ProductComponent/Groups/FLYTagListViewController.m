@@ -38,7 +38,7 @@
     [self.view addSubview:self.globalVC.view];
     
     self.mineVC = [FLYTagListMineViewController new];
-    [self.view addSubview:self.mineVC.view];
+//    [self.view addSubview:self.mineVC.view];
     
     [self.view bringSubviewToFront:self.globalVC.view];
     
@@ -69,6 +69,7 @@
                                                    NSForegroundColorAttributeName:[UIColor flyBlue]};
     self.navigationItem.titleView = self.segmentedControl;
 }
+
 
 #pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor

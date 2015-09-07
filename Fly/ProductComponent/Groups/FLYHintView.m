@@ -10,6 +10,9 @@
 #import "UIFont+FLYAddition.h"
 #import "UIColor+FLYAddition.h"
 
+#define kImageTopPadding 18
+#define kLabelMargin 20
+
 @interface FLYHintView()
 
 @property (nonatomic) UILabel *titleLabel;
@@ -26,6 +29,7 @@
         _titleLabel.text = text;
         _titleLabel.numberOfLines = 0;
         NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+        paragraphStyle.alignment = NSTextAlignmentCenter;
         paragraphStyle.lineSpacing = 2;
         NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:text];
         [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, text.length)];
@@ -55,14 +59,31 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self);
         make.centerX.equalTo(self);
-        make.leading.greaterThanOrEqualTo(self).offset(30);
-        make.trailing.lessThanOrEqualTo(self).offset(30);
+        make.leading.greaterThanOrEqualTo(self).offset(kLabelMargin);
+        make.trailing.lessThanOrEqualTo(self).offset(kLabelMargin);
     }];
     
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(18);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(kImageTopPadding);
         make.centerX.equalTo(self);
     }];
+}
+
+- (CGSize)intrinsicContentSize
+{
+    NSString *text = self.titleLabel.text;
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    paragraphStyle.lineSpacing = 2;
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:text];
+    [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, text.length)];
+    [attrStr addAttribute:NSFontAttributeName value:[UIFont flyLightFontWithSize:14] range:NSMakeRange(0, text.length)];
+    
+    CGRect rect = [attrStr boundingRectWithSize:CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds) - kLabelMargin * 2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
+    
+    CGFloat intrinsicWidth = MIN(CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetWidth(self.titleLabel.bounds));
+    CGFloat intrinsicHeight = ceilf(rect.size.height) + kImageTopPadding + CGRectGetHeight(self.imageView.bounds);
+    return CGSizeMake(intrinsicWidth, intrinsicHeight);
 }
 
 

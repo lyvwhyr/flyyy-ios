@@ -105,10 +105,11 @@
         make.height.mas_equalTo(self.view);
     }];
     
-    if (self.hintView && self.hintView.hidden == NO) {
+    if (_hintView && _hintView.hidden == NO) {
         [_hintView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.view);
-            make.top.equalTo(self.searchBar.mas_bottom).offset(120);
+            make.leading.mas_equalTo(self.view);
+            make.trailing.mas_equalTo(self.view);
+            make.top.equalTo(self.searchBar.mas_bottom).offset(40);
         }];
     }
     
