@@ -67,3 +67,5 @@
 #define EP_ACTIVITIES_UNREAD_COUNT                  @"/v1/activities/unread_count"
 #define EP_ACTIVITIES_MARK_READ                     @"/v1/activities/read"
 #define EP_ACTIVITIES_GET                           @"/v1/activities"
+
+// tags

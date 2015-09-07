@@ -78,32 +78,31 @@
 
 - (void)loadRightBarButton
 {
-//    if (!_hasJoinedGroup) {
-//        FLYAddGroupBarButtonItem *barItem = [FLYAddGroupBarButtonItem barButtonItem:NO];
-//        __weak typeof(self)weakSelf = self;
-//        barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
-//            __strong typeof(self) strongSelf = weakSelf;
-//            strongSelf.hasJoinedGroup = YES;
-//            JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-//            HUD.textLabel.text = @"Joined";
-//            HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
-//            [HUD showInView:self.view];
-//            [HUD dismissAfterDelay:2.0];
-//
-//            [self loadRightBarButton];
-//        };
-//        self.navigationItem.rightBarButtonItem = barItem;
-//    } else {
-//        FLYJoinedGroupBarButtonItem *barItem = [FLYJoinedGroupBarButtonItem barButtonItem:NO];
-//        __weak typeof(self)weakSelf = self;
-//        barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
-//            __strong typeof(self) strongSelf = weakSelf;
-//            strongSelf.hasJoinedGroup = NO;
-//            [self loadRightBarButton];
-//        };
-//        self.navigationItem.rightBarButtonItem = barItem;
-//    }
-//}
+    if (!_hasJoinedGroup) {
+        FLYAddGroupBarButtonItem *barItem = [FLYAddGroupBarButtonItem barButtonItem:NO];
+        __weak typeof(self)weakSelf = self;
+        barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+            __strong typeof(self) strongSelf = weakSelf;
+            strongSelf.hasJoinedGroup = YES;
+            JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+            HUD.textLabel.text = @"Joined";
+            HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
+            [HUD showInView:self.view];
+            [HUD dismissAfterDelay:2.0];
+
+            [self loadRightBarButton];
+        };
+        self.navigationItem.rightBarButtonItem = barItem;
+    } else {
+        FLYJoinedGroupBarButtonItem *barItem = [FLYJoinedGroupBarButtonItem barButtonItem:NO];
+        __weak typeof(self)weakSelf = self;
+        barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+            __strong typeof(self) strongSelf = weakSelf;
+            strongSelf.hasJoinedGroup = NO;
+            [self loadRightBarButton];
+        };
+        self.navigationItem.rightBarButtonItem = barItem;
+    }
 }
 
 - (BOOL)isFullScreen

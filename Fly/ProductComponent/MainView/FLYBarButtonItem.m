@@ -9,6 +9,7 @@
 #import "FLYBarButtonItem.h"
 #import "UIView+FLYAddition.h"
 #import "UIButton+TouchAreaInsets.h"
+#import "UIImage+FLYAddition.h"
 
 
 @implementation FLYBarButtonItem
@@ -108,7 +109,7 @@
 {
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //12 * 21
-    UIImage *image = [UIImage imageNamed:@"icon_join_group"];
+    UIImage *image = [[UIImage imageNamed:@"icon_join_group"] imageWithColorOverlay:[UIColor whiteColor]];
     CGFloat x = (left ? -1 : 1) * 16;
     backButton.frame = CGRectMake(x, 0, 52, 44);
     [backButton setImage:image forState:UIControlStateNormal];
@@ -124,8 +125,8 @@
 {
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     //12 * 21
-    UIImage *image = [UIImage imageNamed:@"icon_group_checkmark"];
-    CGFloat x = (left ? -1 : 1) * 10;
+    UIImage *image = [[UIImage imageNamed:@"icon_group_checkmark"] imageWithColorOverlay:[UIColor whiteColor]];
+    CGFloat x = (left ? -1 : 1) * 16;
     backButton.frame = CGRectMake(x, 0, 52, 44);
     [backButton setImage:image forState:UIControlStateNormal];
     self = [super initWithButton:backButton actionBlock:nil];
