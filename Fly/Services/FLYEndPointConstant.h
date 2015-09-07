@@ -69,3 +69,4 @@
 #define EP_ACTIVITIES_GET                           @"/v1/activities"
 
 // tags
+#define EP_TAGS_FOLLOW                              @"v1/tags/%@/join"

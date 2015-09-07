@@ -16,6 +16,7 @@
 #import "UIColor+FLYAddition.h"
 #import "FLYGroup.h"
 #import "FLYTopicService.h"
+#import "FLYTagsService.h"
 
 @interface FLYGroupViewController ()
 @property (nonatomic) UILabel *groupTitleLabel;
@@ -82,6 +83,10 @@
         FLYAddGroupBarButtonItem *barItem = [FLYAddGroupBarButtonItem barButtonItem:NO];
         __weak typeof(self)weakSelf = self;
         barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+            if ([FLYUtilities isInvalidUser]) {
+                return;
+            }
+            
             __strong typeof(self) strongSelf = weakSelf;
             strongSelf.hasJoinedGroup = YES;
             JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
@@ -91,12 +96,18 @@
             [HUD dismissAfterDelay:2.0];
 
             [self loadRightBarButton];
+            
+            [FLYTagsService followTagWithId:self.group.groupId followed:NO successBlock:nil errorBlock:nil];
         };
         self.navigationItem.rightBarButtonItem = barItem;
     } else {
         FLYJoinedGroupBarButtonItem *barItem = [FLYJoinedGroupBarButtonItem barButtonItem:NO];
         __weak typeof(self)weakSelf = self;
         barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+            if ([FLYUtilities isInvalidUser]) {
+                return;
+            }
+            
             __strong typeof(self) strongSelf = weakSelf;
             strongSelf.hasJoinedGroup = NO;
             [self loadRightBarButton];
