@@ -149,7 +149,7 @@
     [[FLYScribe sharedInstance] logEvent:@"group_list" section:groupName  component:nil element:nil action:@"click"];
     FLYGroup *group = self.groups[indexPath.row];
     FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
-    [self.controller.navigationController pushViewController:vc animated:YES];
+    [[self.delegate rootViewController].navigationController pushViewController:vc animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

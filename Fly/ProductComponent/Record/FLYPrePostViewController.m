@@ -368,7 +368,7 @@
 #pragma mark - Service
 - (void)_serviceCreateTopicWithParams:(NSDictionary *)dict
 {
-    NSDictionary *initialParams = @{@"topic_title":@"hihi ",
+    NSDictionary *initialParams = @{@"topic_title": self.topicTitle,
                              @"media_id":[FLYAppStateManager sharedInstance].mediaId,
                              @"extension":@"m4a",
                              @"audio_duration":@(self.audioDuration)
@@ -378,7 +378,6 @@
     if (self.selectedGroup) {
         [params setObject:self.selectedGroup.groupId forKey:@"group_id"];
     }
-    params[@"tag_names"] = @[@"tag1", @"tag2", @"tag3"];
     
     @weakify(self)
     FLYPostTopicSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {

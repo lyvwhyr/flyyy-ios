@@ -14,7 +14,7 @@
 #import "UIColor+FLYAddition.h"
 #import "FLYTagListBaseViewController.h"
 
-@interface FLYTagListViewController ()
+@interface FLYTagListViewController () <FLYTagListMineViewControllerDelegate, FLYTagListGlobalViewControllerDelegate>
 
 @property (nonatomic) PPiFlatSegmentedControl *segmentedControl;
 @property (nonatomic) FLYTagListGlobalViewController *globalVC;
@@ -40,6 +40,7 @@
     self.mineVC = [FLYTagListMineViewController new];
 //    [self.view addSubview:self.mineVC.view];
     
+    self.globalVC.delegate = self;
     [self.view bringSubviewToFront:self.globalVC.view];
     
     @weakify(self);
@@ -49,10 +50,12 @@
                                                                   @strongify(self)
                                                                   if (segmentIndex == FLYSegmentedControlStateGlobal) {
                                                                       [self.mineVC.view removeFromSuperview];
+                                                                      self.globalVC.delegate = self;
                                                                       [self.view addSubview:self.globalVC.view];
                                                                       [self.view bringSubviewToFront:self.globalVC.view];
                                                                   } else {
                                                                       [self.globalVC.view removeFromSuperview];
+                                                                      self.mineVC.delegate = self;
                                                                       [self.view addSubview:self.mineVC.view];
                                                                       [self.view bringSubviewToFront:self.mineVC.view];
                                                                   }
@@ -68,6 +71,11 @@
     self.segmentedControl.selectedTextAttributes=@{NSFontAttributeName:[UIFont flyFontWithSize:16],
                                                    NSForegroundColorAttributeName:[UIColor flyBlue]};
     self.navigationItem.titleView = self.segmentedControl;
+}
+
+- (UIViewController *)rootViewController
+{
+    return self;
 }
 
 

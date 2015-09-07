@@ -32,7 +32,7 @@
 
 #define kSuggestGroupRow 0
 
-@interface FLYTagListGlobalViewController ()
+@interface FLYTagListGlobalViewController () <FLYTagListBaseViewControllerDelegate>
 
 @property (nonatomic) FLYTagListBaseViewController *baseVC;
 
@@ -44,6 +44,7 @@
 {
     if (self = [super init]) {
         _baseVC = [[FLYTagListBaseViewController alloc] init];
+        _baseVC.delegate = self;
     }
     return self;
 }
@@ -66,6 +67,11 @@
         make.edges.equalTo(self.view);
     }];
     [super updateViewConstraints];
+}
+
+- (UIViewController *)rootViewController
+{
+    return [self.delegate rootViewController];
 }
 
 @end

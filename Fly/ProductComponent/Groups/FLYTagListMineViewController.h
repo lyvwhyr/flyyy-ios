@@ -8,8 +8,15 @@
 
 #import "FLYUniversalViewController.h"
 
+@protocol FLYTagListMineViewControllerDelegate
+
+- (UIViewController *)rootViewController;
+
+@end
+
 @interface FLYTagListMineViewController : FLYUniversalViewController
 
 @property (nonatomic) UIView *containerView;
+@property (nonatomic) id<FLYTagListMineViewControllerDelegate> delegate;
 
 @end

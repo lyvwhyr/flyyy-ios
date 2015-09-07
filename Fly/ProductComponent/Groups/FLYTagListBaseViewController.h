@@ -10,8 +10,15 @@
 
 @class FLYTagListViewController;
 
+@protocol FLYTagListBaseViewControllerDelegate
+
+- (UIViewController *)rootViewController;
+
+@end
+
 @interface FLYTagListBaseViewController : FLYUniversalViewController
 
 @property (nonatomic) FLYTagListViewController *controller;
+@property (nonatomic, weak) id<FLYTagListBaseViewControllerDelegate> delegate;
 
 @end
