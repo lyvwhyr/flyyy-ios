@@ -472,10 +472,10 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
 
 - (void)groupNameTapped:(FLYFeedTopicTableViewCell *)cell indexPath:(NSIndexPath *)indexPath
 {
-    FLYGroup *group = cell.topic.group;
-    FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
-    vc.isFullScreen = [self isFullScreen];
-    [self.flyNavigationController pushViewController:vc animated:YES];
+//    FLYGroup *group = cell.topic.group;
+//    FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
+//    vc.isFullScreen = [self isFullScreen];
+//    [self.flyNavigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - FLYTopicDetailReplyCellDelegate

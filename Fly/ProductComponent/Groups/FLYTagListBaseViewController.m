@@ -28,6 +28,7 @@
 #import "FLYSearchBar.h"
 #import "FLYTagListViewController.h"
 #import "FLYHintView.h"
+#import "FLYUser.h"
 
 
 #define kSuggestGroupRow 0
@@ -40,11 +41,37 @@
 @property (nonatomic) FLYHintView *hintView;
 @property (nonatomic) UITableView *groupsTabelView;
 
-@property (nonatomic) NSArray *groups;
+@property (nonatomic) NSMutableArray *groups;
+@property (nonatomic) FLYTagListType tagListType;
 
 @end
 
 @implementation FLYTagListBaseViewController
+
+- (instancetype)initWithTagListType:(FLYTagListType)type
+{
+    if (self = [super init]) {
+        _tagListType = type;
+        [self populateTags:_tagListType];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_tagsUpdated) name:kNotificationMyTagsUpdated object:nil];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)populateTags:(FLYTagListType)type
+{
+    if (type == FLYTagListTypeMine) {
+        _groups = [NSMutableArray arrayWithArray:[FLYAppStateManager sharedInstance].currentUser.tags];
+    } else {
+        _groups = [NSMutableArray new];
+    }
+}
 
 - (void)viewDidLoad
 {
@@ -63,8 +90,6 @@
     self.groupsTabelView.dataSource = self;
     self.groupsTabelView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.groupsTabelView];
-    
-    self.groups = [NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList];
     
     [self updateViewConstraints];
 }
@@ -124,7 +149,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //    return _groups.count + 1;
     return _groups.count;
 }
 
@@ -191,6 +215,12 @@
         [self.view addSubview:_hintView];
     }
     return _hintView;
+}
+
+- (void)_tagsUpdated
+{
+    self.groups = [FLYAppStateManager sharedInstance].currentUser.tags;
+    [self.groupsTabelView reloadData];
 }
 
 #pragma mark - Navigation bar and status bar

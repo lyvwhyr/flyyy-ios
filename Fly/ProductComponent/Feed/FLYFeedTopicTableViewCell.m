@@ -294,10 +294,10 @@
     self.topicTitleLabel.attributedText = attrStr;
     
     // add hashTags
-    if ([self.topic.group.groupName length] > 0) {
-        NSRange range = [self.topicTitleLabel.text rangeOfString:[NSString stringWithFormat:@"#%@",self.topic.group.groupName] options:NSBackwardsSearch];
-        [self.topicTitleLabel addLinkToURL:[NSURL URLWithString:@"flyy://tag"] withRange:range];
-    }
+//    if ([self.topic.tags.groupName length] > 0) {
+//        NSRange range = [self.topicTitleLabel.text rangeOfString:[NSString stringWithFormat:@"#%@",self.topic.group.groupName] options:NSBackwardsSearch];
+//        [self.topicTitleLabel addLinkToURL:[NSURL URLWithString:@"flyy://tag"] withRange:range];
+//    }
     
     [self.topicTitleLabel sizeToFit];
     
@@ -464,11 +464,11 @@
 + (NSString *)_getDisplayTitleString:(FLYTopic *)topic
 {
     NSString *topicTitleDisplayStr;
-    if ([topic.group.groupName length] > 0) {
-        topicTitleDisplayStr = [NSString stringWithFormat:@"%@ %@", topic.topicTitle, [NSString stringWithFormat:@"#%@", topic.group.groupName]];
-    } else {
+//    if ([topic.group.groupName length] > 0) {
+//        topicTitleDisplayStr = [NSString stringWithFormat:@"%@ %@", topic.topicTitle, [NSString stringWithFormat:@"#%@", topic.group.groupName]];
+//    } else {
         topicTitleDisplayStr = topic.topicTitle;
-    }
+//    }
     return topicTitleDisplayStr;
 }
 

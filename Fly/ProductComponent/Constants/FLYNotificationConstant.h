@@ -44,3 +44,6 @@
 
 // logout
 #define kNotificationLogout @"kNotificationLogout"
+
+// tags updated
+#define kNotificationMyTagsUpdated @"kNotificationMyTagsUpdated"

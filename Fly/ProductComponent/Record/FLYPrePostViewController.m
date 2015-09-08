@@ -30,6 +30,7 @@
 #import "FLYTopicService.h"
 #import "FLYPushNotificationManager.h"
 #import "UIFont+FLYAddition.h"
+#import "FLYTagsManager.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -389,6 +390,9 @@
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         self.postButton.userInteractionEnabled = YES;
         
+        if (post.tags && post.tags.count > 0) {
+            [[FLYTagsManager sharedInstance] updateCurrentUserTags:post.tags];
+        }
     };
     
     FLYPostTopicErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {

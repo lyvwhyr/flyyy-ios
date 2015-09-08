@@ -44,7 +44,7 @@
 @property (nonatomic) BOOL liked;
 
 @property (nonatomic) FLYUser *user;
-@property (nonatomic) FLYGroup *group;
+@property (nonatomic) NSMutableArray *tags;
 
 @property (nonatomic) BOOL isAudioDownloaded;
 

@@ -36,7 +36,13 @@
         _createdAt = [[dict fly_objectOrNilForKey:@"created_at"] stringValue];
         _updatedAt = [[dict fly_objectOrNilForKey:@"updated_at"] stringValue];
         _user = [[FLYUser alloc] initWithDictionary:[dict fly_dictionaryForKey:@"user"]];
-        _group = [[FLYGroup alloc] initWithDictory:[dict fly_dictionaryForKey:@"group"]];
+        
+        _tags = [NSMutableArray new];
+        NSArray *tagsData = [dict fly_arrayForKey:@"tags"];
+        for (NSDictionary *tagDict in tagsData) {
+            FLYGroup *tag = [[FLYGroup alloc] initWithDictory:tagDict];
+            [_tags addObject:tag];
+        }
         _liked = [dict fly_boolForKey:@"liked" defaultValue:0];
         
         NSDate *date = [[NSDate alloc] initWithTimeIntervalSince1970:[_createdAt longLongValue]/1000];

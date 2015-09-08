@@ -661,10 +661,10 @@
 
 - (void)groupNameTapped:(FLYFeedTopicTableViewCell *)cell indexPath:(NSIndexPath *)indexPath
 {
-    FLYGroup *group = ((FLYTopic *)self.posts[indexPath.row]).group;
-    FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
-    vc.isFullScreen = [self isFullScreen];
-    [self.flyNavigationController pushViewController:vc animated:YES];
+//    FLYGroup *group = ((FLYTopic *)self.posts[indexPath.row]).group;
+//    FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
+//    vc.isFullScreen = [self isFullScreen];
+//    [self.flyNavigationController pushViewController:vc animated:YES];
 }
 
 - (void)clearPreviousPlayingItem

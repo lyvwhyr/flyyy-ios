@@ -23,4 +23,19 @@
     return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:_groupId forKey:@"group_id"];
+    [coder encodeObject:_groupName forKey:@"group_name"];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super init]) {
+        _groupId = [aDecoder decodeObjectForKey:@"group_id"];
+        _groupName = [aDecoder decodeObjectForKey:@"group_name"];
+    }
+    return self;
+}
+
 @end

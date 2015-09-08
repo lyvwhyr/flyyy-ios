@@ -8,6 +8,11 @@
 
 #import "FLYUniversalViewController.h"
 
+typedef NS_ENUM(NSUInteger, FLYTagListType) {
+    FLYTagListTypeMine = 0,
+    FLYTagListTypeGlobal
+};
+
 @class FLYTagListViewController;
 
 @protocol FLYTagListBaseViewControllerDelegate
@@ -20,5 +25,7 @@
 
 @property (nonatomic) FLYTagListViewController *controller;
 @property (nonatomic, weak) id<FLYTagListBaseViewControllerDelegate> delegate;
+
+- (instancetype)initWithTagListType:(FLYTagListType)type;
 
 @end
