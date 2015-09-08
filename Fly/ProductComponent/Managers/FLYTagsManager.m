@@ -48,6 +48,36 @@
     }
 }
 
+- (void)unFollowTag:(FLYGroup *)tagToUnfollow
+{
+    NSMutableArray *existingTags = [FLYAppStateManager sharedInstance].currentUser.tags;
+    if (!existingTags) {
+        return;
+    }
+    for (FLYGroup *tag in existingTags) {
+        if ([tag.groupId isEqualToString:tagToUnfollow.groupId]) {
+            [existingTags removeObject:tag];
+            break;
+        }
+    }
+    [FLYAppStateManager sharedInstance].currentUser.tags = existingTags;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationMyTagsUpdated object:self];
+}
+
+- (BOOL)alreadyFollowedTag:(FLYGroup *)tag
+{
+    NSMutableArray *followedTags = [FLYAppStateManager sharedInstance].currentUser.tags;
+    if (!followedTags || followedTags.count == 0) {
+        return NO;
+    }
+    for (FLYGroup *followedTag in followedTags) {
+        if ([followedTag.groupId isEqualToString:tag.groupId]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 - (BOOL)_tagAlreadyExist:(FLYGroup *)tag existingTags:(NSMutableArray *)existingTags
 {
     for (FLYGroup *existingTag in existingTags) {

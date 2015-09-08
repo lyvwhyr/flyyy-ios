@@ -12,5 +12,7 @@
 
 + (instancetype)sharedInstance;
 - (void)updateCurrentUserTags:(NSMutableArray *)tagsToMerge;
+- (BOOL)alreadyFollowedTag:(FLYGroup *)tag;
+- (void)unFollowTag:(FLYGroup *)tagToUnfollow;
 
 @end
