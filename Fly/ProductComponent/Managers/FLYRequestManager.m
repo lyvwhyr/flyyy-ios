@@ -48,28 +48,13 @@
 - (void)_initMe
 {
     FLYGetMeSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
-        //init current logged in user
-        NSDictionary *userDict = [responseObj fly_dictionaryForKey:@"user"];
-        if (!userDict) {
+        if (!responseObj) {
             UALog(@"User is empty");
             return;
         }
-        FLYUser *user = [[FLYUser alloc] initWithDictionary:userDict];
-        [FLYAppStateManager sharedInstance].currentUser = user;
-        
-        // set device token
-        if ([FLYAppStateManager sharedInstance].deviceToken) {
-            [FLYPushNotificationManager setDeviceToken:user];
-        }
-        
-        //save user id to NSUserDefault
-        NSUserDefaults *defalut = [NSUserDefaults standardUserDefaults];
-        [defalut setObject:user.userId forKey:kLoggedInUserNsUserDefaultKey];
-        [defalut synchronize];
-        
         
         // common init
-        [[FLYLoginManager sharedInstance] initAfterLogin];
+        [[FLYLoginManager sharedInstance] initAfterLogin:responseObj];
         
     };
     FLYGetMeErrorBlock errorBlock = ^(id responseObj, NSError *error) {

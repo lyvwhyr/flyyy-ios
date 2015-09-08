@@ -17,8 +17,8 @@
         if (dict == nil) {
             return self;
         }
-        _groupId = [[dict fly_objectOrNilForKey:@"group_id"] stringValue];
-        _groupName = [dict fly_stringForKey:@"group_name"];
+        _groupId = [[dict fly_objectOrNilForKey:@"tag_id"] stringValue];
+        _groupName = [dict fly_stringForKey:@"tag_name"];
     }
     return self;
 }

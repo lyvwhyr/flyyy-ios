@@ -8,6 +8,7 @@
 
 #import "FLYUser.h"
 #import "NSDictionary+FLYAddition.h"
+#import "FLYGroup.h"
 
 @implementation FLYUser
 
@@ -21,6 +22,12 @@
         _userName = [dict fly_stringForKey:@"user_name"];
         _createdAt = [[dict fly_objectOrNilForKey:@"created_at"] stringValue];
         _suspended = [dict fly_boolForKey:@"suspended" defaultValue:NO];
+        _tags = [NSMutableArray new];
+        NSArray *tagsData = [dict fly_arrayForKey:@"tags"];
+        for (NSDictionary *tagDict in tagsData) {
+            FLYGroup *tag = [[FLYGroup alloc] initWithDictory:tagDict];
+            [_tags addObject:tag];
+        }
     }
     return self;
 }

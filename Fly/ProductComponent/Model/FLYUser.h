@@ -14,6 +14,7 @@
 @property (nonatomic, copy) NSString *userName;
 @property (nonatomic, copy) NSString *createdAt;
 @property (nonatomic) BOOL suspended;
+@property (nonatomic) NSMutableArray *tags;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 

@@ -12,6 +12,6 @@
 
 + (instancetype)sharedInstance;
 
-- (void)initAfterLogin;
+- (void)initAfterLogin:(NSDictionary *)data;
 
 @end

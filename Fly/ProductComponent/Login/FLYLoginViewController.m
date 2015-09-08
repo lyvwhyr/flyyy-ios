@@ -278,22 +278,13 @@
         [FLYAppStateManager sharedInstance].authToken = authToken;
         [UICKeyChainStore setString:[FLYAppStateManager sharedInstance].authToken forKey:kAuthTokenKey];
         
-        //init current logged in user
-        NSDictionary *userDict = [responseObj fly_dictionaryForKey:@"user"];
-        if (!userDict) {
+        if (!responseObj) {
             UALog(@"User is empty");
             return;
         }
-        FLYUser *user = [[FLYUser alloc] initWithDictionary:userDict];
-        [FLYAppStateManager sharedInstance].currentUser = user;
-        
-        //save user id to NSUserDefault
-        NSUserDefaults *defalut = [NSUserDefaults standardUserDefaults];
-        [defalut setObject:user.userId forKey:kLoggedInUserNsUserDefaultKey];
-        [defalut synchronize];
         
         // common init
-        [[FLYLoginManager sharedInstance] initAfterLogin];
+        [[FLYLoginManager sharedInstance] initAfterLogin:responseObj];
         
         if ([FLYAppStateManager sharedInstance].needRestartNavigationStackAfterLogin) {
             [FLYAppStateManager sharedInstance].needRestartNavigationStackAfterLogin = NO;

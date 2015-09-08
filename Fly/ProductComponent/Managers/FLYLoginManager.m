@@ -8,6 +8,9 @@
 
 #import "FLYLoginManager.h"
 #import "NSDictionary+FLYAddition.h"
+#import "FLYUser.h"
+#import "FLYGroup.h"
+#import "FLYPushNotificationManager.h"
 
 @implementation FLYLoginManager
 
@@ -22,8 +25,26 @@
 }
 
 // This method is called after a user successfully logged in either through login, sign up or auth/me
-- (void)initAfterLogin
+- (void)initAfterLogin:(NSDictionary *)data
 {
+    NSMutableDictionary *userDict = [[data fly_dictionaryForKey:@"user"] mutableCopy];
+    if ([data fly_arrayForKey:@"tags"]) {
+        userDict[@"tags"] = [data fly_arrayForKey:@"tags"];
+    }
+    
+    FLYUser *currentUser = [[FLYUser alloc] initWithDictionary:userDict];
+    [FLYAppStateManager sharedInstance].currentUser = currentUser;
+    
+    //save user id to NSUserDefault
+    NSUserDefaults *defalut = [NSUserDefaults standardUserDefaults];
+    [defalut setObject:currentUser.userId forKey:kLoggedInUserNsUserDefaultKey];
+    [defalut synchronize];
+    
+    // set device token
+    if ([FLYAppStateManager sharedInstance].deviceToken) {
+        [FLYPushNotificationManager setDeviceToken:currentUser];
+    }
+    
     [[FLYAppStateManager sharedInstance] updateActivityCount];
 }
 

@@ -75,6 +75,7 @@
         [self.contentView addSubview:_playButton];
         
         _bodyLabel = [UILabel new];
+        _bodyLabel.numberOfLines = 0;
         _bodyLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _bodyLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14];
         _bodyLabel.textColor = [UIColor flyColorFlyReplyBodyTextGrey];
@@ -233,6 +234,7 @@
         [self.bodyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self).offset(-kBodyLabelYOffset);
             make.leading.equalTo(self.playButton.mas_trailing).offset(kBodyLabelLeftPadding);
+            make.trailing.lessThanOrEqualTo(self.likeButton.mas_leading).offset(-10);
         }];
         
         [self.postAt mas_makeConstraints:^(MASConstraintMaker *make) {
