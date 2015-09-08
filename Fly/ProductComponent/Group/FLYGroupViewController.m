@@ -88,7 +88,7 @@
                 return;
             }
             JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-            HUD.textLabel.text = @"Joined";
+            HUD.textLabel.text = @"Followed";
             HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
             [HUD showInView:self.view];
             [HUD dismissAfterDelay:2.0];
