@@ -8,6 +8,7 @@
 
 #import "FLYTagListMineViewController.h"
 #import "FLYTagListBaseViewController.h"
+#import "FLYEmptyStateView.h"
 
 @interface FLYTagListMineViewController () <FLYTagListBaseViewControllerDelegate>
 
@@ -29,11 +30,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     self.containerView = [UIView new];
-    self.containerView = self.baseVC.view;
-    [self.baseVC.view removeFromSuperview];
+    
+    if ([FLYAppStateManager sharedInstance].currentUser) {
+        self.containerView = self.baseVC.view;
+        [self.baseVC.view removeFromSuperview];
+    } else {
+        FLYEmptyStateView *notLoggedInView = [[FLYEmptyStateView alloc] initWithTitle:@"Hi!" description:@"You can begin to follow your own groups by signing up below:"];
+        self.containerView = notLoggedInView;
+        
+        [self.rootViewController.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    }
     self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.containerView];
 }
@@ -41,7 +48,10 @@
 - (void)updateViewConstraints
 {
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
+        make.leading.equalTo(self.view);
+        make.trailing.equalTo(self.view);
+        make.bottom.equalTo(self.view);
     }];
     [super updateViewConstraints];
 }
