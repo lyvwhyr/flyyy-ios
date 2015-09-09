@@ -27,7 +27,7 @@ typedef NS_OPTIONS(NSUInteger, FLYTopicCellOptions) {
 - (void)playButtonTapped:(FLYFeedTopicTableViewCell *)cell withPost:(FLYTopic *)post withIndexPath:(NSIndexPath *)indexPath;
 
 @optional
-- (void)groupNameTapped:(FLYFeedTopicTableViewCell *)cell indexPath:(NSIndexPath *)indexPath;
+- (void)groupNameTapped:(FLYFeedTopicTableViewCell *)cell indexPath:(NSIndexPath *)indexPath tagId:(NSString *)tagId;
 
 @end
 

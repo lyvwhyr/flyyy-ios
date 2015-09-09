@@ -40,6 +40,7 @@
 #import "FLYPushNotificationManager.h"
 #import "FLYServerConfig.h"
 #import "FLYShareManager.h"
+#import "FLYGroup.h"
 
 typedef NS_ENUM(NSInteger, FLYPostAuthorActions) {
     FLYPostAuthorActionsDelete = 0,
@@ -470,12 +471,22 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     [self _commentButtonTapped:nil];
 }
 
-- (void)groupNameTapped:(FLYFeedTopicTableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+- (void)groupNameTapped:(FLYFeedTopicTableViewCell *)cell indexPath:(NSIndexPath *)indexPath tagId:(NSString *)tagId
 {
-//    FLYGroup *group = cell.topic.group;
-//    FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
-//    vc.isFullScreen = [self isFullScreen];
-//    [self.flyNavigationController pushViewController:vc animated:YES];
+    NSMutableArray *tags = self.topic.tags;
+    FLYGroup *tappedTag;
+    for (FLYGroup *tag in tags) {
+        if ([tag.groupId isEqualToString:tagId]) {
+            tappedTag = tag;
+            break;
+        }
+    }
+    if (tappedTag) {
+        FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:tappedTag];
+        vc.isFullScreen = [self isFullScreen];
+        [self.flyNavigationController pushViewController:vc animated:YES];
+        
+    }
 }
 
 #pragma mark - FLYTopicDetailReplyCellDelegate

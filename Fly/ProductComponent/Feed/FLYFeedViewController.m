@@ -659,12 +659,22 @@
     [[FLYAudioManager sharedInstance] updateAudioState:newItem];
 }
 
-- (void)groupNameTapped:(FLYFeedTopicTableViewCell *)cell indexPath:(NSIndexPath *)indexPath
+- (void)groupNameTapped:(FLYFeedTopicTableViewCell *)cell indexPath:(NSIndexPath *)indexPath tagId:(NSString *)tagId
 {
-//    FLYGroup *group = ((FLYTopic *)self.posts[indexPath.row]).group;
-//    FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:group];
-//    vc.isFullScreen = [self isFullScreen];
-//    [self.flyNavigationController pushViewController:vc animated:YES];
+    NSMutableArray *tags = ((FLYTopic *)self.posts[indexPath.row]).tags;
+    FLYGroup *tappedTag;
+    for (FLYGroup *tag in tags) {
+        if ([tag.groupId isEqualToString:tagId]) {
+            tappedTag = tag;
+            break;
+        }
+    }
+    if (tappedTag) {
+        FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:tappedTag];
+        vc.isFullScreen = [self isFullScreen];
+        [self.flyNavigationController pushViewController:vc animated:YES];
+ 
+    }
 }
 
 - (void)clearPreviousPlayingItem

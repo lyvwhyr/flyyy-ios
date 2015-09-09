@@ -282,7 +282,7 @@
     
     self.topicTitleLabel.linkAttributes = @{NSForegroundColorAttributeName:[UIColor flyHomefeedBlue]};
     self.topicTitleLabel.activeLinkAttributes = @{NSForegroundColorAttributeName:[UIColor flyHomefeedBlue]};
-    self.topicTitleLabel.text = [FLYFeedTopicTableViewCell _getDisplayTitleString:topic];
+    
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[FLYFeedTopicTableViewCell _getDisplayTitleString:topic]];
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     paragraphStyle.lineSpacing = 2;
@@ -294,10 +294,12 @@
     self.topicTitleLabel.attributedText = attrStr;
     
     // add hashTags
-//    if ([self.topic.tags.groupName length] > 0) {
-//        NSRange range = [self.topicTitleLabel.text rangeOfString:[NSString stringWithFormat:@"#%@",self.topic.group.groupName] options:NSBackwardsSearch];
-//        [self.topicTitleLabel addLinkToURL:[NSURL URLWithString:@"flyy://tag"] withRange:range];
-//    }
+    for (FLYGroup *tag in self.topic.tags) {
+        NSRange range = [self.topicTitleLabel.text rangeOfString:[NSString stringWithFormat:@"#%@",tag.groupName] options:NSBackwardsSearch];
+        if (range.location != NSNotFound) {
+            [self.topicTitleLabel addLinkToURL:[NSURL URLWithString:tag.groupId] withRange:range];
+        }
+    }
     
     [self.topicTitleLabel sizeToFit];
     
@@ -439,7 +441,7 @@
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
     [[FLYScribe sharedInstance] logEvent:@"feed" section:@"group_name" component:nil element:nil action:@"click"];
-    [self.delegate groupNameTapped:self indexPath:self.indexPath];
+    [self.delegate groupNameTapped:self indexPath:self.indexPath tagId:[url absoluteString]];
 }
 
 #pragma mark - notification
@@ -464,11 +466,17 @@
 + (NSString *)_getDisplayTitleString:(FLYTopic *)topic
 {
     NSString *topicTitleDisplayStr;
-//    if ([topic.group.groupName length] > 0) {
-//        topicTitleDisplayStr = [NSString stringWithFormat:@"%@ %@", topic.topicTitle, [NSString stringWithFormat:@"#%@", topic.group.groupName]];
-//    } else {
+    if (!topic.tags.count || topic.tags.count > 1) {
         topicTitleDisplayStr = topic.topicTitle;
-//    }
+    } else {
+        NSString *tagName = ((FLYGroup *)topic.tags[0]).groupName;
+        // old posts
+        if ([topic.topicTitle rangeOfString:tagName].location == NSNotFound) {
+            topicTitleDisplayStr = [NSString stringWithFormat:@"%@ %@", topic.topicTitle, [NSString stringWithFormat:@"#%@", tagName]];
+        } else {
+            topicTitleDisplayStr = topic.topicTitle;
+        }
+    }
     return topicTitleDisplayStr;
 }
 
