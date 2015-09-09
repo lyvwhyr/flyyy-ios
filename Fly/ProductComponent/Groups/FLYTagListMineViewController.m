@@ -36,10 +36,9 @@
         self.containerView = self.baseVC.view;
         [self.baseVC.view removeFromSuperview];
     } else {
-        FLYEmptyStateView *notLoggedInView = [[FLYEmptyStateView alloc] initWithTitle:@"Hi!" description:@"You can begin to follow your own groups by signing up below:"];
+        FLYEmptyStateView *notLoggedInView = [[FLYEmptyStateView alloc] initWithTitle:LOC(@"FLYNotLoggedInFollowTitle") description:LOC(@"FLYNotLoggedInFollowDescription")];
         self.containerView = notLoggedInView;
-        
-        [self.rootViewController.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+        self.rootViewController.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     }
     self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.containerView];
@@ -48,7 +47,7 @@
 - (void)updateViewConstraints
 {
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
+        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight - 1);
         make.leading.equalTo(self.view);
         make.trailing.equalTo(self.view);
         make.bottom.equalTo(self.view);

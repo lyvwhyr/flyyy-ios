@@ -231,3 +231,6 @@
 "FLYTagListGlobalTab" = "global";
 "FLYTagListMineTab" = "mine";
 "FLYTagListSearchAtLeastTwoChars" = "Type at least 2 characters to start your search";
+
+"FLYNotLoggedInFollowTitle" = "Hi!";
+"FLYNotLoggedInFollowDescription" = "You can begin to follow your own tags by signing up.";

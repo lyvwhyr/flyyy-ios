@@ -10,15 +10,13 @@
 #import "UIFont+FLYAddition.h"
 #import "UIColor+FLYAddition.h"
 
-#define kImageTopMargin 30
-#define kTitleTopMargin 7
+#define kTitleTopMargin 45
 #define kDescrptionTopMargin 30
 #define kCtaTopMargin 30
 
 @interface FLYEmptyStateView()
 
 @property (nonatomic) UIImageView *bgView;
-@property (nonatomic) UIImageView *imageView;
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UILabel *descriptionLabel;
 @property (nonatomic) UIButton *ctaButton;
@@ -34,11 +32,6 @@
         _bgView.translatesAutoresizingMaskIntoConstraints = NO;
         _bgView.image = [UIImage imageNamed:@"bg_empty_state"];
         [self addSubview:_bgView];
-        
-        _imageView = [UIImageView new];
-        _imageView.image = [UIImage imageNamed:@"icon_empty_state_image"];
-        [_imageView sizeToFit];
-        [self addSubview:_imageView];
         
         _titleLabel = [UILabel new];
         _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -69,10 +62,8 @@
         _ctaButton.layer.cornerRadius = 4.0f;
         [_ctaButton setTitle:@"Join Flyy" forState:UIControlStateNormal];
         [_ctaButton setTitleColor:[FLYUtilities colorWithHexString:@"#9EC5D8"] forState:UIControlStateNormal];
-//        [_ctaButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _ctaButton.backgroundColor = [UIColor whiteColor];
         _ctaButton.titleLabel.font = [UIFont flyFontWithSize:21];
-//        [_ctaButton sizeToFit];
         [self addSubview:_ctaButton];
         
         [self _addConstrants];
@@ -86,20 +77,15 @@
         make.edges.equalTo(self);
     }];
     
-    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(kImageTopMargin);
-        make.centerX.equalTo(self);
-    }];
-    
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.imageView.mas_bottom).offset(kTitleTopMargin);
+        make.top.equalTo(self).offset(kTitleTopMargin);
         make.centerX.equalTo(self);
     }];
 
     [self.descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom).offset(kDescrptionTopMargin);
-        make.leading.greaterThanOrEqualTo(self).offset(36);
-        make.trailing.lessThanOrEqualTo(self).offset(-36);
+        make.leading.greaterThanOrEqualTo(self).offset(30);
+        make.trailing.lessThanOrEqualTo(self).offset(-30);
         make.centerX.equalTo(self);
     }];
     
