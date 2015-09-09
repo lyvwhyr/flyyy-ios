@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^FLYEmptyStateViewActionBlock)(void);
+
 @interface FLYEmptyStateView : UIView
 
-- (instancetype)initWithTitle:(NSString *)title description:(NSString *)description;
+- (instancetype)initWithTitle:(NSString *)title description:(NSString *)description actionBlock:(FLYEmptyStateViewActionBlock)actionBlock;
 
 @end

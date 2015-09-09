@@ -36,12 +36,21 @@
         self.containerView = self.baseVC.view;
         [self.baseVC.view removeFromSuperview];
     } else {
-        FLYEmptyStateView *notLoggedInView = [[FLYEmptyStateView alloc] initWithTitle:LOC(@"FLYNotLoggedInFollowTitle") description:LOC(@"FLYNotLoggedInFollowDescription")];
+        FLYEmptyStateViewActionBlock actionBlock = ^(void) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRequireSignupNotification object:self];
+        };
+        
+        FLYEmptyStateView *notLoggedInView = [[FLYEmptyStateView alloc] initWithTitle:LOC(@"FLYNotLoggedInFollowTitle") description:LOC(@"FLYNotLoggedInFollowDescription") actionBlock:actionBlock];
         self.containerView = notLoggedInView;
         self.rootViewController.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     }
     self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.containerView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 - (void)updateViewConstraints

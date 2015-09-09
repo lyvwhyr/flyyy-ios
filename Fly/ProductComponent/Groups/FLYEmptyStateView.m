@@ -21,13 +21,17 @@
 @property (nonatomic) UILabel *descriptionLabel;
 @property (nonatomic) UIButton *ctaButton;
 
+@property (nonatomic, copy) FLYEmptyStateViewActionBlock actionBlock;
+
 @end
 
 @implementation FLYEmptyStateView
 
-- (instancetype)initWithTitle:(NSString *)title description:(NSString *)description
+- (instancetype)initWithTitle:(NSString *)title description:(NSString *)description actionBlock:(FLYEmptyStateViewActionBlock)actionBlock
 {
     if (self = [super init]) {
+        _actionBlock = [actionBlock copy];
+        
         _bgView = [UIImageView new];
         _bgView.translatesAutoresizingMaskIntoConstraints = NO;
         _bgView.image = [UIImage imageNamed:@"bg_empty_state"];
@@ -64,6 +68,7 @@
         [_ctaButton setTitleColor:[FLYUtilities colorWithHexString:@"#9EC5D8"] forState:UIControlStateNormal];
         _ctaButton.backgroundColor = [UIColor whiteColor];
         _ctaButton.titleLabel.font = [UIFont flyFontWithSize:21];
+        [_ctaButton addTarget:self action:@selector(_ctaTapped) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_ctaButton];
         
         [self _addConstrants];
@@ -96,6 +101,13 @@
         make.height.equalTo(@(42));
     }];
     
+}
+
+- (void)_ctaTapped
+{
+    if (self.actionBlock) {
+        self.actionBlock();
+    }
 }
 
 @end
