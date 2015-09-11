@@ -8,6 +8,12 @@
 
 #import "FLYUniversalViewController.h"
 
+@protocol FLYFeedViewControllerDelegate
+
+- (UIViewController *)rootViewController;
+
+@end
+
 typedef NS_ENUM(NSInteger, FLYFeedType) {
     FLYFeedTypeHome = 0,
     FLYFeedTypeGroup,
@@ -26,6 +32,8 @@ typedef NS_ENUM(NSInteger, FLYFeedType) {
 
 // feed type. default is home
 @property (nonatomic) FLYFeedType feedType;
+
+@property (nonatomic, weak) id<FLYFeedViewControllerDelegate> delegate;
 
 - (BOOL)hideLeftBarItem;
 - (BOOL)isFullScreen;

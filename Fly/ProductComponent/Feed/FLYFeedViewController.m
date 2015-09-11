@@ -100,14 +100,8 @@
         
         _loadMoreCount = 0;
         _feedType = FLYFeedTypeHome;
-        [self _addObservers];
     }
     return self;
-}
-
-- (void)_addObservers
-{
-    
 }
 
 - (void)viewDidLoad {
@@ -424,6 +418,7 @@
     FLYTopic *topic = self.posts[indexPath.row];
     FLYTopicDetailViewController *viewController = [[FLYTopicDetailViewController alloc] initWithTopic:topic];
     viewController.isBackFullScreen = [self isFullScreen];
+    self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -689,6 +684,15 @@
     }
     
     [[FLYAudioManager sharedInstance].audioPlayer stop];
+}
+
+- (UINavigationController *)navigationController
+{
+    if ([self.delegate rootViewController]) {
+        return [self.delegate rootViewController].navigationController;
+    } else {
+        return [super navigationController];
+    }
 }
 
 #pragma mark - navigation bar item tapped 

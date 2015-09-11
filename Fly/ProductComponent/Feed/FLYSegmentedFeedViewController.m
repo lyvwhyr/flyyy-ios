@@ -12,7 +12,7 @@
 #import "UIFont+FLYAddition.h"
 #import "FLYFeedViewController.h"
 
-@interface FLYSegmentedFeedViewController ()
+@interface FLYSegmentedFeedViewController () <FLYFeedViewControllerDelegate>
 
 @property (nonatomic) PPiFlatSegmentedControl *segmentedControl;
 @property (nonatomic) FLYFeedViewController *globalVC;
@@ -31,6 +31,7 @@
 - (void)_setupSegmentedControl
 {
     self.globalVC = [FLYFeedViewController new];
+    self.globalVC.delegate = self;
     [self.view addSubview:self.globalVC.view];
     
     self.segmentedControl = [[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 183, 28)
@@ -48,6 +49,13 @@
     self.segmentedControl.selectedTextAttributes=@{NSFontAttributeName:[UIFont flyFontWithSize:16],
                                                    NSForegroundColorAttributeName:[UIColor flyBlue]};
     self.navigationItem.titleView = self.segmentedControl;
+}
+
+#pragma mark - rootViewController
+
+- (UIViewController *)rootViewController
+{
+    return self;
 }
 
 #pragma mark - Navigation bar and status bar
