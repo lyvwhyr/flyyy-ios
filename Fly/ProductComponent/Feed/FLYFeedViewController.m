@@ -10,7 +10,6 @@
 #import "FLYFeedViewController.h"
 #import "FLYFeedTopicTableViewCell.h"
 #import "FLYFilterHomeFeedSelectorViewController.h"
-#import "FLYInlineReplyView.h"
 #import "FLYTopicDetailViewController.h"
 #import "FLYBarButtonItem.h"
 #import "FLYGroupViewController.h"
@@ -51,7 +50,6 @@
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
 
 @property (nonatomic) UIView *backgroundView;
-@property (nonatomic) FLYInlineReplyView *inlineReplyView;
 @property (nonatomic) UITableView *feedTableView;
 
 @property (nonatomic) FLYCatalogBarButtonItem *leftBarItem;
@@ -125,7 +123,6 @@
     if (![self hideLeftBarItem]) {
         [self _loadLeftBarItem];
     }
-    [self _addInlineReplyBar];
     
     _feedTableView = [UITableView new];
     _feedTableView.backgroundColor = [UIColor clearColor];
@@ -259,6 +256,7 @@
         FLYTopic *lastTopic = [self.posts lastObject];
         self.beforeTimestamp = lastTopic.createdAt;
         [self.feedTableView reloadData];
+        [self updateViewConstraints];
     };
     FLYGetTopicsErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error){
         @strongify(self)
@@ -279,8 +277,6 @@
 {
     [super viewWillDisappear:animated];
     [self _clearAllPlaying];
-    
-
 }
 
 - (void)_popPushNotificationDialogIfNecessary
@@ -296,17 +292,6 @@
     [defaults setInteger:timelineViewCount forKey:kHomeTimelineViewCountAfterLoginKey];
 }
 
-- (void)_addInlineReplyBar
-{
-    _inlineReplyView = [FLYInlineReplyView new];
-    _inlineReplyView.translatesAutoresizingMaskIntoConstraints = NO;
-    __weak typeof(self) weakSelf = self;
-    _inlineReplyView.backgroudTappedBlock = ^(FLYInlineReplyView *view){
-        __strong typeof(self) strongSelf = weakSelf;
-        [strongSelf _moveInlineReplyViewOffScreen];
-    };
-    [self.view addSubview:_inlineReplyView];
-}
 
 - (void)_loadLeftBarItem
 {
@@ -364,23 +349,17 @@
     [_backgroundView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
         make.leading.equalTo(self.view);
-        make.right.equalTo(self.view);
+        make.trailing.equalTo(self.view);
         make.bottom.equalTo(self.view);
     }];
     
     [_feedTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
         make.leading.equalTo(self.view);
-        make.right.equalTo(self.view);
+        make.trailing.equalTo(self.view);
         make.bottom.equalTo(self.view);
     }];
     
-    [_inlineReplyView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(CGRectGetHeight(self.view.bounds));
-        make.leading.equalTo(self.view);
-        make.width.equalTo(self.view);
-        make.height.equalTo(self.view);
-    }];
     [super updateViewConstraints];
 }
 
@@ -710,45 +689,6 @@
     }
     
     [[FLYAudioManager sharedInstance].audioPlayer stop];
-}
-
-#pragma mark - reply view move in and off screen
-- (void)_moveInlineReplyViewOnScreen
-{
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    [_inlineReplyView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view);
-        make.leading.equalTo(self.view);
-        make.width.equalTo(self.view);
-        make.height.equalTo(self.view);
-    }];
-    [UIView animateWithDuration:0.3f animations:^{
-        _backgroundView.backgroundColor = [UIColor grayColor];
-        _backgroundView.alpha = 0.4;
-        [self.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-
-    }];
-}
-
-- (void)_moveInlineReplyViewOffScreen
-{
-    self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
-    
-    _backgroundView.backgroundColor = [UIColor clearColor];
-    _backgroundView.alpha = 0;
-    [self.view bringSubviewToFront:_backgroundView];
-    [_inlineReplyView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(CGRectGetHeight(self.view.bounds));
-        make.leading.equalTo(self.view);
-        make.width.equalTo(self.view);
-        make.height.equalTo(self.view);
-    }];
-    [UIView animateWithDuration:0.3f animations:^{
-        [self.view layoutIfNeeded];
-    }];
-    [self.view needsUpdateConstraints];
-    [self.view layoutIfNeeded];
 }
 
 #pragma mark - navigation bar item tapped 

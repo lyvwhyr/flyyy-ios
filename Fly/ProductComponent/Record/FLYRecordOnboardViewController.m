@@ -79,20 +79,20 @@
 {
     [self.explanationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight + 20);
-        make.left.equalTo(self.view).offset(15);
-        make.right.lessThanOrEqualTo(self.view).offset(-15);
+        make.leading.equalTo(self.view).offset(15);
+        make.trailing.lessThanOrEqualTo(self.view).offset(-15);
     }];
     
     [self.beAuthenticLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.explanationLabel.mas_bottom).offset(20);
-        make.left.equalTo(self.explanationLabel);
-        make.right.lessThanOrEqualTo(self.view).offset(-15);
+        make.leading.equalTo(self.explanationLabel);
+        make.trailing.lessThanOrEqualTo(self.view).offset(-15);
     }];
     
     [self.noAbusiveContentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.beAuthenticLabel.mas_bottom).offset(20);
-        make.left.equalTo(self.explanationLabel);
-        make.right.lessThanOrEqualTo(self.view).offset(-15);
+        make.leading.equalTo(self.explanationLabel);
+        make.trailing.lessThanOrEqualTo(self.view).offset(-15);
     }];
     
 }

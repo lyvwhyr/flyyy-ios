@@ -113,7 +113,7 @@
     CGFloat height = 1.0/[FLYUtilities FLYMainScreenScale];
     [_separatorView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@44);
-        make.left.equalTo(@0.0);
+        make.leading.equalTo(@0.0);
         make.width.equalTo(@(CGRectGetWidth([UIScreen mainScreen].bounds)));
         make.height.equalTo([NSNumber numberWithFloat:height]);
     }];

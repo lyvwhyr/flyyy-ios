@@ -363,6 +363,7 @@
 		A6A57A9D1A34134200610785 /* icon_reply_record@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6A57A9C1A34134200610785 /* icon_reply_record@3x.png */; };
 		A6A57AA91A34345600610785 /* FLYTopicDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57AA81A34345600610785 /* FLYTopicDetailViewController.m */; };
 		A6A57AAD1A34555400610785 /* FLYTopicDetailReplyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A57AAB1A34555400610785 /* FLYTopicDetailReplyCell.m */; };
+		A6A602AF1BA00DD10052CA5B /* FLYSegmentedFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A602AE1BA00DD10052CA5B /* FLYSegmentedFeedViewController.m */; };
 		A6A6C4CB1B9E9D6900E869E0 /* FLYTagsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A6C4CA1B9E9D6900E869E0 /* FLYTagsManager.m */; };
 		A6A6C4CE1B9EA9FF00E869E0 /* FLYEmptyStateView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A6C4CD1B9EA9FF00E869E0 /* FLYEmptyStateView.m */; };
 		A6A70CD71AA4010D0000F784 /* FLYSignupPhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A70CD61AA4010D0000F784 /* FLYSignupPhoneNumberViewController.m */; };
@@ -1098,6 +1099,8 @@
 		A6A57AA81A34345600610785 /* FLYTopicDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTopicDetailViewController.m; sourceTree = "<group>"; };
 		A6A57AAA1A34555400610785 /* FLYTopicDetailReplyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTopicDetailReplyCell.h; sourceTree = "<group>"; };
 		A6A57AAB1A34555400610785 /* FLYTopicDetailReplyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTopicDetailReplyCell.m; sourceTree = "<group>"; };
+		A6A602AD1BA00DD10052CA5B /* FLYSegmentedFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSegmentedFeedViewController.h; sourceTree = "<group>"; };
+		A6A602AE1BA00DD10052CA5B /* FLYSegmentedFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSegmentedFeedViewController.m; sourceTree = "<group>"; };
 		A6A6C4C91B9E9D6900E869E0 /* FLYTagsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTagsManager.h; sourceTree = "<group>"; };
 		A6A6C4CA1B9E9D6900E869E0 /* FLYTagsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTagsManager.m; sourceTree = "<group>"; };
 		A6A6C4CC1B9EA9FF00E869E0 /* FLYEmptyStateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYEmptyStateView.h; sourceTree = "<group>"; };
@@ -2409,6 +2412,8 @@
 				A69C4BE71A2851FD00CAD443 /* FLYFeedTopicTableViewCell.h */,
 				A69C4BE81A2851FD00CAD443 /* FLYFeedTopicTableViewCell.m */,
 				A67CC61A1A7DDE100092E500 /* fixture */,
+				A6A602AD1BA00DD10052CA5B /* FLYSegmentedFeedViewController.h */,
+				A6A602AE1BA00DD10052CA5B /* FLYSegmentedFeedViewController.m */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -3442,6 +3447,7 @@
 				A638D82D1AC9C73000E67ED3 /* FLYNotificationViewController.m in Sources */,
 				A61D18691A1EE70900D188B5 /* FLYAppStateManager.m in Sources */,
 				A60489961A85DAFD00C67480 /* FLYGroupManager.m in Sources */,
+				A6A602AF1BA00DD10052CA5B /* FLYSegmentedFeedViewController.m in Sources */,
 				A6A4EFB01A2BD4D500FD4066 /* FLYTagListTableViewCell.m in Sources */,
 				A6A91BDD1B8A585900866AC3 /* FLYTagSearchViewController.m in Sources */,
 				A6E1B4821B86471B001B0E04 /* UIImage+FontAwesome.m in Sources */,

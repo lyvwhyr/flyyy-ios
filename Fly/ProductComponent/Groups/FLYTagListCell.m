@@ -62,18 +62,18 @@
 {
     [self.groupNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
-        make.left.equalTo(self).offset(kLeftPadding);
+        make.leading.equalTo(self).offset(kLeftPadding);
     }];
     
     [self.checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
-        make.right.equalTo(self).offset(-kRightPadding);
+        make.trailing.equalTo(self).offset(-kRightPadding);
     }];
     
     CGFloat height = 1.0/[FLYUtilities FLYMainScreenScale];
     [self.separator mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_bottom);
-        make.left.equalTo(self).offset(kLeftPadding);
+        make.leading.equalTo(self).offset(kLeftPadding);
         make.trailing.equalTo(self).offset(-kSeparatorRightPadding);
         make.height.equalTo(@(height));
     }];

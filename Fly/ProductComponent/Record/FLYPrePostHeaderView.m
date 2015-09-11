@@ -85,14 +85,14 @@
     [self.descriptionTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.captionLabel.mas_bottom).offset(kDescriptionTextTopPadding);
         make.leading.equalTo(self);
-        make.right.equalTo(self);
+        make.trailing.equalTo(self);
         make.height.equalTo(@kDescpritonHeight);
     }];
     
     [self.selectGroupLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.descriptionTextView.mas_bottom).offset(kDescriptionTextTopPadding);
         make.leading.equalTo(self);
-        make.right.equalTo(self);
+        make.trailing.equalTo(self);
     }];
     
     [super updateConstraints];

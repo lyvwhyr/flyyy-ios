@@ -50,7 +50,8 @@
 - (void)setLabelText:(NSString *)text
 {
     _localTitleLabel.text = text;
-    [self updateConstraints];
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
 }
 
 - (void)setLabelTextColor:(UIColor *)color

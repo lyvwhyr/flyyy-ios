@@ -30,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.containerView = [UIView new];
     
     if ([FLYAppStateManager sharedInstance].currentUser) {
@@ -55,12 +56,21 @@
 
 - (void)updateViewConstraints
 {
-    [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight - 1);
-        make.leading.equalTo(self.view);
-        make.trailing.equalTo(self.view);
-        make.bottom.equalTo(self.view);
-    }];
+    if (![FLYAppStateManager sharedInstance].currentUser) {
+        [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight - 1);
+            make.leading.equalTo(self.view);
+            make.trailing.equalTo(self.view);
+            make.bottom.equalTo(self.view);
+        }];
+    } else {
+        [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view);
+            make.leading.equalTo(self.view);
+            make.trailing.equalTo(self.view);
+            make.bottom.equalTo(self.view);
+        }];
+    }
     [super updateViewConstraints];
 }
 

@@ -54,7 +54,7 @@
         NSInteger leftX = kTabLeadingMargin + i * kTabWidth + i * middleSpacing;
         [tabView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(@kTabTopMargin);
-                make.left.equalTo(@(leftX));
+                make.leading.equalTo(@(leftX));
                 make.width.equalTo(@kTabWidth);
                 make.height.equalTo(@kTabHeight);
         }];
@@ -67,7 +67,7 @@
     CGFloat height = 1.0/[FLYUtilities FLYMainScreenScale];
     [self.separator mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@0.0);
-        make.left.equalTo(@0.0);
+        make.leading.equalTo(@0.0);
         make.width.equalTo(@(CGRectGetWidth([UIScreen mainScreen].bounds)));
         make.height.equalTo([NSNumber numberWithFloat:height]);
     }];

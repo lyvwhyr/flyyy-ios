@@ -7,7 +7,7 @@
 //
 
 #import "FLYNavigationManager.h"
-#import "FLYFeedViewController.h"
+#import "FLYSegmentedFeedViewController.h"
 #import "NSTimer+BlocksKit.h"
 
 @implementation FLYNavigationManager

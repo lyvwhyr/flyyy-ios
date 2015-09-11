@@ -38,7 +38,7 @@
 {
     [_groupNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
-        make.left.equalTo(self).offset(20);
+        make.leading.equalTo(self).offset(20);
     }];
     
     [super updateConstraints];

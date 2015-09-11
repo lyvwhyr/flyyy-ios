@@ -132,7 +132,7 @@
         [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view);
             make.leading.equalTo(self.view);
-            make.right.equalTo(self.view);
+            make.trailing.equalTo(self.view);
             make.bottom.equalTo(self.view);
         }];
     }];

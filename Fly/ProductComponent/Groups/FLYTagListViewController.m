@@ -38,8 +38,6 @@
     [self.view addSubview:self.globalVC.view];
     
     self.mineVC = [FLYTagListMineViewController new];
-//    [self.view addSubview:self.mineVC.view];
-    
     self.globalVC.delegate = self;
     [self.view bringSubviewToFront:self.globalVC.view];
     
@@ -88,6 +86,11 @@
 - (UIColor*)preferredStatusBarColor
 {
     return [UIColor flyBlue];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 

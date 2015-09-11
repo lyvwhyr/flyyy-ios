@@ -14,7 +14,7 @@
 #import "UIColor+FLYAddition.h"
 #import "FLYTabBarView.h"
 #import "FLYTabView.h"
-#import "FLYFeedViewController.h"
+#import "FLYSegmentedFeedViewController.h"
 #import "FLYRecordViewController.h"
 #import "FLYProfileViewController.h"
 #import "FLYTagListViewController.h"
@@ -103,7 +103,7 @@
 
 - (void)_addChildControllers
 {
-    _feedViewController = [FLYFeedViewController new];
+    _feedViewController = [FLYSegmentedFeedViewController new];
     _feedViewNavigationController= [[FLYNavigationController alloc] initWithRootViewController:_feedViewController];
     
     _groupsListViewController = [FLYTagListViewController new];

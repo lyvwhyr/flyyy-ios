@@ -127,7 +127,7 @@
         make.top.equalTo(self.searchBar.mas_bottom).offset(3);
         make.leading.mas_equalTo(self.view);
         make.width.mas_equalTo(self.view);
-        make.height.mas_equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-44);
     }];
     
     if (_hintView && _hintView.hidden == NO) {

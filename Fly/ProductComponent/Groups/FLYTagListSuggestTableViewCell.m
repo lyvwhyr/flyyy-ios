@@ -38,12 +38,12 @@
 {
     [_suggestImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
-        make.left.equalTo(self).offset(20);
+        make.leading.equalTo(self).offset(20);
     }];
     
     [_suggestTextLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
-        make.left.equalTo(_suggestImageView.mas_right).offset(10);
+        make.leading.equalTo(_suggestImageView.mas_right).offset(10);
     }];
     
     [super updateConstraints];

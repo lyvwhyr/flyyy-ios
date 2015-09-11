@@ -61,13 +61,13 @@
     [_groupNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(self).offset(10);
         make.centerY.equalTo(self);
-        make.left.equalTo(self).offset(20);
+        make.leading.equalTo(self).offset(20);
     }];
     
     [_checkButton mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(self).offset(10);
         make.centerY.equalTo(self);
-        make.right.equalTo(self).offset(-20);
+        make.trailing.equalTo(self).offset(-20);
     }];
     [super updateConstraints];
 }
