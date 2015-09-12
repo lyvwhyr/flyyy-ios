@@ -9,6 +9,7 @@
 #import "FLYGroupManager.h"
 #import "FLYEndpointRequest.h"
 #import "FLYGroup.h"
+#import "NSDictionary+FLYAddition.h"
 
 @interface FLYGroupManager()
 
@@ -31,7 +32,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        _groupList = [NSArray new];
+        _groupList = [NSMutableArray new];
         [self _initGroupList];
     }
     return self;
@@ -42,16 +43,16 @@
     @weakify(self)
     self.groupListServiceResponseBlock = ^(id response) {
         @strongify(self)
-        if (!response && ![response isKindOfClass:[NSArray class]]) {
+        if (!response || ![response isKindOfClass:[NSDictionary class]]) {
             return;
         }
-        response = (NSArray *)response;
-        NSMutableArray *tempGroups = [NSMutableArray new];
-        for(int i = 0; i < [response count]; i++) {
-            FLYGroup *group = [[FLYGroup alloc] initWithDictory:response[i]];
-            [tempGroups addObject:group];
+        NSArray *tags = [response fly_arrayForKey:@"tags"];
+        NSMutableArray *tempTags = [NSMutableArray new];
+        for(int i = 0; i < tags.count; i++) {
+            FLYGroup *group = [[FLYGroup alloc] initWithDictory:tags[i]];
+            [tempTags addObject:group];
         }
-        self.groupList = tempGroups;
+        self.groupList = tempTags;
     };
     [FLYEndpointRequest getGroupListService:self.groupListServiceResponseBlock];
 }

@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSString *groupId;
 @property (nonatomic, copy) NSString *groupName;
+@property (nonatomic) NSInteger topicCount;
 
 - (instancetype)initWithDictory:(NSDictionary *)dict;
 

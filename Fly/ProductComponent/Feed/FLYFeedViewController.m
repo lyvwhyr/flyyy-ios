@@ -106,6 +106,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     UIFont *titleFont = [UIFont fontWithName:@"Avenir-Roman" size:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
@@ -124,11 +125,12 @@
     _feedTableView.dataSource = self;
     _feedTableView.delegate = self;
     [_feedTableView registerClass:[FLYFeedTopicTableViewCell class] forCellReuseIdentifier:@"feedPostCellIdentifier"];
+    _feedTableView.showsPullToRefresh = NO;
     [self.view addSubview:_feedTableView];
     
     _feedTableView.separatorInset = UIEdgeInsetsZero;
     _feedTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    _feedTableView.scrollsToTop = YES;
+//    _feedTableView.scrollsToTop = YES;
     
     _backgroundView = [UIView new];
     _backgroundView.userInteractionEnabled = NO;
@@ -139,6 +141,8 @@
     
     NSDictionary *properties = @{kTrackingSection: @"post_page", kTrackingComponent:@"post",  kTrackingElement:@"post_button", kTrackingAction:@"click"};
     [[Mixpanel sharedInstance]  track:@"home_page" properties:properties];
+    
+    [self updateViewConstraints];
 }
 
 #pragma mark - Navigation bar
@@ -250,7 +254,7 @@
         FLYTopic *lastTopic = [self.posts lastObject];
         self.beforeTimestamp = lastTopic.createdAt;
         [self.feedTableView reloadData];
-        [self updateViewConstraints];
+//        [self updateViewConstraints];
     };
     FLYGetTopicsErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error){
         @strongify(self)
@@ -348,6 +352,7 @@
     }];
     
     [_feedTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
         make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
         make.leading.equalTo(self.view);
         make.trailing.equalTo(self.view);

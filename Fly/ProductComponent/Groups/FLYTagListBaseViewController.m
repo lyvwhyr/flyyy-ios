@@ -29,6 +29,7 @@
 #import "FLYTagListViewController.h"
 #import "FLYHintView.h"
 #import "FLYUser.h"
+#import "FLYGroupManager.h"
 
 
 #define kSuggestGroupRow 0
@@ -70,6 +71,7 @@
         _groups = [NSMutableArray arrayWithArray:[FLYAppStateManager sharedInstance].currentUser.tags];
     } else {
         _groups = [NSMutableArray new];
+        _groups = [FLYGroupManager sharedInstance].groupList;
     }
 }
 
@@ -127,7 +129,7 @@
         make.top.equalTo(self.searchBar.mas_bottom).offset(3);
         make.leading.mas_equalTo(self.view);
         make.width.mas_equalTo(self.view);
-        make.bottom.equalTo(self.view).offset(-44);
+        make.bottom.equalTo(self.view);
     }];
     
     if (_hintView && _hintView.hidden == NO) {

@@ -43,7 +43,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        _baseVC = [[FLYTagListBaseViewController alloc] init];
+        _baseVC = [[FLYTagListBaseViewController alloc] initWithTagListType:FLYTagListTypeGlobal];
         _baseVC.delegate = self;
     }
     return self;

@@ -10,7 +10,7 @@
 
 @interface FLYGroupManager : NSObject
 
-@property (nonatomic) NSArray *groupList;
+@property (nonatomic) NSMutableArray *groupList;
 
 + (instancetype)sharedInstance;
 

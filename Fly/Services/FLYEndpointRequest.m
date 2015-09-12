@@ -20,8 +20,10 @@
 + (void)getGroupListService:(GroupListServiceResponseBlock)responseBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:EP_GROUPS parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        responseBlock(responseObject);
+    [manager GET:EP_TAGS parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (responseBlock) {
+            responseBlock(responseObject);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         UALog(@"Failed to get group list. error %@", error);
     }];
