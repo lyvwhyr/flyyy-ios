@@ -851,7 +851,7 @@ typedef NS_ENUM(NSUInteger, FLEXExplorerMode) {
     // Only for iOS 7+
     if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
         self.previousStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
     
     // Show the view controller.

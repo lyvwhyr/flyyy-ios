@@ -85,7 +85,7 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)_addTabBar
@@ -214,11 +214,6 @@
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
     return [DismissingAnimator new];
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
 }
 
 - (FLYNavigationController *)flyNavigationController

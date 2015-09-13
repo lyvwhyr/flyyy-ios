@@ -11,7 +11,6 @@
 #import "FLYFeedTopicTableViewCell.h"
 #import "FLYFilterHomeFeedSelectorViewController.h"
 #import "FLYTopicDetailViewController.h"
-#import "FLYBarButtonItem.h"
 #import "FLYGroupViewController.h"
 #import "FLYDownloadManager.h"
 #import "FLYTopic.h"
@@ -47,12 +46,10 @@
 #define kPopPushNotificationDialogSessionCount 2
 #define kHomeTimelineViewCountAfterLoginKey @"kHomeTimelineViewCountAfterLoginKey"
 
-@interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, UITabBarDelegate, FLYFeedTopicTableViewCellDelegate>
+@interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, FLYFeedTopicTableViewCellDelegate>
 
 @property (nonatomic) UIView *backgroundView;
 @property (nonatomic) UITableView *feedTableView;
-
-@property (nonatomic) FLYCatalogBarButtonItem *leftBarItem;
 
 //used for pagination load more
 @property (nonatomic) NSString *beforeTimestamp;
@@ -94,10 +91,6 @@
                                                  selector:@selector(_audioFinishedPlaying:)
                                                      name:kNotificationDidFinishPlaying object:nil];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(_badgeCountUpdated)
-                                                     name:kActivityCountUpdatedNotification object:nil];
-        
         _loadMoreCount = 0;
         _feedType = FLYFeedTypeHome;
     }
@@ -115,9 +108,6 @@
     _posts = [NSMutableArray new];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    if (![self hideLeftBarItem]) {
-        [self _loadLeftBarItem];
-    }
     
     _feedTableView = [UITableView new];
     _feedTableView.backgroundColor = [UIColor clearColor];
@@ -143,18 +133,6 @@
     [[Mixpanel sharedInstance]  track:@"home_page" properties:properties];
     
     [self updateViewConstraints];
-}
-
-#pragma mark - Navigation bar
-- (void)loadRightBarButton
-{
-    FLYInviteFriendBarButtonItem *barItem = [FLYInviteFriendBarButtonItem barButtonItem:NO];
-    @weakify(self)
-    barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
-        @strongify(self)
-        [self _shareTapped];
-    };
-    self.navigationItem.rightBarButtonItem = barItem;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -290,25 +268,6 @@
     [defaults setInteger:timelineViewCount forKey:kHomeTimelineViewCountAfterLoginKey];
 }
 
-
-- (void)_loadLeftBarItem
-{
-    _leftBarItem = [FLYCatalogBarButtonItem barButtonItem:YES];
-    @weakify(self);
-    _leftBarItem.actionBlock = ^(FLYBarButtonItem *item) {
-        @strongify(self);
-        [[FLYScribe sharedInstance] logEvent:@"nav_catelog" section:@"feed" component:nil element:nil action:@"click"];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kHideRecordIconNotification object:self];
-        
-        self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
-        [self.view layoutIfNeeded];
-        FLYCatalogViewController *vc = [FLYCatalogViewController new];
-        [self.navigationController pushViewController:vc animated:YES];
-    };
-    self.navigationItem.leftBarButtonItem = _leftBarItem;
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -320,15 +279,6 @@
     }
     
      [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    if (![self isFullScreen]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kShowRecordIconNotification object:self];
-    }
-    
-    if ([self isFullScreen]) {
-        self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
-    } else {
-        self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
-    }
     
     // This is a hack. When you go to home feed, tap on group name and go to group page. Tap on play and quickly navigate back
     // to home feed, the play button on home feed is in the wrong state. It is because GroupViewController extends from
@@ -536,17 +486,6 @@
     [self.feedTableView reloadData];
 }
 
-- (void)_badgeCountUpdated
-{
-    NSString *badgeValue;
-    if ([FLYAppStateManager sharedInstance].unreadActivityCount > 9) {
-        badgeValue = @"9+";
-    } else {
-        badgeValue = [@([FLYAppStateManager sharedInstance].unreadActivityCount) stringValue];
-    }
-    self.leftBarItem.badgeValue = badgeValue;
-}
-
 - (void)_audioPlayStateChanged:(NSNotification *)notif
 {
     FLYAudioItem *currentItem = [FLYAudioManager sharedInstance].currentPlayItem;
@@ -745,18 +684,6 @@
         }
     }
     return NO;
-}
-
-- (void)_shareTapped
-{
-    
-    SCLAlertView *alert = [[SCLAlertView alloc] init];
-    
-    [alert addButton:LOC(@"FLYInviteFriendsInviteButtonText") actionBlock:^(void) {
-        [FLYShareManager inviteFriends:self];
-    }];
-    
-    [alert showCustom:self image:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] color:[UIColor flyBlue] title:LOC(@"FLYInviteFriendsTitleText") subTitle:LOC(@"FLYInviteFriendsSubTitleText") closeButtonTitle:LOC(@"FLYButtonCancelText") duration:0.0f];
 }
 
 @end

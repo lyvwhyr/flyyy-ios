@@ -10,4 +10,8 @@
 
 @interface FLYSegmentedFeedViewController : FLYUniversalViewController
 
+@property (nonatomic) BOOL isFullScreen;
+
+- (BOOL)hideLeftBarItem;
+
 @end
