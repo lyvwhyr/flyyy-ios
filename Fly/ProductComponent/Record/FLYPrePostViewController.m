@@ -72,7 +72,7 @@
     
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     
-    _groups = [NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList];
+    _groups = [[NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList] subarrayWithRange:NSMakeRange(0, 9)];
     
     self.title = @"Post";
     
@@ -105,9 +105,9 @@
     }];
     
     // post from tag page
-    if (self.defaultGroup) {
-        [self _setDefaultSelectedIndex:self.defaultGroup];
-    }
+//    if (self.defaultGroup) {
+//        [self _setDefaultSelectedIndex:self.defaultGroup];
+//    }
     
     // search view
     _searchContainerView = [UIView new];
