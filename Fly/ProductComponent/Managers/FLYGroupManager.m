@@ -47,6 +47,7 @@
             return;
         }
         NSArray *tags = [response fly_arrayForKey:@"tags"];
+        self.cursor = [response fly_stringForKey:@"cursor"];
         NSMutableArray *tempTags = [NSMutableArray new];
         for(int i = 0; i < tags.count; i++) {
             FLYGroup *group = [[FLYGroup alloc] initWithDictory:tags[i]];

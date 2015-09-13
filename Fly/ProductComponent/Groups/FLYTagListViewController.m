@@ -71,6 +71,23 @@
     self.navigationItem.titleView = self.segmentedControl;
 }
 
+- (void)updateViewConstraints
+{
+    if ([self.mineVC.view superview]) {
+        [self.mineVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+    }
+    
+    if ([self.globalVC.view superview]) {
+        [self.globalVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+        }];
+    }
+    
+    [super updateViewConstraints];
+}
+
 - (UIViewController *)rootViewController
 {
     return self;

@@ -11,7 +11,7 @@
 
 
 #define EP_CONFIG                                   @"v1/configs"
-#define EP_TAGS                                   @"v1/tags"
+#define EP_TAGS                                     @"v1/tags"
 #define EP_USERS                                    @"v1/users"
 
 // topics

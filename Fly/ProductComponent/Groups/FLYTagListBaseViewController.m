@@ -30,6 +30,9 @@
 #import "FLYHintView.h"
 #import "FLYUser.h"
 #import "FLYGroupManager.h"
+#import "SVPullToRefresh.h"
+#import "FLYTagsService.h"
+#import "NSDictionary+FLYAddition.h"
 
 
 #define kSuggestGroupRow 0
@@ -44,6 +47,9 @@
 
 @property (nonatomic) NSMutableArray *groups;
 @property (nonatomic) FLYTagListType tagListType;
+
+@property (nonatomic) FLYTagsService *tagsService;
+@property (nonatomic) NSString *cursor;
 
 @end
 
@@ -72,6 +78,7 @@
     } else {
         _groups = [NSMutableArray new];
         _groups = [FLYGroupManager sharedInstance].groupList;
+        _cursor = [FLYGroupManager sharedInstance].cursor;
     }
 }
 
@@ -94,6 +101,10 @@
     [self.view addSubview:self.groupsTabelView];
     
     [self updateViewConstraints];
+    
+    if (self.tagListType == FLYTagListTypeGlobal) {
+        [self _initService];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -109,11 +120,6 @@
     self.title = LOC(@"FLYTags");
     UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
 }
 
 -(void)updateViewConstraints
@@ -221,8 +227,55 @@
 
 - (void)_tagsUpdated
 {
-    self.groups = [FLYAppStateManager sharedInstance].currentUser.tags;
-    [self.groupsTabelView reloadData];
+    if (self.tagListType == FLYTagListTypeMine) {
+        self.groups = [FLYAppStateManager sharedInstance].currentUser.tags;
+        [self.groupsTabelView reloadData];
+    }
+}
+
+#pragma mark - service
+
+- (void)_initService
+{
+    self.tagsService = [FLYTagsService new];
+    @weakify(self)
+    [self.groupsTabelView addInfiniteScrollingWithActionHandler:^{
+        @strongify(self)
+        [self _load:NO];
+    }];
+}
+
+- (void)_load:(BOOL)first
+{
+    @weakify(self)
+    FLYGetGlobalTagsSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        @strongify(self)
+        [self.groupsTabelView.infiniteScrollingView stopAnimating];
+        NSDictionary *results = responseObj;
+        NSArray *tagsArray = [results objectForKey:@"tags"];
+        if ([tagsArray count] == 0) {
+            return;
+        }
+        self.cursor = [responseObj fly_stringForKey:@"cursor"];
+        if (!self.cursor || [self.cursor isEqualToString:@""]) {
+            self.cursor = nil;
+        }
+        
+        self.state = FLYViewControllerStateReady;
+        if (first) {
+            [self.groups removeAllObjects];
+        }
+        for(int i = 0; i < tagsArray.count; i++) {
+            FLYGroup *tag = [[FLYGroup alloc] initWithDictory:tagsArray[i]];
+            [self.groups addObject:tag];
+        }
+        [self.groupsTabelView reloadData];
+    };
+    FLYGetGlobalTagsErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error){
+        @strongify(self)
+        [self.groupsTabelView.infiniteScrollingView stopAnimating];
+    };
+    [self.tagsService nextPageWithCursor:self.cursor firstPage:first successBlock:successBlock errorBlock:errorBlock];
 }
 
 #pragma mark - Navigation bar and status bar

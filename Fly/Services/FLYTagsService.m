@@ -10,6 +10,28 @@
 
 @implementation FLYTagsService
 
+- (void)nextPageWithCursor:(NSString *)cursor firstPage:(BOOL)first successBlock:(FLYGetGlobalTagsSuccessBlock)successBlock errorBlock:(FLYGetGlobalTagsErrorBlock)errorBlock
+{
+    NSString *requestEndpoint;
+    if (first) {
+        requestEndpoint = [NSString stringWithFormat: @"%@?limit=%d", EP_TAGS, kGetGlobalTagsPaginationCount];
+    } else if ([cursor length] > 0){
+        requestEndpoint = [NSString stringWithFormat: @"%@?limit=%d&cursor=%@", EP_TAGS, kGetGlobalTagsPaginationCount, cursor];
+    } else {
+        requestEndpoint = [NSString stringWithFormat: @"%@?limit=%d", EP_TAGS, kGetGlobalTagsPaginationCount];
+    }
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:requestEndpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (errorBlock) {
+            errorBlock(operation, error);
+        }
+    }];
+}
+
 + (void)followTagWithId:(NSString *)tagId followed:(BOOL)followed successBlock:(FLYFollowTagSuccessBlock)successBlock errorBlock:(FLYFollowTagErrorBlock)errorBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];

@@ -11,6 +11,7 @@
 @interface FLYGroupManager : NSObject
 
 @property (nonatomic) NSMutableArray *groupList;
+@property (nonatomic, copy) NSString *cursor;
 
 + (instancetype)sharedInstance;
 
