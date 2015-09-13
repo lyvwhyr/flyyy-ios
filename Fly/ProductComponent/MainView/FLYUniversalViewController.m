@@ -109,12 +109,11 @@
     [self.flyNavigationController.flyNavigationBar setColor:[self preferredNavigationBarColor] animated:YES];
     [self.flyNavigationController setStatusBarColor:[self preferredStatusBarColor]];
     
+    // default to light
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     if ([self respondsToSelector:@selector(preferredStatusBarStyle)]) {
         [[UIApplication sharedApplication] setStatusBarStyle:[self preferredStatusBarStyle]];
     }
-    
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     if (_state == FLYViewControllerStateLoading) {
         [self.view bringSubviewToFront:_loaderView];

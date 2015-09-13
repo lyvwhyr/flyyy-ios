@@ -115,7 +115,6 @@
     _feedTableView.dataSource = self;
     _feedTableView.delegate = self;
     [_feedTableView registerClass:[FLYFeedTopicTableViewCell class] forCellReuseIdentifier:@"feedPostCellIdentifier"];
-    _feedTableView.showsPullToRefresh = NO;
     [self.view addSubview:_feedTableView];
     
     _feedTableView.separatorInset = UIEdgeInsetsZero;
@@ -145,6 +144,17 @@
     if (!hasSeenFeedOnboarding) {
         _checkOnboardingCellLoadedTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(_checkCellAvailability) userInfo:nil repeats:YES];
     }
+    
+    @weakify(self)
+    FLYServiceVersion version = [self.topicService serviceVersion:self.topicService.endpoint];
+    [_feedTableView addPullToRefreshWithActionHandler:^{
+        @strongify(self)
+        if (version == FLYServiceVersionOne) {
+            [self _load:YES before:nil cursor:NO];
+        } else {
+            [self _load:YES before:nil cursor:YES];
+        }
+    }];
 }
 
 #pragma mark - service
@@ -158,15 +168,6 @@
     FLYServiceVersion version = [self.topicService serviceVersion:self.topicService.endpoint];
     
     @weakify(self)
-    [_feedTableView addPullToRefreshWithActionHandler:^{
-        @strongify(self)
-        if (version == FLYServiceVersionOne) {
-            [self _load:YES before:nil cursor:NO];
-        } else {
-            [self _load:YES before:nil cursor:YES];
-        }
-    }];
-    
     [self.feedTableView addInfiniteScrollingWithActionHandler:^{
         @strongify(self)
         if (version == FLYServiceVersionOne) {
@@ -301,13 +302,23 @@
         make.bottom.equalTo(self.view);
     }];
     
-    [_feedTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
-        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
-        make.leading.equalTo(self.view);
-        make.trailing.equalTo(self.view);
-        make.bottom.equalTo(self.view);
-    }];
+    if (self.feedType == FLYFeedTypeGroup) {
+        [_feedTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
+            make.leading.equalTo(self.view);
+            make.trailing.equalTo(self.view);
+            make.bottom.equalTo(self.view);
+        }];
+    } else {
+        [_feedTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view);
+            make.leading.equalTo(self.view);
+            make.trailing.equalTo(self.view);
+            make.bottom.equalTo(self.view);
+        }];
+    }
+    
+
     
     [super updateViewConstraints];
 }

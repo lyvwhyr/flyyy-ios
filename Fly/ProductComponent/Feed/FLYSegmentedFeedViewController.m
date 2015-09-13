@@ -54,6 +54,7 @@
 {
     self.globalVC = [FLYFeedViewController new];
     self.globalVC.delegate = self;
+    [self addChildViewController:self.globalVC];
     [self.view addSubview:self.globalVC.view];
     
     self.segmentedControl = [[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 140, 28)
@@ -85,8 +86,6 @@
     } else {
         self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - kTabBarViewHeight);
     }
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 #pragma mark - Navigation bar
