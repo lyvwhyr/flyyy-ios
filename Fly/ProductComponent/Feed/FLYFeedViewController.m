@@ -40,6 +40,7 @@
 #import "JGProgressHUDSuccessIndicatorView.h"
 #import "FLYShareManager.h"
 #import "UIBarButtonItem+Badge.h"
+#import "FLYSegmentedFeedViewController.h"
 
 #define kMaxWaitForTableLoad 3
 
@@ -318,8 +319,6 @@
         }];
     }
     
-
-    
     [super updateViewConstraints];
 }
 
@@ -441,8 +440,8 @@
         [defaults synchronize];
         
         FLYMainViewController *mainVC = nil;
-        if (self.parentViewController && [self.parentViewController.parentViewController isKindOfClass:[FLYMainViewController class]]) {
-            mainVC = (FLYMainViewController *)self.parentViewController.parentViewController;
+        if (self.parentViewController && [self.parentViewController.parentViewController.parentViewController isKindOfClass:[FLYMainViewController class]]) {
+            mainVC = (FLYMainViewController *)self.parentViewController.parentViewController.parentViewController;
         }
         
         [FLYFeedOnBoardingView showFeedOnBoardViewWithCellToExplain:cell mainVC:mainVC];

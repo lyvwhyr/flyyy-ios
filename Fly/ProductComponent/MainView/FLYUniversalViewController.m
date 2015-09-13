@@ -38,9 +38,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    #if DEBUG
-//    [[FLEXManager sharedManager] showExplorer];
-//    #endif
+    #if DEBUG
+    [[FLEXManager sharedManager] showExplorer];
+    #endif
     
     UIFont *titleFont = [UIFont fontWithName:@"Avenir-Roman" size:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
@@ -111,9 +111,9 @@
     
     // default to light
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    if ([self respondsToSelector:@selector(preferredStatusBarStyle)]) {
-        [[UIApplication sharedApplication] setStatusBarStyle:[self preferredStatusBarStyle]];
-    }
+//    if ([self respondsToSelector:@selector(preferredStatusBarStyle)]) {
+//        [[UIApplication sharedApplication] setStatusBarStyle:[self preferredStatusBarStyle]];
+//    }
     
     if (_state == FLYViewControllerStateLoading) {
         [self.view bringSubviewToFront:_loaderView];

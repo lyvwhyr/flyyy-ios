@@ -61,11 +61,13 @@
         _topBackgroundView = [UIView new];
         _topBackgroundView.backgroundColor = [UIColor blackColor];
         _topBackgroundView.alpha = kBackgroundAlpha;
+        _topBackgroundView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_topBackgroundView];
         
         _bottomBackgroundView = [UIView new];
         _bottomBackgroundView.backgroundColor = [UIColor blackColor];
         _bottomBackgroundView.alpha = kBackgroundAlpha;
+        _bottomBackgroundView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_bottomBackgroundView];
         
         // play post
@@ -79,6 +81,7 @@
         
         _playPostArrow = [UIImageView new];
         _playPostArrow.image = [UIImage imageNamed:@"icon_down_arrow"];
+        _playPostArrow.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_playPostArrow];
         
         // topic title
@@ -91,6 +94,7 @@
         
         _titleArrow = [UIImageView new];
         _titleArrow.image = [UIImage imageNamed:@"icon_down_arrow"];
+        _titleArrow.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_titleArrow];
         
         // vote
@@ -103,6 +107,7 @@
         
         _votesArrow = [UIImageView new];
         _votesArrow.image = [UIImage imageNamed:@"icon_down_arrow"];
+        _votesArrow.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_votesArrow];
         
         // user name
@@ -115,6 +120,7 @@
         
         _usernameArrow = [UIImageView new];
         _usernameArrow.image = [UIImage imageNamed:@"icon_up_arrow"];
+        _usernameArrow.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_usernameArrow];
         
         
@@ -128,6 +134,7 @@
         
         _commentsArrow = [UIImageView new];
         _commentsArrow.image = [UIImage imageNamed:@"icon_up_arrow"];
+        _commentsArrow.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_commentsArrow];
         
         _tapContinueButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -136,6 +143,7 @@
         [_tapContinueButton setTitle:LOC(@"FLYFeedOnboardingTapContinue") forState:UIControlStateNormal];
         _tapContinueButton.titleLabel.textColor = [UIColor whiteColor];
         _tapContinueButton.titleLabel.font = [UIFont flyFontWithSize:18];
+        _tapContinueButton.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_tapContinueButton];
     }
     return self;
@@ -169,11 +177,11 @@
         make.leading.equalTo(self);
         make.trailing.equalTo(self);
         
-        make.bottom.equalTo(self.cellToExplain.mas_top);
+        make.bottom.equalTo(self.cellToExplain.mas_top).offset(kStatusBarHeight + kNavBarHeight);
     }];
     
     [self.bottomBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.cellToExplain.mas_bottom);
+        make.top.equalTo(self.cellToExplain.mas_bottom).offset(kStatusBarHeight + kNavBarHeight);
         make.leading.equalTo(self);
         make.trailing.equalTo(self);
         make.bottom.equalTo(self);
