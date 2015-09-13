@@ -46,6 +46,8 @@
     }
     
     [[FLYAppStateManager sharedInstance] updateActivityCount];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSuccessfulLoginNotification object:self];
 }
 
 

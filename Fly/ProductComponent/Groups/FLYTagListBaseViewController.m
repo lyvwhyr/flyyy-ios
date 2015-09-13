@@ -59,7 +59,6 @@
 {
     if (self = [super init]) {
         _tagListType = type;
-        [self populateTags:_tagListType];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_tagsUpdated) name:kNotificationMyTagsUpdated object:nil];
     }
@@ -71,21 +70,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)populateTags:(FLYTagListType)type
-{
-    if (type == FLYTagListTypeMine) {
-        _groups = [NSMutableArray arrayWithArray:[FLYAppStateManager sharedInstance].currentUser.tags];
-    } else {
-        _groups = [NSMutableArray new];
-        _groups = [FLYGroupManager sharedInstance].groupList;
-        _cursor = [FLYGroupManager sharedInstance].cursor;
-    }
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.title = LOC(@"FLYTags");
+    
+    [self populateTags:_tagListType];
     
     // search bar
     self.searchBar = [FLYSearchBar new];
@@ -104,6 +94,17 @@
     
     if (self.tagListType == FLYTagListTypeGlobal) {
         [self _initService];
+    }
+}
+
+- (void)populateTags:(FLYTagListType)type
+{
+    if (type == FLYTagListTypeMine) {
+        _groups = [NSMutableArray arrayWithArray:[FLYAppStateManager sharedInstance].currentUser.tags];
+    } else {
+        _groups = [NSMutableArray new];
+        _groups = [FLYGroupManager sharedInstance].groupList;
+        _cursor = [FLYGroupManager sharedInstance].cursor;
     }
 }
 

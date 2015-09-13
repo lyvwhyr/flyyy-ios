@@ -9,6 +9,7 @@
 #import "FLYEmptyStateView.h"
 #import "UIFont+FLYAddition.h"
 #import "UIColor+FLYAddition.h"
+#import "SDiPhoneVersion.h"
 
 #define kTitleTopMargin 45
 #define kDescrptionTopMargin 30
@@ -82,8 +83,17 @@
         make.edges.equalTo(self);
     }];
     
+    
+    CGFloat titleTop = kTitleTopMargin;
+    DeviceVersion deviceVersion = [SDiPhoneVersion deviceVersion];
+    if (deviceVersion == iPhone6Plus) {
+        titleTop = 120;
+    } else if (deviceVersion == iPhone6) {
+        titleTop = 70;
+    }
+    
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(kTitleTopMargin);
+        make.top.equalTo(self).offset(titleTop);
         make.centerX.equalTo(self);
     }];
 

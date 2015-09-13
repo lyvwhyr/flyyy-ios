@@ -22,9 +22,13 @@
                              @"password":password
                              };
     [manager POST:self.endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        successBlock(operation, responseObject);
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
     } failure:^(id responseObj, NSError *error) {
-        errorBlock(responseObj, error);
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
     }];
 }
 

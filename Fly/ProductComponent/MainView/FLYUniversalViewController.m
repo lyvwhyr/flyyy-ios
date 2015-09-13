@@ -113,6 +113,9 @@
         [[UIApplication sharedApplication] setStatusBarStyle:[self preferredStatusBarStyle]];
     }
     
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     if (_state == FLYViewControllerStateLoading) {
         [self.view bringSubviewToFront:_loaderView];
         [_loaderView startAnimating];

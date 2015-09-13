@@ -23,6 +23,8 @@
     if (self = [super init]) {
         _baseVC = [[FLYTagListBaseViewController alloc] initWithTagListType:FLYTagListTypeMine];
         _baseVC.delegate = self;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_successfulLogin:) name:kSuccessfulLoginNotification object:nil];
     }
     return self;
 }
@@ -49,11 +51,6 @@
     [self.view addSubview:self.containerView];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
 - (void)updateViewConstraints
 {
     if (![FLYAppStateManager sharedInstance].currentUser) {
@@ -72,6 +69,18 @@
         }];
     }
     [super updateViewConstraints];
+}
+
+- (void)_successfulLogin:(NSNotification *)notification
+{
+    [self.containerView removeFromSuperview];
+    
+    self.containerView = self.baseVC.view;
+    self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:self.containerView];
+    
+    [self.view setNeedsUpdateConstraints];
+    [self.view updateConstraintsIfNeeded];
 }
 
 - (UIViewController *)rootViewController
