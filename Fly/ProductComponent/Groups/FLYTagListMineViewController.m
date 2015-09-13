@@ -79,4 +79,9 @@
     return [self.delegate rootViewController];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 @end

@@ -56,7 +56,7 @@
     self.globalVC.delegate = self;
     [self.view addSubview:self.globalVC.view];
     
-    self.segmentedControl = [[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 183, 28)
+    self.segmentedControl = [[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 140, 28)
                                                                      items:@[[[PPiFlatSegmentItem alloc] initWithTitle:LOC(@"FLYTagListGlobalTab") andIcon:nil], [[PPiFlatSegmentItem alloc] initWithTitle:LOC(@"FLYTagListMineTab") andIcon:nil]]
                                                               iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
                                                               }

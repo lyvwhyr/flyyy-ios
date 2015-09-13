@@ -28,6 +28,7 @@
 {
     [super viewDidLoad];
     [self _setupSegmentedControl];
+    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
 }
 
 - (void)_setupSegmentedControl
@@ -42,7 +43,7 @@
     [self.view bringSubviewToFront:self.globalVC.view];
     
     @weakify(self);
-    self.segmentedControl = [[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 183, 28)
+    self.segmentedControl = [[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 150, 28)
                                                                      items:@[[[PPiFlatSegmentItem alloc] initWithTitle:LOC(@"FLYTagListGlobalTab") andIcon:nil], [[PPiFlatSegmentItem alloc] initWithTitle:LOC(@"FLYTagListMineTab") andIcon:nil]]
                                                               iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
                                                                   @strongify(self)
