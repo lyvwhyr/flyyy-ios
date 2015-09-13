@@ -17,6 +17,11 @@
     return [FLYTopicService serviceWithEndpoint:[NSString stringWithFormat:EP_TOPIC_WITH_GROUP_ID_V2, groupIds]];
 }
 
++ (instancetype)topicsServiceMine
+{
+    return [FLYTopicService serviceWithEndpoint:EP_TOPIC_MINE];
+}
+
 + (instancetype)myTopics
 {
     return [FLYTopicService serviceWithEndpoint:[NSString stringWithFormat:EP_TOPIC_ME]];

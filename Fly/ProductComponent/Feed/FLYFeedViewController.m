@@ -41,6 +41,7 @@
 #import "FLYShareManager.h"
 #import "UIBarButtonItem+Badge.h"
 #import "FLYSegmentedFeedViewController.h"
+#import "NSTimer+BlocksKit.h"
 
 #define kMaxWaitForTableLoad 3
 
@@ -303,7 +304,7 @@
         make.bottom.equalTo(self.view);
     }];
     
-    if (self.feedType == FLYFeedTypeGroup) {
+    if (self.feedType == FLYFeedTypeGroup || self.feedType == FLYFeedTypeMine) {
         [_feedTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
             make.leading.equalTo(self.view);
@@ -444,7 +445,9 @@
             mainVC = (FLYMainViewController *)self.parentViewController.parentViewController.parentViewController;
         }
         
-        [FLYFeedOnBoardingView showFeedOnBoardViewWithCellToExplain:cell mainVC:mainVC];
+        [NSTimer bk_scheduledTimerWithTimeInterval:0.5 block:^(NSTimer *timer) {
+            [FLYFeedOnBoardingView showFeedOnBoardViewWithCellToExplain:cell mainVC:mainVC];
+        } repeats:NO];
         [self _cleanupOnBoardingTimer];
     }
 }

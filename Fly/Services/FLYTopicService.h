@@ -24,6 +24,8 @@ typedef void(^FLYPostTopicErrorBlock)(id responseObj, NSError *error);
 @interface FLYTopicService : FLYServiceBase
 
 + (instancetype)topicsServiceWithGroupIds:(NSString *)groupIds;
+// topics filtered by my following tags
++ (instancetype)topicsServiceMine;
 + (instancetype)myTopics;
 
 + (void)postTopic:(NSDictionary *)dict successBlock:(FLYPostTopicSuccessBlock)successBlock errorBlock:(FLYPostTopicErrorBlock)errorBlock;

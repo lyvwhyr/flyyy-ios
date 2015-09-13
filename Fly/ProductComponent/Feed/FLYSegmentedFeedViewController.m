@@ -17,6 +17,7 @@
 #import "FLYShareManager.h"
 #import "UIBarButtonItem+Badge.h"
 #import "FLYNavigationController.h"
+#import "FLYTopicService.h"
 
 @interface FLYSegmentedFeedViewController () <FLYFeedViewControllerDelegate>
 
@@ -57,9 +58,26 @@
     [self addChildViewController:self.globalVC];
     [self.view addSubview:self.globalVC.view];
     
+    self.mineVC = [FLYFeedViewController new];
+    self.mineVC.topicService = [FLYTopicService topicsServiceMine];
+    self.mineVC.feedType = FLYFeedTypeMine;
+    [self addChildViewController:self.mineVC];
+    
+    
     self.segmentedControl = [[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 140, 28)
                                                                      items:@[[[PPiFlatSegmentItem alloc] initWithTitle:LOC(@"FLYTagListGlobalTab") andIcon:nil], [[PPiFlatSegmentItem alloc] initWithTitle:LOC(@"FLYTagListMineTab") andIcon:nil]]
                                                               iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
+                                                                  if (segmentIndex == 0) {
+                                                                      [self.mineVC.view removeFromSuperview];
+                                                                      self.globalVC.delegate = self;
+                                                                      [self.view addSubview:self.globalVC.view];
+                                                                      [self.view bringSubviewToFront:self.globalVC.view];
+                                                                  } else {
+                                                                      [self.globalVC.view removeFromSuperview];
+                                                                      self.mineVC.delegate = self;
+                                                                      [self.view addSubview:self.mineVC.view];
+                                                                      [self.view bringSubviewToFront:self.mineVC.view];
+                                                                  }
                                                               }
                                                             iconSeparation:0];
     self.segmentedControl.layer.cornerRadius = 4;

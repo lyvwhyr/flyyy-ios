@@ -26,6 +26,7 @@
 // topics v2 API
 #define EP_TOPIC_V2                                 @"v2/topics"
 #define EP_TOPIC_WITH_GROUP_ID_V2                   @"v2/topics?tag_id=%@"
+#define EP_TOPIC_MINE                               @"v2/topics?filter=by_tags"
 
 // reply
 #define EP_REPLY_WITH_TOPIC_ID                      @"v1/topics/%@"
