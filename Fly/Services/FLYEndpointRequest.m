@@ -20,7 +20,8 @@
 + (void)getGroupListService:(GroupListServiceResponseBlock)responseBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:EP_TAGS parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSDictionary *params = @{@"limit":@(50)};
+    [manager GET:EP_TAGS parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (responseBlock) {
             responseBlock(responseObject);
         }

@@ -16,6 +16,7 @@
 #import "FLYUser.h"
 #import "FLYNavigationBar.h"
 #import "FLYNavigationController.h"
+#import "FLYSignupFollowTagsViewController.h"
 
 #define kTitleTopPadding 20
 
@@ -168,7 +169,9 @@
             [defalut setObject:user.userId forKey:kLoggedInUserNsUserDefaultKey];
             [defalut synchronize];
         }
-        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        FLYSignupFollowTagsViewController *vc = [FLYSignupFollowTagsViewController new];
+        [self.navigationController pushViewController:vc animated:NO];
     };
     
     FLYCreateuserErrorBlock errorBlock = ^(id responseObj, NSError *error) {
