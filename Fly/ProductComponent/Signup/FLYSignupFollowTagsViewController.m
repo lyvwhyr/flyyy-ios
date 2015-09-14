@@ -12,9 +12,9 @@
 #import "FLYGroup.h"
 #import "FLYGroupManager.h"
 
-#define kLeftPadding    15
-#define kTagButtonHorizontalSpacing 19
-#define kTagButtonVerticalSpacing 12
+#define kLeftPadding    15.0f
+#define kTagButtonHorizontalSpacing 19.0f
+#define kTagButtonVerticalSpacing 12.0f
 
 @interface FLYSignupFollowTagsViewController ()
 
@@ -92,7 +92,7 @@
     }];
     
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topBgImage.mas_bottom);
+        make.top.equalTo(self.topBgImage.mas_bottom).offset(15);
         make.bottom.equalTo(self.doneButton.mas_top);
         make.leading.equalTo(self.view);
         make.trailing.equalTo(self.view);
@@ -108,7 +108,7 @@
     UIButton *previousButton;
     UIButton *lastButton;
     CGFloat currentWidth = 0.0;
-    CGFloat MAX_ROW_WIDTH = CGRectGetWidth(self.view.bounds) - 2 * kLeftPadding;
+    CGFloat MAX_ROW_WIDTH = CGRectGetWidth(self.view.bounds) - kLeftPadding;
     NSMutableArray *buttonsInRow = [NSMutableArray new];
     for (UIButton *currentButton in self.tagButtonArray) {
         CGFloat buttonWidth = CGRectGetWidth(currentButton.bounds);
@@ -116,7 +116,7 @@
             if (previousButton == nil) {
                 [currentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
                     make.top.equalTo(self.contentView.mas_leading);
-                    make.leading.equalTo(self.contentView);
+                    make.leading.equalTo(self.contentView).offset(kLeftPadding);
                 }];
             } else {
                 [currentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -132,9 +132,10 @@
                 for (UIButton *button in buttonsInRow) {
                     bWidth += CGRectGetWidth(button.bounds);
                 }
-                CGFloat hSpacing = (MAX_ROW_WIDTH - bWidth - kTagButtonHorizontalSpacing * (buttonCountInRow - 1))/buttonCountInRow/2.0f - 1;
+                CGFloat hSpacing = (MAX_ROW_WIDTH - bWidth - kTagButtonHorizontalSpacing * (buttonCountInRow - 1))/(CGFloat)buttonCountInRow/2.0f - 1;
                 for (int i = 0; i < buttonsInRow.count; i++) {
                     UIButton *btn = buttonsInRow[i];
+                    btn.titleLabel.adjustsFontSizeToFitWidth = YES;
                     btn.contentEdgeInsets = UIEdgeInsetsMake(5, 15 + hSpacing, 5, 15 + hSpacing);
                     [btn sizeToFit];
                 }
@@ -145,7 +146,7 @@
             // new line
             currentWidth = 0.0f;
             [currentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.leading.equalTo(self.contentView);
+                make.leading.equalTo(self.contentView).offset(kLeftPadding);
                 make.top.equalTo(previousButton.mas_bottom).offset(kTagButtonVerticalSpacing);
             }];
         }

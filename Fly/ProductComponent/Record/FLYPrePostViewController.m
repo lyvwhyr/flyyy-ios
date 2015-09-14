@@ -170,6 +170,7 @@
                 CGFloat hSpacing = (MAX_ROW_WIDTH - bWidth - kTagButtonHorizontalSpacing * (buttonCountInRow - 1))/buttonCountInRow/2.0f - 1;
                 for (int i = 0; i < buttonsInRow.count; i++) {
                     UIButton *btn = buttonsInRow[i];
+                    btn.titleLabel.adjustsFontSizeToFitWidth = YES;
                     btn.contentEdgeInsets = UIEdgeInsetsMake(5, 15 + hSpacing, 5, 15 + hSpacing);
                     [btn sizeToFit];
                 }
