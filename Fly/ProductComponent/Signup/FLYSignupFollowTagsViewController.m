@@ -26,6 +26,7 @@
 @property (nonatomic) NSArray *groups;
 @property (nonatomic) NSMutableArray *tagButtonArray;
 @property (nonatomic) BOOL alreadyLayouted;
+@property (nonatomic) UIButton *lastButton;
 
 @end
 
@@ -54,6 +55,7 @@
     
     self.contentView = [UIView new];
     [self.scrollView addSubview:self.contentView];
+    self.scrollView.scrollEnabled = YES;
     
     _tagButtonArray = [NSMutableArray new];
     [self.groups enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -106,7 +108,6 @@
     
     // tag buttons
     UIButton *previousButton;
-    UIButton *lastButton;
     CGFloat currentWidth = 0.0;
     CGFloat MAX_ROW_WIDTH = CGRectGetWidth(self.view.bounds) - kLeftPadding;
     NSMutableArray *buttonsInRow = [NSMutableArray new];
@@ -115,7 +116,7 @@
         if ((buttonWidth + currentWidth) < MAX_ROW_WIDTH) {
             if (previousButton == nil) {
                 [currentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(self.contentView.mas_leading);
+                    make.top.equalTo(self.contentView);
                     make.leading.equalTo(self.contentView).offset(kLeftPadding);
                 }];
             } else {
@@ -152,14 +153,20 @@
         }
         currentWidth += buttonWidth + kTagButtonHorizontalSpacing;
         previousButton = currentButton;
-        lastButton = currentButton;
+        self.lastButton = currentButton;
     }
     
     [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.scrollView);
         make.width.equalTo(self.scrollView);
-        make.bottom.equalTo(lastButton.mas_bottom).offset(30);
+        make.bottom.equalTo(self.lastButton.mas_bottom).offset(30);
     }];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMaxY(self.lastButton.frame) + 30);
 }
 
 - (void)_tagSelected:(id)button
