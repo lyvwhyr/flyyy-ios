@@ -266,10 +266,6 @@
 
 - (void)_nextButtonTapped
 {
-    FLYSignupFollowTagsViewController *vc = [FLYSignupFollowTagsViewController new];
-    [self.navigationController pushViewController:vc animated:NO];
-    return;
-    
     NSString *phoneNumber = [NSString stringWithFormat:@"%@ %@", self.countryAreaCode, self.formattedPhoneNumber];
     
     BOOL phoneVerificationEnabled = [[FLYAppStateManager sharedInstance].configs fly_boolForKey:@"phoneVerificationEnabled" defaultValue:NO];

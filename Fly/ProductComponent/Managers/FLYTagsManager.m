@@ -26,10 +26,6 @@
 {
     NSMutableArray *existingTags = [FLYAppStateManager sharedInstance].currentUser.tags;
     NSMutableArray *finalTags = [NSMutableArray arrayWithArray:existingTags];
-    if (!existingTags) {
-        [FLYAppStateManager sharedInstance].currentUser.tags = tagsToMerge;
-        return;
-    }
     for (FLYGroup *tag in tagsToMerge) {
         if (![self _tagAlreadyExist:tag existingTags:existingTags]) {
             [finalTags addObject:tag];
@@ -40,7 +36,7 @@
         finalTags = [[finalTags sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
             FLYGroup *g1 = obj1;
             FLYGroup *g2 = obj2;
-            return [g1.groupName compare:g2.groupName];
+            return [[g1.groupName lowercaseString] compare:[g2.groupName lowercaseString]];
         }] mutableCopy];
         
         [FLYAppStateManager sharedInstance].currentUser.tags = finalTags;

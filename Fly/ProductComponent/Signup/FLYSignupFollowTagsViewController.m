@@ -11,6 +11,9 @@
 #import "UIFont+FLYAddition.h"
 #import "FLYGroup.h"
 #import "FLYGroupManager.h"
+#import "FLYTagsService.h"
+#import "Dialog.h"
+#import "FLYTagsManager.h"
 
 #define kLeftPadding    15.0f
 #define kTagButtonHorizontalSpacing 19.0f
@@ -28,6 +31,9 @@
 @property (nonatomic) BOOL alreadyLayouted;
 @property (nonatomic) UIButton *lastButton;
 
+@property (nonatomic) NSUInteger followTagCount;
+@property (nonatomic) NSMutableArray *followedTags;
+
 @end
 
 @implementation FLYSignupFollowTagsViewController
@@ -35,6 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.followedTags = [NSMutableArray new];
     self.groups = [NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList];
     
     self.title = @"Follow tags";
@@ -48,6 +55,7 @@
     self.doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.doneButton setTitle:@"Done" forState:UIControlStateNormal];
     self.doneButton.backgroundColor = [UIColor flyBlue];
+    [self.doneButton addTarget:self action:@selector(_doneButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.doneButton];
     
     self.scrollView = [UIScrollView new];
@@ -68,6 +76,7 @@
         tagButton.contentEdgeInsets = UIEdgeInsetsMake(5, 15, 5, 15);
         tagButton.titleLabel.font = [UIFont flyFontWithSize:14.0f];
         [tagButton setTitleColor:[FLYUtilities colorWithHexString:@"#737373"] forState:UIControlStateNormal];
+        [tagButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [tagButton addTarget:self action:@selector(_tagSelected:) forControlEvents:UIControlEventTouchUpInside];
         [tagButton setTitle:group.groupName forState:UIControlStateNormal];
         [tagButton sizeToFit];
@@ -169,9 +178,40 @@
     self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.bounds), CGRectGetMaxY(self.lastButton.frame) + 30);
 }
 
-- (void)_tagSelected:(id)button
+- (void)_tagSelected:(UIButton *)button
 {
+    button.selected = !button.selected;
+    FLYGroup *tag = self.groups[button.tag];
+    if (button.selected) {
+        // follow tags
+        [button setBackgroundColor:[UIColor flyBlue]];
+        button.layer.borderColor = [UIColor flyBlue].CGColor;
+        
+        self.followTagCount++;
+        [self.followedTags addObject:tag];
+        
+        [FLYTagsService followTagWithId:tag.groupId followed:NO successBlock:nil errorBlock:nil];
+    } else {
+        // unfollow tags
+        [button setBackgroundColor:[UIColor whiteColor]];
+        button.layer.borderColor = [UIColor flyShareTextGrey].CGColor;
+        [FLYTagsService followTagWithId:tag.groupId followed:YES successBlock:nil errorBlock:nil];
+        [self.followedTags removeObject:tag];
+        self.followTagCount--;
+    }
+}
+
+- (void)_doneButtonTapped
+{
+    if (self.followTagCount <= 3) {
+        [Dialog simpleToast:LOC(@"FLYSignupFollowAtLeastThreeTags")];
+        return;
+    }
+    if (self.followedTags.count > 0) {
+        [[FLYTagsManager sharedInstance] updateCurrentUserTags:self.followedTags];
+    }
     
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Navigation bar and status bar
