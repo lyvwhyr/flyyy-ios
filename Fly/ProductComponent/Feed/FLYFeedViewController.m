@@ -42,6 +42,7 @@
 #import "UIBarButtonItem+Badge.h"
 #import "FLYSegmentedFeedViewController.h"
 #import "NSTimer+BlocksKit.h"
+#import "FLYEmptyStateView.h"
 
 #define kMaxWaitForTableLoad 3
 
@@ -52,6 +53,7 @@
 
 @property (nonatomic) UIView *backgroundView;
 @property (nonatomic) UITableView *feedTableView;
+@property (nonatomic) FLYEmptyStateView *notLoggedInView;
 
 //used for pagination load more
 @property (nonatomic) NSString *beforeTimestamp;
@@ -93,6 +95,10 @@
                                                  selector:@selector(_audioFinishedPlaying:)
                                                      name:kNotificationDidFinishPlaying object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_successfulLogin:)
+                                                     name:kSuccessfulLoginNotification object:nil];
+        
         _loadMoreCount = 0;
         _feedType = FLYFeedTypeHome;
     }
@@ -132,6 +138,16 @@
     
     NSDictionary *properties = @{kTrackingSection: @"post_page", kTrackingComponent:@"post",  kTrackingElement:@"post_button", kTrackingAction:@"click"};
     [[Mixpanel sharedInstance]  track:@"home_page" properties:properties];
+    
+    if ([self _showNotLoggedInView]) {
+        FLYEmptyStateViewActionBlock actionBlock = ^(void) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRequireSignupNotification object:self];
+        };
+        
+        self.notLoggedInView = [[FLYEmptyStateView alloc] initWithTitle:LOC(@"FLYNotLoggedInFollowTitle") description:LOC(@"FLYNotLoggedInFollowDescription") actionBlock:actionBlock];
+        [self.view addSubview:self.notLoggedInView];
+        self.rootViewController.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
+    }
     
     [self updateViewConstraints];
 }
@@ -320,7 +336,24 @@
         }];
     }
     
+    if ([self _showNotLoggedInView]) {
+        [self.notLoggedInView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight - 1);
+            make.leading.equalTo(self.view);
+            make.trailing.equalTo(self.view);
+            make.bottom.equalTo(self.view);
+        }];
+    }
+    
     [super updateViewConstraints];
+}
+
+- (BOOL)_showNotLoggedInView
+{
+    if (![FLYAppStateManager sharedInstance].currentUser && self.feedType == FLYFeedTypeMine) {
+        return YES;
+    }
+    return NO;
 }
 
 
@@ -558,6 +591,17 @@
     }
 }
 
+- (void)_successfulLogin:(NSNotification *)notification
+{
+    [self.notLoggedInView removeFromSuperview];
+    self.notLoggedInView = nil;
+    
+    [self _initService];
+    
+    [self.view setNeedsUpdateConstraints];
+    [self.view updateConstraintsIfNeeded];
+}
+
 - (void)_scrollToTop
 {
     NSIndexPath* top = [NSIndexPath indexPathForRow:NSNotFound inSection:0];
@@ -650,6 +694,11 @@
     } else {
         return [super navigationController];
     }
+}
+
+- (UIViewController *)rootViewController
+{
+    return [self.delegate rootViewController];
 }
 
 #pragma mark - navigation bar item tapped 
