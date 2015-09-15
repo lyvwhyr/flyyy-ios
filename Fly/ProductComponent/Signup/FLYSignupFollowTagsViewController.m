@@ -211,6 +211,8 @@
         [[FLYTagsManager sharedInstance] updateCurrentUserTags:self.followedTags];
     }
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSuccessfulLoginNotification object:self];
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

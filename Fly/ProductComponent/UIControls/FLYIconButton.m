@@ -63,7 +63,8 @@
 {
     [_localIconView setImage:image];
     [_localIconView sizeToFit];
-    [self updateConstraints];
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
 }
 
 - (void)updateConstraints
@@ -84,7 +85,7 @@
         
         [_localTitleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self).offset(labelExtraOffset);
-            make.leading.equalTo(_localIconView.mas_right).offset(rightPadding);
+            make.leading.equalTo(_localIconView.mas_trailing).offset(rightPadding);
         }];
     } else {
         [_localIconView mas_remakeConstraints:^(MASConstraintMaker *make) {
