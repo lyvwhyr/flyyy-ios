@@ -19,6 +19,7 @@
 {
     _autoCompleteItem = autoCompleteItem;
     self.textLabel.text = autoCompleteItem.displayedString;
+    self.textLabel.font = [UIFont fontWithName:@"Avenir-Book" size:16];
 }
 
 @end

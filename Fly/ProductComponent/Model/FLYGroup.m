@@ -41,4 +41,9 @@
     return self;
 }
 
+- (NSString *)description
+{
+    return _groupName;
+}
+
 @end

@@ -60,4 +60,19 @@
     }
 }
 
++ (void)autocompleteWithName:(NSString *)name successBlock:(FLYFollowTagSuccessBlock)successBlock errorBlock:(FLYFollowTagErrorBlock)errorBlock
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *endpoint = [NSString stringWithFormat:EP_TAGS_AUTOCOMPLETE, name];
+    [manager GET:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
+    } failure:^(id responseObj, NSError *error) {
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
+    }];
+}
+
 @end

@@ -31,6 +31,7 @@
 #import "FLYPushNotificationManager.h"
 #import "UIFont+FLYAddition.h"
 #import "FLYTagsManager.h"
+#import "FLYTagsService.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"

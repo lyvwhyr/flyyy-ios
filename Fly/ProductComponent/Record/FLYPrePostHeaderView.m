@@ -10,6 +10,9 @@
 #import "Dialog.h"
 #import "UIColor+FLYAddition.h"
 #import "MJAutoCompleteManager.h"
+#import "FLYTagsService.h"
+#import "FLYGroup.h"
+#import "NSDictionary+FLYAddition.h"
 
 #define kTopPadding 10
 #define kDescriptionTextTopPadding  13
@@ -23,6 +26,9 @@
 @property (nonatomic) UILabel *selectGroupLabel;
 
 @property (nonatomic) MJAutoCompleteManager *autoCompleteMgr;
+@property (nonatomic) NSArray *autocompleteItems;
+
+@property (nonatomic) NSMutableArray *tags;
 
 @end
 
@@ -32,6 +38,8 @@
 - (instancetype)initWithSearchView:(UIView *)searchView
 {
     if (self = [super init]) {
+        _tags = [NSMutableArray new];
+        
         _captionLabel = [UILabel new];
         [_captionLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:16]];
         _captionLabel.text = @"Caption:";
@@ -60,9 +68,8 @@
         self.autoCompleteMgr.dataSource = self;
         self.autoCompleteMgr.delegate = self;
         
-        NSArray *names = @[@"i1", @"i2", @"i3", @"i4", @"i5", @"i6", @"hello"];
-
-        NSArray *items = [MJAutoCompleteItem autoCompleteCellModelFromObjects:names];
+        // start with empty items to trigger auto complete
+        NSArray *items = [MJAutoCompleteItem autoCompleteCellModelFromObjects:@[]];
         MJAutoCompleteTrigger *hashTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"#"
                                                                             autoCompleteItems:items];
         [self.autoCompleteMgr addAutoCompleteTrigger:hashTrigger];
@@ -160,21 +167,26 @@
 {
     /* Since we implemented this method, we are stuck and must handle ALL triggers */
     // the # trigger is trivial:
-    static int i = 0;
-    i++;
+    
     if ([trigger.delimiter isEqual:@"#"])
     {
-        [self.autoCompleteMgr removeAllAutoCompleteTriggers];
-        NSMutableArray *names =  [NSMutableArray arrayWithArray: @[@"ai1", @"ai2", @"ai3", @"ai4", @"ai5", @"ai6", [NSString stringWithFormat:@"aii%d", i]]];
-        
-        NSArray *items = [MJAutoCompleteItem autoCompleteCellModelFromObjects:names];
-        MJAutoCompleteTrigger *hashTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"#"
-                                                                            autoCompleteItems:items];
-        [self.autoCompleteMgr addAutoCompleteTrigger:hashTrigger];
-        
-        
-        // we already provided the list
-        callback(trigger.autoCompleteItemList);
+        [FLYTagsService autocompleteWithName:string successBlock:^(AFHTTPRequestOperation *operation, id responseObj) {
+            [self.tags removeAllObjects];
+            NSArray *rawTags = [responseObj fly_arrayForKey:@"tags"];
+            for (NSDictionary *tagDict in rawTags) {
+                FLYGroup *tag = [[FLYGroup alloc] initWithDictory:tagDict];
+                [self.tags addObject:tag];
+            }
+            self.autocompleteItems = [MJAutoCompleteItem autoCompleteCellModelFromObjects:self.tags];
+            MJAutoCompleteTrigger *hashTrigger = [[MJAutoCompleteTrigger alloc] initWithDelimiter:@"#"
+                                                                                autoCompleteItems:self.autocompleteItems];
+            [self.autoCompleteMgr addAutoCompleteTrigger:hashTrigger];
+            callback(hashTrigger.autoCompleteItemList);
+      
+        } errorBlock:^(id responseObj, NSError *error) {
+            
+        }];
+
     }
 }
 

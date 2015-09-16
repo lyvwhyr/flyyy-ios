@@ -71,3 +71,4 @@
 
 // tags
 #define EP_TAGS_FOLLOW                              @"v1/tags/%@/join"
+#define EP_TAGS_AUTOCOMPLETE                        @"v1/tags/autocomplete/%@"

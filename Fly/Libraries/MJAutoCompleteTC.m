@@ -43,6 +43,8 @@ static NSString *MJAutoCompleteCellReuseIdentifier = @"AutoCompleteCell";
     [self.tableView setHidden:self.contents == nil];
     // make sure the table view fits the container
     [self.tableView setAutoresizingMask:(UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth)];
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, -20, 0, 0);
 }
 
 - (void)showAutoCompleteItems:(NSArray *)items reversed:(BOOL)reverse
