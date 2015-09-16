@@ -47,7 +47,6 @@
 @property (nonatomic) UIImageView *backgroundImageView;
 @property (nonatomic) FLYPrePostHeaderView *headerView;
 @property (nonatomic) FLYPostButtonView *postButton;
-@property (nonatomic) UIView *overlayView;
 @property (nonatomic) UIView *searchContainerView;
 
 @property (nonatomic) NSArray *groups;
@@ -58,6 +57,8 @@
 
 @property (nonatomic) NSIndexPath *selectedIndex;
 @property (nonatomic) FLYGroup *selectedGroup;
+
+@property (nonatomic) CGFloat keyboardHeight;
 
 @property (nonatomic, copy) mediaUploadSuccessBlock successBlock;
 @property (nonatomic, copy) mediaUploadFailureBlock failureBlock;
@@ -82,13 +83,16 @@
     [self.view addSubview:self.backgroundImageView];
     
     _postButton = [FLYPostButtonView new];
+    _postButton.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_postButtonTapped)];
     [_postButton addGestureRecognizer:tap];
     [self.view addSubview:_postButton];
     
     // Initialize tags
     _tagButtonArray = [NSMutableArray new];
+    @weakify(self)
     [self.groups enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        @strongify(self)
         FLYGroup *group = (FLYGroup *)obj;
         UIButton *tagButton = [UIButton buttonWithType:UIButtonTypeCustom];
         tagButton.layer.cornerRadius = 4.0f;
@@ -105,11 +109,6 @@
         [self.tagButtonArray addObject:tagButton];
     }];
     
-    // post from tag page
-//    if (self.defaultGroup) {
-//        [self _setDefaultSelectedIndex:self.defaultGroup];
-//    }
-    
     // search view
     _searchContainerView = [UIView new];
     [self.view addSubview:_searchContainerView];
@@ -118,9 +117,19 @@
     self.headerView.delegate = self;
     [self.view addSubview:self.headerView];
     
+    [self _addObservers];
+    
     [self updateViewConstraints];
     
     [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:nil element:nil action:@"impression"];
+}
+
+- (void)_addObservers
+{
+ [[NSNotificationCenter defaultCenter] addObserver:self
+                                          selector:@selector(keyboardWillShow:)
+                                              name:@"UIKeyboardWillShowNotification"
+                                            object:nil];
 }
 
 - (void)_tagSelected:(UIButton *)target
@@ -190,27 +199,18 @@
         previousButton = currentButton;
     }
     
-    [_postButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_postButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(self.view);
         make.bottom.equalTo(self.view);
         make.width.equalTo(self.view);
         make.height.equalTo(@(kFlyPostButtonHeight));
     }];
     
-    if (_overlayView) {
-        [_overlayView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view).offset(kNavBarHeight + kStatusBarHeight + kTitleTextCellHeight);
-            make.leading.equalTo(self.view);
-            make.trailing.equalTo(self.view);
-            make.bottom.equalTo(self.view);
-        }];
-    }
-    
-    [self.searchContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight + 150);
+    [self.searchContainerView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.headerView.descriptionTextView.mas_bottom).offset(5);
         make.leading.equalTo(self.view).offset(kLeftPadding);
         make.trailing.equalTo(self.view).offset(-kLeftPadding);
-        make.bottom.equalTo(self.view).offset(-kFlyPostButtonHeight);
+        make.bottom.equalTo(self.view).offset(-self.keyboardHeight);
     }];
     
     self.alreadyLayouted = YES;
@@ -286,31 +286,17 @@
 - (BOOL)titleTextViewShouldEndEditing:(UITextView *)textView
 {
     self.topicTitle = textView.text;
-    
-    [self _exitEditTitleMode];
     return YES;
 }
 
-- (UIView *)overlayView
+- (void)searchViewWillAppear:(FLYPrePostHeaderView *)view
 {
-    if (!_overlayView) {
-        _overlayView = [UIView new];
-        [_overlayView setBackgroundColor:[UIColor blackColor]];
-        _overlayView.alpha = 0.65;
-        
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_exitEditTitleMode)];
-        [_overlayView addGestureRecognizer:tapGestureRecognizer];
-    }
-    return _overlayView;
+    self.searchContainerView.userInteractionEnabled = YES;
 }
 
-- (void)_exitEditTitleMode
+- (void)searchViewWillDisappear:(FLYPrePostHeaderView *)view
 {
-    _overlayView.alpha = 0;
-    [_overlayView removeFromSuperview];
-    _overlayView = nil;
-    
-    [self.headerView resignFirstResponder];
+    self.searchContainerView.userInteractionEnabled = NO;
 }
 
 - (void)_postButtonTapped
@@ -319,10 +305,10 @@
     [[Mixpanel sharedInstance]  track:@"recording_flow" properties:properties];
     
     NSString *defaultStr = LOC(@"FLYPrePostDefaultText");
-//    if (!self.topicTitle || [self.topicTitle isEqualToString:defaultStr]) {
-//        [Dialog simpleToast:LOC(@"FLYPrePostDefaultText")];
-//        return;
-//    }
+    if (!self.topicTitle || [self.topicTitle isEqualToString:defaultStr]) {
+        [Dialog simpleToast:LOC(@"FLYPrePostDefaultText")];
+        return;
+    }
     
     BOOL mediaAlreadyUploaded = [FLYAppStateManager sharedInstance].mediaAlreadyUploaded;
     NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
@@ -420,6 +406,13 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
+}
+
+- (void)keyboardWillShow:(NSNotification *)note {
+    NSDictionary *userInfo = [note userInfo];
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    self.keyboardHeight = kbSize.height;
+    [self updateViewConstraints];
 }
 
 @end

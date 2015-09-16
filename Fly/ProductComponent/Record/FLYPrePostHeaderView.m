@@ -22,7 +22,6 @@
 @interface FLYPrePostHeaderView()<UITextViewDelegate, MJAutoCompleteManagerDataSource, MJAutoCompleteManagerDelegate>
 
 @property (nonatomic) UILabel *captionLabel;
-@property (nonatomic) UITextView *descriptionTextView;
 @property (nonatomic) UILabel *selectGroupLabel;
 
 @property (nonatomic) MJAutoCompleteManager *autoCompleteMgr;
@@ -194,6 +193,18 @@
 - (void)autoCompleteManager:(MJAutoCompleteManager *)acManager shouldUpdateToText:(NSString *)newText
 {
     self.descriptionTextView.text = newText;
+}
+
+- (void)autoCompleteManagerViewWillAppear:(MJAutoCompleteManager *)acManager
+{
+    self.selectGroupLabel.hidden = YES;
+    [self.delegate searchViewWillAppear:self];
+}
+
+- (void)autoCompleteManagerViewWillDisappear:(MJAutoCompleteManager *)acManager
+{
+    self.selectGroupLabel.hidden = NO;
+    [self.delegate searchViewWillDisappear:self];
 }
 
 #pragma mark - UIResponder

@@ -145,7 +145,6 @@ static NSString *MJAutoCompleteCellReuseIdentifier = @"AutoCompleteCell";
     [cell setAutoCompleteItem:item];
     
     [self.delegate autoCompleteTableController:self willPresentCell:cell];
-    
     return cell;
 }
 
