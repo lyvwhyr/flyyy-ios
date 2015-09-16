@@ -22,7 +22,7 @@
 @interface FLYPrePostHeaderView()<UITextViewDelegate, MJAutoCompleteManagerDataSource, MJAutoCompleteManagerDelegate>
 
 @property (nonatomic) UILabel *captionLabel;
-@property (nonatomic) UILabel *selectGroupLabel;
+@property (nonatomic) UIView *searchView;
 
 @property (nonatomic) MJAutoCompleteManager *autoCompleteMgr;
 @property (nonatomic) NSArray *autocompleteItems;
@@ -37,6 +37,7 @@
 - (instancetype)initWithSearchView:(UIView *)searchView
 {
     if (self = [super init]) {
+        _searchView = searchView;
         _tags = [NSMutableArray new];
         
         _captionLabel = [UILabel new];
@@ -55,13 +56,7 @@
         [_descriptionTextView setTextColor:[UIColor lightGrayColor]];
         _descriptionTextView.backgroundColor = [UIColor flySettingBackgroundColor];
         [self addSubview:_descriptionTextView];
-        
-        _selectGroupLabel = [UILabel new];
-        [_selectGroupLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:16]];
-        _selectGroupLabel.text = @"Popular Tags:";
-        _selectGroupLabel.textColor = [UIColor flyBlue];
-        _selectGroupLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:_selectGroupLabel];
+        [_descriptionTextView becomeFirstResponder];
         
         self.autoCompleteMgr = [[MJAutoCompleteManager alloc] init];
         self.autoCompleteMgr.dataSource = self;
@@ -95,18 +90,12 @@
         make.height.equalTo(@kDescpritonHeight);
     }];
     
-    [self.selectGroupLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.descriptionTextView.mas_bottom).offset(kDescriptionTextTopPadding);
-        make.leading.equalTo(self);
-        make.trailing.equalTo(self);
-    }];
-    
     [super updateConstraints];
 }
 
 #pragma mark - UITextViewDelegate
 
-- (BOOL) textViewShouldBeginEditing:(UITextView *)textView
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
     if (textView.textColor == [UIColor lightGrayColor]) {
         textView.text = @"";
@@ -147,6 +136,10 @@
             [textView resignFirstResponder];
         }
         return NO;
+    }
+    // delete
+    if ([text isEqualToString:@""]) {
+        return YES;
     }
     
     NSUInteger newLength = [textView.text length] + [text length] - range.length;
@@ -197,14 +190,42 @@
 
 - (void)autoCompleteManagerViewWillAppear:(MJAutoCompleteManager *)acManager
 {
-    self.selectGroupLabel.hidden = YES;
     [self.delegate searchViewWillAppear:self];
 }
 
 - (void)autoCompleteManagerViewWillDisappear:(MJAutoCompleteManager *)acManager
 {
-    self.selectGroupLabel.hidden = NO;
     [self.delegate searchViewWillDisappear:self];
+}
+
+- (void)addTagWithTagName:(NSString *)tagName
+{
+    if (self.descriptionTextView.textColor == [UIColor lightGrayColor])
+    {
+        [self textViewShouldBeginEditing:self.descriptionTextView];
+    }
+    
+    NSString *originalText = self.descriptionTextView.text;
+    if (originalText.length == 0) {
+        self.descriptionTextView.text = [NSString stringWithFormat:@"#%@ ", tagName];
+        return;
+    }
+    NSString *lastChar = [originalText substringWithRange:NSMakeRange(originalText.length - 1, 1)];
+    NSString *finalString;
+    if ([lastChar isEqualToString:@" "]) {
+        finalString = [NSString stringWithFormat:@"%@#%@ ", originalText, tagName];
+    } else if ([lastChar isEqualToString:@"#"]) {
+        finalString = [NSString stringWithFormat:@"%@%@ ", originalText, tagName];
+    } else {
+        finalString = [NSString stringWithFormat:@"%@ #%@ ", originalText, tagName];
+    }
+    
+    if (finalString.length > kMaxCharLengh) {
+        [Dialog simpleToast:LOC(@"FLYMaxCaptionLengthExceeded")];
+        return;
+    }
+    
+    self.descriptionTextView.text = finalString;
 }
 
 #pragma mark - UIResponder

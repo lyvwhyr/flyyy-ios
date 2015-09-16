@@ -41,11 +41,13 @@
 #define kLeftPadding    15
 #define kTagButtonHorizontalSpacing 19
 #define kTagButtonVerticalSpacing 12
+#define kDescriptionTextTopPadding  13
 
 @interface FLYPrePostViewController () <UITableViewDataSource, UITableViewDelegate, FLYPrePostHeaderViewDelegate, JGProgressHUDDelegate>
 
 @property (nonatomic) UIImageView *backgroundImageView;
 @property (nonatomic) FLYPrePostHeaderView *headerView;
+@property (nonatomic) UILabel *popularTagLabel;
 @property (nonatomic) FLYPostButtonView *postButton;
 @property (nonatomic) UIView *searchContainerView;
 
@@ -111,11 +113,20 @@
     
     // search view
     _searchContainerView = [UIView new];
+    _searchContainerView.userInteractionEnabled = NO;
     [self.view addSubview:_searchContainerView];
     
     self.headerView = [[FLYPrePostHeaderView alloc] initWithSearchView:self.searchContainerView];
     self.headerView.delegate = self;
     [self.view addSubview:self.headerView];
+    
+    _popularTagLabel = [UILabel new];
+    [_popularTagLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:16]];
+    _popularTagLabel.text = @"Popular Tags:";
+    _popularTagLabel.textColor = [UIColor flyBlue];
+    _popularTagLabel.userInteractionEnabled = NO;
+    _popularTagLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:_popularTagLabel];
     
     [self _addObservers];
     
@@ -134,7 +145,9 @@
 
 - (void)_tagSelected:(UIButton *)target
 {
-    UALog(@"hello");
+    FLYGroup *tag = self.groups[target.tag];
+    NSString *tagName = tag.groupName;
+    [self.headerView addTagWithTagName:tagName];
 }
 
 - (void)updateViewConstraints
@@ -147,7 +160,13 @@
         make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight + 15);
         make.leading.equalTo(self.view).offset(kLeftPadding);
         make.trailing.equalTo(self.view).offset(-kLeftPadding);
-        make.height.equalTo(@140);
+        make.height.equalTo(@105);
+    }];
+    
+    [self.popularTagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.headerView.mas_bottom);
+        make.leading.equalTo(self.headerView);
+        make.trailing.equalTo(self.view);
     }];
     
     // tag buttons
@@ -160,8 +179,8 @@
         if ((buttonWidth + currentWidth) < MAX_ROW_WIDTH) {
             if (previousButton == nil) {
                 [currentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(self.headerView.mas_bottom);
-                    make.leading.equalTo(self.headerView);
+                    make.top.equalTo(self.popularTagLabel.mas_bottom).offset(5);
+                    make.leading.equalTo(self.popularTagLabel);
                 }];
             } else {
                 [currentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -191,7 +210,7 @@
             // new line
             currentWidth = 0.0f;
             [currentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.leading.equalTo(self.headerView);
+                make.leading.equalTo(self.popularTagLabel);
                 make.top.equalTo(previousButton.mas_bottom).offset(kTagButtonVerticalSpacing);
             }];
         }
@@ -278,8 +297,6 @@
 #pragma mark - FLYPrePostTitleTableViewCellDelegate
 - (BOOL)titleTextViewShouldBeginEditing:(UITextView *)textView
 {
-//    [self.view addSubview:self.overlayView];
-    [self updateViewConstraints];
     return YES;
 }
 
@@ -292,11 +309,13 @@
 - (void)searchViewWillAppear:(FLYPrePostHeaderView *)view
 {
     self.searchContainerView.userInteractionEnabled = YES;
+    self.popularTagLabel.hidden = YES;
 }
 
 - (void)searchViewWillDisappear:(FLYPrePostHeaderView *)view
 {
     self.searchContainerView.userInteractionEnabled = NO;
+    self.popularTagLabel.hidden = NO;
 }
 
 - (void)_postButtonTapped

@@ -28,5 +28,6 @@
 - (instancetype)initWithSearchView:(UIView *)searchView;
 - (void)becomeFirstResponder;
 - (void)resignFirstResponder;
+- (void)addTagWithTagName:(NSString *)tagName;
 
 @end
