@@ -33,6 +33,7 @@
 #import "SVPullToRefresh.h"
 #import "FLYTagsService.h"
 #import "NSDictionary+FLYAddition.h"
+#import "FLYTagSearchViewController.h"
 
 
 #define kSuggestGroupRow 0
@@ -44,6 +45,7 @@
 @property (nonatomic) BOOL searching;
 @property (nonatomic) FLYHintView *hintView;
 @property (nonatomic) UITableView *groupsTabelView;
+@property (nonatomic) FLYTagSearchViewController *searchVC;
 
 @property (nonatomic) NSMutableArray *groups;
 @property (nonatomic) FLYTagListType tagListType;
@@ -147,6 +149,16 @@
         }];
     }
     
+    if (self.searchVC) {
+        [self.searchVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.searchBar.mas_bottom).offset(3);
+            make.leading.mas_equalTo(self.view);
+            make.width.mas_equalTo(self.view);
+            make.bottom.equalTo(self.view);
+        }];
+
+    }
+    
     [super updateViewConstraints];
 }
 
@@ -203,15 +215,29 @@
 {
     self.hintView.hidden = YES;
     self.groupsTabelView.hidden = NO;
+    
+    [self.searchVC.view removeFromSuperview];
+    self.searchVC = nil;
 }
 
 - (void)searchBar:(FLYSearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    if (searchText.length <= 2) {
-        self.groupsTabelView.hidden = YES;
+    self.groupsTabelView.hidden = YES;
+    if (searchText.length < 1) {
         self.hintView.hidden = NO;
+        self.searchVC.view.hidden = YES;
     } else {
         self.hintView.hidden = YES;
+        self.searchVC.view.hidden = NO;
+        
+        if (!self.searchVC) {
+            self.searchVC = [[FLYTagSearchViewController alloc] initWithSearchType:self.tagListType];
+            [self.searchVC.view removeFromSuperview];
+            [self.view addSubview:self.searchVC.view];
+            [self addChildViewController:self.searchVC];
+            [self updateViewConstraints];
+        }
+        [self.searchVC updateSearchText:searchText];
     }
 }
 
