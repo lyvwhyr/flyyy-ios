@@ -52,6 +52,7 @@
 
 @property (nonatomic) FLYTagsService *tagsService;
 @property (nonatomic) NSString *cursor;
+@property (nonatomic) CGFloat keyboardHeight;
 
 @end
 
@@ -63,6 +64,11 @@
         _tagListType = type;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_tagsUpdated) name:kNotificationMyTagsUpdated object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillShow:)
+                                                     name:@"UIKeyboardWillShowNotification"
+                                                   object:nil];
     }
     return self;
 }
@@ -154,7 +160,7 @@
             make.top.equalTo(self.searchBar.mas_bottom).offset(3);
             make.leading.mas_equalTo(self.view);
             make.width.mas_equalTo(self.view);
-            make.bottom.equalTo(self.view);
+            make.bottom.equalTo(self.view).offset(-self.keyboardHeight + 44);
         }];
 
     }
@@ -314,6 +320,13 @@
 - (UIColor*)preferredStatusBarColor
 {
     return [UIColor flyBlue];
+}
+
+- (void)keyboardWillShow:(NSNotification *)note {
+    NSDictionary *userInfo = [note userInfo];
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    self.keyboardHeight = kbSize.height;
+    [self updateViewConstraints];
 }
 
 @end
