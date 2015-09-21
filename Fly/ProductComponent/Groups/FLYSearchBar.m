@@ -126,6 +126,12 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.searchField resignFirstResponder];
+    return YES;
+}
+
 
 - (void)_cancelButtonTapped
 {

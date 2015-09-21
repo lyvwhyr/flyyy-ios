@@ -66,3 +66,15 @@ typedef void(^FLYBarButtonItemActionBlock)(FLYBarButtonItem *barButtonItem);
 @interface FLYPostRecordingPostBarButtonItem : FLYBarButtonItem
 
 @end
+
+@interface FLYPostRecordingArrowButtonItem : FLYBarButtonItem
+
+@end
+
+@interface FLYJoinTagButtonItem : FLYBarButtonItem
+
+@end
+
+@interface FLYLeaveTagButtonItem : FLYBarButtonItem
+
+@end

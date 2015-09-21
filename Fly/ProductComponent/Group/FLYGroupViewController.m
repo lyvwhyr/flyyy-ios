@@ -82,13 +82,13 @@
 {
     _hasJoinedGroup = [[FLYTagsManager sharedInstance] alreadyFollowedTag:self.group];
     if (!_hasJoinedGroup) {
-        FLYAddGroupBarButtonItem *barItem = [FLYAddGroupBarButtonItem barButtonItem:NO];
+        FLYJoinTagButtonItem *barItem = [FLYJoinTagButtonItem barButtonItem:NO];
         barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
             if ([FLYUtilities isInvalidUser]) {
                 return;
             }
             JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-            HUD.textLabel.text = @"Followed";
+            HUD.textLabel.text = @"Joined";
             HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
             [HUD showInView:self.view];
             [HUD dismissAfterDelay:2.0];
@@ -100,7 +100,7 @@
         self.navigationItem.rightBarButtonItem = barItem;
     } else {
         // unfollow
-        FLYJoinedGroupBarButtonItem *barItem = [FLYJoinedGroupBarButtonItem barButtonItem:NO];
+        FLYLeaveTagButtonItem *barItem = [FLYLeaveTagButtonItem barButtonItem:NO];
         barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
             if ([FLYUtilities isInvalidUser]) {
                 return;

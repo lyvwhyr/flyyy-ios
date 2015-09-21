@@ -232,3 +232,55 @@
 
 @end
 
+@implementation FLYPostRecordingArrowButtonItem : FLYBarButtonItem
+
+- (instancetype)initWithSide:(BOOL)left
+{
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //12 * 21
+    UIImage *image = [UIImage imageNamed:@"icon_record_next"];
+    CGFloat x = (left ? -1 : 1) * 10;
+    backButton.frame = CGRectMake(x, 0, 52, 44);
+    [backButton setImage:image forState:UIControlStateNormal];
+    self = [super initWithButton:backButton actionBlock:nil];
+    return self;
+}
+
+@end
+
+@implementation FLYJoinTagButtonItem
+
+- (instancetype)initWithSide:(BOOL)left
+{
+    UIButton *joinButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    joinButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14];
+    [joinButton setTitle:@"Join" forState:UIControlStateNormal];
+    CGFloat x = (left ? -1 : 1) * 10;
+    joinButton.frame = CGRectMake(x, 0, 66, 28);
+    joinButton.layer.cornerRadius = 4.0f;
+    joinButton.layer.borderWidth = 1.0f;
+    joinButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self = [super initWithButton:joinButton actionBlock:nil];
+    return self;
+}
+
+@end
+
+@implementation FLYLeaveTagButtonItem
+
+- (instancetype)initWithSide:(BOOL)left
+{
+    UIButton *leaveButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    leaveButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Book" size:14];
+    [leaveButton setTitle:@"Leave" forState:UIControlStateNormal];
+    CGFloat x = (left ? -1 : 1) * 10;
+    leaveButton.frame = CGRectMake(x, 0, 66, 28);
+    leaveButton.layer.cornerRadius = 4.0f;
+    leaveButton.layer.borderWidth = 1.0f;
+    leaveButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self = [super initWithButton:leaveButton actionBlock:nil];
+    return self;
+}
+
+@end
+

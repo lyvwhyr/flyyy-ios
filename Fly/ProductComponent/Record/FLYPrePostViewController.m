@@ -32,6 +32,7 @@
 #import "UIFont+FLYAddition.h"
 #import "FLYTagsManager.h"
 #import "FLYTagsService.h"
+#import "FLYBarButtonItem.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -86,6 +87,7 @@
     
     _postButton = [FLYPostButtonView new];
     _postButton.userInteractionEnabled = YES;
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_postButtonTapped)];
     [_postButton addGestureRecognizer:tap];
     [self.view addSubview:_postButton];
@@ -133,6 +135,17 @@
     [self updateViewConstraints];
     
     [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:nil element:nil action:@"impression"];
+}
+
+-(void)loadRightBarButton
+{
+    FLYBarButtonItem *barButtonItem = [[FLYPostRecordingArrowButtonItem alloc] initWithSide:NO];
+    @weakify(self)
+    barButtonItem.actionBlock = ^(FLYBarButtonItem *item) {
+        @strongify(self)
+        [self _postButtonTapped];
+    };
+    self.navigationItem.rightBarButtonItem = barButtonItem;
 }
 
 - (void)_addObservers
@@ -320,11 +333,12 @@
 
 - (void)_postButtonTapped
 {
+    self.topicTitle = self.headerView.descriptionTextView.text;
     NSDictionary *properties = @{kTrackingSection: @"post_page", kTrackingComponent:@"post",  kTrackingElement:@"post_button", kTrackingAction:@"click"};
     [[Mixpanel sharedInstance]  track:@"recording_flow" properties:properties];
     
     NSString *defaultStr = LOC(@"FLYPrePostDefaultText");
-    if (!self.topicTitle || [self.topicTitle isEqualToString:defaultStr]) {
+    if (self.topicTitle.length == 0 || [self.topicTitle isEqualToString:defaultStr]) {
         [Dialog simpleToast:LOC(@"FLYPrePostDefaultText")];
         return;
     }
@@ -333,6 +347,7 @@
     NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
     
     self.postButton.userInteractionEnabled = NO;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     if (mediaAlreadyUploaded) {
         [self _serviceCreateTopicWithParams:@{@"user_id":userId}];
     } else {
@@ -352,6 +367,7 @@
         
         FLYUploadToS3ErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {
             self.postButton.userInteractionEnabled = YES;
+            self.navigationItem.rightBarButtonItem.enabled = YES;
             [HUD dismiss];
             [Dialog simpleToast:LOC(@"FLYGenericError")];
         };
@@ -396,6 +412,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kNewPostReceivedNotification object:self userInfo:dict];
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         self.postButton.userInteractionEnabled = YES;
+        self.navigationItem.rightBarButtonItem.enabled = YES;
         
         if (post.tags && post.tags.count > 0) {
             [[FLYTagsManager sharedInstance] updateCurrentUserTags:post.tags];
@@ -405,6 +422,7 @@
     FLYPostTopicErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {
         @strongify(self)
         self.postButton.userInteractionEnabled = YES;
+        self.navigationItem.rightBarButtonItem.enabled = YES;
         UALog(@"Post error %@", error);
     };
     

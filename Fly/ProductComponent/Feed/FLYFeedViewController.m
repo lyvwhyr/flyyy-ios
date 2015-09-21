@@ -320,7 +320,7 @@
         make.bottom.equalTo(self.view);
     }];
     
-    if (self.feedType == FLYFeedTypeGroup || (self.feedType == FLYFeedTypeMine && NSFoundationVersionNumber < NSFoundationVersionNumber_iOS_8_0)) {
+    if (self.feedType == FLYFeedTypeGroup || (self.feedType == FLYFeedTypeMine && NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)) {
         [_feedTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
             make.leading.equalTo(self.view);
