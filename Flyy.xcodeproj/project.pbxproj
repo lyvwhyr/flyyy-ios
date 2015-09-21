@@ -273,6 +273,7 @@
 		A698F51E1B577A3A00953B4D /* SDWTwitterLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A698F51D1B577A3A00953B4D /* SDWTwitterLabel.m */; };
 		A698F5241B577B3F00953B4D /* TwitterText.m in Sources */ = {isa = PBXBuildFile; fileRef = A698F5211B577B3F00953B4D /* TwitterText.m */; };
 		A698F5251B577B3F00953B4D /* TwitterTextEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A698F5231B577B3F00953B4D /* TwitterTextEntity.m */; };
+		A6991BA91BAFB76E00D8012E /* FLYShareTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6991BA81BAFB76E00D8012E /* FLYShareTagView.m */; settings = {ASSET_TAGS = (); }; };
 		A69C4B941A27094B00CAD443 /* icon_tabbar_group@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */; };
 		A69C4B981A270E1400CAD443 /* PaperButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A69C4B971A270E1400CAD443 /* PaperButton.m */; };
 		A69C4B9A1A27111700CAD443 /* icon_filter_feed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A69C4B991A27111700CAD443 /* icon_filter_feed@3x.png */; };
@@ -935,6 +936,8 @@
 		A698F5211B577B3F00953B4D /* TwitterText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterText.m; sourceTree = "<group>"; };
 		A698F5221B577B3F00953B4D /* TwitterTextEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterTextEntity.h; sourceTree = "<group>"; };
 		A698F5231B577B3F00953B4D /* TwitterTextEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterTextEntity.m; sourceTree = "<group>"; };
+		A6991BA71BAFB76D00D8012E /* FLYShareTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYShareTagView.h; sourceTree = "<group>"; };
+		A6991BA81BAFB76E00D8012E /* FLYShareTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYShareTagView.m; sourceTree = "<group>"; };
 		A69C4B931A27094B00CAD443 /* icon_tabbar_group@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_group@3x.png"; sourceTree = "<group>"; };
 		A69C4B961A270E1400CAD443 /* PaperButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaperButton.h; sourceTree = "<group>"; };
 		A69C4B971A270E1400CAD443 /* PaperButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaperButton.m; sourceTree = "<group>"; };
@@ -2712,6 +2715,8 @@
 			children = (
 				A6A4EFBC1A2C22EF00FD4066 /* FLYGroupViewController.h */,
 				A6A4EFBD1A2C22EF00FD4066 /* FLYGroupViewController.m */,
+				A6991BA71BAFB76D00D8012E /* FLYShareTagView.h */,
+				A6991BA81BAFB76E00D8012E /* FLYShareTagView.m */,
 			);
 			path = Group;
 			sourceTree = "<group>";
@@ -3323,6 +3328,7 @@
 				A648C0E71A19AD4A00FF1744 /* MASViewAttribute.m in Sources */,
 				A643AEF21AA9539E00BF4E0F /* NINonRetainingCollections.m in Sources */,
 				A643AE3F1AA9336D00BF4E0F /* FLYUsersService.m in Sources */,
+				A6991BA91BAFB76E00D8012E /* FLYShareTagView.m in Sources */,
 				A651BD951A4985F20081A1E0 /* SVProgressHUD.m in Sources */,
 				A6048A411A85E63100C67480 /* EXTScope.m in Sources */,
 				A690F2821AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m in Sources */,

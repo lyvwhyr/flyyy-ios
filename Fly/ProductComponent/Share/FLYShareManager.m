@@ -56,4 +56,18 @@
     [fromVC presentViewController:avc animated:YES completion:nil];
 }
 
++ (void)shareTag:(UIViewController *)fromVC tagName:(NSString *)tagName
+{
+    NSString *message = [NSString stringWithFormat:LOC(@"FLYShareTagText"), tagName, URL_SHORT_APPLE_STORE_URL];
+    NSArray * shareItems = @[message];
+    UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
+    [avc setCompletionHandler:^(NSString *activityType, BOOL completed) {
+        if (completed) {
+            NSDictionary *properties = @{kTrackingSection: @"tag", kTrackingComponent:@"complete"};
+            [[Mixpanel sharedInstance]  track:@"share" properties:properties];
+        }
+    }];
+    [fromVC presentViewController:avc animated:YES completion:nil];
+}
+
 @end

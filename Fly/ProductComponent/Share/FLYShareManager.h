@@ -14,5 +14,6 @@
 
 + (void)shareTopicWithTopic:(FLYTopic *)topic fromViewController:(UIViewController *)fromVC;
 + (void)inviteFriends:(UIViewController *)fromVC;
++ (void)shareTag:(UIViewController *)fromVC tagName:(NSString *)tagName;
 
 @end

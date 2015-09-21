@@ -18,9 +18,12 @@
 #import "FLYTopicService.h"
 #import "FLYTagsService.h"
 #import "FLYTagsManager.h"
+#import "FLYShareTagView.h"
+#import "FLYShareManager.h"
 
 @interface FLYGroupViewController ()
 @property (nonatomic) UILabel *groupTitleLabel;
+@property (nonatomic) FLYShareTagView *shareTagView;
 
 @property (nonatomic) BOOL hasJoinedGroup;
 @property (nonatomic) FLYGroup *group;
@@ -45,9 +48,14 @@
 {
     [super viewDidLoad];
     
-    UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
-    self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
-    self.title = [NSString stringWithFormat:@"#%@", self.group.groupName];
+    NSString *displayName = [NSString stringWithFormat:@"#%@", self.group.groupName];
+    self.shareTagView = [[FLYShareTagView alloc] initWithTitle:displayName];
+    self.shareTagView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_shareTapped)];
+    [self.shareTagView addGestureRecognizer:tapGestureRecognizer];
+    
+    self.navigationItem.titleView = self.shareTagView;
+    self.navigationItem.titleView.frame = CGRectMake(0, 0, [FLYShareTagView viewSize:displayName].width, [FLYShareTagView viewSize:displayName].height);
     
     [[FLYScribe sharedInstance] logEvent:@"group_page" section:nil component:nil element:nil action:@"impression"];
 }
@@ -126,6 +134,12 @@
 -(void)_backButtonTapped
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)_shareTapped
+{
+    NSString *tagName = [NSString stringWithFormat:@"#%@", self.group.groupName];
+    [FLYShareManager shareTag:self tagName:tagName];
 }
 
 @end
