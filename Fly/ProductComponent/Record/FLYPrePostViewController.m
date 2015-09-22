@@ -346,6 +346,10 @@
         return;
     }
     
+    if (self.defaultGroup) {
+        self.topicTitle = [NSString stringWithFormat:@"%@ #%@", self.topicTitle, self.defaultGroup.groupName];
+    }
+    
     BOOL mediaAlreadyUploaded = [FLYAppStateManager sharedInstance].mediaAlreadyUploaded;
     NSString *userId = [FLYAppStateManager sharedInstance].currentUser.userId;
     
@@ -368,6 +372,7 @@
             [self _serviceCreateTopicWithParams:@{@"user_id":userId}];
         };
         
+        
         FLYUploadToS3ErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {
             self.postButton.userInteractionEnabled = YES;
             self.navigationItem.rightBarButtonItem.enabled = YES;
@@ -375,20 +380,6 @@
             [Dialog simpleToast:LOC(@"FLYGenericError")];
         };
         [FLYMediaService getSignedUrlAndUploadWithSuccessBlock:successBlock errorBlock:errorBlock];
-    }
-}
-
-- (void)_setDefaultSelectedIndex:(FLYGroup *)defaultGroup
-{
-    NSInteger defaultRow;
-    for (int i = 0; i < [self.groups count]; i++) {
-        FLYGroup *groupInList = self.groups[i];
-        if ([groupInList.groupId isEqualToString:defaultGroup.groupId]) {
-            defaultRow = i;
-            self.selectedIndex = [NSIndexPath indexPathForRow:i inSection:0];
-            self.selectedGroup = defaultGroup;
-            return;
-        }
     }
 }
 
