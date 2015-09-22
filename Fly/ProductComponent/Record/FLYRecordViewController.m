@@ -479,7 +479,7 @@
     self.recordBottomBar = [FLYRecordBottomBar new];
     [self.view addSubview:self.recordBottomBar];
     
-    if ([self _isVoiceFilterSupported] && iOSVersionGreaterThanOrEqualTo(@"8") && !self.filterView) {
+    if ([self _isVoiceFilterSupported] && (iOSVersionGreaterThanOrEqualTo(@"8") && NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_8_3) && !self.filterView) {
         [self.filterView removeFromSuperview];
         self.filterView = nil;
         self.filterView = [FLYVoiceEffectView new];

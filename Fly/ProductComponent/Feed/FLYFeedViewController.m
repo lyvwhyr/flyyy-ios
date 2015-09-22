@@ -159,7 +159,7 @@
     // load feed onboarding view
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL hasSeenFeedOnboarding = [[defaults objectForKey:kFeedOnboardingKey] boolValue];
-    if (!hasSeenFeedOnboarding) {
+    if (!hasSeenFeedOnboarding && NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1) {
         _checkOnboardingCellLoadedTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(_checkCellAvailability) userInfo:nil repeats:YES];
     }
     
@@ -290,6 +290,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    if (![self isFullScreen]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kShowRecordIconNotification object:self];
+    }
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL hasShownPNDialog = [defaults boolForKey:kHasShownEnablePushNotificationDialog];
@@ -646,9 +650,8 @@
     }
     if (tappedTag) {
         FLYGroupViewController *vc = [[FLYGroupViewController alloc] initWithGroup:tappedTag];
-        vc.isFullScreen = [self isFullScreen];
+        vc.isFullScreen = NO;
         [self.flyNavigationController pushViewController:vc animated:YES];
- 
     }
 }
 

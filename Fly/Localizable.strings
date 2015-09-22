@@ -5,6 +5,7 @@
 "FLYPrePostGroupEmpty" = "Please choose a group.";
 "FLYTapToStartRecordingLabelText" = "Tap to start recording";
 "FLYTapWhenDoneLabelText" = "Tap when you are done";
+"FLYPostMustMinLength" = "Topic title must be at least %ld characters long";
 
 // recording
 "FLYAdjustPitchLow" = "Low";

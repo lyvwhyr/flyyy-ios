@@ -33,6 +33,7 @@
 #import "FLYTagsManager.h"
 #import "FLYTagsService.h"
 #import "FLYBarButtonItem.h"
+#import "NSDictionary+FLYAddition.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -338,8 +339,10 @@
     [[Mixpanel sharedInstance]  track:@"recording_flow" properties:properties];
     
     NSString *defaultStr = LOC(@"FLYPrePostDefaultText");
-    if (self.topicTitle.length == 0 || [self.topicTitle isEqualToString:defaultStr]) {
-        [Dialog simpleToast:LOC(@"FLYPrePostDefaultText")];
+    
+    NSInteger minimalLen = [[FLYAppStateManager sharedInstance].configs fly_integerForKey:@"minimalPostTitleLen" defaultValue:kMinimalPostTitleLen];
+    if ((self.topicTitle.length < minimalLen) || [self.topicTitle isEqualToString:defaultStr]) {
+        [Dialog simpleToast:[NSString stringWithFormat:LOC(@"FLYPostMustMinLength"), minimalLen]];
         return;
     }
     

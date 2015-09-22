@@ -16,6 +16,7 @@
 #define kDefaultMaxRecordingLen 60
 #define kActivityPaginationCount 50
 #define kGetGlobalTagsPaginationCount 15
+#define kMinimalPostTitleLen 8
 
 #define kMainScreenWidth      CGRectGetWidth([UIScreen mainScreen].bounds)
 #define kMainScreenHeight     CGRectGetHeight([UIScreen mainScreen].bounds)
