@@ -44,7 +44,7 @@
     self.followedTags = [NSMutableArray new];
     self.groups = [NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList];
     
-    self.title = @"Follow tags";
+    self.title = @"Follow Tags";
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.topBgImage = [UIImageView new];

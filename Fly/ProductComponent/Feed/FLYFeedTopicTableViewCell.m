@@ -295,7 +295,7 @@
     
     // add hashTags
     for (FLYGroup *tag in self.topic.tags) {
-        NSRange range = [self.topicTitleLabel.text rangeOfString:[NSString stringWithFormat:@"#%@",tag.groupName] options:NSBackwardsSearch];
+        NSRange range = [[self.topicTitleLabel.text lowercaseString] rangeOfString:[NSString stringWithFormat:@"#%@", [tag.groupName lowercaseString]] options:NSBackwardsSearch];
         if (range.location != NSNotFound) {
             [self.topicTitleLabel addLinkToURL:[NSURL URLWithString:tag.groupId] withRange:range];
         }
