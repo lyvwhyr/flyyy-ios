@@ -22,6 +22,7 @@
 {
     if (self = [super init]) {
         [super setTopicService:[FLYTopicService myTopics]];
+        self.feedType = FLYFeedTypeMyPosts;
     }
     return self;
 }

@@ -324,7 +324,7 @@
         make.bottom.equalTo(self.view);
     }];
     
-    if (self.feedType == FLYFeedTypeGroup || (self.feedType == FLYFeedTypeMine && NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)) {
+    if (self.feedType == FLYFeedTypeGroup || self.feedType == FLYFeedTypeMyPosts || (self.feedType == FLYFeedTypeMine && NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1)) {
         [_feedTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight);
             make.leading.equalTo(self.view);
@@ -401,8 +401,8 @@
     [topicCell setupTopic:_posts[indexPath.row] needUpdateConstraints:needUpdateConstraints];
     topicCell.selectionStyle = UITableViewCellSelectionStyleNone;
     topicCell.delegate = self;
-    [topicCell setNeedsUpdateConstraints];
-    [cell updateConstraints];
+//    [topicCell setNeedsUpdateConstraints];
+//    [cell updateConstraints];
     return topicCell;
 }
 
