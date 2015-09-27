@@ -73,6 +73,7 @@
         [_playButton addTarget:self action:@selector(_playButtonTapped) forControlEvents:UIControlEventTouchUpInside];
         _playButton.touchAreaInsets = UIEdgeInsetsMake(15, kPlayButtonLeftPadding, 15, 15);
         [self.contentView addSubview:_playButton];
+        [_playButton sizeToFit];
         
         _bodyLabel = [UILabel new];
         _bodyLabel.numberOfLines = 0;
@@ -219,6 +220,8 @@
         [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self);
             make.leading.equalTo(self).offset(kPlayButtonLeftPadding);
+            make.width.equalTo(@(CGRectGetWidth(self.playButton.bounds)));
+            make.height.equalTo(@(CGRectGetHeight(self.playButton.bounds)));
         }];
         
         [self.likeButton mas_makeConstraints:^(MASConstraintMaker *make) {

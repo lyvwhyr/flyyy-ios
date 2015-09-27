@@ -401,8 +401,8 @@
     [topicCell setupTopic:_posts[indexPath.row] needUpdateConstraints:needUpdateConstraints];
     topicCell.selectionStyle = UITableViewCellSelectionStyleNone;
     topicCell.delegate = self;
-//    [topicCell setNeedsUpdateConstraints];
-//    [cell updateConstraints];
+    [topicCell setNeedsUpdateConstraints];
+    [cell updateConstraints];
     return topicCell;
 }
 
