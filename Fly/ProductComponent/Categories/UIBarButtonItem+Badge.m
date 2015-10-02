@@ -124,6 +124,7 @@ NSString const *UIBarButtonItem_badgeValueKey = @"UIBarButtonItem_badgeValueKey"
     
     // Animate the size modification if needed
     NSTimeInterval duration = animated ? 0.2 : 0;
+    self.badge.layer.masksToBounds = YES;
     [UIView animateWithDuration:duration animations:^{
         [self updateBadgeFrame];
     }];
