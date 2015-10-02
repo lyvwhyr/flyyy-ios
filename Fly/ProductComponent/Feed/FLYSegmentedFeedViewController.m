@@ -81,14 +81,16 @@
                                                                   }
                                                               }
                                                             iconSeparation:0];
+    
+    UIFont *font = [UIFont flyFontWithSize:14];
     self.segmentedControl.layer.cornerRadius = 4;
     self.segmentedControl.color = [UIColor clearColor];
     self.segmentedControl.borderWidth=.5;
     self.segmentedControl.borderColor = [UIColor whiteColor];
     self.segmentedControl.selectedColor=  [UIColor whiteColor];
-    self.segmentedControl.textAttributes=@{NSFontAttributeName:[UIFont flyFontWithSize:16],
+    self.segmentedControl.textAttributes=@{NSFontAttributeName:font,
                                            NSForegroundColorAttributeName:[UIColor whiteColor]};
-    self.segmentedControl.selectedTextAttributes=@{NSFontAttributeName:[UIFont flyFontWithSize:16],
+    self.segmentedControl.selectedTextAttributes=@{NSFontAttributeName:font,
                                                    NSForegroundColorAttributeName:[UIColor flyBlue]};
     self.navigationItem.titleView = self.segmentedControl;
 }

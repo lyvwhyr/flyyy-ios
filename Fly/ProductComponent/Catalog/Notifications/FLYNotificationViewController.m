@@ -120,7 +120,7 @@
 - (void)_addViewConstraints
 {
     [self.markAllReadContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(11);
+        make.top.equalTo(self.view).offset(5);
         make.leading.equalTo(self.view);
         make.height.equalTo(@(37));
         make.trailing.equalTo(self.view);

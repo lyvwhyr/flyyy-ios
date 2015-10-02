@@ -88,7 +88,7 @@
 "FLYSignupPasswordLengthError" = "Password must be at least 6 characters";
 "FLYSignupUserNameAlreadyExist" = "User name already exists";
 "FLYSignupPhoneNumberAlreadyExist" = "The phone number is already registered by another user";
-"FLYSignupFollowAtLeastThreeTags" = "Please follow at least 3 tags";
+"FLYSignupFollowAtLeastThreeTags" = "Please follow at least 4 tags";
 
 //Recording
 "FLYRecordingVoiceEffect" = "Adjust pitch";
@@ -190,6 +190,10 @@
 "FLYSuggestATag" = "Suggest a tag";
 "FLYEnterTagNamePopupHintText" = "Enter a tag name";
 
+// tag page
+"FLYFollowTagToastTest" = "You'll now see posts from %@ in your home feed";
+"FLUnYFollowTagToastTest" = "You won't see posts from %@ in your home feed anymore";
+
 // suspend
 "FLYAccountSuspendedMessage" = "Your account has been suspended because you have either violated Flyy's Terms of Service or broken our community rules. If you feel that your account has been wrongly suspended, please contact us at support@flyyapp.com";
 
@@ -231,8 +235,8 @@
 
 "FLYNeedLogin" = "Please login first";
 
-"FLYTagListGlobalTab" = "global";
-"FLYTagListMineTab" = "mine";
+"FLYTagListGlobalTab" = "Global";
+"FLYTagListMineTab" = "Mine";
 "FLYTagListSearchAtLeastTwoChars" = "Type at least 1 character to start your search";
 
 "FLYNotLoggedInFollowTitle" = "Hi!";

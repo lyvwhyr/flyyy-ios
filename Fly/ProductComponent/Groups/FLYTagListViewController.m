@@ -43,7 +43,7 @@
     [self.view bringSubviewToFront:self.globalVC.view];
     
     @weakify(self);
-    self.segmentedControl = [[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 150, 28)
+    self.segmentedControl = [[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 140, 28)
                                                                      items:@[[[PPiFlatSegmentItem alloc] initWithTitle:LOC(@"FLYTagListGlobalTab") andIcon:nil], [[PPiFlatSegmentItem alloc] initWithTitle:LOC(@"FLYTagListMineTab") andIcon:nil]]
                                                               iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
                                                                   @strongify(self)
@@ -60,14 +60,15 @@
                                                                   }
                                                               }
                                                             iconSeparation:0];
+    UIFont *font = [UIFont flyFontWithSize:14];
     self.segmentedControl.layer.cornerRadius = 4;
     self.segmentedControl.color = [UIColor clearColor];
     self.segmentedControl.borderWidth=.5;
     self.segmentedControl.borderColor = [UIColor whiteColor];
     self.segmentedControl.selectedColor=  [UIColor whiteColor];
-    self.segmentedControl.textAttributes=@{NSFontAttributeName:[UIFont flyFontWithSize:16],
+    self.segmentedControl.textAttributes=@{NSFontAttributeName:font,
                                            NSForegroundColorAttributeName:[UIColor whiteColor]};
-    self.segmentedControl.selectedTextAttributes=@{NSFontAttributeName:[UIFont flyFontWithSize:16],
+    self.segmentedControl.selectedTextAttributes=@{NSFontAttributeName:font,
                                                    NSForegroundColorAttributeName:[UIColor flyBlue]};
     self.navigationItem.titleView = self.segmentedControl;
 }

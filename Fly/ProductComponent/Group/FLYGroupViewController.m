@@ -20,6 +20,7 @@
 #import "FLYTagsManager.h"
 #import "FLYShareTagView.h"
 #import "FLYShareManager.h"
+#import "Dialog.h"
 
 @interface FLYGroupViewController ()
 @property (nonatomic) UILabel *groupTitleLabel;
@@ -96,10 +97,11 @@
                 return;
             }
             JGProgressHUD *HUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+            HUD.userInteractionEnabled = NO;
             HUD.textLabel.text = @"Joined";
             HUD.indicatorView = [[JGProgressHUDSuccessIndicatorView alloc] init];
             [HUD showInView:self.view];
-            [HUD dismissAfterDelay:2.0];
+            [HUD dismissAfterDelay:1.0];
 
             [[FLYTagsManager sharedInstance] updateCurrentUserTags:[NSMutableArray arrayWithObject:self.group]];
             [FLYTagsService followTagWithId:self.group.groupId followed:NO successBlock:nil errorBlock:nil];
@@ -113,6 +115,9 @@
             if ([FLYUtilities isInvalidUser]) {
                 return;
             }
+            
+            [Dialog simpleToast:@"Left"];
+            
             [[FLYTagsManager sharedInstance] unFollowTag:self.group];
             [FLYTagsService followTagWithId:self.group.groupId followed:YES successBlock:nil errorBlock:nil];
             [self loadRightBarButton];
