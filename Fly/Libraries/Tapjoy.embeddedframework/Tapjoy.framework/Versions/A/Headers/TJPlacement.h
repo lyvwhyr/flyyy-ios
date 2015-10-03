@@ -18,74 +18,34 @@ typedef enum TJCActionRequestTypeEnum {
 } TJCActionRequestType;
 
 
-//TODO - check if these comments are valid and or can be added in here - thought it was moved to own components
 /**
- A request for an app to take an action, triggered by TJplacement content.
- 
- Your app should perform an action based on the value of the request type property:
- 
- - `TJActionRequestInAppPurchase`: an in-app purchase request.  Your app should initiate an in-app
- purchase of the product identified by the identifier property.  If the purchase is completed
- successfully, the app should invoke the completed method; otherwise, it must invoke the
- cancelled method.
- - `TJActionRequestVirtualGood`: a virtual good award request.  Your app should award the user the
- item specified by the identifier with the amount specified by quantity.  If the virtual good
- was successfully rewarded, the app should invoke the completed method; otherwise, it must invoke the
- cancelled method
- - `TJActionRequestCurrency`: a currency change notification.  The user has been awarded the currency
- specified with identifier, with the amount specified by quantity.  The app should invoke the completed
- method once the request is handled.
- - `TJActionRequestNavigation`: an in-app navigation request.  Your app should attempt to navigate
- to the location specified by the identifier.  If the identifier is recognized and the app navigates
- successfully, the app should invoke the completed method; otherwise, it must invoke the
- cancelled method.
- 
- The "identifiers" provided by the request here are the identifiers that you configure in the Tapjoy
- dashboard when creating content.  So, for example, you will only receive TJActionRequest VirtualGood
- requests with identifiers that you have configured yourself.  As such, you should carefully consider
- in advance what kinds of virtual good and navigation locations your app should support.  By implementing
- as many possible options upfront, your app will be more flexible and be able to make the best use
- of Tapjoy's publisher messaging.
- 
- Your app *must* call either completed or cancelled to complete the lifecycle of the request, otherwise
- the content may fail to dismiss and yield control back to your app.
+ A request for an app to take an action, triggered by TJPlacement content.
+
  */
 @interface TJActionRequest : NSObject
 
 /**
  * The type of the request
- *
- * This request type indicates the action that your app should take.  The value is one of
- * `TJActionRequestInAppPurchase`, `TJActionRequestVirtualGood`, `TJActionRequestCurrency`  or  `TJActionRequestNavigation`.
- * Your app should take action according to the request type as described in the class documentation above.
  */
 @property (nonatomic,assign) TJCActionRequestType type;
 
 /**
  * Called by your app to indicate that the request was processed successfully.
- *
- * Should be called when the placement request is completed successfully.  In the case of
- * `TJActionRequestInAppPurchase`, this indicates specifically that the user successfully
- * completed the purchase.
  */
 - (void)completed;
 
 /**
- * Called by your app to indicate that the request was not processed successfully.
- *
- * Should be called when the placement request is cancelled or otherwise not successfully completed.
+ * Called by your app to indicate that the request was cancelled or otherwise not successfully completed.
  */
 - (void)cancelled;
 
 @property (nonatomic, copy) id callback;
 
-//TODO - more description
 /**
  * The identifier associated with the request.
  */
 @property (nonatomic, copy) NSString* requestId;
 
-//TODO - more description
 /**
  * The identifier associated with the request.
  */
@@ -100,24 +60,14 @@ typedef enum TJCActionRequestTypeEnum {
  
   The methods to prepare are:
  
-  - sendPlacementComplete:withContent: Called when an placement is sent successfully
-  - sendPlacementFail:error: Called when an error occurs while sending the placement
-  - contentIsReady:Called when content for an placement is successfully cached
+  - requestDidSucceed: Called when a placement request is sent successfully
+  - requestDidFail:error: Called when an error occurs while sending the placement request
+  - contentIsReady:Called when content for a placement is loaded and ready to display
   - contentDidAppear: Called when placement content did appear
   - contentDidDisappear: Called when placement content did disappear
-  - placement:didRequestAction: Called when an action occurs, such as in-app purchases, and currency or virtual goods rewards
- 
-  As a result of executing the send method, one of these delegate callbacks will be invoked, and the application should act accordingly, presenting any content that is returned. For example:
- 
-    -(void) sendPlacementComplete: (TJPlacement*)placement withContent:(BOOL)contentIsAvailable
-    {
-        if(contentIsAvailable){
-            [placement presentContentWithViewController:self];
-        }
-        else{
-            NSLog(@"No content is available");
-        }
-    }
+  - placement:didRequestPurchase:productId: Called when the user has successfully completed a purchase request
+  - placement:didRequestReward:itemId:quantity:(int)quantity: Called when the user successfully requests a reward
+
  */
 @protocol TJPlacementDelegate <NSObject>
 
@@ -125,10 +75,10 @@ typedef enum TJCActionRequestTypeEnum {
 
 /**
  * Callback issued by TJ to publisher to state that placement request is successful
- * @param TJPlacement that was successful
+ * @param TJPlacement that was sent
  * @return n/a
  */
-- (void)requestDidSucceed:(TJPlacement*)placement;                                          //Unified
+- (void)requestDidSucceed:(TJPlacement*)placement;
 
 /**
  * Called when an error occurs while sending the placement
@@ -136,7 +86,7 @@ typedef enum TJCActionRequestTypeEnum {
  * @error error code
  * @return n/a
  */
-- (void)requestDidFail:(TJPlacement*)placement error:(NSError*)error;                       //Unified
+- (void)requestDidFail:(TJPlacement*)placement error:(NSError*)error;
 
 /**
  * Called when content for an placement is successfully cached
@@ -149,14 +99,14 @@ typedef enum TJCActionRequestTypeEnum {
  * @param placement The TJPlacement that was sent
  * @return n/a
  */
-- (void)contentDidAppear:(TJPlacement*)placement;                                           //Unified
+- (void)contentDidAppear:(TJPlacement*)placement;
 
 /**
  * Called when placement content did disappear
  * @param placement The TJPlacement that was sent
  * @return n/a
  */
-- (void)contentDidDisappear:(TJPlacement*)placement;                                        //Unified
+- (void)contentDidDisappear:(TJPlacement*)placement;
 
 
 /**
@@ -164,7 +114,7 @@ typedef enum TJCActionRequestTypeEnum {
  * @param request - The TJActionRequest object
  * @param productId - the id of the offer that sent the request
  */
-- (void)placement:(TJPlacement*)placement didRequestPurchase:(TJActionRequest*)request productId:(NSString*)productId;                        //Unified
+- (void)placement:(TJPlacement*)placement didRequestPurchase:(TJActionRequest*)request productId:(NSString*)productId;
 
 /**
  * Callback issued by TJ to publisher when the user has successfully requests a reward
@@ -174,7 +124,7 @@ typedef enum TJCActionRequestTypeEnum {
  * @param quantity  - The quantity of the reward for the requested itemId
  */
 
-- (void)placement:(TJPlacement*)placement didRequestReward:(TJActionRequest*)request itemId:(NSString*)itemId quantity:(int)quantity;         //Unified
+- (void)placement:(TJPlacement*)placement didRequestReward:(TJActionRequest*)request itemId:(NSString*)itemId quantity:(int)quantity;
 
 
 @end
@@ -190,11 +140,11 @@ typedef enum TJCActionRequestTypeEnum {
  
   1. Create and configure each placement as a TJPlacement
  
-        TJPlacement *placement = [TJPlacement placementWithNAme: @"level_complete" delegate: self];
+        TJPlacement *placement = [TJPlacement placementWithName: @"level_complete" delegate: self];
  
-  2. Send the placement
+  2. Request content
  
-        [placement send];
+        [placement requestContent];
  
   3. Present any content that is returned by the placement callbacks defined in TJPlacementDelegate
  */
@@ -204,14 +154,13 @@ typedef enum TJCActionRequestTypeEnum {
 @property (nonatomic, weak) id<TJPlacementDelegate> delegate;
 
 /** The name of the placement */
-@property (nonatomic, copy) NSString *placementName;                                        //Unified
+@property (nonatomic, copy) NSString *placementName;
 
-/** UNIFIED **/
 /** Whether content has been loaded and is ready to be presented */
-@property (nonatomic, assign, readonly, getter=isContentReady) BOOL contentReady;           //Unified
+@property (nonatomic, assign, readonly, getter=isContentReady) BOOL contentReady;
 
-/** When there is a fill to show - this value returns a true */
-@property (nonatomic, assign, readonly, getter=isContentAvailable) BOOL contentAvailable;   //Unified
+/** Whether content is available for this placement */
+@property (nonatomic, assign, readonly, getter=isContentAvailable) BOOL contentAvailable;
 
 /** The UIViewController to show the content in */
 @property (nonatomic, retain) UIViewController* presentationViewController;
@@ -221,26 +170,20 @@ typedef enum TJCActionRequestTypeEnum {
  * @param placementName The name of the placement
  * @param delegate The class that implements the TJPlacementDelegate protocol
  */
-+ (id)placementWithName:(NSString*)placementName delegate:(id<TJPlacementDelegate>)delegate;    //Unified
++ (id)placementWithName:(NSString*)placementName delegate:(id<TJPlacementDelegate>)delegate;
 
 /**
- * Sends the placement to the server
+ * Sends the placement request to the server
  *
  * @return n/a
  */
-- (void)requestContent;                                                                     //Unified
+- (void)requestContent;
 
 /**
  * Shows the content that was received from the server after sending this placement
  * @param viewController The ViewController to show the content in
  * @return n/a
  */
-- (void)showContentWithViewController:(UIViewController*)viewController;                    //Unified
-
-
-/**
- * Newer api's being added
- */
-
+- (void)showContentWithViewController:(UIViewController*)viewController;
 
 @end

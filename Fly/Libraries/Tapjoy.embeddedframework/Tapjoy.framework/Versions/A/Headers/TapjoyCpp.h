@@ -195,6 +195,46 @@ namespace tapjoy {
      */
     static void trackPurchase(const char* productId, const char* currencyCode, double price, const char* campaignId);
 
+#if defined(ANDROID)
+    /**
+     * @brief Tracks a purchase with JSON data from the Google Play store.
+     *        Also performs In-app Billing validation if purchaseData and dataSignature are given.
+     *
+     * @param skuDetails
+     *        a String in JSON Object format that contains product item
+     *        details (according to <a href=
+     *        "http://developer.android.com/google/play/billing/billing_reference.html#product-details-table"
+     *        >Specification on Google Play</a>)
+     * @param purchaseData
+     *        a String in JSON format that contains details about the purchase order.
+     *        Use null not to use validation.
+     * @param dataSignature
+     *        String containing the signature of the purchase data that the developer signed with their private key.
+     *        Use null not to use validation.
+     * @param campaignId
+     *        the campaign id of the Purchase Action Request if it initiated
+     *        this purchase, can be null
+     */
+    static void trackPurchaseInGooglePlayStore(const char* skuDetails, const char* purchaseData, const char* dataSignature, const char* campaignId);
+#else // iOS
+    /**
+     * @brief Tracks a purchase from the Apple App Store.
+     *
+     * @param productId
+     *        the identifier of product
+     * @param currencyCode
+     *        the currency code of price as an alphabetic currency code specified in ISO 4217, i.e. "USD", "KRW"
+     * @param price
+     *        the price of product
+     * @param transactionId
+     *        the identifier of iap transaction,
+     *        if this is given, we will check receipt validation. (Available in iOS 7.0 and later)
+     * @param campaignId
+     *        the campaign id of the purchase request which initiated this purchase, can be null
+     */
+    static void trackPurchaseInAppleAppStore(const char* productId, const char* currencyCode, double price, const char* transactionId, const char* campaignId);
+#endif
+
     /**
      * @brief Tracks an event of the given name without category
      */

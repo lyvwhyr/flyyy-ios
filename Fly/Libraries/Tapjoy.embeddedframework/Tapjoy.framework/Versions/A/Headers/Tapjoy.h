@@ -186,9 +186,10 @@ typedef void (^currencyCompletion)(NSDictionary *parameters, NSError *error);
  * @param currencyCode the currency code of price as an alphabetic currency code specified in ISO 4217, i.e. "USD", "KRW"
  * @param price the price of product
  * @param campaignId the campaign id of the purchase request which initiated this purchase, can be nil
+ * @param transactionId the identifier of iap transaction, if this is given, we will check receipt validation. (Available in iOS 7.0 and later)
  * @return n/a
  */
-+ (void)trackPurchase:(NSString *)productIdentifier currencyCode:(NSString *)currencyCode price:(double)price campaignId:(NSString *)campaignId;
++ (void)trackPurchase:(NSString *)productIdentifier currencyCode:(NSString *)currencyCode price:(double)price campaignId:(NSString *)campaignId transactionId:(NSString *)transactionId;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // it will be improve/change API in Oct 2014
