@@ -12,6 +12,6 @@ typedef void (^FLYEmptyStateViewActionBlock)(void);
 
 @interface FLYEmptyStateView : UIView
 
-- (instancetype)initWithTitle:(NSString *)title description:(NSString *)description actionBlock:(FLYEmptyStateViewActionBlock)actionBlock;
+- (instancetype)initWithTitle:(NSString *)title description:(NSString *)description buttonText:(NSString *)buttonText actionBlock:(FLYEmptyStateViewActionBlock)actionBlock;
 
 @end

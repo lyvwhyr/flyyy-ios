@@ -103,8 +103,12 @@
             [HUD showInView:self.view];
             [HUD dismissAfterDelay:1.0];
 
-            [[FLYTagsManager sharedInstance] updateCurrentUserTags:[NSMutableArray arrayWithObject:self.group]];
-            [FLYTagsService followTagWithId:self.group.groupId followed:NO successBlock:nil errorBlock:nil];
+            FLYFollowTagSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj)
+            {
+                [[FLYTagsManager sharedInstance] updateCurrentUserTags:[NSMutableArray arrayWithObject:self.group]];
+            };
+            
+            [FLYTagsService followTagWithId:self.group.groupId followed:NO successBlock:successBlock errorBlock:nil];
             [self loadRightBarButton];
         };
         self.navigationItem.rightBarButtonItem = barItem;
@@ -118,8 +122,13 @@
             
             [Dialog simpleToast:@"Left"];
             
-            [[FLYTagsManager sharedInstance] unFollowTag:self.group];
-            [FLYTagsService followTagWithId:self.group.groupId followed:YES successBlock:nil errorBlock:nil];
+            
+            FLYFollowTagSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj)
+            {
+                [[FLYTagsManager sharedInstance] unFollowTag:self.group];
+            };
+            
+            [FLYTagsService followTagWithId:self.group.groupId followed:YES successBlock:successBlock errorBlock:nil];
             [self loadRightBarButton];
         };
         self.navigationItem.rightBarButtonItem = barItem;

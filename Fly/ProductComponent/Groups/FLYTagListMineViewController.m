@@ -43,7 +43,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:kRequireSignupNotification object:self];
         };
         
-        FLYEmptyStateView *notLoggedInView = [[FLYEmptyStateView alloc] initWithTitle:LOC(@"FLYNotLoggedInFollowTitle") description:LOC(@"FLYNotLoggedInFollowDescription") actionBlock:actionBlock];
+        FLYEmptyStateView *notLoggedInView = [[FLYEmptyStateView alloc] initWithTitle:LOC(@"FLYNotLoggedInFollowTitle") description:LOC(@"FLYNotLoggedInFollowDescription") buttonText:nil actionBlock:actionBlock];
         self.containerView = notLoggedInView;
         self.rootViewController.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     }

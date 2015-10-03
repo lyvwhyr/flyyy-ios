@@ -54,6 +54,7 @@
 @property (nonatomic) UIView *backgroundView;
 @property (nonatomic) UITableView *feedTableView;
 @property (nonatomic) FLYEmptyStateView *notLoggedInView;
+@property (nonatomic) FLYEmptyStateView *noFollowingTagsView;
 
 //used for pagination load more
 @property (nonatomic) NSString *beforeTimestamp;
@@ -98,6 +99,10 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(_successfulLogin:)
                                                      name:kSuccessfulLoginNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_mineTagsUpdated:)
+                                                     name:kNotificationMyTagsUpdated object:nil];
         
         _loadMoreCount = 0;
         _feedType = FLYFeedTypeHome;
@@ -144,8 +149,17 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:kRequireSignupNotification object:self];
         };
         
-        self.notLoggedInView = [[FLYEmptyStateView alloc] initWithTitle:LOC(@"FLYNotLoggedInFollowTitle") description:LOC(@"FLYNotLoggedInFollowDescription") actionBlock:actionBlock];
+        self.notLoggedInView = [[FLYEmptyStateView alloc] initWithTitle:LOC(@"FLYNotLoggedInFollowTitle") description:LOC(@"FLYNotLoggedInFollowDescription") buttonText:nil actionBlock:actionBlock];
         [self.view addSubview:self.notLoggedInView];
+        self.rootViewController.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
+    } else if ([self _mineHasNoFollowedTags]) {
+        FLYEmptyStateViewActionBlock actionBlock = ^(void) {
+            FLYMainViewController *mainVC = (FLYMainViewController *)self.parentViewController.parentViewController.parentViewController;
+            [mainVC setTabIndex:TABBAR_GROUP];
+        };
+        
+        self.noFollowingTagsView = [[FLYEmptyStateView alloc] initWithTitle:LOC(@"FLYNoFollowingTagsTitle") description:LOC(@"FLYNoFollowingTagsDescription") buttonText:LOC(@"FLYNoFollowingTagsButtonText") actionBlock:actionBlock];
+        [self.view addSubview:self.noFollowingTagsView];
         self.rootViewController.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     }
     
@@ -353,12 +367,29 @@
         }];
     }
     
+    if ([self _mineHasNoFollowedTags]) {
+        [self.noFollowingTagsView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(kStatusBarHeight + kNavBarHeight - 1);
+            make.leading.equalTo(self.view);
+            make.trailing.equalTo(self.view);
+            make.bottom.equalTo(self.view);
+        }];
+    }
+    
     [super updateViewConstraints];
 }
 
 - (BOOL)_showNotLoggedInView
 {
     if (![FLYAppStateManager sharedInstance].currentUser && self.feedType == FLYFeedTypeMine) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL)_mineHasNoFollowedTags
+{
+    if ([[FLYAppStateManager sharedInstance].currentUser.tags count] == 0 && self.feedType == FLYFeedTypeMine) {
         return YES;
     }
     return NO;
@@ -601,13 +632,28 @@
 
 - (void)_successfulLogin:(NSNotification *)notification
 {
-    [self.notLoggedInView removeFromSuperview];
-    self.notLoggedInView = nil;
-    
-    [self _initService];
-    
-    [self.view setNeedsUpdateConstraints];
-    [self.view updateConstraintsIfNeeded];
+    if (self.notLoggedInView && self.feedType == FLYFeedTypeMine) {
+        [self.notLoggedInView removeFromSuperview];
+        self.notLoggedInView = nil;
+        
+        [self _initService];
+        
+        [self.view setNeedsUpdateConstraints];
+        [self.view updateConstraintsIfNeeded];
+    }
+}
+
+- (void)_mineTagsUpdated:(NSNotification *)notification
+{
+    if ([FLYAppStateManager sharedInstance].currentUser.tags.count > 0 && self.feedType == FLYFeedTypeMine) {
+        if (self.noFollowingTagsView) {
+            [self.noFollowingTagsView removeFromSuperview];
+            self.noFollowingTagsView = nil;
+        }
+        [self _initService];
+        [self.view setNeedsUpdateConstraints];
+        [self.view updateConstraintsIfNeeded];
+    }
 }
 
 - (void)_scrollToTop

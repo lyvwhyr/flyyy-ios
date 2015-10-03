@@ -28,7 +28,7 @@
 
 @implementation FLYEmptyStateView
 
-- (instancetype)initWithTitle:(NSString *)title description:(NSString *)description actionBlock:(FLYEmptyStateViewActionBlock)actionBlock
+- (instancetype)initWithTitle:(NSString *)title description:(NSString *)description buttonText:(NSString *)buttonText actionBlock:(FLYEmptyStateViewActionBlock)actionBlock
 {
     if (self = [super init]) {
         _actionBlock = [actionBlock copy];
@@ -65,7 +65,11 @@
         _ctaButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _ctaButton.translatesAutoresizingMaskIntoConstraints = NO;
         _ctaButton.layer.cornerRadius = 4.0f;
-        [_ctaButton setTitle:@"Join Flyy" forState:UIControlStateNormal];
+        if (!buttonText) {
+            [_ctaButton setTitle:@"Join Flyy" forState:UIControlStateNormal];
+        } else {
+            [_ctaButton setTitle:buttonText forState:UIControlStateNormal];
+        }
         [_ctaButton setTitleColor:[FLYUtilities colorWithHexString:@"#9EC5D8"] forState:UIControlStateNormal];
         _ctaButton.backgroundColor = [UIColor whiteColor];
         _ctaButton.titleLabel.font = [UIFont flyFontWithSize:21];
