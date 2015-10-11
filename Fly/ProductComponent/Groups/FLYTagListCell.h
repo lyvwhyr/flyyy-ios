@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FLYGroup.h"
 
 @interface FLYTagListCell : UITableViewCell
 
-@property (nonatomic, copy) NSString *groupName;
+@property (nonatomic) FLYGroup *group;
 
 @property (nonatomic) UILabel *groupNameLabel;
 @property (nonatomic) UIButton *checkButton;

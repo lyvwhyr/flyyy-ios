@@ -187,7 +187,7 @@
     
     FLYTagListCell *chooseGroupCell = (FLYTagListCell *)cell;
     FLYGroup *group = [_groups objectAtIndex:(indexPath.row)];
-    chooseGroupCell.groupName = group.groupName;
+    chooseGroupCell.group = group;
     cell = chooseGroupCell;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
@@ -262,6 +262,8 @@
 {
     if (self.tagListType == FLYTagListTypeMine) {
         self.groups = [FLYAppStateManager sharedInstance].currentUser.tags;
+        [self.groupsTabelView reloadData];
+    } else {
         [self.groupsTabelView reloadData];
     }
 }

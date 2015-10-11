@@ -8,6 +8,15 @@
 
 #import "FLYTagListCell.h"
 #import "UIColor+FLYAddition.h"
+#import "FLYTagsManager.h"
+#import "FLYTagsService.h"
+#import "UIButton+TouchAreaInsets.h"
+
+@interface FLYTagListCell()
+
+@property (nonatomic) BOOL hasJoinedGroup;
+
+@end
 
 @implementation FLYTagListCell
 
@@ -27,15 +36,15 @@
         
         _checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _checkButton.translatesAutoresizingMaskIntoConstraints = NO;
-        _checkButton.userInteractionEnabled = NO;
-        [_checkButton setImage:[UIImage imageNamed:@"icon_right_arrow"] forState:UIControlStateNormal];
-        [_checkButton setImage:[UIImage imageNamed:@"icon_right_arrow"] forState:UIControlStateHighlighted];
-        [_checkButton setImage:[UIImage imageNamed:@"icon_right_arrow"] forState:UIControlStateSelected];
+        [_checkButton setImage:[UIImage imageNamed:@"icon_join_group_grey_border"] forState:UIControlStateNormal];
+        [_checkButton addTarget:self action:@selector(_actionButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        _checkButton.touchAreaInsets = UIEdgeInsetsMake(3, 5, 3, 5);
         [_checkButton sizeToFit];
         [self addSubview:_checkButton];
         
         _separator = [UIView new];
         _separator.backgroundColor = [UIColor flyGrey];
+        _separator.alpha = 0.5f;
         _separator.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:_separator];
         
@@ -44,18 +53,17 @@
     return self;
 }
 
-- (void)selectCell
+- (void)setGroup:(FLYGroup *)group
 {
-    _checkButton.selected = !_checkButton.selected;
-}
-
-- (void)setGroupName:(NSString *)groupName
-{
-    if (self.isFirst) {
-        self.groupNameLabel.text = groupName;
+    _group = group;
+    self.hasJoinedGroup = [[FLYTagsManager sharedInstance] alreadyFollowedTag:group];
+    if (self.hasJoinedGroup) {
+        [_checkButton setImage:[UIImage imageNamed:@"icon_leave_group"] forState:UIControlStateNormal];
     } else {
-        self.groupNameLabel.text = [NSString stringWithFormat:@"#%@", groupName];
+        [_checkButton setImage:[UIImage imageNamed:@"icon_join_group_grey_border"] forState:UIControlStateNormal];
     }
+    
+    self.groupNameLabel.text = [NSString stringWithFormat:@"#%@", group.groupName];
 }
 
 - (void)updateConstraints
@@ -74,11 +82,34 @@
     [self.separator mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_bottom);
         make.leading.equalTo(self).offset(kLeftPadding);
-        make.trailing.equalTo(self).offset(-kSeparatorRightPadding);
+        make.trailing.equalTo(self.checkButton.mas_trailing);
         make.height.equalTo(@(height));
     }];
     
     [super updateConstraints];
+}
+
+- (void)_actionButtonTapped
+{
+    if (self.hasJoinedGroup) {
+        [self.checkButton setImage:[UIImage imageNamed:@"icon_join_group_grey_border"] forState:UIControlStateNormal];
+        FLYFollowTagSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj)
+        {
+            [[FLYTagsManager sharedInstance] unFollowTag:self.group];
+            self.hasJoinedGroup = NO;
+        };
+        
+        [FLYTagsService followTagWithId:self.group.groupId followed:YES successBlock:successBlock errorBlock:nil];
+    } else {
+        [self.checkButton setImage:[UIImage imageNamed:@"icon_leave_group"] forState:UIControlStateNormal];
+        FLYFollowTagSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj)
+        {
+            self.hasJoinedGroup = YES;
+            [[FLYTagsManager sharedInstance] updateCurrentUserTags:[NSMutableArray arrayWithObject:self.group]];
+        };
+        
+        [FLYTagsService followTagWithId:self.group.groupId followed:NO successBlock:successBlock errorBlock:nil];
+    }
 }
 
 @end

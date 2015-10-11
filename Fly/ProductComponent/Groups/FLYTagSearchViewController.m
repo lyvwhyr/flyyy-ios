@@ -84,7 +84,7 @@
         cell = [[FLYTagListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     FLYGroup *tag = [self.tags objectAtIndex:(indexPath.row)];
-    cell.groupName = tag.groupName;
+    cell.group = tag;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.backgroundColor = [UIColor clearColor];
     return cell;
