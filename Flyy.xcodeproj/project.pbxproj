@@ -266,6 +266,8 @@
 		A693AA9D1B5F3A6900517402 /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A693AA9C1B5F3A6900517402 /* JSBadgeView.m */; };
 		A693AAA21B5F3CBA00517402 /* UIBarButtonItem+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = A693AA9F1B5F3CBA00517402 /* UIBarButtonItem+Badge.m */; };
 		A693AAA31B5F3CBA00517402 /* UIButton+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = A693AAA11B5F3CBA00517402 /* UIButton+Badge.m */; };
+		A69437891BCB44F90063A817 /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A69437871BCB44F90063A817 /* TapjoyResources.bundle */; settings = {ASSET_TAGS = (); }; };
+		A694378A1BCB44F90063A817 /* Tapjoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A69437881BCB44F90063A817 /* Tapjoy.framework */; settings = {ASSET_TAGS = (); }; };
 		A6949B6E1B3781AA008C2529 /* FLYNavigationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6949B6D1B3781AA008C2529 /* FLYNavigationManager.m */; };
 		A695F31B1BA6317700371B63 /* FLYSignupFollowTagsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A695F31A1BA6317700371B63 /* FLYSignupFollowTagsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A698F51E1B577A3A00953B4D /* SDWTwitterLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A698F51D1B577A3A00953B4D /* SDWTwitterLabel.m */; };
@@ -922,6 +924,8 @@
 		A693AA9F1B5F3CBA00517402 /* UIBarButtonItem+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Badge.m"; sourceTree = "<group>"; };
 		A693AAA01B5F3CBA00517402 /* UIButton+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Badge.h"; sourceTree = "<group>"; };
 		A693AAA11B5F3CBA00517402 /* UIButton+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Badge.m"; sourceTree = "<group>"; };
+		A69437871BCB44F90063A817 /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
+		A69437881BCB44F90063A817 /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tapjoy.framework; sourceTree = "<group>"; };
 		A6949B6C1B3781AA008C2529 /* FLYNavigationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYNavigationManager.h; sourceTree = "<group>"; };
 		A6949B6D1B3781AA008C2529 /* FLYNavigationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYNavigationManager.m; sourceTree = "<group>"; };
 		A695F3191BA6317700371B63 /* FLYSignupFollowTagsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSignupFollowTagsViewController.h; sourceTree = "<group>"; };
@@ -1295,6 +1299,7 @@
 				A659E4281AD8B99C0089EFB7 /* libZtx_iOS-fat.a in Frameworks */,
 				A6DAF9711B40E3AD004CABEF /* FBSDKShareKit.framework in Frameworks */,
 				A6DAF9771B40E3E2004CABEF /* FBSDKShareKit.framework in Frameworks */,
+				A694378A1BCB44F90063A817 /* Tapjoy.framework in Frameworks */,
 				A6DAF96F1B40E3AC004CABEF /* FBSDKCoreKit.framework in Frameworks */,
 				A6D949EA1A9079AC003D4265 /* Crashlytics.framework in Frameworks */,
 				7D4B72EB34192CBBF4792073 /* libPods.a in Frameworks */,
@@ -1323,6 +1328,7 @@
 		A60489FC1A85E63100C67480 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A69437851BCB44F90063A817 /* Tapjoy.embeddedframework */,
 				A6DAF96B1B40E3A6004CABEF /* Facebook */,
 				A6799C791AABDE14003DAE5B /* ZTX */,
 				A6048AA51A8603EF00C67480 /* AFNetworking */,
@@ -2286,6 +2292,23 @@
 			path = JSBadgeView;
 			sourceTree = "<group>";
 		};
+		A69437851BCB44F90063A817 /* Tapjoy.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				A69437861BCB44F90063A817 /* Resources */,
+				A69437881BCB44F90063A817 /* Tapjoy.framework */,
+			);
+			path = Tapjoy.embeddedframework;
+			sourceTree = "<group>";
+		};
+		A69437861BCB44F90063A817 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A69437871BCB44F90063A817 /* TapjoyResources.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		A698F51B1B577A3000953B4D /* fast-twitter-label */ = {
 			isa = PBXGroup;
 			children = (
@@ -3052,6 +3075,7 @@
 				A669FB5F1ABFD99B00A96D24 /* SVWebViewControllerActivitySafari-iPad.png in Resources */,
 				A6655B551A19DEF000440AAB /* icon_tabbar_home@3x.png in Resources */,
 				A6A0E4131A1DB9480036116E /* icon_navigation_back@3x.png in Resources */,
+				A69437891BCB44F90063A817 /* TapjoyResources.bundle in Resources */,
 				A652D23A1A7F3ADD00765D45 /* icon_inline_share.png in Resources */,
 				A652D2561A7F3ADD00765D45 /* icon_tabbar_group.png in Resources */,
 				A652D2451A7F3ADD00765D45 /* icon_navigation_catalog@2x.png in Resources */,

@@ -91,6 +91,11 @@
 
 - (void)_actionButtonTapped
 {
+    if (![FLYAppStateManager sharedInstance].currentUser) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRequireSignupNotification object:self];
+        return;
+    }
+    
     if (self.hasJoinedGroup) {
         [self.checkButton setImage:[UIImage imageNamed:@"icon_join_group_grey_border"] forState:UIControlStateNormal];
         FLYFollowTagSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj)
