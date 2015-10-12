@@ -140,8 +140,6 @@
 		A648C0F21A19C65B00FF1744 /* FLYTabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A648C0BC1A1956AA00FF1744 /* FLYTabBarView.m */; };
 		A648C0F41A19C7A100FF1744 /* icon_tabbar_voice@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A648C0F31A19C7A100FF1744 /* icon_tabbar_voice@3x.png */; };
 		A648C0F61A19D1FF00FF1744 /* icon_tabbar_voice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A648C0F51A19D1FF00FF1744 /* icon_tabbar_voice@2x.png */; };
-		A6491FC61BC0654A00E9C6D1 /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6491FC41BC0654A00E9C6D1 /* TapjoyResources.bundle */; settings = {ASSET_TAGS = (); }; };
-		A6491FC71BC0654A00E9C6D1 /* Tapjoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6491FC51BC0654A00E9C6D1 /* Tapjoy.framework */; settings = {ASSET_TAGS = (); }; };
 		A64BDAC61A7B518400B46F18 /* FLYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A64BDAC51A7B518400B46F18 /* FLYUser.m */; };
 		A64BDAC91A7B519400B46F18 /* FLYGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A64BDAC81A7B519400B46F18 /* FLYGroup.m */; };
 		A64BDACB1A7B647600B46F18 /* FLYURLConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = A64BDACA1A7B647600B46F18 /* FLYURLConstants.h */; };
@@ -741,8 +739,6 @@
 		A648C0F01A19B18B00FF1744 /* UIFont+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FLYAddition.m"; sourceTree = "<group>"; };
 		A648C0F31A19C7A100FF1744 /* icon_tabbar_voice@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_voice@3x.png"; sourceTree = "<group>"; };
 		A648C0F51A19D1FF00FF1744 /* icon_tabbar_voice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tabbar_voice@2x.png"; sourceTree = "<group>"; };
-		A6491FC41BC0654A00E9C6D1 /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
-		A6491FC51BC0654A00E9C6D1 /* Tapjoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Tapjoy.framework; sourceTree = "<group>"; };
 		A64BDAC41A7B518400B46F18 /* FLYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUser.h; sourceTree = "<group>"; };
 		A64BDAC51A7B518400B46F18 /* FLYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUser.m; sourceTree = "<group>"; };
 		A64BDAC71A7B519400B46F18 /* FLYGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroup.h; sourceTree = "<group>"; };
@@ -1299,7 +1295,6 @@
 				A659E4281AD8B99C0089EFB7 /* libZtx_iOS-fat.a in Frameworks */,
 				A6DAF9711B40E3AD004CABEF /* FBSDKShareKit.framework in Frameworks */,
 				A6DAF9771B40E3E2004CABEF /* FBSDKShareKit.framework in Frameworks */,
-				A6491FC71BC0654A00E9C6D1 /* Tapjoy.framework in Frameworks */,
 				A6DAF96F1B40E3AC004CABEF /* FBSDKCoreKit.framework in Frameworks */,
 				A6D949EA1A9079AC003D4265 /* Crashlytics.framework in Frameworks */,
 				7D4B72EB34192CBBF4792073 /* libPods.a in Frameworks */,
@@ -1936,7 +1931,6 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				A6491FC21BC0654A00E9C6D1 /* Tapjoy.embeddedframework */,
 				A6F01BCF1B9CB78300258CC7 /* MJAutoComplete */,
 				A6E1B4991B86475F001B0E04 /* PPiFlatSegmentedControl */,
 				A6E1B44B1B86471B001B0E04 /* FontAwesome+iOS */,
@@ -1995,23 +1989,6 @@
 				A648C0E21A19AD4A00FF1744 /* View+MASShorthandAdditions.h */,
 			);
 			path = Masonry;
-			sourceTree = "<group>";
-		};
-		A6491FC21BC0654A00E9C6D1 /* Tapjoy.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				A6491FC31BC0654A00E9C6D1 /* Resources */,
-				A6491FC51BC0654A00E9C6D1 /* Tapjoy.framework */,
-			);
-			path = Tapjoy.embeddedframework;
-			sourceTree = "<group>";
-		};
-		A6491FC31BC0654A00E9C6D1 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				A6491FC41BC0654A00E9C6D1 /* TapjoyResources.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		A651BD841A4985CB0081A1E0 /* HUD */ = {
@@ -3075,7 +3052,6 @@
 				A669FB5F1ABFD99B00A96D24 /* SVWebViewControllerActivitySafari-iPad.png in Resources */,
 				A6655B551A19DEF000440AAB /* icon_tabbar_home@3x.png in Resources */,
 				A6A0E4131A1DB9480036116E /* icon_navigation_back@3x.png in Resources */,
-				A6491FC61BC0654A00E9C6D1 /* TapjoyResources.bundle in Resources */,
 				A652D23A1A7F3ADD00765D45 /* icon_inline_share.png in Resources */,
 				A652D2561A7F3ADD00765D45 /* icon_tabbar_group.png in Resources */,
 				A652D2451A7F3ADD00765D45 /* icon_navigation_catalog@2x.png in Resources */,
