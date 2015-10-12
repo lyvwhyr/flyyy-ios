@@ -5,7 +5,9 @@
 "FLYPrePostGroupEmpty" = "Please choose a group.";
 "FLYTapToStartRecordingLabelText" = "Tap to start recording";
 "FLYTapWhenDoneLabelText" = "Tap when you are done";
-"FLYPostMustMinLength" = "Topic title must be at least %ld characters long";
+"FLYPostMustMinLength" = "Caption must be at least %ld characters long.";
+"FLYPostMustHaveAgroup" = "Please tag the caption to a group by typing in '#'.";
+"FLYPostDescrptionText" = "Write an interesting caption (at least %ld characters long) and tag it to a group by typing in '#'.";
 
 // recording
 "FLYAdjustPitchLow" = "Low";

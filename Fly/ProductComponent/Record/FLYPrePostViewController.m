@@ -49,9 +49,9 @@
 
 @property (nonatomic) UIImageView *backgroundImageView;
 @property (nonatomic) FLYPrePostHeaderView *headerView;
-@property (nonatomic) UILabel *popularTagLabel;
 @property (nonatomic) FLYPostButtonView *postButton;
 @property (nonatomic) UIView *searchContainerView;
+@property (nonatomic) UILabel *descriptionLabel;
 
 @property (nonatomic) NSArray *groups;
 @property (nonatomic, copy) NSString *topicTitle;
@@ -123,13 +123,22 @@
     self.headerView.delegate = self;
     [self.view addSubview:self.headerView];
     
-    _popularTagLabel = [UILabel new];
-    [_popularTagLabel setFont:[UIFont fontWithName:@"Avenir-Book" size:16]];
-    _popularTagLabel.text = @"Popular Tags:";
-    _popularTagLabel.textColor = [UIColor flyBlue];
-    _popularTagLabel.userInteractionEnabled = NO;
-    _popularTagLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:_popularTagLabel];
+    
+    NSInteger minimalLen = [[FLYAppStateManager sharedInstance].configs fly_integerForKey:@"minimalPostTitleLen" defaultValue:kMinimalPostTitleLen];
+    NSString *description = [NSString stringWithFormat:LOC(@"FLYPostDescrptionText"), minimalLen];
+    _descriptionLabel = [UILabel new];
+    _descriptionLabel.numberOfLines = 0;
+    _descriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    NSMutableAttributedString *descriptionAttr = [[NSMutableAttributedString alloc] initWithString:description];
+    
+    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    paragraphStyle.lineSpacing = 2;
+    [descriptionAttr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, description.length)];
+    [descriptionAttr addAttributes:@{NSFontAttributeName: [UIFont flyFontWithSize:16]} range:NSMakeRange(0, description.length)];
+    [descriptionAttr addAttributes:@{NSForegroundColorAttributeName: [UIColor flyColorFlyGreyText]} range:NSMakeRange(0, description.length)];
+    _descriptionLabel.attributedText = descriptionAttr;
+    [self.view addSubview:_descriptionLabel];
     
     [self _addObservers];
     
@@ -155,6 +164,11 @@
                                           selector:@selector(keyboardWillShow:)
                                               name:@"UIKeyboardWillShowNotification"
                                             object:nil];
+
+ [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:@"UIKeyboardWillHideNotification"
+                                               object:nil];
 }
 
 - (void)_tagSelected:(UIButton *)target
@@ -177,61 +191,6 @@
         make.height.equalTo(@105);
     }];
     
-    [self.popularTagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.headerView.mas_bottom);
-        make.leading.equalTo(self.headerView);
-        make.trailing.equalTo(self.view);
-    }];
-    
-    // tag buttons
-    UIButton *previousButton;
-    CGFloat currentWidth = 0.0;
-    CGFloat MAX_ROW_WIDTH = CGRectGetWidth(self.view.bounds) - 2 * kLeftPadding;
-    NSMutableArray *buttonsInRow = [NSMutableArray new];
-    for (UIButton *currentButton in self.tagButtonArray) {
-        CGFloat buttonWidth = CGRectGetWidth(currentButton.bounds);
-        if ((buttonWidth + currentWidth) < MAX_ROW_WIDTH) {
-            if (previousButton == nil) {
-                [currentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(self.popularTagLabel.mas_bottom).offset(5);
-                    make.leading.equalTo(self.popularTagLabel);
-                }];
-            } else {
-                [currentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(previousButton);
-                    make.leading.equalTo(previousButton.mas_trailing).offset(kTagButtonHorizontalSpacing);
-                }];
-            }
-            [buttonsInRow addObject:currentButton];
-        } else {
-            if (!self.alreadyLayouted) {
-                NSInteger buttonCountInRow = [buttonsInRow count];
-                CGFloat bWidth = 0.0f;
-                for (UIButton *button in buttonsInRow) {
-                    bWidth += CGRectGetWidth(button.bounds);
-                }
-                CGFloat hSpacing = (MAX_ROW_WIDTH - bWidth - kTagButtonHorizontalSpacing * (buttonCountInRow - 1))/buttonCountInRow/2.0f - 1;
-                for (int i = 0; i < buttonsInRow.count; i++) {
-                    UIButton *btn = buttonsInRow[i];
-                    btn.titleLabel.adjustsFontSizeToFitWidth = YES;
-                    btn.contentEdgeInsets = UIEdgeInsetsMake(5, 15 + hSpacing, 5, 15 + hSpacing);
-                    [btn sizeToFit];
-                }
-                [buttonsInRow removeAllObjects];
-                
-                [buttonsInRow addObject:currentButton];
-            }
-            // new line
-            currentWidth = 0.0f;
-            [currentButton mas_remakeConstraints:^(MASConstraintMaker *make) {
-                make.leading.equalTo(self.popularTagLabel);
-                make.top.equalTo(previousButton.mas_bottom).offset(kTagButtonVerticalSpacing);
-            }];
-        }
-        currentWidth += buttonWidth + kTagButtonHorizontalSpacing;
-        previousButton = currentButton;
-    }
-    
     [_postButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(self.view);
         make.bottom.equalTo(self.view);
@@ -244,6 +203,12 @@
         make.leading.equalTo(self.view).offset(kLeftPadding);
         make.trailing.equalTo(self.view).offset(-kLeftPadding);
         make.bottom.equalTo(self.view).offset(-self.keyboardHeight);
+    }];
+    
+    [self.descriptionLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.headerView.mas_bottom).offset(30);
+        make.leading.equalTo(self.view).offset(15);
+        make.trailing.equalTo(self.view).offset(-15);
     }];
     
     self.alreadyLayouted = YES;
@@ -317,19 +282,20 @@
 - (BOOL)titleTextViewShouldEndEditing:(UITextView *)textView
 {
     self.topicTitle = textView.text;
+    [self updateViewConstraints];
     return YES;
 }
 
 - (void)searchViewWillAppear:(FLYPrePostHeaderView *)view
 {
+    self.descriptionLabel.hidden = YES;
     self.searchContainerView.userInteractionEnabled = YES;
-    self.popularTagLabel.hidden = YES;
 }
 
 - (void)searchViewWillDisappear:(FLYPrePostHeaderView *)view
 {
+    self.descriptionLabel.hidden = NO;
     self.searchContainerView.userInteractionEnabled = NO;
-    self.popularTagLabel.hidden = NO;
 }
 
 - (void)_postButtonTapped
@@ -345,6 +311,12 @@
         [Dialog simpleToast:[NSString stringWithFormat:LOC(@"FLYPostMustMinLength"), minimalLen]];
         return;
     }
+    
+    if (![self _hasHashTag:self.topicTitle]) {
+        [Dialog simpleToast:LOC(@"FLYPostMustHaveAgroup")];
+        return;
+    }
+    
     
     if (self.defaultGroup) {
         self.topicTitle = [NSString stringWithFormat:@"%@ #%@", self.topicTitle, self.defaultGroup.groupName];
@@ -381,6 +353,22 @@
         };
         [FLYMediaService getSignedUrlAndUploadWithSuccessBlock:successBlock errorBlock:errorBlock];
     }
+}
+
+- (BOOL)_hasHashTag:(NSString *)str
+{
+    BOOL hasHashTag = NO;
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"#(\\w+)" options:0 error:&error];
+    NSArray *matches = [regex matchesInString:str options:0 range:NSMakeRange(0, str.length)];
+    for (NSTextCheckingResult *match in matches) {
+        NSRange wordRange = [match rangeAtIndex:1];
+        NSString* word = [str substringWithRange:wordRange];
+        NSLog(@"Found tag %@", word);
+        hasHashTag = YES;
+        break;
+    }
+    return hasHashTag;
 }
 
 #pragma mark - Service
@@ -443,6 +431,12 @@
     NSDictionary *userInfo = [note userInfo];
     CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     self.keyboardHeight = kbSize.height;
+    [self updateViewConstraints];
+}
+
+- (void)keyboardWillHide:(NSNotification *)note
+{
+    self.keyboardHeight = 44;
     [self updateViewConstraints];
 }
 

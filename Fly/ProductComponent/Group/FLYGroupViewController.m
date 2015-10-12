@@ -106,6 +106,7 @@
             FLYFollowTagSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj)
             {
                 [[FLYTagsManager sharedInstance] updateCurrentUserTags:[NSMutableArray arrayWithObject:self.group]];
+                [self loadRightBarButton];
             };
             
             [FLYTagsService followTagWithId:self.group.groupId followed:NO successBlock:successBlock errorBlock:nil];
@@ -126,6 +127,7 @@
             FLYFollowTagSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj)
             {
                 [[FLYTagsManager sharedInstance] unFollowTag:self.group];
+                [self loadRightBarButton];
             };
             
             [FLYTagsService followTagWithId:self.group.groupId followed:YES successBlock:successBlock errorBlock:nil];
