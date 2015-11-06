@@ -16,7 +16,9 @@
 
 typedef NS_ENUM(NSInteger, TabBarItemIndex) {
     TABBAR_HOME = 0,
-    TABBAR_GROUP
+    TABBAR_GROUP,
+    TABBAR_RECORD,
+    TABBAR_ME
 };
 
 @interface FLYMainViewController : FLYUniversalViewController
@@ -24,6 +26,9 @@ typedef NS_ENUM(NSInteger, TabBarItemIndex) {
 @property (nonatomic) FLYTabBarView *tabBarView;
 @property (nonatomic) FLYTabView *homeTab;
 @property (nonatomic) FLYTabView *groupsTab;
+@property (nonatomic) FLYTabView *recordTab;
+@property (nonatomic) FLYTabView *meTab;
+
 @property (nonatomic) UIButton *recordButton;
 
 @property (nonatomic) FLYSegmentedFeedViewController *feedViewController;

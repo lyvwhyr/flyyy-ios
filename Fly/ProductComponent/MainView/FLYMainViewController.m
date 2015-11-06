@@ -73,10 +73,10 @@
     [self _addTabBar];
     [self _addChildControllers];
     
-    self.recordButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.recordButton setImage:[UIImage imageNamed:@"icon_home_record"] forState:UIControlStateNormal];
-    [self.recordButton addTarget:self action:@selector(_recordButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    [self.view insertSubview:self.recordButton aboveSubview:self.currentViewController.view];
+//    self.recordButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [self.recordButton setImage:[UIImage imageNamed:@"icon_home_record"] forState:UIControlStateNormal];
+//    [self.recordButton addTarget:self action:@selector(_recordButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view insertSubview:self.recordButton aboveSubview:self.currentViewController.view];
     
     [self _addViewConstraints];
 }
@@ -95,8 +95,10 @@
     
     self.homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_home" recordTab:NO];
     self.groupsTab = [[FLYTabView alloc] initWithTitle:LOC(@"FLYTags") image:@"icon_homefeed_tag_blue_notselected" recordTab:NO];
+    self.recordTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_home" recordTab:NO];
+    self.meTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_home" recordTab:NO];
     
-    NSArray *tabs = @[self.homeTab, self.groupsTab];
+    NSArray *tabs = @[self.homeTab, self.groupsTab, self.recordTab, self.meTab];
     [self.tabBarView setTabViews:tabs];
     self.tabBarView.delegate = self;
 }
@@ -148,7 +150,7 @@
         [self _updateActiveTab:TABBAR_HOME];
         
         [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_home_button" component:nil element:nil action:@"click"];
-    } else {
+    } else if (index == TABBAR_GROUP) {
         if (_currentViewController == _groupsListViewNavigationController) {
             return;
         }
@@ -158,6 +160,10 @@
         [self _updateActiveTab:TABBAR_GROUP];
         
         [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_groups_button" component:nil element:nil action:@"click"];
+    } else if (index == TABBAR_RECORD) {
+        [self _recordButtonTapped];
+    } else {
+        
     }
 }
 
