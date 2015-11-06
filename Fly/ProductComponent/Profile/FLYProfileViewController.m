@@ -7,31 +7,52 @@
 //
 
 #import "FLYProfileViewController.h"
+#import "UIColor+FLYAddition.h"
 
 @interface FLYProfileViewController ()
+
+@property (nonatomic) UIImageView *bgImageView;
 
 @end
 
 @implementation FLYProfileViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
+    self.title = @"Me";
+    self.bgImageView = [UIImageView new];
+    self.bgImageView.image = [UIImage imageNamed:@"profile_bg"];
+    [self.view addSubview:self.bgImageView];
+    
+    [self updateViewConstraints];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)updateViewConstraints
+{
+    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
+    [super updateViewConstraints];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Navigation bar and status bar
+- (UIColor *)preferredNavigationBarColor
+{
+    return [UIColor flyBlue];
 }
-*/
+
+- (UIColor*)preferredStatusBarColor
+{
+    return [UIColor flyBlue];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 
 @end

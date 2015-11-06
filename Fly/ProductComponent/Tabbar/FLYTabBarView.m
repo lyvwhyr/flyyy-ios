@@ -10,7 +10,7 @@
 #import "FLYTabView.h"
 #import "UIColor+FLYAddition.h"
 
-#define kTabLeadingMargin        20
+#define kTabLeadingMargin        15
 #define kTabTopMargin            1
 #define kTabWidth                60
 #define kTabHeight               44
@@ -28,7 +28,7 @@
 {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor flyTabBarBackground];
+        self.backgroundColor = [UIColor flyBlue];
         self.userInteractionEnabled = YES;
         
         _separator = [UIView new];

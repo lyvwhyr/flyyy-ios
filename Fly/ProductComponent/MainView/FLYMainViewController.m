@@ -34,6 +34,7 @@
 #import "FLYAudioManager.h"
 #import <AVFoundation/AVFoundation.h>
 #import "FLYRecordOnboardViewController.h"
+#import "FLYProfileViewController.h"
 
 #if DEBUG
 #import "FLEXManager.h"
@@ -72,12 +73,6 @@
     
     [self _addTabBar];
     [self _addChildControllers];
-    
-//    self.recordButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [self.recordButton setImage:[UIImage imageNamed:@"icon_home_record"] forState:UIControlStateNormal];
-//    [self.recordButton addTarget:self action:@selector(_recordButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view insertSubview:self.recordButton aboveSubview:self.currentViewController.view];
-    
     [self _addViewConstraints];
 }
 
@@ -94,9 +89,9 @@
     [self.view addSubview:self.tabBarView];
     
     self.homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_home" recordTab:NO];
-    self.groupsTab = [[FLYTabView alloc] initWithTitle:LOC(@"FLYTags") image:@"icon_homefeed_tag_blue_notselected" recordTab:NO];
-    self.recordTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_home" recordTab:NO];
-    self.meTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_home" recordTab:NO];
+    self.groupsTab = [[FLYTabView alloc] initWithTitle:LOC(@"FLYTags") image:@"icon_homefeed_group" recordTab:NO];
+    self.recordTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_record" recordTab:NO];
+    self.meTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_me" recordTab:NO];
     
     NSArray *tabs = @[self.homeTab, self.groupsTab, self.recordTab, self.meTab];
     [self.tabBarView setTabViews:tabs];
@@ -110,6 +105,9 @@
     
     _groupsListViewController = [FLYTagListViewController new];
     _groupsListViewNavigationController = [[FLYNavigationController alloc] initWithRootViewController:_groupsListViewController];
+    
+    _profileViewController = [FLYProfileViewController new];
+    _profileViewNavigationController = [[FLYNavigationController alloc] initWithRootViewController:_profileViewController];
     
     _currentViewController = _feedViewNavigationController;
     [self addViewController:_currentViewController];
@@ -163,12 +161,21 @@
     } else if (index == TABBAR_RECORD) {
         [self _recordButtonTapped];
     } else {
+        if (_currentViewController == _profileViewNavigationController) {
+            return;
+        }
+        [self removeViewController:_currentViewController];
+        [self addViewController:_profileViewNavigationController];
+        _currentViewController = _profileViewNavigationController;
+        [self _updateActiveTab:TABBAR_ME];
         
+        [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_me_button" component:nil element:nil action:@"click"];
     }
 }
 
 - (void)_updateActiveTab:(TabBarItemIndex)index
 {
+    /*
     switch (index) {
         case TABBAR_HOME: {
             [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home"]];
@@ -183,6 +190,7 @@
         default:
             break;
     }
+    */
 }
 
 - (void)removeViewController:(UIViewController *)viewController

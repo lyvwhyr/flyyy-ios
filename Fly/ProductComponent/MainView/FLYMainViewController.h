@@ -13,6 +13,7 @@
 @class FLYTabView;
 @class FLYTagListViewController;
 @class FLYSegmentedFeedViewController;
+@class FLYProfileViewController;
 
 typedef NS_ENUM(NSInteger, TabBarItemIndex) {
     TABBAR_HOME = 0,
@@ -33,9 +34,11 @@ typedef NS_ENUM(NSInteger, TabBarItemIndex) {
 
 @property (nonatomic) FLYSegmentedFeedViewController *feedViewController;
 @property (nonatomic) FLYTagListViewController *groupsListViewController;
+@property (nonatomic) FLYProfileViewController *profileViewController;
 @property (nonatomic) UIViewController *currentViewController;
 
 @property (nonatomic) FLYNavigationController *feedViewNavigationController;
+@property (nonatomic) FLYNavigationController *profileViewNavigationController;
 
 - (FLYNavigationController *)flyNavigationController;
 - (void)setTabIndex:(NSUInteger)index;
