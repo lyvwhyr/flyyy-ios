@@ -12,21 +12,27 @@
 #import "YYText.h"
 #import "UIFont+FLYAddition.h"
 #import "UIView+FLYAddition.h"
+#import "FLYMyTopicsViewController.h"
+#import "FLYNavigationController.h"
 
-#define kProfileStatInfoTopMargin 90
+#define kTopBackgroundHeight 320
+#define kProfileStatInfoTopMargin 80
 #define kProfileStatInfoHeight 55
 #define kProfileStatInfoWidth 70
 #define kProfileStatInfoMiddleSpacing 67
-#define kProfileBioTextTopMargin 46
+#define kProfileBioTextTopMargin 26
 
 @interface FLYProfileViewController () <YYTextViewDelegate>
 
-@property (nonatomic) UIImageView *bgImageView;
+@property (nonatomic) UIView *topBgView;
+@property (nonatomic) UIImageView *triangleBgImageView;
 @property (nonatomic) FLYProfileStatInfoView *followerStatView;
 @property (nonatomic) FLYProfileStatInfoView *followingStatView;
 @property (nonatomic) FLYProfileStatInfoView *postsStatView;
 @property (nonatomic) YYTextView *bioTextView;
 @property (nonatomic) UIButton *followButton;
+
+@property (nonatomic) FLYMyTopicsViewController *myPostViewController;
 
 @end
 
@@ -38,9 +44,9 @@
     
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     self.title = @"Me";
-    self.bgImageView = [UIImageView new];
-    self.bgImageView.image = [UIImage imageNamed:@"profile_bg"];
-    [self.view addSubview:self.bgImageView];
+    self.topBgView = [UIView new];
+    self.topBgView.backgroundColor = [UIColor flyBlue];
+    [self.view addSubview:self.topBgView];
     
     // followers, following, andposts info
     self.followerStatView = [[FLYProfileStatInfoView alloc] initWithCount:1 name:@"followers"];
@@ -65,7 +71,25 @@
     [self.followButton sizeToFit];
     [self.view addSubview:self.followButton];
     
+    self.myPostViewController = [[FLYMyTopicsViewController alloc] init];
+    [self addChildViewController:self.myPostViewController];
+    [self.view insertSubview:self.myPostViewController.view belowSubview:self.topBgView];
+    
+    
+    self.triangleBgImageView = [UIImageView new];
+    self.triangleBgImageView.image = [UIImage imageNamed:@"icon_triangle_profile_bg"];
+    [self.triangleBgImageView sizeToFit];
+    [self.view addSubview:self.triangleBgImageView];
+    
+    
     [self updateViewConstraints];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+//    self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - 44);
+//    
+//       self.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - 44);
 }
 
 - (void)updateViewConstraints
@@ -73,8 +97,11 @@
     CGFloat leftMargin = (CGRectGetWidth([UIScreen mainScreen].bounds) - kProfileStatInfoWidth * 3 - kProfileStatInfoMiddleSpacing * 2) / 2.0f;
     
     
-    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+    [self.topBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view);
+        make.height.equalTo(@(kTopBackgroundHeight));
+        make.leading.equalTo(self.view);
+        make.trailing.equalTo(self.view);
     }];
     
     [self.followerStatView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -108,6 +135,17 @@
     [self.followButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bioTextView.mas_bottom).offset(30);
         make.centerX.equalTo(self.view);
+    }];
+    
+    [self.triangleBgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topBgView.mas_bottom).offset(-1);
+    }];
+    
+    [self.myPostViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.triangleBgImageView).offset(-44-44-44);
+        make.leading.equalTo(self.view);
+        make.trailing.equalTo(self.view);
+        make.bottom.equalTo(self.view);
     }];
     
     [super updateViewConstraints];
