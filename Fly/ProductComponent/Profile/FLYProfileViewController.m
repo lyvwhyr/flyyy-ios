@@ -14,6 +14,7 @@
 #import "UIView+FLYAddition.h"
 #import "FLYMyTopicsViewController.h"
 #import "FLYNavigationController.h"
+#import "FLYBadgeView.h"
 
 #define kTopBackgroundHeight 320
 #define kProfileStatInfoTopMargin 80
@@ -21,6 +22,7 @@
 #define kProfileStatInfoWidth 70
 #define kProfileStatInfoMiddleSpacing 67
 #define kProfileBioTextTopMargin 26
+#define kProfileBadgeSize 90
 
 @interface FLYProfileViewController () <YYTextViewDelegate>
 
@@ -31,6 +33,7 @@
 @property (nonatomic) FLYProfileStatInfoView *postsStatView;
 @property (nonatomic) YYTextView *bioTextView;
 @property (nonatomic) UIButton *followButton;
+@property (nonatomic) FLYBadgeView *badgeView;
 
 @property (nonatomic) FLYMyTopicsViewController *myPostViewController;
 
@@ -81,6 +84,8 @@
     [self.triangleBgImageView sizeToFit];
     [self.view addSubview:self.triangleBgImageView];
     
+    self.badgeView = [[FLYBadgeView alloc] initWithPoint:10];
+    [self.view addSubview:self.badgeView];
     
     [self updateViewConstraints];
 }
@@ -139,6 +144,13 @@
     
     [self.triangleBgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topBgView.mas_bottom).offset(-1);
+    }];
+    
+    [self.badgeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.triangleBgImageView).offset(-10);
+        make.trailing.equalTo(self.view).offset(-58);
+        make.width.equalTo(@(kProfileBadgeSize));
+        make.height.equalTo(@(kProfileBadgeSize));
     }];
     
     [self.myPostViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
