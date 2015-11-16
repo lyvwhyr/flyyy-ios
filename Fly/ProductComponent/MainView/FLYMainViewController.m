@@ -107,6 +107,7 @@
     _groupsListViewNavigationController = [[FLYNavigationController alloc] initWithRootViewController:_groupsListViewController];
     
     _profileViewController = [FLYProfileViewController new];
+    _profileViewController.isSelf = YES;
     _profileViewNavigationController = [[FLYNavigationController alloc] initWithRootViewController:_profileViewController];
     
     _currentViewController = _feedViewNavigationController;

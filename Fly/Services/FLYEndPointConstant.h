@@ -43,6 +43,7 @@
 // users
 #define EP_USER                                     @"v1/users"
 #define EP_USER_WITH_USER_ID                        @"v1/users/%@"
+#define EP_USER_FOLLOW_BY_USER_ID                   @"/v1/users/me/follow/%@"
 
 // reset password
 #define EP_USER_RESET                               @"v1/users/reset"

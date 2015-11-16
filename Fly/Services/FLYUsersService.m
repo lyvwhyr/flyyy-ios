@@ -74,7 +74,6 @@
             errorBlock(responseObj, error);
         }
     }];
-    
 }
 
 + (void)renameUserWithNewUsername:(NSString *)newUsername successBlock:(FLYRenameSuccessBlock)successBlock error:(FLYRenameErrorBlock)errorBlock
@@ -90,6 +89,33 @@
             errorBlock(responseObj, error);
         }
     }];
+}
+
++ (void)followUserByUserId:(NSString *)userId isFollow:(BOOL)isFollow successBlock:(FLYFollowUserByUserIdSuccessBlock)successBlock error:(FLYFollowUserByUserIdErrorBlock)errorBlock
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *endPoint = [NSString stringWithFormat:EP_USER_FOLLOW_BY_USER_ID, userId];
+    if (isFollow) {
+        [manager PUT:endPoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if (successBlock) {
+                successBlock(operation, responseObject);
+            }
+        } failure:^(id responseObj, NSError *error) {
+            if (errorBlock) {
+                errorBlock(responseObj, error);
+            }
+        }];
+    } else {
+        [manager DELETE:endPoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if (successBlock) {
+                successBlock(operation, responseObject);
+            }
+        } failure:^(id responseObj, NSError *error) {
+            if (errorBlock) {
+                errorBlock(responseObj, error);
+            }
+        }];
+    }
 }
 
 @end

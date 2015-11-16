@@ -10,6 +10,8 @@
 
 @interface FLYProfileViewController : FLYUniversalViewController
 
+@property (nonatomic) BOOL isSelf;
+
 - (instancetype)initWithUserId:(NSString *)userId;
 
 @end

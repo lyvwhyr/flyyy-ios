@@ -27,11 +27,16 @@ typedef void(^FLYGetUserByUserIdErrorBlock)(id responseObj, NSError *error);
 typedef void(^FLYRenameSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
 typedef void(^FLYRenameErrorBlock)(id responseObj, NSError *error);
 
+// PUT|DELETE /v1/users/me/follow/[0-9]+
+typedef void(^FLYFollowUserByUserIdSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
+typedef void(^FLYFollowUserByUserIdErrorBlock)(id responseObj, NSError *error);
+
 @interface FLYUsersService : FLYServiceBase
 
 + (instancetype)usersService;
 + (void)renameUserWithNewUsername:(NSString *)newUsername successBlock:(FLYRenameSuccessBlock)successBlock error:(FLYRenameErrorBlock)errorBlock;
 + (void)getUserWithUserId:(NSString *)userId successBlock:(FLYGetUserByUserIdSuccessBlock)successBlock error:(FLYGetUserByUserIdErrorBlock)errorBlock;
++ (void)followUserByUserId:(NSString *)userId isFollow:(BOOL)isFollow successBlock:(FLYFollowUserByUserIdSuccessBlock)successBlock error:(FLYFollowUserByUserIdErrorBlock)errorBlock;
 
 
 - (void)createUserWithPhoneHash:(NSString *)phoneHash code:(NSString *)code userName:(NSString *)userName password:(NSString *)password success:(FLYCreateUserSuccessBlock)successBlock error:(FLYCreateuserErrorBlock)errorBlock;

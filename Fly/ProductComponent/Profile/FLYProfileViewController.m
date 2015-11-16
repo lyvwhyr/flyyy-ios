@@ -37,7 +37,6 @@
 @property (nonatomic) UIButton *followButton;
 @property (nonatomic) FLYBadgeView *badgeView;
 
-@property (nonatomic) BOOL isSelf;
 @property (nonatomic) NSString *userId;
 @property (nonatomic) FLYUser *user;
 
@@ -97,6 +96,7 @@
     
     self.followButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.followButton setImage:[UIImage imageNamed:@"icon_follow_user"] forState:UIControlStateNormal];
+    [self.followButton addTarget:self action:@selector(_followUser) forControlEvents:UIControlEventTouchUpInside];
     [self.followButton sizeToFit];
     [self.view addSubview:self.followButton];
     
@@ -115,7 +115,12 @@
     
     [self updateViewConstraints];
     
-    [self _initService];
+    if (self.isSelf) {
+        self.user = [FLYAppStateManager sharedInstance].currentUser;
+        [self _updateProfileByUser:self.user];
+    } else {
+        [self _initService];
+    }
 }
 
 - (void)_initService
@@ -207,6 +212,11 @@
     }];
     
     [super updateViewConstraints];
+}
+
+- (void)_followUser
+{
+    [FLYUsersService followUserByUserId:self.userId isFollow:YES successBlock:nil error:nil];
 }
 
 #pragma mark - update profile
