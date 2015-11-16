@@ -26,6 +26,8 @@
 #import "SDiPhoneVersion.h"
 #import "UITableViewCell+FLYAddition.h"
 #import "FLYShareManager.h"
+#import "FLYProfileViewController.h"
+#import "UITableViewCell+FLYAddition.h"
 
 @interface FLYFeedTopicTableViewCell() <TTTAttributedLabelDelegate>
 
@@ -93,6 +95,10 @@
         _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _userNameLabel.adjustsFontSizeToFitWidth = YES;
         _userNameLabel.minimumScaleFactor = 0.5;
+        _userNameLabel.userInteractionEnabled = YES;
+        UITapGestureRecognizer *userNameTapGestureRecognizer = [UITapGestureRecognizer new];
+        [userNameTapGestureRecognizer addTarget:self action:@selector(_userNameTapped)];
+        [_userNameLabel addGestureRecognizer:userNameTapGestureRecognizer];
         [self.contentView addSubview:_userNameLabel];
         
         UIFont *shareFont = [UIFont fontWithName:@"Avenir-Book" size:10];
@@ -406,6 +412,13 @@
 {
     UIViewController *fromViewController = self.tableViewController;
     [FLYShareManager shareTopicWithTopic:self.topic fromViewController:fromViewController];
+}
+
+- (void)_userNameTapped
+{
+    FLYProfileViewController *profileVC = [[FLYProfileViewController alloc] initWithUserId:self.topic.user.userId];
+    UIViewController *fromViewController = self.tableViewController;
+    [fromViewController.navigationController pushViewController:profileVC animated:YES];
 }
 
 

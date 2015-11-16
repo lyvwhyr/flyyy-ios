@@ -15,6 +15,8 @@
 #import "FLYMyTopicsViewController.h"
 #import "FLYNavigationController.h"
 #import "FLYBadgeView.h"
+#import "FLYUsersService.h"
+#import "FLYUser.h"
 
 #define kTopBackgroundHeight 320
 #define kProfileStatInfoTopMargin 80
@@ -35,30 +37,54 @@
 @property (nonatomic) UIButton *followButton;
 @property (nonatomic) FLYBadgeView *badgeView;
 
+@property (nonatomic) BOOL isSelf;
+@property (nonatomic) NSString *userId;
+@property (nonatomic) FLYUser *user;
+
 @property (nonatomic) FLYMyTopicsViewController *myPostViewController;
+
+// service
+@property (nonatomic) FLYUsersService *usersService;
 
 @end
 
 @implementation FLYProfileViewController
+
+- (instancetype)initWithUserId:(NSString *)userId
+{
+    if (self = [super init]) {
+        _userId = userId;
+        FLYUser *currentUser = [FLYAppStateManager sharedInstance].currentUser;
+        if (!currentUser) {
+            _isSelf = NO;
+        } else {
+            if ([currentUser isEqual:userId]) {
+                _isSelf = YES;
+            } else {
+                _isSelf = NO;
+            }
+        }
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
-    self.title = @"Me";
     self.topBgView = [UIView new];
     self.topBgView.backgroundColor = [UIColor flyBlue];
     [self.view addSubview:self.topBgView];
     
     // followers, following, andposts info
-    self.followerStatView = [[FLYProfileStatInfoView alloc] initWithCount:1 name:@"followers"];
+    self.followerStatView = [[FLYProfileStatInfoView alloc] initWithCount:0 name:@"followers"];
     [self.view addSubview:self.followerStatView];
     
-    self.followingStatView = [[FLYProfileStatInfoView alloc] initWithCount:1 name:@"following"];
+    self.followingStatView = [[FLYProfileStatInfoView alloc] initWithCount:0 name:@"following"];
     [self.view addSubview:self.followingStatView];
     
-    self.postsStatView = [[FLYProfileStatInfoView alloc] initWithCount:1 name:@"posts"];
+    self.postsStatView = [[FLYProfileStatInfoView alloc] initWithCount:0 name:@"posts"];
     [self.view addSubview:self.postsStatView];
     
     self.bioTextView = [YYTextView new];
@@ -88,6 +114,26 @@
     [self.view addSubview:self.badgeView];
     
     [self updateViewConstraints];
+    
+    [self _initService];
+}
+
+- (void)_initService
+{
+    FLYGetUserByUserIdSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj)
+    {
+        if (responseObj) {
+            self.user = [[FLYUser alloc] initWithDictionary:responseObj];
+            [self _updateProfileByUser:self.user];
+        }
+    };
+    
+    FLYGetUserByUserIdErrorBlock errorBlock = ^(id responseObj, NSError *error)
+    {
+        
+    };
+    
+    [FLYUsersService getUserWithUserId:self.userId successBlock:successBlock error:errorBlock];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -161,6 +207,17 @@
     }];
     
     [super updateViewConstraints];
+}
+
+#pragma mark - update profile
+- (void)_updateProfileByUser:(FLYUser *)user
+{
+    self.title = [NSString stringWithFormat:@"@%@", user.userName];
+    
+    // update profile stat
+    [self.followerStatView setCount:user.followerCount];
+    [self.followingStatView setCount:user.followeeCount];
+    [self.postsStatView setCount:user.topicCount];
 }
 
 #pragma mark - Navigation bar and status bar

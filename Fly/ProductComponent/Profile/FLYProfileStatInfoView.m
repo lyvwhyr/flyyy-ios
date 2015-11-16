@@ -22,7 +22,7 @@
 {
     if (self = [super init]) {
         _firstLineLabel = [UILabel new];
-        _firstLineLabel.text = @"1,248";
+        _firstLineLabel.text = [@(count) stringValue];
         _firstLineLabel.font = [UIFont flyFontWithSize:24.0f];
         _firstLineLabel.textColor = [UIColor whiteColor];
         [_firstLineLabel sizeToFit];
@@ -36,6 +36,12 @@
         [self addSubview:_secondLineLabel];
     }
     return self;
+}
+
+- (void)setCount:(NSInteger)count
+{
+    _firstLineLabel.text = [@(count) stringValue];
+    [self updateConstraintsIfNeeded];
 }
 
 - (void)updateConstraints

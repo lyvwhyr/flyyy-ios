@@ -11,5 +11,6 @@
 @interface FLYProfileStatInfoView : UIView
 
 - (instancetype)initWithCount:(NSInteger)count name:(NSString *)name;
+- (void)setCount:(NSInteger)count;
 
 @end

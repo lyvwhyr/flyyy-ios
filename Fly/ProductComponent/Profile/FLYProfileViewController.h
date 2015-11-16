@@ -10,4 +10,6 @@
 
 @interface FLYProfileViewController : FLYUniversalViewController
 
+- (instancetype)initWithUserId:(NSString *)userId;
+
 @end

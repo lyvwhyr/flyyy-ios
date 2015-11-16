@@ -51,10 +51,30 @@
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:EP_USER_ME parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        successBlock(operation, responseObject);
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
     } failure:^(id responseObj, NSError *error) {
-        errorBlock(responseObj, error);
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
     }];
+}
+
++ (void)getUserWithUserId:(NSString *)userId successBlock:(FLYGetUserByUserIdSuccessBlock)successBlock error:(FLYGetUserByUserIdErrorBlock)errorBlock
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *endPoint = [NSString stringWithFormat:EP_USER_WITH_USER_ID, userId];
+    [manager GET:endPoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
+    } failure:^(id responseObj, NSError *error) {
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
+    }];
+    
 }
 
 + (void)renameUserWithNewUsername:(NSString *)newUsername successBlock:(FLYRenameSuccessBlock)successBlock error:(FLYRenameErrorBlock)errorBlock
