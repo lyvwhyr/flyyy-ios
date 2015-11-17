@@ -17,6 +17,7 @@
 #import "FLYBadgeView.h"
 #import "FLYUsersService.h"
 #import "FLYUser.h"
+#import "FLYFollowingUserListViewController.h"
 
 #define kTopBackgroundHeight 320
 #define kProfileStatInfoTopMargin 80
@@ -81,6 +82,9 @@
     [self.view addSubview:self.followerStatView];
     
     self.followingStatView = [[FLYProfileStatInfoView alloc] initWithCount:0 name:@"following"];
+    UITapGestureRecognizer *followingTapGestureRecognizer = [UITapGestureRecognizer new];
+    [followingTapGestureRecognizer addTarget:self action:@selector(_followingViewTapped)];
+    [self.followingStatView addGestureRecognizer:followingTapGestureRecognizer];
     [self.view addSubview:self.followingStatView];
     
     self.postsStatView = [[FLYProfileStatInfoView alloc] initWithCount:0 name:@"posts"];
@@ -217,6 +221,12 @@
 - (void)_followUser
 {
     [FLYUsersService followUserByUserId:self.userId isFollow:YES successBlock:nil error:nil];
+}
+
+- (void)_followingViewTapped
+{
+    FLYFollowingUserListViewController *vc = [FLYFollowingUserListViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - update profile
