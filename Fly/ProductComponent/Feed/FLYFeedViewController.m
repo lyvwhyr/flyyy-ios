@@ -132,8 +132,6 @@
     
     _feedTableView.separatorInset = UIEdgeInsetsZero;
     _feedTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-//    _feedTableView.scrollsToTop = YES;
-    
     _backgroundView = [UIView new];
     _backgroundView.userInteractionEnabled = NO;
     _backgroundView.backgroundColor = [UIColor clearColor];

@@ -11,6 +11,8 @@
 #define kTabBarViewHeight   44
 #define kTopicPaginationCount 50
 #define KReplyPaginationCount 20
+#define kUserFollowingsPaginationCount 50
+#define kUserFollowersPaginationCount 50
 #define kStreamingMinimialLen 5
 #define kUsernameMaxLen 20
 #define kDefaultMaxRecordingLen 60

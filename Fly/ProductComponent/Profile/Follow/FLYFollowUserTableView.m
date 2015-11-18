@@ -9,10 +9,14 @@
 #import "FLYFollowUserTableView.h"
 #import "SVPullToRefresh.h"
 #import "FLYFollowUserTableViewCell.h"
+#import "FLYUsersService.h"
+#import "FLYUser.h"
+#import "NSDictionary+FLYAddition.h"
 
 @interface FLYFollowUserTableView() <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) FLYFollowType type;
+@property (nonatomic) NSString *userId;
 @property (nonatomic) UITableView *tableView;
 
 @property (nonatomic) NSMutableArray *entries;
@@ -22,26 +26,56 @@
 
 @implementation FLYFollowUserTableView
 
-- (instancetype)initWithType:(FLYFollowType)type
+- (instancetype)initWithType:(FLYFollowType)type userId:(NSString *)userId
 {
     if (self = [super init]) {
         _type =type;
+        _userId = userId;
         _entries = [NSMutableArray new];
         
         _tableView = [UITableView new];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
         [self addSubview:_tableView];
         
-        
-        
-        @weakify(self)
-        [self.tableView addInfiniteScrollingWithActionHandler:^{
-            @strongify(self)
-//            [self _load:NO before:self.cursor cursor:YES];
-        }];
+        [self _load:YES cursor:nil];
     }
     return self;
+}
+
+- (void)_load:(BOOL)first cursor:(NSString *)cursor
+{
+    @weakify(self)
+    FLYGetFollowerListSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        @strongify(self)
+        if (!responseObj) {
+            return;
+        }
+        NSArray *usersArr = [responseObj fly_arrayForKey:@"followees"];
+        self.cursor = [responseObj fly_stringForKey:@"cursor"];
+        for (int i = 0; i < usersArr.count; i++) {
+            NSDictionary *dict = usersArr[i];
+            FLYUser *user = [[FLYUser alloc] initWithDictionary:dict];
+            [self.entries addObject:user];
+        }
+        [self.tableView reloadData];
+        [self updateConstraints];
+    };
+    
+    FLYGetFollowerListErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error){
+        [self.tableView.infiniteScrollingView stopAnimating];
+    };
+    
+    switch (self.type) {
+        case FLYFollowTypeFollowing: {
+            [FLYUsersService getFollowingWithUserId:self.userId firstPage:first cursor:cursor successBlock:successBlock errorBlock:errorBlock];
+            break;
+        }
+            
+        default:
+            break;
+    }
 }
 
 - (void)updateConstraints
@@ -58,8 +92,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
-    //return self.entries.count;
+    return self.entries.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -67,12 +100,33 @@
     static NSString *cellIdentifier = @"FLYEverythingElseCell";
     FLYFollowUserTableViewCell *cell = [[FLYFollowUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    [cell setupCellWithUser:(FLYUser *)self.entries[indexPath.row]];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
 }
 
 

@@ -88,6 +88,9 @@
     [self.view addSubview:self.followingStatView];
     
     self.postsStatView = [[FLYProfileStatInfoView alloc] initWithCount:0 name:@"posts"];
+    UITapGestureRecognizer *postsTapGestureRecognizer = [UITapGestureRecognizer new];
+    [postsTapGestureRecognizer addTarget:self action:@selector(_postsViewTapped)];
+    [self.postsStatView addGestureRecognizer:postsTapGestureRecognizer];
     [self.view addSubview:self.postsStatView];
     
     self.bioTextView = [YYTextView new];
@@ -95,7 +98,6 @@
     self.bioTextView.textColor = [UIColor whiteColor];
     self.bioTextView.font = [UIFont flyFontWithSize:19];
     self.bioTextView.textAlignment = NSTextAlignmentCenter;
-//    self.bioTextView.size = CGSizeMake(CGRectGetWidth(self.view.bounds) - 2 * kProfileStatInfoWidth, 52);
     [self.view addSubview:self.bioTextView];
     
     self.followButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -225,8 +227,16 @@
 
 - (void)_followingViewTapped
 {
-    FLYFollowingUserListViewController *vc = [FLYFollowingUserListViewController new];
+    FLYFollowingUserListViewController *vc = [[FLYFollowingUserListViewController alloc] initWithUserId:self.userId];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)_postsViewTapped
+{
+    if (self.isSelf) {
+        FLYMyTopicsViewController *vc = [FLYMyTopicsViewController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - update profile

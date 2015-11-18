@@ -118,4 +118,26 @@
     }
 }
 
++ (void)getFollowingWithUserId:(NSString *)userId firstPage:(BOOL)first cursor:(NSString *)cursor successBlock:(FLYGetFollowerListSuccessBlock)successBlock errorBlock:(FLYGetFollowerListErrorBlock)errorBlock
+{
+    NSDictionary *params = [NSDictionary new];
+    if (first) {
+        params = @{@"limit":@(kUserFollowingsPaginationCount)};
+    } else {
+        params = @{@"limit":@(kUserFollowingsPaginationCount), @"cursor":cursor};
+    }
+    
+    NSString *endpoint = [NSString stringWithFormat:EP_USER_FOLLOWINGS, userId];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (errorBlock) {
+            errorBlock(operation, error);
+        }
+    }];
+}
+
 @end

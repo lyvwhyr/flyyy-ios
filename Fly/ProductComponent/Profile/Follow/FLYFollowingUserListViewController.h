@@ -10,4 +10,6 @@
 
 @interface FLYFollowingUserListViewController : FLYUniversalViewController
 
+- (instancetype)initWithUserId:(NSString *)userId;
+
 @end

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class FLYUser;
+
 @interface FLYFollowUserTableViewCell : UITableViewCell
+
+- (void)setupCellWithUser:(FLYUser *)user;
 
 @end

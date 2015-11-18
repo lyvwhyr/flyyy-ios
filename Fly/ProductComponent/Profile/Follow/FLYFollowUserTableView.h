@@ -16,6 +16,6 @@ typedef NS_ENUM(NSInteger, FLYFollowType) {
 
 @interface FLYFollowUserTableView : UIView
 
-- (instancetype)initWithType:(FLYFollowType)type;
+- (instancetype)initWithType:(FLYFollowType)type userId:(NSString *)userId;
 
 @end

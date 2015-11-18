@@ -13,17 +13,26 @@
 @interface FLYFollowingUserListViewController ()
 
 @property (nonatomic) FLYFollowUserTableView *followingUserTable;
+@property (nonatomic) NSString *userId;
 
 @end
 
 @implementation FLYFollowingUserListViewController
+
+- (instancetype)initWithUserId:(NSString *)userId
+{
+    if (self = [super init]) {
+        _userId = userId;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.title = @"Following";
     
-    self.followingUserTable = [[FLYFollowUserTableView alloc] initWithType:FLYFollowTypeFollowing];
+    self.followingUserTable = [[FLYFollowUserTableView alloc] initWithType:FLYFollowTypeFollowing userId:self.userId];
     self.followingUserTable.backgroundColor = [UIColor blueColor];
     [self.view addSubview:self.followingUserTable];
     [self _addViewConstraints];

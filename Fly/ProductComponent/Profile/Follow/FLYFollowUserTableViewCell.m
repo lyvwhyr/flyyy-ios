@@ -9,6 +9,7 @@
 #import "FLYFollowUserTableViewCell.h"
 #import "UIFont+FLYAddition.h"
 #import "UIColor+FLYAddition.h"
+#import "FLYUser.h"
 
 @interface FLYFollowUserTableViewCell()
 
@@ -31,15 +32,33 @@
         [self addSubview:_badgeImageView];
         
         _userNameLabel = [UILabel new];
-        _userNameLabel.text = @"pancake";
-        _userNameLabel.textColor = [UIColor flyBlue];
+        _userNameLabel.textColor = [UIColor flyFollowUserTextColor];
         _userNameLabel.font = [UIFont flyLightFontWithSize:19];
-        [_userNameLabel sizeToFit];
         [self addSubview:_userNameLabel];
+        
+        _pointsLabel = [UILabel new];
+        _pointsLabel.textColor = [UIColor flyFollowUserTextColor];
+        _pointsLabel.font = [UIFont flyFontWithSize:16];
+        [self addSubview:_pointsLabel];
+        
+        _followButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_followButton setImage:[UIImage imageNamed:@"icon_follow_user_grey"] forState:UIControlStateNormal];
+        [_followButton sizeToFit];
+        [self addSubview:_followButton];
     }
-    [self updateConstraints];
     
     return self;
+}
+
+- (void)setupCellWithUser:(FLYUser *)user
+{
+    self.userNameLabel.text = user.userName;
+    [self.userNameLabel sizeToFit];
+    
+    self.pointsLabel.text = @"234";
+    [self.pointsLabel sizeToFit];
+    
+    [self updateConstraints];
 }
 
 - (void)updateConstraints
@@ -51,7 +70,17 @@
     
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.badgeImageView);
-        make.leading.equalTo(self.badgeImageView.mas_trailing).offset(35);
+        make.leading.equalTo(self.badgeImageView.mas_trailing).offset(30);
+    }];
+    
+    [self.followButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self);
+        make.trailing.equalTo(self).offset(-14);
+    }];
+    
+    [self.pointsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self);
+        make.trailing.equalTo(self.followButton.mas_leading).offset(-25);
     }];
     
     [super updateConstraints];
