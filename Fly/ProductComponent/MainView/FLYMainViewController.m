@@ -165,6 +165,11 @@
         if (_currentViewController == _profileViewNavigationController) {
             return;
         }
+        
+        if ([FLYUtilities isInvalidUser]) {
+            return;
+        }
+        
         [self removeViewController:_currentViewController];
         [self addViewController:_profileViewNavigationController];
         _currentViewController = _profileViewNavigationController;
@@ -176,22 +181,34 @@
 
 - (void)_updateActiveTab:(TabBarItemIndex)index
 {
-    /*
     switch (index) {
         case TABBAR_HOME: {
-            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home"]];
-            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_tag_blue_notselected"]];
+            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home_selected"]];
+            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_group"]];
+            [self.meTab setTabImage:[UIImage imageNamed:@"icon_homefeed_me"]];
             break;
         }
         case TABBAR_GROUP: {
-            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home_not_selected"]];
-            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_tag_blue"]];
+            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home"]];
+            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_group_selected"]];
+            [self.meTab setTabImage:[UIImage imageNamed:@"icon_homefeed_me"]];
+            break;
+        }
+        case TABBAR_ME: {
+            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home"]];
+            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_group"]];
+            [self.meTab setTabImage:[UIImage imageNamed:@"icon_homefeed_me_selected"]];
+            break;
+        }
+        case TABBAR_RECORD: {
+            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home"]];
+            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_group"]];
+            [self.meTab setTabImage:[UIImage imageNamed:@"icon_homefeed_me"]];
             break;
         }
         default:
             break;
     }
-    */
 }
 
 - (void)removeViewController:(UIViewController *)viewController
