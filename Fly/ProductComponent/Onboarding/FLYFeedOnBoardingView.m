@@ -260,12 +260,12 @@
 {
     [self removeFromSuperview];
     
-    if (self.mainViewController) {
-        _tabbarOnboardingView = [FLYTabbarOnboardingView new];
-        _tabbarOnboardingView.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
-        _tabbarOnboardingView.mainViewController = self.mainViewController;
-        [self.showInView addSubview:_tabbarOnboardingView];
-    }
+//    if (self.mainViewController) {
+//        _tabbarOnboardingView = [FLYTabbarOnboardingView new];
+//        _tabbarOnboardingView.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+//        _tabbarOnboardingView.mainViewController = self.mainViewController;
+//        [self.showInView addSubview:_tabbarOnboardingView];
+//    }
 }
 
 - (void)layoutSubviews
