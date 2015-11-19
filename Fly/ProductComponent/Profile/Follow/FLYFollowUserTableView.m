@@ -39,9 +39,19 @@
         _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
         [self addSubview:_tableView];
         
-        [self _load:YES cursor:nil];
+        [self _initService];
     }
     return self;
+}
+
+- (void)_initService
+{
+    @weakify(self)
+    [_tableView addInfiniteScrollingWithActionHandler:^{
+        @strongify(self)
+        [self _load:NO cursor:self.cursor];
+    }];
+    [self _load:YES cursor:nil];
 }
 
 - (void)_load:(BOOL)first cursor:(NSString *)cursor
@@ -49,6 +59,7 @@
     @weakify(self)
     FLYGetFollowerListSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
         @strongify(self)
+        [self.tableView.infiniteScrollingView stopAnimating];
         if (!responseObj) {
             return;
         }
@@ -57,6 +68,9 @@
         for (int i = 0; i < usersArr.count; i++) {
             NSDictionary *dict = usersArr[i];
             FLYUser *user = [[FLYUser alloc] initWithDictionary:dict];
+            if ([self _isUserInArray:user]) {
+                continue;
+            }
             [self.entries addObject:user];
         }
         [self.tableView reloadData];
@@ -127,6 +141,20 @@
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
     
+}
+
+- (BOOL)_isUserInArray:(FLYUser *)user
+{
+    if ([self.entries count] == 0) {
+        return NO;
+    }
+    for (int i = 0; i < self.entries.count; i++) {
+        FLYUser *userInArray = self.entries[i];
+        if ([user.userId isEqual:userInArray.userId]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 
