@@ -28,6 +28,7 @@
 #import "FLYShareManager.h"
 #import "FLYProfileViewController.h"
 #import "UITableViewCell+FLYAddition.h"
+#import "UIView+FLYAddition.h"
 
 @interface FLYFeedTopicTableViewCell() <TTTAttributedLabelDelegate>
 
@@ -89,12 +90,13 @@
         _topicTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_topicTitleLabel];
         
-        _userNameLabel = [UILabel new];
+        _userNameLabel = [TTTAttributedLabel new];
         _userNameLabel.textColor = [UIColor flyGrey];
         _userNameLabel.font = [UIFont fontWithName:@"Avenir-Book" size:8];
         _userNameLabel.translatesAutoresizingMaskIntoConstraints = NO;
         _userNameLabel.adjustsFontSizeToFitWidth = YES;
         _userNameLabel.minimumScaleFactor = 0.5;
+        _userNameLabel.touchAreaInsets = UIEdgeInsetsMake(15, 15, 15, 15);
         _userNameLabel.userInteractionEnabled = YES;
         UITapGestureRecognizer *userNameTapGestureRecognizer = [UITapGestureRecognizer new];
         [userNameTapGestureRecognizer addTarget:self action:@selector(_userNameTapped)];

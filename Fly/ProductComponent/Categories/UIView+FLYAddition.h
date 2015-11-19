@@ -111,6 +111,8 @@
  */
 @property (nonatomic, readonly) CGFloat orientationHeight;
 
+@property (nonatomic, assign) UIEdgeInsets touchAreaInsets;
+
 /**
  * Finds the first descendant view (including this view) that is a member of a particular class.
  */

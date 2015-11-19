@@ -36,7 +36,7 @@ typedef NS_OPTIONS(NSUInteger, FLYTopicCellOptions) {
 //play button
 @property (nonatomic) UIButton *playButton;
 @property (nonatomic) TTTAttributedLabel *topicTitleLabel;
-@property (nonatomic) UILabel *userNameLabel;
+@property (nonatomic) TTTAttributedLabel *userNameLabel;
 @property (nonatomic) FLYIconButton *likeButton;
 @property (nonatomic) FLYIconButton *commentButton;
 
