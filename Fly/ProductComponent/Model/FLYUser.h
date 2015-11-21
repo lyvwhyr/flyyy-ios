@@ -15,7 +15,7 @@
 @property (nonatomic, copy) NSString *createdAt;
 @property (nonatomic) BOOL suspended;
 @property (nonatomic) NSMutableArray *tags;
-@property (nonatomic) NSInteger followeeCount;
+@property (nonatomic) NSInteger followingCount;
 @property (nonatomic) NSInteger followerCount;
 @property (nonatomic) NSInteger replyCount;
 @property (nonatomic) NSInteger topicCount;

@@ -30,7 +30,7 @@
             [_tags addObject:tag];
         }
         
-        _followeeCount = [dict fly_integerForKey:@"followees"];
+        _followingCount = [dict fly_integerForKey:@"followees"];
         _followerCount = [dict fly_integerForKey:@"followers"];
         _replyCount = [dict fly_integerForKey:@"replies"];
         _topicCount = [dict fly_integerForKey:@"topics"];

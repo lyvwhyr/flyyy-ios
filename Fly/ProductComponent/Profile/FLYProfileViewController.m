@@ -64,7 +64,6 @@
                 _isSelf = NO;
             }
         }
-        
         [self _addObservers];
     }
     return self;
@@ -121,7 +120,7 @@
         [self _initOrUpdateFollowView];
         
         self.user = [FLYAppStateManager sharedInstance].currentUser;
-        [self _updateProfileByUser:self.user];
+        [self _updateProfileByUser];
     } else {
         [self _initService];
     }
@@ -133,7 +132,7 @@
     {
         if (responseObj) {
             self.user = [[FLYUser alloc] initWithDictionary:responseObj];
-            [self _updateProfileByUser:self.user];
+            [self _updateProfileByUser];
         }
     };
     
@@ -253,14 +252,14 @@
 }
 
 #pragma mark - update profile
-- (void)_updateProfileByUser:(FLYUser *)user
+- (void)_updateProfileByUser
 {
-    self.title = [NSString stringWithFormat:@"@%@", user.userName];
+    self.title = [NSString stringWithFormat:@"@%@", self.user.userName];
     
     // update profile stat
-    [self.followerStatView setCount:user.followerCount];
-    [self.followingStatView setCount:user.followeeCount];
-    [self.postsStatView setCount:user.topicCount];
+    [self _updateFollowerStatView];
+    [self _updateFollowingStatView];
+    [self.postsStatView setCount:self.user.topicCount];
     [self _initOrUpdateFollowView];
     
     [self updateViewConstraints];
@@ -287,13 +286,49 @@
     }
 }
 
-#pragma mark - Notification
+- (void)_updateFollowerStatView
+{
+    [self.followerStatView setCount:self.user.followerCount];
+}
+
+- (void)_updateFollowingStatView
+{
+    [self.followingStatView setCount:self.user.followingCount];
+}
+
+
+#pragma mark - Follow notification
 
 - (void)_followUpdated:(NSNotification *)notification
 {
     FLYUser *user = [notification.userInfo objectForKey:@"user"];
-    self.user.isFollowing = user.isFollowing;
+    FLYUser *currentUser = [FLYAppStateManager sharedInstance].currentUser;
+    // update viewing page
+    if ([user.userId isEqualToString:self.user.userId]) {
+        if (self.user.isFollowing) {
+            self.user.followerCount++;
+        } else {
+            if (self.user.followerCount > 0) {
+                self.user.followerCount--;
+            }
+        }
+        [self _updateFollowerStatView];
+        
+        // update my profile page
+    } else if ([self.user.userId isEqualToString:currentUser.userId]) {
+        if (user.isFollowing) {
+            self.user.followingCount++;
+        } else {
+            if (self.user.followingCount > 0) {
+                self.user.followingCount--;
+            }
+        }
+        [self _updateFollowingStatView];
+    } else {
+        return;
+    }
     
+    self.user.isFollowing = user.isFollowing;
     [self _initOrUpdateFollowView];
 }
 
