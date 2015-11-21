@@ -64,7 +64,6 @@
                 _isSelf = NO;
             }
         }
-        [self _addObservers];
     }
     return self;
 }
@@ -72,6 +71,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // observers need to be called on every viewController creation. Otherwise, profile view won't be updated correctly
+    [self _addObservers];
     
     self.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     self.topBgView = [UIView new];
@@ -301,6 +303,8 @@
 
 - (void)_followUpdated:(NSNotification *)notification
 {
+    // user is currenlty viewing page
+    // self.user used to render profile page
     FLYUser *user = [notification.userInfo objectForKey:@"user"];
     FLYUser *currentUser = [FLYAppStateManager sharedInstance].currentUser;
     // update viewing page
