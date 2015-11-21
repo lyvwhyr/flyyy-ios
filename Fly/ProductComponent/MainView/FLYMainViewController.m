@@ -168,7 +168,7 @@
         
         if ([FLYUtilities isInvalidUser]) {
             return;
-        }
+        } 
         
         [self removeViewController:_currentViewController];
         [self addViewController:_profileViewNavigationController];

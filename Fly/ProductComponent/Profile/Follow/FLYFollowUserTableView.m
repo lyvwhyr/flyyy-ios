@@ -63,7 +63,7 @@
         if (!responseObj) {
             return;
         }
-        NSArray *usersArr = [responseObj fly_arrayForKey:@"followees"];
+        NSArray *usersArr = [responseObj fly_arrayForKey:@"users"];
         self.cursor = [responseObj fly_stringForKey:@"cursor"];
         for (int i = 0; i < usersArr.count; i++) {
             NSDictionary *dict = usersArr[i];

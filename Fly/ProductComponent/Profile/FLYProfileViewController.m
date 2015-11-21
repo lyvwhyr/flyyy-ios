@@ -100,11 +100,7 @@
     self.bioTextView.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.bioTextView];
     
-    self.followButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.followButton setImage:[UIImage imageNamed:@"icon_follow_user"] forState:UIControlStateNormal];
-    [self.followButton addTarget:self action:@selector(_followUser) forControlEvents:UIControlEventTouchUpInside];
-    [self.followButton sizeToFit];
-    [self.view addSubview:self.followButton];
+    [self _setupFollowView];
     
     self.myPostViewController = [[FLYMyTopicsViewController alloc] init];
     [self addChildViewController:self.myPostViewController];
@@ -248,6 +244,15 @@
     [self.followerStatView setCount:user.followerCount];
     [self.followingStatView setCount:user.followeeCount];
     [self.postsStatView setCount:user.topicCount];
+}
+
+- (void)_setupFollowView
+{
+    self.followButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.followButton setImage:[UIImage imageNamed:@"icon_follow_user"] forState:UIControlStateNormal];
+    [self.followButton addTarget:self action:@selector(_followUser) forControlEvents:UIControlEventTouchUpInside];
+    [self.followButton sizeToFit];
+    [self.view addSubview:self.followButton];
 }
 
 #pragma mark - Navigation bar and status bar
