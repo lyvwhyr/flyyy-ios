@@ -110,7 +110,7 @@
     self.triangleBgImageView = [UIImageView new];
     self.triangleBgImageView.image = [UIImage imageNamed:@"icon_triangle_profile_bg"];
     [self.triangleBgImageView sizeToFit];
-    [self.view addSubview:self.triangleBgImageView];
+    [self.view insertSubview:self.triangleBgImageView belowSubview:self.topBgView];
     
     self.badgeView = [[FLYBadgeView alloc] initWithPoint:10];
     [self.view addSubview:self.badgeView];
@@ -196,7 +196,9 @@
     }];
     
     [self.triangleBgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.topBgView.mas_bottom).offset(-1);
+        make.leading.equalTo(self.view).offset(-3);
+        make.trailing.equalTo(self.view).offset(3);
+        make.top.equalTo(self.topBgView.mas_bottom).offset(-3);
     }];
     
     [self.badgeView mas_makeConstraints:^(MASConstraintMaker *make) {
