@@ -48,3 +48,6 @@
 
 // tags updated
 #define kNotificationMyTagsUpdated @"kNotificationMyTagsUpdated"
+
+// follow user
+#define kNotificationFollowUserChanged @"kNotificationFollowUserChanged"

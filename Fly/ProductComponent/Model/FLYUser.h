@@ -20,7 +20,9 @@
 @property (nonatomic) NSInteger replyCount;
 @property (nonatomic) NSInteger topicCount;
 @property (nonatomic) NSInteger points;
+@property (nonatomic) BOOL isFollowing;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
+- (void)followUser;
 
 @end

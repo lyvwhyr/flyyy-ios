@@ -9,6 +9,7 @@
 #import "FLYUser.h"
 #import "NSDictionary+FLYAddition.h"
 #import "FLYGroup.h"
+#import "FLYUsersService.h"
 
 @implementation FLYUser
 
@@ -34,8 +35,36 @@
         _replyCount = [dict fly_integerForKey:@"replies"];
         _topicCount = [dict fly_integerForKey:@"topics"];
         _points = [dict fly_integerForKey:@"likes"];
+        _isFollowing = [dict fly_boolForKey:@"is_following"];
     }
     return self;
+}
+
+- (void)followUser
+{
+    // need to call serverFollow first so it can use the original values of a user.
+    [self _serverFollow];
+    [self _clientFollow];
+}
+
+- (void)_clientFollow
+{
+    self.isFollowing = !self.isFollowing;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationFollowUserChanged object:self userInfo:@{@"user":self}];
+}
+
+- (void)_serverFollow
+{
+    FLYFollowUserByUserIdSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        
+    };
+    
+    FLYFollowUserByUserIdErrorBlock errorBlock = ^(id responseObj, NSError *error) {
+        // revert follow
+        [self _clientFollow];
+    };
+    
+    [FLYUsersService followUserByUserId:self.userId isFollow:!self.isFollowing successBlock:successBlock error:errorBlock];
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder

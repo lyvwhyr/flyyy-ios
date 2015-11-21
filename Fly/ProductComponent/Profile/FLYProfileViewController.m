@@ -58,12 +58,14 @@
         if (!currentUser) {
             _isSelf = NO;
         } else {
-            if ([currentUser isEqual:userId]) {
+            if ([currentUser.userId isEqual:userId]) {
                 _isSelf = YES;
             } else {
                 _isSelf = NO;
             }
         }
+        
+        [self _addObservers];
     }
     return self;
 }
@@ -100,8 +102,6 @@
     self.bioTextView.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.bioTextView];
     
-    [self _setupFollowView];
-    
     self.myPostViewController = [[FLYMyTopicsViewController alloc] init];
     [self addChildViewController:self.myPostViewController];
     [self.view insertSubview:self.myPostViewController.view belowSubview:self.topBgView];
@@ -118,6 +118,8 @@
     [self updateViewConstraints];
     
     if (self.isSelf) {
+        [self _initOrUpdateFollowView];
+        
         self.user = [FLYAppStateManager sharedInstance].currentUser;
         [self _updateProfileByUser:self.user];
     } else {
@@ -141,6 +143,11 @@
     };
     
     [FLYUsersService getUserWithUserId:self.userId successBlock:successBlock error:errorBlock];
+}
+
+- (void)_addObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_followUpdated:) name:kNotificationFollowUserChanged object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -218,9 +225,17 @@
     [super updateViewConstraints];
 }
 
-- (void)_followUser
+- (void)_followButtonTapped
 {
-    [FLYUsersService followUserByUserId:self.userId isFollow:YES successBlock:nil error:nil];
+    if (self.isSelf) {
+        
+    } else {
+        if (self.user) {
+            [self.user followUser];
+        } else {
+            UALog(@"user to follow is nil");
+        }
+    }
 }
 
 - (void)_followingViewTapped
@@ -246,15 +261,40 @@
     [self.followerStatView setCount:user.followerCount];
     [self.followingStatView setCount:user.followeeCount];
     [self.postsStatView setCount:user.topicCount];
+    [self _initOrUpdateFollowView];
+    
+    [self updateViewConstraints];
 }
 
-- (void)_setupFollowView
+- (void)_initOrUpdateFollowView
 {
-    self.followButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.followButton setImage:[UIImage imageNamed:@"icon_follow_user"] forState:UIControlStateNormal];
-    [self.followButton addTarget:self action:@selector(_followUser) forControlEvents:UIControlEventTouchUpInside];
-    [self.followButton sizeToFit];
-    [self.view addSubview:self.followButton];
+    if (!self.followButton) {
+        self.followButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.followButton setImage:[UIImage imageNamed:@"icon_follow_user"] forState:UIControlStateNormal];
+        [self.followButton addTarget:self action:@selector(_followButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        [self.followButton sizeToFit];
+        [self.view addSubview:self.followButton];
+    }
+    
+    if (self.isSelf) {
+        [self.followButton setImage:[UIImage imageNamed:@"icon_share_user"] forState:UIControlStateNormal];
+    } else {
+        if (self.user.isFollowing) {
+            [self.followButton setImage:[UIImage imageNamed:@"icon_unfollow_user"] forState:UIControlStateNormal];
+        } else {
+            [self.followButton setImage:[UIImage imageNamed:@"icon_follow_user"] forState:UIControlStateNormal];
+        }
+    }
+}
+
+#pragma mark - Notification
+
+- (void)_followUpdated:(NSNotification *)notification
+{
+    FLYUser *user = [notification.userInfo objectForKey:@"user"];
+    self.user.isFollowing = user.isFollowing;
+    
+    [self _initOrUpdateFollowView];
 }
 
 #pragma mark - Navigation bar and status bar
