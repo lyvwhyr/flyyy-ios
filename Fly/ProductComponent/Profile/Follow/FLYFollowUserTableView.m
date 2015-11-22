@@ -140,7 +140,12 @@
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
-    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    FLYUser *user = self.entries[indexPath.row];
+    [self.delegate tableCellTapped:self user:user];
 }
 
 - (BOOL)_isUserInArray:(FLYUser *)user
