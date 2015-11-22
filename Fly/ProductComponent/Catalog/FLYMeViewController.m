@@ -118,6 +118,7 @@
     switch (indexPath.row) {
         case FLYEverythingElseCellTypePosts: {
             FLYMyTopicsViewController *myPostsVC = [FLYMyTopicsViewController new];
+            myPostsVC.isFullScreen = YES;
             self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
             [self.flyNavigationController pushViewController:myPostsVC animated:YES];
             break;

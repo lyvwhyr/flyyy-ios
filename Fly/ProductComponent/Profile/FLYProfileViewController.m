@@ -105,6 +105,7 @@
     [self.view addSubview:self.bioTextView];
     
     self.myPostViewController = [[FLYMyTopicsViewController alloc] init];
+    self.myPostViewController.isFullScreen = NO;
     [self addChildViewController:self.myPostViewController];
     [self.view insertSubview:self.myPostViewController.view belowSubview:self.topBgView];
     

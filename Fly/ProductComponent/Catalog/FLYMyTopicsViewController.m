@@ -18,6 +18,8 @@
 
 @implementation FLYMyTopicsViewController
 
+@synthesize isFullScreen = _isFullScreen;
+
 - (instancetype)init
 {
     if (self = [super init]) {
@@ -39,7 +41,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
 }
 
 
@@ -69,7 +70,7 @@
 
 - (BOOL)isFullScreen
 {
-    return YES;
+    return _isFullScreen;
 }
 
 -(void)_backButtonTapped
