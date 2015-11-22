@@ -44,6 +44,8 @@
         _userNameLabel = [UILabel new];
         _userNameLabel.textColor = [UIColor flyFollowUserTextColor];
         _userNameLabel.font = [UIFont flyLightFontWithSize:19];
+        _userNameLabel.adjustsFontSizeToFitWidth = YES;
+        _userNameLabel.minimumScaleFactor = 0.5;
         [self addSubview:_userNameLabel];
         
         _pointsLabel = [UILabel new];
@@ -110,15 +112,20 @@
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self.badgeImageView);
         make.leading.equalTo(self.badgeImageView.mas_trailing).offset(30);
+        make.trailing.lessThanOrEqualTo(self.pointsLabel.mas_leading).offset(-20);
     }];
     
     [self.followButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
+        make.width.equalTo(@(CGRectGetWidth(self.followButton.bounds)));
+        make.height.equalTo(@(CGRectGetHeight(self.followButton.bounds)));
         make.trailing.equalTo(self).offset(-14);
     }];
     
     [self.pointsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(self);
+        make.width.equalTo(@(CGRectGetWidth(self.pointsLabel.bounds)));
+        make.height.equalTo(@(CGRectGetHeight(self.pointsLabel.bounds)));
         make.trailing.equalTo(self.followButton.mas_leading).offset(-25);
     }];
     
