@@ -27,6 +27,11 @@
     return [FLYTopicService serviceWithEndpoint:[NSString stringWithFormat:EP_TOPIC_ME]];
 }
 
++ (instancetype)topicsByUserId:(NSString *)userId
+{
+    return [FLYTopicService serviceWithEndpoint:[NSString stringWithFormat:EP_USER_TOPICS_BY_USER_ID, userId]];
+}
+
 + (void)postTopic:(NSDictionary *)dict successBlock:(FLYPostTopicSuccessBlock)successBlock errorBlock:(FLYPostTopicErrorBlock)errorBlock
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -87,6 +92,11 @@
 - (void)nextPageBefore:(NSString *)before firstPage:(BOOL)first cursor:(BOOL)useCursor successBlock:(FLYGetTopicsSuccessBlock)successBlock errorBlock:(FLYGetTopicsErrorBlock)errorBlock
 {
     NSInteger topicsPerPage = [[FLYAppStateManager sharedInstance].configs fly_integerForKey:@"topicsPerPage" defaultValue:kTopicPaginationCount];
+    
+    // for EP_USER_TOPICS_BY_USER_ID, only return 10
+    if ([self.endpoint rangeOfString:@"/v1/users/"].location != NSNotFound) {
+        topicsPerPage = 10;
+    }
     
     NSDictionary *params = [NSDictionary new];
     if (first) {

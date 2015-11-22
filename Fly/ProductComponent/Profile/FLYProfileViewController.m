@@ -21,6 +21,7 @@
 #import "FLYShareManager.h"
 #import "Dialog.h"
 #import "FLYFollowerListViewController.h"
+#import "FLYUserFeedViewController.h"
 
 #define kTopBackgroundHeight 320
 #define kProfileStatInfoTopMargin 80
@@ -45,6 +46,7 @@
 @property (nonatomic) FLYUser *user;
 
 @property (nonatomic) FLYMyTopicsViewController *myPostViewController;
+@property (nonatomic) FLYUserFeedViewController *otherUserFeedViewController;
 
 // service
 @property (nonatomic) FLYUsersService *usersService;
@@ -109,21 +111,14 @@
     self.bioTextView.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:self.bioTextView];
     
-    self.myPostViewController = [[FLYMyTopicsViewController alloc] init];
-    self.myPostViewController.isFullScreen = NO;
-    [self addChildViewController:self.myPostViewController];
-    [self.view insertSubview:self.myPostViewController.view belowSubview:self.topBgView];
-    
-    
-    self.triangleBgImageView = [UIImageView new];
-    self.triangleBgImageView.image = [UIImage imageNamed:@"icon_triangle_profile_bg"];
-    [self.triangleBgImageView sizeToFit];
-    [self.view insertSubview:self.triangleBgImageView belowSubview:self.topBgView];
-    
     [self updateViewConstraints];
     
     if (self.isSelf) {
         self.user = [FLYAppStateManager sharedInstance].currentUser;
+        self.myPostViewController = [[FLYMyTopicsViewController alloc] init];
+        self.myPostViewController.isFullScreen = NO;
+        [self addChildViewController:self.myPostViewController];
+        [self.view insertSubview:self.myPostViewController.view belowSubview:self.topBgView];
         [self _updateProfileByUser];
     } else {
         [self _initService];
@@ -137,6 +132,7 @@
         if (responseObj) {
             self.user = [[FLYUser alloc] initWithDictionary:responseObj];
             [self _updateProfileByUser];
+            [self _initOtherFeedView];
         }
     };
     
@@ -151,13 +147,6 @@
 - (void)_addObservers
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_followUpdated:) name:kNotificationFollowUserChanged object:nil];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-//    self.flyNavigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - 44);
-//    
-//       self.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds) - 44);
 }
 
 - (void)updateViewConstraints
@@ -218,12 +207,21 @@
         make.height.equalTo(@(kProfileBadgeSize));
     }];
     
-    [self.myPostViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.triangleBgImageView).offset(-44-44-44);
-        make.leading.equalTo(self.view);
-        make.trailing.equalTo(self.view);
-        make.bottom.equalTo(self.view);
-    }];
+    if (self.isSelf && self.myPostViewController) {
+        [self.myPostViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.triangleBgImageView).offset(-44-44-44);
+            make.leading.equalTo(self.view);
+            make.trailing.equalTo(self.view);
+            make.bottom.equalTo(self.view);
+        }];
+    } else if (self.otherUserFeedViewController) {
+        [self.otherUserFeedViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.triangleBgImageView).offset(-44-44-44);
+            make.leading.equalTo(self.view);
+            make.trailing.equalTo(self.view);
+            make.bottom.equalTo(self.view);
+        }];
+    }
     
     [super updateViewConstraints];
 }
@@ -273,6 +271,7 @@
     [self _updateFollowingStatView];
     [self.postsStatView setCount:self.user.topicCount];
     [self _initOrUpdateFollowView];
+    [self _initTriangleBgView];
     [self _initBadgeView];
     
     [self updateViewConstraints];
@@ -299,10 +298,27 @@
     }
 }
 
+- (void)_initTriangleBgView
+{
+    self.triangleBgImageView = [UIImageView new];
+    self.triangleBgImageView.image = [UIImage imageNamed:@"icon_triangle_profile_bg"];
+    [self.triangleBgImageView sizeToFit];
+    [self.view insertSubview:self.triangleBgImageView belowSubview:self.topBgView];
+}
+
 - (void)_initBadgeView
 {
     self.badgeView = [[FLYBadgeView alloc] initWithPoint:self.user.points];
     [self.view addSubview:self.badgeView];
+}
+
+- (void)_initOtherFeedView
+{
+    self.otherUserFeedViewController = [[FLYUserFeedViewController alloc] initWithUserId:self.user.userId];
+    self.otherUserFeedViewController.isFullScreen = NO;
+    [self addChildViewController:self.otherUserFeedViewController];
+    [self.view insertSubview:self.otherUserFeedViewController.view belowSubview:self.topBgView];
+    [self updateViewConstraints];
 }
 
 - (void)_updateFollowerStatView

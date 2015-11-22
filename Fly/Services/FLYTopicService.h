@@ -27,6 +27,7 @@ typedef void(^FLYPostTopicErrorBlock)(id responseObj, NSError *error);
 // topics filtered by my following tags
 + (instancetype)topicsServiceMine;
 + (instancetype)myTopics;
++ (instancetype)topicsByUserId:(NSString *)userId;
 
 + (void)postTopic:(NSDictionary *)dict successBlock:(FLYPostTopicSuccessBlock)successBlock errorBlock:(FLYPostTopicErrorBlock)errorBlock;
 + (void)likeTopicWithId:(NSString *)topicId liked:(BOOL)liked successBlock:(FLYLikeSuccessBlock)successBlock errorBlock:(FLYLikeErrorBlock)errorBlock;
