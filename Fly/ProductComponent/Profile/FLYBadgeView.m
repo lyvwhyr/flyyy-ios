@@ -8,6 +8,7 @@
 
 #import "FLYBadgeView.h"
 #import "UIFont+FLYAddition.h"
+#import "FLYBadgeHelper.h"
 
 #define kBadgeImageSize 24
 
@@ -34,12 +35,13 @@
         [self addSubview:_bgImageView];
         
         _badgeImageView = [UIImageView new];
-        _badgeImageView.image = [UIImage imageNamed:@"icon_profile_badge_heart"];
+        NSInteger level = [FLYBadgeHelper getLevelForPoints:_point];
+        _badgeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%ld", @"icon_badge_l", level]];
         [_badgeImageView sizeToFit];
         [self addSubview:_badgeImageView];
         
         _pointLabel = [UILabel new];
-        _pointLabel.text = @"24";
+        _pointLabel.text = [NSString stringWithFormat:@"%ld", _point];
         _pointLabel.textColor = [UIColor whiteColor];
         _pointLabel.font = [UIFont flyFontWithSize:15];
         [_pointLabel sizeToFit];
@@ -59,8 +61,6 @@
     [self.badgeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(20);
         make.centerX.equalTo(self);
-//        make.width.equalTo(@(kBadgeImageSize));
-//        make.height.equalTo(@(kBadgeImageSize));
     }];
     
     [self.pointLabel mas_makeConstraints:^(MASConstraintMaker *make) {

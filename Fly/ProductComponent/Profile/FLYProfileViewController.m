@@ -120,13 +120,10 @@
     [self.triangleBgImageView sizeToFit];
     [self.view insertSubview:self.triangleBgImageView belowSubview:self.topBgView];
     
-    self.badgeView = [[FLYBadgeView alloc] initWithPoint:10];
-    [self.view addSubview:self.badgeView];
-    
     [self updateViewConstraints];
     
     if (self.isSelf) {
-        [self _initOrUpdateFollowView];
+//        [self _initOrUpdateFollowView];
         self.user = [FLYAppStateManager sharedInstance].currentUser;
         [self _updateProfileByUser];
     } else {
@@ -217,7 +214,7 @@
     
     [self.badgeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.triangleBgImageView).offset(-10);
-        make.trailing.equalTo(self.view).offset(-58);
+        make.trailing.equalTo(self.view).offset(-48);
         make.width.equalTo(@(kProfileBadgeSize));
         make.height.equalTo(@(kProfileBadgeSize));
     }];
@@ -277,6 +274,7 @@
     [self _updateFollowingStatView];
     [self.postsStatView setCount:self.user.topicCount];
     [self _initOrUpdateFollowView];
+    [self _initBadgeView];
     
     [self updateViewConstraints];
 }
@@ -300,6 +298,12 @@
             [self.followButton setImage:[UIImage imageNamed:@"icon_follow_user"] forState:UIControlStateNormal];
         }
     }
+}
+
+- (void)_initBadgeView
+{
+    self.badgeView = [[FLYBadgeView alloc] initWithPoint:self.user.points];
+    [self.view addSubview:self.badgeView];
 }
 
 - (void)_updateFollowerStatView
