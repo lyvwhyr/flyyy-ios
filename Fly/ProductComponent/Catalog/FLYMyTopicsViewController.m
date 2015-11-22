@@ -38,12 +38,6 @@
     self.title = LOC(@"FLYMyPosts");
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-
-
 #pragma mark - Navigation bar
 - (void)loadLeftBarButton
 {
@@ -56,11 +50,6 @@
         };
         self.navigationItem.leftBarButtonItem = barItem;
     }
-}
-
-- (void)loadRightBarButton
-{
-    
 }
 
 - (BOOL)hideLeftBarItem

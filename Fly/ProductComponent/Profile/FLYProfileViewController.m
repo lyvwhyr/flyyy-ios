@@ -123,7 +123,6 @@
     [self updateViewConstraints];
     
     if (self.isSelf) {
-//        [self _initOrUpdateFollowView];
         self.user = [FLYAppStateManager sharedInstance].currentUser;
         [self _updateProfileByUser];
     } else {
