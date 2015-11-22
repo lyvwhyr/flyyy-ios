@@ -18,6 +18,7 @@
 #import "FLYUsersService.h"
 #import "FLYUser.h"
 #import "FLYFollowingUserListViewController.h"
+#import "FLYShareManager.h"
 
 #define kTopBackgroundHeight 320
 #define kProfileStatInfoTopMargin 80
@@ -229,7 +230,7 @@
 - (void)_followButtonTapped
 {
     if (self.isSelf) {
-        
+        [FLYShareManager shareProfile:self profileName:self.user.userName];
     } else {
         if (self.user) {
             [self.user followUser];

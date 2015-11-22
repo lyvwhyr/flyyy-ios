@@ -70,4 +70,18 @@
     [fromVC presentViewController:avc animated:YES completion:nil];
 }
 
++ (void)shareProfile:(UIViewController *)fromVC profileName:(NSString *)profileName
+{
+    NSString *message = [NSString stringWithFormat:LOC(@"FLYProfileShare"), profileName, URL_SHORT_APPLE_STORE_URL];
+    NSArray * shareItems = @[message];
+    UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
+    [avc setCompletionHandler:^(NSString *activityType, BOOL completed) {
+        if (completed) {
+            NSDictionary *properties = @{kTrackingSection: @"profile", kTrackingComponent:@"complete"};
+            [[Mixpanel sharedInstance]  track:@"share" properties:properties];
+        }
+    }];
+    [fromVC presentViewController:avc animated:YES completion:nil];
+}
+
 @end

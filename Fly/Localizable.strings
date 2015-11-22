@@ -247,3 +247,6 @@
 "FLYNoFollowingTagsTitle" = "Hi!";
 "FLYNoFollowingTagsDescription" = "Join groups you like and we'll help you build your timeline.";
 "FLYNoFollowingTagsButtonText" = "Let's go!";
+
+// profile page
+"FLYProfileShare" = "This Flyy app is so fun! Follow me @%@ and download at %@.";
