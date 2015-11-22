@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7D4B72EB34192CBBF4792073 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4DA38F875E9D2C76E94F1F6 /* libPods.a */; };
+		A603B44A1C018C9A0081C850 /* FLYBadgeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A603B4491C018C9A0081C850 /* FLYBadgeHelper.m */; };
 		A60489961A85DAFD00C67480 /* FLYGroupManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A60489951A85DAFD00C67480 /* FLYGroupManager.m */; };
 		A6048A3C1A85E63100C67480 /* EXTADT.m in Sources */ = {isa = PBXBuildFile; fileRef = A6048A021A85E63100C67480 /* EXTADT.m */; };
 		A6048A3D1A85E63100C67480 /* EXTConcreteProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = A6048A041A85E63100C67480 /* EXTConcreteProtocol.m */; };
@@ -500,6 +501,8 @@
 
 /* Begin PBXFileReference section */
 		0F37115B05133DC886737552 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A603B4481C018C9A0081C850 /* FLYBadgeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYBadgeHelper.h; sourceTree = "<group>"; };
+		A603B4491C018C9A0081C850 /* FLYBadgeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYBadgeHelper.m; sourceTree = "<group>"; };
 		A60489941A85DAFD00C67480 /* FLYGroupManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYGroupManager.h; sourceTree = "<group>"; };
 		A60489951A85DAFD00C67480 /* FLYGroupManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYGroupManager.m; sourceTree = "<group>"; };
 		A6048A011A85E63100C67480 /* EXTADT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTADT.h; sourceTree = "<group>"; };
@@ -2874,6 +2877,8 @@
 				A6BF71661BFAE46D0059838D /* FLYFollowUserTableViewCell.m */,
 				A6BF71681BFAEAA00059838D /* FLYFollowingUserListViewController.h */,
 				A6BF71691BFAEAA00059838D /* FLYFollowingUserListViewController.m */,
+				A603B4481C018C9A0081C850 /* FLYBadgeHelper.h */,
+				A603B4491C018C9A0081C850 /* FLYBadgeHelper.m */,
 			);
 			name = Follow;
 			path = Profile/Follow;
@@ -3566,6 +3571,7 @@
 				A669FB661ABFE5B600A96D24 /* FLYUsernameService.m in Sources */,
 				A6048AD21A8603EF00C67480 /* AFSecurityPolicy.m in Sources */,
 				A6048ADC1A8603EF00C67480 /* UIButton+AFNetworking.m in Sources */,
+				A603B44A1C018C9A0081C850 /* FLYBadgeHelper.m in Sources */,
 				A648C0E31A19AD4A00FF1744 /* MASCompositeConstraint.m in Sources */,
 				A643AEF81AA9539E00BF4E0F /* NIState.m in Sources */,
 				A669FB321ABFD8C200A96D24 /* SVModalWebViewController.m in Sources */,

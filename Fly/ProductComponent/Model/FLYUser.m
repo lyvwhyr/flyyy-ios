@@ -34,7 +34,7 @@
         _followerCount = [dict fly_integerForKey:@"followers"];
         _replyCount = [dict fly_integerForKey:@"replies"];
         _topicCount = [dict fly_integerForKey:@"topics"];
-        _points = [dict fly_integerForKey:@"likes"];
+        _points = [dict fly_integerForKey:@"points"];
         _isFollowing = [dict fly_boolForKey:@"is_following"];
     }
     return self;

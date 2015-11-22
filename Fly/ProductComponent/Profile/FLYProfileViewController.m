@@ -121,7 +121,6 @@
     
     if (self.isSelf) {
         [self _initOrUpdateFollowView];
-        
         self.user = [FLYAppStateManager sharedInstance].currentUser;
         [self _updateProfileByUser];
     } else {
@@ -242,7 +241,7 @@
 
 - (void)_followingViewTapped
 {
-    FLYFollowingUserListViewController *vc = [[FLYFollowingUserListViewController alloc] initWithUserId:self.userId];
+    FLYFollowingUserListViewController *vc = [[FLYFollowingUserListViewController alloc] initWithUserId:self.user.userId];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
