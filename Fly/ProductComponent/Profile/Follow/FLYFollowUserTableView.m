@@ -86,6 +86,10 @@
             [FLYUsersService getFollowingWithUserId:self.userId firstPage:first cursor:cursor successBlock:successBlock errorBlock:errorBlock];
             break;
         }
+        case FLYFollowTypeFollower: {
+            [FLYUsersService getFollowersWithUserId:self.userId firstPage:first cursor:cursor successBlock:successBlock errorBlock:errorBlock];
+            break;
+        }
             
         default:
             break;

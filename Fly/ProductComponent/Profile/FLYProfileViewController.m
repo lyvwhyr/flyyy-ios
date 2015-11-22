@@ -20,6 +20,7 @@
 #import "FLYFollowingUserListViewController.h"
 #import "FLYShareManager.h"
 #import "Dialog.h"
+#import "FLYFollowerListViewController.h"
 
 #define kTopBackgroundHeight 320
 #define kProfileStatInfoTopMargin 80
@@ -84,6 +85,9 @@
     
     // followers, following, andposts info
     self.followerStatView = [[FLYProfileStatInfoView alloc] initWithCount:0 name:@"followers"];
+    UITapGestureRecognizer *followerTapGestureRecognizer = [UITapGestureRecognizer new];
+    [followerTapGestureRecognizer addTarget:self action:@selector(_followerViewTapped)];
+    [self.followerStatView addGestureRecognizer:followerTapGestureRecognizer];
     [self.view addSubview:self.followerStatView];
     
     self.followingStatView = [[FLYProfileStatInfoView alloc] initWithCount:0 name:@"following"];
@@ -244,6 +248,12 @@
 - (void)_followingViewTapped
 {
     FLYFollowingUserListViewController *vc = [[FLYFollowingUserListViewController alloc] initWithUserId:self.user.userId];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)_followerViewTapped
+{
+    FLYFollowerListViewController *vc = [[FLYFollowerListViewController alloc] initWithUserId:self.user.userId];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

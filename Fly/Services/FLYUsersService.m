@@ -120,6 +120,18 @@
 
 + (void)getFollowingWithUserId:(NSString *)userId firstPage:(BOOL)first cursor:(NSString *)cursor successBlock:(FLYGetFollowerListSuccessBlock)successBlock errorBlock:(FLYGetFollowerListErrorBlock)errorBlock
 {
+    NSString *endpoint = [NSString stringWithFormat:EP_USER_FOLLOWINGS, userId];
+    [FLYUsersService getUsersWithEndpoint:endpoint userId:userId firstPage:first cursor:cursor successBlock:successBlock errorBlock:errorBlock];
+}
+
++ (void)getFollowersWithUserId:(NSString *)userId firstPage:(BOOL)first cursor:(NSString *)cursor successBlock:(FLYGetFollowerListSuccessBlock)successBlock errorBlock:(FLYGetFollowerListErrorBlock)errorBlock
+{
+    NSString *endpoint = [NSString stringWithFormat:EP_USER_FOLLOWERS, userId];
+    [FLYUsersService getUsersWithEndpoint:endpoint userId:userId firstPage:first cursor:cursor successBlock:successBlock errorBlock:errorBlock];
+}
+
++ (void)getUsersWithEndpoint:(NSString *)ep userId:(NSString *)userId firstPage:(BOOL)first cursor:(NSString *)cursor successBlock:(FLYGetFollowerListSuccessBlock)successBlock errorBlock:(FLYGetFollowerListErrorBlock)errorBlock
+{
     NSDictionary *params = [NSDictionary new];
     if (first) {
         params = @{@"limit":@(kUserFollowingsPaginationCount)};
@@ -127,9 +139,9 @@
         params = @{@"limit":@(kUserFollowingsPaginationCount), @"cursor":cursor};
     }
     
-    NSString *endpoint = [NSString stringWithFormat:EP_USER_FOLLOWINGS, userId];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:ep parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (successBlock) {
             successBlock(operation, responseObject);
         }
