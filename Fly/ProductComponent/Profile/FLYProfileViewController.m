@@ -19,6 +19,7 @@
 #import "FLYUser.h"
 #import "FLYFollowingUserListViewController.h"
 #import "FLYShareManager.h"
+#import "Dialog.h"
 
 #define kTopBackgroundHeight 320
 #define kProfileStatInfoTopMargin 80
@@ -251,6 +252,8 @@
     if (self.isSelf) {
         FLYMyTopicsViewController *vc = [FLYMyTopicsViewController new];
         [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [Dialog simpleToast:LOC(@"FLYProfilePostsLocked")];
     }
 }
 
