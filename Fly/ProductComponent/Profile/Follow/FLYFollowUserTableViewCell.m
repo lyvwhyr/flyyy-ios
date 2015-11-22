@@ -10,6 +10,7 @@
 #import "UIFont+FLYAddition.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYUser.h"
+#import "FLYBadgeHelper.h"
 
 #define kBadgeSize 30
 
@@ -83,6 +84,8 @@
         [self.followButton setImage:[UIImage imageNamed:@"icon_follow_user_grey"] forState:UIControlStateNormal];
     }
     
+    NSInteger level = [FLYBadgeHelper getLevelForPoints:self.user.points];
+    self.badgeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%ld", @"icon_badge_l", level]];
     [self updateConstraints];
 }
 

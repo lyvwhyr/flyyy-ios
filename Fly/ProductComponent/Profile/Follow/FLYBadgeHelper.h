@@ -10,6 +10,6 @@
 
 @interface FLYBadgeHelper : NSObject
 
-- (NSInteger)getLevelForPoints:(NSInteger)points;
++ (NSInteger)getLevelForPoints:(NSInteger)points;
 
 @end

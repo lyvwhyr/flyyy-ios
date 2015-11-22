@@ -10,7 +10,7 @@
 
 @implementation FLYBadgeHelper
 
-- (NSInteger)getLevelForPoints:(NSInteger)points
++ (NSInteger)getLevelForPoints:(NSInteger)points
 {
     if (points >= 400) {
         return 5;
