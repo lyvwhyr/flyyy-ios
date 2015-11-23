@@ -29,6 +29,7 @@
 #define kProfileStatInfoWidth 70
 #define kProfileStatInfoMiddleSpacing 67
 #define kProfileBioTextTopMargin 26
+#define kProfileBioTextLeftMargin 15
 #define kProfileBadgeSize 90
 
 @interface FLYProfileViewController () <YYTextViewDelegate>
@@ -50,6 +51,8 @@
 
 // service
 @property (nonatomic) FLYUsersService *usersService;
+
+@property (nonatomic) NSInteger currentNumberOfBioLines;
 
 @end
 
@@ -111,13 +114,12 @@
     self.bioTextView.font = [UIFont flyFontWithSize:19];
     self.bioTextView.textAlignment = NSTextAlignmentCenter;
     self.bioTextView.returnKeyType = UIReturnKeyDone;
+    self.bioTextView.userInteractionEnabled = NO;
     self.bioTextView.delegate = self;
-    [self _setSelfDefaultBio];
     [self.view addSubview:self.bioTextView];
     
-    [self updateViewConstraints];
-    
     if (self.isSelf) {
+        self.bioTextView.userInteractionEnabled = YES;
         self.user = [FLYAppStateManager sharedInstance].currentUser;
         self.myPostViewController = [[FLYMyTopicsViewController alloc] init];
         self.myPostViewController.isFullScreen = NO;
@@ -127,6 +129,11 @@
     } else {
         [self _initService];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 }
 
 - (void)_initService
@@ -186,11 +193,13 @@
         make.height.equalTo(@(kProfileStatInfoHeight));
     }];
     
-    [self.bioTextView mas_makeConstraints:^(MASConstraintMaker *make) {
+    CGFloat bioTextHeight = [self _getBioTextHeight:self.bioTextView.text];
+    
+    [self.bioTextView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.followerStatView.mas_bottom).offset(kProfileBioTextTopMargin);
-        make.leading.equalTo(self.followerStatView);
-        make.trailing.equalTo(self.postsStatView);
-        make.height.equalTo(@(52));
+        make.leading.equalTo(@(kProfileBioTextLeftMargin));
+        make.trailing.equalTo(@(-kProfileBioTextLeftMargin));
+        make.height.equalTo(@(bioTextHeight));
     }];
     
     [self.followButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -277,6 +286,7 @@
     [self _initOrUpdateFollowView];
     [self _initTriangleBgView];
     [self _initBadgeView];
+    [self _initBioView];
     
     [self updateViewConstraints];
 }
@@ -314,6 +324,20 @@
 {
     self.badgeView = [[FLYBadgeView alloc] initWithPoint:self.user.points];
     [self.view addSubview:self.badgeView];
+}
+
+- (void)_initBioView
+{
+    if (self.user.textBio) {
+        self.bioTextView.text = self.user.textBio;
+        self.bioTextView.alpha = 1;
+    } else {
+        if (self.isSelf) {
+            [self _setSelfDefaultBio];
+        } else {
+            [self _setOthersDefaultBio];
+        }
+    }
 }
 
 - (void)_initOtherFeedView
@@ -380,6 +404,19 @@
     self.bioTextView.alpha = 0.44;
 }
 
+- (void)_setOthersDefaultBio
+{
+    self.bioTextView.text = LOC(@"FLYProfileBioOthersDefault");
+    self.bioTextView.alpha = 0.44;
+}
+
+- (CGFloat)_getBioTextHeight:(NSString *)bio
+{
+    CGFloat maxWidth = CGRectGetWidth([[UIScreen mainScreen] bounds]) - kProfileBioTextLeftMargin - kProfileBioTextLeftMargin - 2.0 * self.bioTextView.textContainerInset.left;
+    CGRect rect = [bio boundingRectWithSize:CGSizeMake(maxWidth, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont flyFontWithSize:19], NSParagraphStyleAttributeName:[NSParagraphStyle defaultParagraphStyle]} context:nil];
+    return rect.size.height + 5;
+}
+
 #pragma mark - YYTextViewDelegate
 
 - (BOOL)textView:(YYTextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
@@ -388,11 +425,16 @@
         [textView resignFirstResponder];
         return NO;
     }
+    
     return YES;
 }
 
 - (BOOL)textViewShouldBeginEditing:(YYTextView *)textView
 {
+    if (!self.isSelf) {
+        return NO;
+    }
+    
     self.bioTextView.alpha = 1.0f;
     if ([textView.text isEqualToString:LOC(@"FLYProfileBioSelfDefault")]) {
         textView.text = @"";
@@ -404,11 +446,32 @@
 - (void)textViewDidEndEditing:(YYTextView *)textView
 {
     NSString *cleanStr = [textView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (cleanStr == nil || [cleanStr isEqualToString:@""]) {
+        [FLYUsersService updateTextBio:nil isDelete:YES successBlock:nil error:nil];
+    } else {
+        [FLYUsersService updateTextBio:textView.text isDelete:NO successBlock:nil error:nil];
+    }
     if ([cleanStr isEqualToString:@""]) {
         [self _setSelfDefaultBio];
     }
     
-    [FLYUsersService updateTextBio:textView.text successBlock:nil error:nil];
+    self.user.textBio = textView.text;
+    [self updateViewConstraints];
+}
+
+- (void)textViewDidChange:(YYTextView *)textView
+{
+    NSUInteger maxNumberOfLines = 3;
+    NSUInteger numLines = textView.contentSize.height / textView.font.lineHeight;
+    if (self.currentNumberOfBioLines != numLines) {
+        [self updateViewConstraints];
+    }
+    
+    if (numLines > maxNumberOfLines)
+    {
+        textView.text = [textView.text substringToIndex:textView.text.length - 1];
+        [Dialog simpleToast:@"Your bio cannot be more than 3 lines"];
+    }
 }
 
 

@@ -152,19 +152,32 @@
     }];
 }
 
-+ (void)updateTextBio:(NSString *)textBio successBlock:(FLYGenericSuccessBlock)successBlock error:(FLYGenericErrorBlock)errorBlock
++ (void)updateTextBio:(NSString *)textBio isDelete:(BOOL)isDelete successBlock:(FLYGenericSuccessBlock)successBlock error:(FLYGenericErrorBlock)errorBlock
 {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *params = @{@"text_bio":textBio};
-    [manager PUT:EP_USER_TEXT_BIO parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (successBlock) {
-            successBlock(operation, responseObject);
-        }
-    } failure:^(id responseObj, NSError *error) {
-        if (errorBlock) {
-            errorBlock(responseObj, error);
-        }
-    }];
+    if (!isDelete) {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *params = @{@"text_bio":textBio};
+        [manager PUT:EP_USER_TEXT_BIO parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if (successBlock) {
+                successBlock(operation, responseObject);
+            }
+        } failure:^(id responseObj, NSError *error) {
+            if (errorBlock) {
+                errorBlock(responseObj, error);
+            }
+        }];
+    } else {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager DELETE:EP_USER_TEXT_BIO parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if (successBlock) {
+                successBlock(operation, responseObject);
+            }
+        } failure:^(id responseObj, NSError *error) {
+            if (errorBlock) {
+                errorBlock(responseObj, error);
+            }
+        }];
+    }
 }
 
 @end

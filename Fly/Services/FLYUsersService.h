@@ -47,6 +47,6 @@ typedef void(^FLYGetFollowerListErrorBlock)(id responseObj, NSError *error);
 - (void)createUserWithPhoneHash:(NSString *)phoneHash code:(NSString *)code userName:(NSString *)userName password:(NSString *)password success:(FLYCreateUserSuccessBlock)successBlock error:(FLYCreateuserErrorBlock)errorBlock;
 - (void)resetPasswordWithPhoneHash:(NSString *)phoneHash code:(NSString *)code password:(NSString *)password success:(FLYResetPasswordSuccessBlock)successBlock error:(FLYResetPasswordErrorBlock)errorBlock;
 - (void)getMeWithsuccessBlock:(FLYGetMeSuccessBlock)successBlock error:(FLYGetMeErrorBlock)errorBlock;
-+ (void)updateTextBio:(NSString *)textBio successBlock:(FLYGenericSuccessBlock)successBlock error:(FLYGenericErrorBlock)errorBlock;
++ (void)updateTextBio:(NSString *)textBio isDelete:(BOOL)isDelete successBlock:(FLYGenericSuccessBlock)successBlock error:(FLYGenericErrorBlock)errorBlock;
 
 @end
