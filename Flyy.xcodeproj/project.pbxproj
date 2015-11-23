@@ -391,6 +391,7 @@
 		A6C521641B6C274100C1085D /* FLYActivityService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C521631B6C274100C1085D /* FLYActivityService.m */; };
 		A6C521671B6C79CE00C1085D /* FLYLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C521661B6C79CE00C1085D /* FLYLoginManager.m */; };
 		A6C725E01C026EA400E6FA2D /* FLYUserFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C725DF1C026EA400E6FA2D /* FLYUserFeedViewController.m */; };
+		A6C725E41C02847200E6FA2D /* FLYFriendDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C725E31C02847200E6FA2D /* FLYFriendDiscoveryViewController.m */; };
 		A6CA54FB1AD7148D007FB6FA /* FLYTabbarOnboardingView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CA54FA1AD7148D007FB6FA /* FLYTabbarOnboardingView.m */; };
 		A6CD56E41A47D891003486DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A6CD56E31A47D891003486DD /* Localizable.strings */; };
 		A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CD56E61A47DAFB003486DD /* NSBundle+FLYAddition.m */; };
@@ -1189,6 +1190,8 @@
 		A6C521661B6C79CE00C1085D /* FLYLoginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoginManager.m; sourceTree = "<group>"; };
 		A6C725DE1C026EA400E6FA2D /* FLYUserFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUserFeedViewController.h; sourceTree = "<group>"; };
 		A6C725DF1C026EA400E6FA2D /* FLYUserFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUserFeedViewController.m; sourceTree = "<group>"; };
+		A6C725E21C02847200E6FA2D /* FLYFriendDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFriendDiscoveryViewController.h; sourceTree = "<group>"; };
+		A6C725E31C02847200E6FA2D /* FLYFriendDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFriendDiscoveryViewController.m; sourceTree = "<group>"; };
 		A6CA54F91AD7148D007FB6FA /* FLYTabbarOnboardingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTabbarOnboardingView.h; sourceTree = "<group>"; };
 		A6CA54FA1AD7148D007FB6FA /* FLYTabbarOnboardingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTabbarOnboardingView.m; sourceTree = "<group>"; };
 		A6CD56E31A47D891003486DD /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -1661,6 +1664,7 @@
 		A6263EB51A18800A00C4C3BA /* ProductComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A6C725E11C02845400E6FA2D /* DiscoverFriends */,
 				A6BA77571BF9AA9400C76765 /* Follow */,
 				A6F861A11B5882EF004753C7 /* Share */,
 				A61629BC1B13D48500DC0CCF /* PushNotification */,
@@ -2894,6 +2898,16 @@
 			path = Profile/Follow;
 			sourceTree = "<group>";
 		};
+		A6C725E11C02845400E6FA2D /* DiscoverFriends */ = {
+			isa = PBXGroup;
+			children = (
+				A6C725E21C02847200E6FA2D /* FLYFriendDiscoveryViewController.h */,
+				A6C725E31C02847200E6FA2D /* FLYFriendDiscoveryViewController.m */,
+			);
+			name = DiscoverFriends;
+			path = Profile/DiscoverFriends;
+			sourceTree = "<group>";
+		};
 		A6CD56E81A480298003486DD /* Download */ = {
 			isa = PBXGroup;
 			children = (
@@ -3547,6 +3561,7 @@
 				A651BD951A4985F20081A1E0 /* SVProgressHUD.m in Sources */,
 				A6048A411A85E63100C67480 /* EXTScope.m in Sources */,
 				A6BF71671BFAE46D0059838D /* FLYFollowUserTableViewCell.m in Sources */,
+				A6C725E41C02847200E6FA2D /* FLYFriendDiscoveryViewController.m in Sources */,
 				A690F2821AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m in Sources */,
 				A669FB611ABFD99B00A96D24 /* SVWebViewControllerActivitySafari.m in Sources */,
 				A6A11DA01B9E10130095EB18 /* FLYTagsService.m in Sources */,

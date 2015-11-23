@@ -21,6 +21,7 @@
 @property (nonatomic) NSInteger topicCount;
 @property (nonatomic) NSInteger points;
 @property (nonatomic) BOOL isFollowing;
+@property (nonatomic) NSString *textBio;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (void)followUser;

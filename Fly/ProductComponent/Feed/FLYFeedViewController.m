@@ -178,16 +178,18 @@
         [defaults synchronize];
     }
     
-    @weakify(self)
-    FLYServiceVersion version = [self.topicService serviceVersion:self.topicService.endpoint];
-    [_feedTableView addPullToRefreshWithActionHandler:^{
-        @strongify(self)
-        if (version == FLYServiceVersionOne) {
-            [self _load:YES before:nil cursor:NO];
-        } else {
-            [self _load:YES before:nil cursor:YES];
-        }
-    }];
+    if (self.feedType != FLYFeedTypeOhtersPosts) {
+        @weakify(self)
+        FLYServiceVersion version = [self.topicService serviceVersion:self.topicService.endpoint];
+        [_feedTableView addPullToRefreshWithActionHandler:^{
+            @strongify(self)
+            if (version == FLYServiceVersionOne) {
+                [self _load:YES before:nil cursor:NO];
+            } else {
+                [self _load:YES before:nil cursor:YES];
+            }
+        }];
+    }
 }
 
 #pragma mark - service
@@ -200,15 +202,17 @@
     
     FLYServiceVersion version = [self.topicService serviceVersion:self.topicService.endpoint];
     
-    @weakify(self)
-    [self.feedTableView addInfiniteScrollingWithActionHandler:^{
-        @strongify(self)
-        if (version == FLYServiceVersionOne) {
-            [self _load:NO before:self.beforeTimestamp cursor:NO];
-        } else {
-            [self _load:NO before:self.cursor cursor:YES];
-        }
-    }];
+    if (self.feedType != FLYFeedTypeOhtersPosts) {
+        @weakify(self)
+        [self.feedTableView addInfiniteScrollingWithActionHandler:^{
+            @strongify(self)
+            if (version == FLYServiceVersionOne) {
+                [self _load:NO before:self.beforeTimestamp cursor:NO];
+            } else {
+                [self _load:NO before:self.cursor cursor:YES];
+            }
+        }];
+    }
     
     if (version == FLYServiceVersionOne) {
         [self _load:YES before:nil cursor:NO];

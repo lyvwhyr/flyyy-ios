@@ -77,6 +77,8 @@
 {
     [super viewDidLoad];
     
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     // observers need to be called on every viewController creation. Otherwise, profile view won't be updated correctly
     [self _addObservers];
     
@@ -105,10 +107,12 @@
     [self.view addSubview:self.postsStatView];
     
     self.bioTextView = [YYTextView new];
-    self.bioTextView.text = @"\"Tell us about yourself\"";
     self.bioTextView.textColor = [UIColor whiteColor];
     self.bioTextView.font = [UIFont flyFontWithSize:19];
     self.bioTextView.textAlignment = NSTextAlignmentCenter;
+    self.bioTextView.returnKeyType = UIReturnKeyDone;
+    self.bioTextView.delegate = self;
+    [self _setSelfDefaultBio];
     [self.view addSubview:self.bioTextView];
     
     [self updateViewConstraints];
@@ -131,8 +135,8 @@
     {
         if (responseObj) {
             self.user = [[FLYUser alloc] initWithDictionary:responseObj];
-            [self _updateProfileByUser];
             [self _initOtherFeedView];
+            [self _updateProfileByUser];
         }
     };
     
@@ -216,7 +220,7 @@
         }];
     } else if (self.otherUserFeedViewController) {
         [self.otherUserFeedViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.triangleBgImageView).offset(-44-44-44);
+            make.top.equalTo(self.triangleBgImageView).offset(-44);
             make.leading.equalTo(self.view);
             make.trailing.equalTo(self.view);
             make.bottom.equalTo(self.view);
@@ -318,7 +322,6 @@
     self.otherUserFeedViewController.isFullScreen = NO;
     [self addChildViewController:self.otherUserFeedViewController];
     [self.view insertSubview:self.otherUserFeedViewController.view belowSubview:self.topBgView];
-    [self updateViewConstraints];
 }
 
 - (void)_updateFollowerStatView
@@ -368,6 +371,46 @@
     self.user.isFollowing = user.isFollowing;
     [self _initOrUpdateFollowView];
 }
+
+#pragma mark - TextView
+
+- (void)_setSelfDefaultBio
+{
+    self.bioTextView.text = LOC(@"FLYProfileBioSelfDefault");
+    self.bioTextView.alpha = 0.44;
+}
+
+#pragma mark - YYTextViewDelegate
+
+- (BOOL)textView:(YYTextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)textViewShouldBeginEditing:(YYTextView *)textView
+{
+    self.bioTextView.alpha = 1.0f;
+    if ([textView.text isEqualToString:LOC(@"FLYProfileBioSelfDefault")]) {
+        textView.text = @"";
+        textView.selectedRange = NSMakeRange(0, 0);
+    }
+    return YES;
+}
+
+- (void)textViewDidEndEditing:(YYTextView *)textView
+{
+    NSString *cleanStr = [textView.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if ([cleanStr isEqualToString:@""]) {
+        [self _setSelfDefaultBio];
+    }
+    
+    [FLYUsersService updateTextBio:textView.text successBlock:nil error:nil];
+}
+
 
 #pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor

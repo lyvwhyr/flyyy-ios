@@ -36,6 +36,11 @@
         _topicCount = [dict fly_integerForKey:@"topics"];
         _points = [dict fly_integerForKey:@"points"];
         _isFollowing = [dict fly_boolForKey:@"is_following"];
+        
+        NSDictionary *bioDict = [dict fly_dictionaryForKey:@"bio"];
+        if (bioDict) {
+            _textBio = [bioDict fly_stringForKey:@"text"];
+        }
     }
     return self;
 }

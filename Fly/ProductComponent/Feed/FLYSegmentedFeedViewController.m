@@ -18,6 +18,7 @@
 #import "UIBarButtonItem+Badge.h"
 #import "FLYNavigationController.h"
 #import "FLYTopicService.h"
+#import "FLYFriendDiscoveryViewController.h"
 
 @interface FLYSegmentedFeedViewController () <FLYFeedViewControllerDelegate>
 
@@ -116,7 +117,7 @@
     @weakify(self)
     barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
         @strongify(self)
-        [self _shareTapped];
+        [self _inviteFriends];
     };
     self.navigationItem.rightBarButtonItem = barItem;
 }
@@ -183,15 +184,10 @@
     return NO;
 }
 
-- (void)_shareTapped
+- (void)_inviteFriends
 {
-    SCLAlertView *alert = [[SCLAlertView alloc] init];
-    
-    [alert addButton:LOC(@"FLYInviteFriendsInviteButtonText") actionBlock:^(void) {
-        [FLYShareManager inviteFriends:self];
-    }];
-    
-    [alert showCustom:self image:[UIImage imageNamed:@"icon_homefeed_playgreenempty"] color:[UIColor flyBlue] title:LOC(@"FLYInviteFriendsTitleText") subTitle:LOC(@"FLYInviteFriendsSubTitleText") closeButtonTitle:LOC(@"FLYButtonCancelText") duration:0.0f];
+    FLYFriendDiscoveryViewController *vc = [FLYFriendDiscoveryViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

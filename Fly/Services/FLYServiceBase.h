@@ -10,6 +10,9 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "AFHTTPRequestOperation.h"
 
+typedef void(^FLYGenericSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
+typedef void(^FLYGenericErrorBlock)(id responseObj, NSError *error);
+
 typedef NS_ENUM(NSInteger, FLYServiceVersion) {
     FLYServiceVersionOne = 0,
     FLYServiceVersionTwo

@@ -27,4 +27,7 @@
 #import "EXTScope.h"
 #import "FLYScribe.h"
 
+#import "UIColor+FLYAddition.h"
+#import "UIFont+FLYAddition.h"
+
 #endif

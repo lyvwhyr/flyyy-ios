@@ -47,6 +47,8 @@
 #define EP_USER_FOLLOWINGS                          @"/v1/users/%@/followees"
 #define EP_USER_FOLLOWERS                           @"/v1/users/%@/followers"
 #define EP_USER_TOPICS_BY_USER_ID                   @"/v1/users/%@/topics"
+#define EP_USER_TEXT_BIO                            @"/v1/users/text_bio"
+#define EP_USER_AUDIO_BIO                           @"/v1/users/audio_bio"
 
 // reset password
 #define EP_USER_RESET                               @"v1/users/reset"
