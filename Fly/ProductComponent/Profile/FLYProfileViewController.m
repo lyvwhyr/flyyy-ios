@@ -29,7 +29,7 @@
 #define kProfileStatInfoWidth 70
 #define kProfileStatInfoMiddleSpacing 67
 #define kProfileBioTextTopMargin 26
-#define kProfileBioTextLeftMargin 15
+#define kProfileBioTextLeftMargin 20
 #define kProfileBadgeSize 90
 
 @interface FLYProfileViewController () <YYTextViewDelegate>
