@@ -23,7 +23,7 @@
     if (self = [super init]) {
         _firstLineLabel = [UILabel new];
         _firstLineLabel.text = [@(count) stringValue];
-        _firstLineLabel.font = [UIFont flyFontWithSize:24.0f];
+        _firstLineLabel.font = [UIFont flyFontWithSize:22.0f];
         _firstLineLabel.textColor = [UIColor whiteColor];
         [_firstLineLabel sizeToFit];
         [self addSubview:_firstLineLabel];

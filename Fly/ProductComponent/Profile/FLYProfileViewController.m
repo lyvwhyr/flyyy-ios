@@ -178,8 +178,58 @@
         make.leading.equalTo(self.view);
         make.trailing.equalTo(self.view);
     }];
-    if (CGRectGetWidth([UIScreen mainScreen].bounds) > 320) {
+    if (CGRectGetWidth([UIScreen mainScreen].bounds) > 375) {
+        [self.audioBioButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.view).offset(40);
+            make.top.equalTo(self.view).offset(kProfileAudioBioTopMargin);
+        }];
         
+        [self.postsStatView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.followerStatView);
+            make.trailing.equalTo(self.view).offset(-30);
+            make.width.equalTo(@(kProfileStatInfoWidth));
+            make.height.equalTo(@(kProfileStatInfoHeight));
+        }];
+        
+        [self.followingStatView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.audioBioButton);
+            make.trailing.equalTo(self.postsStatView.mas_leading).offset(-25);
+            make.width.equalTo(@(kProfileStatInfoWidth));
+            make.height.equalTo(@(kProfileStatInfoHeight));
+        }];
+        
+        [self.followerStatView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.audioBioButton);
+            make.trailing.equalTo(self.followingStatView.mas_leading).offset(-25);
+            make.width.equalTo(@(kProfileStatInfoWidth));
+            make.height.equalTo(@(kProfileStatInfoHeight));
+        }];
+    } else if (CGRectGetWidth([UIScreen mainScreen].bounds) > 320) {
+        [self.audioBioButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.view).offset(30);
+            make.top.equalTo(self.view).offset(kProfileAudioBioTopMargin);
+        }];
+        
+        [self.postsStatView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.followerStatView);
+            make.trailing.equalTo(self.view).offset(-15);
+            make.width.equalTo(@(kProfileStatInfoWidth));
+            make.height.equalTo(@(kProfileStatInfoHeight));
+        }];
+        
+        [self.followingStatView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.audioBioButton);
+            make.trailing.equalTo(self.postsStatView.mas_leading).offset(-20);
+            make.width.equalTo(@(kProfileStatInfoWidth));
+            make.height.equalTo(@(kProfileStatInfoHeight));
+        }];
+        
+        [self.followerStatView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.audioBioButton);
+            make.trailing.equalTo(self.followingStatView.mas_leading).offset(-20);
+            make.width.equalTo(@(kProfileStatInfoWidth));
+            make.height.equalTo(@(kProfileStatInfoHeight));
+        }];
     } else {
         CGFloat middleSpacing = (CGRectGetWidth([UIScreen mainScreen].bounds) - kProfileAudioBioWidth - kProfileStatInfoWidth * 3 - kProfileAudioBioLeftMargin *2) / 3.0f;
         
@@ -209,8 +259,6 @@
             make.height.equalTo(@(kProfileStatInfoHeight));
         }];
     }
-    
-    
 
     
     CGFloat bioTextHeight = [self _getBioTextHeight:self.bioTextView.text];
