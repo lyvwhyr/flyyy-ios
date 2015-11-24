@@ -22,12 +22,15 @@
 #import "Dialog.h"
 #import "FLYFollowerListViewController.h"
 #import "FLYUserFeedViewController.h"
+#import "FLYRecordViewController.h"
 
 #define kTopBackgroundHeight 320
-#define kProfileStatInfoTopMargin 80
+#define kProfileAudioBioLeftMargin 20
+#define kProfileAudioBioWidth 54
+#define kProfileAudioBioTopMargin 80
 #define kProfileStatInfoHeight 55
 #define kProfileStatInfoWidth 70
-#define kProfileStatInfoMiddleSpacing 67
+#define kProfileStatInfoPostsRightMargin 5
 #define kProfileBioTextTopMargin 26
 #define kProfileBioTextLeftMargin 20
 #define kProfileBadgeSize 90
@@ -40,6 +43,7 @@
 @property (nonatomic) FLYProfileStatInfoView *followingStatView;
 @property (nonatomic) FLYProfileStatInfoView *postsStatView;
 @property (nonatomic) YYTextView *bioTextView;
+@property (nonatomic) UIButton *audioBioButton;
 @property (nonatomic) UIButton *followButton;
 @property (nonatomic) FLYBadgeView *badgeView;
 
@@ -118,6 +122,12 @@
     self.bioTextView.delegate = self;
     [self.view addSubview:self.bioTextView];
     
+    self.audioBioButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.audioBioButton setImage:[UIImage imageNamed:@"icon_profile_playback"] forState:UIControlStateNormal];
+    [self.audioBioButton addTarget:self action:@selector(_audioBioButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.audioBioButton sizeToFit];
+    [self.view addSubview:self.audioBioButton];
+    
     if (self.isSelf) {
         self.bioTextView.userInteractionEnabled = YES;
         self.user = [FLYAppStateManager sharedInstance].currentUser;
@@ -162,36 +172,46 @@
 
 - (void)updateViewConstraints
 {
-    CGFloat leftMargin = (CGRectGetWidth([UIScreen mainScreen].bounds) - kProfileStatInfoWidth * 3 - kProfileStatInfoMiddleSpacing * 2) / 2.0f;
-    
-    
     [self.topBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
         make.height.equalTo(@(kTopBackgroundHeight));
         make.leading.equalTo(self.view);
         make.trailing.equalTo(self.view);
     }];
+    if (CGRectGetWidth([UIScreen mainScreen].bounds) > 320) {
+        
+    } else {
+        CGFloat middleSpacing = (CGRectGetWidth([UIScreen mainScreen].bounds) - kProfileAudioBioWidth - kProfileStatInfoWidth * 3 - kProfileAudioBioLeftMargin *2) / 3.0f;
+        
+        [self.audioBioButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.view).offset(kProfileAudioBioLeftMargin);
+            make.top.equalTo(self.view).offset(kProfileAudioBioTopMargin);
+        }];
+        
+        [self.postsStatView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.followerStatView);
+            make.trailing.equalTo(self.view).offset(-kProfileStatInfoPostsRightMargin);
+            make.width.equalTo(@(kProfileStatInfoWidth));
+            make.height.equalTo(@(kProfileStatInfoHeight));
+        }];
+        
+        [self.followingStatView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.audioBioButton);
+            make.trailing.equalTo(self.postsStatView.mas_leading).offset(-middleSpacing);
+            make.width.equalTo(@(kProfileStatInfoWidth));
+            make.height.equalTo(@(kProfileStatInfoHeight));
+        }];
+        
+        [self.followerStatView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.audioBioButton);
+            make.trailing.equalTo(self.followingStatView.mas_leading).offset(-middleSpacing);
+            make.width.equalTo(@(kProfileStatInfoWidth));
+            make.height.equalTo(@(kProfileStatInfoHeight));
+        }];
+    }
     
-    [self.followerStatView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(kProfileStatInfoTopMargin);
-        make.leading.equalTo(self.view).offset(leftMargin);
-        make.width.equalTo(@(kProfileStatInfoWidth));
-        make.height.equalTo(@(kProfileStatInfoHeight));
-    }];
     
-    [self.followingStatView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.followerStatView);
-        make.leading.equalTo(self.followerStatView.mas_trailing).offset(kProfileStatInfoMiddleSpacing);
-        make.width.equalTo(@(kProfileStatInfoWidth));
-        make.height.equalTo(@(kProfileStatInfoHeight));
-    }];
-    
-    [self.postsStatView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.followerStatView);
-        make.leading.equalTo(self.followingStatView.mas_trailing).offset(kProfileStatInfoMiddleSpacing);
-        make.width.equalTo(@(kProfileStatInfoWidth));
-        make.height.equalTo(@(kProfileStatInfoHeight));
-    }];
+
     
     CGFloat bioTextHeight = [self _getBioTextHeight:self.bioTextView.text];
     
@@ -239,6 +259,9 @@
     [super updateViewConstraints];
 }
 
+
+#pragma mark - Tap events
+
 - (void)_followButtonTapped
 {
     if (self.isSelf) {
@@ -272,6 +295,11 @@
     } else {
         [Dialog simpleToast:LOC(@"FLYProfilePostsLocked")];
     }
+}
+
+- (void)_audioBioButtonTapped
+{
+    
 }
 
 #pragma mark - update profile

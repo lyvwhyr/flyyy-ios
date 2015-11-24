@@ -102,6 +102,8 @@
 "FLYOnboardingFirstTimeHint" = "Tap the button and leave the world a message";
 "FLYOnboardingFirstTimeHintHighlight" = "button";
 
+"FLYOnboardingAudioBioHint" = "A few words about yourself. Tap to record.";
+
 //Topic detail
 "FLYTopicDetailTabbarComment" = "Comment";
 "FLYTopicDetailTabbarPlayAll" = "Play all";
