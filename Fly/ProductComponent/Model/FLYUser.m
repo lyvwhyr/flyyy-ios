@@ -10,6 +10,7 @@
 #import "NSDictionary+FLYAddition.h"
 #import "FLYGroup.h"
 #import "FLYUsersService.h"
+#import "FLYServerConfig.h"
 
 @implementation FLYUser
 
@@ -40,8 +41,10 @@
         NSDictionary *bioDict = [dict fly_dictionaryForKey:@"bio"];
         if (bioDict) {
             _textBio = [bioDict fly_stringForKey:@"text"];
-            _audioBio = [bioDict fly_stringForKey:@"media_path"];
             _audioBioDuration = [bioDict fly_integerForKey:@"audio_duration"];
+            if (_audioBioDuration > 0) {
+                _audioBioURL = [NSString stringWithFormat:@"%@/%@", [FLYServerConfig getAssetURL], [bioDict fly_stringForKey:@"media_path"]];
+            }
         }
     }
     return self;

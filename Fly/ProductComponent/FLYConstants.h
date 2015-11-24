@@ -13,7 +13,7 @@
 #define KReplyPaginationCount 20
 #define kUserFollowingsPaginationCount 50
 #define kUserFollowersPaginationCount 50
-#define kStreamingMinimialLen 5
+#define kStreamingMinimialLen 3
 #define kUsernameMaxLen 20
 #define kDefaultMaxRecordingLen 60
 #define kActivityPaginationCount 50

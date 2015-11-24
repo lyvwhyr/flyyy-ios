@@ -23,6 +23,7 @@
 #import "FLYFollowerListViewController.h"
 #import "FLYUserFeedViewController.h"
 #import "FLYRecordViewController.h"
+#import "FLYAudioManager.h"
 
 #define kTopBackgroundHeight 320
 #define kProfileAudioBioLeftMargin 20
@@ -349,7 +350,9 @@
 - (void)_audioBioButtonTapped
 {
     if (self.user.audioBioDuration > 0) {
+        FLYAudioItem *newItem = [[FLYAudioItem alloc] initWithUrl:[NSURL URLWithString:self.user.audioBioURL] andCount:0 indexPath:nil itemType:FLYPlayableItemAudioBio playState:FLYPlayStateNotSet audioDuration:self.user.audioBioDuration];
         
+        [[FLYAudioManager sharedInstance] updateAudioState:newItem];
     } else {
         if (self.isSelf) {
             FLYRecordViewController *vc = [[FLYRecordViewController alloc] initWithRecordType:RecordingForAudioBio];

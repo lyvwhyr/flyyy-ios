@@ -21,8 +21,8 @@
 @property (nonatomic) NSInteger topicCount;
 @property (nonatomic) NSInteger points;
 @property (nonatomic) BOOL isFollowing;
-@property (nonatomic) NSString *textBio;
-@property (nonatomic) NSString *audioBio;
+@property (nonatomic, copy) NSString *textBio;
+@property (nonatomic, copy) NSString *audioBioURL;
 @property (nonatomic) NSInteger audioBioDuration;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;

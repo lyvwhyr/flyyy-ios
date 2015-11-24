@@ -394,7 +394,7 @@
             [self.progressHUD dismiss];
         }
         FLYUser *newUser = [[FLYUser alloc] initWithDictionary:responseObj];
-        [FLYAppStateManager sharedInstance].currentUser.audioBio = newUser.audioBio;
+        [FLYAppStateManager sharedInstance].currentUser.audioBioURL = newUser.audioBioURL;
         [FLYAppStateManager sharedInstance].currentUser.audioBioDuration = newUser.audioBioDuration;
         
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
