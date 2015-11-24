@@ -73,6 +73,7 @@
 // onboarding
 #define kFeedOnboardingKey @"kFeedOnboardingKey"
 #define kRecordingOnboardingKey @"kRecordingOnboardingKey"
+#define kRecordingAudioBioOnboardingKey @"kRecordingAudioBioOnboardingKey"
 #define kTopicDetailOnboardingKey @"kTopicDetailOnboardingKey"
 
 // user default

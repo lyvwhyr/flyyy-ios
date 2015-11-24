@@ -180,4 +180,19 @@
     }
 }
 
++ (void)updateAudioBioWithMediaId:(NSString *)mediaId audioDuration:(NSInteger)audioDuration successBlock:(FLYGenericSuccessBlock)successBlock error:(FLYGenericErrorBlock)errorBlock
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *params = @{@"media_id":mediaId, @"audio_duration":@(audioDuration)};
+    [manager PUT:EP_USER_AUDIO_BIO parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
+    } failure:^(id responseObj, NSError *error) {
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
+    }];
+}
+
 @end

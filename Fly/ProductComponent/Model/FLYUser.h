@@ -22,6 +22,8 @@
 @property (nonatomic) NSInteger points;
 @property (nonatomic) BOOL isFollowing;
 @property (nonatomic) NSString *textBio;
+@property (nonatomic) NSString *audioBio;
+@property (nonatomic) NSInteger audioBioDuration;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 - (void)followUser;

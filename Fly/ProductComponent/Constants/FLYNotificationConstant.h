@@ -51,3 +51,5 @@
 
 // follow user
 #define kNotificationFollowUserChanged @"kNotificationFollowUserChanged"
+
+#define kNotificationAudioBioUpdated @"kNotificationAudioBioUpdated"

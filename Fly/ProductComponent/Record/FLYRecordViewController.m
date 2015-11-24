@@ -42,6 +42,7 @@
 #import "FLYDashTextView.h"
 #import "UIFont+FLYAddition.h"
 #import "FLYReplyService.h"
+#import "FLYUsersService.h"
 
 #define kInnerCircleRadius 100
 #define kOuterCircleRadius 150
@@ -140,7 +141,9 @@
     //Set up title
     if (self.recordingType == RecordingForReply) {
         self.title = LOC(@"FLYRecordingCommentTitle");
-    } else {
+    } else if (self.recordingType == RecordingForAudioBio) {
+        self.title = LOC(@"FLYRecordingAudioBioTitle");
+    }else {
         self.title = LOC(@"FLYRecordingRecordTitle");
     }
     UIFont *titleFont = [UIFont fontWithName:@"Avenir-Book" size:16];
@@ -279,6 +282,25 @@
             prePostVC.defaultGroup = self.defaultGroup;
         }
         [self.navigationController pushViewController:prePostVC animated:YES];
+    } else if (self.recordingType == RecordingForAudioBio) {
+        self.progressHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        self.progressHUD.delegate = self;
+        self.progressHUD.textLabel.text = @"Saving...";
+        [self.progressHUD showInView:self.view];
+        
+        @weakify(self)
+        FLYUploadToS3SuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+            @strongify(self)
+            [self _postBioIntroWithMediaId:[FLYAppStateManager sharedInstance].mediaId duration:self.audioLength];
+        };
+        
+        FLYUploadToS3ErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self _enableUserInteractionsAfterAnimation];
+            
+            [self.progressHUD dismiss];
+            [Dialog simpleToast:LOC(@"FLYGenericError")];
+        };
+        [FLYMediaService getSignedUrlAndUploadWithSuccessBlock:successBlock errorBlock:errorBlock];
     } else {
         [self _disableUserInteractionsOnAnimation];
         NSDictionary *properties = @{kTrackingSection: @"post_page", kTrackingComponent:@"reply",  kTrackingElement:@"post_button", kTrackingAction:@"click"};
@@ -365,6 +387,33 @@
     [FLYReplyService postReply:dict successBlock:successBlock errorBlock:errorBlock];
 }
 
+- (void)_postBioIntroWithMediaId:(NSString *)mediaId duration:(NSInteger)duration
+{
+    FLYGenericSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        if (self.progressHUD && self.progressHUD.visible) {
+            [self.progressHUD dismiss];
+        }
+        FLYUser *newUser = [[FLYUser alloc] initWithDictionary:responseObj];
+        [FLYAppStateManager sharedInstance].currentUser.audioBio = newUser.audioBio;
+        [FLYAppStateManager sharedInstance].currentUser.audioBioDuration = newUser.audioBioDuration;
+        
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [self _enableUserInteractionsAfterAnimation];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationAudioBioUpdated object:self];
+    };
+    
+    FLYGenericErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self _enableUserInteractionsAfterAnimation];
+        if (self.progressHUD && self.progressHUD.visible) {
+            [self.progressHUD dismiss];
+        }
+        [Dialog simpleToast:LOC(@"FLYGenericError")];
+    };
+    
+    [FLYUsersService updateAudioBioWithMediaId:mediaId audioDuration:duration successBlock:successBlock error:errorBlock];
+}
+
 
 - (void)_setupInitialViewState
 {
@@ -397,9 +446,16 @@
     [self.view addSubview:_userActionImageView];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL hasSeenRecordingOnboarding = [[defaults objectForKey:kRecordingOnboardingKey] boolValue];
-    if(!hasSeenRecordingOnboarding) {
-        [self _setupOnboardingView];
+    if (self.recordingType == RecordingForAudioBio) {
+        BOOL hasSeenBioRecordingOnboarding = [[defaults objectForKey:kRecordingAudioBioOnboardingKey] boolValue];
+        if(!hasSeenBioRecordingOnboarding) {
+            [self _setupOnboardingView];
+        }
+    } else {
+        BOOL hasSeenRecordingOnboarding = [[defaults objectForKey:kRecordingOnboardingKey] boolValue];
+        if(!hasSeenRecordingOnboarding) {
+            [self _setupOnboardingView];
+        }
     }
     
     [self.glowView removeFromSuperview];
@@ -545,13 +601,27 @@
 - (void)_setupOnboardingView
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:@(YES) forKey:kRecordingOnboardingKey];
+    if (self.recordingType == RecordingForAudioBio) {
+        [defaults setObject:@(YES) forKey:kRecordingAudioBioOnboardingKey];
+    } else {
+        [defaults setObject:@(YES) forKey:kRecordingOnboardingKey];
+    }
     [defaults synchronize];
+    
+    NSString *onboardingText;
+    NSArray *highlightItems;
+    if (self.recordingType == RecordingForAudioBio) {
+        onboardingText = LOC(@"FLYOnboardingAudioBioHint");
+        highlightItems = @[];
+    } else {
+        onboardingText = LOC(@"FLYOnboardingFirstTimeHint");
+        highlightItems = @[LOC(@"FLYOnboardingFirstTimeHintHighlight")];
+    }
     
     UIFont *font = [UIFont flyFontWithSize:18];
     UIFont *highlightFont = [UIFont fontWithName:@"Avenir-black" size:18];
     UIEdgeInsets insets = UIEdgeInsetsMake(20, 20, 20, 20);
-    _onboardingTextView = [[FLYDashTextView alloc] initWithText:LOC(@"FLYOnboardingFirstTimeHint") font:font color:[UIColor flyBlue] hightlightItems:@[LOC(@"FLYOnboardingFirstTimeHintHighlight")] highlightFont:highlightFont edgeInsets:insets dashColor:FLYDashTextBlue maxLabelWidth:kOnboardingMaxWidth];
+    _onboardingTextView = [[FLYDashTextView alloc] initWithText:onboardingText font:font color:[UIColor flyBlue] hightlightItems:highlightItems highlightFont:highlightFont edgeInsets:insets dashColor:FLYDashTextBlue maxLabelWidth:kOnboardingMaxWidth];
     [self.view addSubview:_onboardingTextView];
     
     _dashTextViewArrow = [UIImageView new];

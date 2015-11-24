@@ -138,6 +138,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[FLYProfileViewController viewDidLoad]:FLYProfileViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[FLYFeedViewController tableView:willDisplayCell:forRowAtIndexPath:]:FLYFeedViewController.m">
          <PersistentStrings>
             <PersistentString

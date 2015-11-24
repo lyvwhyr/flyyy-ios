@@ -178,6 +178,7 @@
         make.leading.equalTo(self.view);
         make.trailing.equalTo(self.view);
     }];
+    
     if (CGRectGetWidth([UIScreen mainScreen].bounds) > 375) {
         [self.audioBioButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self.view).offset(40);
@@ -347,7 +348,15 @@
 
 - (void)_audioBioButtonTapped
 {
-    
+    if (self.user.audioBioDuration > 0) {
+        
+    } else {
+        if (self.isSelf) {
+            FLYRecordViewController *vc = [[FLYRecordViewController alloc] initWithRecordType:RecordingForAudioBio];
+            FLYNavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:vc];
+            [self presentViewController:navigationController animated:NO completion:nil];
+        }
+    }
 }
 
 #pragma mark - update profile
@@ -363,6 +372,7 @@
     [self _initTriangleBgView];
     [self _initBadgeView];
     [self _initBioView];
+    [self _initAudioView];
     
     [self updateViewConstraints];
 }
@@ -412,6 +422,22 @@
             [self _setSelfDefaultBio];
         } else {
             [self _setOthersDefaultBio];
+        }
+    }
+}
+
+- (void)_initAudioView
+{
+    if (self.user.audioBioDuration > 0) {
+        [self.audioBioButton setImage:[UIImage imageNamed:@"icon_profile_playback"] forState:UIControlStateNormal];
+    } else {
+        // User hasn't entered audio bio
+        if (self.isSelf) {
+            [self.audioBioButton setImage:[UIImage imageNamed:@"icon_profile_record_bio"] forState:UIControlStateNormal];
+        } else {
+            [self.audioBioButton setImage:[UIImage imageNamed:@"icon_profile_playback"] forState:UIControlStateNormal];
+            self.audioBioButton.alpha = 0.44f;
+            self.audioBioButton.enabled = NO;
         }
     }
 }
