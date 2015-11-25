@@ -37,8 +37,6 @@
         [self addSubview:_badgeView];
         
         _badgeImageView = [UIImageView new];
-        _badgeImageView.image = [UIImage imageNamed:@"icon_profile_badge_heart"];
-        [_badgeImageView sizeToFit];
         [_badgeView addSubview:_badgeImageView];
         
         _userNameLabel = [UILabel new];
@@ -88,6 +86,7 @@
     
     NSInteger level = [FLYBadgeHelper getLevelForPoints:self.user.points];
     self.badgeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%ld", @"icon_badge_l", level]];
+    [self.badgeImageView sizeToFit];
     [self updateConstraints];
 }
 
@@ -107,6 +106,7 @@
     
     [self.badgeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.badgeView);
+        make.size.lessThanOrEqualTo(self.badgeView);
     }];
     
     [self.userNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {

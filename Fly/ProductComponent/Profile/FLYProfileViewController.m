@@ -24,6 +24,7 @@
 #import "FLYUserFeedViewController.h"
 #import "FLYRecordViewController.h"
 #import "FLYAudioManager.h"
+#import "NAKPlaybackIndicatorView.h"
 
 #define kTopBackgroundHeight 320
 #define kProfileAudioBioLeftMargin 20
@@ -45,6 +46,7 @@
 @property (nonatomic) FLYProfileStatInfoView *postsStatView;
 @property (nonatomic) YYTextView *bioTextView;
 @property (nonatomic) UIButton *audioBioButton;
+@property (nonatomic) NAKPlaybackIndicatorView *playbackIndicatorView;
 @property (nonatomic) UIButton *followButton;
 @property (nonatomic) FLYBadgeView *badgeView;
 
@@ -262,6 +264,12 @@
         }];
     }
 
+    [self.playbackIndicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view).offset(40);
+        make.top.equalTo(self.view).offset(kProfileAudioBioTopMargin);
+        make.width.equalTo(@(kProfileAudioBioWidth));
+        make.height.equalTo(@(kProfileAudioBioWidth));
+    }];
     
     CGFloat bioTextHeight = [self _getBioTextHeight:self.bioTextView.text];
     
@@ -353,6 +361,14 @@
         FLYAudioItem *newItem = [[FLYAudioItem alloc] initWithUrl:[NSURL URLWithString:self.user.audioBioURL] andCount:0 indexPath:nil itemType:FLYPlayableItemAudioBio playState:FLYPlayStateNotSet audioDuration:self.user.audioBioDuration];
         
         [[FLYAudioManager sharedInstance] updateAudioState:newItem];
+        
+        _playbackIndicatorView = [[NAKPlaybackIndicatorView alloc] initWithFrame:CGRectZero];
+        _playbackIndicatorView.tintColor = [UIColor colorWithHue:0.968 saturation:0.827 brightness:1.000 alpha:1.000];
+        _playbackIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addSubview:_playbackIndicatorView];
+        _playbackIndicatorView.state = NAKPlaybackIndicatorViewStatePlaying;
+        [self updateViewConstraints];
+
     } else {
         if (self.isSelf) {
             FLYRecordViewController *vc = [[FLYRecordViewController alloc] initWithRecordType:RecordingForAudioBio];

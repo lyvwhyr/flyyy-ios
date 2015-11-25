@@ -59,8 +59,10 @@
     }];
     
     [self.badgeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(20);
+        make.top.equalTo(self).offset(15);
         make.centerX.equalTo(self);
+        make.width.lessThanOrEqualTo(@(35));
+        make.height.lessThanOrEqualTo(@(35));
     }];
     
     [self.pointLabel mas_makeConstraints:^(MASConstraintMaker *make) {

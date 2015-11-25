@@ -447,10 +447,7 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (self.recordingType == RecordingForAudioBio) {
-        BOOL hasSeenBioRecordingOnboarding = [[defaults objectForKey:kRecordingAudioBioOnboardingKey] boolValue];
-        if(!hasSeenBioRecordingOnboarding) {
-            [self _setupOnboardingView];
-        }
+        [self _setupOnboardingView];
     } else {
         BOOL hasSeenRecordingOnboarding = [[defaults objectForKey:kRecordingOnboardingKey] boolValue];
         if(!hasSeenRecordingOnboarding) {
@@ -601,11 +598,7 @@
 - (void)_setupOnboardingView
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (self.recordingType == RecordingForAudioBio) {
-        [defaults setObject:@(YES) forKey:kRecordingAudioBioOnboardingKey];
-    } else {
-        [defaults setObject:@(YES) forKey:kRecordingOnboardingKey];
-    }
+    [defaults setObject:@(YES) forKey:kRecordingOnboardingKey];
     [defaults synchronize];
     
     NSString *onboardingText;

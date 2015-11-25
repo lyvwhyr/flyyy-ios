@@ -252,6 +252,8 @@
 		A67208201A35689600B2C5B5 /* icon_seconds@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A672081F1A35689600B2C5B5 /* icon_seconds@3x.png */; };
 		A67208231A3569C600B2C5B5 /* FLYReplyPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = A67208221A3569C600B2C5B5 /* FLYReplyPlayView.m */; };
 		A67208251A356CAE00B2C5B5 /* icon_play_reply@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A67208241A356CAE00B2C5B5 /* icon_play_reply@3x.png */; };
+		A67414511C04495700800C8B /* NAKPlaybackIndicatorContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A674144E1C04495700800C8B /* NAKPlaybackIndicatorContentView.m */; };
+		A67414521C04495700800C8B /* NAKPlaybackIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = A67414501C04495700800C8B /* NAKPlaybackIndicatorView.m */; };
 		A6799C7E1AABDE3D003DAE5B /* EAFRead.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6799C7B1AABDE3D003DAE5B /* EAFRead.mm */; };
 		A6799C7F1AABDE3D003DAE5B /* EAFWrite.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6799C7D1AABDE3D003DAE5B /* EAFWrite.mm */; };
 		A6799C881AABDFB7003DAE5B /* FLYVoiceFilterManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A6799C871AABDFB7003DAE5B /* FLYVoiceFilterManager.mm */; };
@@ -930,6 +932,10 @@
 		A67208211A3569C600B2C5B5 /* FLYReplyPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYReplyPlayView.h; sourceTree = "<group>"; };
 		A67208221A3569C600B2C5B5 /* FLYReplyPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYReplyPlayView.m; sourceTree = "<group>"; };
 		A67208241A356CAE00B2C5B5 /* icon_play_reply@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_play_reply@3x.png"; sourceTree = "<group>"; };
+		A674144D1C04495700800C8B /* NAKPlaybackIndicatorContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAKPlaybackIndicatorContentView.h; sourceTree = "<group>"; };
+		A674144E1C04495700800C8B /* NAKPlaybackIndicatorContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAKPlaybackIndicatorContentView.m; sourceTree = "<group>"; };
+		A674144F1C04495700800C8B /* NAKPlaybackIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAKPlaybackIndicatorView.h; sourceTree = "<group>"; };
+		A67414501C04495700800C8B /* NAKPlaybackIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAKPlaybackIndicatorView.m; sourceTree = "<group>"; };
 		A6799C7A1AABDE3D003DAE5B /* EAFRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAFRead.h; sourceTree = "<group>"; };
 		A6799C7B1AABDE3D003DAE5B /* EAFRead.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EAFRead.mm; sourceTree = "<group>"; };
 		A6799C7C1AABDE3D003DAE5B /* EAFWrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAFWrite.h; sourceTree = "<group>"; };
@@ -2040,6 +2046,7 @@
 		A648C0CA1A19ACDB00FF1744 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				A674144C1C04492E00800C8B /* NAKPlaybackIndicatorView */,
 				A6F01BCF1B9CB78300258CC7 /* MJAutoComplete */,
 				A6E1B4991B86475F001B0E04 /* PPiFlatSegmentedControl */,
 				A6E1B44B1B86471B001B0E04 /* FontAwesome+iOS */,
@@ -2304,6 +2311,17 @@
 				A66E204C1A2EBDAE004235F5 /* RDVTabBarController.m */,
 			);
 			path = RDVTabBarController;
+			sourceTree = "<group>";
+		};
+		A674144C1C04492E00800C8B /* NAKPlaybackIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				A674144D1C04495700800C8B /* NAKPlaybackIndicatorContentView.h */,
+				A674144E1C04495700800C8B /* NAKPlaybackIndicatorContentView.m */,
+				A674144F1C04495700800C8B /* NAKPlaybackIndicatorView.h */,
+				A67414501C04495700800C8B /* NAKPlaybackIndicatorView.m */,
+			);
+			path = NAKPlaybackIndicatorView;
 			sourceTree = "<group>";
 		};
 		A6799C791AABDE14003DAE5B /* ZTX */ = {
@@ -3426,6 +3444,7 @@
 			files = (
 				A6C521671B6C79CE00C1085D /* FLYLoginManager.m in Sources */,
 				A6A0E4931A1E76110036116E /* FLEXArgumentInputNotSupportedView.m in Sources */,
+				A67414521C04495700800C8B /* NAKPlaybackIndicatorView.m in Sources */,
 				A6D949EE1A9086FA003D4265 /* UIDevice+FLYAddition.m in Sources */,
 				A648C0F11A19B18B00FF1744 /* UIFont+FLYAddition.m in Sources */,
 				A657BAE41AC93B0300886C0F /* FLYCatalogViewController.m in Sources */,
@@ -3604,6 +3623,7 @@
 				A698F5241B577B3F00953B4D /* TwitterText.m in Sources */,
 				A6A0E4971A1E76110036116E /* FLEXArgumentInputSwitchView.m in Sources */,
 				A640624A1AD5DF5000278ED6 /* FLYFeedOnBoardingView.m in Sources */,
+				A67414511C04495700800C8B /* NAKPlaybackIndicatorContentView.m in Sources */,
 				A6A0E4C01A1E76110036116E /* FLEXImagePreviewViewController.m in Sources */,
 				A6CA54FB1AD7148D007FB6FA /* FLYTabbarOnboardingView.m in Sources */,
 				A6A57A981A33D92700610785 /* FLYInlineReplyView.m in Sources */,
