@@ -256,3 +256,9 @@
 "FLYProfilePostsLocked" = "Posts are locked";
 "FLYProfileBioSelfDefault" = "Click here to provide a description about yourself";
 "FLYProfileBioOthersDefault" = "User has not provided a profile description.";
+
+// invite friends
+"FLYShareTypeInviteContacts" = "Invite Contacts";
+"FLYShareTypeFacebook" = "Facebook";
+"FLYShareTypeOther" = "Other";
+"FLYPopularUsersLabelText" = "Popular Users";

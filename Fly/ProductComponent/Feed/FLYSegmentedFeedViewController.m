@@ -186,6 +186,8 @@
 
 - (void)_inviteFriends
 {
+    self.navigationController.view.frame = CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), CGRectGetHeight([UIScreen mainScreen].bounds));
+    [self.view layoutIfNeeded];
     FLYFriendDiscoveryViewController *vc = [FLYFriendDiscoveryViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }

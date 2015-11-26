@@ -8,12 +8,24 @@
 
 #import "FLYFriendDiscoveryViewController.h"
 #import "FLYSearchBar.h"
+#import "FLYShareFriendTableViewCell.h"
+#import "FLYFollowUserTableView.h"
+#import "FLYProfileViewController.h"
+#import "FLYUser.h"
 
+typedef NS_ENUM(NSInteger, FLYShareType) {
+    FLYShareTypeInviteContracts = 0,
+    FLYShareTypeFacebook,
+    FLYShareTypeOther,
+    FLYShareTypeNumber
+};
 
-@interface FLYFriendDiscoveryViewController () <FLYSearchBarDelegate>
+@interface FLYFriendDiscoveryViewController () <FLYSearchBarDelegate, UITableViewDataSource, UITableViewDelegate, FLYFollowUserTableViewDelegate>
 
 @property (nonatomic) FLYSearchBar *searchBar;
-@property (nonatomic) UITableView *tableView;
+@property (nonatomic) UITableView *shareTableView;
+@property (nonatomic) UILabel *popularUsersLabel;
+@property (nonatomic) FLYFollowUserTableView *popularUsersTable;
 
 @end
 
@@ -29,7 +41,71 @@
     self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
     
+    self.shareTableView = [UITableView new];
+    self.shareTableView.dataSource = self;
+    self.shareTableView.delegate = self;
+    [self.view addSubview:self.shareTableView];
+    
+    self.popularUsersLabel = [UILabel new];
+    self.popularUsersLabel.text = LOC(@"FLYPopularUsersLabelText");
+    self.popularUsersLabel.font = [UIFont fontWithName:@"Futura-Medium" size:14];
+    self.popularUsersLabel.textColor = [FLYUtilities colorWithHexString:@"#9C9C9C"];
+    [self.popularUsersLabel sizeToFit];
+    [self.view addSubview:self.popularUsersLabel];
+    
+    self.popularUsersTable = [[FLYFollowUserTableView alloc] initWithType:FLYFollowTypeLeadboard userId:nil];
+    self.popularUsersTable.delegate = self;
+    [self.view addSubview:self.popularUsersTable];
+    
     [self updateViewConstraints];
+}
+
+#pragma mark - UITableViewDatasource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return FLYShareTypeNumber;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"FLYShareFriendTableViewCell";
+    FLYShareFriendTableViewCell *cell = [[FLYShareFriendTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if (indexPath.row == FLYShareTypeInviteContracts) {
+        [cell configCellWithImage:@"icon_invite_contact" text:LOC(@"FLYShareTypeInviteContacts")];
+    } else if (indexPath.row == FLYShareTypeFacebook) {
+        [cell configCellWithImage:@"icon_invite_facebook" text:LOC(@"FLYShareTypeFacebook")];
+    } else {
+        [cell configCellWithImage:@"icon_invite_other" text:LOC(@"FLYShareTypeOther")];
+    }
+    return cell;
+}
+
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 -(void)updateViewConstraints
@@ -41,7 +117,34 @@
         make.height.equalTo(@(31));
     }];
     
+    [self.shareTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.searchBar.mas_bottom).offset(8);
+        make.leading.equalTo(self.view);
+        make.trailing.equalTo(self.view);
+        make.height.equalTo(@(180));
+    }];
+    
+    [self.popularUsersLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.shareTableView.mas_bottom).offset(10);
+        make.leading.equalTo(self.view).offset(23);
+    }];
+    
+    [self.popularUsersTable mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.popularUsersLabel.mas_bottom).offset(10);
+        make.leading.equalTo(self.view);
+        make.trailing.equalTo(self.view);
+        make.bottom.equalTo(self.view);
+    }];
+    
     [super updateViewConstraints];
+}
+
+#pragma mark - FLYFollowUserTableViewDelegate
+
+- (void)tableCellTapped:(FLYFollowUserTableView *)tableView user:(FLYUser *)user
+{
+    FLYProfileViewController *profileVC = [[FLYProfileViewController alloc] initWithUserId:user.userId];
+    [self.navigationController pushViewController:profileVC animated:YES];
 }
 
 - (BOOL)isFullScreen

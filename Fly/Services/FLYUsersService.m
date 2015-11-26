@@ -130,6 +130,11 @@
     [FLYUsersService getUsersWithEndpoint:endpoint userId:userId firstPage:first cursor:cursor successBlock:successBlock errorBlock:errorBlock];
 }
 
++ (void)getLeaderboardFirstPage:(BOOL)first cursor:(NSString *)cursor successBlock:(FLYGetFollowerListSuccessBlock)successBlock errorBlock:(FLYGetFollowerListErrorBlock)errorBlock
+{
+    [FLYUsersService getUsersWithEndpoint:EP_USER userId:nil firstPage:first cursor:cursor successBlock:successBlock errorBlock:errorBlock];
+}
+
 + (void)getUsersWithEndpoint:(NSString *)ep userId:(NSString *)userId firstPage:(BOOL)first cursor:(NSString *)cursor successBlock:(FLYGetFollowerListSuccessBlock)successBlock errorBlock:(FLYGetFollowerListErrorBlock)errorBlock
 {
     NSDictionary *params = [NSDictionary new];

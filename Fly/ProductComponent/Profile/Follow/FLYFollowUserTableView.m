@@ -90,6 +90,11 @@
             [FLYUsersService getFollowersWithUserId:self.userId firstPage:first cursor:cursor successBlock:successBlock errorBlock:errorBlock];
             break;
         }
+        
+        case FLYFollowTypeLeadboard: {
+            [FLYUsersService getLeaderboardFirstPage:first cursor:cursor successBlock:successBlock errorBlock:errorBlock];
+            break;
+        }
             
         default:
             break;

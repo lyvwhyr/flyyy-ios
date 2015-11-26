@@ -171,6 +171,8 @@
 - (void)_addObservers
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_followUpdated:) name:kNotificationFollowUserChanged object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_audioBioUpdated:) name:kNotificationAudioBioUpdated object:nil];
 }
 
 - (void)updateViewConstraints
@@ -515,6 +517,11 @@
     
     self.user.isFollowing = user.isFollowing;
     [self _initOrUpdateFollowView];
+}
+
+- (void)_audioBioUpdated:(NSNotification *)notif
+{
+    [self _initAudioView];
 }
 
 #pragma mark - TextView
