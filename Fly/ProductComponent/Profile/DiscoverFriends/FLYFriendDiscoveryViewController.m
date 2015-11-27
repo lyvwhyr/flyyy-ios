@@ -6,13 +6,14 @@
 //  Copyright © 2015 Fly. All rights reserved.
 //
 
-#import "FLYFriendDiscoveryViewController.h"
+#import "FLYFriendDiscoveryViewController.h"cover
 #import "FLYSearchBar.h"
 #import "FLYShareFriendTableViewCell.h"
 #import "FLYFollowUserTableView.h"
 #import "FLYProfileViewController.h"
 #import "FLYUser.h"
 #import "FLYUsernameSearchViewController.h"
+#import "FLYShareManager.h"
 
 typedef NS_ENUM(NSInteger, FLYShareType) {
     FLYShareTypeInviteContracts = 0,
@@ -103,6 +104,17 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 60;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == FLYShareTypeInviteContracts) {
+        
+    } else if (indexPath.row == FLYShareTypeFacebook) {
+        
+    } else {
+        [FLYShareManager inviteFriends:self];
+    }
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
