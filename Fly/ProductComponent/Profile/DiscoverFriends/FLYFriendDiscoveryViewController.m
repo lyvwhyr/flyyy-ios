@@ -12,6 +12,7 @@
 #import "FLYFollowUserTableView.h"
 #import "FLYProfileViewController.h"
 #import "FLYUser.h"
+#import "FLYUsernameSearchViewController.h"
 
 typedef NS_ENUM(NSInteger, FLYShareType) {
     FLYShareTypeInviteContracts = 0,
@@ -20,16 +21,30 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
     FLYShareTypeNumber
 };
 
-@interface FLYFriendDiscoveryViewController () <FLYSearchBarDelegate, UITableViewDataSource, UITableViewDelegate, FLYFollowUserTableViewDelegate>
+@interface FLYFriendDiscoveryViewController () <FLYSearchBarDelegate, UITableViewDataSource, UITableViewDelegate, FLYFollowUserTableViewDelegate, FLYUsernameSearchViewControllerDelegate>
 
 @property (nonatomic) FLYSearchBar *searchBar;
 @property (nonatomic) UITableView *shareTableView;
 @property (nonatomic) UILabel *popularUsersLabel;
 @property (nonatomic) FLYFollowUserTableView *popularUsersTable;
 
+@property (nonatomic) FLYUsernameSearchViewController *searchVC;
+@property (nonatomic) CGFloat keyboardHeight;
+
 @end
 
 @implementation FLYFriendDiscoveryViewController
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillShow:)
+                                                     name:@"UIKeyboardWillShowNotification"
+                                                   object:nil];
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -136,7 +151,60 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
         make.bottom.equalTo(self.view);
     }];
     
+    if (self.searchVC) {
+        [self.searchVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.searchBar.mas_bottom).offset(3);
+            make.leading.mas_equalTo(self.view);
+            make.width.mas_equalTo(self.view);
+            make.bottom.equalTo(self.view).offset(-self.keyboardHeight + 44);
+        }];
+        
+    }
+    
     [super updateViewConstraints];
+}
+
+#pragma mark - FLYSearchBarDelegate
+
+- (void)searchBarDidBeginEditing:(FLYSearchBar *)searchBar
+{
+    [self _setNoneSearchViewsVisible:NO];
+}
+
+- (void)searchBarCancelButtonClicked:(FLYSearchBar *)searchBar
+{
+    [self _setNoneSearchViewsVisible:YES];
+    
+    [self.searchVC.view removeFromSuperview];
+    self.searchVC = nil;
+}
+
+- (void)searchBar:(FLYSearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    [self _setNoneSearchViewsVisible:NO];
+    
+    if (searchText.length < 1) {
+        self.searchVC.view.hidden = YES;
+    } else {
+        self.searchVC.view.hidden = NO;
+        
+        if (!self.searchVC) {
+            self.searchVC = [FLYUsernameSearchViewController new];
+            self.searchVC.delegate = self;
+            [self.searchVC.view removeFromSuperview];
+            [self.view addSubview:self.searchVC.view];
+            [self addChildViewController:self.searchVC];
+            [self updateViewConstraints];
+        }
+        [self.searchVC updateSearchText:searchText];
+    }
+}
+
+- (void)_setNoneSearchViewsVisible:(BOOL)visible
+{
+    self.shareTableView.hidden = !visible;
+    self.popularUsersLabel.hidden = !visible;
+    self.popularUsersTable.hidden = !visible;
 }
 
 #pragma mark - FLYFollowUserTableViewDelegate
@@ -145,6 +213,12 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
 {
     FLYProfileViewController *profileVC = [[FLYProfileViewController alloc] initWithUserId:user.userId];
     [self.navigationController pushViewController:profileVC animated:YES];
+}
+
+#pragma mark - FLYUsernameSearchViewControllerDelegate
+- (UIViewController *)rootViewController
+{
+    return self;
 }
 
 - (BOOL)isFullScreen
@@ -167,6 +241,13 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
+}
+
+- (void)keyboardWillShow:(NSNotification *)note {
+    NSDictionary *userInfo = [note userInfo];
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    self.keyboardHeight = kbSize.height;
+    [self updateViewConstraints];
 }
 
 @end

@@ -200,4 +200,19 @@
     }];
 }
 
++ (void)autocompleteWithName:(NSString *)name successBlock:(FLYGenericSuccessBlock)successBlock errorBlock:(FLYGenericSuccessBlock)errorBlock
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *endpoint = [NSString stringWithFormat:EP_USER_SEARCH_BY_USERNAME, name];
+    [manager GET:endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
+    } failure:^(id responseObj, NSError *error) {
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
+    }];
+}
+
 @end

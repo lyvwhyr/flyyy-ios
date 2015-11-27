@@ -14,7 +14,8 @@
 typedef NS_ENUM(NSInteger, FLYFollowType) {
     FLYFollowTypeFollowing = 0,
     FLYFollowTypeFollower,
-    FLYFollowTypeLeadboard
+    FLYFollowTypeLeadboard,
+    FLYFollowTypeSearchResult
 };
 
 @protocol FLYFollowUserTableViewDelegate <NSObject>
@@ -28,5 +29,7 @@ typedef NS_ENUM(NSInteger, FLYFollowType) {
 @property (nonatomic, weak) id<FLYFollowUserTableViewDelegate> delegate;
 
 - (instancetype)initWithType:(FLYFollowType)type userId:(NSString *)userId;
+
+- (void)setDatasource:(NSMutableArray *)data;
 
 @end

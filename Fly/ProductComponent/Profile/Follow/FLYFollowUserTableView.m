@@ -44,6 +44,13 @@
     return self;
 }
 
+- (void)setDatasource:(NSMutableArray *)data
+{
+    _entries = [data mutableCopy];
+    [self.tableView reloadData];
+    [self updateConstraints];
+}
+
 - (void)_initService
 {
     @weakify(self)

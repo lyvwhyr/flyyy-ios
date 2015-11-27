@@ -50,5 +50,6 @@ typedef void(^FLYGetFollowerListErrorBlock)(id responseObj, NSError *error);
 - (void)getMeWithsuccessBlock:(FLYGetMeSuccessBlock)successBlock error:(FLYGetMeErrorBlock)errorBlock;
 + (void)updateTextBio:(NSString *)textBio isDelete:(BOOL)isDelete successBlock:(FLYGenericSuccessBlock)successBlock error:(FLYGenericErrorBlock)errorBlock;
 + (void)updateAudioBioWithMediaId:(NSString *)mediaId audioDuration:(NSInteger)audioDuration successBlock:(FLYGenericSuccessBlock)successBlock error:(FLYGenericErrorBlock)errorBlock;
++ (void)autocompleteWithName:(NSString *)name successBlock:(FLYGenericSuccessBlock)successBlock errorBlock:(FLYGenericSuccessBlock)errorBlock;
 
 @end

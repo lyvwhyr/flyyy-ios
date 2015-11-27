@@ -49,6 +49,7 @@
 #define EP_USER_TOPICS_BY_USER_ID                   @"/v1/users/%@/topics"
 #define EP_USER_TEXT_BIO                            @"/v1/users/text_bio"
 #define EP_USER_AUDIO_BIO                           @"/v1/users/audio_bio"
+#define EP_USER_SEARCH_BY_USERNAME                  @"/v1/users/search/%@"
 
 // reset password
 #define EP_USER_RESET                               @"v1/users/reset"

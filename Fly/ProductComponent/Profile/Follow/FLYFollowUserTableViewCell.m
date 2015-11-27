@@ -84,6 +84,10 @@
         [self.followButton setImage:[UIImage imageNamed:@"icon_follow_user_grey"] forState:UIControlStateNormal];
     }
     
+    if ([user.userId isEqualToString:[FLYAppStateManager sharedInstance].currentUser.userId]) {
+        self.followButton.hidden = YES;
+    }
+    
     NSInteger level = [FLYBadgeHelper getLevelForPoints:self.user.points];
     self.badgeImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@%ld", @"icon_badge_l", level]];
     [self.badgeImageView sizeToFit];
