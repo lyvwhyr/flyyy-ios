@@ -52,7 +52,7 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
     self.title = @"Discover Friends";
     self.view.backgroundColor = [UIColor tableHeaderGrey];
     
-    self.searchBar = [FLYSearchBar new];
+    self.searchBar = [[FLYSearchBar alloc] initWithType:FLYSearchBarTypeUsername];
     self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
     

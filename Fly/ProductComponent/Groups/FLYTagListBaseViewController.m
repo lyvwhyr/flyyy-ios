@@ -86,7 +86,7 @@
     [self populateTags:_tagListType];
     
     // search bar
-    self.searchBar = [FLYSearchBar new];
+    self.searchBar = [[FLYSearchBar alloc] initWithType:FLYSearchBarTypeTag];
     self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
     

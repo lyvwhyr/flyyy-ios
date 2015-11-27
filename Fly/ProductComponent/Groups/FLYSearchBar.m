@@ -17,16 +17,25 @@
 @property (nonatomic) UIImageView *searchIconImageView;
 @property (nonatomic) UIButton *cancelButton;
 
+@property (nonatomic) FLYSearchBarType type;
+
 @end
 
 @implementation FLYSearchBar
 
-- (instancetype)init
+- (instancetype)initWithType:(FLYSearchBarType)type
 {
-    if (self = [super init]) {
+    if (self = [super initWithFrame:CGRectZero]) {
+        _type = type;
+        
         _searchBackgroundView = [UIView new];
         _searchBackgroundView.translatesAutoresizingMaskIntoConstraints = NO;
-        _searchBackgroundView.backgroundColor = [FLYUtilities colorWithHexString:@"#7E9099" alpha:0.14f];
+        
+        if (_type == FLYSearchBarTypeTag) {
+            _searchBackgroundView.backgroundColor = [FLYUtilities colorWithHexString:@"#7E9099" alpha:0.14f];
+        } else if (_type == FLYSearchBarTypeUsername) {
+            _searchBackgroundView.backgroundColor = [FLYUtilities colorWithHexString:@"#FFFFFF" alpha:1];
+        }
         _searchBackgroundView.layer.cornerRadius = 4.0f;
         [self addSubview:_searchBackgroundView];
         
@@ -38,7 +47,13 @@
         
         _searchField = [UITextField new];
         _searchField.translatesAutoresizingMaskIntoConstraints = NO;
-        _searchField.placeholder = @"Search";
+        
+        if (_type == FLYSearchBarTypeTag) {
+            _searchField.placeholder = @"Search";
+        } else if (_type == FLYSearchBarTypeUsername) {
+            _searchField.placeholder = LOC(@"FLYSearchByUsernameText");
+        }
+        
         _searchField.font = [UIFont flyFontWithSize:15];
         _searchField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _searchField.returnKeyType = UIReturnKeySearch;

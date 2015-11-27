@@ -10,6 +10,11 @@
 
 @class FLYSearchBar;
 
+typedef NS_ENUM(NSInteger, FLYSearchBarType) {
+    FLYSearchBarTypeTag = 0,
+    FLYSearchBarTypeUsername
+};
+
 @protocol FLYSearchBarDelegate <NSObject>
 
 @optional
@@ -23,5 +28,9 @@
 @interface FLYSearchBar : UIView
 
 @property (nonatomic, weak) id<FLYSearchBarDelegate> delegate;
+
+- (instancetype)initWithType:(FLYSearchBarType)type;
+- (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
