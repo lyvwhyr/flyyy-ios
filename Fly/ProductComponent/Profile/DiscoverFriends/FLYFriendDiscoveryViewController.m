@@ -89,7 +89,7 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
 {
     static NSString *cellIdentifier = @"FLYShareFriendTableViewCell";
     FLYShareFriendTableViewCell *cell = [[FLYShareFriendTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (indexPath.row == FLYShareTypeInviteContracts) {
         [cell configCellWithImage:@"icon_invite_contact" text:LOC(@"FLYShareTypeInviteContacts")];
     } else if (indexPath.row == FLYShareTypeFacebook) {
@@ -126,6 +126,7 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
     } else {
         [FLYShareManager inviteFriends:self];
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
