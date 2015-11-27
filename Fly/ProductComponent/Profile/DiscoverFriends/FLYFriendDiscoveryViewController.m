@@ -6,7 +6,7 @@
 //  Copyright © 2015 Fly. All rights reserved.
 //
 
-#import "FLYFriendDiscoveryViewController.h"cover
+#import "FLYFriendDiscoveryViewController.h"
 #import "FLYSearchBar.h"
 #import "FLYShareFriendTableViewCell.h"
 #import "FLYFollowUserTableView.h"
@@ -14,6 +14,7 @@
 #import "FLYUser.h"
 #import "FLYUsernameSearchViewController.h"
 #import "FLYShareManager.h"
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
 typedef NS_ENUM(NSInteger, FLYShareType) {
     FLYShareTypeInviteContracts = 0,
@@ -22,7 +23,7 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
     FLYShareTypeNumber
 };
 
-@interface FLYFriendDiscoveryViewController () <FLYSearchBarDelegate, UITableViewDataSource, UITableViewDelegate, FLYFollowUserTableViewDelegate, FLYUsernameSearchViewControllerDelegate>
+@interface FLYFriendDiscoveryViewController () <FLYSearchBarDelegate, UITableViewDataSource, UITableViewDelegate, FLYFollowUserTableViewDelegate, FLYUsernameSearchViewControllerDelegate, FBSDKAppInviteDialogDelegate>
 
 @property (nonatomic) FLYSearchBar *searchBar;
 @property (nonatomic) UITableView *shareTableView;
@@ -111,7 +112,14 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
     if (indexPath.row == FLYShareTypeInviteContracts) {
         
     } else if (indexPath.row == FLYShareTypeFacebook) {
+        FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
+        content.appLinkURL = [NSURL URLWithString:@"https://fb.me/1653813334878873"];
+        //optionally set previewImageURL
+        content.appInvitePreviewImageURL = [NSURL URLWithString:@"https://flyyapp.com/img/default_share_small.png"];
         
+        // present the dialog. Assumes self implements protocol `FBSDKAppInviteDialogDelegate`
+        [FBSDKAppInviteDialog showWithContent:content
+                                     delegate:self];
     } else {
         [FLYShareManager inviteFriends:self];
     }
@@ -231,6 +239,19 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
 - (UIViewController *)rootViewController
 {
     return self;
+}
+
+
+#pragma mark - FBSDKAppInviteDialogDelegate
+
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results;
+{
+    
+}
+
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error;
+{
+    
 }
 
 - (BOOL)isFullScreen
