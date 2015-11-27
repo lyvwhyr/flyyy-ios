@@ -14,6 +14,7 @@
 #import "FLYUser.h"
 #import "FLYUsernameSearchViewController.h"
 #import "FLYShareManager.h"
+#import "THContactPickerViewController.h"
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
 typedef NS_ENUM(NSInteger, FLYShareType) {
@@ -110,7 +111,9 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == FLYShareTypeInviteContracts) {
-        
+        THContactPickerViewController *contactPicker = [[THContactPickerViewController alloc] init];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:contactPicker];
+        [self presentViewController:navigationController animated:YES completion:nil];
     } else if (indexPath.row == FLYShareTypeFacebook) {
         FBSDKAppInviteContent *content =[[FBSDKAppInviteContent alloc] init];
         content.appLinkURL = [NSURL URLWithString:@"https://fb.me/1653813334878873"];
@@ -244,14 +247,14 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
 
 #pragma mark - FBSDKAppInviteDialogDelegate
 
-- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results;
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results
 {
-    
+    NSLog(@"hi");
 }
 
-- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error;
+- (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error
 {
-    
+    NSLog(@"hi");    
 }
 
 - (BOOL)isFullScreen

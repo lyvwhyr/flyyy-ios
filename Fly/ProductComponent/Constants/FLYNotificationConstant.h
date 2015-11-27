@@ -53,3 +53,5 @@
 #define kNotificationFollowUserChanged @"kNotificationFollowUserChanged"
 
 #define kNotificationAudioBioUpdated @"kNotificationAudioBioUpdated"
+
+#define kNotificationInviteFriendsSMSSent @"kNotificationInviteFriendsSMSSent"

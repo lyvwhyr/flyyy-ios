@@ -415,6 +415,19 @@
 		A6D949F61A9090BD003D4265 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6D949F51A9090BD003D4265 /* Security.framework */; };
 		A6D949F91A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A6D949F81A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m */; };
 		A6DCA7741B5C19F60076C9C8 /* FLYRecordOnboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DCA7731B5C19F60076C9C8 /* FLYRecordOnboardViewController.m */; };
+		A6DF8A091C08EF48004AA94F /* icon-avatar-60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = A6DF89F41C08EF48004AA94F /* icon-avatar-60x60.png */; };
+		A6DF8A0A1C08EF48004AA94F /* icon-avatar-60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6DF89F51C08EF48004AA94F /* icon-avatar-60x60@2x.png */; };
+		A6DF8A0B1C08EF48004AA94F /* icon-checkbox-selected-green-25x25.png in Resources */ = {isa = PBXBuildFile; fileRef = A6DF89F61C08EF48004AA94F /* icon-checkbox-selected-green-25x25.png */; };
+		A6DF8A0C1C08EF48004AA94F /* icon-checkbox-selected-green-25x25@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6DF89F71C08EF48004AA94F /* icon-checkbox-selected-green-25x25@2x.png */; };
+		A6DF8A0D1C08EF48004AA94F /* icon-checkbox-unselected-25x25.png in Resources */ = {isa = PBXBuildFile; fileRef = A6DF89F81C08EF48004AA94F /* icon-checkbox-unselected-25x25.png */; };
+		A6DF8A0E1C08EF48004AA94F /* icon-checkbox-unselected-25x25@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6DF89F91C08EF48004AA94F /* icon-checkbox-unselected-25x25@2x.png */; };
+		A6DF8A101C08EF48004AA94F /* THBubbleColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DF89FC1C08EF48004AA94F /* THBubbleColor.m */; };
+		A6DF8A111C08EF48004AA94F /* THContact.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DF89FE1C08EF48004AA94F /* THContact.m */; };
+		A6DF8A121C08EF48004AA94F /* THContactBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DF8A001C08EF48004AA94F /* THContactBubble.m */; };
+		A6DF8A131C08EF48004AA94F /* THContactPickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DF8A021C08EF48004AA94F /* THContactPickerTableViewCell.m */; };
+		A6DF8A141C08EF48004AA94F /* THContactPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6DF8A031C08EF48004AA94F /* THContactPickerTableViewCell.xib */; };
+		A6DF8A151C08EF48004AA94F /* THContactPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DF8A051C08EF48004AA94F /* THContactPickerView.m */; };
+		A6DF8A161C08EF48004AA94F /* THContactPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DF8A071C08EF48004AA94F /* THContactPickerViewController.m */; };
 		A6DFD1311AA80670008520F5 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DFD1301AA80670008520F5 /* CoreTelephony.framework */; };
 		A6DFD1341AA8291B008520F5 /* FLYLoginSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DFD1331AA8291B008520F5 /* FLYLoginSignupViewController.m */; };
 		A6E06E551B71FD8C003D5A30 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E541B71FD8C003D5A30 /* CoreData.framework */; };
@@ -1231,6 +1244,25 @@
 		A6D949F81A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+RMSaveCustomObject.m"; sourceTree = "<group>"; };
 		A6DCA7721B5C19F60076C9C8 /* FLYRecordOnboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYRecordOnboardViewController.h; sourceTree = "<group>"; };
 		A6DCA7731B5C19F60076C9C8 /* FLYRecordOnboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYRecordOnboardViewController.m; sourceTree = "<group>"; };
+		A6DF89F41C08EF48004AA94F /* icon-avatar-60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-avatar-60x60.png"; sourceTree = "<group>"; };
+		A6DF89F51C08EF48004AA94F /* icon-avatar-60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-avatar-60x60@2x.png"; sourceTree = "<group>"; };
+		A6DF89F61C08EF48004AA94F /* icon-checkbox-selected-green-25x25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-checkbox-selected-green-25x25.png"; sourceTree = "<group>"; };
+		A6DF89F71C08EF48004AA94F /* icon-checkbox-selected-green-25x25@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-checkbox-selected-green-25x25@2x.png"; sourceTree = "<group>"; };
+		A6DF89F81C08EF48004AA94F /* icon-checkbox-unselected-25x25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-checkbox-unselected-25x25.png"; sourceTree = "<group>"; };
+		A6DF89F91C08EF48004AA94F /* icon-checkbox-unselected-25x25@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-checkbox-unselected-25x25@2x.png"; sourceTree = "<group>"; };
+		A6DF89FB1C08EF48004AA94F /* THBubbleColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THBubbleColor.h; sourceTree = "<group>"; };
+		A6DF89FC1C08EF48004AA94F /* THBubbleColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THBubbleColor.m; sourceTree = "<group>"; };
+		A6DF89FD1C08EF48004AA94F /* THContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THContact.h; sourceTree = "<group>"; };
+		A6DF89FE1C08EF48004AA94F /* THContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THContact.m; sourceTree = "<group>"; };
+		A6DF89FF1C08EF48004AA94F /* THContactBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THContactBubble.h; sourceTree = "<group>"; };
+		A6DF8A001C08EF48004AA94F /* THContactBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THContactBubble.m; sourceTree = "<group>"; };
+		A6DF8A011C08EF48004AA94F /* THContactPickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THContactPickerTableViewCell.h; sourceTree = "<group>"; };
+		A6DF8A021C08EF48004AA94F /* THContactPickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THContactPickerTableViewCell.m; sourceTree = "<group>"; };
+		A6DF8A031C08EF48004AA94F /* THContactPickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THContactPickerTableViewCell.xib; sourceTree = "<group>"; };
+		A6DF8A041C08EF48004AA94F /* THContactPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THContactPickerView.h; sourceTree = "<group>"; };
+		A6DF8A051C08EF48004AA94F /* THContactPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THContactPickerView.m; sourceTree = "<group>"; };
+		A6DF8A061C08EF48004AA94F /* THContactPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THContactPickerViewController.h; sourceTree = "<group>"; };
+		A6DF8A071C08EF48004AA94F /* THContactPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THContactPickerViewController.m; sourceTree = "<group>"; };
 		A6DFD1301AA80670008520F5 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A6DFD1321AA8291B008520F5 /* FLYLoginSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYLoginSignupViewController.h; sourceTree = "<group>"; };
 		A6DFD1331AA8291B008520F5 /* FLYLoginSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoginSignupViewController.m; sourceTree = "<group>"; };
@@ -1431,6 +1463,7 @@
 		A60489FC1A85E63100C67480 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A6DF89F31C08EF48004AA94F /* ContactPicker */,
 				A6F2ACF11BF044C60078980B /* YYText */,
 				A69437851BCB44F90063A817 /* Tapjoy.embeddedframework */,
 				A6DAF96B1B40E3A6004CABEF /* Facebook */,
@@ -2965,6 +2998,32 @@
 			path = Facebook;
 			sourceTree = "<group>";
 		};
+		A6DF89F31C08EF48004AA94F /* ContactPicker */ = {
+			isa = PBXGroup;
+			children = (
+				A6DF89F41C08EF48004AA94F /* icon-avatar-60x60.png */,
+				A6DF89F51C08EF48004AA94F /* icon-avatar-60x60@2x.png */,
+				A6DF89F61C08EF48004AA94F /* icon-checkbox-selected-green-25x25.png */,
+				A6DF89F71C08EF48004AA94F /* icon-checkbox-selected-green-25x25@2x.png */,
+				A6DF89F81C08EF48004AA94F /* icon-checkbox-unselected-25x25.png */,
+				A6DF89F91C08EF48004AA94F /* icon-checkbox-unselected-25x25@2x.png */,
+				A6DF89FB1C08EF48004AA94F /* THBubbleColor.h */,
+				A6DF89FC1C08EF48004AA94F /* THBubbleColor.m */,
+				A6DF89FD1C08EF48004AA94F /* THContact.h */,
+				A6DF89FE1C08EF48004AA94F /* THContact.m */,
+				A6DF89FF1C08EF48004AA94F /* THContactBubble.h */,
+				A6DF8A001C08EF48004AA94F /* THContactBubble.m */,
+				A6DF8A011C08EF48004AA94F /* THContactPickerTableViewCell.h */,
+				A6DF8A021C08EF48004AA94F /* THContactPickerTableViewCell.m */,
+				A6DF8A031C08EF48004AA94F /* THContactPickerTableViewCell.xib */,
+				A6DF8A041C08EF48004AA94F /* THContactPickerView.h */,
+				A6DF8A051C08EF48004AA94F /* THContactPickerView.m */,
+				A6DF8A061C08EF48004AA94F /* THContactPickerViewController.h */,
+				A6DF8A071C08EF48004AA94F /* THContactPickerViewController.m */,
+			);
+			path = ContactPicker;
+			sourceTree = "<group>";
+		};
 		A6E171F31A1C5F1A00F2B4BF /* SVPulsingAnnotationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3288,6 +3347,7 @@
 				A652D2151A7F3ADD00765D45 /* icon_down_arrow@2x.png in Resources */,
 				A652D25A1A7F3ADD00765D45 /* icon_tabbar_voice.png in Resources */,
 				A669FB5B1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome-iPad.png in Resources */,
+				A6DF8A0C1C08EF48004AA94F /* icon-checkbox-selected-green-25x25@2x.png in Resources */,
 				A652D2411A7F3ADD00765D45 /* icon_nav_filter@2x.png in Resources */,
 				A652D2501A7F3ADD00765D45 /* icon_seconds.png in Resources */,
 				A652D2441A7F3ADD00765D45 /* icon_navigation_catalog.png in Resources */,
@@ -3296,6 +3356,7 @@
 				A643AEE41AA9539E00BF4E0F /* deps in Resources */,
 				A640BC3D1A381AE900DC59A7 /* icon_navigation_catalog@3x.png in Resources */,
 				A652D2391A7F3ADD00765D45 /* icon_inline_comment@2x.png in Resources */,
+				A6DF8A0E1C08EF48004AA94F /* icon-checkbox-unselected-25x25@2x.png in Resources */,
 				A652D2581A7F3ADD00765D45 /* icon_tabbar_home.png in Resources */,
 				A652D21A1A7F3ADD00765D45 /* icon_filter_feed.png in Resources */,
 				A6227D181AD109FA0039083D /* iRate.bundle in Resources */,
@@ -3329,21 +3390,26 @@
 				A6A0E41D1A1E6E970036116E /* icon_tabbar_me@2x.png in Resources */,
 				A652D2551A7F3ADD00765D45 /* icon_suggest_group@2x.png in Resources */,
 				A69C4B9A1A27111700CAD443 /* icon_filter_feed@3x.png in Resources */,
+				A6DF8A0A1C08EF48004AA94F /* icon-avatar-60x60@2x.png in Resources */,
 				A652D2571A7F3ADD00765D45 /* icon_tabbar_group@2x.png in Resources */,
 				A669FB5E1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome@2x.png in Resources */,
 				A6A57A9D1A34134200610785 /* icon_reply_record@3x.png in Resources */,
 				A652D2471A7F3ADD00765D45 /* icon_play_reply@2x.png in Resources */,
+				A6DF8A0B1C08EF48004AA94F /* icon-checkbox-selected-green-25x25.png in Resources */,
 				A652D2191A7F3ADD00765D45 /* icon_feed_play@2x.png in Resources */,
 				A6263EA01A187E1200C4C3BA /* LaunchScreen.xib in Resources */,
 				A6E1B4961B86471B001B0E04 /* LICENSE in Resources */,
 				A652D2111A7F3ADD00765D45 /* icon_back@2x.png in Resources */,
+				A6DF8A0D1C08EF48004AA94F /* icon-checkbox-unselected-25x25.png in Resources */,
 				A6D949F31A9089FC003D4265 /* Info.plist in Resources */,
 				A6263E9D1A187E1200C4C3BA /* Images.xcassets in Resources */,
 				A69C4B9C1A27186300CAD443 /* icon_nav_filter@3x.png in Resources */,
 				A652D24E1A7F3ADD00765D45 /* icon_reply_record.png in Resources */,
 				A669FB5C1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome-iPad@2x.png in Resources */,
 				A652D2461A7F3ADD00765D45 /* icon_play_reply.png in Resources */,
+				A6DF8A141C08EF48004AA94F /* THContactPickerTableViewCell.xib in Resources */,
 				A6E1B49F1B864771001B0E04 /* fontawesome-webfont.ttf in Resources */,
+				A6DF8A091C08EF48004AA94F /* icon-avatar-60x60.png in Resources */,
 				A652D2121A7F3ADD00765D45 /* icon_checked.png in Resources */,
 				A652D2101A7F3ADD00765D45 /* icon_back.png in Resources */,
 				A648C0F41A19C7A100FF1744 /* icon_tabbar_voice@3x.png in Resources */,
@@ -3471,6 +3537,7 @@
 				A6048AD41A8603EF00C67480 /* AFURLRequestSerialization.m in Sources */,
 				A61629C21B14096500DC0CCF /* FLYPayload.m in Sources */,
 				A6949B6E1B3781AA008C2529 /* FLYNavigationManager.m in Sources */,
+				A6DF8A151C08EF48004AA94F /* THContactPickerView.m in Sources */,
 				A603B46A1C01B8A10081C850 /* MASLayoutConstraint.m in Sources */,
 				A6A0E4B11A1E76110036116E /* FLEXDescriptionTableViewCell.m in Sources */,
 				A648C0C31A1962A200FF1744 /* FLYUtilities.m in Sources */,
@@ -3504,6 +3571,7 @@
 				A6F4223A1B1ABFEE007F4C79 /* FLYMentionPayload.m in Sources */,
 				A6A4EFB31A2BE71000FD4066 /* FLYTagListSuggestTableViewCell.m in Sources */,
 				A6A0E4A91A1E76110036116E /* FLEXGlobalsTableViewController.m in Sources */,
+				A6DF8A121C08EF48004AA94F /* THContactBubble.m in Sources */,
 				A69C4BD81A2840E700CAD443 /* NSDictionary+FLYAddition.m in Sources */,
 				A6D692241A92F61A00F8EEDE /* FLYAudioItem.m in Sources */,
 				A66E204D1A2EBDAE004235F5 /* RDVTabBarItem.m in Sources */,
@@ -3596,6 +3664,7 @@
 				A643AEF71AA9539E00BF4E0F /* NISnapshotRotation.m in Sources */,
 				A6A4EFBE1A2C22EF00FD4066 /* FLYGroupViewController.m in Sources */,
 				A6A0E4911A1E76110036116E /* FLEXArgumentInputFontView.m in Sources */,
+				A6DF8A161C08EF48004AA94F /* THContactPickerViewController.m in Sources */,
 				A665FC221AA263CE00490A18 /* FLYTimelineService.m in Sources */,
 				A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */,
 				A66499561ABBB2BD00C4FF08 /* IBActionSheet.m in Sources */,
@@ -3677,6 +3746,7 @@
 				A6A70CD71AA4010D0000F784 /* FLYSignupPhoneNumberViewController.m in Sources */,
 				A6A0E4B41A1E76110036116E /* FLEXImageExplorerViewController.m in Sources */,
 				A6A6C4CB1B9E9D6900E869E0 /* FLYTagsManager.m in Sources */,
+				A6DF8A101C08EF48004AA94F /* THBubbleColor.m in Sources */,
 				A603B44D1C01AE560081C850 /* FLYFollowerListViewController.m in Sources */,
 				A66E96551AA0457F000B0E83 /* CALayer+MBAnimationPersistence.m in Sources */,
 				A6E5CF181AD76AFD0058C081 /* FLYTopicDetailOnboardingView.m in Sources */,
@@ -3705,6 +3775,7 @@
 				A6A0E4BA1A1E76110036116E /* FLEXHeapEnumerator.m in Sources */,
 				A6E1B4831B86471B001B0E04 /* UIAwesomeButton.m in Sources */,
 				A603B46D1C01B8A10081C850 /* NSArray+MASAdditions.m in Sources */,
+				A6DF8A131C08EF48004AA94F /* THContactPickerTableViewCell.m in Sources */,
 				A6048ADB1A8603EF00C67480 /* UIAlertView+AFNetworking.m in Sources */,
 				A6048ADA1A8603EF00C67480 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				A6048AD51A8603EF00C67480 /* AFURLResponseSerialization.m in Sources */,
@@ -3784,6 +3855,7 @@
 				A6263ECB1A1897CE00C4C3BA /* UIColor+FLYAddition.m in Sources */,
 				A643AEF11AA9539E00BF4E0F /* NINonEmptyCollectionTesting.m in Sources */,
 				A6A0E4921A1E76110036116E /* FLEXArgumentInputJSONObjectView.m in Sources */,
+				A6DF8A111C08EF48004AA94F /* THContact.m in Sources */,
 				A6F01BDB1B9CB82D00258CC7 /* MJAutoCompleteItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
