@@ -44,7 +44,7 @@
         
         _activityLabel = [TTTAttributedLabel new];
         _activityLabel.textColor = [UIColor flyBlue];
-        _activityLabel.numberOfLines = 0;
+        _activityLabel.adjustsFontSizeToFitWidth = YES;
         _activityLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_activityLabel];
         
@@ -68,6 +68,7 @@
     
     if ([FLYNotificationTableViewCell _isFollowAction:notification]) {
         [self _addFollowObserver];
+        self.activityLabel.numberOfLines = 1;
         
         self.followBackButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.followBackButton setImage:[UIImage imageNamed:@"icon_notification_follow"] forState:UIControlStateNormal];
@@ -82,6 +83,8 @@
         } else {
             [self.followBackButton setImage:[UIImage imageNamed:@"icon_notification_follow"] forState:UIControlStateNormal];
         }
+    } else {
+        self.activityLabel.numberOfLines = 0;
     }
     
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithAttributedString:notification.notificationString];
@@ -150,21 +153,29 @@
         }];
     }
     
-    [self.activityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self).offset(kLeftMargin);
-        make.top.equalTo(self).offset(kTopMargin);
-        make.trailing.lessThanOrEqualTo(self).offset(-kRightMargin);
-    }];
-    
     [self.createdAt mas_makeConstraints:^(MASConstraintMaker *make) {
         make.trailing.equalTo(self.contentView).offset(-5);
         make.bottom.equalTo(self.contentView).offset(-8);
     }];
     
     if (self.followBackButton) {
+        [self.activityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self).offset(kLeftMargin);
+            make.centerY.equalTo(self);
+        }];
+        
         [self.followBackButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self.activityLabel.mas_trailing).offset(10);
             make.centerY.equalTo(self);
+            make.width.equalTo(@(CGRectGetWidth(self.followBackButton.bounds)));
+            make.height.equalTo(@(CGRectGetHeight(self.followBackButton.bounds)));
+            make.trailing.lessThanOrEqualTo(self.createdAt.mas_leading).offset(-10);
+        }];
+    } else {
+        [self.activityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self).offset(kLeftMargin);
+            make.top.equalTo(self).offset(kTopMargin);
+            make.trailing.lessThanOrEqualTo(self).offset(-kRightMargin);
         }];
     }
     
