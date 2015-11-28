@@ -159,6 +159,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    FLYNotification *notificaiton = (FLYNotification *)self.entries[indexPath.row];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
@@ -166,8 +168,12 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell clearReadState];
     
-    FLYTopic *topic = ((FLYNotification *)self.entries[indexPath.row]).topic;
-    [self.delegate visitTopicDetail:topic];
+    if ([notificaiton.action isEqualToString:@"followed"]) {
+        
+    } else {
+        FLYTopic *topic = notificaiton.topic;
+        [self.delegate visitTopicDetail:topic];
+    }
 }
 
 
