@@ -18,6 +18,7 @@
 @property (nonatomic) NSMutableAttributedString *notificationString;
 @property (nonatomic, copy) NSString *createdAt;
 @property (nonatomic, copy) NSString *displayableCreateAt;
+@property (nonatomic) NSMutableArray *actors;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 

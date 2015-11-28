@@ -71,7 +71,6 @@
 
 @interface FLYNotification()
 
-@property (nonatomic) NSMutableArray *actors;
 
 @end
 
@@ -106,7 +105,7 @@
         } else if ([self.action isEqualToString:@"followed"]) {
             tempStr = LOC(@"FLYSinglePersonFollowActivity");
         } else {
-            tempStr = LOC(@"FLYSinglePersonFollowActivity");
+            tempStr = LOC(@"FLYSinglePersonMentionActivity");
         }
         result = [NSString stringWithFormat:tempStr, username, self.topic.topicTitle];
         attrStr = [[NSMutableAttributedString alloc] initWithString:result];

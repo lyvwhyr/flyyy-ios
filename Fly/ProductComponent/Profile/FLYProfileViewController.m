@@ -65,6 +65,8 @@
 
 @property (nonatomic) NSInteger currentNumberOfBioLines;
 
+@property (nonatomic) BOOL shouldAdjustFeedHeight;
+
 @end
 
 @implementation FLYProfileViewController
@@ -148,9 +150,10 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewWillDisappear:animated];
+    self.shouldAdjustFeedHeight = YES;
 }
 
 - (void)_initService
@@ -319,12 +322,21 @@
             make.bottom.equalTo(self.view);
         }];
     } else if (self.otherUserFeedViewController) {
-        [self.otherUserFeedViewController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.triangleBgImageView).offset(-44);
-            make.leading.equalTo(self.view);
-            make.trailing.equalTo(self.view);
-            make.bottom.equalTo(self.view);
-        }];
+        if (self.shouldAdjustFeedHeight) {
+            [self.otherUserFeedViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.triangleBgImageView).offset(-44-44-44);
+                make.leading.equalTo(self.view);
+                make.trailing.equalTo(self.view);
+                make.bottom.equalTo(self.view);
+            }];
+        } else {
+            [self.otherUserFeedViewController.view mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.triangleBgImageView).offset(-44 - 20);
+                make.leading.equalTo(self.view);
+                make.trailing.equalTo(self.view);
+                make.bottom.equalTo(self.view);
+            }];
+        }
     }
     
     [super updateViewConstraints];

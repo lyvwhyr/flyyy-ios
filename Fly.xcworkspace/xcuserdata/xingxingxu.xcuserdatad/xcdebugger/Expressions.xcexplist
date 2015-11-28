@@ -27,6 +27,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__39-[FLYNotificationViewController _load:]_block_invoke:FLYNotificationViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.entries">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[FLYUser initWithDictory:]:FLYUser.m">
       </ContextState>
       <ContextState
@@ -38,14 +46,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[FLYPrePostHeaderView textViewDidChange:]:FLYPrePostHeaderView.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "textView.text">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "+[FLYNotificationTableViewCell heightForNotification:]:FLYNotificationTableViewCell.m">
       </ContextState>
       <ContextState
@@ -53,6 +53,14 @@
          <PersistentStrings>
             <PersistentString
                value = "self.entries">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[FLYPrePostHeaderView textViewDidChange:]:FLYPrePostHeaderView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "textView.text">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

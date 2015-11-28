@@ -10,6 +10,8 @@
 #import "TTTAttributedLabel.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYNotification.h"
+#import "FLYUser.h"
+#import "UIButton+TouchAreaInsets.h"
 
 #define kTopMargin   10
 #define kBottomMargin 10
@@ -21,8 +23,11 @@
 @property (nonatomic) UIImageView *dotView;
 @property (nonatomic) TTTAttributedLabel *activityLabel;
 @property (nonatomic) UILabel *createdAt;
+@property (nonatomic) UIButton *followBackButton;
 
 @property (nonatomic) FLYNotification *notification;
+@property (nonatomic) FLYUser *actor;
+
 
 @end
 
@@ -47,13 +52,37 @@
         _createdAt.font = [UIFont fontWithName:@"Avenir-Book" size:9];
         _createdAt.textColor = [UIColor flyColorFlyReplyPostAtGrey];
         [self.contentView addSubview:_createdAt];
+        
     }
     return self;
+}
+
+- (void)_addFollowObserver
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_followUpdated:) name:kNotificationFollowUserChanged object:nil];
 }
 
 - (void)setupCell:(FLYNotification *)notification
 {
     self.notification = notification;
+    
+    if ([FLYNotificationTableViewCell _isFollowAction:notification]) {
+        [self _addFollowObserver];
+        
+        self.followBackButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.followBackButton setImage:[UIImage imageNamed:@"icon_notification_follow"] forState:UIControlStateNormal];
+        self.followBackButton.touchAreaInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+        [self.followBackButton addTarget:self action:@selector(_followButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+        [self.followBackButton sizeToFit];
+        [self addSubview:self.followBackButton];
+        
+        FLYUser *actor = [[FLYUser alloc] initWithDictionary:notification.actors[0]];
+        if (actor.isFollowing) {
+            [self.followBackButton setImage:[UIImage imageNamed:@"icon_notification_unfollow"] forState:UIControlStateNormal];
+        } else {
+            [self.followBackButton setImage:[UIImage imageNamed:@"icon_notification_follow"] forState:UIControlStateNormal];
+        }
+    }
     
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithAttributedString:notification.notificationString];
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
@@ -87,7 +116,7 @@
 
 + (CGFloat)heightForNotification:(FLYNotification *)notification
 {
-    if ([notification.action isEqualToString:@"followed"]) {
+    if ([FLYNotificationTableViewCell _isFollowAction:notification]) {
         return 44;
     }
     
@@ -132,7 +161,48 @@
         make.bottom.equalTo(self.contentView).offset(-8);
     }];
     
+    if (self.followBackButton) {
+        [self.followBackButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.activityLabel.mas_trailing).offset(10);
+            make.centerY.equalTo(self);
+        }];
+    }
+    
     [super updateConstraints];
+}
+
+- (void)_followButtonTapped
+{
+    [self.actor followUser];
+}
+
+#pragma mark - Follow notification
+
+- (void)_followUpdated:(NSNotification *)notification
+{
+    FLYUser *user = [notification.userInfo objectForKey:@"user"];
+    if ([user.userId isEqualToString:self.actor.userId]) {
+        self.actor.isFollowing = user.isFollowing;
+        if (user.isFollowing) {
+            [self.followBackButton setImage:[UIImage imageNamed:@"icon_notification_unfollow"] forState:UIControlStateNormal];
+        } else {
+            [self.followBackButton setImage:[UIImage imageNamed:@"icon_notification_follow"] forState:UIControlStateNormal];
+        }
+    }
+}
+
+// get actor for follow activity
+- (FLYUser *)actor
+{
+    if (!_actor) {
+        _actor = [[FLYUser alloc] initWithDictionary:self.notification.actors[0]];
+    }
+    return _actor;
+}
+
++ (BOOL)_isFollowAction:(FLYNotification *)notification
+{
+    return [notification.action isEqualToString:@"followed"];
 }
 
 @end
