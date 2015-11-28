@@ -78,3 +78,7 @@ typedef void(^FLYBarButtonItemActionBlock)(FLYBarButtonItem *barButtonItem);
 @interface FLYLeaveTagButtonItem : FLYBarButtonItem
 
 @end
+
+@interface FLYProfileEditButtonItem : FLYBarButtonItem
+
+@end

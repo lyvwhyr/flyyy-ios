@@ -281,6 +281,21 @@
     self = [super initWithButton:leaveButton actionBlock:nil];
     return self;
 }
-
 @end
 
+
+@implementation FLYProfileEditButtonItem
+
+- (instancetype)initWithSide:(BOOL)left
+{
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //12 * 21
+    UIImage *image = [UIImage imageNamed:@"icon_profile_edit"];
+    CGFloat x = (left ? -1 : 1) * 10;
+    backButton.frame = CGRectMake(x, 0, 52, 44);
+    [backButton setImage:image forState:UIControlStateNormal];
+    self = [super initWithButton:backButton actionBlock:nil];
+    return self;
+}
+
+@end

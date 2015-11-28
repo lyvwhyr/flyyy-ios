@@ -26,6 +26,7 @@
 #import "FLYAudioManager.h"
 #import "NAKPlaybackIndicatorView.h"
 #import "FLYAudioItem.h"
+#import "FLYBarButtonItem.h"
 
 #define kTopBackgroundHeight 320
 #define kProfileAudioBioLeftMargin 20
@@ -329,6 +330,20 @@
     [super updateViewConstraints];
 }
 
+#pragma mark - Navigation bar
+- (void)loadRightBarButton
+{
+    if (self.isSelf) {
+        FLYProfileEditButtonItem *barItem = [FLYProfileEditButtonItem barButtonItem:NO];
+        @weakify(self)
+        barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+            @strongify(self)
+            [self _editProfileTapped];
+        };
+        self.navigationItem.rightBarButtonItem = barItem;
+    }
+}
+
 
 #pragma mark - Tap events
 
@@ -372,13 +387,25 @@
     if (self.user.audioBioDuration > 0) {
         [self _playAudioBio];
     } else {
-        if (self.isSelf) {
-            FLYRecordViewController *vc = [[FLYRecordViewController alloc] initWithRecordType:RecordingForAudioBio];
-            FLYNavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:vc];
-            [self presentViewController:navigationController animated:NO completion:nil];
-        }
+        [self _editAudioBio];
     }
 }
+
+- (void)_editAudioBio
+{
+    if (self.isSelf) {
+        FLYRecordViewController *vc = [[FLYRecordViewController alloc] initWithRecordType:RecordingForAudioBio];
+        FLYNavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:navigationController animated:NO completion:nil];
+    }
+}
+
+- (void)_editProfileTapped
+{
+    [self _editAudioBio];
+}
+
+
 
 - (void)_playAudioBio
 {

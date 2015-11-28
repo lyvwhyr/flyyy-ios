@@ -257,6 +257,13 @@
 
 - (void)_nextBarButtonTapped
 {
+    if (self.recordingType == RecordingForAudioBio) {
+        if (self.audioLength < kStreamingMinimialLen) {
+            [Dialog simpleToast:@"Recording must be at least 3s long"];
+            return;
+        }
+    }
+    
     if (![self _isAlreadyProcessed:self.filterEffect]) {
         [Dialog simpleToast:LOC(@"FLYRecordingStillProcessing")];
         return;
@@ -772,11 +779,17 @@
 
 - (void)_updateUserState
 {
-    [self.waver removeFromSuperview];
-    self.waver = nil;
-    
     [self _hideOnboardingView];
     
+    if (self.recordingType == RecordingForAudioBio && _currentState == FLYRecordRecordingState) {
+        if (self.audioLength < kStreamingMinimialLen) {
+            [Dialog simpleToast:@"Recording must be at least 3s long"];
+            return;
+        }
+    }
+    
+    [self.waver removeFromSuperview];
+    self.waver = nil;
     [self _cleanupTimer];
     
     switch (_currentState) {
@@ -788,6 +801,13 @@
         }
         case FLYRecordRecordingState:
         {
+            if (self.recordingType == RecordingForAudioBio) {
+                if (self.audioLength < kStreamingMinimialLen) {
+                    [Dialog simpleToast:@"Recording must be at least 3s long"];
+                    return;
+                }
+            }
+            
             _currentState = FLYRecordCompleteState;
             [self _setupCompleteViewState];
             break;
