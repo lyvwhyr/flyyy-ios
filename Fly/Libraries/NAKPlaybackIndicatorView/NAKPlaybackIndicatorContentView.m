@@ -8,16 +8,16 @@
 
 #import "NAKPlaybackIndicatorContentView.h"
 
-static const NSInteger kBarCount = 3;
+static const NSInteger kBarCount = 4;
 
-static const CGFloat kBarWidth = 3.0;
-static const CGFloat kBarIdleHeight = 3.0;
+static const CGFloat kBarWidth = 4.0;
+static const CGFloat kBarIdleHeight = 9.0;
 
 static const CGFloat kHorizontalBarSpacing = 2.0; // Measured on iPad 2 (non-Retina)
 static const CGFloat kRetinaHorizontalBarSpacing = 1.5; // Measured on iPhone 5s (Retina)
 
-static const CGFloat kBarMinPeakHeight = 6.0;
-static const CGFloat kBarMaxPeakHeight = 12.0;
+static const CGFloat kBarMinPeakHeight = 10.0;
+static const CGFloat kBarMaxPeakHeight = 32.0;
 
 static const CFTimeInterval kMinBaseOscillationPeriod = 0.6;
 static const CFTimeInterval kMaxBaseOscillationPeriod = 0.8;

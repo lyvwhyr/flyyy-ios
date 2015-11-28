@@ -25,6 +25,7 @@
 #import "FLYRecordViewController.h"
 #import "FLYAudioManager.h"
 #import "NAKPlaybackIndicatorView.h"
+#import "FLYAudioItem.h"
 
 #define kTopBackgroundHeight 320
 #define kProfileAudioBioLeftMargin 20
@@ -47,6 +48,8 @@
 @property (nonatomic) YYTextView *bioTextView;
 @property (nonatomic) UIButton *audioBioButton;
 @property (nonatomic) NAKPlaybackIndicatorView *playbackIndicatorView;
+@property (nonatomic) UIImageView *audioBioPlaybackBg;
+
 @property (nonatomic) UIButton *followButton;
 @property (nonatomic) FLYBadgeView *badgeView;
 
@@ -173,6 +176,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_followUpdated:) name:kNotificationFollowUserChanged object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_audioBioUpdated:) name:kNotificationAudioBioUpdated object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_audioBioCompletedPlaying:) name:kNotificationDidFinishPlaying object:nil];
 }
 
 - (void)updateViewConstraints
@@ -266,9 +271,12 @@
         }];
     }
 
+    [self.audioBioPlaybackBg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.audioBioButton);
+    }];
+    
     [self.playbackIndicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.view).offset(40);
-        make.top.equalTo(self.view).offset(kProfileAudioBioTopMargin);
+        make.center.equalTo(self.audioBioButton);
         make.width.equalTo(@(kProfileAudioBioWidth));
         make.height.equalTo(@(kProfileAudioBioWidth));
     }];
@@ -364,11 +372,21 @@
         
         [[FLYAudioManager sharedInstance] updateAudioState:newItem];
         
-        _playbackIndicatorView = [[NAKPlaybackIndicatorView alloc] initWithFrame:CGRectZero];
-        _playbackIndicatorView.tintColor = [UIColor colorWithHue:0.968 saturation:0.827 brightness:1.000 alpha:1.000];
+        if (!self.audioBioPlaybackBg) {
+            self.audioBioPlaybackBg = [UIImageView new];
+            self.audioBioPlaybackBg.image = [UIImage imageNamed:@"icon_profile_playback_bg"];
+            [self.view addSubview:self.audioBioPlaybackBg];
+        }
+        self.audioBioPlaybackBg.hidden = NO;
+        
+        _playbackIndicatorView = [[NAKPlaybackIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        _playbackIndicatorView.tintColor = [UIColor whiteColor];
         _playbackIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.view addSubview:_playbackIndicatorView];
         _playbackIndicatorView.state = NAKPlaybackIndicatorViewStatePlaying;
+        
+        self.audioBioButton.hidden = YES;
+        
         [self updateViewConstraints];
 
     } else {
@@ -524,6 +542,20 @@
     [self _initAudioView];
 }
 
+- (void)_audioBioCompletedPlaying:(NSNotification *)notif
+{
+    FLYAudioItem *audioItem = [notif.userInfo objectForKey:kAudioItemkey];
+    if (audioItem.itemType == FLYPlayableItemAudioBio) {
+        self.playbackIndicatorView.state = NAKPlaybackIndicatorViewStateStopped;
+        [self.playbackIndicatorView removeFromSuperview];
+        self.playbackIndicatorView = nil;
+        self.audioBioButton.hidden = NO;
+        
+        [self.audioBioPlaybackBg removeFromSuperview];
+        self.audioBioPlaybackBg = nil;
+    }
+}
+
 #pragma mark - TextView
 
 - (void)_setSelfDefaultBio
@@ -601,7 +633,6 @@
         [Dialog simpleToast:@"Your bio cannot be more than 3 lines"];
     }
 }
-
 
 #pragma mark - Navigation bar and status bar
 - (UIColor *)preferredNavigationBarColor
