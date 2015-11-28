@@ -160,6 +160,8 @@
             self.user = [[FLYUser alloc] initWithDictionary:responseObj];
             [self _initOtherFeedView];
             [self _updateProfileByUser];
+            
+            [self _playAudioBio];
         }
     };
     
@@ -368,6 +370,19 @@
 - (void)_audioBioButtonTapped
 {
     if (self.user.audioBioDuration > 0) {
+        [self _playAudioBio];
+    } else {
+        if (self.isSelf) {
+            FLYRecordViewController *vc = [[FLYRecordViewController alloc] initWithRecordType:RecordingForAudioBio];
+            FLYNavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:vc];
+            [self presentViewController:navigationController animated:NO completion:nil];
+        }
+    }
+}
+
+- (void)_playAudioBio
+{
+    if (self.user.audioBioDuration > 0) {
         FLYAudioItem *newItem = [[FLYAudioItem alloc] initWithUrl:[NSURL URLWithString:self.user.audioBioURL] andCount:0 indexPath:nil itemType:FLYPlayableItemAudioBio playState:FLYPlayStateNotSet audioDuration:self.user.audioBioDuration];
         
         [[FLYAudioManager sharedInstance] updateAudioState:newItem];
@@ -388,13 +403,6 @@
         self.audioBioButton.hidden = YES;
         
         [self updateViewConstraints];
-
-    } else {
-        if (self.isSelf) {
-            FLYRecordViewController *vc = [[FLYRecordViewController alloc] initWithRecordType:RecordingForAudioBio];
-            FLYNavigationController *navigationController = [[FLYNavigationController alloc] initWithRootViewController:vc];
-            [self presentViewController:navigationController animated:NO completion:nil];
-        }
     }
 }
 
