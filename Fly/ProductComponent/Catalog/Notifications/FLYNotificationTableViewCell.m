@@ -87,6 +87,10 @@
 
 + (CGFloat)heightForNotification:(FLYNotification *)notification
 {
+    if ([notification.action isEqualToString:@"followed"]) {
+        return 44;
+    }
+    
     if (notification.notificationString == nil) {
         return 0;
     }

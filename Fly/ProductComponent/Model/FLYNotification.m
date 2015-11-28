@@ -103,8 +103,10 @@
         NSString *username = [self.actors[0] fly_stringForKey:@"user_name"];
         if ([self.action isEqualToString:@"replied"]) {
             tempStr = LOC(@"FLYSinglePersonRepliedActivity");
+        } else if ([self.action isEqualToString:@"followed"]) {
+            tempStr = LOC(@"FLYSinglePersonFollowActivity");
         } else {
-            tempStr = LOC(@"FLYSinglePersonMentionActivity");
+            tempStr = LOC(@"FLYSinglePersonFollowActivity");
         }
         result = [NSString stringWithFormat:tempStr, username, self.topic.topicTitle];
         attrStr = [[NSMutableAttributedString alloc] initWithString:result];
@@ -153,7 +155,9 @@
         [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username1]];
         [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username2]];
     }
+    if (![self.action isEqualToString:@"followed"]) {
        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16] range:[result rangeOfString:self.topic.topicTitle]];
+    }
     return attrStr;
 }
 

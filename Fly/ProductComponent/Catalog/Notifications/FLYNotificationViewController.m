@@ -144,12 +144,16 @@
 # pragma mark - UITableViewDelegate, UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    FLYNotification *notification = self.entries[indexPath.row];
+    if ([notification.action isEqualToString:@"followed"]) {
+        
+    }
+    
     static NSString *cellIdentifier = @"FLYNotificationTableViewCellCellIdentifier";
     FLYNotificationTableViewCell *cell = [self.notificationTableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (!cell) {
         cell = [[FLYNotificationTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    FLYNotification *notification = self.entries[indexPath.row];
     [cell setupCell:notification];
     [cell setNeedsUpdateConstraints];
     [cell updateConstraints];

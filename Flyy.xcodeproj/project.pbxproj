@@ -428,6 +428,7 @@
 		A6DF8A141C08EF48004AA94F /* THContactPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6DF8A031C08EF48004AA94F /* THContactPickerTableViewCell.xib */; };
 		A6DF8A151C08EF48004AA94F /* THContactPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DF8A051C08EF48004AA94F /* THContactPickerView.m */; };
 		A6DF8A161C08EF48004AA94F /* THContactPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DF8A071C08EF48004AA94F /* THContactPickerViewController.m */; };
+		A6DF8A1A1C0919CD004AA94F /* FLYFollowBackTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DF8A191C0919CD004AA94F /* FLYFollowBackTableViewCell.m */; };
 		A6DFD1311AA80670008520F5 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6DFD1301AA80670008520F5 /* CoreTelephony.framework */; };
 		A6DFD1341AA8291B008520F5 /* FLYLoginSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6DFD1331AA8291B008520F5 /* FLYLoginSignupViewController.m */; };
 		A6E06E551B71FD8C003D5A30 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E541B71FD8C003D5A30 /* CoreData.framework */; };
@@ -1263,6 +1264,8 @@
 		A6DF8A051C08EF48004AA94F /* THContactPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THContactPickerView.m; sourceTree = "<group>"; };
 		A6DF8A061C08EF48004AA94F /* THContactPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THContactPickerViewController.h; sourceTree = "<group>"; };
 		A6DF8A071C08EF48004AA94F /* THContactPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THContactPickerViewController.m; sourceTree = "<group>"; };
+		A6DF8A181C0919CD004AA94F /* FLYFollowBackTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFollowBackTableViewCell.h; sourceTree = "<group>"; };
+		A6DF8A191C0919CD004AA94F /* FLYFollowBackTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFollowBackTableViewCell.m; sourceTree = "<group>"; };
 		A6DFD1301AA80670008520F5 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A6DFD1321AA8291B008520F5 /* FLYLoginSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYLoginSignupViewController.h; sourceTree = "<group>"; };
 		A6DFD1331AA8291B008520F5 /* FLYLoginSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoginSignupViewController.m; sourceTree = "<group>"; };
@@ -2202,6 +2205,8 @@
 				A638D82C1AC9C73000E67ED3 /* FLYNotificationViewController.m */,
 				A6BC6F3B1B7333E8009FDF10 /* FLYNotificationTableViewCell.h */,
 				A6BC6F3C1B7333E8009FDF10 /* FLYNotificationTableViewCell.m */,
+				A6DF8A181C0919CD004AA94F /* FLYFollowBackTableViewCell.h */,
+				A6DF8A191C0919CD004AA94F /* FLYFollowBackTableViewCell.m */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -3675,6 +3680,7 @@
 				A6A0E4BF1A1E76110036116E /* FLEXHierarchyTableViewController.m in Sources */,
 				A651BD871A4985D40081A1E0 /* Dialog.m in Sources */,
 				A6A0E4AC1A1E76110036116E /* FLEXLiveObjectsTableViewController.m in Sources */,
+				A6DF8A1A1C0919CD004AA94F /* FLYFollowBackTableViewCell.m in Sources */,
 				A643AEE91AA9539E00BF4E0F /* NIDebuggingTools.m in Sources */,
 				A6F01BDD1B9CB82D00258CC7 /* MJAutoCompleteTC.m in Sources */,
 				A6E1B4971B86471B001B0E04 /* README.md in Sources */,

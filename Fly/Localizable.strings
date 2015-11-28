@@ -236,6 +236,8 @@
 "FLYThreePersonMentionActivity" = "%@, %@ and %@ replied to you in post: %@";
 "FLYMoreThanThreePeopleMentionActivity" = "%@, %@ and %ld others replied to you in post: %@";
 
+"FLYSinglePersonFollowActivity" = "%@ started following you!";
+
 "FLYAllNotificationsRead" = "All Notifications Read";
 
 "FLYNeedLogin" = "Please login first";
