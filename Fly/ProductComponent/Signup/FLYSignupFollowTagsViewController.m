@@ -172,6 +172,11 @@
     }];
 }
 
+- (void)loadLeftBarButton
+{
+    self.navigationItem.hidesBackButton = YES;
+}
+
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
@@ -203,7 +208,7 @@
 
 - (void)_doneButtonTapped
 {
-    if (self.followTagCount <= 3) {
+    if (self.followTagCount <= 2) {
         [Dialog simpleToast:LOC(@"FLYSignupFollowAtLeastThreeTags")];
         return;
     }
