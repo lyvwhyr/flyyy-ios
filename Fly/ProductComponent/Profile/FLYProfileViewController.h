@@ -11,6 +11,7 @@
 @interface FLYProfileViewController : FLYUniversalViewController
 
 @property (nonatomic) BOOL isSelf;
+@property (nonatomic) UIButton *audioBioButton;
 
 - (instancetype)initWithUserId:(NSString *)userId;
 

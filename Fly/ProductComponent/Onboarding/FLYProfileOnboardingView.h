@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class FLYMainViewController;
+@class FLYProfileViewController;
+
 @interface FLYProfileOnboardingView : UIView
+
++ (UIView *)showFeedOnBoardViewWithMainVC:(FLYMainViewController *)mainVC inViewController:(FLYProfileViewController *)inViewController;
 
 @end

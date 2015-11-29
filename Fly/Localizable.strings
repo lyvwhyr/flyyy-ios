@@ -265,3 +265,6 @@
 "FLYShareTypeOther" = "Other";
 "FLYPopularUsersLabelText" = "Popular Users";
 "FLYSearchByUsernameText" = "Search by username";
+
+"FLYProfileOnboardingTapToRecord" = "A few words about yourself. Tap to record.";
+"FLYProfileOnboardingTapToRecordTextHighlight" = "Tap";

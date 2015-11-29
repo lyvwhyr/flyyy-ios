@@ -45,7 +45,7 @@
 
 #define kMaxWaitForTableLoad 3
 
-#define kPopPushNotificationDialogSessionCount 2
+#define kPopPushNotificationDialogSessionCount 4
 #define kHomeTimelineViewCountAfterLoginKey @"kHomeTimelineViewCountAfterLoginKey"
 
 @interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, FLYFeedTopicTableViewCellDelegate>
@@ -295,7 +295,7 @@
 
 - (void)_popPushNotificationDialogIfNecessary
 {
-    // pop enable push notification dialog on 2rd session
+    // pop enable push notification dialog on 4rd session
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSInteger timelineViewCount = [defaults integerForKey:kHomeTimelineViewCountAfterLoginKey];
     if (timelineViewCount >= kPopPushNotificationDialogSessionCount) {

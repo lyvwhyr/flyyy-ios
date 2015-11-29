@@ -75,6 +75,7 @@
 #define kRecordingOnboardingKey @"kRecordingOnboardingKey"
 #define kRecordingAudioBioOnboardingKey @"kRecordingAudioBioOnboardingKey"
 #define kTopicDetailOnboardingKey @"kTopicDetailOnboardingKey"
+#define kProfileAudioBioOnboardingKey @"kProfileAudioBioOnboardingKey"
 
 // user default
 #define kConfigsUserDefaultKey @"kConfigsUserDefaultKey"

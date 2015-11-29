@@ -27,6 +27,8 @@
 #import "NAKPlaybackIndicatorView.h"
 #import "FLYAudioItem.h"
 #import "FLYBarButtonItem.h"
+#import "FLYProfileOnboardingView.h"
+#import "FLYMainViewController.h"
 
 #define kTopBackgroundHeight 320
 #define kProfileAudioBioLeftMargin 20
@@ -47,7 +49,7 @@
 @property (nonatomic) FLYProfileStatInfoView *followingStatView;
 @property (nonatomic) FLYProfileStatInfoView *postsStatView;
 @property (nonatomic) YYTextView *bioTextView;
-@property (nonatomic) UIButton *audioBioButton;
+
 @property (nonatomic) NAKPlaybackIndicatorView *playbackIndicatorView;
 @property (nonatomic) UIImageView *audioBioPlaybackBg;
 
@@ -138,6 +140,13 @@
     [self.view addSubview:self.audioBioButton];
     
     if (self.isSelf) {
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        BOOL hasSeenOnboarding = [[defaults objectForKey:kProfileAudioBioOnboardingKey] boolValue];
+        if (!hasSeenOnboarding) {
+            [self _loadProfileOnboarding];
+        }
+        
         self.bioTextView.userInteractionEnabled = YES;
         self.user = [FLYAppStateManager sharedInstance].currentUser;
         self.myPostViewController = [[FLYMyTopicsViewController alloc] init];
@@ -678,6 +687,17 @@
     {
         textView.text = [textView.text substringToIndex:textView.text.length - 1];
         [Dialog simpleToast:@"Your bio cannot be more than 3 lines"];
+    }
+}
+
+- (void)_loadProfileOnboarding
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@(YES) forKey:kProfileAudioBioOnboardingKey];
+    [defaults synchronize];
+    if (self.parentViewController && [self.parentViewController.parentViewController isKindOfClass:[FLYMainViewController class]]) {
+        FLYMainViewController *mainVC = (FLYMainViewController *)self.parentViewController.parentViewController;
+        [FLYProfileOnboardingView showFeedOnBoardViewWithMainVC:mainVC inViewController:self];
     }
 }
 
