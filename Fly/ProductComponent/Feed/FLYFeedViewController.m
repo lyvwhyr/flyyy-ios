@@ -146,7 +146,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:kRequireSignupNotification object:self];
         };
         
-        self.notLoggedInView = [[FLYEmptyStateView alloc] initWithTitle:LOC(@"FLYNotLoggedInFollowTitle") description:LOC(@"FLYNotLoggedInFollowDescription") buttonText:nil actionBlock:actionBlock];
+        self.notLoggedInView = [[FLYEmptyStateView alloc] initWithTitle:LOC(@"FLYNotLoggedInFollowTitle") description:LOC(@"FLYNoFollowingTagsDescription") buttonText:nil actionBlock:actionBlock];
         [self.view addSubview:self.notLoggedInView];
         self.rootViewController.navigationController.navigationBar.shadowImage = [[UIImage alloc] init];
     } else if ([self _mineHasNoFollowedTags]) {

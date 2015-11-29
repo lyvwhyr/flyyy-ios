@@ -370,6 +370,10 @@
 
 - (void)_followButtonTapped
 {
+    if ([FLYUtilities isInvalidUser]) {
+        return;
+    }
+    
     if (self.isSelf) {
         [FLYShareManager shareProfile:self profileName:self.user.userName];
     } else {

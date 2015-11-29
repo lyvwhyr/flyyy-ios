@@ -250,7 +250,7 @@
 "FLYTagListSearchAtLeastTwoChars" = "Type at least 1 character to start your search";
 
 "FLYNotLoggedInFollowTitle" = "Hi!";
-"FLYNotLoggedInFollowDescription" = "You can begin to follow your own tags by signing up.";
+"FLYNotLoggedInFollowDescription" = "You can begin to customize your timeline by signing up.";
 
 "FLYNoFollowingTagsTitle" = "Hi!";
 "FLYNoFollowingTagsDescription" = "Join groups you like and we'll help you build your timeline.";

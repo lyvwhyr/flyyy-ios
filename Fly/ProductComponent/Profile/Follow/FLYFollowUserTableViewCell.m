@@ -96,6 +96,10 @@
 
 - (void)_followButtonTapped
 {
+    if ([FLYUtilities isInvalidUser]) {
+        return;
+    }
+    
     [self.user followUser];
 }
 

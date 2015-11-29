@@ -864,7 +864,7 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     
     NSMutableArray *otherButtons = [NSMutableArray new];
     NSString *visitProfileStr = [NSString stringWithFormat:LOC(@"FLYTopicDetailActionsheetVisitProfile"), reply.user.userName];
-    [otherButtons addObject:LOC(visitProfileStr)];
+    [otherButtons addObject:visitProfileStr];
     if (isAuthor) {
         [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetAddReply")];
         [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetDeleteReply")];
