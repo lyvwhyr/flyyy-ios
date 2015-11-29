@@ -12,6 +12,7 @@
 #import "FLYNotification.h"
 #import "FLYUser.h"
 #import "UIButton+TouchAreaInsets.h"
+#import "FLYActivityService.h"
 
 #define kTopMargin   10
 #define kBottomMargin 10
@@ -185,6 +186,12 @@
 - (void)_followButtonTapped
 {
     [self.actor followUser];
+    [self clearReadState];
+    
+    FLYGenericSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        [[FLYAppStateManager sharedInstance] updateActivityCount];
+    };
+    [FLYActivityService markSingleFollowActivityReadWithActivityId:self.actor.userId successBlock:successBlock errorBlock:nil];
 }
 
 #pragma mark - Follow notification

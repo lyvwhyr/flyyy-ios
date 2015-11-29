@@ -19,6 +19,7 @@
 #import "FLYIconButton.h"
 #import "UIFont+FLYAddition.h"
 #import "FLYUser.h"
+#import "FLYActivityService.h"
 
 @interface FLYNotificationViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -173,6 +174,7 @@
         FLYNotification *notif = self.entries[indexPath.row];
         FLYUser *actor = [[FLYUser alloc] initWithDictionary:notif.actors[0]];
         [self.delegate visitProfile:actor];
+        [FLYActivityService markSingleFollowActivityReadWithActivityId:actor.userId successBlock:nil errorBlock:nil];
     } else {
         FLYTopic *topic = notificaiton.topic;
         [self.delegate visitTopicDetail:topic];

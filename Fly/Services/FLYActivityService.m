@@ -60,4 +60,19 @@
     }];
 }
 
++ (void)markSingleFollowActivityReadWithActivityId:(NSString *)actorUserId successBlock:(FLYGenericSuccessBlock)successBlock errorBlock:(FLYGenericErrorBlock)errorBlock
+{
+    NSString *ep = [NSString stringWithFormat:EP_ACTIVITIES_MARK_FOLLOWED_READ, actorUserId];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager PUT:ep parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
+    } failure:^(id responseObj, NSError *error) {
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
+    }];
+}
+
 @end

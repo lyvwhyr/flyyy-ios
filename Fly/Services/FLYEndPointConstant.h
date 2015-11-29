@@ -77,6 +77,7 @@
 #define EP_ACTIVITIES_UNREAD_COUNT                  @"/v1/activities/unread_count"
 #define EP_ACTIVITIES_MARK_READ                     @"/v1/activities/read"
 #define EP_ACTIVITIES_GET                           @"/v1/activities"
+#define EP_ACTIVITIES_MARK_FOLLOWED_READ            @"/v1/activities/followed/%@/read"
 
 // tags
 #define EP_TAGS_FOLLOW                              @"v1/tags/%@/join"
