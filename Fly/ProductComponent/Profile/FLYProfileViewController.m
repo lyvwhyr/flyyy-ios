@@ -193,6 +193,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_audioBioUpdated:) name:kNotificationAudioBioUpdated object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_audioBioCompletedPlaying:) name:kNotificationDidFinishPlaying object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(_newPostReceived:)
+                                                 name:kNewPostReceivedNotification object:nil];
 }
 
 - (void)updateViewConstraints
@@ -559,6 +563,11 @@
     [self.followingStatView setCount:self.user.followingCount];
 }
 
+- (void)_updatePostsStatView
+{
+    [self.postsStatView setCount:self.user.topicCount];
+}
+
 
 #pragma mark - Follow notification
 
@@ -581,13 +590,6 @@
         
         // update my profile page
     } else if ([self.user.userId isEqualToString:currentUser.userId]) {
-        if (user.isFollowing) {
-            self.user.followingCount++;
-        } else {
-            if (self.user.followingCount > 0) {
-                self.user.followingCount--;
-            }
-        }
         [self _updateFollowingStatView];
     } else {
         return;
@@ -595,6 +597,11 @@
     
     self.user.isFollowing = user.isFollowing;
     [self _initOrUpdateFollowView];
+}
+
+- (void)_newPostReceived:(NSNotification *)notif
+{
+    [self _updatePostsStatView];
 }
 
 - (void)_audioBioUpdated:(NSNotification *)notif

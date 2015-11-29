@@ -53,6 +53,12 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_requireSignupOrLogin:) name:kRequireSignupNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_logout:) name:kNotificationLogout object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_followUpdated:) name:kNotificationFollowUserChanged object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_newPostReceived:)
+                                                     name:kNewPostReceivedNotification object:nil];
+        
     }
     return self;
 }
@@ -134,6 +140,26 @@
     self.mediaId = nil;
     self.mineType = nil;
     self.mediaAlreadyUploaded = NO;
+}
+
+- (void)_followUpdated:(NSNotification *)notification
+{
+    FLYUser *user = [notification.userInfo objectForKey:@"user"];
+    FLYUser *currentUser = [FLYAppStateManager sharedInstance].currentUser;
+    currentUser.isFollowing = user.isFollowing;
+    if (user.isFollowing) {
+        currentUser.followingCount++;
+    } else {
+        if (currentUser.followingCount > 0) {
+            currentUser.followingCount--;
+        }
+    }
+}
+
+- (void)_newPostReceived:(NSNotification *)notif
+{
+    FLYUser *currentUser = [FLYAppStateManager sharedInstance].currentUser;
+    currentUser.topicCount++;
 }
 
 @end

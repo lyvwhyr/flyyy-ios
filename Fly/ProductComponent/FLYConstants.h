@@ -84,6 +84,8 @@
 // One time keys
 #define kHasShownEnablePushNotificationDialog @"kHasShownEnablePushNotificationDialog"
 
+#define kNewPostReceivedNotification @"kNewPostReceivedNotification"
+
 
 #define kPrivacyPolicyURL   @"https://www.flyyapp.com/privacy.html"
 #define kTermsOfServiceURL  @"https://www.flyyapp.com/terms.html"

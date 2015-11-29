@@ -24,7 +24,6 @@ typedef NS_ENUM(NSInteger, FLYFeedType) {
 
 @class FLYTopicService;
 
-#define kNewPostReceivedNotification @"kNewPostReceivedNotification"
 
 @interface FLYFeedViewController : FLYUniversalViewController
 
