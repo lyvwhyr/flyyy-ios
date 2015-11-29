@@ -9,10 +9,12 @@
 #import "FLYUniversalViewController.h"
 
 @class FLYTopic;
+@class FLYUser;
 
 @protocol FLYNotificationViewControllerDelegate <NSObject>
 
 - (void)visitTopicDetail:(FLYTopic *)topic;
+- (void)visitProfile:(FLYUser *)user;
 
 @end
 

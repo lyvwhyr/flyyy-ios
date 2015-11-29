@@ -41,6 +41,7 @@
 #import "FLYServerConfig.h"
 #import "FLYShareManager.h"
 #import "FLYGroup.h"
+#import "FLYProfileViewController.h"
 
 typedef NS_ENUM(NSInteger, FLYPostAuthorActions) {
     FLYPostAuthorActionsDelete = 0,
@@ -51,13 +52,15 @@ typedef NS_ENUM(NSInteger, FLYPostNonAuthorActions) {
 };
 
 typedef NS_ENUM(NSInteger, FLYReplyAuthorActions) {
-    FLYReplyAuthorActionsComment = 0,
+    FLYReplyAuthorActionsProfileVisit = 0,
+    FLYReplyAuthorActionsComment,
     FLYReplyAuthorActionsDelete,
 };
 
 typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
-    FLYReplyNonAuthorActionsComment = 0,
-    FLYReplyNonAuthorActionsReport
+    FLYReplyNonAuthorActionsProfileVisit = 0,
+    FLYReplyNonAuthorActionsComment,
+    FLYReplyNonAuthorActionsReport,
 };
 
 
@@ -536,6 +539,12 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     }
 }
 
+- (void)_profileVisitTapped:(NSString *)userId
+{
+    FLYProfileViewController *profileVC = [[FLYProfileViewController alloc] initWithUserId:userId];
+    [self.navigationController pushViewController:profileVC animated:YES];
+}
+
 - (void)_commentButtonTapped:(FLYReply *)reply
 {
     if ([FLYUtilities isInvalidUser]) {
@@ -854,6 +863,8 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
     }
     
     NSMutableArray *otherButtons = [NSMutableArray new];
+    NSString *visitProfileStr = [NSString stringWithFormat:LOC(@"FLYTopicDetailActionsheetVisitProfile"), reply.user.userName];
+    [otherButtons addObject:LOC(visitProfileStr)];
     if (isAuthor) {
         [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetAddReply")];
         [otherButtons addObject:LOC(@"FLYTopicDetailActionsheetDeleteReply")];
@@ -867,6 +878,11 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
         if (actionSheet.cancelButtonIndex != buttonIndex) {
             if (isAuthor) {
                 switch (buttonIndex) {
+                    case FLYReplyAuthorActionsProfileVisit: {
+                        [self _profileVisitTapped:reply.user.userId];
+                        break;
+                    }
+                        
                     case FLYReplyAuthorActionsComment: {
                         [self _commentButtonTapped:reply];
                         break;
@@ -880,6 +896,10 @@ typedef NS_ENUM(NSInteger, FLYReplyNonAuthorActions) {
                 }
             } else {
                 switch (buttonIndex) {
+                    case FLYReplyNonAuthorActionsProfileVisit: {
+                        [self _profileVisitTapped:reply.user.userId];
+                        break;
+                    }
                     case FLYReplyNonAuthorActionsComment: {
                         [self _commentButtonTapped:reply];
                         break;

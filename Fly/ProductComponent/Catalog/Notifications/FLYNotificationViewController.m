@@ -18,6 +18,7 @@
 #import "NSDictionary+FLYAddition.h"
 #import "FLYIconButton.h"
 #import "UIFont+FLYAddition.h"
+#import "FLYUser.h"
 
 @interface FLYNotificationViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -169,7 +170,9 @@
     [cell clearReadState];
     
     if ([notificaiton.action isEqualToString:@"followed"]) {
-        
+        FLYNotification *notif = self.entries[indexPath.row];
+        FLYUser *actor = [[FLYUser alloc] initWithDictionary:notif.actors[0]];
+        [self.delegate visitProfile:actor];
     } else {
         FLYTopic *topic = notificaiton.topic;
         [self.delegate visitTopicDetail:topic];

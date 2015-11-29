@@ -22,6 +22,7 @@
 #import "FLYNavigationController.h"
 #import "JSBadgeView.h"
 #import "FLYTopicDetailViewController.h"
+#import "FLYProfileViewController.h"
 
 #define kSegmentedControlHeight 44
 
@@ -189,6 +190,12 @@
     FLYTopicDetailViewController *viewController = [[FLYTopicDetailViewController alloc] initWithTopic:topic];
     viewController.isBackFullScreen = YES;
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)visitProfile:(FLYUser *)user
+{
+    FLYProfileViewController *profileVC = [[FLYProfileViewController alloc] initWithUserId:user.userId];
+    [self.navigationController pushViewController:profileVC animated:YES];
 }
 
 #pragma mark - Navigation bar and status bar

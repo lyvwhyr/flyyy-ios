@@ -24,12 +24,11 @@
 @property (nonatomic) UIImageView *recordPostArrow;
 @property (nonatomic) UILabel *tagsLabel;
 @property (nonatomic) UIImageView *tagsArrow;
+@property (nonatomic) UILabel *profileLabel;
+@property (nonatomic) UIImageView *profileArrow;
 
 @property (nonatomic) UIView *bottomBackgrounLeftView;
 @property (nonatomic) UIView *bottomBackgrounRightView;
-
-// fake recording button. Only used for tutorial
-@property (nonatomic) UIButton *recordButton;
 
 @property (nonatomic) UIButton *tapContinueButton;
 
@@ -86,10 +85,16 @@
         _tagsArrow.image = [UIImage imageNamed:@"icon_down_arrow"];
         [self addSubview:_tagsArrow];
 
-        _recordButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _recordButton.userInteractionEnabled = NO;
-        [_recordButton setImage:[UIImage imageNamed:@"icon_home_record"] forState:UIControlStateNormal];
-        [self addSubview:_recordButton];
+        _profileLabel = [UILabel new];
+        _profileLabel.textColor = [UIColor whiteColor];
+        _profileLabel.font = font;
+        _profileLabel.text = LOC(@"FLYTabbarOnboardingProfileButton");
+        _profileLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:_profileLabel];
+        
+        _profileArrow = [UIImageView new];
+        _profileArrow.image = [UIImage imageNamed:@"icon_down_arrow"];
+        [self addSubview:_profileArrow];
         
         _tapContinueButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _tapContinueButton.userInteractionEnabled = NO;
@@ -114,8 +119,9 @@
     FLYTabBarView *tabbarView = self.mainViewController.tabBarView;
     
     FLYTabView *homeTab = self.mainViewController.homeTab;
-    UIButton *recordingTab = self.mainViewController.recordButton;
-    FLYTabView *tagsTab = self.mainViewController.groupsTab;
+    FLYTabView *groupsTab = self.mainViewController.groupsTab;
+    FLYTabView *recordTab = self.mainViewController.recordTab;
+    FLYTabView *meTab = self.mainViewController.meTab;
     
     [self.homefeedLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(homeTab);
@@ -128,14 +134,9 @@
         make.bottom.equalTo(tabbarView.mas_top).offset(-kLabelTitleSpacing);
     }];
     
-    [self.recordPostLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(recordingTab);
-        make.bottom.equalTo(recordingTab.mas_top).offset(-75);
-    }];
-    
     [self.tagsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(tagsTab);
-        make.bottom.equalTo(tagsTab.mas_top).offset(-35);
+        make.centerX.equalTo(groupsTab);
+        make.bottom.equalTo(groupsTab.mas_top).offset(-35);
     }];
     
     [self.tagsArrow mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -144,15 +145,26 @@
         make.bottom.equalTo(tabbarView.mas_top).offset(-kLabelTitleSpacing);
     }];
     
-    [self.recordButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
-        make.bottom.equalTo(self);
+    [self.recordPostLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(recordTab);
+        make.bottom.equalTo(recordTab.mas_top).offset(-35);
     }];
     
     [self.recordPostArrow mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.recordPostLabel);
         make.top.equalTo(self.recordPostLabel.mas_bottom).offset(kLabelTitleSpacing);
-        make.bottom.equalTo(self.recordButton.mas_top).offset(-kLabelTitleSpacing);
+        make.bottom.equalTo(recordTab.mas_top).offset(-kLabelTitleSpacing);
+    }];
+    
+    [self.profileLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(meTab);
+        make.bottom.equalTo(meTab.mas_top).offset(-35);
+    }];
+    
+    [self.profileArrow mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.profileLabel);
+        make.top.equalTo(self.profileLabel.mas_bottom).offset(kLabelTitleSpacing);
+        make.bottom.equalTo(meTab.mas_top).offset(-kLabelTitleSpacing);
     }];
     
     [self.tapContinueButton mas_makeConstraints:^(MASConstraintMaker *make) {
