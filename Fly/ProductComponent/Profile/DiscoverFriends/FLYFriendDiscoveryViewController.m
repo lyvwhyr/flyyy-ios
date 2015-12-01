@@ -177,7 +177,7 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
     
     if (self.searchVC) {
         [self.searchVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.searchBar.mas_bottom).offset(3);
+            make.top.equalTo(self.searchBar.mas_bottom).offset(8);
             make.leading.mas_equalTo(self.view);
             make.width.mas_equalTo(self.view);
             make.bottom.equalTo(self.view).offset(-self.keyboardHeight + 44);
@@ -250,7 +250,8 @@ typedef NS_ENUM(NSInteger, FLYShareType) {
 
 - (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didCompleteWithResults:(NSDictionary *)results
 {
-    NSLog(@"hi");
+    NSDictionary *properties = @{kTrackingSection: @"facebook", kTrackingComponent:@"complete"};
+    [[Mixpanel sharedInstance]  track:@"share" properties:properties];
 }
 
 - (void)appInviteDialog:(FBSDKAppInviteDialog *)appInviteDialog didFailWithError:(NSError *)error

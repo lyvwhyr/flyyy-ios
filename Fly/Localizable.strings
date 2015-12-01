@@ -257,7 +257,7 @@
 "FLYNoFollowingTagsButtonText" = "Let's go!";
 
 // profile page
-"FLYProfileShare" = "This Flyy app is so fun! Follow me @%@ and download at %@.";
+"FLYProfileShare" = "Flyy app is so fun! Follow me @%@ and download at %@.";
 "FLYProfilePostsLocked" = "Posts are locked";
 "FLYProfileBioSelfDefault" = "Click here to provide a description about yourself";
 "FLYProfileBioOthersDefault" = "User has not provided a profile description.";

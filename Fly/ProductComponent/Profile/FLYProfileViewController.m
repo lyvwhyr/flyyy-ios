@@ -147,6 +147,9 @@
             [self _loadProfileOnboarding];
         }
         
+        NSDictionary *properties = @{kTrackingSection: @"self"};
+        [[Mixpanel sharedInstance]  track:@"profile_visit" properties:properties];
+        
         self.bioTextView.userInteractionEnabled = YES;
         self.user = [FLYAppStateManager sharedInstance].currentUser;
         self.myPostViewController = [[FLYMyTopicsViewController alloc] init];
@@ -155,6 +158,8 @@
         [self.view insertSubview:self.myPostViewController.view belowSubview:self.topBgView];
         [self _updateProfileByUser];
     } else {
+        NSDictionary *properties = @{kTrackingSection: @"other"};
+        [[Mixpanel sharedInstance]  track:@"profile_visit" properties:properties];
         [self _initService];
     }
 }
@@ -446,12 +451,16 @@
         if (!self.audioBioPlaybackBg) {
             self.audioBioPlaybackBg = [UIImageView new];
             self.audioBioPlaybackBg.image = [UIImage imageNamed:@"icon_profile_playback_bg"];
+            self.audioBioPlaybackBg.userInteractionEnabled = YES;
             [self.view addSubview:self.audioBioPlaybackBg];
+            UITapGestureRecognizer *playbackTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_playbackTapped)];
+            [self.audioBioPlaybackBg addGestureRecognizer:playbackTapGestureRecognizer];
         }
         self.audioBioPlaybackBg.hidden = NO;
         
         _playbackIndicatorView = [[NAKPlaybackIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         _playbackIndicatorView.tintColor = [UIColor whiteColor];
+        _playbackIndicatorView.userInteractionEnabled = NO;
         _playbackIndicatorView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.view addSubview:_playbackIndicatorView];
         _playbackIndicatorView.state = NAKPlaybackIndicatorViewStatePlaying;
@@ -613,14 +622,19 @@
 {
     FLYAudioItem *audioItem = [notif.userInfo objectForKey:kAudioItemkey];
     if (audioItem.itemType == FLYPlayableItemAudioBio) {
-        self.playbackIndicatorView.state = NAKPlaybackIndicatorViewStateStopped;
-        [self.playbackIndicatorView removeFromSuperview];
-        self.playbackIndicatorView = nil;
-        self.audioBioButton.hidden = NO;
-        
-        [self.audioBioPlaybackBg removeFromSuperview];
-        self.audioBioPlaybackBg = nil;
+        [self _removePlaybackView];
     }
+}
+
+- (void)_removePlaybackView
+{
+    self.playbackIndicatorView.state = NAKPlaybackIndicatorViewStateStopped;
+    [self.playbackIndicatorView removeFromSuperview];
+    self.playbackIndicatorView = nil;
+    self.audioBioButton.hidden = NO;
+    
+    [self.audioBioPlaybackBg removeFromSuperview];
+    self.audioBioPlaybackBg = nil;
 }
 
 #pragma mark - TextView
@@ -710,6 +724,12 @@
         FLYMainViewController *mainVC = (FLYMainViewController *)self.parentViewController.parentViewController;
         [FLYProfileOnboardingView showFeedOnBoardViewWithMainVC:mainVC inViewController:self];
     }
+}
+
+- (void)_playbackTapped
+{
+    [[FLYAudioManager sharedInstance].audioPlayer stop];
+    [self _removePlaybackView];
 }
 
 #pragma mark - Navigation bar and status bar

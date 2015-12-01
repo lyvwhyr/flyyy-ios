@@ -89,6 +89,7 @@
 		A63188EB1A92B1890042E12A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A63188EA1A92B1890042E12A /* MediaPlayer.framework */; };
 		A63189221A92B34E0042E12A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A63189211A92B34E0042E12A /* Reachability.m */; };
 		A63189241A92B3C70042E12A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A63189231A92B3C70042E12A /* libxml2.dylib */; };
+		A631CA9B1C0BF000001A0459 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = A631CA9A1C0BF000001A0459 /* UIScrollView+EmptyDataSet.m */; };
 		A636FC381A9AA73E0084DE6A /* FLYScribe.m in Sources */ = {isa = PBXBuildFile; fileRef = A636FC371A9AA73E0084DE6A /* FLYScribe.m */; };
 		A636FC3B1A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A636FC3A1A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.m */; };
 		A638D82D1AC9C73000E67ED3 /* FLYNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A638D82C1AC9C73000E67ED3 /* FLYNotificationViewController.m */; };
@@ -685,6 +686,8 @@
 		A63189201A92B34E0042E12A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		A63189211A92B34E0042E12A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		A63189231A92B3C70042E12A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		A631CA991C0BF000001A0459 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		A631CA9A1C0BF000001A0459 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		A636FC361A9AA73E0084DE6A /* FLYScribe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYScribe.h; sourceTree = "<group>"; };
 		A636FC371A9AA73E0084DE6A /* FLYScribe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYScribe.m; sourceTree = "<group>"; };
 		A636FC391A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+FLYAddition.h"; sourceTree = "<group>"; };
@@ -1768,6 +1771,8 @@
 		A6263EBE1A1887DB00C4C3BA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				A631CA991C0BF000001A0459 /* UIScrollView+EmptyDataSet.h */,
+				A631CA9A1C0BF000001A0459 /* UIScrollView+EmptyDataSet.m */,
 				A693AA9E1B5F3CBA00517402 /* UIBarButtonItem+Badge.h */,
 				A693AA9F1B5F3CBA00517402 /* UIBarButtonItem+Badge.m */,
 				A693AAA01B5F3CBA00517402 /* UIButton+Badge.h */,
@@ -3820,6 +3825,7 @@
 				A6CD56E71A47DAFB003486DD /* NSBundle+FLYAddition.m in Sources */,
 				A6DCA7741B5C19F60076C9C8 /* FLYRecordOnboardViewController.m in Sources */,
 				A6D949F91A90B65F003D4265 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
+				A631CA9B1C0BF000001A0459 /* UIScrollView+EmptyDataSet.m in Sources */,
 				A6A0E4BE1A1E76110036116E /* FLEXHierarchyTableViewCell.m in Sources */,
 				A693AA9D1B5F3A6900517402 /* JSBadgeView.m in Sources */,
 				A6048A3E1A85E63100C67480 /* EXTNil.m in Sources */,

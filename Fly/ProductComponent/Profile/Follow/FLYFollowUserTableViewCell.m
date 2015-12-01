@@ -100,6 +100,9 @@
         return;
     }
     
+    NSDictionary *properties = @{kTrackingSection: @"followr", kTrackingComponent:@"complete"};
+    [[Mixpanel sharedInstance]  track:@"follow_user" properties:properties];
+    
     [self.user followUser];
 }
 

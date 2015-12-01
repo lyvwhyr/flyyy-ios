@@ -42,13 +42,14 @@
 #import "FLYSegmentedFeedViewController.h"
 #import "NSTimer+BlocksKit.h"
 #import "FLYEmptyStateView.h"
+#import "UIScrollView+EmptyDataSet.h"
 
 #define kMaxWaitForTableLoad 3
 
 #define kPopPushNotificationDialogSessionCount 4
 #define kHomeTimelineViewCountAfterLoginKey @"kHomeTimelineViewCountAfterLoginKey"
 
-@interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, FLYFeedTopicTableViewCellDelegate>
+@interface FLYFeedViewController () <UITableViewDelegate, UITableViewDataSource, FLYFeedTopicTableViewCellDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property (nonatomic) UIView *backgroundView;
 @property (nonatomic) UITableView *feedTableView;
@@ -66,6 +67,8 @@
 // check if a tableview is full loaded for so we can launch on boarding
 @property (nonatomic) CGFloat elapsedTimeSinceLastCellSeen;
 @property (nonatomic) NSTimer *checkOnboardingCellLoadedTimer;
+
+@property (nonatomic) BOOL shouldShowEmptyState;
 
 @end
 
@@ -135,6 +138,9 @@
     _backgroundView.userInteractionEnabled = NO;
     _backgroundView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_backgroundView];
+    
+    _feedTableView.emptyDataSetSource = self;
+    _feedTableView.emptyDataSetDelegate = self;
     
     [self _initService];
     
@@ -223,6 +229,8 @@
 
 - (void)_load:(BOOL)first before:(NSString *)before cursor:(BOOL)useCursor
 {
+    self.shouldShowEmptyState = NO;
+    
     // No more to fetch
     if (!first && useCursor && !before) {
         [self.feedTableView.pullToRefreshView stopAnimating];
@@ -233,6 +241,7 @@
     self.state = FLYViewControllerStateLoading;
     @weakify(self)
     FLYGetTopicsSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
+        
         @strongify(self)
         [self.feedTableView.pullToRefreshView stopAnimating];
         [self.feedTableView.infiniteScrollingView stopAnimating];
@@ -249,6 +258,9 @@
         }
         
         if (topicsArray == nil ||  topicsArray.count == 0) {
+            self.shouldShowEmptyState = YES;
+            [self.feedTableView reloadEmptyDataSet];
+            
             self.state = FLYViewControllerStateError;
             return;
         }
@@ -270,6 +282,7 @@
         FLYTopic *lastTopic = [self.posts lastObject];
         self.beforeTimestamp = lastTopic.createdAt;
         [self.feedTableView reloadData];
+        
         [self updateViewConstraints];
     };
     FLYGetTopicsErrorBlock errorBlock = ^(AFHTTPRequestOperation *operation, NSError *error){
@@ -753,6 +766,21 @@
 - (UIViewController *)rootViewController
 {
     return [self.delegate rootViewController];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"No Posts";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont flyLightFontWithSize:25],
+                                 NSForegroundColorAttributeName: [FLYUtilities colorWithHexString:@"#C5C4C4"]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return self.shouldShowEmptyState;
 }
 
 #pragma mark - navigation bar item tapped 

@@ -481,6 +481,9 @@ UIBarButtonItem *leftBarButton;
 {
     switch (result) {
         case MessageComposeResultSent: {
+            NSDictionary *properties = @{kTrackingSection: @"sms", kTrackingComponent:@"complete", kTrackingElement:@(self.selectedContacts.count)};
+            [[Mixpanel sharedInstance]  track:@"share" properties:properties];
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationInviteFriendsSMSSent object:self];
             [self dismissViewControllerAnimated:YES completion:nil];
             break;
