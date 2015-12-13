@@ -62,7 +62,7 @@
     [self.view addSubview:self.logoView];
     
     self.logoImageView = [UIImageView new];
-    self.logoImageView.image = [UIImage imageNamed:@"icon_login_wings"];
+    self.logoImageView.image = [UIImage imageNamed:@"icon_homefeed_wings_white"];
     [self.logoView addSubview:self.logoImageView];
     
     self.logoSeparator = [UIView new];

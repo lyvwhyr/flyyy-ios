@@ -21,16 +21,16 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
+      "filename" : "iphone3.5_splash_page.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "launch_screen3_5.png",
       "scale" : "2x"
     },
     {
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
-      "filename" : "launch_screen4.png",
+      "filename" : "iphone4_splash_page.png",
       "minimum-system-version" : "7.0",
       "orientation" : "portrait",
       "scale" : "2x"
