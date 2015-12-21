@@ -15,9 +15,9 @@
 "FLYRecordingStillProcessing" = "Still processing the audio, please try to submit your recording later.";
 
 // Record onboarding
-"FLYRecordOnboardExplanationText" = "Before posting you promise to:";
-"FLYRecordOnboardBeAuthenticRuleText" = "1. Be authentic and speak about your personal thoughts or feelings.";
-"FLYRecordOnboardNoAbusiveContentText" = "2. Won't post abusive content or people's private information (We have zero tolerance on abusive content).";
+"FLYRecordOnboardExplanationText" = "Before posting you promise:";
+"FLYRecordOnboardBeAuthenticRuleText" = "1. To be authentic and speak about your personal thoughts or feelings.";
+"FLYRecordOnboardNoAbusiveContentText" = "2. To not post abusive content or share people's private information.";
 
 
 //Home feed
@@ -97,7 +97,7 @@
 "FLYRecordingMe" = "Me";
 "FLYRecordingCommentTitle" = "Comment";
 "FLYRecordingRecordTitle" = "Record";
-"FLYRecordingAudioBioTitle" = "Self intro";
+"FLYRecordingAudioBioTitle" = "Introduce yourself";
 
 // Recording onboarding
 "FLYOnboardingFirstTimeHint" = "Tap the button and leave the world a message";

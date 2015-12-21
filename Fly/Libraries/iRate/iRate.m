@@ -483,11 +483,20 @@ static NSString *const iRateMacAppStoreURLFormat = @"macappstore://itunes.apple.
     }
     
     //check how many times we've used it and the number of significant events
-    else if (self.usesCount < self.usesUntilPrompt && self.eventCount < self.eventsUntilPrompt)
+    else if (self.usesCount < self.usesUntilPrompt)
     {
         if (self.verboseLogging)
         {
             NSLog(@"iRate did not prompt for rating because the app has only been used %@ times and only %@ events have been logged", @(self.usesCount), @(self.eventCount));
+        }
+        return NO;
+    }
+    
+    else if (self.eventCount < self.eventsUntilPrompt)
+    {
+        if (self.verboseLogging)
+        {
+            NSLog(@"iRate did not prompt for rating because only %@ events have been logged", @(self.eventCount));
         }
         return NO;
     }

@@ -15,6 +15,7 @@
 #import "NSDate+TimeAgo.h"
 #import "FLYTopicService.h"
 #import "FLYServerConfig.h"
+#import "iRate.h"
 
 @interface FLYTopic() <FLYDownloadableAudio>
 
@@ -88,7 +89,9 @@
 - (void)_serverLike:(BOOL)liked
 {
     FLYLikeSuccessBlock successBlock = ^(AFHTTPRequestOperation *operation, id responseObj) {
-        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[iRate sharedInstance] logEvent:NO];
+        });
     };
     
     FLYLikeErrorBlock errorBlock = ^(id responseObj, NSError *error) {

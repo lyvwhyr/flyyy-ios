@@ -166,9 +166,10 @@
     [iRate sharedInstance].promptForNewVersionIfUserRated = NO;
     [iRate sharedInstance].daysUntilPrompt = 0;
     [iRate sharedInstance].usesUntilPrompt = 0;
-    [iRate sharedInstance].eventsUntilPrompt = 10; // After a user listens to the 10th post, show the prompt.
-    [iRate sharedInstance].remindPeriod = 7;
+    [iRate sharedInstance].eventsUntilPrompt = 4; // After a user likes 4 posts, show the prompt.
+    [iRate sharedInstance].remindPeriod = 5;
     [iRate sharedInstance].verboseLogging = NO;
+    [iRate sharedInstance].previewMode = NO;
     
     // Facebook install sdk
     [[FBSDKApplicationDelegate sharedInstance] application:application
