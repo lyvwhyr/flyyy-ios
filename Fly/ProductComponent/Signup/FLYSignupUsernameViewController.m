@@ -73,6 +73,8 @@
     self.inputTextField = [UITextField new];
     self.inputTextField.translatesAutoresizingMaskIntoConstraints = NO;
     self.inputTextField.inputAccessoryView = self.confirmButton;
+    self.inputTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.inputTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     self.inputTextField.placeholder = LOC(@"FLYSignupUsernameHint");
     [self.inputPhoneView addSubview:self.inputTextField];
     
