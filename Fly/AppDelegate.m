@@ -24,6 +24,7 @@
 #import "FLYPushNotificationRouter.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <Tapjoy/Tapjoy.h>
+#import "Harpy.h"
 
 #define MIXPANEL_TOKEN @"4ce141a1dcd56132894230aff97b282b"
 
@@ -92,6 +93,7 @@
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
     [FBSDKAppEvents activateApp];
+    [[Harpy sharedInstance] checkVersionDaily];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -176,6 +178,7 @@
                              didFinishLaunchingWithOptions:launchOptions];
     
     [self _setupTapjoy];
+    [self _setupNewVersionAvailablePrompt];
     
     //Fabric should the the last one
     [Fabric with:@[CrashlyticsKit]];
@@ -195,6 +198,17 @@
     
 //    [Tapjoy setDebugEnabled:YES]; //Do not set this for any version of the game released to an app store!
     [Tapjoy connect:@"m7gqUgvvTieLDyZOf1YKEAEBjlh4fiJ1RoWFd59etU1GEoNoM-sBi3li-Cs9"];
+}
+
+- (void)_setupNewVersionAvailablePrompt
+{
+    [[Harpy sharedInstance] setAppID:kFlyyAppID];
+    
+    // Set the UIViewController that will present an instance of UIAlertController
+    [[Harpy sharedInstance] setPresentingViewController:_window.rootViewController];
+    
+    // Perform check for new version of your app
+    [[Harpy sharedInstance] checkVersion];
 }
 
 -(void)tjcConnectSuccess:(NSNotification*)notifyObj{

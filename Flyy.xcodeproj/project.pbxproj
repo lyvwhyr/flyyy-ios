@@ -448,6 +448,8 @@
 		A6E06E6D1B72010F003D5A30 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E6C1B72010F003D5A30 /* MapKit.framework */; };
 		A6E06E6F1B720114003D5A30 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E6E1B720114003D5A30 /* MobileCoreServices.framework */; };
 		A6E06E711B720123003D5A30 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E06E701B720123003D5A30 /* Twitter.framework */; };
+		A6E0B3711C2A348F0089690E /* Harpy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6E0B36E1C2A348F0089690E /* Harpy.bundle */; };
+		A6E0B3721C2A348F0089690E /* Harpy.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E0B3701C2A348F0089690E /* Harpy.m */; };
 		A6E171F61A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */; };
 		A6E171FC1A1C62EC00F2B4BF /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171F91A1C62EC00F2B4BF /* PulsingHaloLayer.m */; };
 		A6E171FD1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A6E171FB1A1C62EC00F2B4BF /* MultiplePulsingHaloLayer.m */; };
@@ -1290,6 +1292,9 @@
 		A6E06E6C1B72010F003D5A30 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A6E06E6E1B720114003D5A30 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		A6E06E701B720123003D5A30 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		A6E0B36E1C2A348F0089690E /* Harpy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Harpy.bundle; sourceTree = "<group>"; };
+		A6E0B36F1C2A348F0089690E /* Harpy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Harpy.h; sourceTree = "<group>"; };
+		A6E0B3701C2A348F0089690E /* Harpy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Harpy.m; sourceTree = "<group>"; };
 		A6E171F41A1C5F4B00F2B4BF /* SVPulsingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPulsingAnnotationView.h; sourceTree = "<group>"; };
 		A6E171F51A1C5F4B00F2B4BF /* SVPulsingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPulsingAnnotationView.m; sourceTree = "<group>"; };
 		A6E171F81A1C62EC00F2B4BF /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
@@ -1472,6 +1477,7 @@
 		A60489FC1A85E63100C67480 /* External */ = {
 			isa = PBXGroup;
 			children = (
+				A6E0B36D1C2A348F0089690E /* Harpy */,
 				A6DF89F31C08EF48004AA94F /* ContactPicker */,
 				A6F2ACF11BF044C60078980B /* YYText */,
 				A69437851BCB44F90063A817 /* Tapjoy.embeddedframework */,
@@ -3039,6 +3045,16 @@
 			path = ContactPicker;
 			sourceTree = "<group>";
 		};
+		A6E0B36D1C2A348F0089690E /* Harpy */ = {
+			isa = PBXGroup;
+			children = (
+				A6E0B36E1C2A348F0089690E /* Harpy.bundle */,
+				A6E0B36F1C2A348F0089690E /* Harpy.h */,
+				A6E0B3701C2A348F0089690E /* Harpy.m */,
+			);
+			path = Harpy;
+			sourceTree = "<group>";
+		};
 		A6E171F31A1C5F1A00F2B4BF /* SVPulsingAnnotationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3372,6 +3388,7 @@
 				A640BC3D1A381AE900DC59A7 /* icon_navigation_catalog@3x.png in Resources */,
 				A652D2391A7F3ADD00765D45 /* icon_inline_comment@2x.png in Resources */,
 				A6DF8A0E1C08EF48004AA94F /* icon-checkbox-unselected-25x25@2x.png in Resources */,
+				A6E0B3711C2A348F0089690E /* Harpy.bundle in Resources */,
 				A652D2581A7F3ADD00765D45 /* icon_tabbar_home.png in Resources */,
 				A652D21A1A7F3ADD00765D45 /* icon_filter_feed.png in Resources */,
 				A6227D181AD109FA0039083D /* iRate.bundle in Resources */,
@@ -3819,6 +3836,7 @@
 				A6E1B4821B86471B001B0E04 /* UIImage+FontAwesome.m in Sources */,
 				A669FB5D1ABFD99B00A96D24 /* SVWebViewControllerActivityChrome.m in Sources */,
 				A643AEEC1AA9539E00BF4E0F /* NIFoundationMethods.m in Sources */,
+				A6E0B3721C2A348F0089690E /* Harpy.m in Sources */,
 				A6CC69F01C07CC4200CC8D82 /* FLYUsernameSearchViewController.m in Sources */,
 				A6A70CDB1AA4597A0000F784 /* ECPhoneNumberFormatter.m in Sources */,
 				A669FB341ABFD8C200A96D24 /* SVWebViewController.m in Sources */,
