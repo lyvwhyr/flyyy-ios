@@ -312,10 +312,10 @@
         return;
     }
     
-    if (![self _hasHashTag:self.topicTitle]) {
-        [Dialog simpleToast:LOC(@"FLYPostMustHaveAgroup")];
-        return;
-    }
+//    if (![self _hasHashTag:self.topicTitle]) {
+//        [Dialog simpleToast:LOC(@"FLYPostMustHaveAgroup")];
+//        return;
+//    }
     
     
     if (self.defaultGroup) {

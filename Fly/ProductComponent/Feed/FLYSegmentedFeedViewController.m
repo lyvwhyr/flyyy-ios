@@ -23,8 +23,8 @@
 @interface FLYSegmentedFeedViewController () <FLYFeedViewControllerDelegate>
 
 @property (nonatomic) PPiFlatSegmentedControl *segmentedControl;
-@property (nonatomic) FLYFeedViewController *globalVC;
-@property (nonatomic) FLYFeedViewController *mineVC;
+@property (nonatomic) FLYFeedViewController *popularVC;
+@property (nonatomic) FLYFeedViewController *recentVC;
 
 @property (nonatomic) FLYCatalogBarButtonItem *leftBarItem;
 
@@ -38,6 +38,10 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(_badgeCountUpdated)
                                                      name:kActivityCountUpdatedNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(_newPostReceived:)
+                                                     name:kNewPostReceivedNotification object:nil];
     }
     return self;
 }
@@ -54,31 +58,31 @@
 
 - (void)_setupSegmentedControl
 {
-    self.globalVC = [FLYFeedViewController new];
-    self.globalVC.delegate = self;
-    [self addChildViewController:self.globalVC];
-    [self.view addSubview:self.globalVC.view];
+    self.popularVC = [FLYFeedViewController new];
+    self.popularVC.delegate = self;
+    [self addChildViewController:self.popularVC];
+    [self.view addSubview:self.popularVC.view];
     
     self.segmentedControl = [[PPiFlatSegmentedControl alloc] initWithFrame:CGRectMake(0, 0, 140, 28)
-                                                                     items:@[[[PPiFlatSegmentItem alloc] initWithTitle:LOC(@"FLYTagListGlobalTab") andIcon:nil], [[PPiFlatSegmentItem alloc] initWithTitle:LOC(@"FLYTagListMineTab") andIcon:nil]]
+                                                                     items:@[[[PPiFlatSegmentItem alloc] initWithTitle:LOC(@"FLYHomefeedSegmentedControlPopular") andIcon:nil], [[PPiFlatSegmentItem alloc] initWithTitle:LOC(@"FLYHomefeedSegmentedControlRecent") andIcon:nil]]
                                                               iconPosition:IconPositionRight andSelectionBlock:^(NSUInteger segmentIndex) {
                                                                   if (segmentIndex == 0) {
-                                                                      [self.mineVC.view removeFromSuperview];
-                                                                      self.globalVC.delegate = self;
-                                                                      [self.view addSubview:self.globalVC.view];
-                                                                      [self.view bringSubviewToFront:self.globalVC.view];
+                                                                      [self.recentVC.view removeFromSuperview];
+                                                                      self.popularVC.delegate = self;
+                                                                      [self.view addSubview:self.popularVC.view];
+                                                                      [self.view bringSubviewToFront:self.popularVC.view];
                                                                   } else {
-                                                                      if (!self.mineVC) {
-                                                                          self.mineVC = [FLYFeedViewController new];
-                                                                          self.mineVC.topicService = [FLYTopicService topicsServiceMine];
-                                                                          self.mineVC.feedType = FLYFeedTypeMine;
-                                                                          [self addChildViewController:self.mineVC];
+                                                                      if (!self.recentVC) {
+                                                                          self.recentVC = [FLYFeedViewController new];
+                                                                          self.recentVC.topicService = [FLYTopicService topicsServiceMine];
+                                                                          self.recentVC.feedType = FLYFeedTypeMine;
+                                                                          [self addChildViewController:self.recentVC];
                                                                       }
                                                                       
-                                                                      [self.globalVC.view removeFromSuperview];
-                                                                      self.mineVC.delegate = self;
-                                                                      [self.view addSubview:self.mineVC.view];
-                                                                      [self.view bringSubviewToFront:self.mineVC.view];
+                                                                      [self.popularVC.view removeFromSuperview];
+                                                                      self.recentVC.delegate = self;
+                                                                      [self.view addSubview:self.recentVC.view];
+                                                                      [self.view bringSubviewToFront:self.recentVC.view];
                                                                   }
                                                               }
                                                             iconSeparation:0];
@@ -140,6 +144,8 @@
     self.navigationItem.leftBarButtonItem = _leftBarItem;
 }
 
+
+#pragma mark - Notification helper methods
 - (void)_badgeCountUpdated
 {
     NSString *badgeValue;
@@ -149,6 +155,23 @@
         badgeValue = [@([FLYAppStateManager sharedInstance].unreadActivityCount) stringValue];
     }
     self.leftBarItem.badgeValue = badgeValue;
+}
+
+- (void)_newPostReceived:(NSNotification *)notif
+{
+    if (!self.recentVC) {
+        self.recentVC = [FLYFeedViewController new];
+        self.recentVC.topicService = [FLYTopicService topicsServiceMine];
+        self.recentVC.feedType = FLYFeedTypeMine;
+        [self addChildViewController:self.recentVC];
+    }
+    
+    [self.popularVC.view removeFromSuperview];
+    self.recentVC.delegate = self;
+    [self.view addSubview:self.recentVC.view];
+    [self.view bringSubviewToFront:self.recentVC.view];
+    
+    [self.segmentedControl setSelected:YES segmentAtIndex:1];
 }
 
 #pragma mark - rootViewController

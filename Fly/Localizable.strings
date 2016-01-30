@@ -7,7 +7,7 @@
 "FLYTapWhenDoneLabelText" = "Tap when you are done";
 "FLYPostMustMinLength" = "Caption must be at least %ld characters long.";
 "FLYPostMustHaveAgroup" = "Please tag the caption to a group by typing in '#'.";
-"FLYPostDescrptionText" = "Write an interesting caption (at least %ld characters long) and tag it to a group by typing in '#'.";
+"FLYPostDescrptionText" = "Write an interesting caption (at least %ld characters long).";
 
 // recording
 "FLYAdjustPitchLow" = "Low";
@@ -248,6 +248,9 @@
 "FLYTagListGlobalTab" = "Global";
 "FLYTagListMineTab" = "Mine";
 "FLYTagListSearchAtLeastTwoChars" = "Type at least 1 character to start your search";
+
+"FLYHomefeedSegmentedControlPopular" = "Popular";
+"FLYHomefeedSegmentedControlRecent" = "Recent";
 
 "FLYNotLoggedInFollowTitle" = "Hi!";
 "FLYNotLoggedInFollowDescription" = "You can begin to customize your timeline by signing up.";
