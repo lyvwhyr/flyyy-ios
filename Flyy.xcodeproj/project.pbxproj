@@ -383,6 +383,7 @@
 		A6A91BDD1B8A585900866AC3 /* FLYTagSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6A91BDC1B8A585900866AC3 /* FLYTagSearchViewController.m */; };
 		A6AC35231B09457100D5C985 /* FLYDeviceTokenService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AC35221B09457100D5C985 /* FLYDeviceTokenService.m */; };
 		A6AD869B1B7FC07C0082D818 /* FLYUsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AD869A1B7FC07C0082D818 /* FLYUsernameViewController.m */; };
+		A6AFEAFF1C5DE7DF00FFDD99 /* FLYOnboardingEnablePushNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6AFEAFE1C5DE7DF00FFDD99 /* FLYOnboardingEnablePushNotificationViewController.m */; };
 		A6BA775A1BF9AC3500C76765 /* FLYFollowUserTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BA77591BF9AC3500C76765 /* FLYFollowUserTableView.m */; };
 		A6BAD4091AA57C4D00DB10F7 /* FLYPhoneService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BAD4081AA57C4D00DB10F7 /* FLYPhoneService.m */; };
 		A6BAD40C1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6BAD40B1AA58A6500DB10F7 /* FLYSignupConfirmCodeViewController.m */; };
@@ -1193,6 +1194,8 @@
 		A6AC35221B09457100D5C985 /* FLYDeviceTokenService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDeviceTokenService.m; sourceTree = "<group>"; };
 		A6AD86991B7FC07C0082D818 /* FLYUsernameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUsernameViewController.h; sourceTree = "<group>"; };
 		A6AD869A1B7FC07C0082D818 /* FLYUsernameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUsernameViewController.m; sourceTree = "<group>"; };
+		A6AFEAFD1C5DE7DF00FFDD99 /* FLYOnboardingEnablePushNotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYOnboardingEnablePushNotificationViewController.h; sourceTree = "<group>"; };
+		A6AFEAFE1C5DE7DF00FFDD99 /* FLYOnboardingEnablePushNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYOnboardingEnablePushNotificationViewController.m; sourceTree = "<group>"; };
 		A6BA77581BF9AC3500C76765 /* FLYFollowUserTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFollowUserTableView.h; sourceTree = "<group>"; };
 		A6BA77591BF9AC3500C76765 /* FLYFollowUserTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYFollowUserTableView.m; sourceTree = "<group>"; };
 		A6BAD4071AA57C4D00DB10F7 /* FLYPhoneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYPhoneService.h; sourceTree = "<group>"; };
@@ -1869,6 +1872,8 @@
 				A6E5CF171AD76AFD0058C081 /* FLYTopicDetailOnboardingView.m */,
 				A66F76C81C0978D700DFD845 /* FLYProfileOnboardingView.h */,
 				A66F76C91C0978D700DFD845 /* FLYProfileOnboardingView.m */,
+				A6AFEAFD1C5DE7DF00FFDD99 /* FLYOnboardingEnablePushNotificationViewController.h */,
+				A6AFEAFE1C5DE7DF00FFDD99 /* FLYOnboardingEnablePushNotificationViewController.m */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -3719,6 +3724,7 @@
 				A643AEF81AA9539E00BF4E0F /* NIState.m in Sources */,
 				A669FB321ABFD8C200A96D24 /* SVModalWebViewController.m in Sources */,
 				A6A0E4A71A1E76110036116E /* FLEXFileBrowserSearchOperation.m in Sources */,
+				A6AFEAFF1C5DE7DF00FFDD99 /* FLYOnboardingEnablePushNotificationViewController.m in Sources */,
 				A665FC1F1AA263A900490A18 /* FLYServiceBase.m in Sources */,
 				A698F5241B577B3F00953B4D /* TwitterText.m in Sources */,
 				A6A0E4971A1E76110036116E /* FLEXArgumentInputSwitchView.m in Sources */,
