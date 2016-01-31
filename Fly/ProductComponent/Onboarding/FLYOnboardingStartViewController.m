@@ -10,11 +10,15 @@
 #import "UIColor+FLYAddition.h"
 #import "FLYMainViewController.h"
 #import "SDiPhoneVersion.h"
+#import "UIColor+FLYAddition.h"
+#import "UIFont+FLYAddition.h"
 
 @interface FLYOnboardingStartViewController ()
 
-@property (nonatomic) UIImageView *imageView;
-@property (nonatomic) UITapGestureRecognizer *tapGesturRecognizer;
+@property (nonatomic) UIImageView *bgImageView;
+@property (nonatomic) UILabel *titleLabel;
+@property (nonatomic) UILabel *descriptionLabel;
+@property (nonatomic) UIButton *actionButton;
 
 @end
 
@@ -24,36 +28,95 @@
 {
     [super viewDidLoad];
     
-    // hide the 1px bottom line in navigation bar
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    self.bgImageView = [UIImageView new];
+    self.bgImageView.image = [UIImage imageNamed:@"welcome_moving_bg"];
+    self.bgImageView.userInteractionEnabled = YES;
+    [self.view addSubview:self.bgImageView];
     
-    self.imageView = [UIImageView new];
+    self.titleLabel = [UILabel new];
+    self.titleLabel.text = LOC(@"FLYFirstTimeGetStartedTitle");
+    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.titleLabel.font = [UIFont flyBlackFontWithSize:36.0f];
+    self.titleLabel.textColor = [UIColor flyFirstTimeUserTextColor];
+    [self.titleLabel sizeToFit];
+    [self.view addSubview:self.titleLabel];
     
-    if ([SDiPhoneVersion deviceSize] == iPhone35inch) {
-        self.imageView.image = [UIImage imageNamed:@"icon_tutorial_start_iphone4_personal"];
-    } else {
-         self.imageView.image = [UIImage imageNamed:@"icon_tutorial_start_personal"];
-    }
-    self.imageView.userInteractionEnabled = YES;
+    self.descriptionLabel = [UILabel new];
+    self.descriptionLabel.numberOfLines = 0;
+    self.descriptionLabel.adjustsFontSizeToFitWidth = YES;
+    self.descriptionLabel.textAlignment = NSTextAlignmentCenter;
+    self.descriptionLabel.text = LOC(@"FLYFirstTimeGetStartedDescriptionLabel");
+    self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.descriptionLabel.font = [UIFont flyBlackFontWithSize:22.0f];
+    self.descriptionLabel.textColor = [UIColor flyFirstTimeUserTextColor];
+    [self.descriptionLabel sizeToFit];
+    [self.view addSubview:self.descriptionLabel];
     
-    [self.view addSubview:self.imageView];
+    self.actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.actionButton setTitle:LOC(@"FLYFirstTimeGetStartedActionButtonText") forState:UIControlStateNormal];
+    [self.actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.actionButton setBackgroundColor:[UIColor flyFirstTimeUserTextColor]];
+    self.actionButton.titleLabel.font = [UIFont flyBlackFontWithSize:22];
+    self.actionButton.layer.cornerRadius = 4.0f;
+    self.actionButton.contentEdgeInsets = UIEdgeInsetsMake(12, 85, 12, 85);
+    self.actionButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.actionButton addTarget:self action:@selector(_handleTap) forControlEvents:UIControlEventTouchUpInside];
+    [self.actionButton sizeToFit];
+    [self.view addSubview:self.actionButton];
+ 
     [self _addViewConstraints];
-    
-    self.tapGesturRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    [self.imageView addGestureRecognizer:self.tapGesturRecognizer];
 }
 
 - (void)_addViewConstraints
 {
-    [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view);
+        make.top.equalTo(self.view);
+    }];
+    
+    [self.actionButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.bottom.equalTo(self.view).offset(-75);
+    }];
+    
+    [self.descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.bottom.equalTo(self.actionButton.mas_top).offset(-35);
+        make.leading.lessThanOrEqualTo(self.view.mas_leading).offset(50);
+        make.trailing.lessThanOrEqualTo(self.view.mas_trailing).offset(-50);
+    }];
+    
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.view);
+        make.bottom.equalTo(self.descriptionLabel.mas_top).offset(-17);
     }];
 }
 
-- (void)handleTap:(UIPanGestureRecognizer *)gr
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self _startAnimateBackground];
+}
+
+- (void)_startAnimateBackground
+{
+    [UIView animateWithDuration:8.0f animations:^{
+        [self.bgImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.equalTo(self.view);
+        }];
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)_handleTap
 {
     FLYMainViewController *vc = [FLYMainViewController new];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 
 #pragma mark - Navigation bar and status bar

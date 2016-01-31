@@ -42,6 +42,8 @@
 + (UIColor *)flyShareTextGrey;
 + (UIColor *)flySettingBackgroundColor;
 + (UIColor *)flyFollowUserTextColor;
++ (UIColor *)flyFirstTimeUserTextColor;
+
 
 
 + (UIColor *)customGrayColor;

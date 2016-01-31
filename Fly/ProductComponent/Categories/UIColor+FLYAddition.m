@@ -42,6 +42,7 @@
 #define kColorFlyShareTextGrey                          @"#9B9B9B"
 #define kColorFlySettingBackgroundColor                 @"#F8F8F8"
 #define kColorFlyFollowUserTextColor                    @"#738B97"
+#define kColorFlyFirstTimeUserTextColor                 @"#29B9EA"
 
 @implementation UIColor (FLYAddition)
 
@@ -203,6 +204,11 @@
 + (UIColor *)flyFollowUserTextColor
 {
     return [FLYUtilities colorWithHexString:kColorFlyFollowUserTextColor];
+}
+
++ (UIColor *)flyFirstTimeUserTextColor
+{
+    return [FLYUtilities colorWithHexString:kColorFlyFirstTimeUserTextColor];
 }
 
 #pragma mark - from external libraries

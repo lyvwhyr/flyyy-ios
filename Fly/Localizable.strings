@@ -19,6 +19,12 @@
 "FLYRecordOnboardBeAuthenticRuleText" = "1. To be authentic and speak about your personal thoughts or feelings.";
 "FLYRecordOnboardNoAbusiveContentText" = "2. To not post abusive content or share people's private information.";
 
+// First time user experience
+"FLYFirstTimeGetStartedTitle" = "Welcome to Flyy!";
+"FLYFirstTimeGetStartedDescriptionLabel" = "We'are so excited to hear what you have to say.";
+"FLYFirstTimeGetStartedActionButtonText" = "Get Started";
+
+
 
 //Home feed
 "FLYHomeTitle" = "Home";

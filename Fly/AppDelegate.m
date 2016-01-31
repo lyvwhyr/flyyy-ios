@@ -49,11 +49,11 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL hasSeenFeedOnboarding = [[defaults objectForKey:kFeedOnboardingKey] boolValue];
     FLYUniversalViewController *mainVC;
-    if (hasSeenFeedOnboarding) {
-        mainVC = [FLYMainViewController new];
-    } else {
+//    if (hasSeenFeedOnboarding) {
+//        mainVC = [FLYMainViewController new];
+//    } else {
         mainVC = [FLYOnboardingStartViewController new];
-    }
+//    }
     FLYNavigationController *navigationVC = [[FLYNavigationController alloc] initWithRootViewController:mainVC];
     self.window.rootViewController = navigationVC;
     

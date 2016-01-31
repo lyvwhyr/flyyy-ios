@@ -13,5 +13,6 @@
 + (UIFont *)flyToolBarFont;
 + (UIFont *)flyFontWithSize:(CGFloat)size;
 + (UIFont *)flyLightFontWithSize:(CGFloat)size;
++ (UIFont *)flyBlackFontWithSize:(CGFloat)size;
 
 @end

@@ -28,4 +28,9 @@
     return [UIFont fontWithName:@"Avenir-Light" size:size];
 }
 
++ (UIFont *)flyBlackFontWithSize:(CGFloat)size
+{
+    return [UIFont fontWithName:@"Avenir-Black" size:size];
+}
+
 @end

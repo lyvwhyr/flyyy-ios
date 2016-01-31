@@ -38,9 +38,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    #if DEBUG
-//    [[FLEXManager sharedManager] showExplorer];
-//    #endif
+    #if DEBUG
+    [[FLEXManager sharedManager] showExplorer];
+    #endif
+    
+    // hide the 1px bottom line in navigation bar
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     
     UIFont *titleFont = [UIFont fontWithName:@"Avenir-Roman" size:16];
     self.flyNavigationController.flyNavigationBar.titleTextAttributes =@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:titleFont};
@@ -176,6 +179,11 @@
 - (void)_backButtonTapped
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 @end
