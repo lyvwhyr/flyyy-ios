@@ -27,9 +27,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.bgImageView = [UIImageView new];
-    self.bgImageView.image = [UIImage imageNamed:@"welcome_moving_bg"];
+    self.bgImageView.image = [UIImage imageNamed:@"welcome_moving_bg_dot"];
     self.bgImageView.userInteractionEnabled = YES;
     [self.view addSubview:self.bgImageView];
     
@@ -69,10 +70,6 @@
 
 - (void)_addViewConstraints
 {
-    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.view);
-        make.top.equalTo(self.view);
-    }];
     
     [self.actionButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
@@ -89,6 +86,11 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
         make.bottom.equalTo(self.descriptionLabel.mas_top).offset(-17);
+    }];
+    
+    [self.bgImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.equalTo(self.view);
+        make.bottom.equalTo(self.titleLabel.mas_top).offset(30);
     }];
 }
 

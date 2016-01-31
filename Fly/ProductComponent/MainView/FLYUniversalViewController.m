@@ -38,9 +38,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    #if DEBUG
-    [[FLEXManager sharedManager] showExplorer];
-    #endif
+//    #if DEBUG
+//    [[FLEXManager sharedManager] showExplorer];
+//    #endif
     
     // hide the 1px bottom line in navigation bar
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
