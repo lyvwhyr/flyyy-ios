@@ -24,6 +24,11 @@
 "FLYFirstTimeGetStartedDescriptionLabel" = "We'are so excited to hear what you have to say.";
 "FLYFirstTimeGetStartedActionButtonText" = "Get Started";
 
+// Push notification onboarding
+"FLYFirtTimeEnablePushNotifiationTitle" = "\"Psst!\"";
+"FLYFirtTimeEnablePushNotifiationDescription" = "Receive notifications from Flyy whenever your posts are loved, followed or replied to!";
+"FLYFirtTimeEnablePushNotifiationActionButtonText" = "Enable Notifications";
+
 
 
 //Home feed

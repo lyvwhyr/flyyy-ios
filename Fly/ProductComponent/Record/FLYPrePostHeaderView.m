@@ -126,7 +126,9 @@
     [self.autoCompleteMgr processString:textView.text];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    [self.delegate textView:textView shouldChangeTextInRange:range replacementText:text];
     
     if([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];

@@ -12,6 +12,7 @@
 #import "SDiPhoneVersion.h"
 #import "UIColor+FLYAddition.h"
 #import "UIFont+FLYAddition.h"
+#import "FLYOnboardingEnablePushNotificationViewController.h"
 
 @interface FLYOnboardingStartViewController ()
 
@@ -112,7 +113,9 @@
 
 - (void)_handleTap
 {
-    FLYMainViewController *vc = [FLYMainViewController new];
+//    FLYMainViewController *vc = [FLYMainViewController new];
+//    [self.navigationController pushViewController:vc animated:YES];
+    FLYOnboardingEnablePushNotificationViewController *vc = [FLYOnboardingEnablePushNotificationViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -14,6 +14,7 @@
 
 - (BOOL)titleTextViewShouldBeginEditing:(UITextView *)textView;
 - (BOOL)titleTextViewShouldEndEditing:(UIView *)textView;
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text;
 - (void)searchViewWillAppear:(FLYPrePostHeaderView *)view;
 - (void)searchViewWillDisappear:(FLYPrePostHeaderView *)view;
 

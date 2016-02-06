@@ -44,6 +44,10 @@
 #define kTagButtonHorizontalSpacing 19
 #define kTagButtonVerticalSpacing 12
 #define kDescriptionTextTopPadding  13
+#define kHillImageBottomPading 20
+
+// pi is approximately equal to 3.14159265359.
+#define   DEGREES_TO_RADIANS(degrees)  ((3.14159265359 * degrees)/ 180)
 
 @interface FLYPrePostViewController () <UITableViewDataSource, UITableViewDelegate, FLYPrePostHeaderViewDelegate, JGProgressHUDDelegate>
 
@@ -52,6 +56,7 @@
 @property (nonatomic) FLYPostButtonView *postButton;
 @property (nonatomic) UIView *searchContainerView;
 @property (nonatomic) UILabel *descriptionLabel;
+@property (nonatomic) UIImageView *hillBgImageView;
 
 @property (nonatomic) NSArray *groups;
 @property (nonatomic, copy) NSString *topicTitle;
@@ -78,7 +83,7 @@
     
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     
-    _groups = [[NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList] subarrayWithRange:NSMakeRange(0, 9)];
+//    _groups = [[NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList] subarrayWithRange:NSMakeRange(0, 9)];
     
     self.title = @"Post";
     
@@ -124,27 +129,38 @@
     [self.view addSubview:self.headerView];
     
     
-    NSInteger minimalLen = [[FLYAppStateManager sharedInstance].configs fly_integerForKey:@"minimalPostTitleLen" defaultValue:kMinimalPostTitleLen];
-    NSString *description = [NSString stringWithFormat:LOC(@"FLYPostDescrptionText"), minimalLen];
-    _descriptionLabel = [UILabel new];
-    _descriptionLabel.numberOfLines = 0;
-    _descriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    NSMutableAttributedString *descriptionAttr = [[NSMutableAttributedString alloc] initWithString:description];
-    
-    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-    paragraphStyle.alignment = NSTextAlignmentCenter;
-    paragraphStyle.lineSpacing = 2;
-    [descriptionAttr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, description.length)];
-    [descriptionAttr addAttributes:@{NSFontAttributeName: [UIFont flyFontWithSize:16]} range:NSMakeRange(0, description.length)];
-    [descriptionAttr addAttributes:@{NSForegroundColorAttributeName: [UIColor flyColorFlyGreyText]} range:NSMakeRange(0, description.length)];
-    _descriptionLabel.attributedText = descriptionAttr;
-    [self.view addSubview:_descriptionLabel];
+//    NSInteger minimalLen = [[FLYAppStateManager sharedInstance].configs fly_integerForKey:@"minimalPostTitleLen" defaultValue:kMinimalPostTitleLen];
+//    NSString *description = [NSString stringWithFormat:LOC(@"FLYPostDescrptionText"), minimalLen];
+//    _descriptionLabel = [UILabel new];
+//    _descriptionLabel.numberOfLines = 0;
+//    _descriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+//    NSMutableAttributedString *descriptionAttr = [[NSMutableAttributedString alloc] initWithString:description];
+//    
+//    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+//    paragraphStyle.alignment = NSTextAlignmentCenter;
+//    paragraphStyle.lineSpacing = 2;
+//    [descriptionAttr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, description.length)];
+//    [descriptionAttr addAttributes:@{NSFontAttributeName: [UIFont flyFontWithSize:16]} range:NSMakeRange(0, description.length)];
+//    [descriptionAttr addAttributes:@{NSForegroundColorAttributeName: [UIColor flyColorFlyGreyText]} range:NSMakeRange(0, description.length)];
+//    _descriptionLabel.attributedText = descriptionAttr;
+//    [self.view addSubview:_descriptionLabel];
+
+    self.hillBgImageView = [UIImageView new];
+    self.hillBgImageView.image = [UIImage imageNamed:@"topic_caption_hill_bg"];
+    [self.hillBgImageView sizeToFit];
+    [self.view addSubview:self.hillBgImageView];
     
     [self _addObservers];
     
     [self updateViewConstraints];
     
     [[FLYScribe sharedInstance] logEvent:@"recording_flow" section:@"post_page" component:nil element:nil action:@"impression"];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
 }
 
 -(void)loadRightBarButton
@@ -205,10 +221,14 @@
         make.bottom.equalTo(self.view).offset(-self.keyboardHeight);
     }];
     
-    [self.descriptionLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.headerView.mas_bottom).offset(30);
-        make.leading.equalTo(self.view).offset(15);
-        make.trailing.equalTo(self.view).offset(-15);
+//    [self.descriptionLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.headerView.mas_bottom).offset(30);
+//        make.leading.equalTo(self.view).offset(15);
+//        make.trailing.equalTo(self.view).offset(-15);
+//    }];
+    
+    [self.hillBgImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view).offset(-self.keyboardHeight - kHillImageBottomPading);
     }];
     
     self.alreadyLayouted = YES;
@@ -297,6 +317,56 @@
     self.descriptionLabel.hidden = NO;
     self.searchContainerView.userInteractionEnabled = NO;
 }
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    NSInteger oldLen = [textView.text length];
+    NSUInteger newLen = [textView.text length] + [text length] - range.length;
+    [self _animatePathWithOldLen:oldLen newLen:newLen];
+    return YES;
+}
+
+- (void)_animatePathWithOldLen:(NSInteger)oldLen newLen:(NSInteger)newLen
+{
+    CGFloat screenWidth = CGRectGetWidth(self.view.bounds);
+    CGFloat pading = 20;
+    CGFloat radius = (1.72/3 * (screenWidth - pading * 2)/2) * 2;
+    
+    CGFloat centerY =  CGRectGetHeight(self.view.bounds) - (self.keyboardHeight + CGRectGetHeight(self.hillBgImageView.bounds) + kHillImageBottomPading) + (1.72/3 * (screenWidth - pading * 2)/2) + 20; // 20 pading
+    
+    UIBezierPath *aPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(screenWidth/2.0f, centerY)
+                                                         radius:radius
+                                                     startAngle:(M_PI + M_PI/6.0)
+                                                       endAngle:(M_PI * 2 - M_PI/6.0)
+                                                      clockwise:YES];
+    
+    CAShapeLayer *pathLayer = [CAShapeLayer layer];
+    pathLayer.frame = self.view.bounds;
+    pathLayer.strokeColor = [UIColor flyGrey].CGColor;
+    pathLayer.fillColor     = [UIColor clearColor].CGColor;
+    pathLayer.lineCap = kCALineCapSquare;
+    pathLayer.path = aPath.CGPath;
+    pathLayer.lineWidth = 1.0f;
+    pathLayer.strokeStart = 0.0f;
+    pathLayer.strokeEnd = 1.0f;
+    [self.view.layer addSublayer:pathLayer];
+    
+    
+    UIImage *sunImage = [UIImage imageNamed:@"topic_caption_sun"];
+    CALayer *sunLayer = [CALayer layer];
+    sunLayer.contents = (id)sunImage.CGImage;
+    sunLayer.frame = CGRectMake(0.0f, 0.0f, sunImage.size.width, sunImage.size.height);
+    [pathLayer addSublayer:sunLayer];
+    
+    CAKeyframeAnimation *sunAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    sunAnimation.duration = 10.0;
+    sunAnimation.path = pathLayer.path;
+    sunAnimation.calculationMode = kCAAnimationPaced;
+    sunAnimation.delegate = self;
+    [sunLayer addAnimation:sunAnimation forKey:@"position"];
+}
+
+#pragma mark - button tap actions
 
 - (void)_postButtonTapped
 {
@@ -422,15 +492,11 @@
     return [UIColor flyBlue];
 }
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-}
-
 - (void)keyboardWillShow:(NSNotification *)note {
     NSDictionary *userInfo = [note userInfo];
     CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     self.keyboardHeight = kbSize.height;
+    
     [self updateViewConstraints];
 }
 
