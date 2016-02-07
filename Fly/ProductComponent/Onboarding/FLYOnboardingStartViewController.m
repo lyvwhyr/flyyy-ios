@@ -106,6 +106,7 @@
     [UIView animateWithDuration:8.0f animations:^{
         [self.bgImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.trailing.equalTo(self.view);
+            make.bottom.equalTo(self.titleLabel.mas_top).offset(30);
         }];
         [self.view layoutIfNeeded];
     }];
@@ -113,8 +114,6 @@
 
 - (void)_handleTap
 {
-//    FLYMainViewController *vc = [FLYMainViewController new];
-//    [self.navigationController pushViewController:vc animated:YES];
     FLYOnboardingEnablePushNotificationViewController *vc = [FLYOnboardingEnablePushNotificationViewController new];
     [self.navigationController pushViewController:vc animated:YES];
 }

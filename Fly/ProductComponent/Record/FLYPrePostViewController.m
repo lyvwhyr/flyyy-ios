@@ -334,6 +334,12 @@
 
 - (void)_animatePathWithOldLen:(NSInteger)oldLen newLen:(NSInteger)newLen
 {
+    NSInteger steps = 41;
+    // Don't animate out of screen
+    if (newLen > (steps - 4)) {
+        return;
+    }
+    
     if (self.pathLayer) {
         [self.sunLayer removeFromSuperlayer];
         self.sunLayer = nil;
@@ -356,10 +362,8 @@
     
     CGFloat centerY =  CGRectGetHeight(self.view.bounds) - (self.keyboardHeight + CGRectGetHeight(self.hillBgImageView.bounds) + kHillImageBottomPading) + (1.72/3 * (screenWidth - pading * 2)/2) + 20; // 20 pading
     
-    
-    NSInteger steps = 41;
-    CGFloat startAngle = (M_PI + M_PI/6.0) + oldLen * M_PI * 2/3.0 * 1.0/steps;
-    CGFloat endAngle = (M_PI + M_PI/6.0) + newLen * M_PI * 2/3.0 * 1.0/steps;
+    CGFloat startAngle = (M_PI + M_PI/6.0 + M_PI/20.0) + oldLen * M_PI * 3/5.0 * 1.0/steps;
+    CGFloat endAngle = (M_PI + M_PI/6.0 + M_PI/20.0) + newLen * M_PI * 3/5.0 * 1.0/steps;
     
     self.arcPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(screenWidth/2.0f, centerY)
                                                          radius:radius
@@ -369,7 +373,7 @@
     
     self.pathLayer = [CAShapeLayer layer];
     self.pathLayer.frame = self.view.bounds;
-    self.pathLayer.strokeColor = [FLYUtilities colorWithHexString:@"#8e8e93" alpha:0.7].CGColor;
+    self.pathLayer.strokeColor = [UIColor clearColor].CGColor;
     self.pathLayer.fillColor     = [UIColor clearColor].CGColor;
     self.pathLayer.lineCap = kCALineCapSquare;
     self.pathLayer.path = self.arcPath.CGPath;
