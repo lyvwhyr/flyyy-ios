@@ -34,6 +34,7 @@
 #import "FLYTagsService.h"
 #import "FLYBarButtonItem.h"
 #import "NSDictionary+FLYAddition.h"
+#import "UIImage+FLYAddition.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -68,6 +69,11 @@
 @property (nonatomic) FLYGroup *selectedGroup;
 
 @property (nonatomic) CGFloat keyboardHeight;
+
+// animation text strength
+@property (nonatomic) UIBezierPath *arcPath;
+@property (nonatomic) CAShapeLayer *pathLayer;
+@property (nonatomic) CALayer *sunLayer;
 
 @property (nonatomic, copy) mediaUploadSuccessBlock successBlock;
 @property (nonatomic, copy) mediaUploadFailureBlock failureBlock;
@@ -328,42 +334,75 @@
 
 - (void)_animatePathWithOldLen:(NSInteger)oldLen newLen:(NSInteger)newLen
 {
+    if (self.pathLayer) {
+        [self.sunLayer removeFromSuperlayer];
+        self.sunLayer = nil;
+        
+        [self.pathLayer removeFromSuperlayer];
+        self.pathLayer = nil;
+    }
+    
+    if (oldLen == newLen) {
+        return;
+    }
+    BOOL clockwise = YES;
+    if (newLen < oldLen) {
+        clockwise = NO;
+    }
+    
     CGFloat screenWidth = CGRectGetWidth(self.view.bounds);
     CGFloat pading = 20;
     CGFloat radius = (1.72/3 * (screenWidth - pading * 2)/2) * 2;
     
     CGFloat centerY =  CGRectGetHeight(self.view.bounds) - (self.keyboardHeight + CGRectGetHeight(self.hillBgImageView.bounds) + kHillImageBottomPading) + (1.72/3 * (screenWidth - pading * 2)/2) + 20; // 20 pading
     
-    UIBezierPath *aPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(screenWidth/2.0f, centerY)
+    
+    NSInteger steps = 41;
+    CGFloat startAngle = (M_PI + M_PI/6.0) + oldLen * M_PI * 2/3.0 * 1.0/steps;
+    CGFloat endAngle = (M_PI + M_PI/6.0) + newLen * M_PI * 2/3.0 * 1.0/steps;
+    
+    self.arcPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(screenWidth/2.0f, centerY)
                                                          radius:radius
-                                                     startAngle:(M_PI + M_PI/6.0)
-                                                       endAngle:(M_PI * 2 - M_PI/6.0)
-                                                      clockwise:YES];
+                                                     startAngle:startAngle
+                                                       endAngle:endAngle
+                                                      clockwise:clockwise];
     
-    CAShapeLayer *pathLayer = [CAShapeLayer layer];
-    pathLayer.frame = self.view.bounds;
-    pathLayer.strokeColor = [UIColor flyGrey].CGColor;
-    pathLayer.fillColor     = [UIColor clearColor].CGColor;
-    pathLayer.lineCap = kCALineCapSquare;
-    pathLayer.path = aPath.CGPath;
-    pathLayer.lineWidth = 1.0f;
-    pathLayer.strokeStart = 0.0f;
-    pathLayer.strokeEnd = 1.0f;
-    [self.view.layer addSublayer:pathLayer];
+    self.pathLayer = [CAShapeLayer layer];
+    self.pathLayer.frame = self.view.bounds;
+    self.pathLayer.strokeColor = [FLYUtilities colorWithHexString:@"#8e8e93" alpha:0.7].CGColor;
+    self.pathLayer.fillColor     = [UIColor clearColor].CGColor;
+    self.pathLayer.lineCap = kCALineCapSquare;
+    self.pathLayer.path = self.arcPath.CGPath;
+    self.pathLayer.lineWidth = 1.0f;
+    self.pathLayer.strokeStart = 0.0f;
+    self.pathLayer.strokeEnd = 0.2f;
+    [self.view.layer addSublayer:self.pathLayer];
     
-    
-    UIImage *sunImage = [UIImage imageNamed:@"topic_caption_sun"];
-    CALayer *sunLayer = [CALayer layer];
-    sunLayer.contents = (id)sunImage.CGImage;
-    sunLayer.frame = CGRectMake(0.0f, 0.0f, sunImage.size.width, sunImage.size.height);
-    [pathLayer addSublayer:sunLayer];
+    UIImage *sunImage = [UIImage imageNamed:@"topic_caption_sun"];;
+    if (newLen < (steps/4)) {
+        sunImage = [UIImage imageNamed:@"topic_caption_sun"];
+    } else if (newLen < (steps/2)) {
+        sunImage = [sunImage imageWithColorOverlay:[FLYUtilities colorWithHexString:@"#DCAC47"]];
+    } else if (newLen < (steps * 0.75)) {
+        sunImage = [sunImage imageWithColorOverlay:[FLYUtilities colorWithHexString:@"#DCC147"]];
+    } else if (newLen < steps){
+        sunImage = [sunImage imageWithColorOverlay:[FLYUtilities colorWithHexString:@"#B5DC47"]];
+    } else {
+        sunImage = [sunImage imageWithColorOverlay:[FLYUtilities colorWithHexString:@"#48DC47"]];
+    }
+    self.sunLayer = [CALayer layer];
+    self.sunLayer.contents = (id)sunImage.CGImage;
+    self.sunLayer.frame = CGRectMake(0.0f, 0.0f, sunImage.size.width, sunImage.size.height);
+    [self.pathLayer addSublayer:self.sunLayer];
     
     CAKeyframeAnimation *sunAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-    sunAnimation.duration = 10.0;
-    sunAnimation.path = pathLayer.path;
+    sunAnimation.fillMode = kCAFillModeForwards;
+    sunAnimation.removedOnCompletion = NO;
+    sunAnimation.duration = 0.2;
+    sunAnimation.path = self.pathLayer.path;
     sunAnimation.calculationMode = kCAAnimationPaced;
     sunAnimation.delegate = self;
-    [sunLayer addAnimation:sunAnimation forKey:@"position"];
+    [self.sunLayer addAnimation:sunAnimation forKey:@"position"];
 }
 
 #pragma mark - button tap actions
