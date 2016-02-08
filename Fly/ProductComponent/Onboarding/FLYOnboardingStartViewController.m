@@ -69,6 +69,18 @@
     [self _addViewConstraints];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
+
 - (void)_addViewConstraints
 {
     
@@ -116,11 +128,6 @@
 {
     FLYOnboardingEnablePushNotificationViewController *vc = [FLYOnboardingEnablePushNotificationViewController new];
     [self.navigationController pushViewController:vc animated:YES];
-}
-
--(BOOL)prefersStatusBarHidden
-{
-    return YES;
 }
 
 #pragma mark - Navigation bar and status bar

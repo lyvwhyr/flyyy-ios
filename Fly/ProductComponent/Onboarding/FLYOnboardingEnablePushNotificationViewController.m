@@ -10,10 +10,11 @@
 #import "FLYMainViewController.h"
 #import "SDVersion.h"
 #import "FLYPushNotificationManager.h"
+#import "FLYBarButtonItem.h"
+#import "FLYNavigationController.h"
 
 @interface FLYOnboardingEnablePushNotificationViewController ()
 
-@property (nonatomic) UIButton *skipButton;
 @property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIImageView *imageView;
 @property (nonatomic) UILabel *descriptionLabel;
@@ -25,6 +26,8 @@
 
 @implementation FLYOnboardingEnablePushNotificationViewController
 
+
+#pragma mark - UIViewController life cycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -78,6 +81,21 @@
     [self _addViewConstraints];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController.view removeGestureRecognizer:self.navigationController.interactivePopGestureRecognizer];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
+
+#pragma mark - Add observers
+
 - (void)_addObservers
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pushVC) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -129,6 +147,7 @@
         make.centerX.equalTo(self.view);
     }];
 }
+
 
 - (BOOL)_shouldShowTitle
 {
@@ -204,9 +223,9 @@
     self.hasPushedToNewVC = YES;
 }
 
-- (BOOL)prefersStatusBarHidden
+- (void)_skipButtonTapped
 {
-    return YES;
+    [self _pushVC];
 }
 
 @end
