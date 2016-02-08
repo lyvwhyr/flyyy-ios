@@ -306,19 +306,6 @@
     [self _clearAllPlaying];
 }
 
-- (void)_popPushNotificationDialogIfNecessary
-{
-    // pop enable push notification dialog on 4rd session
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSInteger timelineViewCount = [defaults integerForKey:kHomeTimelineViewCountAfterLoginKey];
-    if (timelineViewCount >= kPopPushNotificationDialogSessionCount) {
-        // enable push notification dialog
-        [self performSelector:@selector(_showEnablePushNotifDialog) withObject:self afterDelay:0.5];
-    }
-    timelineViewCount += 1;
-    [defaults setInteger:timelineViewCount forKey:kHomeTimelineViewCountAfterLoginKey];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -343,8 +330,6 @@
         FLYFeedTopicTableViewCell *visibleCell = (FLYFeedTopicTableViewCell *)(visibleCells[i]);
         [visibleCell updatePlayState:FLYPlayStateNotSet];
     }
-    
-    [self _popPushNotificationDialogIfNecessary];
 }
 
 - (void)updateViewConstraints
@@ -568,14 +553,6 @@
     [self.posts insertObject:topic atIndex:0];
     [self.feedTableView reloadData];
     [self _scrollToTop];
-    
-    // enable push notification dialog
-    [self performSelector:@selector(_showEnablePushNotifDialog) withObject:self afterDelay:0.5];
-}
-
-- (void)_showEnablePushNotifDialog
-{
-    [FLYPushNotificationManager showEnablePushNotificationDialog:self];
 }
 
 - (void)_topicDeleted:(NSNotification *)notif

@@ -9,6 +9,7 @@
 #import "FLYOnboardingEnablePushNotificationViewController.h"
 #import "FLYMainViewController.h"
 #import "SDVersion.h"
+#import "FLYPushNotificationManager.h"
 
 @interface FLYOnboardingEnablePushNotificationViewController ()
 
@@ -18,6 +19,8 @@
 @property (nonatomic) UILabel *descriptionLabel;
 @property (nonatomic) UIButton *actionButton;
 
+@property (nonatomic) BOOL hasPushedToNewVC;
+
 @end
 
 @implementation FLYOnboardingEnablePushNotificationViewController
@@ -25,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self _addObservers];
     self.view.backgroundColor = [UIColor whiteColor];
     
     if ([self _shouldShowTitle]) {
@@ -71,7 +75,14 @@
     [self.actionButton sizeToFit];
     [self.view addSubview:self.actionButton];
     
-     [self _addViewConstraints];
+    [self _addViewConstraints];
+}
+
+- (void)_addObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pushVC) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_pushVC) name:kPushNotificationEnabled object:nil];
 }
 
 - (void)_addViewConstraints
@@ -175,8 +186,22 @@
 
 - (void)_enablePushNotificationButtonTapped
 {
+    [FLYPushNotificationManager registerPushNotification];
+    
+    // ios 7
+    if (iOSVersionLessThan(@"8")) {
+        [self _pushVC];
+    }
+}
+
+- (void)_pushVC
+{
+    if (self.hasPushedToNewVC) {
+        return;
+    }
     FLYMainViewController *vc = [FLYMainViewController new];
     [self.navigationController pushViewController:vc animated:YES];
+    self.hasPushedToNewVC = YES;
 }
 
 - (BOOL)prefersStatusBarHidden

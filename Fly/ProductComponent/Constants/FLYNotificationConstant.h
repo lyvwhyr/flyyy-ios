@@ -55,3 +55,6 @@
 #define kNotificationAudioBioUpdated @"kNotificationAudioBioUpdated"
 
 #define kNotificationInviteFriendsSMSSent @"kNotificationInviteFriendsSMSSent"
+
+// push notification enabled
+#define kPushNotificationEnabled @"kPushNotificationEnabled"
