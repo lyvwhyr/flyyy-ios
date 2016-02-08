@@ -10,7 +10,7 @@
 #import "FLYAudioManager.h"
 #import "FLYDownloadableAudio.h"
 #import "PXAlertView.h"
-#import "SDiPhoneVersion.h"
+#import "SDVersion.h"
 #import "FLYFeedTopicTableViewCell.h"
 #import "FLYAudioItem.h"
 #import "FLYDownloadManager.h"

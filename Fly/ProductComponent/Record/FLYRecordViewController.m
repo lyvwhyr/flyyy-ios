@@ -34,7 +34,7 @@
 #import "STKAudioPlayer.h"
 #import "FLYVoiceFilterManager.h"
 #import "FLYVoiceEffectView.h"
-#import "SDiPhoneVersion.h"
+#import "SDVersion.h"
 #import "FLYTopic.h"
 #import "FLYMediaService.h"
 #import "FLYGroup.h"
@@ -554,7 +554,7 @@
 
 - (BOOL)_isVoiceFilterSupported
 {
-    DeviceVersion deviceVersion = [SDiPhoneVersion deviceVersion];
+    DeviceVersion deviceVersion = [SDVersion deviceVersion];
     if (deviceVersion == iPhone5S || deviceVersion == iPhone6 || deviceVersion == iPhone6Plus) {
         return YES;
     }
@@ -688,7 +688,7 @@
     CGFloat userActionOffset = -60;
     CGFloat filterViewTopOffset = 20;
     
-    if ([SDiPhoneVersion deviceVersion] == iPhone6Plus) {
+    if ([SDVersion deviceSize] == Screen5Dot5inch) {
         userActionOffset = -100;
         filterViewTopOffset = 70;
     }

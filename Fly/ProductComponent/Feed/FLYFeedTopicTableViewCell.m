@@ -23,7 +23,7 @@
 #import "UAProgressView.h"
 #import "UIButton+TouchAreaInsets.h"
 #import "UIButton+TouchAreaInsets.h"
-#import "SDiPhoneVersion.h"
+#import "SDVersion.h"
 #import "UITableViewCell+FLYAddition.h"
 #import "FLYShareManager.h"
 #import "FLYProfileViewController.h"

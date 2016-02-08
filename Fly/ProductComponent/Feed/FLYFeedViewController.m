@@ -28,7 +28,7 @@
 #import "FLYCatalogViewController.h"
 #import "FLYAudioManager.h"
 #import "FLYFeedOnBoardingView.h"
-#import "SDiPhoneVersion.h"
+#import "SDVersion.h"
 #import "FLYMainViewController.h"
 #import "NSDictionary+FLYAddition.h"
 #import "FLYPushNotificationManager.h"
@@ -514,7 +514,7 @@
     }
     
     NSIndexPath *indexPathToOnboarding;
-    if ([SDiPhoneVersion deviceSize] == iPhone35inch) {
+    if ([SDVersion deviceSize] == Screen3Dot5inch) {
         indexPathToOnboarding = [NSIndexPath indexPathForRow:1 inSection:0];
     } else {
         indexPathToOnboarding = [NSIndexPath indexPathForRow:2 inSection:0];

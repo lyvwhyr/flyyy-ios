@@ -9,7 +9,7 @@
 #import "FLYEmptyStateView.h"
 #import "UIFont+FLYAddition.h"
 #import "UIColor+FLYAddition.h"
-#import "SDiPhoneVersion.h"
+#import "SDVersion.h"
 
 #define kTitleTopMargin 45
 #define kDescrptionTopMargin 30
@@ -89,10 +89,10 @@
     
     
     CGFloat titleTop = kTitleTopMargin;
-    DeviceVersion deviceVersion = [SDiPhoneVersion deviceVersion];
-    if (deviceVersion == iPhone6Plus) {
+    DeviceSize deviceSize = [SDVersion deviceSize];
+    if (deviceSize == Screen5Dot5inch) {
         titleTop = 120;
-    } else if (deviceVersion == iPhone6) {
+    } else if (deviceSize == Screen4Dot7inch) {
         titleTop = 70;
     }
     

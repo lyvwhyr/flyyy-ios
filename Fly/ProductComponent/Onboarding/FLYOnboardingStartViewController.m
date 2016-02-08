@@ -9,7 +9,7 @@
 #import "FLYOnboardingStartViewController.h"
 #import "UIColor+FLYAddition.h"
 #import "FLYMainViewController.h"
-#import "SDiPhoneVersion.h"
+#import "SDVersion.h"
 #import "UIColor+FLYAddition.h"
 #import "UIFont+FLYAddition.h"
 #import "FLYOnboardingEnablePushNotificationViewController.h"
