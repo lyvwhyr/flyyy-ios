@@ -8,6 +8,7 @@
 
 #import "FLYServiceBase.h"
 
+@class FLYNotification;
 //
 typedef void(^FLYActivityUnreadCountSuccessBlock)(AFHTTPRequestOperation *operation, id responseObj);
 typedef void(^FLYActivityUnreadCountErrorBlock)(id responseObj, NSError *error);
@@ -27,5 +28,6 @@ typedef void(^FLYActivityMarkAllReadErrorBlock)(id responseObj, NSError *error);
 + (void)markAllRead:(FLYActivityMarkAllReadSuccessBlock)successBlock errorBlock:(FLYActivityMarkAllReadErrorBlock)errorBlock;
 + (void)getUnreadCount:(FLYActivityUnreadCountSuccessBlock)successBlock errorBlock:(FLYActivityUnreadCountErrorBlock)errorBlock;
 + (void)markSingleFollowActivityReadWithActivityId:(NSString *)actorUserId successBlock:(FLYGenericSuccessBlock)successBlock errorBlock:(FLYGenericErrorBlock)errorBlock;
++ (void)markSingleActivityRead:(FLYNotification *)notification successBlock:(FLYGenericSuccessBlock)successBlock errorBlock:(FLYGenericErrorBlock)errorBlock;
 
 @end

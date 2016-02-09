@@ -7,6 +7,9 @@
 //
 
 #import "FLYActivityService.h"
+#import "FLYNotification.h"
+#import "FLYTopic.h"
+#import "FLYReply.h"
 
 @implementation FLYActivityService
 
@@ -63,6 +66,30 @@
 + (void)markSingleFollowActivityReadWithActivityId:(NSString *)actorUserId successBlock:(FLYGenericSuccessBlock)successBlock errorBlock:(FLYGenericErrorBlock)errorBlock
 {
     NSString *ep = [NSString stringWithFormat:EP_ACTIVITIES_MARK_FOLLOWED_READ, actorUserId];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager PUT:ep parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (successBlock) {
+            successBlock(operation, responseObject);
+        }
+    } failure:^(id responseObj, NSError *error) {
+        if (errorBlock) {
+            errorBlock(responseObj, error);
+        }
+    }];
+}
+
++ (void)markSingleActivityRead:(FLYNotification *)notification successBlock:(FLYGenericSuccessBlock)successBlock errorBlock:(FLYGenericErrorBlock)errorBlock
+{
+    
+    NSString *action = notification.action;
+    NSString *actionId;
+    if ([action isEqualToString:kFLYNotificationTypeReplyLiked]) {
+        actionId = notification.reply.replyId;
+    } else if ([action isEqualToString:kFLYNotificationTypeTopicLiked]) {
+        actionId = notification.topic.topicId;
+    }
+    
+    NSString *ep = [NSString stringWithFormat:EP_ACTIVITIES_MARK_SINGLE_READ, action, actionId];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager PUT:ep parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (successBlock) {

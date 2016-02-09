@@ -78,6 +78,7 @@
 #define EP_ACTIVITIES_MARK_READ                     @"/v1/activities/read"
 #define EP_ACTIVITIES_GET                           @"/v1/activities"
 #define EP_ACTIVITIES_MARK_FOLLOWED_READ            @"/v1/activities/followed/%@/read"
+#define EP_ACTIVITIES_MARK_SINGLE_READ              @"/v1/activities/%@/%@/read"
 
 // tags
 #define EP_TAGS_FOLLOW                              @"v1/tags/%@/join"

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class FLYTopic;
+@class FLYReply;
 
 #define kFLYNotificationTypeReplied     @"replied"
 #define kFLYNotificationTypeFollowed    @"followed"
@@ -20,6 +21,7 @@
 @interface FLYNotification : NSObject
 
 @property (nonatomic) FLYTopic *topic;
+@property (nonatomic) FLYReply *reply;
 @property (nonatomic, copy) NSString *action;
 @property (nonatomic) BOOL isRead;
 @property (nonatomic) NSMutableAttributedString *notificationString;

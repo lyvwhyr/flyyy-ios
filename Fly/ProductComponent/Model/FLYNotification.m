@@ -11,6 +11,7 @@
 #import "FLYNotificationActor.h"
 #import "FLYTopic.h"
 #import "FLYUser.h"
+#import "FLYReply.h"
 #import "NSDate+TimeAgo.h"
 #import "UIFont+FLYAddition.h"
 
@@ -82,6 +83,7 @@
         _action = [dict fly_stringForKey:@"action"];
         if ([_action isEqualToString:kFLYNotificationTypeReplyLiked]) {
             _topic = [[FLYTopic alloc] initWithDictory:[[dict fly_dictionaryForKey:@"reply"] fly_dictionaryForKey:@"topic"]];
+            _reply = [[FLYReply alloc] initWithDictionary:[dict fly_dictionaryForKey:@"reply"]];
         } else {
             _topic = [[FLYTopic alloc] initWithDictory:[dict fly_dictionaryForKey:@"topic"]];
         }

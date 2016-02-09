@@ -178,6 +178,10 @@
     } else {
         FLYTopic *topic = notificaiton.topic;
         [self.delegate visitTopicDetail:topic];
+        
+        if ([notificaiton.action isEqualToString:kFLYNotificationTypeReplyLiked] || [notificaiton.action isEqualToString:kFLYNotificationTypeTopicLiked]) {
+            [FLYActivityService markSingleActivityRead:notificaiton successBlock:nil errorBlock:nil];
+        }
     }
 }
 
