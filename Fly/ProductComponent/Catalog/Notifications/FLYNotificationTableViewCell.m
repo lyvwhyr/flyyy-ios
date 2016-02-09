@@ -220,7 +220,7 @@
 
 + (BOOL)_isFollowAction:(FLYNotification *)notification
 {
-    return [notification.action isEqualToString:@"followed"];
+    return [notification.action isEqualToString:kFLYNotificationTypeFollowed];
 }
 
 @end

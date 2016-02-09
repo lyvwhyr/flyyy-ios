@@ -223,9 +223,4 @@
     self.hasPushedToNewVC = YES;
 }
 
-- (void)_skipButtonTapped
-{
-    [self _pushVC];
-}
-
 @end

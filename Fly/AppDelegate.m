@@ -101,6 +101,7 @@
 }
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPushNotificationEnabled object:self];
     if (deviceToken) {
         NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
         token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -116,6 +117,7 @@
 {
     //register to receive notifications
     [application registerForRemoteNotifications];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kPushNotificationEnabled object:self];
 }
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler

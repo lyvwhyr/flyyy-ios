@@ -80,7 +80,11 @@
 {
     if (self = [super init]) {
         _action = [dict fly_stringForKey:@"action"];
-        _topic = [[FLYTopic alloc] initWithDictory:[dict fly_dictionaryForKey:@"topic"]];
+        if ([_action isEqualToString:kFLYNotificationTypeReplyLiked]) {
+            _topic = [[FLYTopic alloc] initWithDictory:[[dict fly_dictionaryForKey:@"reply"] fly_dictionaryForKey:@"topic"]];
+        } else {
+            _topic = [[FLYTopic alloc] initWithDictory:[dict fly_dictionaryForKey:@"topic"]];
+        }
         _actors = [[dict fly_arrayForKey:@"actors"] mutableCopy];
         _isRead = [dict fly_boolForKey:@"read"];
         
@@ -100,64 +104,99 @@
     NSString *tempStr;
     if ([self.actors count] == 1) {
         NSString *username = [self.actors[0] fly_stringForKey:@"user_name"];
-        if ([self.action isEqualToString:@"replied"]) {
+        if ([self.action isEqualToString:kFLYNotificationTypeReplied]) {
             tempStr = LOC(@"FLYSinglePersonRepliedActivity");
-        } else if ([self.action isEqualToString:@"followed"]) {
+        } else if ([self.action isEqualToString:kFLYNotificationTypeFollowed]) {
             tempStr = LOC(@"FLYSinglePersonFollowActivity");
-        } else {
+        } else if ([self.action isEqualToString:kFLYNotificationTypeMention]) {
             tempStr = LOC(@"FLYSinglePersonMentionActivity");
+        } else if ([self.action isEqualToString:kFLYNotificationTypeTopicLiked]) {
+            tempStr = LOC(@"FLYSinglePersonLikeTopicActivity");
+        } else if ([self.action isEqualToString:kFLYNotificationTypeReplyLiked]) {
+            tempStr = LOC(@"FLYSinglePersonLikeReplyActivity");
         }
-        result = [NSString stringWithFormat:tempStr, username, self.topic.topicTitle];
-        attrStr = [[NSMutableAttributedString alloc] initWithString:result];
-        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
-        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username]];
+        if (tempStr) {
+            result = [NSString stringWithFormat:tempStr, username, self.topic.topicTitle];
+            attrStr = [[NSMutableAttributedString alloc] initWithString:result];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username]];
+        }
     } else if ([self.actors count] == 2) {
         NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
         NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
-        if ([self.action isEqualToString:@"replied"]) {
+        if ([self.action isEqualToString:kFLYNotificationTypeReplied]) {
             tempStr = LOC(@"FLYTwoPersonRepliedActivity");
-        } else {
+        } else if ([self.action isEqualToString:kFLYNotificationTypeMention]) {
             tempStr = LOC(@"FLYTwoPersonMentionActivity");
+        } else if ([self.action isEqualToString:kFLYNotificationTypeTopicLiked]) {
+            tempStr = LOC(@"FLYTwoPersonLikeTopicActivity");
+        } else if ([self.action isEqualToString:kFLYNotificationTypeReplyLiked]) {
+            tempStr = LOC(@"FLYTwoPersonLikeReplyActivity");
         }
-        result = [NSString stringWithFormat:tempStr, username1, username2, self.topic.topicTitle];
-        attrStr = [[NSMutableAttributedString alloc] initWithString:result];
-        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
-        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username1]];
-        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username2]];
+        if (tempStr) {
+            result = [NSString stringWithFormat:tempStr, username1, username2, self.topic.topicTitle];
+            attrStr = [[NSMutableAttributedString alloc] initWithString:result];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username1]];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username2]];
+        }
     } else if ([self.actors count] == 3) {
         NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
         NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
         NSString *username3 = [self.actors[2] fly_stringForKey:@"user_name"];
-        if ([self.action isEqualToString:@"replied"]) {
+        if ([self.action isEqualToString:kFLYNotificationTypeReplied]) {
             tempStr = LOC(@"FLYThreePersonRepliedActivity");
-        } else {
+        } else if ([self.action isEqualToString:kFLYNotificationTypeMention]) {
             tempStr = LOC(@"FLYThreePersonMentionActivity");
+        } else if ([self.action isEqualToString:kFLYNotificationTypeTopicLiked]) {
+            tempStr = LOC(@"FLYThreePersonLikeTopicActivity");
+        } else if ([self.action isEqualToString:kFLYNotificationTypeReplyLiked]) {
+            tempStr = LOC(@"FLYThreePersonLikeReplyActivity");
         }
-        result = [NSString stringWithFormat:tempStr, username1, username2, username3, self.topic.topicTitle];
-        attrStr = [[NSMutableAttributedString alloc] initWithString:result];
-        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
-        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username1]];
-        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username2]];
-        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username3]];
+        if (tempStr) {
+            result = [NSString stringWithFormat:tempStr, username1, username2, username3, self.topic.topicTitle];
+            attrStr = [[NSMutableAttributedString alloc] initWithString:result];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username1]];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username2]];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username3]];
+        }
     } else {
         NSString *username1 = [self.actors[0] fly_stringForKey:@"user_name"];
         NSString *username2 = [self.actors[1] fly_stringForKey:@"user_name"];
         NSInteger otherCount = self.actors.count - 2;
-        if ([self.action isEqualToString:@"replied"]) {
+        if ([self.action isEqualToString:kFLYNotificationTypeReplied]) {
             tempStr = LOC(@"FLYMoreThanThreePeopleRepliedActivity");
-        } else {
+        } else if ([self.action isEqualToString:kFLYNotificationTypeMention]) {
             tempStr = LOC(@"FLYMoreThanThreePeopleMentionActivity");
+        } else if ([self.action isEqualToString:kFLYNotificationTypeTopicLiked]) {
+            tempStr = LOC(@"FLYMoreThanThreePeopleLikeTopicActivity");
+        } else if ([self.action isEqualToString:kFLYNotificationTypeReplyLiked]) {
+            tempStr = LOC(@"FLYMoreThanThreePeopleLikeReplyActivity");
         }
-        result = [NSString stringWithFormat:tempStr, username1, username2, otherCount, self.topic.topicTitle];
-        attrStr = [[NSMutableAttributedString alloc] initWithString:result];
-        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
-        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username1]];
-        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username2]];
+        if (tempStr) {
+            result = [NSString stringWithFormat:tempStr, username1, username2, otherCount, self.topic.topicTitle];
+            attrStr = [[NSMutableAttributedString alloc] initWithString:result];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Roman" size:16] range:NSMakeRange(0, result.length)];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username1]];
+            [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Avenir-Heavy" size:16] range:[result rangeOfString:username2]];
+        }
     }
-    if (![self.action isEqualToString:@"followed"]) {
+    if ([self _shouldAddTopicTitleForAction:self.action]) {
        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16] range:[result rangeOfString:self.topic.topicTitle]];
     }
     return attrStr;
+}
+
+- (BOOL)_shouldAddTopicTitleForAction:(NSString *)action
+{
+    if ([action isEqualToString:kFLYNotificationTypeReplied] ||
+            [action isEqualToString:kFLYNotificationTypeMention] ||
+                [action isEqualToString:kFLYNotificationTypeTopicLiked] ||
+                    [action isEqualToString:kFLYNotificationTypeReplyLiked]) {
+        return YES;
+    }
+    return NO;
 }
 
 @end

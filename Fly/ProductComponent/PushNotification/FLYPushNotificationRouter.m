@@ -11,6 +11,7 @@
 #import "FLYReplyPayload.h"
 #import "FLYMentionPayload.h"
 #import "FLYPayload.h"
+#import "FLYTopicPayload.h"
 #import "FLYTopicDetailViewController.h"
 #import "FLYMainViewController.h"
 #import "FLYNavigationManager.h"
@@ -31,8 +32,8 @@
 + (id)payloadWithDictionary:(NSDictionary *)dict
 {
     NSString *type = [dict fly_stringForKey:@"type"];
-    if ([type isEqualToString:@"reply"]) {
-        return [[FLYReplyPayload alloc] initWithDictionary:dict];
+    if ([type isEqualToString:@"reply"] || [type isEqualToString:@"replyLike"] || [type isEqualToString:@"topicLike"]) {
+        return [[FLYTopicPayload alloc] initWithDictionary:dict];
     } else if ([type isEqualToString:@"mention"]) {
         return [[FLYMentionPayload alloc] initWithDictionary:dict];
     }
@@ -43,8 +44,8 @@
 - (void)routePushPayloadDict:(NSDictionary *)payloadDict
 {
     id payload = [FLYPushNotificationRouter payloadWithDictionary:payloadDict];
-    if ([payload isKindOfClass:[FLYReplyPayload class]]) {
-        [self _handleReplyPayload:payload];
+    if ([payload isKindOfClass:[FLYTopicPayload class]]) {
+        [self _handleTopicPayload:payload];
     } else if ([payload isKindOfClass:[FLYMentionPayload class]]) {
         [self _handleMentionPayload:payload];
     } else {
@@ -54,7 +55,7 @@
 
 
 #pragma mark - Handle push notification payload
-- (void)_handleReplyPayload:(FLYReplyPayload *)payload
+- (void)_handleTopicPayload:(FLYReplyPayload *)payload
 {
     FLYNavigationManager *manager = [FLYNavigationManager sharedInstance];
  

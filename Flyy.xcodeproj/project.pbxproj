@@ -266,6 +266,7 @@
 		A67CC61C1A7DDE360092E500 /* topics.json in Resources */ = {isa = PBXBuildFile; fileRef = A67CC61B1A7DDE360092E500 /* topics.json */; };
 		A67CC61F1A7DF1730092E500 /* CoreGraphics+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A67CC61E1A7DF1730092E500 /* CoreGraphics+FLYAddition.m */; };
 		A6852B821A875EE70093C75C /* FLYRecordBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = A6852B811A875EE70093C75C /* FLYRecordBottomBar.m */; };
+		A68F1EFE1C69C349008B8F6A /* FLYTopicPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = A68F1EFD1C69C349008B8F6A /* FLYTopicPayload.m */; };
 		A690C0841B54CC47002B71CA /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A690C0831B54CC47002B71CA /* AdSupport.framework */; };
 		A690F2821AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A690F2811AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m */; };
 		A690F2851AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A690F2841AA6F07D00B0D3E8 /* FLYSignupEnterPasswordViewController.m */; };
@@ -979,6 +980,8 @@
 		A67CC61E1A7DF1730092E500 /* CoreGraphics+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CoreGraphics+FLYAddition.m"; sourceTree = "<group>"; };
 		A6852B801A875EE70093C75C /* FLYRecordBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYRecordBottomBar.h; sourceTree = "<group>"; };
 		A6852B811A875EE70093C75C /* FLYRecordBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYRecordBottomBar.m; sourceTree = "<group>"; };
+		A68F1EFC1C69C349008B8F6A /* FLYTopicPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTopicPayload.h; sourceTree = "<group>"; };
+		A68F1EFD1C69C349008B8F6A /* FLYTopicPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTopicPayload.m; sourceTree = "<group>"; };
 		A690C0831B54CC47002B71CA /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		A690F2801AA6D64100B0D3E8 /* FLYSignupUsernameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSignupUsernameViewController.h; sourceTree = "<group>"; };
 		A690F2811AA6D64100B0D3E8 /* FLYSignupUsernameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSignupUsernameViewController.m; sourceTree = "<group>"; };
@@ -1596,6 +1599,8 @@
 				A6F422361B1ABFDB007F4C79 /* FLYReplyPayload.m */,
 				A6F422381B1ABFEE007F4C79 /* FLYMentionPayload.h */,
 				A6F422391B1ABFEE007F4C79 /* FLYMentionPayload.m */,
+				A68F1EFC1C69C349008B8F6A /* FLYTopicPayload.h */,
+				A68F1EFD1C69C349008B8F6A /* FLYTopicPayload.m */,
 			);
 			path = PushNotification;
 			sourceTree = "<group>";
@@ -3716,6 +3721,7 @@
 				A66499561ABBB2BD00C4FF08 /* IBActionSheet.m in Sources */,
 				A6E279341BEC7FC700B909D2 /* FLYProfileStatInfoView.m in Sources */,
 				A6A0E4A21A1E76110036116E /* FLEXExplorerViewController.m in Sources */,
+				A68F1EFE1C69C349008B8F6A /* FLYTopicPayload.m in Sources */,
 				A6A0E48F1A1E76110036116E /* FLEXArgumentInputColorView.m in Sources */,
 				A6852B821A875EE70093C75C /* FLYRecordBottomBar.m in Sources */,
 				A6A0E4BF1A1E76110036116E /* FLEXHierarchyTableViewController.m in Sources */,

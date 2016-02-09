@@ -170,7 +170,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell clearReadState];
     
-    if ([notificaiton.action isEqualToString:@"followed"]) {
+    if ([notificaiton.action isEqualToString:kFLYNotificationTypeFollowed]) {
         FLYNotification *notif = self.entries[indexPath.row];
         FLYUser *actor = [[FLYUser alloc] initWithDictionary:notif.actors[0]];
         [self.delegate visitProfile:actor];

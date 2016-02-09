@@ -250,6 +250,16 @@
 "FLYThreePersonMentionActivity" = "%@, %@ and %@ replied to you in post: %@";
 "FLYMoreThanThreePeopleMentionActivity" = "%@, %@ and %ld others replied to you in post: %@";
 
+"FLYSinglePersonLikeTopicActivity" = "%@ liked your post: %@";
+"FLYTwoPersonLikeTopicActivity" =  "%@ and %@ liked your post: %@";
+"FLYThreePersonLikeTopicActivity" = "%@, %@ and %@ liked your post: %@";
+"FLYMoreThanThreePeopleLikeTopicActivity" = "%@, %@ and %ld others liked your post: %@";
+
+"FLYSinglePersonLikeReplyActivity" = "%@ liked your reply in post: %@";
+"FLYTwoPersonLikeReplyActivity" =  "%@ and %@ liked your reply in post: %@";
+"FLYThreePersonLikeReplyActivity" = "%@, %@ and %@ liked your reply in post: %@";
+"FLYMoreThanThreePeopleLikeReplyActivity" = "%@, %@ and %ld others liked your reply in post: %@";
+
 "FLYSinglePersonFollowActivity" = "%@ started following you!";
 
 "FLYAllNotificationsRead" = "All Notifications Read";

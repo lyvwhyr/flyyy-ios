@@ -10,6 +10,13 @@
 
 @class FLYTopic;
 
+#define kFLYNotificationTypeReplied     @"replied"
+#define kFLYNotificationTypeFollowed    @"followed"
+#define kFLYNotificationTypeMention     @"mention"
+#define kFLYNotificationTypeTopicLiked  @"topicLiked"
+#define kFLYNotificationTypeReplyLiked  @"replyLiked"
+
+
 @interface FLYNotification : NSObject
 
 @property (nonatomic) FLYTopic *topic;
