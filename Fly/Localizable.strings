@@ -7,7 +7,7 @@
 "FLYTapWhenDoneLabelText" = "Tap when you are done";
 "FLYPostMustMinLength" = "Caption must be at least %ld characters long.";
 "FLYPostMustHaveAgroup" = "Please tag the caption to a group by typing in '#'.";
-"FLYPostDescrptionText" = "Write an interesting caption (at least %ld characters long).";
+"FLYPostDescrptionText" = "Best day ever in Golden Gate park! #beautifulday #nature";
 
 // recording
 "FLYAdjustPitchLow" = "Low";

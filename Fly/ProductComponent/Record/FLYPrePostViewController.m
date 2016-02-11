@@ -35,6 +35,7 @@
 #import "FLYBarButtonItem.h"
 #import "NSDictionary+FLYAddition.h"
 #import "UIImage+FLYAddition.h"
+#import "SDVersion.h"
 
 #define kFlyPrePostTitleCellIdentifier @"flyPrePostTitleCellIdentifier"
 #define kFlyPrePostChooseGroupCellIdentifier @"flyPrePostChooseGroupCellIdentifier"
@@ -45,7 +46,7 @@
 #define kTagButtonHorizontalSpacing 19
 #define kTagButtonVerticalSpacing 12
 #define kDescriptionTextTopPadding  13
-#define kHillImageBottomPading 20
+#define kHillImageBottomPading 10
 
 // pi is approximately equal to 3.14159265359.
 #define   DEGREES_TO_RADIANS(degrees)  ((3.14159265359 * degrees)/ 180)
@@ -88,9 +89,6 @@
     [super viewDidLoad];
     
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
-    
-//    _groups = [[NSArray arrayWithArray:[FLYGroupManager sharedInstance].groupList] subarrayWithRange:NSMakeRange(0, 9)];
-    
     self.title = @"Post";
     
     self.backgroundImageView = [UIImageView new];
@@ -135,26 +133,30 @@
     [self.view addSubview:self.headerView];
     
     
-//    NSInteger minimalLen = [[FLYAppStateManager sharedInstance].configs fly_integerForKey:@"minimalPostTitleLen" defaultValue:kMinimalPostTitleLen];
-//    NSString *description = [NSString stringWithFormat:LOC(@"FLYPostDescrptionText"), minimalLen];
-//    _descriptionLabel = [UILabel new];
-//    _descriptionLabel.numberOfLines = 0;
-//    _descriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
-//    NSMutableAttributedString *descriptionAttr = [[NSMutableAttributedString alloc] initWithString:description];
-//    
-//    NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
-//    paragraphStyle.alignment = NSTextAlignmentCenter;
-//    paragraphStyle.lineSpacing = 2;
-//    [descriptionAttr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, description.length)];
-//    [descriptionAttr addAttributes:@{NSFontAttributeName: [UIFont flyFontWithSize:16]} range:NSMakeRange(0, description.length)];
-//    [descriptionAttr addAttributes:@{NSForegroundColorAttributeName: [UIColor flyColorFlyGreyText]} range:NSMakeRange(0, description.length)];
-//    _descriptionLabel.attributedText = descriptionAttr;
-//    [self.view addSubview:_descriptionLabel];
+    DeviceSize deviceSize = [SDVersion deviceSize];
+    if (deviceSize >= Screen4Dot7inch) {
+        NSString *description = LOC(@"FLYPostDescrptionText");
+        _descriptionLabel = [UILabel new];
+        _descriptionLabel.numberOfLines = 0;
+        _descriptionLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        NSMutableAttributedString *descriptionAttr = [[NSMutableAttributedString alloc] initWithString:description];
+        
+        NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
+        paragraphStyle.alignment = NSTextAlignmentCenter;
+        paragraphStyle.lineSpacing = 2;
+        [descriptionAttr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, description.length)];
+        [descriptionAttr addAttributes:@{NSFontAttributeName: [UIFont flyFontWithSize:18]} range:NSMakeRange(0, description.length)];
+        [descriptionAttr addAttributes:@{NSForegroundColorAttributeName: [FLYUtilities colorWithHexString:@"#D6D6D6"]} range:NSMakeRange(0, description.length)];
+        _descriptionLabel.attributedText = descriptionAttr;
+        [self.view addSubview:_descriptionLabel];
+    }
 
-    self.hillBgImageView = [UIImageView new];
-    self.hillBgImageView.image = [UIImage imageNamed:@"topic_caption_hill_bg"];
-    [self.hillBgImageView sizeToFit];
-    [self.view addSubview:self.hillBgImageView];
+    if ([SDVersion deviceSize] >= Screen4inch) {
+        self.hillBgImageView = [UIImageView new];
+        self.hillBgImageView.image = [UIImage imageNamed:@"topic_caption_hill_bg"];
+        [self.hillBgImageView sizeToFit];
+        [self.view addSubview:self.hillBgImageView];
+    }
     
     [self _addObservers];
     
@@ -227,15 +229,20 @@
         make.bottom.equalTo(self.view).offset(-self.keyboardHeight);
     }];
     
-//    [self.descriptionLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.headerView.mas_bottom).offset(30);
-//        make.leading.equalTo(self.view).offset(15);
-//        make.trailing.equalTo(self.view).offset(-15);
-//    }];
     
-    [self.hillBgImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view).offset(-self.keyboardHeight - kHillImageBottomPading);
-    }];
+    if (self.descriptionLabel) {
+        [self.descriptionLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.headerView.mas_bottom).offset(15);
+            make.leading.equalTo(self.view).offset(25);
+            make.trailing.equalTo(self.view).offset(-25);
+        }];
+    }
+    
+    if (self.hillBgImageView) {
+        [self.hillBgImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.view).offset(-self.keyboardHeight - kHillImageBottomPading);
+        }];
+    }
     
     self.alreadyLayouted = YES;
     [super updateViewConstraints];
@@ -328,7 +335,9 @@
 {
     NSInteger oldLen = [textView.text length];
     NSUInteger newLen = [textView.text length] + [text length] - range.length;
-    [self _animatePathWithOldLen:oldLen newLen:newLen];
+    if ([SDVersion deviceSize] >= Screen4inch) {
+        [self _animatePathWithOldLen:oldLen newLen:newLen];
+    }
     return YES;
 }
 
@@ -361,6 +370,10 @@
     CGFloat radius = (1.72/3 * (screenWidth - pading * 2)/2) * 2;
     
     CGFloat centerY =  CGRectGetHeight(self.view.bounds) - (self.keyboardHeight + CGRectGetHeight(self.hillBgImageView.bounds) + kHillImageBottomPading) + (1.72/3 * (screenWidth - pading * 2)/2) + 20; // 20 pading
+    
+    if ([SDVersion deviceVersion] == iPhone5S || [SDVersion deviceVersion] == iPhone5C) {
+        centerY = centerY + 20;
+    }
     
     CGFloat startAngle = (M_PI + M_PI/6.0 + M_PI/20.0) + oldLen * M_PI * 3/5.0 * 1.0/steps;
     CGFloat endAngle = (M_PI + M_PI/6.0 + M_PI/20.0) + newLen * M_PI * 3/5.0 * 1.0/steps;
@@ -538,14 +551,15 @@
 - (void)keyboardWillShow:(NSNotification *)note {
     NSDictionary *userInfo = [note userInfo];
     CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    self.keyboardHeight = kbSize.height;
+    if (!self.keyboardHeight) {
+        self.keyboardHeight = kbSize.height;
+    }
     
     [self updateViewConstraints];
 }
 
 - (void)keyboardWillHide:(NSNotification *)note
 {
-    self.keyboardHeight = 44;
     [self updateViewConstraints];
 }
 
