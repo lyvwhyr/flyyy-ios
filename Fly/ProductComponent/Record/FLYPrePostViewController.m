@@ -165,7 +165,9 @@
         [self.view addSubview:self.hillBgImageView];
     }
     
-    [self _addSunView];
+    if ([SDVersion deviceSize] >= Screen4inch) {
+        [self _addSunView];
+    }
     [self _addObservers];
     
     [self updateViewConstraints];
@@ -283,73 +285,50 @@
         }];
     }
     
-    CGFloat circlePadding = 80;
-    CGFloat screenWidth = CGRectGetWidth(self.view.bounds);
-    CGFloat radius = (screenWidth - 2 * circlePadding) / 2.0f;
-    CGFloat centerY = CGRectGetHeight(self.view.bounds) - (self.keyboardHeight + CGRectGetHeight(self.hillBgImageView.bounds)/2 + 10);
-    CGFloat centerX = screenWidth / 2.0f;
-//    CGFloat imageSize = CGRectGetHeight(self.sunView1.bounds);
-    CGFloat imageSize = 36;
-    
-    
-    CGFloat startAngle = M_PI;
-    CGFloat endAngle = 2* M_PI;
-    
-    self.arcPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(centerX, centerY)
-                                                  radius:radius
-                                              startAngle:startAngle
-                                                endAngle:endAngle
-                                               clockwise:YES];
-    
-    self.pathLayer = [CAShapeLayer layer];
-    self.pathLayer.frame = self.view.bounds;
-    self.pathLayer.strokeColor = [UIColor clearColor].CGColor;
-    self.pathLayer.fillColor     = [UIColor clearColor].CGColor;
-    self.pathLayer.lineCap = kCALineCapSquare;
-    self.pathLayer.path = self.arcPath.CGPath;
-    self.pathLayer.lineWidth = 0.5f;
-    self.pathLayer.strokeStart = 0.0f;
-    self.pathLayer.strokeEnd = 1.0f;
-    self.pathLayer.opacity = 0.3f;
-    [self.view.layer addSublayer:self.pathLayer];
-    
-
-    
-    [self.sunView1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(@(circlePadding - imageSize/2.0f));
-        make.top.equalTo(@(centerY - imageSize/2.0f));
-        make.width.equalTo(@(imageSize));
-        make.height.equalTo(@(imageSize));
-    }];
-    
-    [self.sunView2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.view).offset(centerX - imageSize/2.0f - sqrt(2)/2 * radius + radius * 1/8.0);
-        make.top.equalTo(self.view).offset(centerY - sqrt(2)/2 * radius - imageSize/2.0f + radius * 1/4.0);
-        make.width.equalTo(@(imageSize));
-        make.height.equalTo(@(imageSize));
-    }];
-    
-    [self.sunView3 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.view).offset(centerX - imageSize/2.0f);
-        make.top.equalTo(self.view).offset(centerY - radius - imageSize/2.0f + radius * 1/4.0);
-        make.width.equalTo(@(imageSize));
-        make.height.equalTo(@(imageSize));
-    }];
-    
-    [self.sunView4 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.view).offset(-(centerX - imageSize/2.0f - sqrt(2)/2 * radius + radius * 1/8.0));
-        make.top.equalTo(self.sunView2);
-        make.width.equalTo(@(imageSize));
-        make.height.equalTo(@(imageSize));
-    }];
-    
-    
-    [self.sunView5 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.trailing.equalTo(self.view).offset(-(circlePadding - imageSize/2.0f));
-        make.top.equalTo(self.sunView1);
-        make.width.equalTo(@(imageSize));
-        make.height.equalTo(@(imageSize));
-    }];
+    if (self.sunView1) {
+        CGFloat circlePadding = 80;
+        CGFloat screenWidth = CGRectGetWidth(self.view.bounds);
+        CGFloat radius = (screenWidth - 2 * circlePadding) / 2.0f;
+        CGFloat centerY = CGRectGetHeight(self.view.bounds) - (self.keyboardHeight + CGRectGetHeight(self.hillBgImageView.bounds)/2 + 10);
+        CGFloat centerX = screenWidth / 2.0f;
+        CGFloat imageSize = 36;
+        
+        [self.sunView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(@(circlePadding - imageSize/2.0f));
+            make.top.equalTo(@(centerY - imageSize/2.0f));
+            make.width.equalTo(@(imageSize));
+            make.height.equalTo(@(imageSize));
+        }];
+        
+        [self.sunView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.view).offset(centerX - imageSize/2.0f - sqrt(2)/2 * radius + radius * 1/8.0);
+            make.top.equalTo(self.view).offset(centerY - sqrt(2)/2 * radius - imageSize/2.0f + radius * 1/4.0);
+            make.width.equalTo(@(imageSize));
+            make.height.equalTo(@(imageSize));
+        }];
+        
+        [self.sunView3 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.leading.equalTo(self.view).offset(centerX - imageSize/2.0f);
+            make.top.equalTo(self.view).offset(centerY - radius - imageSize/2.0f + radius * 1/4.0);
+            make.width.equalTo(@(imageSize));
+            make.height.equalTo(@(imageSize));
+        }];
+        
+        [self.sunView4 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.equalTo(self.view).offset(-(centerX - imageSize/2.0f - sqrt(2)/2 * radius + radius * 1/8.0));
+            make.top.equalTo(self.sunView2);
+            make.width.equalTo(@(imageSize));
+            make.height.equalTo(@(imageSize));
+        }];
+        
+        
+        [self.sunView5 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.trailing.equalTo(self.view).offset(-(circlePadding - imageSize/2.0f));
+            make.top.equalTo(self.sunView1);
+            make.width.equalTo(@(imageSize));
+            make.height.equalTo(@(imageSize));
+        }];
+    }
     
     
     self.alreadyLayouted = YES;
@@ -430,12 +409,23 @@
 - (void)searchViewWillAppear:(FLYPrePostHeaderView *)view
 {
     self.descriptionLabel.hidden = YES;
+    self.hillBgImageView.hidden = YES;
+    self.sunView1.hidden = YES;
+    self.sunView2.hidden = YES;
+    self.sunView3.hidden = YES;
+    self.sunView4.hidden = YES;
+    self.sunView5.hidden = YES;
     self.searchContainerView.userInteractionEnabled = YES;
 }
 
 - (void)searchViewWillDisappear:(FLYPrePostHeaderView *)view
 {
     self.descriptionLabel.hidden = NO;
+    self.sunView1.hidden = NO;
+    self.sunView2.hidden = NO;
+    self.sunView3.hidden = NO;
+    self.sunView4.hidden = NO;
+    self.sunView5.hidden = NO;
     self.searchContainerView.userInteractionEnabled = NO;
 }
 
