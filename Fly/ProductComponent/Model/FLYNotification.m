@@ -185,6 +185,10 @@
         }
     }
     if ([self _shouldAddTopicTitleForAction:self.action]) {
+        if (self.topic.topicTitle.length == 0) {
+            self.topic.topicTitle = @"Unknown";
+        }
+        
        [attrStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"AvenirNext-MediumItalic" size:16] range:[result rangeOfString:self.topic.topicTitle]];
     }
     return attrStr;

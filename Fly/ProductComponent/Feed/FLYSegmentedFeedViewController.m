@@ -59,6 +59,7 @@
 - (void)_setupSegmentedControl
 {
     self.popularVC = [FLYFeedViewController new];
+    self.popularVC.topicService = [[FLYTopicService alloc] initWithFeedOrderType:FLYFeedOrderTypePopular];
     self.popularVC.delegate = self;
     [self addChildViewController:self.popularVC];
     [self.view addSubview:self.popularVC.view];
@@ -74,8 +75,7 @@
                                                                   } else {
                                                                       if (!self.recentVC) {
                                                                           self.recentVC = [FLYFeedViewController new];
-                                                                          self.recentVC.topicService = [FLYTopicService topicsServiceMine];
-                                                                          self.recentVC.feedType = FLYFeedTypeMine;
+                                                                          self.recentVC.feedType = FLYFeedTypeHome;
                                                                           [self addChildViewController:self.recentVC];
                                                                       }
                                                                       
@@ -161,8 +161,6 @@
 {
     if (!self.recentVC) {
         self.recentVC = [FLYFeedViewController new];
-        self.recentVC.topicService = [FLYTopicService topicsServiceMine];
-        self.recentVC.feedType = FLYFeedTypeMine;
         [self addChildViewController:self.recentVC];
     }
     

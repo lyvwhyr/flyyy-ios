@@ -89,6 +89,15 @@
     }];
 }
 
+- (instancetype)initWithFeedOrderType:(FLYFeedOrderType)feedOrderType
+{
+    if (self = [super init]) {
+        self = [[FLYTopicService alloc] initWithEndpoint:EP_TOPIC_V2];
+        _feedOrderType = feedOrderType;
+    }
+    return self;
+}
+
 - (void)nextPageBefore:(NSString *)before firstPage:(BOOL)first cursor:(BOOL)useCursor successBlock:(FLYGetTopicsSuccessBlock)successBlock errorBlock:(FLYGetTopicsErrorBlock)errorBlock
 {
     NSInteger topicsPerPage = [[FLYAppStateManager sharedInstance].configs fly_integerForKey:@"topicsPerPage" defaultValue:kTopicPaginationCount];
@@ -108,6 +117,13 @@
             params = @{@"limit":@(topicsPerPage), @"before":before};
         }
     }
+    
+    NSMutableDictionary *tempDict = [params mutableCopy];
+    if (_feedOrderType == FLYFeedOrderTypePopular) {
+        tempDict[@"order_by"] = @"popularity";
+        params = [tempDict copy];
+    }
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:self.endpoint parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (successBlock) {
