@@ -84,9 +84,14 @@
 - (void)_addViewConstraints
 {
     
+    CGFloat actionButtonBottomPadding = -60;
+    if ([SDVersion deviceSize] == Screen5Dot5inch) {
+        actionButtonBottomPadding = -75;
+    }
+    
     [self.actionButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.view);
-        make.bottom.equalTo(self.view).offset(-75);
+        make.bottom.equalTo(self.view).offset(actionButtonBottomPadding);
     }];
     
     [self.descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
