@@ -21,7 +21,7 @@
 
 // First time user experience
 "FLYFirstTimeGetStartedTitle" = "Welcome to Flyy!";
-"FLYFirstTimeGetStartedDescriptionLabel" = "We'are so excited to hear what you have to say.";
+"FLYFirstTimeGetStartedDescriptionLabel" = "We're so excited to hear what you have to say.";
 "FLYFirstTimeGetStartedActionButtonText" = "Get Started";
 
 // Push notification onboarding

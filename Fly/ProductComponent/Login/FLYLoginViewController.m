@@ -46,6 +46,8 @@
 @property (nonatomic) UITextField *passwordTextField;
 @property (nonatomic) UIImageView *passwordUnderlineView;
 
+@property (nonatomic) UIButton *forgetPasswordButton;
+
 // phone number
 @property (nonatomic) UIView *phoneNumberView;
 @property (nonatomic) UIImageView *phoneNumberUnderlineView;
@@ -118,6 +120,7 @@
     
     [self.loginButton setEnabled:NO];
     [self.loginButton setTitle:LOC(@"FLYLoginButtonText") forState:UIControlStateNormal];
+    self.loginButton.titleLabel.font = [UIFont flyFontWithSize:20.0f];
     [self.loginButton addTarget:self action:@selector(_loginButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -142,8 +145,9 @@
     self.passwordTextField.backgroundColor = [UIColor clearColor];
     self.passwordTextField.translatesAutoresizingMaskIntoConstraints = NO;
     UIColor *color = [UIColor whiteColor];
-    self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:LOC(@"FLYLoginDefaultPasswordTextFieldText") attributes:@{NSForegroundColorAttributeName: color}];
+    self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:LOC(@"FLYLoginDefaultPasswordTextFieldText") attributes:@{NSForegroundColorAttributeName: color, NSFontAttributeName:[UIFont flyFontWithSize:17.0f]}];
     self.passwordTextField.secureTextEntry = YES;
+    self.phoneNumberTextField.font = [UIFont flyFontWithSize:17.0f];
     self.passwordTextField.delegate = self;
     [self.passwordTextField addTarget:self action:@selector(_passwordTextFieldDidChange)
                      forControlEvents:UIControlEventEditingChanged];
@@ -169,10 +173,11 @@
     self.phoneNumberTextField = [UITextField new];
     self.phoneNumberTextField.translatesAutoresizingMaskIntoConstraints = NO;
     self.phoneNumberTextField.keyboardType = UIKeyboardTypeNumberPad;
-    self.phoneNumberTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:LOC(@"FLYLoginDefaultPhoneNumberTextFieldText") attributes:@{NSForegroundColorAttributeName: color}];
+    self.phoneNumberTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:LOC(@"FLYLoginDefaultPhoneNumberTextFieldText") attributes:@{NSForegroundColorAttributeName: color, NSFontAttributeName:[UIFont flyFontWithSize:17.0f]}];
     [self.phoneNumberTextField addTarget:self action:@selector(_phoneNumberTextFieldDidChange)
                         forControlEvents:UIControlEventEditingChanged];
     self.phoneNumberTextField.textColor = [UIColor whiteColor];
+    self.phoneNumberTextField.font = [UIFont flyFontWithSize:17.0f];
     self.phoneNumberTextField.delegate = self;
     [self.phoneNumberView addSubview:self.phoneNumberTextField];
     
@@ -181,6 +186,14 @@
     self.logoView.image = [UIImage imageNamed:@"login_logo"];
     [self.logoView sizeToFit];
     [self.view addSubview:self.logoView];
+    
+    self.forgetPasswordButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.forgetPasswordButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.forgetPasswordButton setImage:[UIImage imageNamed:@"login_question_mark"] forState:UIControlStateNormal];
+    [self.forgetPasswordButton addTarget:self action:@selector(_forgetPasswordButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    self.forgetPasswordButton.contentEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+    [self.view addSubview:self.forgetPasswordButton];
+    [self.forgetPasswordButton sizeToFit];
     
     [self _addObservers];
     [self updateViewConstraints];
@@ -276,6 +289,11 @@
         make.trailing.equalTo(self.passwordView);
         make.top.equalTo(self.passwordView);
         make.bottom.equalTo(self.passwordView);
+    }];
+    
+    [self.forgetPasswordButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.passwordView);
+        make.trailing.equalTo(self.passwordUnderlineView);
     }];
     
     
