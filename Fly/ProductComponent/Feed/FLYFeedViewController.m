@@ -196,6 +196,8 @@
             }
         }];
     }
+    
+    
 }
 
 #pragma mark - service
@@ -549,6 +551,10 @@
 
 - (void)_newPostReceived:(NSNotification *)notif
 {
+    if (self.feedType == FLYFeedTypePopular) {
+        return;
+    }
+    
     FLYTopic *topic = [notif.userInfo objectForKey:kNewPostKey];
     [self.posts insertObject:topic atIndex:0];
     [self.feedTableView reloadData];

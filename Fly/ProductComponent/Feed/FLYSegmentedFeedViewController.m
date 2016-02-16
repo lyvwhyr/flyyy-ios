@@ -61,6 +61,7 @@
     self.popularVC = [FLYFeedViewController new];
     self.popularVC.topicService = [[FLYTopicService alloc] initWithFeedOrderType:FLYFeedOrderTypePopular];
     self.popularVC.delegate = self;
+    self.popularVC.feedType = FLYFeedTypePopular;
     [self addChildViewController:self.popularVC];
     [self.view addSubview:self.popularVC.view];
     

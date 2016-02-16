@@ -19,7 +19,8 @@ typedef NS_ENUM(NSInteger, FLYFeedType) {
     FLYFeedTypeGroup,
     FLYFeedTypeMine,
     FLYFeedTypeMyPosts,
-    FLYFeedTypeOhtersPosts
+    FLYFeedTypeOhtersPosts,
+    FLYFeedTypePopular
 };
 
 @class FLYTopicService;
