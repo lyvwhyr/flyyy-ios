@@ -96,6 +96,7 @@
 #define kTrackingComponent  @"component"
 #define kTrackingElement    @"element"
 #define kTrackingAction     @"action"
+#define kTrackingActivityType @"activityType"
 
 #ifdef NDEBUG
     #define NSLog(...) /* suppress NSLog when in release mode */

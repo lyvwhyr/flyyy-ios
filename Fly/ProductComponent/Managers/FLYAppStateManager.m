@@ -13,7 +13,7 @@
 #import "FLYUser.h"
 #import "FLYSignupPhoneNumberViewController.h"
 #import "FLYNavigationController.h"
-#import "FLYLoginSignupViewController.h"
+#import "FLYLoginViewController.h"
 #import "UICKeyChainStore.h"
 #import "FLYUsersService.h"
 #import "NSDictionary+FLYAddition.h"
@@ -83,7 +83,7 @@
 - (void)_requireSignupOrLogin:(NSNotification *)notification
 {
     UIViewController *fromVC = [[UIApplication sharedApplication] keyWindow].rootViewController;
-    FLYLoginSignupViewController *vc = [FLYLoginSignupViewController new];
+    FLYLoginViewController *vc = [FLYLoginViewController new];
     vc.canGoBack = YES;
     UINavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
     [fromVC presentViewController:nav animated:NO completion:nil];
@@ -109,7 +109,7 @@
     [UICKeyChainStore removeItemForKey:kAuthTokenKey];
     
     UIViewController *fromVC = [notification.userInfo objectForKey:kFromViewControllerKey];
-    FLYLoginSignupViewController *vc = [FLYLoginSignupViewController new];
+    FLYLoginViewController *vc = [FLYLoginViewController new];
     vc.canGoBack = NO;
     UINavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
     [fromVC presentViewController:nav animated:NO completion:nil];

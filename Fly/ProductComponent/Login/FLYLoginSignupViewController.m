@@ -47,7 +47,7 @@
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     
     self.backgroundImageView = [UIImageView new];
-    self.backgroundImageView.image = [UIImage imageNamed:@"icon_login_background"];
+    self.backgroundImageView.image = [UIImage imageNamed:@"login_background"];
     [self.view addSubview:self.backgroundImageView];
     
     

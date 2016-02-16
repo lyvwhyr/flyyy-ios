@@ -33,7 +33,7 @@
     UIActivityViewController * avc = [[UIActivityViewController alloc] initWithActivityItems:shareItems applicationActivities:nil];
     [avc setCompletionHandler:^(NSString *activityType, BOOL completed) {
         if (completed) {
-            NSDictionary *properties = @{kTrackingSection: @"share_topic", kTrackingComponent:@"complete"};
+            NSDictionary *properties = @{kTrackingSection: @"share_topic", kTrackingComponent:@"complete", kTrackingActivityType: activityType};
             [[Mixpanel sharedInstance]  track:@"share" properties:properties];
         }
     }];

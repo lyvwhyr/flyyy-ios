@@ -36,6 +36,7 @@
 + (UIColor *)flyInlineAction;
 + (UIColor *)flyHomefeedBlue;
 + (UIColor *)flyButtonGreen;
++ (UIColor *)flyButtonYellow;
 + (UIColor *)flyTopicTitleColor;
 + (UIColor *)flyShareTextYellow;
 + (UIColor *)flyShareTextBlue;

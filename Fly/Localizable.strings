@@ -50,8 +50,11 @@
 "FLYShareTagText" = "You are invited to join the conversation %@ on Flyy. Download at %@";
 
 //Sign up and login page
-"FLYLoginButtonText" = "Login";
+"FLYLoginButtonText" = "Sign in";
 "FLYSignupButtonText" = "Sign up";
+
+"FLYSignupDescrptionText" = "Don’t have an account? Sign up";
+"FLYSignupDescrptionLinkText" = "Sign up";
 
 //Login
 "FLYCountryCodeTitle" = "Country Code";

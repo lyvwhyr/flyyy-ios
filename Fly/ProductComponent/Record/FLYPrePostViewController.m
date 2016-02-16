@@ -160,6 +160,7 @@
 
     if ([SDVersion deviceSize] >= Screen4inch) {
         self.hillBgImageView = [UIImageView new];
+        self.hillBgImageView.translatesAutoresizingMaskIntoConstraints = NO;
         self.hillBgImageView.image = [UIImage imageNamed:@"topic_caption_hill_bg"];
         [self.hillBgImageView sizeToFit];
         [self.view addSubview:self.hillBgImageView];
@@ -293,28 +294,28 @@
         CGFloat centerX = screenWidth / 2.0f;
         CGFloat imageSize = 36;
         
-        [self.sunView1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.sunView1 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(@(circlePadding - imageSize/2.0f));
             make.top.equalTo(@(centerY - imageSize/2.0f));
             make.width.equalTo(@(imageSize));
             make.height.equalTo(@(imageSize));
         }];
         
-        [self.sunView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.sunView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self.view).offset(centerX - imageSize/2.0f - sqrt(2)/2 * radius + radius * 1/8.0);
             make.top.equalTo(self.view).offset(centerY - sqrt(2)/2 * radius - imageSize/2.0f + radius * 1/4.0);
             make.width.equalTo(@(imageSize));
             make.height.equalTo(@(imageSize));
         }];
         
-        [self.sunView3 mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.sunView3 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self.view).offset(centerX - imageSize/2.0f);
             make.top.equalTo(self.view).offset(centerY - radius - imageSize/2.0f + radius * 1/4.0);
             make.width.equalTo(@(imageSize));
             make.height.equalTo(@(imageSize));
         }];
         
-        [self.sunView4 mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.sunView4 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.trailing.equalTo(self.view).offset(-(centerX - imageSize/2.0f - sqrt(2)/2 * radius + radius * 1/8.0));
             make.top.equalTo(self.sunView2);
             make.width.equalTo(@(imageSize));
@@ -322,7 +323,7 @@
         }];
         
         
-        [self.sunView5 mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.sunView5 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.trailing.equalTo(self.view).offset(-(circlePadding - imageSize/2.0f));
             make.top.equalTo(self.sunView1);
             make.width.equalTo(@(imageSize));
