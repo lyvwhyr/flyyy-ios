@@ -30,7 +30,7 @@
 #define kLeftIconWidth 50
 #define kTextFieldLeftPadding 40
 #define kTextFieldRightPadding 20
-#define kExitButtonOriginX 20
+#define kExitButtonOriginX 32
 #define kExitButtonOriginY 32
 
 @interface FLYLoginViewController () <UITextFieldDelegate, NIAttributedLabelDelegate>
@@ -144,6 +144,7 @@
     self.passwordTextField.textColor = [UIColor whiteColor];
     self.passwordTextField.backgroundColor = [UIColor clearColor];
     self.passwordTextField.translatesAutoresizingMaskIntoConstraints = NO;
+    self.passwordTextField.alpha = 0.54f;
     UIColor *color = [UIColor whiteColor];
     self.passwordTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:LOC(@"FLYLoginDefaultPasswordTextFieldText") attributes:@{NSForegroundColorAttributeName: color, NSFontAttributeName:[UIFont flyFontWithSize:17.0f]}];
     self.passwordTextField.secureTextEntry = YES;
@@ -173,6 +174,7 @@
     self.phoneNumberTextField = [UITextField new];
     self.phoneNumberTextField.translatesAutoresizingMaskIntoConstraints = NO;
     self.phoneNumberTextField.keyboardType = UIKeyboardTypeNumberPad;
+    self.phoneNumberTextField.alpha = 0.54f;
     self.phoneNumberTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:LOC(@"FLYLoginDefaultPhoneNumberTextFieldText") attributes:@{NSForegroundColorAttributeName: color, NSFontAttributeName:[UIFont flyFontWithSize:17.0f]}];
     [self.phoneNumberTextField addTarget:self action:@selector(_phoneNumberTextFieldDidChange)
                         forControlEvents:UIControlEventEditingChanged];
@@ -349,6 +351,12 @@
 
 - (void)_phoneNumberTextFieldDidChange
 {
+    if ([self.phoneNumberTextField.text length] > 0) {
+        self.phoneNumberTextField.alpha = 1.0f;
+    } else {
+        self.phoneNumberTextField.alpha = 0.54f;
+    }
+    
     if ([self.phoneNumberTextField.text length] > 0 && [self.passwordTextField.text length] > 0) {
         self.loginButton.backgroundColor = [UIColor flyButtonYellow];
         [self.loginButton setEnabled:YES];
@@ -365,6 +373,12 @@
 
 - (void)_passwordTextFieldDidChange
 {
+    if ([self.passwordTextField.text length] > 0) {
+        self.passwordTextField.alpha = 1.0f;
+    } else {
+        self.passwordTextField.alpha = 0.54f;
+    }
+    
     if ([self.phoneNumberTextField.text length] > 0 && [self.passwordTextField.text length] > 0) {
         self.loginButton.backgroundColor = [UIColor flyButtonYellow];
         [self.loginButton setEnabled:YES];
@@ -404,7 +418,7 @@
 {
     [[FLYScribe sharedInstance] logEvent:@"login_page" section:@"login" component:nil element:nil action:@"click"];
     
-    [self.loginButton setTitle:@"Logging In" forState:UIControlStateDisabled];
+    [self.loginButton setTitle:@"logging In" forState:UIControlStateDisabled];
     self.loginButton.enabled = NO;
     self.loginButton.loading = YES;
     

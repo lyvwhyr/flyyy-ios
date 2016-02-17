@@ -50,7 +50,7 @@
 "FLYShareTagText" = "You are invited to join the conversation %@ on Flyy. Download at %@";
 
 //Sign up and login page
-"FLYLoginButtonText" = "Sign in";
+"FLYLoginButtonText" = "sign in";
 "FLYSignupButtonText" = "Sign up";
 
 "FLYSignupDescrptionText" = "Don’t have an account? Sign up";
@@ -60,8 +60,8 @@
 "FLYCountryCodeTitle" = "Country Code";
 "FLYLoginNavigationTitle" = "Login";
 "FLYLoginTitle" = "You Speak. We Listen.";
-"FLYLoginDefaultPhoneNumberTextFieldText" = "Phone number";
-"FLYLoginDefaultPasswordTextFieldText" = "Password";
+"FLYLoginDefaultPhoneNumberTextFieldText" = "phone number";
+"FLYLoginDefaultPasswordTextFieldText" = "password";
 "FLYLoginForgetPasswordText" = "Forgot password?";
 "FLYLoginWrongPassword" = "Incorrect phone number or password.";
 "FLYLoginPhoneNumberNotFound" = "The phone number you entered doesn't belong to any account";

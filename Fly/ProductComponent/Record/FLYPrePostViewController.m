@@ -178,38 +178,38 @@
 
 - (void)_addSunView
 {
-    UIImage *sunImage = [UIImage imageNamed:@"sun_grey"];
+//    UIImage *sunImage = [UIImage imageNamed:@"sun_grey"];
 //    sunImage = [sunImage imageWithColorOverlay:[FLYUtilities colorWithHexString:@"#F2F2F2"]];
     
-    self.sunView1 = [UIImageView new];
-    self.sunView1.translatesAutoresizingMaskIntoConstraints = NO;
-    self.sunView1.image = sunImage;
-    [self.sunView1 sizeToFit];
-    [self.view addSubview:self.sunView1];
-    
-    self.sunView2 = [UIImageView new];
-    self.sunView2.translatesAutoresizingMaskIntoConstraints = NO;
-    self.sunView2.image = sunImage;
-    [self.sunView2 sizeToFit];
-    [self.view addSubview:self.sunView2];
-    
-    self.sunView3 = [UIImageView new];
-    self.sunView3.translatesAutoresizingMaskIntoConstraints = NO;
-    self.sunView3.image = sunImage;
-    [self.sunView3 sizeToFit];
-    [self.view addSubview:self.sunView3];
-    
-    self.sunView4 = [UIImageView new];
-    self.sunView4.translatesAutoresizingMaskIntoConstraints = NO;
-    self.sunView4.image = sunImage;
-    [self.sunView4 sizeToFit];
-    [self.view addSubview:self.sunView4];
-    
-    self.sunView5 = [UIImageView new];
-    self.sunView5.translatesAutoresizingMaskIntoConstraints = NO;
-    self.sunView5.image = sunImage;
-    [self.sunView5 sizeToFit];
-    [self.view addSubview:self.sunView5];
+//    self.sunView1 = [UIImageView new];
+//    self.sunView1.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.sunView1.image = sunImage;
+//    [self.sunView1 sizeToFit];
+//    [self.view addSubview:self.sunView1];
+//    
+//    self.sunView2 = [UIImageView new];
+//    self.sunView2.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.sunView2.image = sunImage;
+//    [self.sunView2 sizeToFit];
+//    [self.view addSubview:self.sunView2];
+//    
+//    self.sunView3 = [UIImageView new];
+//    self.sunView3.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.sunView3.image = sunImage;
+//    [self.sunView3 sizeToFit];
+//    [self.view addSubview:self.sunView3];
+//    
+//    self.sunView4 = [UIImageView new];
+//    self.sunView4.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.sunView4.image = sunImage;
+//    [self.sunView4 sizeToFit];
+//    [self.view addSubview:self.sunView4];
+//    
+//    self.sunView5 = [UIImageView new];
+//    self.sunView5.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.sunView5.image = sunImage;
+//    [self.sunView5 sizeToFit];
+//    [self.view addSubview:self.sunView5];
 }
 
 -(void)loadRightBarButton
@@ -285,51 +285,51 @@
             make.bottom.equalTo(self.view).offset(-self.keyboardHeight + 5);
         }];
     }
-    
-    if (self.sunView1) {
-        CGFloat circlePadding = 80;
-        CGFloat screenWidth = CGRectGetWidth(self.view.bounds);
-        CGFloat radius = (screenWidth - 2 * circlePadding) / 2.0f;
-        CGFloat centerY = CGRectGetHeight(self.view.bounds) - (self.keyboardHeight + CGRectGetHeight(self.hillBgImageView.bounds)/2 + 10);
-        CGFloat centerX = screenWidth / 2.0f;
-        CGFloat imageSize = 36;
-        
-        [self.sunView1 mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(@(circlePadding - imageSize/2.0f));
-            make.top.equalTo(@(centerY - imageSize/2.0f));
-            make.width.equalTo(@(imageSize));
-            make.height.equalTo(@(imageSize));
-        }];
-        
-        [self.sunView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(self.view).offset(centerX - imageSize/2.0f - sqrt(2)/2 * radius + radius * 1/8.0);
-            make.top.equalTo(self.view).offset(centerY - sqrt(2)/2 * radius - imageSize/2.0f + radius * 1/4.0);
-            make.width.equalTo(@(imageSize));
-            make.height.equalTo(@(imageSize));
-        }];
-        
-        [self.sunView3 mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(self.view).offset(centerX - imageSize/2.0f);
-            make.top.equalTo(self.view).offset(centerY - radius - imageSize/2.0f + radius * 1/4.0);
-            make.width.equalTo(@(imageSize));
-            make.height.equalTo(@(imageSize));
-        }];
-        
-        [self.sunView4 mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.trailing.equalTo(self.view).offset(-(centerX - imageSize/2.0f - sqrt(2)/2 * radius + radius * 1/8.0));
-            make.top.equalTo(self.sunView2);
-            make.width.equalTo(@(imageSize));
-            make.height.equalTo(@(imageSize));
-        }];
-        
-        
-        [self.sunView5 mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.trailing.equalTo(self.view).offset(-(circlePadding - imageSize/2.0f));
-            make.top.equalTo(self.sunView1);
-            make.width.equalTo(@(imageSize));
-            make.height.equalTo(@(imageSize));
-        }];
-    }
+//    
+//    if (self.sunView1) {
+//        CGFloat circlePadding = 80;
+//        CGFloat screenWidth = CGRectGetWidth(self.view.bounds);
+//        CGFloat radius = (screenWidth - 2 * circlePadding) / 2.0f;
+//        CGFloat centerY = CGRectGetHeight(self.view.bounds) - (self.keyboardHeight + CGRectGetHeight(self.hillBgImageView.bounds)/2 + 10);
+//        CGFloat centerX = screenWidth / 2.0f;
+//        CGFloat imageSize = 36;
+//        
+//        [self.sunView1 mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.leading.equalTo(@(circlePadding - imageSize/2.0f));
+//            make.top.equalTo(@(centerY - imageSize/2.0f));
+//            make.width.equalTo(@(imageSize));
+//            make.height.equalTo(@(imageSize));
+//        }];
+//        
+//        [self.sunView2 mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.leading.equalTo(self.view).offset(centerX - imageSize/2.0f - sqrt(2)/2 * radius + radius * 1/8.0);
+//            make.top.equalTo(self.view).offset(centerY - sqrt(2)/2 * radius - imageSize/2.0f + radius * 1/4.0);
+//            make.width.equalTo(@(imageSize));
+//            make.height.equalTo(@(imageSize));
+//        }];
+//        
+//        [self.sunView3 mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.leading.equalTo(self.view).offset(centerX - imageSize/2.0f);
+//            make.top.equalTo(self.view).offset(centerY - radius - imageSize/2.0f + radius * 1/4.0);
+//            make.width.equalTo(@(imageSize));
+//            make.height.equalTo(@(imageSize));
+//        }];
+//        
+//        [self.sunView4 mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.trailing.equalTo(self.view).offset(-(centerX - imageSize/2.0f - sqrt(2)/2 * radius + radius * 1/8.0));
+//            make.top.equalTo(self.sunView2);
+//            make.width.equalTo(@(imageSize));
+//            make.height.equalTo(@(imageSize));
+//        }];
+//        
+//        
+//        [self.sunView5 mas_remakeConstraints:^(MASConstraintMaker *make) {
+//            make.trailing.equalTo(self.view).offset(-(circlePadding - imageSize/2.0f));
+//            make.top.equalTo(self.sunView1);
+//            make.width.equalTo(@(imageSize));
+//            make.height.equalTo(@(imageSize));
+//        }];
+//    }
     
     
     self.alreadyLayouted = YES;
@@ -411,22 +411,15 @@
 {
     self.descriptionLabel.hidden = YES;
     self.hillBgImageView.hidden = YES;
-    self.sunView1.hidden = YES;
-    self.sunView2.hidden = YES;
-    self.sunView3.hidden = YES;
-    self.sunView4.hidden = YES;
-    self.sunView5.hidden = YES;
+    self.sunLayer.hidden = YES;
     self.searchContainerView.userInteractionEnabled = YES;
 }
 
 - (void)searchViewWillDisappear:(FLYPrePostHeaderView *)view
 {
     self.descriptionLabel.hidden = NO;
-    self.sunView1.hidden = NO;
-    self.sunView2.hidden = NO;
-    self.sunView3.hidden = NO;
-    self.sunView4.hidden = NO;
-    self.sunView5.hidden = NO;
+    self.hillBgImageView.hidden = NO;
+    self.sunLayer.hidden = NO;
     self.searchContainerView.userInteractionEnabled = NO;
 }
 
@@ -442,51 +435,87 @@
 
 - (void)_animatePathWithOldLen:(NSInteger)oldLen newLen:(NSInteger)newLen
 {
-    NSInteger interval = 8;
+    NSInteger steps = 41;
+    // Don't animate out of screen
+    if (newLen > (steps - 4)) {
+        return;
+    }
+    
+    if (self.pathLayer) {
+        [self.sunLayer removeFromSuperlayer];
+        self.sunLayer = nil;
+        
+        [self.pathLayer removeFromSuperlayer];
+        self.pathLayer = nil;
+    }
     
     if (oldLen == newLen) {
         return;
     }
-    
-    UIImage *greyImage = [UIImage imageNamed:@"sun_grey"];
-    UIImage *yellowImage = [UIImage imageNamed:@"sun_yellow"];
-    if (newLen >= (interval * 5)) {
-        self.sunView1.image = yellowImage;
-        self.sunView2.image = yellowImage;
-        self.sunView3.image = yellowImage;
-        self.sunView4.image = yellowImage;
-        self.sunView5.image = yellowImage;
-    } else if (newLen >= (interval * 4)) {
-        self.sunView1.image = yellowImage;
-        self.sunView2.image = yellowImage;
-        self.sunView3.image = yellowImage;
-        self.sunView4.image = yellowImage;
-        self.sunView5.image = greyImage;
-    } else if (newLen >= (interval * 3)) {
-        self.sunView1.image = yellowImage;
-        self.sunView2.image = yellowImage;
-        self.sunView3.image = yellowImage;
-        self.sunView4.image = greyImage;
-        self.sunView5.image = greyImage;
-    } else if (newLen >= (interval * 2)) {
-        self.sunView1.image = yellowImage;
-        self.sunView2.image = yellowImage;
-        self.sunView3.image = greyImage;
-        self.sunView4.image = greyImage;
-        self.sunView5.image = greyImage;
-    } else if (newLen >= (interval * 1)) {
-        self.sunView1.image = yellowImage;
-        self.sunView2.image = greyImage;
-        self.sunView3.image = greyImage;
-        self.sunView4.image = greyImage;
-        self.sunView5.image = greyImage;
-    } else {
-        self.sunView1.image = greyImage;
-        self.sunView2.image = greyImage;
-        self.sunView3.image = greyImage;
-        self.sunView4.image = greyImage;
-        self.sunView5.image = greyImage;
+    BOOL clockwise = YES;
+    if (newLen < oldLen) {
+        clockwise = NO;
     }
+    
+    CGFloat screenWidth = CGRectGetWidth(self.view.bounds);
+    CGFloat pading = 20;
+    CGFloat radius = (1.72/3 * (screenWidth - pading * 2)/2) * 2;
+    
+    CGFloat centerY =  CGRectGetHeight(self.view.bounds) - (self.keyboardHeight + CGRectGetHeight(self.hillBgImageView.bounds) + kHillImageBottomPading) + (1.72/3 * (screenWidth - pading * 2)/2) + 20; // 20 pading
+    
+    if ([SDVersion deviceSize] <= Screen4inch) {
+        centerY = centerY + 20;
+    }
+    
+    if ([SDVersion deviceSize] == Screen4Dot7inch) {
+        centerY = centerY + 18;
+    }
+    
+    CGFloat startAngle = (M_PI + M_PI/6.0 + M_PI/20.0) + oldLen * M_PI * 3/5.0 * 1.0/steps;
+    CGFloat endAngle = (M_PI + M_PI/6.0 + M_PI/20.0) + newLen * M_PI * 3/5.0 * 1.0/steps;
+    
+    self.arcPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(screenWidth/2.0f, centerY)
+                                                  radius:radius
+                                              startAngle:startAngle
+                                                endAngle:endAngle
+                                               clockwise:clockwise];
+    
+    self.pathLayer = [CAShapeLayer layer];
+    self.pathLayer.frame = self.view.bounds;
+    self.pathLayer.strokeColor = [UIColor clearColor].CGColor;
+    self.pathLayer.fillColor     = [UIColor clearColor].CGColor;
+    self.pathLayer.lineCap = kCALineCapSquare;
+    self.pathLayer.path = self.arcPath.CGPath;
+    self.pathLayer.lineWidth = 1.0f;
+    self.pathLayer.strokeStart = 0.0f;
+    self.pathLayer.strokeEnd = 0.2f;
+    [self.view.layer addSublayer:self.pathLayer];
+    
+    UIImage *sunImage = [UIImage imageNamed:@"topic_caption_sun"];;
+    if (newLen < (steps/4)) {
+        sunImage = [UIImage imageNamed:@"topic_caption_sun"];
+    } else if (newLen < (steps/2)) {
+        sunImage = [sunImage imageWithColorOverlay:[FLYUtilities colorWithHexString:@"#F5A623"]];
+    } else if (newLen < (steps * 0.75)) {
+        sunImage = [sunImage imageWithColorOverlay:[FLYUtilities colorWithHexString:@"#ADD66E"]];
+    } else if (newLen < steps){
+        sunImage = [sunImage imageWithColorOverlay:[FLYUtilities colorWithHexString:@"#7ED321"]];
+    } else {
+        sunImage = [sunImage imageWithColorOverlay:[FLYUtilities colorWithHexString:@"#7ED321"]];
+    }
+    self.sunLayer = [CALayer layer];
+    self.sunLayer.contents = (id)sunImage.CGImage;
+    self.sunLayer.frame = CGRectMake(0.0f, 0.0f, sunImage.size.width, sunImage.size.height);
+    [self.pathLayer addSublayer:self.sunLayer];
+    
+    CAKeyframeAnimation *sunAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    sunAnimation.fillMode = kCAFillModeForwards;
+    sunAnimation.removedOnCompletion = NO;
+    sunAnimation.duration = 0.2;
+    sunAnimation.path = self.pathLayer.path;
+    sunAnimation.calculationMode = kCAAnimationPaced;
+    sunAnimation.delegate = self;
+    [self.sunLayer addAnimation:sunAnimation forKey:@"position"];
 }
 
 #pragma mark - button tap actions
