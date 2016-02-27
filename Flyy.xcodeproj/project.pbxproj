@@ -482,6 +482,7 @@
 		A6F01BDD1B9CB82D00258CC7 /* MJAutoCompleteTC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F01BD71B9CB82D00258CC7 /* MJAutoCompleteTC.m */; };
 		A6F01BDE1B9CB82D00258CC7 /* MJAutoCompleteTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F01BD91B9CB82D00258CC7 /* MJAutoCompleteTrigger.m */; };
 		A6F01BE11B9CF6EB00258CC7 /* FLYTagListBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F01BE01B9CF6EB00258CC7 /* FLYTagListBaseViewController.m */; };
+		A6F2132B1C825CFA00257D77 /* NSAttributedString+FLYAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F2132A1C825CFA00257D77 /* NSAttributedString+FLYAddition.m */; };
 		A6F2AD261BF044C60078980B /* YYTextContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F2ACF41BF044C60078980B /* YYTextContainerView.m */; };
 		A6F2AD271BF044C60078980B /* YYTextDebugOption.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F2ACF61BF044C60078980B /* YYTextDebugOption.m */; };
 		A6F2AD281BF044C60078980B /* YYTextEffectWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F2ACF81BF044C60078980B /* YYTextEffectWindow.m */; };
@@ -1355,6 +1356,8 @@
 		A6F01BD91B9CB82D00258CC7 /* MJAutoCompleteTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJAutoCompleteTrigger.m; path = Fly/Libraries/MJAutoCompleteTrigger.m; sourceTree = SOURCE_ROOT; };
 		A6F01BDF1B9CF6EB00258CC7 /* FLYTagListBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYTagListBaseViewController.h; sourceTree = "<group>"; };
 		A6F01BE01B9CF6EB00258CC7 /* FLYTagListBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYTagListBaseViewController.m; sourceTree = "<group>"; };
+		A6F213291C825CFA00257D77 /* NSAttributedString+FLYAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+FLYAddition.h"; sourceTree = "<group>"; };
+		A6F2132A1C825CFA00257D77 /* NSAttributedString+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+FLYAddition.m"; sourceTree = "<group>"; };
 		A6F2ACF31BF044C60078980B /* YYTextContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextContainerView.h; sourceTree = "<group>"; };
 		A6F2ACF41BF044C60078980B /* YYTextContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYTextContainerView.m; sourceTree = "<group>"; };
 		A6F2ACF51BF044C60078980B /* YYTextDebugOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYTextDebugOption.h; sourceTree = "<group>"; };
@@ -1828,6 +1831,8 @@
 				A636FC3A1A9AAB4A0084DE6A /* NSMutableDictionary+FLYAddition.m */,
 				A6F8619E1B58820B004753C7 /* UITableViewCell+FLYAddition.h */,
 				A6F8619F1B58820B004753C7 /* UITableViewCell+FLYAddition.m */,
+				A6F213291C825CFA00257D77 /* NSAttributedString+FLYAddition.h */,
+				A6F2132A1C825CFA00257D77 /* NSAttributedString+FLYAddition.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -3650,6 +3655,7 @@
 				A61B6D421AAAE3DD00A5B696 /* RNLoadingButton.m in Sources */,
 				A6F2AD271BF044C60078980B /* YYTextDebugOption.m in Sources */,
 				A62B25571A8FECFF007E11C3 /* UIView+Glow.m in Sources */,
+				A6F2132B1C825CFA00257D77 /* NSAttributedString+FLYAddition.m in Sources */,
 				A6A0E49E1A1E76110036116E /* FLEXIvarEditorViewController.m in Sources */,
 				A67208231A3569C600B2C5B5 /* FLYReplyPlayView.m in Sources */,
 				A6A0E4A41A1E76110036116E /* FLEXToolbarItem.m in Sources */,

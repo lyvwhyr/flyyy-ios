@@ -29,6 +29,7 @@
 #import "FLYProfileViewController.h"
 #import "UITableViewCell+FLYAddition.h"
 #import "UIView+FLYAddition.h"
+#import "NSAttributedString+FLYAddition.h"
 
 @interface FLYFeedTopicTableViewCell() <TTTAttributedLabelDelegate>
 
@@ -86,6 +87,7 @@
         _topicTitleLabel = [TTTAttributedLabel new];
         _topicTitleLabel.delegate = self;
         _topicTitleLabel.numberOfLines = 0;
+        _topicTitleLabel.lineSpacing = 2.0f;
         _topicTitleLabel.adjustsFontSizeToFitWidth = NO;
         _topicTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_topicTitleLabel];
@@ -441,13 +443,11 @@
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     [attrStr addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, topicTitleDisplayStr.length)];
     [attrStr addAttribute:NSFontAttributeName value:dummyLabel.font range:NSMakeRange(0, topicTitleDisplayStr.length)];
-    dummyLabel.attributedText = attrStr;
     CGFloat maxWidth = CGRectGetWidth([[UIScreen mainScreen] bounds]) - rightPadding - leftPadding;
-    
-    CGRect rect = [attrStr boundingRectWithSize:CGSizeMake(maxWidth, 10000) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    height = [attrStr boundingHeightForWidth:maxWidth];
     
     //top, bottom, padding
-    height += rect.size.height + 20 + 40;
+    height += 20 + 40;
     
     return height;
 }
