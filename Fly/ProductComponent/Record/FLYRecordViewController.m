@@ -539,7 +539,7 @@
     self.recordBottomBar = [FLYRecordBottomBar new];
     [self.view addSubview:self.recordBottomBar];
     
-    if ([self _isVoiceFilterSupported] && (iOSVersionGreaterThanOrEqualTo(@"8") && NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_8_3) && !self.filterView) {
+    if ([self _isVoiceFilterSupported] && !self.filterView) {
         [self.filterView removeFromSuperview];
         self.filterView = nil;
         self.filterView = [FLYVoiceEffectView new];
@@ -929,13 +929,15 @@
 
 - (void)_vioceFilterApplied:(NSNotification *)notification
 {
-    FLYVoiceFilterEffect effect = [[notification.userInfo objectForKey:@"filter_effect"] integerValue];
-    [self.alreadyProcessedEffects addObject:@(effect)];
-    
-    self.userActionImageView.userInteractionEnabled = YES;
-    [_loadingView stopAnimating];
-    [_loadingView removeFromSuperview];
-    _loadingView = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        FLYVoiceFilterEffect effect = [[notification.userInfo objectForKey:@"filter_effect"] integerValue];
+        [self.alreadyProcessedEffects addObject:@(effect)];
+        
+        self.userActionImageView.userInteractionEnabled = YES;
+        [_loadingView stopAnimating];
+        [_loadingView removeFromSuperview];
+        _loadingView = nil;
+    });
 }
 
 - (void)_applyVoiceFilterFailed:(NSNotification *)notification
