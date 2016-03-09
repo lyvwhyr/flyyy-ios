@@ -554,8 +554,7 @@
 
 - (BOOL)_isVoiceFilterSupported
 {
-    DeviceVersion deviceVersion = [SDVersion deviceVersion];
-    if (deviceVersion == iPhone5S || deviceVersion == iPhone6 || deviceVersion == iPhone6Plus) {
+    if (iOSVersionGreaterThanOrEqualTo(@"8")) {
         return YES;
     }
     return NO;
