@@ -213,6 +213,16 @@
     [[Harpy sharedInstance] checkVersion];
 }
 
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [super touchesBegan:touches withEvent:event];
+    CGPoint location = [[[event allTouches] anyObject] locationInView:[self window]];
+    CGRect statusBarFrame = CGRectMake(0, 0, CGRectGetWidth(self.window.bounds), 20);
+    if (CGRectContainsPoint(statusBarFrame, location)) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kStatusBarTappedNotification
+                                                            object:nil];
+    }
+}
+
 -(void)tjcConnectSuccess:(NSNotification*)notifyObj{
     NSLog(@"Tapjoy connect Succeeded");
 }

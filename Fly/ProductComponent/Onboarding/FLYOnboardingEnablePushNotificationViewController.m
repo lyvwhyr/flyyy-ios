@@ -12,6 +12,9 @@
 #import "FLYPushNotificationManager.h"
 #import "FLYBarButtonItem.h"
 #import "FLYNavigationController.h"
+#import "FLYSignupPhoneNumberViewController.h"
+#import "FLYLoginViewController.h"
+#import "FLYLoginSignupViewController.h"
 
 @interface FLYOnboardingEnablePushNotificationViewController ()
 
@@ -218,7 +221,8 @@
     if (self.hasPushedToNewVC) {
         return;
     }
-    FLYMainViewController *vc = [FLYMainViewController new];
+    
+    FLYLoginSignupViewController *vc = [FLYLoginSignupViewController new];
     [self.navigationController pushViewController:vc animated:YES];
     self.hasPushedToNewVC = YES;
 }

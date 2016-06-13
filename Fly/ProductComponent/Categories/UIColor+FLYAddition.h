@@ -44,6 +44,8 @@
 + (UIColor *)flySettingBackgroundColor;
 + (UIColor *)flyFollowUserTextColor;
 + (UIColor *)flyFirstTimeUserTextColor;
++ (UIColor *)flyLoginBgColor;
++ (UIColor *)flySignupBgColor;
 
 
 

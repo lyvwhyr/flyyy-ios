@@ -17,6 +17,7 @@
 #import "FLYNavigationBar.h"
 #import "FLYNavigationController.h"
 #import "FLYSignupFollowTagsViewController.h"
+#import "FLYMainViewController.h"
 
 #define kTitleTopPadding 20
 
@@ -170,9 +171,12 @@
             [defalut synchronize];
         }
         
-        FLYSignupFollowTagsViewController *vc = [FLYSignupFollowTagsViewController new];
-        [self.navigationController pushViewController:vc animated:NO];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSuccessfulLoginNotification object:self];
+        FLYMainViewController *mainVC = [FLYMainViewController new];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainVC];
+        [self presentViewController:nav animated:YES completion:nil];
     };
+    
     
     FLYCreateuserErrorBlock errorBlock = ^(id responseObj, NSError *error) {
         if ([[responseObj objectForKey:@"code"] integerValue] == kUserNameAlreadyExist) {

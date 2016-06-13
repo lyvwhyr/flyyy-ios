@@ -44,6 +44,8 @@
 #define kColorFlySettingBackgroundColor                 @"#F8F8F8"
 #define kColorFlyFollowUserTextColor                    @"#738B97"
 #define kColorFlyFirstTimeUserTextColor                 @"#29B9EA"
+#define kColorFlyLoginBgColor                           @"#f78b50"
+#define kColorFlySignupBgColor                          @"#00beff"
 
 @implementation UIColor (FLYAddition)
 
@@ -215,6 +217,16 @@
 + (UIColor *)flyFirstTimeUserTextColor
 {
     return [FLYUtilities colorWithHexString:kColorFlyFirstTimeUserTextColor];
+}
+
++ (UIColor *)flyLoginBgColor
+{
+    return [FLYUtilities colorWithHexString:kColorFlyLoginBgColor];
+}
+
++ (UIColor *)flySignupBgColor
+{
+    return [FLYUtilities colorWithHexString:kColorFlySignupBgColor];
 }
 
 #pragma mark - from external libraries

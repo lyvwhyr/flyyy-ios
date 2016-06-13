@@ -58,3 +58,5 @@
 
 // push notification enabled
 #define kPushNotificationEnabled @"kPushNotificationEnabled"
+
+#define kStatusBarTappedNotification  @"statusBarTappedNotification"

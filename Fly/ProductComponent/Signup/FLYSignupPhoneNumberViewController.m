@@ -24,7 +24,6 @@
 #import "NSDictionary+FLYAddition.h"
 #import "SVWebViewController.h"
 #import "NSDictionary+FLYAddition.h"
-#import "FLYSignupFollowTagsViewController.h"
 
 #define kTitleTopPadding 10
 #define kSubtitleTopPadding 50
@@ -261,7 +260,11 @@
 
 - (void)_backButtonTapped
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if (!self.presentingViewController) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)_nextButtonTapped

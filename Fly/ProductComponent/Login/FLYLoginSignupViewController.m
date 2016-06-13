@@ -16,24 +16,12 @@
 #import "FLYIconButton.h"
 #import "UIFont+FLYAddition.h"
 
-#define kTitleTopPadding   18
-#define kExitButtonOriginX 20
-#define kExitButtonOriginY 32
-
 @interface FLYLoginSignupViewController ()
 
-@property (nonatomic) UIImageView *backgroundImageView;
-
-@property (nonatomic) UIButton *exitButton;
-
-@property (nonatomic) UIView *logoView;
-@property (nonatomic) UIImageView *logoImageView;
-@property (nonatomic) UIView *logoSeparator;
-@property (nonatomic) UILabel *logoText;
-
-@property (nonatomic) UILabel *titleLabel;
-@property (nonatomic) UIButton *loginButton;
-@property (nonatomic) UIButton *signupButton;
+@property (nonatomic) UIView *loginBgView;
+@property (nonatomic) UILabel *loginLabel;
+@property (nonatomic) UIView *signupBgView;
+@property (nonatomic) UILabel *signupLabel;
 
 @end
 
@@ -46,55 +34,39 @@
     // hide the 1px bottom line in navigation bar
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
     
-    self.backgroundImageView = [UIImageView new];
-    self.backgroundImageView.image = [UIImage imageNamed:@"login_background"];
-    [self.view addSubview:self.backgroundImageView];
+    self.loginBgView = [UIView new];
+    self.loginBgView.backgroundColor = [UIColor flyLoginBgColor];
+    self.loginBgView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *loginTapGr = [UITapGestureRecognizer new];
+    [loginTapGr addTarget:self action:@selector(loginTapped)];
+    [self.loginBgView addGestureRecognizer:loginTapGr];
     
+    [self.view addSubview:self.loginBgView];
     
-    if (self.canGoBack) {
-        self.exitButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.exitButton setImage:[UIImage imageNamed:@"icon_sign_in_exit_white"] forState:UIControlStateNormal];
-        [self.exitButton addTarget:self action:@selector(_exitButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:self.exitButton];
-    }
+    UIFont *font = [UIFont flyBlackFontWithSize:26];
+    self.loginLabel = [UILabel new];
+    self.loginLabel.text = @"LOGIN";
+    self.loginLabel.font = font;
+    self.loginLabel.textColor = [UIColor whiteColor];
+    [self.loginLabel sizeToFit];
+    [self.view addSubview:self.loginLabel];
     
-    self.logoView = [UIView new];
-    [self.view addSubview:self.logoView];
+
+    self.signupBgView = [UIView new];
+    self.signupBgView.backgroundColor = [UIColor flySignupBgColor];
+    [self.view addSubview:self.signupBgView];
     
-    self.logoImageView = [UIImageView new];
-    self.logoImageView.image = [UIImage imageNamed:@"icon_homefeed_wings_white"];
-    [self.logoView addSubview:self.logoImageView];
+    self.signupBgView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *signupTapGr = [UITapGestureRecognizer new];
+    [signupTapGr addTarget:self action:@selector(signupTapped)];
+    [self.signupBgView addGestureRecognizer:signupTapGr];
     
-    self.logoSeparator = [UIView new];
-    self.logoSeparator.backgroundColor = [UIColor whiteColor];
-    [self.logoView addSubview:self.logoSeparator];
-    
-    UIFont *font = [UIFont flyFontWithSize:24];
-    self.logoText = [UILabel new];
-    self.logoText.text = LOC(@"FLYFlyy");
-    self.logoText.font = font;
-    self.logoText.textColor = [UIColor whiteColor];
-    [self.logoView addSubview:self.logoText];
-    
-    
-    _titleLabel = [UILabel new];
-    _titleLabel.text = LOC(@"FLYLoginTitle");
-    _titleLabel.textColor = [UIColor whiteColor];
-    _titleLabel.font = [UIFont flyFontWithSize:20];
-    [self.view addSubview:_titleLabel];
-    
-    self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.loginButton setTitle:LOC(@"FLYLoginButtonText") forState:UIControlStateNormal];
-    [self.loginButton setTitleColor:[UIColor flyBlue] forState:UIControlStateNormal];
-    [self.loginButton addTarget:self action:@selector(_loginButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    self.loginButton.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.loginButton];
-    
-    self.signupButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.signupButton addTarget:self action:@selector(_signupButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-    self.signupButton.backgroundColor = [FLYUtilities colorWithHexString:@"#88D5A8"];
-    [self.signupButton setTitle:LOC(@"FLYSignupButtonText") forState:UIControlStateNormal];
-    [self.view addSubview:self.signupButton];
+    self.signupLabel = [UILabel new];
+    self.signupLabel.text = @"SIGNUP";
+    self.signupLabel.font = font;
+    self.signupLabel.textColor = [UIColor whiteColor];
+    [self.signupLabel sizeToFit];
+    [self.view addSubview:self.signupLabel];
     
     [[FLYScribe sharedInstance] logEvent:@"login_signup_page" section:nil component:nil element:nil action:@"impression"];
     
@@ -104,11 +76,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
@@ -127,58 +100,31 @@
 
 - (void)_addViewConstraints
 {
-    if (self.canGoBack) {
-        [self.exitButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.leading.equalTo(self.view).offset(kExitButtonOriginX);
-            make.top.equalTo(self.view).offset(kExitButtonOriginY);
-        }];
-    }
     
-    [self.logoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@(85));
-        make.height.equalTo(@(35));
-        make.centerX.equalTo(self.view);
-        make.centerY.equalTo(self.view).offset(-90);
-    }];
+    CGFloat halfScreen = CGRectGetHeight(self.view.bounds) / 2.0f;
     
-    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.logoView);
-        make.centerY.equalTo(self.logoView);
-    }];
-    
-    [self.logoSeparator mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.logoImageView.mas_trailing).offset(5);
-        make.top.equalTo(self.logoView).offset(3);
-        make.width.equalTo(@(1));
-        make.bottom.equalTo(self.logoView).offset(-3);
-    }];
-    
-    [self.logoText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.leading.equalTo(self.logoSeparator.mas_trailing).offset(5);
-        make.centerY.equalTo(self.logoView);
-    }];
-    
-    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.view);
-        make.top.equalTo(self.logoView.mas_bottom).offset(kTitleTopPadding);
-    }];
-    
-    [self.backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
-    
-    [self.signupButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.loginBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view);
         make.leading.equalTo(self.view);
-        make.bottom.equalTo(self.view);
-        make.height.equalTo(@(45));
-        make.width.equalTo(self.view);
+        make.trailing.equalTo(self.view);
+        make.height.equalTo(@(halfScreen));
     }];
     
-    [self.loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.loginLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.loginBgView);
+        make.centerY.equalTo(self.loginBgView);
+    }];
+    
+    [self.signupBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.loginBgView.mas_bottom);
         make.leading.equalTo(self.view);
-        make.bottom.equalTo(self.signupButton.mas_top);
-        make.height.equalTo(@(45));
-        make.width.equalTo(self.view);
+        make.trailing.equalTo(self.view);
+        make.height.equalTo(@(halfScreen));
+    }];
+    
+    [self.signupLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.signupBgView);
+        make.centerY.equalTo(self.signupBgView);
     }];
 }
 
@@ -197,6 +143,19 @@
 - (void)_exitButtonTapped
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)signupTapped
+{
+    FLYSignupPhoneNumberViewController *vc = [FLYSignupPhoneNumberViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)loginTapped
+{
+    FLYLoginViewController *vc = [FLYLoginViewController new];
+    vc.canGoBack = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Navigation bar and status bar

@@ -22,6 +22,7 @@
 #import "FLYGroup.h"
 #import "FLYDeviceTokenService.h"
 #import "FLYActivityService.h"
+#import "FLYLoginSignupViewController.h"
 
 #define kUnreadActivityKey @"unread_count"
 
@@ -83,7 +84,7 @@
 - (void)_requireSignupOrLogin:(NSNotification *)notification
 {
     UIViewController *fromVC = [[UIApplication sharedApplication] keyWindow].rootViewController;
-    FLYLoginViewController *vc = [FLYLoginViewController new];
+    FLYLoginSignupViewController *vc = [FLYLoginSignupViewController new];
     vc.canGoBack = YES;
     UINavigationController *nav = [[FLYNavigationController alloc] initWithRootViewController:vc];
     [fromVC presentViewController:nav animated:NO completion:nil];

@@ -25,19 +25,22 @@
 #import "FLYLoginManager.h"
 #import "SDVersion.h"
 #import "UIButton+TouchAreaInsets.h"
+#import "UIView+FLYAddition.h"
+#import "FLYBarButtonItem.h"
 
 #define kTitleTopPadding 20
 #define kLeftIconWidth 50
 #define kTextFieldLeftPadding 40
 #define kTextFieldRightPadding 20
-#define kExitButtonOriginX 32
+#define kExitButtonOriginX 20
 #define kExitButtonOriginY 32
 
-@interface FLYLoginViewController () <UITextFieldDelegate, NIAttributedLabelDelegate>
+@interface FLYLoginViewController () <UITextFieldDelegate, UIScrollViewDelegate>
+
+@property (nonatomic) UIScrollView *dummyScrollView;
 
 @property (nonatomic) UIButton *exitButton;
 @property (nonatomic) UIImageView *backgroundImageView;
-@property (nonatomic) NIAttributedLabel *dontHaveAccountLabel;
 @property (nonatomic) RNLoadingButton *loginButton;
 
 //password field
@@ -88,24 +91,6 @@
         [self.view addSubview:self.exitButton];
         self.exitButton.touchAreaInsets = UIEdgeInsetsMake(15, 15, 15, 15);
     }
-    
-    self.dontHaveAccountLabel = [NIAttributedLabel new];
-    self.dontHaveAccountLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.dontHaveAccountLabel.numberOfLines = 1;
-    self.dontHaveAccountLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.dontHaveAccountLabel.textColor = [UIColor whiteColor];
-    self.dontHaveAccountLabel.font = [UIFont flyFontWithSize:15];
-    
-    self.dontHaveAccountLabel.delegate = self;
-    self.dontHaveAccountLabel.autoDetectLinks = NO;
-    self.dontHaveAccountLabel.linkFont = [UIFont flyBlackFontWithSize:15];
-    self.dontHaveAccountLabel.linkColor = [UIColor whiteColor];
-    self.dontHaveAccountLabel.text = LOC(@"FLYSignupDescrptionText");
-    NSRange linkRange = [_dontHaveAccountLabel.text rangeOfString:LOC(@"FLYSignupDescrptionLinkText")];
-    [self.dontHaveAccountLabel addLink:[NSURL URLWithString:@"flyy://singup"]
-                                     range:linkRange];
-    [self.dontHaveAccountLabel sizeToFit];
-    [self.view addSubview:self.dontHaveAccountLabel];
     
     self.loginButton = [RNLoadingButton new];
     self.loginButton.layer.cornerRadius = 5.0f;
@@ -197,6 +182,14 @@
     [self.view addSubview:self.forgetPasswordButton];
     [self.forgetPasswordButton sizeToFit];
     
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+    scrollView.delegate = self;
+    scrollView.contentSize = CGSizeMake(0.0f,1.0f);
+    [scrollView setContentOffset:CGPointMake(0.0f,1.0f) animated:NO];
+    // optional
+    scrollView.scrollsToTop = YES; // default is YES.
+    [self.view addSubview:scrollView];
+    
     [self _addObservers];
     [self updateViewConstraints];
     
@@ -219,27 +212,30 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 
 - (void)updateViewConstraints
 {
+    
+    [self.backgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+    
     if (self.canGoBack) {
         [self.exitButton mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.leading.equalTo(self.view).offset(kExitButtonOriginX);
             make.top.equalTo(self.view).offset(kExitButtonOriginY);
         }];
     }
-    
-    [self.backgroundImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
-    }];
     
     if (self.keyboardHeight) {
         if ([self.phoneNumberTextField.text length] == 0 || [self.passwordTextField.text length] == 0) {
@@ -254,14 +250,9 @@
             make.height.equalTo(@(45));
         }];
     } else {
-        [self.dontHaveAccountLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.view);
-            make.bottom.equalTo(self.view).offset(-35);
-        }];
-        
         [self.loginButton mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.view);
-            make.bottom.equalTo(self.dontHaveAccountLabel.mas_top).offset(-36);
+            make.bottom.equalTo(self.view).offset(-20 - self.keyboardHeight);
             make.width.equalTo(@(CGRectGetWidth([UIScreen mainScreen].bounds) - 80));
             make.height.equalTo(@(45));
         }];
@@ -454,14 +445,10 @@
         // common init
         [[FLYLoginManager sharedInstance] initAfterLogin:responseObj];
         
-        if ([FLYAppStateManager sharedInstance].needRestartNavigationStackAfterLogin) {
-            [FLYAppStateManager sharedInstance].needRestartNavigationStackAfterLogin = NO;
-            FLYMainViewController *mainVC = [FLYMainViewController new];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainVC];
-            [self presentViewController:nav animated:YES completion:nil];
-        } else {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
+        [FLYAppStateManager sharedInstance].needRestartNavigationStackAfterLogin = NO;
+        FLYMainViewController *mainVC = [FLYMainViewController new];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainVC];
+        [self presentViewController:nav animated:YES completion:nil];
     };
     
     FLYLoginUserErrorBlock errorBlock= ^(id responseObj, NSError *error) {
@@ -486,17 +473,21 @@
     [self.loginService loginWithPhoneNumber:unformattedPhoneNumber password:password success:successBlock error:errorBlock];
 }
 
-#pragma mark - NIAttributedLabelDelegate
-- (void)attributedLabel:(NIAttributedLabel *)attributedLabel didSelectTextCheckingResult:(NSTextCheckingResult *)result atPoint:(CGPoint)point
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
 {
-    FLYSignupPhoneNumberViewController *vc = [FLYSignupPhoneNumberViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
+    // DETECTED! - do what you need to
+    NSLog(@"scrollViewShouldScrollToTop");
+    return NO;
 }
 
 #pragma mark - private methods
 - (void)_exitButtonTapped
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (!self.presentingViewController) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -518,8 +509,6 @@
         if (!self.keyboardHeight) {
             self.keyboardHeight = kbSize.height;
         }
-        
-        self.dontHaveAccountLabel.hidden = YES;
         self.logoView.hidden = YES;
         [self updateViewConstraints];
     }
@@ -528,10 +517,26 @@
 - (void)keyboardWillHide:(NSNotification *)note
 {
     if (self.shouldBeginEditing) {
-        self.dontHaveAccountLabel.hidden = NO;
         self.logoView.hidden = NO;
         [self updateViewConstraints];
     }
+}
+
+#pragma mark - Navigation bar
+- (void)loadLeftBarButton
+{
+    @weakify(self)
+    FLYBackBarButtonItem *barItem = [FLYBackBarButtonItem barButtonItem:YES];
+    barItem.actionBlock = ^(FLYBarButtonItem *barButtonItem) {
+        @strongify(self)
+        [self _backButtonTapped];
+    };
+    self.navigationItem.leftBarButtonItem = barItem;
+}
+
+- (void)_backButtonTapped
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Navigation bar and status bar
@@ -540,9 +545,9 @@
     return [UIColor clearColor];
 }
 
-- (UIColor*)preferredStatusBarColor
-{
-    return [UIColor clearColor];
-}
+//- (UIColor*)preferredStatusBarColor
+//{
+//    return [FLYUtilities colorWithHexString:@"#00BEFF"];
+//}
 
 @end
