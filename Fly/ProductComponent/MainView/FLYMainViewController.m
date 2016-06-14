@@ -88,11 +88,12 @@
     [self.view addSubview:self.tabBarView];
     
     self.homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_home" recordTab:NO];
-    self.groupsTab = [[FLYTabView alloc] initWithTitle:LOC(@"FLYTags") image:@"icon_homefeed_group" recordTab:NO];
+//    self.groupsTab = [[FLYTabView alloc] initWithTitle:LOC(@"FLYTags") image:@"icon_homefeed_group" recordTab:NO];
     self.recordTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_record" recordTab:NO];
     self.meTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_me" recordTab:NO];
     
-    NSArray *tabs = @[self.homeTab, self.groupsTab, self.recordTab, self.meTab];
+//    NSArray *tabs = @[self.homeTab, self.groupsTab, self.recordTab, self.meTab];
+    NSArray *tabs = @[self.homeTab, self.recordTab, self.meTab];
     [self.tabBarView setTabViews:tabs];
     self.tabBarView.delegate = self;
 }
@@ -102,8 +103,8 @@
     _feedViewController = [FLYSegmentedFeedViewController new];
     _feedViewNavigationController= [[FLYNavigationController alloc] initWithRootViewController:_feedViewController];
     
-    _groupsListViewController = [FLYTagListViewController new];
-    _groupsListViewNavigationController = [[FLYNavigationController alloc] initWithRootViewController:_groupsListViewController];
+//    _groupsListViewController = [FLYTagListViewController new];
+//    _groupsListViewNavigationController = [[FLYNavigationController alloc] initWithRootViewController:_groupsListViewController];
     
     _profileViewController = [FLYProfileViewController new];
     _profileViewController.isSelf = YES;
@@ -148,17 +149,19 @@
         [self _updateActiveTab:TABBAR_HOME];
         
         [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_home_button" component:nil element:nil action:@"click"];
-    } else if (index == TABBAR_GROUP) {
-        if (_currentViewController == _groupsListViewNavigationController) {
-            return;
-        }
-        [self removeViewController:_currentViewController];
-        [self addViewController:_groupsListViewNavigationController];
-        _currentViewController = _groupsListViewNavigationController;
-        [self _updateActiveTab:TABBAR_GROUP];
-        
-        [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_groups_button" component:nil element:nil action:@"click"];
-    } else if (index == TABBAR_RECORD) {
+    }
+//    else if (index == TABBAR_GROUP) {
+//        if (_currentViewController == _groupsListViewNavigationController) {
+//            return;
+//        }
+//        [self removeViewController:_currentViewController];
+//        [self addViewController:_groupsListViewNavigationController];
+//        _currentViewController = _groupsListViewNavigationController;
+//        [self _updateActiveTab:TABBAR_GROUP];
+//        
+//        [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_groups_button" component:nil element:nil action:@"click"];
+//    }
+    else if (index == TABBAR_RECORD) {
         [self _recordButtonTapped];
     } else {
         if (_currentViewController == _profileViewNavigationController) {
@@ -187,12 +190,12 @@
             [self.meTab setTabImage:[UIImage imageNamed:@"icon_homefeed_me"]];
             break;
         }
-        case TABBAR_GROUP: {
-            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home"]];
-            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_group_selected"]];
-            [self.meTab setTabImage:[UIImage imageNamed:@"icon_homefeed_me"]];
-            break;
-        }
+//        case TABBAR_GROUP: {
+//            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home"]];
+//            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_group_selected"]];
+//            [self.meTab setTabImage:[UIImage imageNamed:@"icon_homefeed_me"]];
+//            break;
+//        }
         case TABBAR_ME: {
             [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home"]];
             [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_group"]];

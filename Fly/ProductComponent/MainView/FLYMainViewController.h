@@ -17,7 +17,7 @@
 
 typedef NS_ENUM(NSInteger, TabBarItemIndex) {
     TABBAR_HOME = 0,
-    TABBAR_GROUP,
+//    TABBAR_GROUP,
     TABBAR_RECORD,
     TABBAR_ME
 };

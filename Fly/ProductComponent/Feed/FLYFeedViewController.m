@@ -158,7 +158,8 @@
     } else if ([self _mineHasNoFollowedTags]) {
         FLYEmptyStateViewActionBlock actionBlock = ^(void) {
             FLYMainViewController *mainVC = (FLYMainViewController *)self.parentViewController.parentViewController.parentViewController;
-            [mainVC setTabIndex:TABBAR_GROUP];
+//            [mainVC setTabIndex:TABBAR_GROUP];
+            [mainVC setTabIndex:0];
         };
         
         self.noFollowingTagsView = [[FLYEmptyStateView alloc] initWithTitle:LOC(@"FLYNoFollowingTagsTitle") description:LOC(@"FLYNoFollowingTagsDescription") buttonText:LOC(@"FLYNoFollowingTagsButtonText") actionBlock:actionBlock];
