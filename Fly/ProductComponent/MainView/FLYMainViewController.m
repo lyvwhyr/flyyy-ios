@@ -72,6 +72,12 @@
     
     [self _addTabBar];
     [self _addChildControllers];
+    
+    self.recordButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.recordButton setImage:[UIImage imageNamed:@"icon_home_record"] forState:UIControlStateNormal];
+    [self.recordButton addTarget:self action:@selector(_recordButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view insertSubview:self.recordButton aboveSubview:self.currentViewController.view];
+    
     [self _addViewConstraints];
 }
 
@@ -89,11 +95,11 @@
     
     self.homeTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_home" recordTab:NO];
 //    self.groupsTab = [[FLYTabView alloc] initWithTitle:LOC(@"FLYTags") image:@"icon_homefeed_group" recordTab:NO];
-    self.recordTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_record" recordTab:NO];
+//    self.recordTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_home_record" recordTab:NO];
     self.meTab = [[FLYTabView alloc] initWithTitle:@"Home" image:@"icon_homefeed_me" recordTab:NO];
     
 //    NSArray *tabs = @[self.homeTab, self.groupsTab, self.recordTab, self.meTab];
-    NSArray *tabs = @[self.homeTab, self.recordTab, self.meTab];
+    NSArray *tabs = @[self.homeTab, self.meTab];
     [self.tabBarView setTabViews:tabs];
     self.tabBarView.delegate = self;
 }
@@ -161,9 +167,10 @@
 //        
 //        [[FLYScribe sharedInstance] logEvent:@"home_page" section:@"bottom_bar_groups_button" component:nil element:nil action:@"click"];
 //    }
-    else if (index == TABBAR_RECORD) {
-        [self _recordButtonTapped];
-    } else {
+//    else if (index == TABBAR_RECORD) {
+//        [self _recordButtonTapped];
+//    }
+    else {
         if (_currentViewController == _profileViewNavigationController) {
             return;
         }
@@ -202,12 +209,12 @@
             [self.meTab setTabImage:[UIImage imageNamed:@"icon_homefeed_me_selected"]];
             break;
         }
-        case TABBAR_RECORD: {
-            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home"]];
-            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_group"]];
-            [self.meTab setTabImage:[UIImage imageNamed:@"icon_homefeed_me"]];
-            break;
-        }
+//        case TABBAR_RECORD: {
+//            [self.homeTab setTabImage:[UIImage imageNamed:@"icon_homefeed_home"]];
+//            [self.groupsTab setTabImage:[UIImage imageNamed:@"icon_homefeed_group"]];
+//            [self.meTab setTabImage:[UIImage imageNamed:@"icon_homefeed_me"]];
+//            break;
+//        }
         default:
             break;
     }
