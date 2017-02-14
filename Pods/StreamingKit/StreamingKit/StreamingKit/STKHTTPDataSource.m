@@ -555,8 +555,8 @@
         {
             NSDictionary* sslSettings = [NSDictionary dictionaryWithObjectsAndKeys:
             (NSString*)kCFStreamSocketSecurityLevelNegotiatedSSL, kCFStreamSSLLevel,
-            [NSNumber numberWithBool:YES], kCFStreamSSLValidatesCertificateChain,
-//            [NSNull null], kCFStreamSSLPeerName,
+            [NSNumber numberWithBool:NO], kCFStreamSSLValidatesCertificateChain,
+            [NSNull null], kCFStreamSSLPeerName,
             nil];
 
             CFReadStreamSetProperty(stream, kCFStreamPropertySSLSettings, (__bridge CFTypeRef)sslSettings);

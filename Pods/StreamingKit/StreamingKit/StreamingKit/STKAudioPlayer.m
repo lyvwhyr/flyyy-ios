@@ -617,7 +617,7 @@ static void AudioFileStreamPacketsProc(void* clientData, UInt32 numberBytes, UIn
 {
     STKDataSource* retval = nil;
     
-    if ([url.scheme isEqualToString:@"file"] || url.scheme == nil)
+    if ([url.scheme isEqualToString:@"file"])
     {
         retval = [[STKLocalFileDataSource alloc] initWithFilePath:url.path];
     }

@@ -723,8 +723,6 @@ static OSStatus topRenderNotifyCallback(void *inRefCon, AudioUnitRenderActionFla
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    
     if ( ABConnectionsChangedNotification ) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audiobusConnectionsChanged:) name:ABConnectionsChangedNotification object:nil];
     }
@@ -1147,18 +1145,6 @@ static OSStatus topRenderNotifyCallback(void *inRefCon, AudioUnitRenderActionFla
 
 -(BOOL)channelGroupIsMuted:(AEChannelGroupRef)group {
     return group->channel->muted;
-}
-
-BOOL AEAudioControllerRenderMainOutput(AEAudioController *audioController, AudioTimeStamp inTimeStamp, UInt32 inNumberFrames, AudioBufferList *ioData) {
-    channel_producer_arg_t arg = {
-        .channel = audioController->_topChannel,
-        .inTimeStamp = inTimeStamp,
-        .ioActionFlags = 0,
-        .nextFilterIndex = 0
-    };
-    OSStatus result = channelAudioProducer((void*)&arg, ioData, &inNumberFrames);
-    handleCallbacksForChannel(arg.channel, &inTimeStamp, inNumberFrames, ioData);
-    return result;
 }
 
 #pragma mark - Filters
@@ -2011,11 +1997,6 @@ NSTimeInterval AEAudioControllerOutputLatency(__unsafe_unretained AEAudioControl
     }
     
     if ( _hasSystemError ) [self attemptRecoveryFromSystemError:NULL];
-}
-
-- (void)applicationDidEnterBackground:(NSNotification *)notification
-{
-    
 }
 
 -(void)audiobusConnectionsChanged:(NSNotification*)notification {

@@ -7,7 +7,6 @@
 //
 
 #import "PXAlertView.h"
-#import "PXAlertView+Customization.h"
 
 @interface PXAlertViewStack : NSObject
 
@@ -189,8 +188,6 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
         self.alertView.center = [self centerWithFrame:frame];
         
         [self setupGestures];
-        
-        [self useDefaultIOS7Style];
     }
     return self;
 }
@@ -418,7 +415,7 @@ static const CGFloat AlertViewLineLayerWidth = 0.5;
 - (CALayer *)lineLayer
 {
     CALayer *lineLayer = [CALayer layer];
-    lineLayer.backgroundColor = [[UIColor colorWithWhite:0.80 alpha:0.7] CGColor];
+    lineLayer.backgroundColor = [[UIColor colorWithWhite:0.90 alpha:0.3] CGColor];
     return lineLayer;
 }
 

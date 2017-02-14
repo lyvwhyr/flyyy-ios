@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7D4B72EB34192CBBF4792073 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4DA38F875E9D2C76E94F1F6 /* libPods.a */; };
+		44506C36C14D4C6854CFEEED /* libPods-Flyy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C1BD2E0318CB93A2579B06 /* libPods-Flyy.a */; };
 		A603B44A1C018C9A0081C850 /* FLYBadgeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A603B4491C018C9A0081C850 /* FLYBadgeHelper.m */; };
 		A603B44D1C01AE560081C850 /* FLYFollowerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A603B44C1C01AE560081C850 /* FLYFollowerListViewController.m */; };
 		A603B4671C01B8A10081C850 /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = A603B44F1C01B8A10081C850 /* MASCompositeConstraint.m */; };
@@ -525,7 +525,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0F37115B05133DC886737552 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		38C9C9DE32508E1B112D5063 /* Pods-Flyy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flyy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flyy/Pods-Flyy.release.xcconfig"; sourceTree = "<group>"; };
+		6AEEA9595A6C72D60899AA56 /* Pods-Flyy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flyy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flyy/Pods-Flyy.debug.xcconfig"; sourceTree = "<group>"; };
+		95C1BD2E0318CB93A2579B06 /* libPods-Flyy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Flyy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A603B4481C018C9A0081C850 /* FLYBadgeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYBadgeHelper.h; sourceTree = "<group>"; };
 		A603B4491C018C9A0081C850 /* FLYBadgeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYBadgeHelper.m; sourceTree = "<group>"; };
 		A603B44B1C01AE560081C850 /* FLYFollowerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYFollowerListViewController.h; sourceTree = "<group>"; };
@@ -1417,8 +1419,6 @@
 		A6F8619F1B58820B004753C7 /* UITableViewCell+FLYAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+FLYAddition.m"; sourceTree = "<group>"; };
 		A6F861A21B588302004753C7 /* FLYShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYShareManager.h; sourceTree = "<group>"; };
 		A6F861A31B588302004753C7 /* FLYShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYShareManager.m; sourceTree = "<group>"; };
-		DEF027D145FDC2CC1553A7A5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		F4DA38F875E9D2C76E94F1F6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1461,7 +1461,7 @@
 				A6D20ED71C083D2700A538F3 /* FBSDKShareKit.framework in Frameworks */,
 				A6D20ED61C083D2700A538F3 /* FBSDKLoginKit.framework in Frameworks */,
 				A6D949EA1A9079AC003D4265 /* Crashlytics.framework in Frameworks */,
-				7D4B72EB34192CBBF4792073 /* libPods.a in Frameworks */,
+				44506C36C14D4C6854CFEEED /* libPods-Flyy.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1475,15 +1475,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3DD9A234A282FD97B33F4A8E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				DEF027D145FDC2CC1553A7A5 /* Pods.debug.xcconfig */,
-				0F37115B05133DC886737552 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		A60489FC1A85E63100C67480 /* External */ = {
 			isa = PBXGroup;
 			children = (
@@ -1666,9 +1657,9 @@
 				A6263EA81A187E1200C4C3BA /* FlyTests */,
 				A6263E8D1A187E1200C4C3BA /* Products */,
 				A6A30D741A1B1F33001AE1FE /* Frameworks */,
-				3DD9A234A282FD97B33F4A8E /* Pods */,
 				A64596431A6B450B00E8D26D /* RawAssets */,
 				A60489FC1A85E63100C67480 /* External */,
+				F69E271F7D7915D29D85FE1A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2868,7 +2859,7 @@
 				A60A44F11A8DD41200BED63A /* UIKit.framework */,
 				A6A30D721A1B1EFA001AE1FE /* CoreGraphics.framework */,
 				A6A30D701A1B1EEE001AE1FE /* QuartzCore.framework */,
-				F4DA38F875E9D2C76E94F1F6 /* libPods.a */,
+				95C1BD2E0318CB93A2579B06 /* libPods-Flyy.a */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -3292,6 +3283,15 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
+		F69E271F7D7915D29D85FE1A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6AEEA9595A6C72D60899AA56 /* Pods-Flyy.debug.xcconfig */,
+				38C9C9DE32508E1B112D5063 /* Pods-Flyy.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3299,12 +3299,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A6263EAF1A187E1200C4C3BA /* Build configuration list for PBXNativeTarget "Flyy" */;
 			buildPhases = (
-				5FFD8CFC20281036486A4AAC /* Check Pods Manifest.lock */,
+				52300AF3DBCCEBFCA0557A54 /* [CP] Check Pods Manifest.lock */,
 				A6263E881A187E1200C4C3BA /* Sources */,
 				A6263E891A187E1200C4C3BA /* Frameworks */,
 				A6263E8A1A187E1200C4C3BA /* Resources */,
-				F4B8CFDA3B625B3B144667BC /* Copy Pods Resources */,
 				A61FEA3F1A8EDDA10088B759 /* ShellScript */,
+				DCA28EA0E7A174C3F30AE44C /* [CP] Embed Pods Frameworks */,
+				CF9D8ABB9EF96E4E24F5DF7A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3500,19 +3501,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5FFD8CFC20281036486A4AAC /* Check Pods Manifest.lock */ = {
+		52300AF3DBCCEBFCA0557A54 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A61FEA3F1A8EDDA10088B759 /* ShellScript */ = {
@@ -3541,19 +3542,34 @@
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 63062b02647d45c6bf509e8ceffe93755e1f164e 1eda514ea6517e88f090c93c54592fd6dc656ba4c44ff439cc19d6f4f213d848";
 		};
-		F4B8CFDA3B625B3B144667BC /* Copy Pods Resources */ = {
+		CF9D8ABB9EF96E4E24F5DF7A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Flyy/Pods-Flyy-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DCA28EA0E7A174C3F30AE44C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Flyy/Pods-Flyy-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -4044,13 +4060,14 @@
 		};
 		A6263EB01A187E1200C4C3BA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DEF027D145FDC2CC1553A7A5 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 6AEEA9595A6C72D60899AA56 /* Pods-Flyy.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = PJ78LC7XG7;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4086,6 +4103,7 @@
 					"$(PROJECT_DIR)/External/ZTX",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flyyapp3.Flyy;
 				PRODUCT_NAME = Flyy;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -4095,12 +4113,13 @@
 		};
 		A6263EB11A187E1200C4C3BA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0F37115B05133DC886737552 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 38C9C9DE32508E1B112D5063 /* Pods-Flyy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = PJ78LC7XG7;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4134,6 +4153,7 @@
 					"$(PROJECT_DIR)/External",
 					"$(PROJECT_DIR)/External/ZTX",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.flyyapp3.Flyy;
 				PRODUCT_NAME = Flyy;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

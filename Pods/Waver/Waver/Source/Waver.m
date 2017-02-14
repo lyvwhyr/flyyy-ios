@@ -17,7 +17,6 @@
 @property (nonatomic) CGFloat waveWidth;
 @property (nonatomic) CGFloat waveMid;
 @property (nonatomic) CGFloat maxAmplitude;
-@property (nonatomic) CADisplayLink *displaylink;
 
 @end
 
@@ -31,13 +30,6 @@
     }
     
     return self;
-}
-
-- (void)dealloc
-{
-    [self.displaylink removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-    [self.displaylink invalidate];
-    self.displaylink = nil;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -68,7 +60,7 @@
     self.phaseShift = -0.25f;
     self.density = 1.f;
     
-//    self.waveColor = [UIColor whiteColor];
+    self.waveColor = [UIColor whiteColor];
     self.mainWaveWidth = 2.0f;
     self.decorativeWavesWidth = 1.0f;
     
@@ -82,8 +74,8 @@
 {
     _waverLevelCallback = waverLevelCallback;
     
-    self.displaylink = [CADisplayLink displayLinkWithTarget:_waverLevelCallback selector:@selector(invoke)];
-    [self.displaylink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    CADisplayLink *displaylink = [CADisplayLink displayLinkWithTarget:_waverLevelCallback selector:@selector(invoke)];
+    [displaylink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
     
     for(int i=0; i < self.numberOfWaves; i++)
     {
@@ -95,8 +87,7 @@
         [waveline setLineWidth:(i==0 ? self.mainWaveWidth : self.decorativeWavesWidth)];
         CGFloat progress = 1.0f - (CGFloat)i / self.numberOfWaves;
         CGFloat multiplier = MIN(1.0, (progress / 3.0f * 2.0f) + (1.0f / 3.0f));
-//        waveline.strokeColor   = [[UIColor colorWithWhite:1.0 alpha:( i == 0 ? 1.0 : 1.0 * multiplier * 0.4)] CGColor];
-        waveline.strokeColor = [[UIColor colorWithRed:245/255.0f green:134/255.0f blue:134/255.0f alpha:( i == 0 ? 1.0 : 1.0 * multiplier * 0.4)] CGColor];
+        waveline.strokeColor   = [[UIColor colorWithWhite:1.0 alpha:( i == 0 ? 1.0 : 1.0 * multiplier * 0.4)] CGColor];
         [self.layer addSublayer:waveline];
         [self.waves addObject:waveline];
     }

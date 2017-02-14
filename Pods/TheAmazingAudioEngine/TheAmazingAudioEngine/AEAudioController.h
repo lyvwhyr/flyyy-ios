@@ -682,8 +682,6 @@ typedef void (*AEAudioControllerMainThreadMessageHandler)(AEAudioController *aud
  */
 - (BOOL)channelGroupIsMuted:(AEChannelGroupRef)group;
 
-BOOL AEAudioControllerRenderMainOutput(AEAudioController *audioController, AudioTimeStamp inTimeStamp, UInt32 inNumberFrames, AudioBufferList *ioData);
-
 ///@}
 #pragma mark - Filters
 /** @name Filters */
