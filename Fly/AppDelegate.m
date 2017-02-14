@@ -180,7 +180,7 @@
                              didFinishLaunchingWithOptions:launchOptions];
     
     [self _setupTapjoy];
-    [self _setupNewVersionAvailablePrompt];
+//    [self _setupNewVersionAvailablePrompt];
     
     //Fabric should the the last one
     [Fabric with:@[CrashlyticsKit]];
