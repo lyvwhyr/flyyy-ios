@@ -175,15 +175,15 @@
     [super viewDidAppear:animated];
     
     // load feed onboarding view
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    BOOL hasSeenFeedOnboarding = [[defaults objectForKey:kFeedOnboardingKey] boolValue];
-    if (!hasSeenFeedOnboarding && NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1) {
-        _checkOnboardingCellLoadedTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(_checkCellAvailability) userInfo:nil repeats:YES];
-    } else {
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    BOOL hasSeenFeedOnboarding = [[defaults objectForKey:kFeedOnboardingKey] boolValue];
+//    if (!hasSeenFeedOnboarding && NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1) {
+//        _checkOnboardingCellLoadedTimer = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector:@selector(_checkCellAvailability) userInfo:nil repeats:YES];
+//    } else {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:@(YES) forKey:kFeedOnboardingKey];
         [defaults synchronize];
-    }
+//    }
     
     if (self.feedType != FLYFeedTypeOhtersPosts) {
         @weakify(self)
